@@ -1,0 +1,24 @@
+{
+  "name": "fenforce-cloudflare-workflow-spike",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "check": "tsc --noEmit && tsc --noEmit -p tsconfig.scripts.json && oxlint src scripts && oxfmt --check .",
+    "verify:remote": "bun scripts/verify-remote.ts"
+  },
+  "dependencies": {
+    "@sniptt/guards": "0.2.0",
+    "effect": "4.0.0-rc.117"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20260928.1",
+    "@types/bun": "1.4.2",
+    "oxfmt": "0.70.0",
+    "oxlint": "1.85.0",
+    "typescript": "7.0.2",
+    "wrangler": "4.142.0"
+  },
+  "packageManager": "bun@1.4.3"
+}
