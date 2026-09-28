@@ -8,7 +8,8 @@
     "env:scan": "varlock scan",
     "dev": "varlock run -- wrangler dev",
     "deploy": "varlock run -- wrangler deploy",
-    "check": "bun run env:check && tsc --noEmit && tsc --noEmit -p tsconfig.scripts.json && oxlint src scripts && oxfmt --check . && bun run analyze && bun run env:scan",
+    "lint": "oxlint --deny-warnings src scripts oxlint.config.ts",
+    "check": "bun run env:check && tsc --noEmit && tsc --noEmit -p scripts/tsconfig.json && bun run lint && oxfmt --check . && bun run analyze && bun run env:scan",
     "analyze": "fallow --root . --fail-on-issues --dupes-threshold 1",
     "verify:remote": "varlock run -- bun scripts/verify-remote.ts"
   },
@@ -22,7 +23,10 @@
     "fallow": "3.30.0",
     "oxfmt": "0.70.0",
     "oxlint": "1.85.0",
+    "oxlint-plugin-complexity": "3.0.0",
+    "oxlint-tsgolint": "7.0.2003",
     "typescript": "7.0.2",
+    "ultracite": "7.12.1",
     "varlock": "1.21.0",
     "wrangler": "4.142.0"
   },

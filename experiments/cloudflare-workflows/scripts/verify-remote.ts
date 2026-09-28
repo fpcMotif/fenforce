@@ -1,22 +1,22 @@
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import path from 'node:path';
 
 import { isString } from '@sniptt/guards';
 import { Schema } from 'effect';
 
-const ROOT = resolve(import.meta.dir, '..');
+const ROOT = path.resolve(import.meta.dir, '..');
 const configuration = Schema.decodeUnknownSync(
   Schema.Struct({
     workflows: Schema.Array(Schema.Struct({ binding: Schema.String, name: Schema.String })),
   }),
-)(Bun.JSONC.parse(await Bun.file(resolve(ROOT, 'wrangler.jsonc')).text()));
+)(Bun.JSONC.parse(await Bun.file(path.resolve(ROOT, 'wrangler.jsonc')).text()));
 const workflow = configuration.workflows.find((entry) => entry.binding === 'APPROVAL_WORKFLOW');
 assert.ok(workflow, 'Missing APPROVAL_WORKFLOW binding');
 const WORKFLOW_NAME = workflow.name;
-const TERMINAL_STATUSES = ['complete', 'errored', 'terminated'];
+const TERMINAL_STATUSES = new Set(['complete', 'errored', 'terminated']);
 const RUN_ID = `${Date.now()}-${crypto.randomUUID().slice(0, 8)}`;
-const EVIDENCE_PATH = resolve(ROOT, 'test-results', `${RUN_ID}.json`);
+const EVIDENCE_PATH = path.resolve(ROOT, 'test-results', `${RUN_ID}.json`);
 
 const INSTANCE_SCHEMA = Schema.Struct({
   id: Schema.String,
@@ -65,14 +65,17 @@ const assertions: string[] = [];
 let passed = false;
 let failure: string | null = null;
 
-async function wrangler(arguments_: string[]): Promise<unknown> {
-  const child = Bun.spawn([resolve(ROOT, 'node_modules/.bin/wrangler'), ...arguments_, '--json'], {
-    cwd: ROOT,
-    stdout: 'pipe',
-    stderr: 'pipe',
-    env: { ...process.env, CI: 'true' },
-    timeout: 45_000,
-  });
+async function wrangler(arguments_: string[]): Promise<string> {
+  const child = Bun.spawn(
+    [path.resolve(ROOT, 'node_modules/.bin/wrangler'), ...arguments_, '--json'],
+    {
+      cwd: ROOT,
+      stdout: 'pipe',
+      stderr: 'pipe',
+      env: { ...process.env, CI: 'true' },
+      timeout: 45_000,
+    },
+  );
   const [stdout, stderr, exitCode] = await Promise.all([
     new Response(child.stdout).text(),
     new Response(child.stderr).text(),
@@ -92,12 +95,12 @@ async function wrangler(arguments_: string[]): Promise<unknown> {
     stderr,
   });
   assert.equal(exitCode, 0, `Wrangler failed: ${stderr}\n${stdout}`);
-  return response;
+  return stdout;
 }
 
 async function describe(instanceId: string): Promise<WorkflowInstance> {
   return Schema.decodeUnknownSync(INSTANCE_SCHEMA)(
-    await wrangler(['workflows', 'instances', 'describe', WORKFLOW_NAME, instanceId]),
+    JSON.parse(await wrangler(['workflows', 'instances', 'describe', WORKFLOW_NAME, instanceId])),
   );
 }
 
@@ -113,10 +116,10 @@ async function waitFor(
       return instance;
     }
     assert.ok(
-      !TERMINAL_STATUSES.includes(instance.status),
+      !TERMINAL_STATUSES.has(instance.status),
       `Unexpected terminal state while waiting for ${label}: ${JSON.stringify(instance)}`,
     );
-    await Bun.sleep(2_000);
+    await Bun.sleep(2000);
   }
   throw new Error(`Timed out waiting for ${instanceId}: ${label}`);
 }
@@ -140,7 +143,7 @@ async function start(label: string): Promise<string> {
   return instanceId;
 }
 
-async function decide(instanceId: string, payload: unknown): Promise<void> {
+async function decide(instanceId: string, payload: boolean | string): Promise<void> {
   await wrangler([
     'workflows',
     'instances',
@@ -187,8 +190,8 @@ try {
     delivery?.attempts?.map((attempt) => attempt.success),
     [false, true],
   );
-  assertions.push('approved: resume reused completed preparation checkpoint');
   assertions.push(
+    'approved: resume reused completed preparation checkpoint',
     'approved: failure after delivery commit retried with exactly one stored delivery',
   );
   createdInstances.delete(approvedId);
@@ -225,7 +228,7 @@ try {
   assert.equal(validation?.attempts?.[0]?.success, false);
   assert.match(
     JSON.stringify(validation?.attempts?.[0]?.error),
-    /Approval payload must be a boolean/,
+    /Approval payload must be a boolean/u,
   );
   assert.ok(!invalid.steps.some((step) => step.name.startsWith('deliver-')));
   assertions.push('invalid: malformed approval failed once without reaching delivery');
@@ -240,17 +243,17 @@ try {
   for (const instanceId of createdInstances) {
     try {
       const instance = await describe(instanceId);
-      if (!TERMINAL_STATUSES.includes(instance.status)) {
+      if (!TERMINAL_STATUSES.has(instance.status)) {
         await wrangler(['workflows', 'instances', 'terminate', WORKFLOW_NAME, instanceId]);
       }
     } catch (error) {
       console.error(`Cleanup failed for ${instanceId}: ${String(error)}`);
     }
   }
-  await mkdir(resolve(ROOT, 'test-results'), { recursive: true });
+  await mkdir(path.resolve(ROOT, 'test-results'), { recursive: true });
   await Bun.write(
     EVIDENCE_PATH,
-    JSON.stringify(
+    `${JSON.stringify(
       {
         runId: RUN_ID,
         workflow: WORKFLOW_NAME,
@@ -261,7 +264,7 @@ try {
       },
       null,
       2,
-    ) + '\n',
+    )}\n`,
   );
   console.log(`Evidence: ${EVIDENCE_PATH}`);
   console.log(

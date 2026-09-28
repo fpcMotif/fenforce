@@ -1,0 +1,7 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["bun"]
+  },
+  "include": ["*.ts", "../env.d.ts", "../oxlint.config.ts"]
+}

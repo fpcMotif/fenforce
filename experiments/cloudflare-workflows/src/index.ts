@@ -1,10 +1,6 @@
 import { isBoolean } from '@sniptt/guards';
-import {
-  DurableObject,
-  WorkflowEntrypoint,
-  type WorkflowEvent,
-  type WorkflowStep,
-} from 'cloudflare:workers';
+import type { WorkflowEvent, WorkflowStep } from 'cloudflare:workers';
+import { DurableObject, WorkflowEntrypoint } from 'cloudflare:workers';
 import { NonRetryableError } from 'cloudflare:workflows';
 import { Effect } from 'effect';
 
@@ -31,7 +27,7 @@ const STEP_OPTIONS = {
 
 export class ExperimentLedger extends DurableObject<Environment> {
   async prepare(): Promise<number> {
-    return this.ctx.storage.transaction(async (transaction) => {
+    return await this.ctx.storage.transaction(async (transaction) => {
       const attempts = ((await transaction.get<number>('preparationAttempts')) ?? 0) + 1;
       await transaction.put('preparationAttempts', attempts);
       await transaction.setAlarm(Date.now() + 24 * 60 * 60 * 1000);
@@ -43,7 +39,7 @@ export class ExperimentLedger extends DurableObject<Environment> {
     attempts: number;
     receiptId: string;
   }> {
-    return this.ctx.storage.transaction(async (transaction) => {
+    return await this.ctx.storage.transaction(async (transaction) => {
       const attempts = ((await transaction.get<number>('deliveryAttempts')) ?? 0) + 1;
       const delivery = (await transaction.get<Delivery>('delivery')) ?? {
         operationId,
@@ -60,7 +56,7 @@ export class ExperimentLedger extends DurableObject<Environment> {
   }
 
   async snapshot(): Promise<LedgerSnapshot> {
-    return this.ctx.storage.transaction(async (transaction) => {
+    return await this.ctx.storage.transaction(async (transaction) => {
       const preparationAttempts = (await transaction.get<number>('preparationAttempts')) ?? 0;
       const deliveryAttempts = (await transaction.get<number>('deliveryAttempts')) ?? 0;
       const delivery = await transaction.get<Delivery>('delivery');
@@ -83,16 +79,19 @@ export class ApprovalWorkflow extends WorkflowEntrypoint<Environment> {
   async run(event: WorkflowEvent<unknown>, step: WorkflowStep) {
     const ledger = this.env.EXPERIMENT_LEDGER.getByName(event.instanceId);
 
-    await step.do('prepare-with-transient-failure', STEP_OPTIONS, () =>
-      Effect.runPromise(
-        Effect.gen(function* () {
-          const attempts = yield* Effect.tryPromise(() => ledger.prepare());
-          if (attempts === 1) {
-            return yield* Effect.fail(new Error('Synthetic transient failure'));
-          }
-          return { attempts };
-        }),
-      ),
+    await step.do(
+      'prepare-with-transient-failure',
+      STEP_OPTIONS,
+      async () =>
+        await Effect.runPromise(
+          Effect.gen(function* prepareWithRetry() {
+            const attempts = yield* Effect.tryPromise(async () => await ledger.prepare());
+            if (attempts === 1) {
+              return yield* Effect.fail(new Error('Synthetic transient failure'));
+            }
+            return { attempts };
+          }),
+        ),
     );
 
     const decision = await step.waitForEvent<boolean>('wait-for-approval', {
@@ -108,24 +107,27 @@ export class ApprovalWorkflow extends WorkflowEntrypoint<Environment> {
     });
 
     if (approved) {
-      await step.do('deliver-with-lost-acknowledgement', STEP_OPTIONS, () =>
-        Effect.runPromise(
-          Effect.gen(function* () {
-            const delivery = yield* Effect.tryPromise(() =>
-              ledger.deliver(`approval:${event.instanceId}`),
-            );
-            if (delivery.attempts === 1) {
-              return yield* Effect.fail(
-                new Error('Synthetic failure after delivery was committed'),
+      await step.do(
+        'deliver-with-lost-acknowledgement',
+        STEP_OPTIONS,
+        async () =>
+          await Effect.runPromise(
+            Effect.gen(function* deliverWithRetry() {
+              const delivery = yield* Effect.tryPromise(
+                async () => await ledger.deliver(`approval:${event.instanceId}`),
               );
-            }
-            return delivery;
-          }),
-        ),
+              if (delivery.attempts === 1) {
+                return yield* Effect.fail(
+                  new Error('Synthetic failure after delivery was committed'),
+                );
+              }
+              return delivery;
+            }),
+          ),
       );
     }
 
-    const snapshot = await step.do('read-ledger', () => ledger.snapshot());
+    const snapshot = await step.do('read-ledger', async () => await ledger.snapshot());
     return {
       instanceId: event.instanceId,
       decision: approved ? 'approved' : 'rejected',
