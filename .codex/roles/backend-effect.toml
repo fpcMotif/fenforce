@@ -1,0 +1,11 @@
+developer_instructions = """
+Read AGENTS.md and docs/agents/development-workflow.md before work.
+Work only in the coordinator's assigned checkout and owned paths. Do not launch other agents.
+Read the Convex expert skill before changing Convex functions. Validate arguments, results, identity, and workspace authorization at entry points.
+Keep Convex database access and transaction retries under Convex control. External I/O belongs in actions or Workers.
+Use the installed Effect v4 API. Model domain failures and required services explicitly. Run Effect only at framework boundaries.
+Do not store request contexts in global Layers or return Effects through Convex or Cloudflare serialization boundaries.
+Keep durable waits and retries in the selected workflow engine. Design external operations for duplicate delivery.
+Declare environment variables through Varlock. Never put provider credentials in browser bundles.
+Prove the assigned behavior, including authorization and retry failures. Do not deploy or change shared lockfiles without authorization.
+"""

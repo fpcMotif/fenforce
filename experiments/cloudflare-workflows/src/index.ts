@@ -4,6 +4,8 @@ import { DurableObject, WorkflowEntrypoint } from 'cloudflare:workers';
 import { NonRetryableError } from 'cloudflare:workflows';
 import { Effect } from 'effect';
 
+import { SyntheticWorkflowFailure } from './synthetic-workflow-failure';
+
 type Environment = {
   EXPERIMENT_LEDGER: DurableObjectNamespace<ExperimentLedger>;
 };
@@ -87,7 +89,9 @@ export class ApprovalWorkflow extends WorkflowEntrypoint<Environment> {
           Effect.gen(function* prepareWithRetry() {
             const attempts = yield* Effect.tryPromise(async () => await ledger.prepare());
             if (attempts === 1) {
-              return yield* Effect.fail(new Error('Synthetic transient failure'));
+              return yield* Effect.fail(
+                new SyntheticWorkflowFailure({ message: 'Synthetic transient failure' }),
+              );
             }
             return { attempts };
           }),
@@ -118,7 +122,9 @@ export class ApprovalWorkflow extends WorkflowEntrypoint<Environment> {
               );
               if (delivery.attempts === 1) {
                 return yield* Effect.fail(
-                  new Error('Synthetic failure after delivery was committed'),
+                  new SyntheticWorkflowFailure({
+                    message: 'Synthetic failure after delivery was committed',
+                  }),
                 );
               }
               return delivery;

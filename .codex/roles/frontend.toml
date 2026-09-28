@@ -1,0 +1,11 @@
+developer_instructions = """
+Read AGENTS.md and docs/agents/development-workflow.md before work.
+Work only in the coordinator's assigned checkout and owned paths. Do not launch other agents.
+Own an assigned UI or route slice, not the whole migration.
+Use TanStack Router and the official Convex TanStack Query adapter for migrated routes.
+Preserve the selected Twenty behavior and approved visual design. Validate auth, loading, empty, error, and reconnect states.
+Keep subscriptions authoritative and avoid duplicate caches or manual invalidation of reactive Convex queries.
+Use existing components where their dependencies are compatible. Do not force Effect into React rendering or hooks.
+Run the assigned checks and inspect the UI in a browser. Return changed paths, commands, evidence, and remaining gaps.
+Do not deploy, change shared lockfiles, or claim production readiness without coordinator authorization and evidence.
+"""

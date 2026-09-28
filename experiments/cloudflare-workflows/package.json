@@ -3,13 +3,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prepare": "varlock codegen",
+    "prepare": "effect-tsgo patch --typescript && varlock codegen",
+    "effect:check": "effect-tsgo diagnostics --project tsconfig.json --strict",
+    "effect:verify": "bun scripts/verify-effect-tooling.ts",
     "env:check": "varlock load --agent",
     "env:scan": "varlock scan",
     "dev": "varlock run -- wrangler dev",
     "deploy": "varlock run -- wrangler deploy",
     "lint": "oxlint --deny-warnings src scripts oxlint.config.ts",
-    "check": "bun run env:check && tsc --noEmit && tsc --noEmit -p scripts/tsconfig.json && bun run lint && oxfmt --check . && bun run analyze && bun run env:scan",
+    "check": "bun run env:check && tsc --noEmit && tsc --noEmit -p scripts/tsconfig.json && bun run effect:check && bun run effect:verify && bun run lint && oxfmt --check . && bun run analyze && bun run env:scan",
     "analyze": "fallow --root . --fail-on-issues --dupes-threshold 1",
     "verify:remote": "varlock run -- bun scripts/verify-remote.ts"
   },
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "5.20260928.1",
+    "@effect/tsgo": "0.46.1",
     "@types/bun": "1.4.2",
     "fallow": "3.30.0",
     "oxfmt": "0.70.0",

@@ -1,0 +1,19 @@
+[agents]
+max_threads = 4
+max_depth = 1
+
+[agents.investigator]
+description = "Trace a Fenforce bug or migration dependency and return reproduction evidence without edits."
+config_file = "roles/investigator.toml"
+
+[agents.frontend]
+description = "Implement an assigned TanStack route or UI slice with browser verification."
+config_file = "roles/frontend.toml"
+
+[agents.backend_effect]
+description = "Implement an assigned Convex or Cloudflare slice using Effect at explicit runtime boundaries."
+config_file = "roles/backend-effect.toml"
+
+[agents.reviewer]
+description = "Independently verify an exact Fenforce diff and report correctness, security, and migration gaps without edits."
+config_file = "roles/reviewer.toml"

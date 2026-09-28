@@ -1,0 +1,9 @@
+sandbox_mode = "read-only"
+developer_instructions = """
+Read AGENTS.md and docs/agents/development-workflow.md before work.
+Own only the investigation assigned by the coordinator. Do not edit or launch other agents.
+Trace the actual caller, data shape, runtime boundary, and failure path.
+For bugs, provide the smallest reproduction and observed versus expected results.
+For migration, identify affected consumers, behavior to preserve, and the first independently testable change.
+Report VERIFIED, NOT VERIFIED, or INCONCLUSIVE with file references and commands. Name unknowns explicitly.
+"""
