@@ -6,7 +6,15 @@ import { isString } from '@sniptt/guards';
 import { Schema } from 'effect';
 
 const ROOT = resolve(import.meta.dir, '..');
-const WORKFLOW_NAME = 'fenforce-approval-spike';
+const configuration = Schema.decodeUnknownSync(
+  Schema.Struct({
+    workflows: Schema.Array(Schema.Struct({ binding: Schema.String, name: Schema.String })),
+  }),
+)(Bun.JSONC.parse(await Bun.file(resolve(ROOT, 'wrangler.jsonc')).text()));
+const workflow = configuration.workflows.find((entry) => entry.binding === 'APPROVAL_WORKFLOW');
+assert.ok(workflow, 'Missing APPROVAL_WORKFLOW binding');
+const WORKFLOW_NAME = workflow.name;
+const TERMINAL_STATUSES = ['complete', 'errored', 'terminated'];
 const RUN_ID = `${Date.now()}-${crypto.randomUUID().slice(0, 8)}`;
 const EVIDENCE_PATH = resolve(ROOT, 'test-results', `${RUN_ID}.json`);
 
@@ -105,7 +113,7 @@ async function waitFor(
       return instance;
     }
     assert.ok(
-      !['complete', 'errored', 'terminated'].includes(instance.status),
+      !TERMINAL_STATUSES.includes(instance.status),
       `Unexpected terminal state while waiting for ${label}: ${JSON.stringify(instance)}`,
     );
     await Bun.sleep(2_000);
@@ -232,7 +240,7 @@ try {
   for (const instanceId of createdInstances) {
     try {
       const instance = await describe(instanceId);
-      if (!['complete', 'errored', 'terminated'].includes(instance.status)) {
+      if (!TERMINAL_STATUSES.includes(instance.status)) {
         await wrangler(['workflows', 'instances', 'terminate', WORKFLOW_NAME, instanceId]);
       }
     } catch (error) {

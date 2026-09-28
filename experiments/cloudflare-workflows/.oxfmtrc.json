@@ -1,4 +1,4 @@
 {
   "singleQuote": true,
-  "ignorePatterns": ["bun.lock", "test-results/**", ".wrangler/**"]
+  "ignorePatterns": ["bun.lock", "env.d.ts", "test-results/**", ".wrangler/**", ".fallow/**"]
 }

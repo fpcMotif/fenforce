@@ -1,3 +1,7 @@
 .wrangler/
 node_modules/
 test-results/
+.env*
+!.env.schema
+env.d.ts
+.fallow/

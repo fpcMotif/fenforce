@@ -67,8 +67,9 @@ export class ExperimentLedger extends DurableObject<Environment> {
       return {
         preparationAttempts,
         deliveryAttempts,
-        deliveryCount: delivery ? 1 : 0,
-        receiptId: delivery?.receiptId ?? null,
+        ...(delivery
+          ? { deliveryCount: 1, receiptId: delivery.receiptId }
+          : { deliveryCount: 0, receiptId: null }),
       };
     });
   }

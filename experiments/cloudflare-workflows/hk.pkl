@@ -1,0 +1,6 @@
+amends "package://github.com/jdx/hk/releases/download/v2.3.1/hk@2.3.1#/Config.pkl"
+steps {
+    ["check"] {
+        check = "bun run check"
+    }
+}
