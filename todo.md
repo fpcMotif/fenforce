@@ -5,8 +5,10 @@
 - [x] Phase B: Design the workflow
 - [x] Phase C: Run the loop
 - [x] Configure project subagent roles and migration handoffs.
-- [ ] Verify Effect v4 editor and compiler diagnostics.
-- [ ] Verify discovery, configuration, and existing quality checks.
+- [x] Verify Effect v4 compiler and standalone LSP diagnostics.
+- [ ] Verify activation in an editor client.
+  skip: editor settings are saved, but no editor client was launched. LSP diagnostics passed; shutdown lifecycle remains inconclusive.
+- [x] Verify discovery, configuration, and existing quality checks.
 - [x] Phase D: Keep the audit trail
 - [ ] Phase E: Verify and hand back
 

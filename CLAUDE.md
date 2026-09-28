@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Twenty is an open-source CRM — an Nx / Yarn 4 monorepo. Main packages: `twenty-front` (React 18, Jotai, Linaria, Vite), `twenty-server` (NestJS, TypeORM, PostgreSQL, Redis, GraphQL), `twenty-shared` (isomorphic types/utils), `twenty-ui`, `twenty-sdk` (application SDK + CLI), `twenty-e2e-testing` (Playwright).
+Twenty is an open-source CRM — an Nx / Bun monorepo. Main packages: `twenty-front` (React 18, Jotai, Linaria, Vite), `twenty-server` (NestJS, TypeORM, PostgreSQL, Redis, GraphQL), `twenty-shared` (isomorphic types/utils), `twenty-ui`, `twenty-sdk` (application SDK + CLI), `twenty-e2e-testing` (Playwright).
 
 Match the surrounding code — the adjacent files in the directory you are editing beat any written rule, including for file naming, which varies by area.
 
@@ -18,33 +18,54 @@ Where this repo differs from your defaults:
 - For Twenty product concepts, consult `packages/twenty-ui/src/icon/icon-dictionary.md` and use the canonical icon.
 - Import icons from `twenty-ui/icon`, never directly from `@tabler/icons-react`; action and status concepts should use their action or status icons.
 - Test behavior, not implementation: query by user-visible text/roles, `@testing-library/user-event` for interactions.
+- Packages are deep modules — see `packages/README.md` before adding or importing one.
 
 ## Commands
 
 ```bash
 bash packages/twenty-utils/setup-dev-env.sh   # Postgres/Redis + DB init; only for tasks needing a running app
-yarn start                                    # front + server + worker
+bun start                                    # front + server + worker
 
-npx jest path/to/file.spec.ts --config=packages/<pkg>/jest.config.mjs   # single test file (preferred)
-npx vitest run --root packages/twenty-ui --project unit <file>          # twenty-ui runs on vitest, not jest
-npx nx test twenty-server                     # package unit tests (same for twenty-front, ...)
-npx nx run twenty-server:test:integration:with-db-reset
-npx nx storybook:build twenty-front && npx nx storybook:test twenty-front
+bunx jest path/to/file.spec.ts --config=packages/<pkg>/jest.config.mjs   # single test file (preferred)
+bunx vitest run --root packages/twenty-ui --project unit <file>          # twenty-ui runs on vitest, not jest
+bunx nx test twenty-server                     # package unit tests (same for twenty-front, ...)
+bunx nx run twenty-server:test:integration:with-db-reset
+bunx nx storybook:build twenty-front && bunx nx storybook:test twenty-front
 
-npx nx lint:diff-with-main twenty-server      # diff-based lint (fast; add --configuration=fix); run with typecheck after changes
-npx nx fmt <pkg>                              # format
-npx nx build twenty-shared                    # required before building/testing packages that depend on it
-npx nx database:reset twenty-server
-npx nx run twenty-front:graphql:generate      # after GraphQL schema changes (--configuration=metadata for metadata schema)
+bunx nx lint:diff-with-main twenty-server      # diff-based lint (fast; add --configuration=fix); run with typecheck after changes
+bunx nx fmt <pkg>                              # format
+bunx nx build twenty-shared                    # required before building/testing packages that depend on it
+bunx nx database:reset twenty-server
+bunx nx run twenty-front:graphql:generate      # after GraphQL schema changes (--configuration=metadata for metadata schema)
 ```
 
 ## Gotchas
 
-- **`twenty-shared/dist` is per-branch state nothing tracks.** After switching branches or editing `twenty-shared`, run `npx nx build twenty-shared --skip-nx-cache` before trusting any typecheck or test failure in a dependent package.
-- **Nx caching can serve a stale pass.** To verify a fix, run `npx tsgo -p tsconfig.json --noEmit` in the package directly rather than `nx typecheck`.
+- **`twenty-shared/dist` is per-branch state nothing tracks.** After switching branches or editing `twenty-shared`, run `bunx nx build twenty-shared --skip-nx-cache` before trusting any typecheck or test failure in a dependent package.
+- **Nx caching can serve a stale pass.** To verify a fix, run `bunx tsgo -p tsconfig.json --noEmit` in the package directly rather than `nx typecheck`.
 - **Do not commit translation catalogs unless translations are the task.** `lingui extract`/`compile` regenerate `packages/twenty-server/src/engine/core-modules/i18n/locales/*.po` and `locales/generated/*` with thousands of lines of churn as a side effect of touching any `msg` string. The i18n pipeline maintains them; leave them out of your commit.
 - **Commit messages must not carry AI attribution.** CI rejects commits containing `@anthropic.com` co-author trailers or "Generated with Claude Code" lines.
 - **Upgrade commands** (`packages/twenty-server/src/database/commands/upgrade-version-command/`): add or edit files only under the current `TWENTY_CURRENT_VERSION` directory, with a real epoch-ms timestamp strictly greater than every existing one in that directory — CI enforces both, and the upgrade cursor silently skips a command that sorts before an already-applied one. Include `up` and `down`; never rewrite committed command logic. Keep command-only helpers and constants in the version folder, never in runtime modules, and never make runtime code branch on migration state. See `packages/twenty-server/docs/UPGRADE_COMMANDS.md`.
-- **Entity file changes need a generated instance command**: `npx nx run twenty-server:database:migrate:generate --name <name> --type <fast|slow>` (slow = adds a data-backfill step).
+- **Entity file changes need a generated instance command**: `bunx nx run twenty-server:database:migrate:generate --name <name> --type <fast|slow>` (slow = adds a data-backfill step).
 - A read-only Postgres MCP server is configured in `.mcp.json` for inspecting workspace data, metadata, and migration results. Writes go through the CLI commands above.
 - E2E login: click "Continue with Email" and use the prefilled credentials.
+
+## Agent skills
+
+### Fenforce development
+
+For Fenforce bugs, features, and stack migration, follow `docs/agents/development-workflow.md`.
+Project subagent roles are configured in `.codex/config.toml`.
+Keep planned TanStack, Convex, and Effect work distinct from verified production behavior.
+
+### Issue tracker
+
+GitHub Issues via `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Canonical 5-role vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context (`CONTEXT.md` + `docs/adr/` at repo root). See `docs/agents/domain.md`.
