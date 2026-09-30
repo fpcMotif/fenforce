@@ -1,8 +1,11 @@
-33c33
-<     throw new ConvexError('FORBIDDEN');
----
->     return { role: "member", _id: "mutant" } as never;
-⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
- FAIL  convex/companyJourney.test.ts > company journey on the Convex candidate > signs in, opens a workspace, writes a company, and rejects unauthorized callers
+$ bash /Users/martinfan/devv/fenforce/docs/migration/evidence/s0-company-journey/diagnostics/journey-test-mutation-check.sh
+# cwd: /Users/martinfan/devv/fenforce
+# started: 2026-09-30T01:28:31Z
+mutated: authorization.ts
 AssertionError: expected 'accepted' to contain 'FORBIDDEN'
-      Tests  1 failed (1)
+mutant membership_check_removed: vitest exit 1, caught
+mutated: workspaceCompanies.ts
+AssertionError: expected [ { …(14) } ] to deeply equal []
+mutant list_ignores_workspace: vitest exit 1, caught
+surviving mutants: 0
+# exit: 0

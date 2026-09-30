@@ -11,4 +11,9 @@ cp -R "$SRC/convex" "$PROBE/convex"
 rm -f "$PROBE"/convex/*.test.ts
 cp "$(dirname "$0")/edit-payload-without-expected-revision.test.ts" "$PROBE/convex/editProbe.test.ts"
 
-cd "$PROBE" && bunx vitest run convex/editProbe.test.ts --silent=false 2>&1 | rg --no-config 'EDIT_PROBE|Tests ' | cut -c1-260
+cd "$PROBE" || exit 2
+bunx vitest run convex/editProbe.test.ts --silent=false > "$PROBE/probe.log" 2>&1
+status=$?
+rg --no-config 'EDIT_PROBE|Tests ' "$PROBE/probe.log" | cut -c1-260
+echo "probe vitest exit: $status"
+exit "$status"

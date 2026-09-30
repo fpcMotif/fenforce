@@ -1,3 +1,8 @@
+$ bash /Users/martinfan/devv/fenforce/docs/migration/evidence/s0-company-journey/diagnostics/edit-payload-without-expected-revision.sh
+# cwd: /Users/martinfan/devv/fenforce
+# started: 2026-09-30T01:28:33Z
 EDIT_PROBE rejected: Validator error: Missing required field `expectedRevision` in object
 EDIT_PROBE_STORED name=Before revision=1
       Tests  1 passed (1)
+probe vitest exit: 0
+# exit: 0

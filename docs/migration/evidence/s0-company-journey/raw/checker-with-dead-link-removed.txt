@@ -1,0 +1,12 @@
+$ bash /Users/martinfan/devv/fenforce/docs/migration/evidence/s0-company-journey/diagnostics/checker-with-dead-link-removed.sh
+# cwd: /Users/martinfan/devv/fenforce
+# started: 2026-09-30T01:28:33Z
+criteria-map.md lines removed: 1
+PASS: 204 declarations mapped across 5 catalogs; local links resolve.
+Catalog statuses: 0 verified; 204 unverified.
+Structural traceability only. Runtime parity and evidence quality require independent review.
+PASS: 11 negative controls rejected; valid control accepted.
+PASS: 204 declarations mapped across 5 catalogs; local links resolve.
+Catalog statuses: 0 verified; 204 unverified.
+Structural traceability only. Runtime parity and evidence quality require independent review.
+# exit: 0

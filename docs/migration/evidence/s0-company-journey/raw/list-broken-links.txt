@@ -1,0 +1,10 @@
+$ bun /Users/martinfan/devv/fenforce/docs/migration/evidence/s0-company-journey/diagnostics/list-broken-links.mjs docs/migration
+# cwd: /Users/martinfan/devv/fenforce
+# started: 2026-09-30T01:28:34Z
+{
+  "count": 1,
+  "missing": [
+    "criteria-map.md: ../../packages/twenty-ui/project.json"
+  ]
+}
+# exit: 0

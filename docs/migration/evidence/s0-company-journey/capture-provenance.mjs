@@ -4,25 +4,8 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
-
-const run = (command, args, options = {}) => {
-  try {
-    return execFileSync(command, args, {
-      cwd: root,
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'pipe'],
-      ...options,
-    }).trim();
-  } catch (error) {
-    return `unavailable: ${String(error.message).split('\n')[0]}`;
-  }
-};
-
-const git = (...args) => run('git', args);
-const sha256 = (path) =>
-  createHash('sha256').update(readFileSync(resolve(root, path))).digest('hex');
-
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
+const CONVEX_DIRECTORY = 'deployments/convex';
 const CANDIDATE_PATHS = [
   'deployments',
   'packages/twenty-front/src/pages/convex-preview',
@@ -41,138 +24,136 @@ const APPLICATION_SOURCE = [
   'packages/twenty-ui/src',
 ];
 
+const problems = [];
+
+const run = (command, commandArguments) => {
+  try {
+    return execFileSync(command, commandArguments, {
+      cwd: ROOT,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    }).trim();
+  } catch (error) {
+    problems.push(
+      `${command} ${commandArguments.join(' ')}: ${String(error.message).split('\n')[0]}`,
+    );
+    return '';
+  }
+};
+
+const git = (...commandArguments) => run('git', commandArguments);
+const lines = (output) => output.split('\n').filter(Boolean);
+const readText = (path) => readFileSync(resolve(ROOT, path), 'utf8');
+const sha256 = (path) =>
+  createHash('sha256')
+    .update(readFileSync(resolve(ROOT, path)))
+    .digest('hex');
+
+const installedVersion = (packageName) => {
+  try {
+    return JSON.parse(
+      readText(`${CONVEX_DIRECTORY}/node_modules/${packageName}/package.json`),
+    ).version;
+  } catch (error) {
+    problems.push(`${packageName} version: ${error.message}`);
+    return null;
+  }
+};
+
 const upstreamBaseline = JSON.parse(
-  readFileSync(resolve(root, 'docs/migration/source-coverage.json'), 'utf8'),
+  readText('docs/migration/source-coverage.json'),
 ).upstreamBaseline;
 
-const trackedChanges = git('diff', '--name-only', 'HEAD', '--', ...CANDIDATE_PATHS)
-  .split('\n')
-  .filter(Boolean);
-const untracked = git(
-  'ls-files',
-  '--others',
-  '--exclude-standard',
-  '--',
-  ...CANDIDATE_PATHS,
-)
-  .split('\n')
-  .filter(Boolean);
-
+const trackedChanges = lines(
+  git('diff', '--name-only', 'HEAD', '--', ...CANDIDATE_PATHS),
+);
+const untracked = lines(
+  git('ls-files', '--others', '--exclude-standard', '--', ...CANDIDATE_PATHS),
+);
 const candidateFiles = [...trackedChanges, ...untracked]
   .filter((path) => !SECRET_FILES.test(path))
   .filter((path) => !GENERATED_OR_VENDORED.test(path))
   .sort();
 
-const version = (packageName, directory) => {
-  try {
-    return JSON.parse(
-      readFileSync(
-        resolve(root, directory, 'node_modules', packageName, 'package.json'),
-        'utf8',
-      ),
-    ).version;
-  } catch {
-    return 'unavailable';
-  }
-};
+const committedApplicationSourceDiff = lines(
+  git(
+    'diff',
+    '--name-only',
+    upstreamBaseline,
+    'HEAD',
+    '--',
+    ...APPLICATION_SOURCE,
+  ),
+);
+const statusCounts = {};
 
-const convexDirectory = 'deployments/convex';
-const convexDeploymentName = (() => {
-  try {
-    return readFileSync(resolve(root, convexDirectory, '.env.local'), 'utf8')
-      .split('\n')
-      .find((line) => line.startsWith('CONVEX_DEPLOYMENT='))
-      ?.split('=')[1]
-      ?.split(' ')[0];
-  } catch {
-    return 'unavailable';
-  }
-})();
+for (const line of lines(git('status', '--porcelain'))) {
+  const status = line.slice(0, 2).trim() || '?';
+  statusCounts[status] = (statusCounts[status] ?? 0) + 1;
+}
 
 const provenance = {
   capturedAtUtc: new Date().toISOString(),
   source: {
     upstreamBaseline,
-    upstreamBaselineResolves: git('rev-parse', '--verify', `${upstreamBaseline}^{commit}`),
+    upstreamBaselineResolves: git(
+      'rev-parse',
+      '--verify',
+      `${upstreamBaseline}^{commit}`,
+    ),
   },
   candidate: {
     branch: git('branch', '--show-current'),
     head: git('rev-parse', 'HEAD'),
     headSubject: git('log', '-1', '--format=%s'),
     mergeBaseWithBaseline: git('merge-base', 'HEAD', upstreamBaseline),
-    worktreeStatusCounts: Object.fromEntries(
-      Object.entries(
-        git('status', '--porcelain')
-          .split('\n')
-          .filter(Boolean)
-          .reduce((counts, line) => {
-            const key = line.slice(0, 2).trim() || '?';
-            counts[key] = (counts[key] ?? 0) + 1;
-            return counts;
-          }, {}),
-      ),
-    ),
+    worktreeStatusCounts: statusCounts,
     candidateFileChecksums: candidateFiles.map((path) => ({
       path,
       trackedChange: trackedChanges.includes(path),
       sha256: sha256(path),
     })),
     excludedFromChecksums:
-      'environment files, generated output, and installed packages',
+      'environment files, generated output, installed packages, and the evidence directory itself',
   },
   applicationSourceAgainstBaseline: {
-    committedDiffFileCount: git(
-      'diff',
-      '--name-only',
-      upstreamBaseline,
-      'HEAD',
-      '--',
-      ...APPLICATION_SOURCE,
-    )
-      .split('\n')
-      .filter(Boolean).length,
-    committedDiffFiles: git(
-      'diff',
-      '--name-only',
-      upstreamBaseline,
-      'HEAD',
-      '--',
-      ...APPLICATION_SOURCE,
-    )
-      .split('\n')
-      .filter(Boolean),
-    uncommittedApplicationSourceChanges: git(
-      'status',
-      '--porcelain',
-      '--',
-      ...APPLICATION_SOURCE,
-    )
-      .split('\n')
-      .filter(Boolean),
+    committedDiffFileCount: committedApplicationSourceDiff.length,
+    committedDiffFiles: committedApplicationSourceDiff,
+    uncommittedApplicationSourceChanges: lines(
+      git('status', '--porcelain', '--', ...APPLICATION_SOURCE),
+    ),
   },
   toolchain: {
     bun: run('bun', ['--version']),
     node: run('node', ['--version']),
+    nodeEnginesDeclared: JSON.parse(readText('package.json')).engines?.node,
+    nvmrc: readText('.nvmrc').trim(),
     docker: run('docker', ['version', '--format', '{{.Server.Version}}']),
-    convex: version('convex', convexDirectory),
-    convexAuth: version('@convex-dev/auth', convexDirectory),
-    convexTest: version('convex-test', convexDirectory),
-    vitest: version('vitest', convexDirectory),
-    typescript: version('typescript', convexDirectory),
+    convex: installedVersion('convex'),
+    convexAuth: installedVersion('@convex-dev/auth'),
+    convexTest: installedVersion('convex-test'),
+    vitest: installedVersion('vitest'),
+    typescript: installedVersion('typescript'),
   },
   flagsAndConfiguration: {
     previewPasswordSignUpDefault: run('rg', [
       '--no-config',
       '-o',
       '^FENFORCE_PREVIEW_AUTH_ENABLED=.*',
-      `${convexDirectory}/.env.schema`,
+      `${CONVEX_DIRECTORY}/.env.schema`,
     ]),
-    convexDeploymentName,
+    previewConvexUrlInHostingSchema: run('rg', [
+      '--no-config',
+      '-o',
+      '^REACT_APP_FENFORCE_CONVEX_URL=.*',
+      'deployments/cloudflare-front/.env.schema',
+    ]),
     convexDeploymentEnvironment:
       'remote state; not captured without deployment access',
     twentyFrontEntry:
       'preview renders only when REACT_APP_FENFORCE_CONVEX_URL is set at build time',
   },
+  problems,
 };
 
 console.log(JSON.stringify(provenance, null, 2));

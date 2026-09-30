@@ -16,4 +16,10 @@ for (const name of documents) {
   }
 }
 
-console.log(JSON.stringify({ count: missing.length, missing: [...new Set(missing)] }, null, 2));
+console.log(
+  JSON.stringify(
+    { count: missing.length, missing: [...new Set(missing)] },
+    null,
+    2,
+  ),
+);

@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
 
 const SERVER_URL = process.env.TWENTY_SERVER_URL ?? 'http://localhost:3000';
+const COMPOSE_PROJECT = process.env.COMPOSE_PROJECT ?? 'fenforce-s0-baseline';
 const COMPOSE_FILE = resolve(
   import.meta.dir,
   '../../../../packages/twenty-docker/docker-compose.dev.yml',
@@ -90,7 +91,8 @@ const exchangeLoginToken = async (loginToken: string) => {
   );
 
   return {
-    failure: exchange.body.errors === undefined ? undefined : outcomeOf(exchange),
+    failure:
+      exchange.body.errors === undefined ? undefined : outcomeOf(exchange),
     token:
       exchange.body.data?.getAuthTokensFromLoginToken.tokens
         .accessOrWorkspaceAgnosticToken.token,
@@ -109,7 +111,8 @@ const signIn = async (email: string, password: string) => {
     }`,
     { email, password, origin: SERVER_URL },
   );
-  const loginToken = login.body.data?.getLoginTokenFromCredentials.loginToken.token;
+  const loginToken =
+    login.body.data?.getLoginTokenFromCredentials.loginToken.token;
 
   return loginToken === undefined
     ? { failure: outcomeOf(login), token: undefined }
@@ -139,9 +142,10 @@ const signInToWorkspace = async (
     }`,
     { email, password },
   );
-  const loginToken = login.body.data?.signIn.availableWorkspaces.availableWorkspacesForSignIn.find(
-    (workspace) => workspace.displayName === workspaceDisplayName,
-  )?.loginToken;
+  const loginToken =
+    login.body.data?.signIn.availableWorkspaces.availableWorkspacesForSignIn.find(
+      (workspace) => workspace.displayName === workspaceDisplayName,
+    )?.loginToken;
 
   return loginToken == null
     ? { failure: outcomeOf(login), token: undefined }
@@ -167,6 +171,8 @@ const psql = (sql: string) =>
     'docker',
     [
       'compose',
+      '-p',
+      COMPOSE_PROJECT,
       '-f',
       COMPOSE_FILE,
       'exec',
@@ -268,7 +274,10 @@ const main = async () => {
     })),
   );
 
-  record('unauthorized: no credentials', outcomeOf(await findCompanies(undefined)));
+  record(
+    'unauthorized: no credentials',
+    outcomeOf(await findCompanies(undefined)),
+  );
   record(
     'unauthorized: invalid token',
     outcomeOf(await findCompanies('not-a-real-token')),

@@ -1,5 +1,4 @@
 import { convexTest } from 'convex-test';
-import { decodeJwt, exportJWK, exportPKCS8, generateKeyPair } from 'jose';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 
 import { api } from './_generated/api';
@@ -15,6 +14,8 @@ const OWNER_EMAIL = 'journey-owner@example.test';
 const OUTSIDER_EMAIL = 'journey-outsider@example.test';
 const COMPANY_NAME = 'Journey Fixture Co';
 const COMPANY_DOMAIN = 'journey-fixture.example';
+
+type TokenClaims = { iss?: string; sub?: string };
 
 const evidence: Array<{ step: string; outcome: unknown }> = [];
 
@@ -37,16 +38,47 @@ const configurePreviewAllowlist = (email: string) => {
   vi.stubEnv('FENFORCE_PREVIEW_INVITE_CODE', INVITE_CODE);
 };
 
+const toPrivateKeyPem = (der: ArrayBuffer) => {
+  const base64 = btoa(String.fromCharCode(...new Uint8Array(der)));
+
+  return `-----BEGIN PRIVATE KEY-----\n${base64.match(/.{1,64}/g)?.join('\n')}\n-----END PRIVATE KEY-----`;
+};
+
+const decodeClaims = (token: string): TokenClaims => {
+  const payload = token.split('.')[1] ?? '';
+
+  return JSON.parse(atob(payload.replace(/-/g, '+').replace(/_/g, '/')));
+};
+
+const userIdOf = (claims: TokenClaims) => claims.sub?.split('|')[0];
+
 beforeAll(async () => {
-  const keys = await generateKeyPair('RS256', { extractable: true });
+  const keys = await crypto.subtle.generateKey(
+    {
+      name: 'RSASSA-PKCS1-v1_5',
+      modulusLength: 2048,
+      publicExponent: new Uint8Array([1, 0, 1]),
+      hash: 'SHA-256',
+    },
+    true,
+    ['sign', 'verify'],
+  );
 
   vi.stubEnv('CONVEX_SITE_URL', SITE_URL);
   vi.stubEnv('SITE_URL', SITE_URL);
-  vi.stubEnv('JWT_PRIVATE_KEY', await exportPKCS8(keys.privateKey));
+  vi.stubEnv(
+    'JWT_PRIVATE_KEY',
+    toPrivateKeyPem(await crypto.subtle.exportKey('pkcs8', keys.privateKey)),
+  );
   vi.stubEnv(
     'JWKS',
     JSON.stringify({
-      keys: [{ use: 'sig', ...(await exportJWK(keys.publicKey)) }],
+      keys: [
+        {
+          use: 'sig',
+          ...(await crypto.subtle.exportKey('jwk', keys.publicKey)),
+        },
+      ],
     }),
   );
 });
@@ -77,7 +109,7 @@ describe('company journey on the Convex candidate', () => {
 
       expect(result.tokens).not.toBeNull();
 
-      const claims = decodeJwt(result.tokens?.token ?? '');
+      const claims = decodeClaims(result.tokens?.token ?? '');
       const issuer = claims.iss ?? '';
       const subject = claims.sub ?? '';
 
@@ -93,18 +125,21 @@ describe('company journey on the Convex candidate', () => {
 
     configurePreviewAllowlist(OWNER_EMAIL);
     const enrollment = await signIn('signUp', OWNER_EMAIL, PASSWORD);
+    expect(enrollment.claims.iss).toBe(SITE_URL);
+    expect(userIdOf(enrollment.claims)).toBeTruthy();
     record('sign-up (allowlisted email, invite code)', {
       tokenIssued: true,
       issuer: enrollment.claims.iss,
     });
 
     const returning = await signIn('signIn', OWNER_EMAIL, PASSWORD);
+    const sameUserAsSignUp =
+      userIdOf(returning.claims) === userIdOf(enrollment.claims);
     record('sign-in (existing account)', {
       tokenIssued: true,
-      sameUserAsSignUp:
-        returning.claims.sub?.split('|')[0] ===
-        enrollment.claims.sub?.split('|')[0],
+      sameUserAsSignUp,
     });
+    expect(sameUserAsSignUp).toBe(true);
 
     const wrongPassword = await outcomeOf(
       test.action(api.auth.signIn, {
@@ -178,15 +213,16 @@ describe('company journey on the Convex candidate', () => {
     const persisted = await test.run(async (context) => {
       const rows = await context.db.query('workspaceCompanies').collect();
 
-      return rows.map(({ name, domainName, deletedAt, workspaceId: id }) => ({
-        name,
-        domainName,
-        deletedAt,
-        inOwnerWorkspace: id === workspaceId,
+      return rows.map((row) => ({
+        name: row.name,
+        domainName: row.domainName,
+        deletedAt: row.deletedAt,
+        inOwnerWorkspace: row.workspaceId === workspaceId,
       }));
     });
     record('persisted rows (workspaceCompanies)', persisted);
     expect(persisted).toHaveLength(1);
+    expect(persisted[0]?.inOwnerWorkspace).toBe(true);
 
     const anonymous = await outcomeOf(
       test.query(api.workspaceCompanies.list, { workspaceId, paginationOpts }),
@@ -195,7 +231,12 @@ describe('company journey on the Convex candidate', () => {
     expect(anonymous).toContain('UNAUTHENTICATED');
 
     configurePreviewAllowlist(OUTSIDER_EMAIL);
-    const outsider = (await signIn('signUp', OUTSIDER_EMAIL, PASSWORD)).session;
+    const outsiderEnrollment = await signIn('signUp', OUTSIDER_EMAIL, PASSWORD);
+    expect(userIdOf(outsiderEnrollment.claims)).not.toBe(
+      userIdOf(enrollment.claims),
+    );
+    const outsider = outsiderEnrollment.session;
+
     const foreignRead = await outcomeOf(
       outsider.query(api.workspaceCompanies.list, {
         workspaceId,
@@ -213,6 +254,18 @@ describe('company journey on the Convex candidate', () => {
     );
     record('unauthorized: foreign write', foreignWrite);
     expect(foreignWrite).toContain('FORBIDDEN');
+
+    const outsiderWorkspaceId = await outsider.mutation(api.workspaces.create, {
+      name: 'Outsider Workspace',
+    });
+    const outsiderOwnList = await outsider.query(api.workspaceCompanies.list, {
+      workspaceId: outsiderWorkspaceId,
+      paginationOpts,
+    });
+    record('scoping: a member of another workspace lists only that workspace', {
+      count: outsiderOwnList.page.length,
+    });
+    expect(outsiderOwnList.page).toEqual([]);
 
     const rowsAfterIntrusion = await test.run((context) =>
       context.db.query('workspaceCompanies').collect(),

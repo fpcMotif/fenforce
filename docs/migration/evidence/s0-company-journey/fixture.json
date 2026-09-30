@@ -1,39 +1,96 @@
 {
-  "fixtureVersion": 1,
+  "fixtureVersion": 2,
   "purpose": "Company journey S0 replay: sign in, open a workspace, list companies, write one company, read it back, and attempt unauthorized access.",
   "company": {
     "name": "Journey Fixture Co",
-    "domain": "journey-fixture.example"
+    "domain": "journey-fixture.example",
+    "repeatedIn": [
+      "deployments/convex/convex/companyJourney.test.ts",
+      "docs/migration/evidence/s0-company-journey/twenty-baseline.ts"
+    ],
+    "note": "The values are repeated in both drivers and in this file. No script reads this file, so a change must be made in all three places."
+  },
+  "actors": {
+    "twentyBaseline": ["seeded demo member of the Apple workspace"],
+    "convexCandidate": [
+      "workspace owner (admin), created by sign-up",
+      "outsider with a separate workspace, created by sign-up"
+    ],
+    "notCovered": [
+      "member with a restricted role",
+      "invitee",
+      "API key",
+      "application",
+      "system actor"
+    ]
   },
   "twentyBaseline": {
     "serverUrl": "http://localhost:3000",
     "frontendUrl": "http://localhost:3100",
+    "version": "2.44.0",
     "account": "the documented demo account from packages/twenty-docs/developers/contribute/capabilities/local-setup.mdx",
     "signInMethod": "email and password through getLoginTokenFromCredentials then getAuthTokensFromLoginToken",
     "data": "packages/twenty-server workspace:seed:dev after database:reset",
-    "services": "packages/twenty-docker/docker-compose.dev.yml (postgres:16, redis:7), removed after capture"
+    "services": {
+      "composeFile": "packages/twenty-docker/docker-compose.dev.yml",
+      "postgres": "postgres:16 sha256:1a6ab3f5345eb6dbe04a1349529caabdb0ab09293a09590fad07b2246bfa4b54",
+      "redis": "redis:7 sha256:c6eabf748fc7a61dbb5a705c78bcf3d6377b1127a97d0ce965c11c44ba46896f",
+      "lifetime": "created for the capture and removed with their volume afterwards"
+    },
+    "workspaces": ["Apple (default, used)", "YCombinator"],
+    "seedCompanies": {
+      "workspace": "Apple",
+      "count": 599,
+      "sha256": "8d087f983c8ace0b9601bf02ba9373d8da187fc2a06c0638c066869878be63cf",
+      "derivation": "sha256 of the lines 'name|domainNamePrimaryLinkUrl', one per company excluding the fixture company, ordered by name then line",
+      "artifact": "not retained; recorded from the capture session's query output"
+    },
+    "featureFlags": {
+      "scope": "identical in the Apple and YCombinator workspaces",
+      "enabled": [
+        "IS_EXECUTION_QUOTA_ENABLED",
+        "IS_JUNCTION_RELATIONS_ENABLED",
+        "IS_MESSAGE_CAMPAIGN_ENABLED",
+        "IS_RECORD_CREATION_FORM_ENABLED",
+        "IS_RECORD_SHARING_ENABLED"
+      ],
+      "disabled": [
+        "IS_AI_CHAT_SHARING_DROPDOWN_ENABLED",
+        "IS_INITIAL_OBJECT_VIEW_ENABLED",
+        "IS_UNIQUE_INDEXES_ENABLED"
+      ],
+      "artifact": "not retained; recorded from the capture session's query output"
+    },
+    "multiWorkspaceMode": "off (IS_MULTIWORKSPACE_ENABLED is commented out in .env.example, so the default applies)",
+    "runtime": "Node v26.10.0 although package.json declares ^24.5.0 and .nvmrc says 24.16.0"
   },
   "convexCandidate": {
     "runtime": "convex-test in-process backend with the real registered functions and the real @convex-dev/auth signIn action",
     "signInMethod": "preview-password provider: signUp with allowlisted email and invite code, then signIn with email and password",
-    "generatedPerRun": "RSA signing key pair; nothing is stored",
+    "generatedPerRun": "RSA signing key pair created with Web Crypto; nothing is stored",
     "syntheticIdentities": {
       "owner": "journey-owner@example.test",
       "outsider": "journey-outsider@example.test",
       "inviteCode": "synthetic value inside companyJourney.test.ts",
       "password": "synthetic value inside companyJourney.test.ts"
     },
+    "data": "empty database created per test run",
     "deployedPreview": "not exercised; needs deployment credentials and preview allowlist values that this environment does not hold"
   },
+  "locale": "en for both sides; the candidate preview sets its interface language to 'en' with empty catalogs",
+  "entitlements": "not captured",
+  "providerMode": "none: no email, calendar, billing or other external provider was connected on either side",
   "flags": {
-    "FENFORCE_PREVIEW_AUTH_ENABLED": "true for signUp only inside the test process, default false in .env.schema",
+    "FENFORCE_PREVIEW_AUTH_ENABLED": "true for signUp only inside the test process; default false in .env.schema",
     "REACT_APP_FENFORCE_CONVEX_URL": "unset renders the original Twenty app; set renders the Convex preview"
   },
   "normalization": {
-    "allowed": [
+    "proposed": [
       "generated identifiers compared by role, not value",
       "timestamps compared by presence, not value"
     ],
+    "applied": "none: every compared value was a fixed string, a count or a presence flag",
+    "accepted": "not accepted by anyone yet",
     "notAllowed": [
       "missing fields",
       "authorization differences",

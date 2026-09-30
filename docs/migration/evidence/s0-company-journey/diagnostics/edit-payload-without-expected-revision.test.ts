@@ -37,7 +37,9 @@ it('rejects the preview edit payload that lacks expectedRevision', async () => {
   });
 
   console.log(`EDIT_PROBE ${outcome}`);
-  console.log(`EDIT_PROBE_STORED name=${stored?.name} revision=${stored?.revision}`);
+  console.log(
+    `EDIT_PROBE_STORED name=${stored?.name} revision=${stored?.revision}`,
+  );
   expect(outcome).toContain('expectedRevision');
   expect(stored?.name).toBe('Before');
 });

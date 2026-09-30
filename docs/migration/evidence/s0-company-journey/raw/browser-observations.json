@@ -1,0 +1,37 @@
+{
+  "class": "operator observations copied from the browser tool output during the session; they are not automated captures and no network log was kept",
+  "viewport": "800x600 in the built-in browser pane; the first two Twenty screenshots were saved at 640x480",
+  "twenty": {
+    "servedBy": "packages/twenty-front dev server on 127.0.0.1:3100 against the built server on localhost:3000",
+    "steps": [
+      {
+        "action": "navigate to http://localhost:3100/objects/companies while signed out",
+        "observed": "tab URL became http://localhost:3100/welcome, tab title 'Sign in or Create an account', page text 'Welcome, Apple.' with Continue"
+      },
+      {
+        "action": "click Continue",
+        "observed": "password step shown with the email and a masked password field; whether the password was prefilled or typed is not visible in the image"
+      },
+      {
+        "action": "click Sign in",
+        "observed": "tab URL became http://localhost:3100/objects/companies, tab title 'All Companies - Companies'; list header showed 600 and the fixture row"
+      },
+      {
+        "action": "click the fixture row",
+        "observed": "tab URL became http://localhost:3100/objects/companies?panel=%2Fobject%2Fcompany%2F<company id>; the record opened in a side panel"
+      }
+    ],
+    "console": "read once during the first load: two vite debug lines and the React DevTools notice; not read again afterwards"
+  },
+  "convexPreview": {
+    "servedBy": "packages/twenty-front dev server on 127.0.0.1:3101 with REACT_APP_FENFORCE_CONVEX_URL set to the deployment URL in deployments/cloudflare-front/.env.schema",
+    "steps": [
+      {
+        "action": "navigate to http://127.0.0.1:3101/objects/companies while signed out",
+        "observed": "URL unchanged, tab title 'Twenty', first heading 'Sign in', zero elements with role alert"
+      }
+    ],
+    "console": "read with the errors-only filter: no entries",
+    "connection": "inferred, not captured: the sign-in gate renders only in the unauthenticated branch of the Convex auth provider. No credentials were entered and nothing was written to the deployment."
+  }
+}
