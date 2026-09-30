@@ -1,0 +1,71 @@
+$ env REACT_APP_FENFORCE_CONVEX_URL=https://placeholder.invalid NODE_ENV=production NODE_OPTIONS=--max-old-space-size=8192 bunx vp build --outDir /private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview
+# cwd: /Users/martinfan/devv/fenforce/packages/twenty-front
+# started: 2026-09-29T13:52:50Z
+[linaria/wyw] Starting CSS pre-build
+[linaria/wyw] Pre-warm: 243ms
+transforming...
+✓ 6958 modules transformed.
+
+(!) outDir /private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+computing gzip size...
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/index.html                                             2.03 kB │ gzip:  0.81 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-vietnamese-400-normal-DMkecbls.woff2      4.97 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-vietnamese-600-normal-Cc8MFFhd.woff2      5.10 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-vietnamese-700-normal-DlLaEgI2.woff2      5.10 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-vietnamese-500-normal-DOriooB6.woff2      5.11 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-greek-ext-400-normal-DGGRlc-M.woff2       5.26 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-greek-ext-500-normal-C4iEst2y.woff2       5.42 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-greek-ext-600-normal-DRtmH8MT.woff2       5.43 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-greek-ext-700-normal-qfdV9bQt.woff2       5.44 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-vietnamese-400-normal-Bbgyi5SW.woff       6.50 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-vietnamese-500-normal-mJboJaSs.woff       6.59 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-vietnamese-700-normal-BZaoP0fm.woff       6.63 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-vietnamese-600-normal-BuLX-rYi.woff       6.64 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-greek-ext-400-normal-KugGGMne.woff        7.06 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-greek-ext-500-normal-2j5mBUwD.woff        7.19 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-greek-ext-600-normal-B8X0CLgF.woff        7.21 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-greek-ext-700-normal-BoQ6DsYi.woff        7.21 kB
+[... 24 lines omitted ...]
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/dm-mono-latin-400-normal--0xN8mdc.woff         11.21 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/dm-mono-latin-500-normal-CN8Miw6E.woff         11.24 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-cyrillic-ext-400-normal-DQukG94-.woff    13.33 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-cyrillic-ext-700-normal-LO58E6JB.woff    13.40 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-cyrillic-ext-500-normal-BmqWE9Dz.woff    13.45 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-cyrillic-ext-600-normal-Bcila6Z-.woff    13.46 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/dm-mono-latin-400-normal-4GdczIuU.woff2        14.82 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/dm-mono-latin-500-normal-DRMDZjhP.woff2        14.98 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-400-normal-C38fXH4l.woff2          23.66 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-500-normal-Cerq10X2.woff2          24.27 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-700-normal-Yt3aPRUw.woff2          24.35 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-600-normal-LgqL8muc.woff2          24.45 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-400-normal-CyCys3Eg.woff           30.69 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-600-normal-CiBQ2DWP.woff           31.26 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-500-normal-BL9OpVg8.woff           31.28 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-700-normal-BLAVimhd.woff           31.32 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-ext-400-normal-C1nco2VV.woff2      35.00 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-ext-500-normal-CV4jyFjo.woff2      36.02 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-ext-700-normal-Ca8adRJv.woff2      36.24 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-ext-600-normal-D2bJ5OIk.woff2      36.26 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-ext-400-normal-77YHD8bZ.woff       47.56 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-ext-500-normal-BxGbmqWO.woff       48.49 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-ext-700-normal-TidjK2hL.woff       48.63 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/inter-latin-ext-600-normal-CIVaiw4L.woff       48.66 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/ConvexCompaniesPreview-CbO3ZwBD.css             6.98 kB │ gzip:  1.66 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/index-CNkCwt6Z.css                            273.68 kB │ gzip: 80.40 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/index-D4WqVOSx.js                             221.93 kB │ gzip: 69.61 kB
+../../../../../../private/tmp/claude-501/-Users-martinfan-devv-fenforce/267121e0-3965-4eab-823f-9ac4d7c79693/scratchpad/build-preview/assets/ConvexCompaniesPreview-hqp6v4nO.js            327.77 kB │ gzip: 95.13 kB
+
+✓ built in 1.06s
+
+[linaria/wyw] ===== CSS PRE-BUILD SUMMARY =====
+[linaria/wyw] Files transformed: 0
+[linaria/wyw] Files skipped (no @linaria): 6958
+[linaria/wyw] Transform time: 0ms
+[linaria/wyw] Avg per transformed file: 0.0ms
+[linaria/wyw] ==========================================
+
+# exit: 0
+

@@ -1,0 +1,8 @@
+33c33
+<     throw new ConvexError('FORBIDDEN');
+---
+>     return { role: "member", _id: "mutant" } as never;
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  convex/companyJourney.test.ts > company journey on the Convex candidate > signs in, opens a workspace, writes a company, and rejects unauthorized callers
+AssertionError: expected 'accepted' to contain 'FORBIDDEN'
+      Tests  1 failed (1)

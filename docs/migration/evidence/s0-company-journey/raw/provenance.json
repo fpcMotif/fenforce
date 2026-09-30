@@ -1,0 +1,287 @@
+{
+  "capturedAtUtc": "2026-09-29T13:51:28.722Z",
+  "source": {
+    "upstreamBaseline": "a431f9afb6e761322109ea3b1b942e007b31eef2",
+    "upstreamBaselineResolves": "a431f9afb6e761322109ea3b1b942e007b31eef2"
+  },
+  "candidate": {
+    "branch": "codex/cloudflare-workflow-spike",
+    "head": "1bf3ec682fcc7b768d1ea895d1a39ec917299b5c",
+    "headSubject": "feat(repo): switch to Bun and configure deep modules boundary enforcement",
+    "mergeBaseWithBaseline": "a431f9afb6e761322109ea3b1b942e007b31eef2",
+    "worktreeStatusCounts": {
+      "D": 21,
+      "M": 214,
+      "??": 19
+    },
+    "candidateFileChecksums": [
+      {
+        "path": "CONTEXT.md",
+        "trackedChange": false,
+        "sha256": "299052b07a58571f4dc3fe0779e9a99385fd0ccbd966ff562b9c36419aace5da"
+      },
+      {
+        "path": "deployments/cloudflare-front/.env.schema",
+        "trackedChange": false,
+        "sha256": "9474524955cb930f97475a37e88f384ae41ed3ecda949625a16d102ce6338698"
+      },
+      {
+        "path": "deployments/cloudflare-front/alchemy.run.ts",
+        "trackedChange": false,
+        "sha256": "4f0d11fee3b99736357bd4e2f65a7b44a957376f558194f675ed959c44a28b4a"
+      },
+      {
+        "path": "deployments/cloudflare-front/bun.lock",
+        "trackedChange": false,
+        "sha256": "f9925415212ec69dc5d5360b854eac1d62fc32a6b132f199dac0eddb1748d4e8"
+      },
+      {
+        "path": "deployments/cloudflare-front/bunfig.toml",
+        "trackedChange": false,
+        "sha256": "5afb0e8222c1907fb6b32b02af2a6317950bf5fb1ea19790c59be4354067a862"
+      },
+      {
+        "path": "deployments/cloudflare-front/package.json",
+        "trackedChange": false,
+        "sha256": "966b1897c694c9a0ecb86db177d168680c560f2c104d2360e29e5962f6268951"
+      },
+      {
+        "path": "deployments/cloudflare-front/scripts/build.mjs",
+        "trackedChange": false,
+        "sha256": "a1c6cff01826af4c00279715c585dd2332acc5bbf57c8fb943c7a2cdd7385089"
+      },
+      {
+        "path": "deployments/cloudflare-front/src/index.test.ts",
+        "trackedChange": false,
+        "sha256": "46c7ff1cd088da8f41c0b0d976fb54a1045d9f01000c90d7929259abedd47079"
+      },
+      {
+        "path": "deployments/cloudflare-front/src/index.ts",
+        "trackedChange": false,
+        "sha256": "5d9a5f50b87ae4773bcbf9b4c9d5116b0f25aeb1411bb4e4da9744b8f6ada156"
+      },
+      {
+        "path": "deployments/cloudflare-front/tsconfig.json",
+        "trackedChange": false,
+        "sha256": "604e236f0951dfd8faafb12f743a2ac2e47033bc32dbd19b5558d2dd5a715aa6"
+      },
+      {
+        "path": "deployments/cloudflare-front/vite.config.ts",
+        "trackedChange": false,
+        "sha256": "e39fe56b5d3bfc78a3f990f5d73eae3e8f8353d5c8ba43f12dc1817cfbe6c13f"
+      },
+      {
+        "path": "deployments/cloudflare-front/wrangler.jsonc",
+        "trackedChange": false,
+        "sha256": "3c8458de0b65dd8cb270c4eeb3f10d9530a8010878a599b3a9dbd76ba90a8650"
+      },
+      {
+        "path": "deployments/convex/.env.schema",
+        "trackedChange": false,
+        "sha256": "743d360ef67408cbbb8614b4295b88048b93d947a83404f2efc3641f2a5a4f1b"
+      },
+      {
+        "path": "deployments/convex/.gitignore",
+        "trackedChange": false,
+        "sha256": "c1be9a7b83075864153509fa626722510fd2507fe18e4548a4a89e11023048ea"
+      },
+      {
+        "path": "deployments/convex/bun.lock",
+        "trackedChange": false,
+        "sha256": "c29e33a5350f20d396b8cb4fe4674575bfc85108bedce36464dc3a7ca3df0d5d"
+      },
+      {
+        "path": "deployments/convex/convex/auth.config.ts",
+        "trackedChange": false,
+        "sha256": "78b7a65550d7aa244cc54699d472ea95fe4467dc0102fe8d4de02b13ddc77819"
+      },
+      {
+        "path": "deployments/convex/convex/auth.test.ts",
+        "trackedChange": false,
+        "sha256": "e1b7687bb3c0892111aa1e03376c7a1009e2e3dd6f389dcb6986ef16dbe66c94"
+      },
+      {
+        "path": "deployments/convex/convex/auth.ts",
+        "trackedChange": false,
+        "sha256": "df902f4bcfa4320e6af12c5e42fad9ada0d093a7888daa3b61f53b7c0fd0dc5a"
+      },
+      {
+        "path": "deployments/convex/convex/authorization.ts",
+        "trackedChange": false,
+        "sha256": "faee6288a12842a9c36423c101787fdacdcf5abac9b717b380cb2c5b4304beca"
+      },
+      {
+        "path": "deployments/convex/convex/companies.ts",
+        "trackedChange": false,
+        "sha256": "04088f434c342d90c4f541850902147e2ee9aa2dcddc0576fac115c813ad51c6"
+      },
+      {
+        "path": "deployments/convex/convex/companyJourney.test.ts",
+        "trackedChange": false,
+        "sha256": "5c8280fa8bbd1734bc2ff1d7b834ee8a9c459e6fbefe66ba622e66fc829f146e"
+      },
+      {
+        "path": "deployments/convex/convex/http.ts",
+        "trackedChange": false,
+        "sha256": "95286eb2ad444fe5bb236abc46f19637ae47bd92c92fcd98a98652b4f59824f9"
+      },
+      {
+        "path": "deployments/convex/convex/schema.ts",
+        "trackedChange": false,
+        "sha256": "8b7c21f60df5cb7a5a515ed40a48f72a0a8510995ffb37958bce0292e481a876"
+      },
+      {
+        "path": "deployments/convex/convex/vite-env.d.ts",
+        "trackedChange": false,
+        "sha256": "df4ff9b07a4858c16cbc242e65e03ae1b1829328335c614c4f2002b776d91b4c"
+      },
+      {
+        "path": "deployments/convex/convex/workspaceCompanies.test.ts",
+        "trackedChange": false,
+        "sha256": "8839dca598185a98802d08e65174bad3589618c5300674d59bcbffbd505c444e"
+      },
+      {
+        "path": "deployments/convex/convex/workspaceCompanies.ts",
+        "trackedChange": false,
+        "sha256": "5be3b836efe78e8e3a7b45f3da096af1a0c4d23fe8db4e44f5cc36588486ee28"
+      },
+      {
+        "path": "deployments/convex/convex/workspaces.ts",
+        "trackedChange": false,
+        "sha256": "ecc0c0a9a5fd3ad1aeee9b58890d0b3738f9b49d54dce0f4995e634ca0d99da7"
+      },
+      {
+        "path": "deployments/convex/package.json",
+        "trackedChange": false,
+        "sha256": "a48a0e78abc7f7a8208229c9fc59f86c38eb88718ecf035cab93ceb86a3b82e0"
+      },
+      {
+        "path": "deployments/convex/tsconfig.json",
+        "trackedChange": false,
+        "sha256": "69d82e25261713078bd66916fda42a14d429343952055b1b075884724f95d261"
+      },
+      {
+        "path": "docs/adr/0001-retain-lingui.md",
+        "trackedChange": false,
+        "sha256": "0723173d212f495f2f7d141371b9f888b749b132ed3e835e0ed79e9e1b30ae2c"
+      },
+      {
+        "path": "docs/adr/0002-stylex-base-ui.md",
+        "trackedChange": false,
+        "sha256": "b41dbdf277cbc3695cb6f96f0b953977a9f8ae182cff9029667eb44ebf1b2a17"
+      },
+      {
+        "path": "docs/migration/README.md",
+        "trackedChange": false,
+        "sha256": "9394e540937ccd88be3891b488bca72a2336e746d329609887d8477a5c8ad29e"
+      },
+      {
+        "path": "docs/migration/backend-map.md",
+        "trackedChange": false,
+        "sha256": "4d5fd28ccf6392187a297535c5b1e47094361dba5c59470f64edb19d7133da69"
+      },
+      {
+        "path": "docs/migration/check-map.mjs",
+        "trackedChange": false,
+        "sha256": "8efa244785b4af13c8e9fdb939ea4ef9cf369d7075f967a4f363876fcf6be8ab"
+      },
+      {
+        "path": "docs/migration/criteria-map.md",
+        "trackedChange": false,
+        "sha256": "edba7d1505e04d952a67e44615d2073514d9dc1343c48aeb9ddb6191fa7afc7d"
+      },
+      {
+        "path": "docs/migration/frontend-map.md",
+        "trackedChange": false,
+        "sha256": "0cf232ec2c89af9fbe810111b46e73d7f323f1df277b20370a30367bc73db4ce"
+      },
+      {
+        "path": "docs/migration/source-coverage.json",
+        "trackedChange": false,
+        "sha256": "21bb4d5c3e76cd37b632b7d9bb63754e063a87b1923514e1ccf14585e6911a2f"
+      },
+      {
+        "path": "packages/twenty-front/src/index.tsx",
+        "trackedChange": true,
+        "sha256": "0b9f01df6ae491437315308c95922fadb6216ccf2a6933536a06701f430f3c44"
+      },
+      {
+        "path": "packages/twenty-front/src/pages/convex-preview/CompaniesWorkspace.tsx",
+        "trackedChange": false,
+        "sha256": "ea26fa65adb657d8e2db3bbe964500c5e9cb64961ae6475d71db31fcac75ffe7"
+      },
+      {
+        "path": "packages/twenty-front/src/pages/convex-preview/CompanyForm.tsx",
+        "trackedChange": false,
+        "sha256": "f6028f511eb1877222dd772d1f9b99c69f6889d77921b7fd45d280917d2799d2"
+      },
+      {
+        "path": "packages/twenty-front/src/pages/convex-preview/ConvexCompaniesPreview.css",
+        "trackedChange": false,
+        "sha256": "72b0e5eb282bfabcaab5fa2bb85f8eb164711480470b918ace45c900c6dd3246"
+      },
+      {
+        "path": "packages/twenty-front/src/pages/convex-preview/ConvexCompaniesPreview.tsx",
+        "trackedChange": false,
+        "sha256": "69021c5d23272ceb79a1f468672bb0049a8583b41f2053f8263e34a0c97a8fd5"
+      },
+      {
+        "path": "packages/twenty-front/src/pages/convex-preview/PreviewSignIn.tsx",
+        "trackedChange": false,
+        "sha256": "45999d4a190de368e8c6b06e19768d2d23eac556aaf42ecffd8b31791b0192a2"
+      }
+    ],
+    "excludedFromChecksums": "environment files, generated output, and installed packages"
+  },
+  "applicationSourceAgainstBaseline": {
+    "committedDiffFileCount": 3,
+    "committedDiffFiles": [
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/seed-dependencies/yarn.lock",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarnrc.yml",
+      "packages/twenty-server/src/engine/core-modules/logic-function/logic-function-drivers/constants/common-layer-dependencies/yarn.lock"
+    ],
+    "uncommittedApplicationSourceChanges": [
+      "M packages/twenty-front/src/index.tsx",
+      " M packages/twenty-front/src/modules/types/apollo-upload-client.d.ts",
+      " M packages/twenty-front/src/modules/types/global.d.ts",
+      " D packages/twenty-front/src/nx-react.d.ts",
+      " M packages/twenty-server/src/database/typeorm/core/legacy-typeorm-migrations-do-not-add/README.md",
+      " M packages/twenty-server/src/engine/core-modules/cache-storage/commands/flush-cache.command.ts",
+      " M packages/twenty-server/src/engine/core-modules/upgrade/constants/twenty-current-version.constant.ts",
+      " M packages/twenty-server/src/engine/core-modules/upgrade/constants/twenty-next-versions.constant.ts",
+      " M packages/twenty-server/src/engine/core-modules/upgrade/constants/twenty-previous-versions.constant.ts",
+      " M packages/twenty-shared/src/vite/createWywProfilingPlugin.ts",
+      " M packages/twenty-ui/src/icon/icon-dictionary.md",
+      " M packages/twenty-ui/src/icon/internal/generateTwentyIconDictionaryMarkdown.ts",
+      " M packages/twenty-ui/src/theme/constants/Animation.ts",
+      " M packages/twenty-ui/src/theme/constants/GrayScaleDark.ts",
+      " M packages/twenty-ui/src/theme/constants/GrayScaleLight.ts",
+      " M packages/twenty-ui/src/theme/constants/MainColorNames.ts",
+      " M packages/twenty-ui/src/theme/constants/ThemeCommon.ts",
+      " M packages/twenty-ui/src/theme/constants/ThemeDark.ts",
+      " M packages/twenty-ui/src/theme/constants/ThemeLight.ts",
+      " M packages/twenty-ui/src/theme/internal/themeSpacing.ts",
+      " M packages/twenty-ui/src/theme/theme-dark.css",
+      " M packages/twenty-ui/src/theme/theme-light.css",
+      " M packages/twenty-ui/src/theme/themeCssVariables.ts",
+      " M packages/twenty-ui/src/theme/themeTypes.ts",
+      "?? packages/twenty-front/src/pages/convex-preview/"
+    ]
+  },
+  "toolchain": {
+    "bun": "1.4.3",
+    "node": "v26.10.0",
+    "docker": "29.4.0",
+    "convex": "1.46.0",
+    "convexAuth": "0.0.95",
+    "convexTest": "0.0.60",
+    "vitest": "5.0.2",
+    "typescript": "7.0.2"
+  },
+  "flagsAndConfiguration": {
+    "previewPasswordSignUpDefault": "FENFORCE_PREVIEW_AUTH_ENABLED=false",
+    "convexDeploymentName": "dev:upbeat-mandrill-971",
+    "convexDeploymentEnvironment": "remote state; not captured without deployment access",
+    "twentyFrontEntry": "preview renders only when REACT_APP_FENFORCE_CONVEX_URL is set at build time"
+  }
+}

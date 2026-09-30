@@ -1,0 +1,44 @@
+{
+  "fixtureVersion": 1,
+  "purpose": "Company journey S0 replay: sign in, open a workspace, list companies, write one company, read it back, and attempt unauthorized access.",
+  "company": {
+    "name": "Journey Fixture Co",
+    "domain": "journey-fixture.example"
+  },
+  "twentyBaseline": {
+    "serverUrl": "http://localhost:3000",
+    "frontendUrl": "http://localhost:3100",
+    "account": "the documented demo account from packages/twenty-docs/developers/contribute/capabilities/local-setup.mdx",
+    "signInMethod": "email and password through getLoginTokenFromCredentials then getAuthTokensFromLoginToken",
+    "data": "packages/twenty-server workspace:seed:dev after database:reset",
+    "services": "packages/twenty-docker/docker-compose.dev.yml (postgres:16, redis:7), removed after capture"
+  },
+  "convexCandidate": {
+    "runtime": "convex-test in-process backend with the real registered functions and the real @convex-dev/auth signIn action",
+    "signInMethod": "preview-password provider: signUp with allowlisted email and invite code, then signIn with email and password",
+    "generatedPerRun": "RSA signing key pair; nothing is stored",
+    "syntheticIdentities": {
+      "owner": "journey-owner@example.test",
+      "outsider": "journey-outsider@example.test",
+      "inviteCode": "synthetic value inside companyJourney.test.ts",
+      "password": "synthetic value inside companyJourney.test.ts"
+    },
+    "deployedPreview": "not exercised; needs deployment credentials and preview allowlist values that this environment does not hold"
+  },
+  "flags": {
+    "FENFORCE_PREVIEW_AUTH_ENABLED": "true for signUp only inside the test process, default false in .env.schema",
+    "REACT_APP_FENFORCE_CONVEX_URL": "unset renders the original Twenty app; set renders the Convex preview"
+  },
+  "normalization": {
+    "allowed": [
+      "generated identifiers compared by role, not value",
+      "timestamps compared by presence, not value"
+    ],
+    "notAllowed": [
+      "missing fields",
+      "authorization differences",
+      "ordering",
+      "domain value transformations"
+    ]
+  }
+}

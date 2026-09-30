@@ -1,0 +1,86 @@
+$ bunx vite-plus run twenty-server#database:reset
+# cwd: /Users/martinfan/devv/fenforce
+# started: 2026-09-29T13:37:14Z
+~/packages/twenty-shared/../..$ bunx tsx packages/twenty-shared/scripts/generateBarrels.ts ⊘ cache disabled
+
+~/packages/twenty-shared$ bun run build:command ◉ cache hit, replaying
+$ bunx vite build && node node_modules/typescript/bin/tsc -p tsconfig.lib.json --moduleResolution bundler --declaration --emitDeclarationOnly --noEmit false --outDir dist --rootDir src && bunx tsc-alias -p tsconfig.lib.json --outDir dist --outputcheck d.ts
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vite.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+~/packages/twenty-emails$ bun run build:command ◉ cache hit, replaying
+$ bunx vite-plus build && node node_modules/typescript/bin/tsc -p tsconfig.lib.json --declaration --emitDeclarationOnly --outDir dist --rootDir src --composite false && bunx tsc-alias -p tsconfig.lib.json --outDir dist
+transforming...
+✓ 1047 modules transformed.
+rendering chunks...
+dist/rolldown-runtime-rQ84J-ij.mjs        1.46 kB
+dist/locales/generated/en.mjs             8.27 kB
+dist/locales/generated/zh-CN.mjs          8.31 kB
+dist/locales/generated/zh-TW.mjs          8.37 kB
+dist/locales/generated/af-ZA.mjs          8.65 kB
+dist/locales/generated/fi-FI.mjs          8.69 kB
+dist/locales/generated/sr-Latn.mjs        8.72 kB
+dist/locales/generated/no-NO.mjs          8.78 kB
+dist/locales/generated/sv-SE.mjs          8.79 kB
+dist/locales/generated/nl-NL.mjs          8.80 kB
+dist/locales/generated/da-DK.mjs          8.81 kB
+dist/locales/generated/pt-BR.mjs          8.83 kB
+dist/locales/generated/es-ES.mjs          8.97 kB
+dist/locales/generated/it-IT.mjs          8.97 kB
+[... 66 lines omitted ...]
+$ bunx rimraf dist && bunx vite build && bunx vite build -c vite.metadata.config.ts && node node_modules/typescript/bin/tsc -p tsconfig.lib.json --declaration --emitDeclarationOnly --noEmit false --outDir dist --rootDir src && bunx tsc-alias -p tsconfig.lib.json --outDir dist
+[... 19 lines omitted ...]
+$ bunx esbuild oxlint-plugin.ts --bundle --format=esm --platform=node --outfile=dist/oxlint-plugin.mjs "--define:__filename='"[plugin]"'" "--define:__dirname='"[plugin]"'" "--banner:js=import { createRequire } from 'module'; const require = createRequire(import.meta.url);"
+[... 6 lines omitted ...]
+$ rimraf dist && nest build --path ./tsconfig.build.json && mkdir -p dist/assets/twenty-client-sdk && cp ../twenty-client-sdk/package.json dist/assets/twenty-client-sdk/ && cp -r ../twenty-client-sdk/dist dist/assets/twenty-client-sdk/dist
+[... 4 lines omitted ...]
+$ bun run database:reset:seed:command
+$ node dist/database/scripts/truncate-clickhouse.js && node dist/database/scripts/truncate-db.js && bun run database:init:command && bun run command-no-deps -- cache:flush && bun run command-no-deps -- workspace:seed:dev
+[... 3 lines omitted ...]
+$ node dist/database/scripts/setup-db.js && bun run database:migrate:command --include-slow
+[... 6 lines omitted ...]
+$ node dist/command/command.js run-instance-commands --force --include-slow
+[... 4 lines omitted ...]
+Error: Cannot find module 'google-auth-library'
+[... 4 lines omitted ...]
+- /Users/martinfan/devv/fenforce/packages/twenty-server/dist/engine/core-modules/core-engine.module.js
+- /Users/martinfan/devv/fenforce/packages/twenty-server/dist/engine/api/graphql/graphql-config/graphql-config.module.js
+- /Users/martinfan/devv/fenforce/packages/twenty-server/dist/engine/api/graphql/admin-panel-graphql-api.module.js
+- /Users/martinfan/devv/fenforce/packages/twenty-server/dist/app.module.js
+- /Users/martinfan/devv/fenforce/packages/twenty-server/dist/command/command.module.js
+- /Users/martinfan/devv/fenforce/packages/twenty-server/dist/command/command.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1591:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1145:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1169:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1196:12)
+    at Module._load (node:internal/modules/cjs/loader:1368:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.require (node:internal/modules/cjs/loader:1701:12)
+    at require (node:internal/modules/helpers:318:16)
+    at Object.<anonymous> (/Users/martinfan/devv/fenforce/packages/twenty-server/dist/modules/connected-account-sync-webhooks/drivers/google/google-messaging-notification.handler.js:14:28)
+    at Module._compile (node:internal/modules/cjs/loader:1956:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/martinfan/devv/fenforce/packages/twenty-server/dist/modules/connected-account-sync-webhooks/drivers/google/google-messaging-notification.handler.js',
+    '/Users/martinfan/devv/fenforce/packages/twenty-server/dist/modules/connected-account-sync-webhooks/connected-account-sync-webhooks.controller.js',
+    '/Users/martinfan/devv/fenforce/packages/twenty-server/dist/modules/connected-account-sync-webhooks/connected-account-sync-webhooks.module.js',
+    '/Users/martinfan/devv/fenforce/packages/twenty-server/dist/engine/core-modules/core-engine.module.js',
+    '/Users/martinfan/devv/fenforce/packages/twenty-server/dist/engine/api/graphql/graphql-config/graphql-config.module.js',
+    '/Users/martinfan/devv/fenforce/packages/twenty-server/dist/engine/api/graphql/admin-panel-graphql-api.module.js',
+    '/Users/martinfan/devv/fenforce/packages/twenty-server/dist/app.module.js',
+    '/Users/martinfan/devv/fenforce/packages/twenty-server/dist/command/command.module.js',
+    '/Users/martinfan/devv/fenforce/packages/twenty-server/dist/command/command.js'
+  ]
+}
+
+Node.js v26.10.0
+error: script "database:migrate:command" exited with code 1
+error: script "database:init:command" exited with code 1
+error: script "database:reset:seed:command" exited with code 1
+error: script "database:reset:command" exited with code 1
+
+---
+vp run: 3/7 cache hit (42%), 22.84s saved, 1 failed. twenty-server#build not cached because it modified its input. (Run `vp run --last-details` for full details)
+# exit: 1
+

@@ -1,0 +1,85 @@
+$ bun docs/migration/evidence/s0-company-journey/twenty-baseline.ts
+# cwd: /Users/martinfan/devv/fenforce
+# started: 2026-09-29T13:47:28Z
+[
+  {
+    "step": "sign-in (existing account)",
+    "outcome": {
+      "tokenIssued": true
+    }
+  },
+  {
+    "step": "sign-in (wrong password)",
+    "outcome": "rejected: FORBIDDEN: Wrong password (http 200)"
+  },
+  {
+    "step": "open workspace",
+    "outcome": {
+      "displayName": "Apple"
+    }
+  },
+  {
+    "step": "list companies (before write)",
+    "outcome": {
+      "totalCount": 599,
+      "fixtureRows": 0
+    }
+  },
+  {
+    "step": "create company then read back",
+    "outcome": {
+      "created": {
+        "name": "Journey Fixture Co",
+        "domainName": {
+          "primaryLinkUrl": "journey-fixture.example",
+          "primaryLinkLabel": "",
+          "secondaryLinks": []
+        },
+        "accountOwnerId": null,
+        "deletedAt": null
+      },
+      "readBackById": {
+        "found": 1,
+        "name": "Journey Fixture Co",
+        "domainName": {
+          "primaryLinkUrl": "journey-fixture.example",
+          "primaryLinkLabel": "",
+          "secondaryLinks": []
+        }
+      },
+      "totalCountAfter": 600
+    }
+  },
+  {
+    "step": "persisted rows (workspace company tables)",
+    "outcome": [
+      {
+        "schema": "workspace_1wgvd1injqtife6y4rvfbu3h5",
+        "rows": [
+          "Journey Fixture Co|journey-fixture.example||t"
+        ]
+      },
+      {
+        "schema": "workspace_3ixj3i1a5avy16ptijtb3lae3",
+        "rows": []
+      }
+    ]
+  },
+  {
+    "step": "unauthorized: no credentials",
+    "outcome": "rejected: NO_CODE: Unknown type \"CompanyFilterInput\". (http 200)"
+  },
+  {
+    "step": "unauthorized: invalid token",
+    "outcome": "rejected: UNAUTHENTICATED: Token invalid. (http 200)"
+  },
+  {
+    "step": "cross-workspace: same account signed into the other workspace",
+    "outcome": {
+      "tokenIssued": false,
+      "failure": "rejected: FORBIDDEN: Token is not valid for this workspace (http 200)"
+    }
+  }
+]
+# exit: 0
+

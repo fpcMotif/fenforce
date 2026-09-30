@@ -1,0 +1,17 @@
+$ bun run check
+# cwd: /Users/martinfan/devv/fenforce/deployments/convex
+# started: 2026-09-29T13:52:52Z
+$ bun run typecheck && bun run test
+$ tsc --noEmit
+$ vitest run
+
+ RUN  v5.0.2 /Users/martinfan/devv/fenforce/deployments/convex
+
+
+ Test Files  3 passed (3)
+      Tests  12 passed (12)
+   Start at  21:52:53
+   Duration  476ms (tests 47%, import 37%, transform 15%, worker 1%)
+
+# exit: 0
+

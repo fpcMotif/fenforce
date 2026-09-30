@@ -1,0 +1,268 @@
+{
+  "ticket": "fpcMotif/fenforce#2",
+  "stage": "S0",
+  "contracts": ["S0", "BE-03", "BE-06", "AC-01", "AC-03"],
+  "scope": "Verification only. No catalog entry is marked verified: docs/migration/check-map.mjs still reports 204 unverified.",
+  "revisions": {
+    "twentyBaseline": "a431f9afb6e761322109ea3b1b942e007b31eef2",
+    "candidateHead": "1bf3ec682fcc7b768d1ea895d1a39ec917299b5c",
+    "candidateWorktree": "HEAD plus 235 tracked changes and 19 untracked entries; per-file checksums for the Convex candidate, preview and migration documents are in raw/provenance.json",
+    "candidateDigest": {
+      "value": "4ceaa5bcaa6acc96acf8dfa220a48a54b51fa1d791dfa88c11e46b8fae24de81",
+      "command": "shasum -a 256 packages/twenty-front/src/pages/convex-preview/* deployments/convex/convex/*.ts | shasum -a 256",
+      "note": "The candidate was edited by another writer between 21:29 and 21:34 (Asia/Perth) on 2026-09-29 while S0 ran. Every candidate-dependent result listed as current was re-run against this digest and the digest was unchanged across that re-run."
+    },
+    "twentyBaselineRuntime": "Application source of the current checkout, not a pristine a431f9a checkout under its original yarn/nx toolchain. Committed application-source differences from a431f9a are three vendored yarn files. Uncommitted application-source differences are comment, type-only import, typing-shim and tooling changes plus the front entry switch that renders the preview only when REACT_APP_FENFORCE_CONVEX_URL is set. Twenty 2.44.0."
+  },
+  "evidenceClasses": {
+    "observed": "Commands and browser sessions run in this session; outputs are under raw/ and browser-states/.",
+    "sourceInspection": "Statements taken from reading source; each is marked in its finding.",
+    "unrun": "Listed under notRun; never counted as passing."
+  },
+  "checks": [
+    {
+      "name": "catalog checker",
+      "command": "bun docs/migration/check-map.mjs",
+      "exit": 1,
+      "artifact": "raw/check-map.txt",
+      "result": "fail: criteria-map.md links to packages/twenty-ui/project.json, which the uncommitted Bun switch deleted"
+    },
+    {
+      "name": "catalog checker self-test",
+      "command": "bun docs/migration/check-map.mjs --self-test",
+      "exit": 1,
+      "artifact": "raw/check-map-selftest.txt",
+      "result": "fail: same dead link, raised before the negative controls run"
+    },
+    {
+      "name": "catalog checker with only that link line removed",
+      "command": "bash diagnostics/checker-with-dead-link-removed.sh",
+      "exit": 0,
+      "result": "pass: 204 declarations mapped, 0 verified; self-test 11 negative controls rejected. The unmodified checker runs against a temporary shim; no repository file changes. diagnostics/list-broken-links.mjs reports exactly one dead link."
+    },
+    {
+      "name": "convex typecheck and tests",
+      "command": "bun run check (deployments/convex)",
+      "exit": 0,
+      "artifact": "raw/convex-check-final.txt",
+      "result": "pass: tsc clean; 3 test files, 12 tests, one of them the new company journey"
+    },
+    {
+      "name": "shared package build, documented form",
+      "command": "bunx vite-plus run twenty-shared#build --no-cache",
+      "exit": 1,
+      "artifact": "raw/shared-build-documented-form.txt",
+      "result": "fail: Vite+ forwards --no-cache to the last build step (tsc-alias), which rejects it. The same string appears in CLAUDE.md and docs/migration/criteria-map.md."
+    },
+    {
+      "name": "shared package build, flag before the task",
+      "command": "bunx vite-plus run --no-cache twenty-shared#build",
+      "exit": 0,
+      "artifact": "raw/shared-build.txt",
+      "result": "pass"
+    },
+    {
+      "name": "front typecheck",
+      "command": "bunx tsgo -p tsconfig.json --noEmit (packages/twenty-front)",
+      "exit": 1,
+      "artifact": "raw/front-tsgo.txt",
+      "result": "fail: 8 errors. 7 are in 5 legacy settings files that are unmodified from the baseline. 1 is in the preview: CompaniesWorkspace.tsx(410,25) TS2741, expectedRevision missing."
+    },
+    {
+      "name": "preview lint",
+      "command": "bunx oxlint --type-aware -c .oxlintrc.json src/pages/convex-preview/",
+      "exit": 0,
+      "artifact": "raw/front-oxlint-preview.txt",
+      "result": "pass"
+    },
+    {
+      "name": "preview format",
+      "command": "bunx oxfmt --check src/pages/convex-preview/",
+      "exit": 0,
+      "artifact": "raw/front-oxfmt-preview.txt",
+      "result": "pass, 5 files"
+    },
+    {
+      "name": "preview production build",
+      "command": "REACT_APP_FENFORCE_CONVEX_URL=https://placeholder.invalid bunx vp build",
+      "exit": 0,
+      "artifact": "raw/front-build-preview.txt",
+      "result": "pass. The build succeeds although the typecheck fails, so the build gate does not catch finding F5."
+    },
+    {
+      "name": "candidate journey test can fail",
+      "command": "bash diagnostics/journey-test-mutation-check.sh",
+      "exit": 1,
+      "artifact": "raw/convex-mutation-check.txt",
+      "result": "expected failure: with the workspace-membership check disabled in a temporary copy, the journey test fails on 'expected accepted to contain FORBIDDEN'"
+    }
+  ],
+  "journey": {
+    "fixture": "fixture.json",
+    "twentyArtifact": "raw/twenty-baseline.json",
+    "convexArtifact": "raw/convex-candidate.json",
+    "steps": [
+      {
+        "step": "sign in with an existing account",
+        "twenty": "token issued through getLoginTokenFromCredentials then getAuthTokensFromLoginToken, using the documented demo account",
+        "convex": "token issued by the real @convex-dev/auth signIn action (preview-password); the JWT is decoded in-process and is not validated by a deployed Convex auth layer",
+        "verdict": "both succeed; evidence strength differs"
+      },
+      {
+        "step": "sign in with a wrong password",
+        "twenty": "rejected: FORBIDDEN 'Wrong password', http 200",
+        "convex": "rejected: InvalidSecret",
+        "verdict": "both reject; error surface differs"
+      },
+      {
+        "step": "open a workspace",
+        "twenty": "session is bound to one workspace at sign-in; currentWorkspace is 'Apple'",
+        "convex": "workspace is created and membership listed (role admin); every later call passes workspaceId",
+        "verdict": "different contract"
+      },
+      {
+        "step": "list companies before the write",
+        "twenty": "totalCount 599 (seeded); fixture name absent",
+        "convex": "0 (fresh in-process database)",
+        "verdict": "datasets not comparable"
+      },
+      {
+        "step": "create a company and read it back",
+        "twenty": "domain stored as typed: primaryLinkUrl 'journey-fixture.example', primaryLinkLabel '' (empty); accountOwnerId null; read back by id 1 row; total 599 to 600",
+        "convex": "domain normalized: primaryLinkUrl 'https://journey-fixture.example', primaryLinkLabel 'journey-fixture.example'; accountOwnerId null; read back and listed",
+        "verdict": "candidate differs: domain normalization. Needs an accepted-behavior decision; not normalized away."
+      },
+      {
+        "step": "persisted state",
+        "twenty": "one row in the Apple workspace company table with the raw domain and empty label; none in the other workspace",
+        "convex": "one workspaceCompanies row in the owner's workspace with a domainName object",
+        "verdict": "both persisted as expected for their own model"
+      },
+      {
+        "step": "unauthorized: no credentials",
+        "twenty": "rejected as a GraphQL validation error (Unknown type CompanyFilterInput, no error code, http 200) because the public schema lacks workspace types; no data returned",
+        "convex": "rejected: UNAUTHENTICATED",
+        "verdict": "both reject with no data; error surface differs"
+      },
+      {
+        "step": "unauthorized: invalid token",
+        "twenty": "rejected: UNAUTHENTICATED 'Token invalid'",
+        "convex": "not exercised: convex-test injects identities and does not verify JWTs",
+        "verdict": "unrun on the candidate"
+      },
+      {
+        "step": "another workspace",
+        "twenty": "the same account cannot obtain a session for the other workspace ('Token is not valid for this workspace'). Data-level isolation between two workspaces was not observed: multi-workspace mode is off and every seeded YCombinator user also belongs to Apple.",
+        "convex": "a signed-in user outside the workspace is rejected FORBIDDEN on read and on write; the row count stays 1",
+        "verdict": "not equivalent evidence; Twenty data isolation unrun"
+      }
+    ],
+    "acceptedNormalization": [
+      "generated identifiers compared by role, not value",
+      "timestamps compared by presence, not value"
+    ],
+    "browser": {
+      "twenty": [
+        "browser-states/twenty-1-signed-out-redirect-to-welcome.jpg: direct /objects/companies while signed out redirected to /welcome",
+        "browser-states/twenty-2-password-step.jpg: sign-in form with prefilled demo credentials",
+        "browser-states/twenty-3-company-list-after-write.jpg: after sign-in the requested URL opened; list total 600 with the fixture row created by the API",
+        "browser-states/twenty-4-company-detail-panel.jpg: record opened in a side panel via ?panel=; domain shown as typed"
+      ],
+      "convex": [
+        "browser-states/convex-1-signed-out-gate-at-company-url.jpg: /objects/companies while signed out renders the sign-in gate in place, no redirect, light theme, no prefilled email, page title 'Twenty', no console errors. The page connected anonymously to the deployment named in deployments/cloudflare-front/.env.schema; nothing was entered or written."
+      ]
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "high",
+      "title": "Dev seeding is broken by the Bun switch and still exits 0",
+      "evidence": "raw/baseline-database-reset-2-missing-yarn-assets.txt shows ENOENT for dist/assets/.../seed-dependencies/yarn.lock; the seed left 0 workspaces and 0 users while the reset script exited 0. Commit 1bf3ec682f deleted three yarn asset files that runtime code still reads (source: get-default-application-package-fields.util.ts line 25 reads seed-dependencies/yarn.lock).",
+      "class": "observed plus source inspection",
+      "workaround": "restored the three files from a431f9a into ignored dist/assets only (reproduce.sh restore_baseline_yarn_assets)",
+      "smallestFollowUp": "Restore or replace the three assets and make the seed command fail loudly."
+    },
+    {
+      "id": "F2",
+      "severity": "high",
+      "title": "Built server cannot start: undeclared dependency google-auth-library",
+      "evidence": "raw/baseline-database-reset-1-missing-google-auth-library.txt shows MODULE_NOT_FOUND from google-messaging-notification.handler.js. The package is imported by server source but declared neither in the baseline nor in the current twenty-server package.json; it exists only in the Bun store.",
+      "class": "observed; that yarn hoisting hid it at the baseline is inferred, not observed",
+      "workaround": "NODE_PATH pointing at the store copy (reproduce.sh google_auth_library_path)",
+      "smallestFollowUp": "Declare google-auth-library in twenty-server."
+    },
+    {
+      "id": "F3",
+      "severity": "medium",
+      "title": "Documented shared build command fails",
+      "evidence": "raw/shared-build-documented-form.txt; corrected form in raw/shared-build.txt",
+      "class": "observed",
+      "smallestFollowUp": "Move --no-cache before the task name in CLAUDE.md and criteria-map.md."
+    },
+    {
+      "id": "F4",
+      "severity": "medium",
+      "title": "Migration catalog gate is red on the working tree",
+      "evidence": "raw/check-map.txt; diagnostics/list-broken-links.mjs finds exactly one dead link, and the checker passes without that line",
+      "class": "observed",
+      "smallestFollowUp": "Repoint or remove the criteria-map.md reference to the deleted packages/twenty-ui/project.json."
+    },
+    {
+      "id": "F5",
+      "severity": "high",
+      "title": "Preview edit is broken against the current Convex mutation",
+      "evidence": "workspaceCompanies.update requires expectedRevision (workspaceCompanies.ts line 224); the preview call at CompaniesWorkspace.tsx line 410 sends only workspaceId, companyId and the form values. tsgo reports TS2741 there. diagnostics/edit-payload-without-expected-revision.sh sends that payload shape to the real mutation: rejected with 'Missing required field expectedRevision' and the stored company is unchanged (raw/convex-edit-without-revision.txt).",
+      "class": "observed at the mutation boundary with the payload shape from the source; the rendered edit flow was not run because no authenticated preview session exists",
+      "smallestFollowUp": "Send the record's revision from the preview when saving, or finish the in-progress change; then add the edit step to the paired journey."
+    },
+    {
+      "id": "F6",
+      "severity": "medium",
+      "title": "Twenty and the candidate normalize company domains differently",
+      "evidence": "see the create-and-read-back step in journey",
+      "class": "observed",
+      "smallestFollowUp": "Record the accepted domain contract for the company slice, then encode it in both sides of the paired journey."
+    },
+    {
+      "id": "F7",
+      "severity": "low",
+      "title": "Front typecheck fails in legacy settings files",
+      "evidence": "7 errors in 5 files (SettingsAccounts*ImapSmtpCaldavConnection, useImapSmtpCaldavConnectionForm, SettingsObjectFieldEdit, SettingsObjectNewFieldConfigure), all unmodified from the baseline; none is in the preview.",
+      "class": "observed; cause not established. Dependency resolution after the Bun switch is a hypothesis; a baseline typecheck was not run.",
+      "smallestFollowUp": "Typecheck a pristine a431f9a checkout to separate baseline errors from switch-induced ones."
+    },
+    {
+      "id": "F8",
+      "severity": "low",
+      "title": "Candidate was edited concurrently during S0",
+      "evidence": "workspaceCompanies.ts, workspaceCompanies.test.ts, schema.ts and PreviewSignIn.tsx changed between 21:29 and 21:34 while this ticket's checks ran; a stale-writer test and a revision field appeared.",
+      "class": "observed",
+      "smallestFollowUp": "Freeze the candidate revision before each stage; commit it so a revision names it."
+    }
+  ],
+  "signInMethodForNextTicket": {
+    "ticket": "fpcMotif/fenforce#3",
+    "method": "preview-password: @convex-dev/auth Password provider. signUp requires FENFORCE_PREVIEW_AUTH_ENABLED=true, the allowlisted FENFORCE_PREVIEW_AUTH_EMAIL and an invite code of at least 32 characters. signIn works for any existing password account. Passwords need 12 or more characters.",
+    "reproducibleFixture": "deployments/convex/convex/companyJourney.test.ts generates a signing key pair per run and uses synthetic identities; it runs offline with bunx vitest run.",
+    "deployedPreview": "Not exercised. It needs preview allowlist values or an existing account password held by the deployment owner, which this environment does not hold."
+  },
+  "notRun": [
+    "Real sign-in against the deployed Convex preview, and every authenticated browser state of the candidate (blocked by credentials that were not supplied and must not be entered by the agent)",
+    "Candidate JWT validation by a deployed Convex auth layer, including the invalid-token case",
+    "Candidate edit, delete, restore, owner selection, pagination and multi-client behavior in a browser",
+    "Twenty baseline from a pristine a431f9a checkout under its own toolchain",
+    "Twenty data-level isolation between two workspaces",
+    "Timing samples and any performance or accessibility check (AC-09, AC-11 are outside this ticket)",
+    "The baseline_* stages of reproduce.sh end to end: they were assembled from commands that ran, but the script itself was only syntax-checked and its provenance stage executed",
+    "Remote Convex deployment state: flags and environment values were not captured"
+  ],
+  "cleanup": {
+    "baselineContainers": "removed with their volume and network after capture",
+    "temporaryEnvFiles": "removed",
+    "restoredAssets": "only under the ignored packages/twenty-server/dist"
+  },
+  "independentReview": {
+    "status": "see review section of the session report; not part of this file's claims"
+  }
+}

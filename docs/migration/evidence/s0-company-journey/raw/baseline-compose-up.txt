@@ -1,0 +1,18 @@
+$ docker compose -f packages/twenty-docker/docker-compose.dev.yml up -d --wait
+# cwd: /Users/martinfan/devv/fenforce
+# started: 2026-09-29T13:35:53Z
+ Image redis:7 Pulling 
+ Image postgres:16 Pulling 
+[... 782 lines omitted ...]
+ Container twenty-dev-db-1 Created 
+ Container twenty-dev-redis-1 Created 
+ Container twenty-dev-db-1 Starting 
+ Container twenty-dev-redis-1 Starting 
+ Container twenty-dev-db-1 Started 
+ Container twenty-dev-redis-1 Started 
+ Container twenty-dev-db-1 Waiting 
+ Container twenty-dev-redis-1 Waiting 
+ Container twenty-dev-redis-1 Healthy 
+ Container twenty-dev-db-1 Healthy 
+# exit: 0
+

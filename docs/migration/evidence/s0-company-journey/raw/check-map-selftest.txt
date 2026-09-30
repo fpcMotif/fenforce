@@ -1,0 +1,24 @@
+$ bun docs/migration/check-map.mjs --self-test
+# cwd: /Users/martinfan/devv/fenforce
+# started: 2026-09-29T13:28:36Z
+38 |   for (const name of documents) {
+39 |     const content = read(resolve(directory, name));
+40 |     for (const match of content.matchAll(/\]\(([^\s)]+)\)/g)) {
+41 |       const destination = match[1].split('#')[0];
+42 |       if (!destination || /^https?:/.test(destination)) continue;
+43 |       assert(existsSync(resolve(directory, destination)), `${name}: missing link ${destination}`);
+           ^
+AssertionError: criteria-map.md: missing link ../../packages/twenty-ui/project.json
+ generatedMessage: false,
+     actual: false,
+   expected: true,
+   operator: "==",
+       diff: "simple",
+       code: "ERR_ASSERTION"
+
+      at checkLinks (/Users/martinfan/devv/fenforce/docs/migration/check-map.mjs:43:7)
+      at validate (/Users/martinfan/devv/fenforce/docs/migration/check-map.mjs:105:3)
+
+Bun v1.4.3-canary.1+37da174d5 (macOS arm64)
+# exit: 1
+

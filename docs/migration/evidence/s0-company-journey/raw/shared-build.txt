@@ -1,0 +1,15 @@
+$ bunx vite-plus run --no-cache twenty-shared#build
+# cwd: /Users/martinfan/devv/fenforce
+# started: 2026-09-29T13:30:46Z
+~/packages/twenty-shared/../..$ bunx tsx packages/twenty-shared/scripts/generateBarrels.ts ⊘ cache disabled
+
+~/packages/twenty-shared$ bun run build:command ⊘ cache disabled
+$ bunx vite build && node node_modules/typescript/bin/tsc -p tsconfig.lib.json --moduleResolution bundler --declaration --emitDeclarationOnly --noEmit false --outDir dist --rootDir src && bunx tsc-alias -p tsconfig.lib.json --outDir dist --outputcheck d.ts
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vite.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+---
+vp run: 0/2 cache hit (0%). (Run `vp run --last-details` for full details)
+# exit: 0
+
