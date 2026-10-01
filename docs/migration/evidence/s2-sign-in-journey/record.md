@@ -32,11 +32,11 @@ Front test failed first with `Cannot find module '../ClearQueryCacheOnUnmount'`.
 
 | Criterion | Status | Evidence |
 | --- | --- | --- |
-| Baseline contract frozen before editing | Met, with the limit that it is source-read | table above |
+| Baseline contract frozen before editing | Partial. The table is read from source, was written after the candidate had already been inspected, and is not backed by a recorded baseline artifact for the session, expiry and sign-out rows. | table above |
 | Permitted user signs in, opens workspace, refreshes a protected URL, signs out | Partial. Sign in, workspace entry and sign out are covered in-process (`companyJourney.test.ts`, `sessionLifecycle.test.ts`). Refresh of `/objects/companies` is not run in a browser; by source the router reads `window.location` and the `Authenticated` gate shows the loading page while the stored token is restored. | `raw/convex-check.txt` |
 | Anonymous cannot read workspace or company data | Met in-process for every public query and the write mutations that exist | `sessionLifecycle.test.ts` "anonymous callers" |
 | Expired or invalid sessions give the recovery state without data | Backend met in-process (expired, forged, no session part). The rendered state is not observed. By source, a rejected query reaches the error boundary ("Unable to load Fenforce", Reload); Reload then fails the token refresh because sign-out and expiry remove the refresh token, and the sign-in form shows. | `sessionLifecycle.test.ts` "invalid and expired sessions" |
-| Sign out clears client state and ends later authenticated reads | Met for the backend and the cache in unit tests. The sessionStorage and cross-tab behavior of the baseline has no counterpart here and was not checked. | `sessionLifecycle.test.ts` "sign-out", `ClearQueryCacheOnUnmountEffect.test.tsx` |
+| Sign out clears client state and ends later authenticated reads | Backend met in-process after a real `signIn` with an injected identity; not validated by a deployed auth layer. Query cache cleared in a unit test. The sessionStorage and cross-tab behavior of the baseline has no counterpart here and was not checked. | `sessionLifecycle.test.ts` "sign-out", `ClearQueryCacheOnUnmountEffect.test.tsx` |
 | Real preview identity boundary, translated errors, accessible controls | Not run. See below. | none |
 | Revisions, fixtures, commands, results | This file, `raw/`, commit named in the hand-off | `raw/` |
 | Independent review | Not obtained. | none |

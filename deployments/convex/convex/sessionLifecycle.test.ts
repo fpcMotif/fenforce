@@ -1,13 +1,14 @@
 import { convexTest } from 'convex-test';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 
+import { FIXTURE_SITE_URL } from '../testing/sessionFixtures';
 import { api } from './_generated/api';
 import schema from './schema';
 
 const modules = import.meta.glob('./**/*.ts');
 const paginationOpts = { numItems: 20, cursor: null };
 
-const SITE_URL = 'https://fixture.convex.site';
+const SITE_URL = FIXTURE_SITE_URL;
 const INVITE_CODE = 'synthetic-session-lifecycle-invite-code-01';
 const PASSWORD = 'synthetic-session-password';
 const MEMBER_EMAIL = 'session-member@example.test';
@@ -157,6 +158,16 @@ describe('anonymous callers', () => {
         test.mutation(api.workspaceCompanies.create, {
           workspaceId,
           name: 'Anon Co',
+        }),
+      ),
+    ).toBe('rejected: UNAUTHENTICATED');
+    expect(
+      await outcomeOf(
+        test.mutation(api.workspaceCompanies.update, {
+          workspaceId,
+          companyId,
+          expectedRevision: 1,
+          name: 'Anon edit',
         }),
       ),
     ).toBe('rejected: UNAUTHENTICATED');

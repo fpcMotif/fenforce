@@ -1,6 +1,5 @@
 import type { TestConvex } from 'convex-test';
 
-import type { Id } from '../convex/_generated/dataModel';
 import type schema from '../convex/schema';
 
 export const FIXTURE_SITE_URL = 'https://fixture.convex.site';
@@ -24,7 +23,7 @@ export const signedInAs = async (
   const subject = `${userId}|${sessionId}`;
 
   return {
-    userId: userId as Id<'users'>,
+    userId,
     sessionId,
     session: test.withIdentity({
       issuer: FIXTURE_SITE_URL,
