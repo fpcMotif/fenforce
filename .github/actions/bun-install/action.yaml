@@ -46,6 +46,12 @@ runs:
     - name: Install Dependencies
       shell: ${{ steps.globals.outputs.ACTION_SHELL }}
       run: bun install --frozen-lockfile --ignore-scripts
+    # vite-plus loads every package's vite config to build its task graph, and
+    # twenty-front's config imports twenty-shared/dist, so the graph can't load
+    # until twenty-shared is built outside vite-plus.
+    - name: Build twenty-shared for config loading
+      shell: ${{ steps.globals.outputs.ACTION_SHELL }}
+      run: bun run --cwd packages/twenty-shared build:command
     # Fork PRs on pull_request already can't write to the base repo's cache (GitHub built-in).
     # The fork guard is defense-in-depth for pull_request_target, which does have write access.
     - name: Save cache
