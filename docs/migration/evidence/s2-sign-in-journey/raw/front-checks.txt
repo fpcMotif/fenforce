@@ -1,0 +1,20 @@
+/Users/martinfan/devv/fenforce/packages/twenty-front
+$ bunx jest --config jest.config.mjs src/pages/convex-preview
+PASS twenty-front src/pages/convex-preview/__tests__/ClearQueryCacheOnUnmountEffect.test.tsx
+  ClearQueryCacheOnUnmountEffect
+    ✓ keeps cached data while mounted and drops it once unmounted (8 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        0.67 s, estimated 1 s
+Ran all test suites matching /src\/pages\/convex-preview/i.
+$ bunx oxlint --type-aware -c .oxlintrc.json src/pages/convex-preview/
+Found 0 warnings and 0 errors.
+Finished in 5.4s on 6 files with 34 rules using 12 threads.
+$ bunx oxfmt --check src/pages/convex-preview/
+
+All matched files use the correct format.
+Finished in 148ms on 7 files using 12 threads.
+$ bunx tsgo -p tsconfig.json --noEmit | grep -c "error TS"
+8

@@ -1,0 +1,25 @@
+{
+  "name": "fenforce-convex",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "varlock run -- convex dev",
+    "dev:once": "varlock run -- convex dev --once",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check": "bun run typecheck && bun run test"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "convex-test": "^0.0.60",
+    "typescript": "7.0.2",
+    "varlock": "1.21.0",
+    "vitest": "^5.0.2"
+  },
+  "packageManager": "bun@1.4.3",
+  "dependencies": {
+    "@auth/core": "0.41.1",
+    "@convex-dev/auth": "^0.0.95",
+    "convex": "^1.46.0"
+  }
+}
