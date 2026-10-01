@@ -1,0 +1,49 @@
+name: CI TLA Smoke
+
+on:
+  pull_request:
+    paths:
+      - experiments/tla-smoke/**
+      - .github/workflows/ci-tla-smoke.yaml
+  push:
+    branches: [main]
+    paths:
+      - experiments/tla-smoke/**
+      - .github/workflows/ci-tla-smoke.yaml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tla-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: experiments/tla-smoke
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: '1.4.3'
+      - name: Install pinned checking dependencies
+        run: bun install --frozen-lockfile
+      - name: Bootstrap native Rust checker
+        run: bun run bootstrap 2>&1 | tee bootstrap.log
+        shell: bash --noprofile --norc -eo pipefail {0}
+      - name: Typecheck scripts
+        run: bun run typecheck
+      - name: Check model and failure controls
+        run: bun run test
+      - name: Verify normal completion after controls
+        run: bun run check
+      - name: Upload smoke evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: tla-smoke
+          path: |
+            experiments/tla-smoke/bootstrap.log
+            experiments/tla-smoke/artifacts/
+          if-no-files-found: error

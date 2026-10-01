@@ -1,0 +1,16 @@
+{
+  "name": "fenforce-tla-smoke",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bootstrap": "bun bootstrap.ts",
+    "check": "bun check.ts positive",
+    "negative": "bun check.ts negative",
+    "test": "bun test smoke.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.2",
+    "typescript": "7.0.2"
+  }
+}
