@@ -314,7 +314,7 @@ describe('Record sharing', () => {
     ],
     ['Sales', { roleId: 'sales-role' }, 'Full access', 'FULL'],
   ])(
-    'can invite %s as %s',
+    'can invite %s as %s with %s',
     async (label, principal, accessLabel, accessLevel) => {
       const user = userEvent.setup();
       renderSharing();

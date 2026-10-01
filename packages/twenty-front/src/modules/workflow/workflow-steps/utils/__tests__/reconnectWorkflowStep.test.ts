@@ -50,7 +50,7 @@ describe('getReconnectedStepIds', () => {
     ).toEqual(['first', 'new', 'last']);
   });
 
-  it.each([undefined, [], ['missing'], ['old', 'new']])(
+  it.each([[undefined], [[]], [['missing']], [['old', 'new']]])(
     'rejects stale and duplicate connections: %j',
     (nextStepIds) => {
       expect(
