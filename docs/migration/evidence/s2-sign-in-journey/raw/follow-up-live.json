@@ -1,0 +1,39 @@
+{
+  "deployment": "https://resilient-bulldog-351.convex.cloud",
+  "checkedAt": "2026-10-01T02:22:52.094Z",
+  "workspaceId": "kd7cmkg10ynds3mmva2jea3te58ff4ej",
+  "companyId": "k57b1w04qza16v4dx2x2p9t4bx8fe25r",
+  "checks": [
+    "real password sign-up and sign-in",
+    "stable membership across sessions",
+    "anonymous reads rejected",
+    "tampered JWT rejected by deployed boundary",
+    "retained JWT rejected after sign-out",
+    "other session remains usable",
+    "revision-checked update persists",
+    "stale revision rejected"
+  ],
+  "record": {
+    "name": "S2 Verified Company",
+    "revision": 2
+  },
+  "tokensRecorded": false,
+  "browser": {
+    "frontend": "http://127.0.0.1:3017",
+    "backend": "https://resilient-bulldog-351.convex.cloud",
+    "checks": [
+      "real form sign-in",
+      "protected company-list URL refresh",
+      "company edit persisted and observed in another tab",
+      "two live tabs returned to sign-in after one tab signed out",
+      "keyboard sign-in through Enter",
+      "expired stored sessions invalidated open subscriptions",
+      "expired-session screen hid company data",
+      "keyboard recovery returned to sign-in"
+    ],
+    "expiryMethod": "Reimported the same synthetic authSessions documents with past expirationTime on this disposable deployment only",
+    "passiveClockExpiryTested": false,
+    "persistedCompanyName": "S2 Browser Verified Company",
+    "screenshots": ["workspace.jpg", "company.jpg", "signed-out.jpg", "expired.jpg"]
+  }
+}

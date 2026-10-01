@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
@@ -19,7 +21,7 @@ const renderBanner = ({
         title="Your key was revoked"
         description="Generate a new one from the provider dashboard."
         action={
-          hasAction ? { label: 'Reconnect', onClick: jest.fn() } : undefined
+          hasAction ? { label: 'Reconnect', onClick: vi.fn() } : undefined
         }
       />
     </I18nProvider>,

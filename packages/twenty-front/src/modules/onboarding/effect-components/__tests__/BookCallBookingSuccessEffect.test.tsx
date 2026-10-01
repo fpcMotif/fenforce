@@ -1,10 +1,12 @@
+import { vi } from 'vite-plus/test';
+
 import { act, render } from '@testing-library/react';
 
 import { BookCallBookingSuccessEffect } from '@/onboarding/effect-components/BookCallBookingSuccessEffect';
 
-const mockCalApi = jest.fn();
+const mockCalApi = vi.fn();
 
-jest.mock('@calcom/embed-react', () => ({
+vi.mock('@calcom/embed-react', () => ({
   getCalApi: () => Promise.resolve(mockCalApi),
 }));
 
@@ -29,11 +31,11 @@ const renderEffect = async (onBookingSuccessful: () => void) => {
 
 describe('BookCallBookingSuccessEffect', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should subscribe to the booking success event', async () => {
-    const onBookingSuccessful = jest.fn();
+    const onBookingSuccessful = vi.fn();
 
     const { emitBookingSuccessful } = await renderEffect(onBookingSuccessful);
 
@@ -41,7 +43,7 @@ describe('BookCallBookingSuccessEffect', () => {
   });
 
   it('should notify once even when the embed emits repeatedly', async () => {
-    const onBookingSuccessful = jest.fn();
+    const onBookingSuccessful = vi.fn();
 
     const { emitBookingSuccessful } = await renderEffect(onBookingSuccessful);
 
@@ -54,7 +56,7 @@ describe('BookCallBookingSuccessEffect', () => {
   });
 
   it('should unsubscribe on unmount so listeners cannot stack up', async () => {
-    const onBookingSuccessful = jest.fn();
+    const onBookingSuccessful = vi.fn();
 
     const { view } = await renderEffect(onBookingSuccessful);
 

@@ -1,3 +1,7 @@
+import type * as LocaleModule from 'date-fns/locale';
+import type * as UseAtomComponentStateValueModule from '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue';
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 import { Temporal } from 'temporal-polyfill';
 import { recordCalendarSelectedDateComponentState } from '@/object-record/record-calendar/states/recordCalendarSelectedDateComponentState';
@@ -5,13 +9,13 @@ import { recordCalendarSelectedDateComponentState } from '@/object-record/record
 import { RecordCalendar } from '@/object-record/record-calendar/components/RecordCalendar';
 import { ViewCalendarLayout } from '~/generated-metadata/graphql';
 
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar/components/RecordCalendarTopBar',
   () => ({
     RecordCalendarTopBar: () => <div data-testid="calendar-top-bar" />,
   }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar/components/RecordCalendarDragDropContext',
   () => ({
     RecordCalendarDragDropContext: ({
@@ -21,17 +25,17 @@ jest.mock(
     }) => children,
   }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar/components/RecordCalendarEscapeHotkeyEffect',
   () => ({ RecordCalendarEscapeHotkeyEffect: () => null }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar/components/RecordCalendarAddNew',
   () => ({
     RecordCalendarAddNew: () => null,
   }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar/record-calendar-card/components/RecordCalendarCard',
   () => ({
     RecordCalendarCard: ({ recordId }: { recordId: string }) => (
@@ -39,32 +43,32 @@ jest.mock(
     ),
   }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar/record-calendar-card/hooks/useIsRecordCalendarCardDragDisabled',
   () => ({
     useIsRecordCalendarCardDragDisabled: () => false,
   }),
 );
-jest.mock(
+vi.mock(
   '@/ui/utilities/drag-and-drop/components/DragDropItemSortableCell',
   () => ({
     DragDropItemSortableCell: ({ children }: { children: React.ReactNode }) =>
       children,
   }),
 );
-jest.mock(
+vi.mock(
   '@/ui/utilities/drag-and-drop/components/DragDropItemDropTarget',
   () => ({
     DragDropItemDropTarget: () => null,
   }),
 );
-jest.mock('@dnd-kit/react', () => ({
-  useDroppable: () => ({ isDropTarget: false, ref: jest.fn() }),
+vi.mock('@dnd-kit/react', () => ({
+  useDroppable: () => ({ isDropTarget: false, ref: vi.fn() }),
 }));
-jest.mock('@/ui/input/components/internal/date/hooks/useUserTimezone', () => ({
+vi.mock('@/ui/input/components/internal/date/hooks/useUserTimezone', () => ({
   useUserTimezone: () => ({ userTimezone: 'Europe/Paris' }),
 }));
-jest.mock(
+vi.mock(
   '@/ui/utilities/state/jotai/hooks/useAtomComponentFamilySelectorValue',
   () => ({
     useAtomComponentFamilySelectorValue: (
@@ -73,41 +77,41 @@ jest.mock(
     ) => [day.toString()],
   }),
 );
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => {
-  const { enUS } = jest.requireActual('date-fns/locale');
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', async () => {
+  const { enUS } =
+    await vi.importActual<typeof LocaleModule>('date-fns/locale');
   return {
     useAtomStateValue: () => ({ calendarStartDay: 1, localeCatalog: enUS }),
   };
 });
-jest.mock('@/ui/utilities/scroll/components/ScrollWrapper', () => ({
+vi.mock('@/ui/utilities/scroll/components/ScrollWrapper', () => ({
   ScrollWrapper: ({ children }: { children: React.ReactNode }) => children,
 }));
-jest.mock(
+vi.mock(
   '@/ui/utilities/state/component-state/hooks/useAvailableComponentInstanceIdOrThrow',
   () => ({
-    useAvailableComponentInstanceIdOrThrow: jest.fn(() => 'calendar-id'),
+    useAvailableComponentInstanceIdOrThrow: vi.fn(() => 'calendar-id'),
   }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar/states/selectors/useRecordCalendarSelection',
   () => ({
-    useRecordCalendarSelection: jest.fn(() => ({
-      resetRecordCalendarSelection: jest.fn(),
+    useRecordCalendarSelection: vi.fn(() => ({
+      resetRecordCalendarSelection: vi.fn(),
     })),
   }),
 );
-jest.mock('@/ui/utilities/pointer-event/hooks/useListenClickOutside', () => ({
-  useListenClickOutside: jest.fn(),
+vi.mock('@/ui/utilities/pointer-event/hooks/useListenClickOutside', () => ({
+  useListenClickOutside: vi.fn(),
 }));
-jest.mock(
-  '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
-  () => ({
-    useAtomComponentStateValue: jest.fn(),
-  }),
-);
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue', () => ({
+  useAtomComponentStateValue: vi.fn(),
+}));
 
-const useAtomComponentStateValueMock = jest.requireMock(
-  '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
+const useAtomComponentStateValueMock = (
+  await vi.importMock<typeof UseAtomComponentStateValueModule>(
+    '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
+  )
 ).useAtomComponentStateValue;
 
 describe('RecordCalendar', () => {
@@ -120,7 +124,7 @@ describe('RecordCalendar', () => {
     return render(<RecordCalendar />);
   };
 
-  beforeEach(() => jest.clearAllMocks());
+  beforeEach(() => vi.clearAllMocks());
 
   it.each([
     [ViewCalendarLayout.DAY, 1, '2026-07-15', '2026-07-15'],

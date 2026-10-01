@@ -1,9 +1,12 @@
+import type * as UuidModule from 'uuid';
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { WorkflowVisualizerComponentInstanceContext } from '@/workflow/workflow-diagram/states/contexts/WorkflowVisualizerComponentInstanceContext';
 import { useCreateStep } from '@/workflow/workflow-steps/hooks/useCreateStep';
 
-const mockGetUpdatableWorkflowVersion = jest.fn();
-const mockCreateWorkflowVersionStep = jest.fn().mockResolvedValue({
+const mockGetUpdatableWorkflowVersion = vi.fn();
+const mockCreateWorkflowVersionStep = vi.fn().mockResolvedValue({
   data: {
     createWorkflowVersionStep: {
       stepsDiff: [
@@ -17,23 +20,20 @@ const mockCreateWorkflowVersionStep = jest.fn().mockResolvedValue({
   },
 });
 
-jest.mock(
-  '@/workflow/workflow-steps/hooks/useCreateWorkflowVersionStep',
-  () => ({
-    useCreateWorkflowVersionStep: () => ({
-      createWorkflowVersionStep: mockCreateWorkflowVersionStep,
-    }),
+vi.mock('@/workflow/workflow-steps/hooks/useCreateWorkflowVersionStep', () => ({
+  useCreateWorkflowVersionStep: () => ({
+    createWorkflowVersionStep: mockCreateWorkflowVersionStep,
   }),
-);
+}));
 
-jest.mock('@/workflow/hooks/useGetUpdatableWorkflowVersionOrThrow', () => ({
+vi.mock('@/workflow/hooks/useGetUpdatableWorkflowVersionOrThrow', () => ({
   useGetUpdatableWorkflowVersionOrThrow: () => ({
     getUpdatableWorkflowVersion: mockGetUpdatableWorkflowVersion,
   }),
 }));
 
-jest.mock('uuid', () => ({
-  ...jest.requireActual('uuid'),
+vi.mock('uuid', async () => ({
+  ...(await vi.importActual<typeof UuidModule>('uuid')),
   v4: () => 'step-id',
 }));
 
@@ -54,7 +54,7 @@ const wrapper = ({ children }: { children: React.ReactNode }) => {
 
 describe('useCreateStep', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should create step in workflow version', async () => {

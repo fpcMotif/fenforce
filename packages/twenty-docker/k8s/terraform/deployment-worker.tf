@@ -36,7 +36,7 @@ resource "kubernetes_deployment" "twentycrm_worker" {
           name    = var.twentycrm_app_name
           stdin   = true
           tty     = true
-          command = ["yarn", "worker:prod"]
+          command = ["bun", "run", "worker:prod"]
 
           env {
             name  = "SERVER_URL"

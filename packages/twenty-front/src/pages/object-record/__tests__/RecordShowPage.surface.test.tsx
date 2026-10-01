@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { WorkspaceSurfaceContext } from '@/ui/layout/contexts/WorkspaceSurfaceContext';
 import { RecordShowPage } from '~/pages/object-record/RecordShowPage';
 import { render, screen } from '@testing-library/react';
@@ -18,15 +20,15 @@ let mockRecordResource: {
   error: undefined,
 };
 
-jest.mock('react-router-dom', () => ({
+vi.mock('react-router-dom', () => ({
   useParams: () => mockParameters,
 }));
 
-jest.mock('@/workspace/hooks/useIsFeatureEnabled', () => ({
+vi.mock('@/workspace/hooks/useIsFeatureEnabled', () => ({
   useIsFeatureEnabled: () => mockIsWorkflowCoreIndexPageEnabled,
 }));
 
-jest.mock('@/object-core/utils/findCoreObjectShowPage', () => ({
+vi.mock('@/object-core/utils/findCoreObjectShowPage', () => ({
   findCoreObjectShowPage: (objectNameSingular: string) =>
     objectNameSingular === 'workflow'
       ? ({ objectRecordId }: { objectRecordId: string }) => (
@@ -35,35 +37,32 @@ jest.mock('@/object-core/utils/findCoreObjectShowPage', () => ({
       : undefined,
 }));
 
-jest.mock('@/object-record/record-show/hooks/useRecordShowPage', () => ({
+vi.mock('@/object-record/record-show/hooks/useRecordShowPage', () => ({
   useRecordShowPage: () => ({
     objectNameSingular: 'person',
     objectRecordId: 'record-1',
   }),
 }));
 
-jest.mock(
-  '@/object-record/record-show/hooks/useRecordShowPageResource',
-  () => ({
-    useRecordShowPageResource: () => mockRecordResource,
-  }),
-);
+vi.mock('@/object-record/record-show/hooks/useRecordShowPageResource', () => ({
+  useRecordShowPageResource: () => mockRecordResource,
+}));
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
   useObjectMetadataItems: () => ({
     objectMetadataItems: mockObjectMetadataItems,
   }),
 }));
 
-jest.mock('@/app/routing/components/WorkspaceRouteUnavailable', () => ({
+vi.mock('@/app/routing/components/WorkspaceRouteUnavailable', () => ({
   WorkspaceRouteUnavailable: () => <div data-testid="route-unavailable" />,
 }));
 
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
   useAtomStateValue: () => false,
 }));
 
-jest.mock(
+vi.mock(
   '@/object-record/components/RecordComponentInstanceContextsWrapper',
   () => ({
     RecordComponentInstanceContextsWrapper: ({
@@ -83,21 +82,21 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/object-record/record-show/components/PageLayoutRecordPageRenderer',
   () => ({
     PageLayoutRecordPageRenderer: () => <div data-testid="record-renderer" />,
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/object-record/record-show/components/RecordShowPageSSESubscribeEffect',
   () => ({
     RecordShowPageSSESubscribeEffect: () => <div data-testid="record-sse" />,
   }),
 );
 
-jest.mock('@/ui/layout/page/components/PageCardLayout', () => ({
+vi.mock('@/ui/layout/page/components/PageCardLayout', () => ({
   PageCardLayout: ({
     children,
     header,
@@ -112,21 +111,21 @@ jest.mock('@/ui/layout/page/components/PageCardLayout', () => ({
   ),
 }));
 
-jest.mock('~/pages/object-record/RecordShowPageHeader', () => ({
+vi.mock('~/pages/object-record/RecordShowPageHeader', () => ({
   RecordShowPageHeader: ({ children }: { children?: React.ReactNode }) => (
     <div data-testid="record-header">{children}</div>
   ),
 }));
 
-jest.mock('~/pages/object-record/RecordShowPageTitle', () => ({
+vi.mock('~/pages/object-record/RecordShowPageTitle', () => ({
   RecordShowPageTitle: () => <div data-testid="record-page-title" />,
 }));
 
-jest.mock('@/command-menu-item/components/RecordShowCommandMenu', () => ({
+vi.mock('@/command-menu-item/components/RecordShowCommandMenu', () => ({
   RecordShowCommandMenu: () => <div data-testid="main-command-menu" />,
 }));
 
-jest.mock('@/side-panel/components/SidePanelToggleButton', () => ({
+vi.mock('@/side-panel/components/SidePanelToggleButton', () => ({
   SidePanelToggleButton: () => <div data-testid="side-panel-toggle" />,
 }));
 

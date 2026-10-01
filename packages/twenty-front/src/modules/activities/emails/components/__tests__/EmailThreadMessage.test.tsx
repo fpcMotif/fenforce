@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 import { MessageParticipantRole } from 'twenty-shared/types';
 
@@ -34,7 +36,7 @@ describe('EmailThreadMessage', () => {
       <EmailThreadMessage
         message={buildMessage({})}
         isExpanded
-        onDraftClick={jest.fn()}
+        onDraftClick={vi.fn()}
       />,
     );
 
@@ -50,7 +52,7 @@ describe('EmailThreadMessage', () => {
       <EmailThreadMessage
         message={buildMessage({ sender: undefined, messageParticipants: [] })}
         isExpanded
-        onDraftClick={jest.fn()}
+        onDraftClick={vi.fn()}
       />,
     );
 

@@ -1,0 +1,38 @@
+name: CI Convex migration
+
+on:
+  pull_request:
+  merge_group:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  migration-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      NODE_OPTIONS: --max-old-space-size=6144
+      REACT_APP_FENFORCE_CONVEX_URL: https://migration-test.convex.cloud
+      CLOUDFLARE_LOAD_DEV_VARS_FROM_DOT_ENV: 'false'
+      CLOUDFLARE_INCLUDE_PROCESS_ENV: 'true'
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/bun-install
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version-file: deployments/convex/package.json
+      - name: Install isolated Convex dependencies
+        run: bun install --cwd deployments/convex --frozen-lockfile --ignore-scripts
+      - name: Prepare the Convex Effect compiler
+        run: bun run --cwd deployments/convex prepare
+      - name: Install isolated frontend host dependencies
+        run: bun install --cwd deployments/cloudflare-front --frozen-lockfile --ignore-scripts
+      - name: Enforce migration contracts
+        run: bun run check:migration

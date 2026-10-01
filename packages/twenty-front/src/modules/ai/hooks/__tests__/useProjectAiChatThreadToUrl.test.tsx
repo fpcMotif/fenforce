@@ -1,12 +1,14 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { AppPath } from 'twenty-shared/types';
 
 import { useProjectAiChatThreadToUrl } from '@/ai/hooks/useProjectAiChatThreadToUrl';
 import { AGENT_CHAT_NEW_THREAD_DRAFT_KEY } from '@/ai/states/agentChatDraftsByThreadIdState';
 
-const navigateAppMock = jest.fn();
+const navigateAppMock = vi.fn();
 
-jest.mock('~/hooks/useNavigateApp', () => ({
+vi.mock('~/hooks/useNavigateApp', () => ({
   useNavigateApp: () => navigateAppMock,
 }));
 
@@ -14,7 +16,7 @@ const THREAD_A = '11111111-1111-4111-8111-111111111111';
 
 describe('useProjectAiChatThreadToUrl', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     window.history.pushState(null, '', '/');
   });
 

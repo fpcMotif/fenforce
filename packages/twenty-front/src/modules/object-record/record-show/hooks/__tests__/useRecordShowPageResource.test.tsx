@@ -1,26 +1,28 @@
+import { vi } from 'vite-plus/test';
+
 import { recordStoreFamilyState } from '@/object-record/record-store/states/recordStoreFamilyState';
 import { RecordShowPageResourceEffect } from '@/object-record/record-show/components/RecordShowPageResourceEffect';
 import { useRecordShowPageResource } from '@/object-record/record-show/hooks/useRecordShowPageResource';
 import { render, renderHook } from '@testing-library/react';
 import { createStore, Provider } from 'jotai';
 
-const mockUseFindOneRecord = jest.fn();
+const mockUseFindOneRecord = vi.fn();
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
   useObjectMetadataItem: () => ({
     objectMetadataItem: { id: 'person-object' },
   }),
 }));
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
   useObjectMetadataItems: () => ({ objectMetadataItems: [] }),
 }));
 
-jest.mock('@/object-record/hooks/useFindOneRecord', () => ({
+vi.mock('@/object-record/hooks/useFindOneRecord', () => ({
   useFindOneRecord: (...args: unknown[]) => mockUseFindOneRecord(...args),
 }));
 
-jest.mock(
+vi.mock(
   '@/object-record/record-show/graphql/operations/factories/findOneRecordForShowPageOperationSignatureFactory',
   () => ({
     buildFindOneRecordForShowPageOperationSignature: () => ({

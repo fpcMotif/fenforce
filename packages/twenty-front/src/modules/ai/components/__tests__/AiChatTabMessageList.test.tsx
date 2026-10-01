@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render } from '@testing-library/react';
 import { type ReactNode } from 'react';
 
@@ -14,20 +16,20 @@ const renderWithPreamble = (preamble: ReactNode) =>
     </AiChatMessageListPreambleContext.Provider>,
   );
 
-const mockUseAtomComponentSelectorValue = jest.fn();
+const mockUseAtomComponentSelectorValue = vi.fn();
 
-jest.mock(
+vi.mock(
   '@/ui/utilities/state/jotai/hooks/useAtomComponentSelectorValue',
   () => ({
     useAtomComponentSelectorValue: () => mockUseAtomComponentSelectorValue(),
   }),
 );
 
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
   useAtomStateValue: () => false,
 }));
 
-jest.mock('@/ui/utilities/scroll/components/ScrollWrapper', () => ({
+vi.mock('@/ui/utilities/scroll/components/ScrollWrapper', () => ({
   ScrollWrapper: ({
     children,
     componentInstanceId,
@@ -44,34 +46,34 @@ jest.mock('@/ui/utilities/scroll/components/ScrollWrapper', () => ({
   ),
 }));
 
-jest.mock('@/ai/components/AiChatNonLastMessageIdsList', () => ({
+vi.mock('@/ai/components/AiChatNonLastMessageIdsList', () => ({
   AiChatNonLastMessageIdsList: () => null,
 }));
-jest.mock('@/ai/components/AiChatLastMessageWithStreamingState', () => ({
+vi.mock('@/ai/components/AiChatLastMessageWithStreamingState', () => ({
   AiChatLastMessageWithStreamingState: () => null,
 }));
-jest.mock('@/ai/components/AiChatPendingResponseIndicator', () => ({
+vi.mock('@/ai/components/AiChatPendingResponseIndicator', () => ({
   AiChatPendingResponseIndicator: () => null,
 }));
-jest.mock('@/ai/components/AiChatErrorUnderMessageList', () => ({
+vi.mock('@/ai/components/AiChatErrorUnderMessageList', () => ({
   AiChatErrorUnderMessageList: () => null,
 }));
-jest.mock('@/ai/components/AiChatScrollToBottomButton', () => ({
+vi.mock('@/ai/components/AiChatScrollToBottomButton', () => ({
   AiChatScrollToBottomButton: () => null,
 }));
-jest.mock(
+vi.mock(
   '@/ai/components/AgentChatScrollToBottomOnDisplayedThreadChangeLayoutEffect',
   () => ({
     AgentChatScrollToBottomOnDisplayedThreadChangeLayoutEffect: () => null,
   }),
 );
-jest.mock('@/ai/components/AgentChatStreamingAutoScrollEffect', () => ({
+vi.mock('@/ai/components/AgentChatStreamingAutoScrollEffect', () => ({
   AgentChatStreamingAutoScrollEffect: () => null,
 }));
 
 describe('AiChatTabMessageList', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render nothing with no messages and no preamble', () => {

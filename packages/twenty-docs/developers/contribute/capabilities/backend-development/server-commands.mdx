@@ -6,41 +6,41 @@ icon: "terminal"
 
 ## Useful commands
 
-These commands should be executed from packages/twenty-server folder.
-From any other folder you can run `npx nx {command} twenty-server` (or `npx nx run twenty-server:{command}`).
+Run these commands from the repository root with `bunx vite-plus run twenty-server#{task}`.
 
 ### First time setup
 
 ```
-npx nx database:reset twenty-server # setup the database with dev seeds
+bunx vite-plus run twenty-server#database:reset # setup the database with dev seeds
 ```
 
 ### Starting the server
 
 ```
-npx nx run twenty-server:start
+bunx vite-plus run twenty-server#start
 ```
 
 ### Lint
 
 ```
-npx nx run twenty-server:lint # pass --fix to fix lint errors
+bunx vite-plus run twenty-server#lint
+bunx vite-plus run twenty-server#lint:fix # fix lint errors
 ```
 
 ### Test
 
 ```
-npx nx run twenty-server:test:unit          # run unit tests
-npx nx run twenty-server:test:integration   # run integration tests
+bunx vite-plus run twenty-server#test             # run unit tests
+bunx vite-plus run twenty-server#test:integration # run integration tests
 ```
-Note: you can run `npx nx run twenty-server:test:integration:with-db-reset` in case you need to reset the database before running the integration tests.
+Run `bunx vite-plus run twenty-server#test:integration:with-db-reset` when integration tests need a database reset.
 
 ### Resetting the database
 
 If you want to reset and seed the database, you can run the following command:
 
 ```bash
-npx nx run twenty-server:database:reset
+bunx vite-plus run twenty-server#database:reset
 ```
 
 ### Migrations
@@ -48,7 +48,7 @@ npx nx run twenty-server:database:reset
 #### For objects in Core/Metadata schemas (TypeORM)
 
 ```bash
-npx nx run twenty-server:database:migrate:generate
+bunx vite-plus run twenty-server#database:migrate:generate --name <name> --type <fast|slow>
 ```
 
 ## Tech Stack
@@ -75,10 +75,8 @@ Here's what the tech stack now looks like.
 - [Jest](https://jestjs.io/)
 
 **Tooling**
-- [Yarn](https://yarnpkg.com/)
+- [Bun](https://bun.com/)
 - [Oxlint](https://oxc.rs/docs/guide/usage/linter.html)
 
 **Development**
 - [AWS EKS](https://aws.amazon.com/eks/)
-
-

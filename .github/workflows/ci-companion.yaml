@@ -8,7 +8,7 @@ on:
       - 'packages/twenty-front/**'
       - 'packages/twenty-shared/**'
       - 'package.json'
-      - 'yarn.lock'
+      - 'bun.lock'
       - '.github/workflows/ci-companion.yaml'
   push:
     branches: [main]
@@ -18,7 +18,7 @@ on:
       - 'packages/twenty-front/**'
       - 'packages/twenty-shared/**'
       - 'package.json'
-      - 'yarn.lock'
+      - 'bun.lock'
       - '.github/workflows/ci-companion.yaml'
 
 permissions:
@@ -34,10 +34,10 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
-      - uses: ./.github/actions/yarn-install
+      - uses: ./.github/actions/bun-install
       - name: Typecheck
-        run: yarn workspace @twentyhq/companion typecheck
+        run: bunx vite-plus run @twentyhq/companion#typecheck
       - name: Test
-        run: yarn workspace @twentyhq/companion test
+        run: bunx vite-plus run @twentyhq/companion#test
       - name: Build
-        run: yarn workspace @twentyhq/companion build
+        run: bunx vite-plus run @twentyhq/companion#build

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, render } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 
@@ -11,9 +13,9 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-const mockCalApi = jest.fn();
+const mockCalApi = vi.fn();
 
-jest.mock('@calcom/embed-react', () => ({
+vi.mock('@calcom/embed-react', () => ({
   getCalApi: () => Promise.resolve(mockCalApi),
 }));
 
@@ -56,7 +58,7 @@ const getPreloadCalls = () =>
 describe('PrefetchBookCallStepEffect', () => {
   beforeEach(() => {
     resetJotaiStore();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should warm the booking page when the step is pending and configured', async () => {

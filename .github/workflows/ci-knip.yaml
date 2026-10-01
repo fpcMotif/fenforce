@@ -21,7 +21,7 @@ jobs:
       files: |
         knip.json
         package.json
-        yarn.lock
+        bun.lock
         packages/twenty-front/**
         packages/twenty-server/**
         packages/twenty-ui/**
@@ -34,6 +34,6 @@ jobs:
       - name: Fetch custom Github Actions
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
       - name: Run knip
-        run: npx nx run-many -t knip --parallel=1
+        run: bunx vite-plus run -r --concurrency-limit 1 knip

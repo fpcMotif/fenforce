@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { computeUpdatedMultiItemFieldItems } from '@/object-record/record-field/ui/meta-types/input/utils/computeUpdatedMultiItemFieldItems';
 
 const items = ['a', 'b', 'c'];
@@ -52,7 +54,7 @@ describe('computeUpdatedMultiItemFieldItems', () => {
 
     it('should use formatInput to transform the value', () => {
       type Link = { url: string; label: string };
-      const formatInput = jest.fn((input: string) => ({
+      const formatInput = vi.fn((input: string) => ({
         url: input,
         label: input,
       }));
@@ -83,7 +85,7 @@ describe('computeUpdatedMultiItemFieldItems', () => {
     });
 
     it('should pass editingIndex to formatInput', () => {
-      const formatInput = jest.fn((input: string) => input);
+      const formatInput = vi.fn((input: string) => input);
 
       computeUpdatedMultiItemFieldItems({
         sanitizedInput: 'edited',

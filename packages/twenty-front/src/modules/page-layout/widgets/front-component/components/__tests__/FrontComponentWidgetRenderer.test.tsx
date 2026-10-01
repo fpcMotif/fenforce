@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 
 import { PageLayoutContentProvider } from '@/page-layout/contexts/PageLayoutContentContext';
@@ -12,7 +14,7 @@ import {
   WidgetConfigurationType,
 } from '~/generated-metadata/graphql';
 
-jest.mock('@/front-components/components/FrontComponentRenderer', () => ({
+vi.mock('@/front-components/components/FrontComponentRenderer', () => ({
   FrontComponentRenderer: ({
     frontComponentId,
     selectedRecordIds,
@@ -28,7 +30,7 @@ jest.mock('@/front-components/components/FrontComponentRenderer', () => ({
   ),
 }));
 
-jest.mock('@/front-components/components/FrontComponentSkeletonLoader', () => ({
+vi.mock('@/front-components/components/FrontComponentSkeletonLoader', () => ({
   FrontComponentSkeletonLoader: () => <div data-testid="skeleton" />,
 }));
 

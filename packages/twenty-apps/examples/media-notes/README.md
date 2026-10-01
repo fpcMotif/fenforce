@@ -23,18 +23,18 @@ on. Serve the front build from the server rather than on its own port:
 
 ```sh
 # from the repo root
-npx nx build twenty-sdk
-NODE_ENV=production npx nx build twenty-front
-npx nx build twenty-server
+bunx vite-plus run twenty-sdk#build
+NODE_ENV=production bunx vite-plus run twenty-front#build
+bunx vite-plus run twenty-server#build
 cp -r packages/twenty-front/build packages/twenty-server/dist/front
 
 # start:ci, not start: the watch target would rimraf dist and delete the front
-npx nx start:ci twenty-server &
+bunx vite-plus run twenty-server#start:ci &
 
 node packages/twenty-sdk/dist/cli.cjs app:publish --private && node packages/twenty-sdk/dist/cli.cjs app:install
 
 # then, from this directory
-FRONT_BASE_URL=http://localhost:3000 npx playwright test --project=setup --project=chromium
+FRONT_BASE_URL=http://localhost:3000 bunx playwright test --project=setup --project=chromium
 ```
 
 It asserts the app-owned recording timer, the playback preview, the uploaded

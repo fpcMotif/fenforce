@@ -1,7 +1,9 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { REACT_APP_SERVER_BASE_URL } from '~/config';
 import { getClientConfig } from '@/client-config/utils/getClientConfig';
 
-global.fetch = jest.fn();
+global.fetch = vi.fn();
 
 const mockClientConfig = {
   billing: {
@@ -51,11 +53,11 @@ const mockClientConfig = {
 
 describe('getClientConfig', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should fetch client config from API', async () => {
-    (fetch as jest.Mock).mockResolvedValueOnce({
+    (fetch as Mock).mockResolvedValueOnce({
       ok: true,
       json: async () => mockClientConfig,
     });
@@ -69,7 +71,7 @@ describe('getClientConfig', () => {
   });
 
   it('should handle fetch errors', async () => {
-    (fetch as jest.Mock).mockResolvedValueOnce({
+    (fetch as Mock).mockResolvedValueOnce({
       ok: false,
       status: 500,
       statusText: 'Internal Server Error',
@@ -81,7 +83,7 @@ describe('getClientConfig', () => {
   });
 
   it('should handle network errors', async () => {
-    (fetch as jest.Mock).mockRejectedValueOnce(new Error('Network error'));
+    (fetch as Mock).mockRejectedValueOnce(new Error('Network error'));
 
     await expect(getClientConfig()).rejects.toThrow('Network error');
   });

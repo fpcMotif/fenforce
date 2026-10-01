@@ -1,22 +1,24 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { useApolloCoreClient } from '@/object-metadata/hooks/useApolloCoreClient';
 import { useRefetchAggregateQueries } from '@/object-record/hooks/useRefetchAggregateQueries';
 import { getGroupByAggregateQueryName } from '@/object-record/record-aggregate/utils/getGroupByAggregateQueryName';
 import { getAggregateQueryName } from '@/object-record/utils/getAggregateQueryName';
 import { renderHook } from '@testing-library/react';
 
-jest.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
-  useApolloCoreClient: jest.fn(),
+vi.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
+  useApolloCoreClient: vi.fn(),
 }));
 
 describe('useRefetchAggregateQueries', () => {
-  const mockRefetchQueries = jest.fn();
+  const mockRefetchQueries = vi.fn();
   const mockApolloClient = {
     refetchQueries: mockRefetchQueries,
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
-    (useApolloCoreClient as jest.Mock).mockReturnValue(mockApolloClient);
+    vi.clearAllMocks();
+    (useApolloCoreClient as Mock).mockReturnValue(mockApolloClient);
   });
 
   it('should refetch queries', async () => {

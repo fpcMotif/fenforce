@@ -1,30 +1,36 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 
 import { getTimelineThreadsFromObjectRecord } from '@/activities/emails/graphql/queries/getTimelineThreadsFromObjectRecord';
 import { useCustomResolver } from '@/activities/hooks/useCustomResolver';
 
-jest.mock('@apollo/client/react', () => ({
-  useQuery: jest.fn(),
+vi.mock('@apollo/client/react', () => ({
+  useQuery: vi.fn(),
 }));
 
-jest.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
-  useApolloCoreClient: jest.fn(() => ({})),
+vi.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
+  useApolloCoreClient: vi.fn(() => ({})),
 }));
 
-const useQueryMock = jest.requireMock('@apollo/client/react').useQuery;
+const useQueryMock = (
+  await vi.importMock<{ useQuery: ReturnType<typeof vi.fn> }>(
+    '@apollo/client/react',
+  )
+).useQuery;
 
 describe('useCustomResolver', () => {
   beforeEach(() => {
     useQueryMock.mockReturnValue({
       data: undefined,
       loading: false,
-      fetchMore: jest.fn(),
+      fetchMore: vi.fn(),
       error: undefined,
     });
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('queries the timeline resolver by object name and record id for any object', () => {

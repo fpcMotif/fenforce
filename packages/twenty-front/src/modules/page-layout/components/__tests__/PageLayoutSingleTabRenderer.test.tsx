@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { recordStoreFamilyState } from '@/object-record/record-store/states/recordStoreFamilyState';
 import { PageLayoutSingleTabRenderer } from '@/page-layout/components/PageLayoutSingleTabRenderer';
 import { usePageLayoutContentContext } from '@/page-layout/contexts/PageLayoutContentContext';
@@ -15,7 +17,7 @@ import { PageLayoutType } from '~/generated-metadata/graphql';
 
 const PAGE_LAYOUT_ID = 'page-layout-id';
 
-jest.mock(
+vi.mock(
   '@/object-record/record-show/components/RecordIdentifierBarTitle',
   () => ({
     RecordIdentifierBarTitle: ({
@@ -28,34 +30,31 @@ jest.mock(
   }),
 );
 
-jest.mock(
-  '@/page-layout/components/PageLayoutInitializationQueryEffect',
-  () => ({
-    PageLayoutInitializationQueryEffect: () => null,
-  }),
-);
+vi.mock('@/page-layout/components/PageLayoutInitializationQueryEffect', () => ({
+  PageLayoutInitializationQueryEffect: () => null,
+}));
 
-jest.mock(
+vi.mock(
   '@/page-layout/components/PageLayoutRecordPageCustomizationSessionRegistrationEffect',
   () => ({
     PageLayoutRecordPageCustomizationSessionRegistrationEffect: () => null,
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/page-layout/widgets/record-table/components/RecordTableWidgetViewDraftsInitializationEffect',
   () => ({
     RecordTableWidgetViewDraftsInitializationEffect: () => null,
   }),
 );
 
-jest.mock('@/page-layout/components/dnd/PageLayoutWidgetDndProvider', () => ({
+vi.mock('@/page-layout/components/dnd/PageLayoutWidgetDndProvider', () => ({
   PageLayoutWidgetDndProvider: ({ children }: { children: ReactNode }) => (
     <>{children}</>
   ),
 }));
 
-jest.mock('@/page-layout/components/PageLayoutContent', () => ({
+vi.mock('@/page-layout/components/PageLayoutContent', () => ({
   PageLayoutContent: () => {
     const { tabId } = usePageLayoutContentContext();
 
@@ -65,12 +64,12 @@ jest.mock('@/page-layout/components/PageLayoutContent', () => ({
 
 describe('PageLayoutSingleTabRenderer', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2026-08-27T12:00:00.000Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-08-27T12:00:00.000Z'));
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it('updates the identifier title and creation date when switching between merge records', () => {

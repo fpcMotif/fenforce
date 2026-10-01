@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { renderHook, waitFor } from '@testing-library/react';
 import { act } from 'react';
 
@@ -14,9 +16,9 @@ import { mockedPersonRecords } from '~/testing/mock-data/generated/data/people/m
 import { getTestEnrichedObjectMetadataItemsMock } from '~/testing/utils/getTestEnrichedObjectMetadataItemsMock';
 import { getMockObjectMetadataItemOrThrow } from '~/testing/utils/getMockObjectMetadataItemOrThrow';
 
-jest.mock('@/object-record/hooks/useRefetchAggregateQueries');
-const mockRefetchAggregateQueries = jest.fn();
-(useRefetchAggregateQueries as jest.Mock).mockReturnValue({
+vi.mock('@/object-record/hooks/useRefetchAggregateQueries');
+const mockRefetchAggregateQueries = vi.fn();
+(useRefetchAggregateQueries as Mock).mockReturnValue({
   refetchAggregateQueries: mockRefetchAggregateQueries,
 });
 
@@ -52,7 +54,7 @@ describe('useDeleteOneRecord', () => {
         variables: { idToDelete: personRecord.id },
         query,
       },
-      result: jest.fn((variables) => ({
+      result: vi.fn((variables) => ({
         data: {
           deletePerson: {
             __typename: 'Person',
@@ -68,7 +70,7 @@ describe('useDeleteOneRecord', () => {
   const defaultMocks = getDefaultMocks();
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('A. Starting from empty cache', () => {
@@ -178,7 +180,7 @@ describe('useDeleteOneRecord', () => {
       await act(async () => {
         try {
           await result.current.deleteOneRecord(personRecord.id);
-          fail('Should have thrown an error');
+          throw new Error('Should have thrown an error');
         } catch {
           assertCachedRecordIsNull({
             recordId: personRecord.id,
@@ -318,7 +320,7 @@ describe('useDeleteOneRecord', () => {
       await act(async () => {
         try {
           await result.current.deleteOneRecord(personRecord.id);
-          fail('Should have thrown an error');
+          throw new Error('Should have thrown an error');
         } catch {
           assertCachedRecordMatchSnapshot({
             recordId: personRecord.id,

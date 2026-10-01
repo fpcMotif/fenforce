@@ -19,7 +19,7 @@ jobs:
       files: |
         packages/twenty-client-sdk/**
         packages/twenty-shared/**
-        yarn.lock
+        bun.lock
         .github/workflows/ci-client-sdk.yaml
         !packages/twenty-client-sdk/package.json
   client-sdk-test:
@@ -38,9 +38,9 @@ jobs:
         with:
           fetch-depth: 10
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
       - name: Run ${{ matrix.task }} task
-        uses: ./.github/actions/nx-affected
+        uses: ./.github/actions/affected-tasks
         with:
           tag: scope:client-sdk
           tasks: ${{ matrix.task }}

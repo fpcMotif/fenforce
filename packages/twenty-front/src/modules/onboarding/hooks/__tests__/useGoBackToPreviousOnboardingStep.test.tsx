@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { type MockedResponse } from '@apollo/client/testing';
 import { MockedProvider } from '@apollo/client/testing/react';
 import { act, renderHook } from '@testing-library/react';
@@ -18,10 +21,10 @@ import {
 } from '~/generated-metadata/graphql';
 import { mockedUserData } from '~/testing/mock-data/users';
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
@@ -56,7 +59,7 @@ const renderGoBackHook = (mocks: readonly MockedResponse[]) => {
 
 describe('useGoBackToPreviousOnboardingStep', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     resetJotaiStore();
     localStorage.clear();
     jotaiStore.set(currentUserState.atom, {

@@ -16,7 +16,7 @@ if (isCheckOnly) {
 
   if (currentMarkdown !== generatedMarkdown) {
     throw new Error(
-      'The icon dictionary Markdown is stale. Run `npx nx generateIconDictionary twenty-ui`.',
+      'The icon dictionary Markdown is stale. Run `bun run --cwd packages/twenty-ui generateIconDictionary` from the repository root.',
     );
   }
 } else {

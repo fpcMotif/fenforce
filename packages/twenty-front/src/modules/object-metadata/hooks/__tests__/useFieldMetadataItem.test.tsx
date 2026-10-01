@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { act } from 'react';
 
@@ -23,9 +25,9 @@ import { jestExpectSuccessfulMetadataRequestResult } from '@/object-metadata/hoo
 import { GET_CURRENT_USER } from '@/users/graphql/queries/getCurrentUser';
 import { mockedUserData } from '~/testing/mock-data/users';
 
-jest.mock('@/object-metadata/hooks/useUpdateOneFieldMetadataItem', () => ({
+vi.mock('@/object-metadata/hooks/useUpdateOneFieldMetadataItem', () => ({
   useUpdateOneFieldMetadataItem: () => ({
-    updateOneFieldMetadataItem: jest.fn().mockResolvedValue({
+    updateOneFieldMetadataItem: vi.fn().mockResolvedValue({
       status: 'successful',
       response: {
         data: {
@@ -36,9 +38,9 @@ jest.mock('@/object-metadata/hooks/useUpdateOneFieldMetadataItem', () => ({
   }),
 }));
 
-jest.mock('@/object-metadata/hooks/useCreateOneFieldMetadataItem', () => ({
+vi.mock('@/object-metadata/hooks/useCreateOneFieldMetadataItem', () => ({
   useCreateOneFieldMetadataItem: () => ({
-    createOneFieldMetadataItem: jest.fn().mockResolvedValue({
+    createOneFieldMetadataItem: vi.fn().mockResolvedValue({
       status: 'successful',
       response: {
         data: {
@@ -49,24 +51,22 @@ jest.mock('@/object-metadata/hooks/useCreateOneFieldMetadataItem', () => ({
   }),
 }));
 
-jest.mock('@/object-metadata/hooks/useDeleteOneFieldMetadataItem', () => ({
+vi.mock('@/object-metadata/hooks/useDeleteOneFieldMetadataItem', () => ({
   useDeleteOneFieldMetadataItem: () => ({
-    deleteOneFieldMetadataItem: jest
-      .fn()
-      .mockImplementation(({ idToDelete }) => {
-        const data =
-          idToDelete === FIELD_RELATION_METADATA_ID
-            ? responseData.fieldRelation
-            : responseData.default;
-        return Promise.resolve({
-          status: 'successful',
-          response: {
-            data: {
-              deleteOneField: data,
-            },
+    deleteOneFieldMetadataItem: vi.fn().mockImplementation(({ idToDelete }) => {
+      const data =
+        idToDelete === FIELD_RELATION_METADATA_ID
+          ? responseData.fieldRelation
+          : responseData.default;
+      return Promise.resolve({
+        status: 'successful',
+        response: {
+          data: {
+            deleteOneField: data,
           },
-        });
-      }),
+        },
+      });
+    }),
   }),
 }));
 
@@ -119,7 +119,7 @@ const mocks = [
       query: GET_CURRENT_USER,
       variables: {},
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         currentUser: mockedUserData,
       },
@@ -130,7 +130,7 @@ const mocks = [
       query: queries.deleteMetadataField,
       variables: variables.deleteMetadataField,
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         deleteOneField: responseData.default,
       },
@@ -141,7 +141,7 @@ const mocks = [
       query: queries.deleteMetadataField,
       variables: variables.deleteMetadataFieldRelation,
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         deleteOneField: responseData.fieldRelation,
       },
@@ -152,7 +152,7 @@ const mocks = [
       query: queries.createMetadataField,
       variables: variables.createMetadataField,
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         createOneField: responseData.createMetadataField,
       },
@@ -163,7 +163,7 @@ const mocks = [
       query: findManyObjectMetadataItemsQuery,
       variables: {},
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: findManyObjectMetadataItemsResponseData,
     })),
   },

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { isLayoutCustomizationModeEnabledState } from '@/layout-customization/states/isLayoutCustomizationModeEnabledState';
 import { PageLayoutTabListNewTabDropdownContent } from '@/page-layout/components/PageLayoutTabListNewTabDropdownContent';
 import { PageLayoutTabListReorderableOverflowDropdown } from '@/page-layout/components/PageLayoutTabListReorderableOverflowDropdown';
@@ -28,11 +30,11 @@ import { PageLayoutType } from '~/generated-metadata/graphql';
 const TAB_LIST_ID = getTabListInstanceIdFromPageLayoutId(
   PAGE_LAYOUT_TEST_INSTANCE_ID,
 );
-const mockNavigatePageLayoutSidePanel = jest.fn();
-const mockCloseDropdown = jest.fn();
-const mockSelectTab = jest.fn();
+const mockNavigatePageLayoutSidePanel = vi.fn();
+const mockCloseDropdown = vi.fn();
+const mockSelectTab = vi.fn();
 
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/hooks/useNavigatePageLayoutSidePanel',
   () => ({
     useNavigatePageLayoutSidePanel: () => ({
@@ -41,17 +43,17 @@ jest.mock(
   }),
 );
 
-jest.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
+vi.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
   useCloseDropdown: () => ({ closeDropdown: mockCloseDropdown }),
 }));
 
-jest.mock('@/ui/layout/dropdown/components/Dropdown', () => ({
+vi.mock('@/ui/layout/dropdown/components/Dropdown', () => ({
   Dropdown: ({ dropdownComponents }: { dropdownComponents: ReactNode }) => (
     <>{dropdownComponents}</>
   ),
 }));
 
-jest.mock(
+vi.mock(
   '@/ui/utilities/drag-and-drop/components/DragDropItemSortableCell',
   () => ({
     DragDropItemSortableCell: ({ children }: { children: ReactNode }) => (
@@ -60,7 +62,7 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/ui/utilities/drag-and-drop/components/DragDropItemDropTarget',
   () => ({
     DragDropItemDropTarget: () => null,
@@ -99,7 +101,7 @@ const TabSettingsControls = () => {
 };
 
 describe('tab settings navigation during a closing panel', () => {
-  beforeEach(() => jest.resetAllMocks());
+  beforeEach(() => vi.resetAllMocks());
 
   it.each(['create', 'reactivate', 'overflow'])(
     'keeps the selected tab when opening settings through %s',

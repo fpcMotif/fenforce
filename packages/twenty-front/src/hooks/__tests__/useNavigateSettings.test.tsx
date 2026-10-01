@@ -1,3 +1,6 @@
+import type * as ReactRouterDomModule from 'react-router-dom';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { MemoryRouter, useNavigate } from 'react-router-dom';
 
@@ -5,14 +8,14 @@ import { WorkspaceSurfaceContext } from '@/ui/layout/contexts/WorkspaceSurfaceCo
 import { SettingsPath } from 'twenty-shared/types';
 import { useNavigateSettings } from '~/hooks/useNavigateSettings';
 
-const openSettingsMenuMock = jest.fn();
+const openSettingsMenuMock = vi.fn();
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: jest.fn(),
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual<typeof ReactRouterDomModule>('react-router-dom')),
+  useNavigate: vi.fn(),
 }));
 
-jest.mock('@/navigation/hooks/useOpenSettings', () => ({
+vi.mock('@/navigation/hooks/useOpenSettings', () => ({
   useOpenSettingsMenu: () => ({ openSettingsMenu: openSettingsMenuMock }),
 }));
 
@@ -53,11 +56,11 @@ const RoutedSidePanelWrapper = ({
 );
 
 describe('useNavigateSettings', () => {
-  const mockNavigate = jest.fn();
+  const mockNavigate = vi.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
-    (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
+    vi.clearAllMocks();
+    (useNavigate as Mock).mockReturnValue(mockNavigate);
   });
 
   it('should navigate to the correct settings path without params', () => {

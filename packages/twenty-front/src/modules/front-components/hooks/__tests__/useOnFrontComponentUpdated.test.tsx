@@ -1,18 +1,20 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 
 import { useOnFrontComponentUpdated } from '@/front-components/hooks/useOnFrontComponentUpdated';
 import { AllMetadataName } from '~/generated-metadata/graphql';
 
-const mockUseListenToEventsForQuery = jest.fn();
-const mockUseListenToMetadataOperationBrowserEvent = jest.fn();
-const mockUpdateFrontComponentApolloCache = jest.fn();
+const mockUseListenToEventsForQuery = vi.fn();
+const mockUseListenToMetadataOperationBrowserEvent = vi.fn();
+const mockUpdateFrontComponentApolloCache = vi.fn();
 
-jest.mock('@/sse-db-event/hooks/useListenToEventsForQuery', () => ({
+vi.mock('@/sse-db-event/hooks/useListenToEventsForQuery', () => ({
   useListenToEventsForQuery: (...args: unknown[]) =>
     mockUseListenToEventsForQuery(...args),
 }));
 
-jest.mock(
+vi.mock(
   '@/browser-event/hooks/useListenToMetadataOperationBrowserEvent',
   () => ({
     useListenToMetadataOperationBrowserEvent: (...args: unknown[]) =>
@@ -20,20 +22,17 @@ jest.mock(
   }),
 );
 
-jest.mock(
-  '@/front-components/hooks/useUpdateFrontComponentApolloCache',
-  () => ({
-    useUpdateFrontComponentApolloCache: () => ({
-      updateFrontComponentApolloCache: mockUpdateFrontComponentApolloCache,
-    }),
+vi.mock('@/front-components/hooks/useUpdateFrontComponentApolloCache', () => ({
+  useUpdateFrontComponentApolloCache: () => ({
+    updateFrontComponentApolloCache: mockUpdateFrontComponentApolloCache,
   }),
-);
+}));
 
 const FRONT_COMPONENT_ID = 'fc-test-id';
 
 describe('useOnFrontComponentUpdated', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should call useListenToEventsForQuery with correct queryId and operationSignature', () => {

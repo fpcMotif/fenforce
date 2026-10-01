@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { createStore, Provider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -6,17 +9,17 @@ import { getStepOutputSchemaFamilyStateKey } from '@/workflow/utils/getStepOutpu
 import { useStepsOutputSchema } from '@/workflow/workflow-variables/hooks/useStepsOutputSchema';
 import { stepsOutputSchemaFamilyState } from '@/workflow/workflow-variables/states/stepsOutputSchemaFamilyState';
 
-const mockMutate = jest.fn();
+const mockMutate = vi.fn();
 const mockClient = { mutate: mockMutate };
-const mockEnqueueToast = jest.fn();
-jest.mock('@/workflow/hooks/useIsWorkflowCoreEnabled', () => ({
+const mockEnqueueToast = vi.fn();
+vi.mock('@/workflow/hooks/useIsWorkflowCoreEnabled', () => ({
   useIsWorkflowCoreEnabled: () => true,
 }));
-jest.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
+vi.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
   useApolloCoreClient: () => mockClient,
 }));
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
@@ -63,7 +66,7 @@ const renderSchemas = () => {
 };
 
 describe('core iterator output schema', () => {
-  beforeEach(() => jest.clearAllMocks());
+  beforeEach(() => vi.clearAllMocks());
 
   it('computes the iterator schema with the core version context', async () => {
     mockMutate.mockResolvedValue({

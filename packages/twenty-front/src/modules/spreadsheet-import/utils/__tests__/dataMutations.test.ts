@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import {
   type ImportedStructuredRow,
   type SpreadsheetImportField,
@@ -118,11 +120,11 @@ describe('addErrorsAndRunHooks', () => {
     level: 'error',
   };
 
-  const rowHook: SpreadsheetImportRowHook = jest.fn((row, addError) => {
+  const rowHook: SpreadsheetImportRowHook = vi.fn((row, addError) => {
     addError('name', nameError);
     return row;
   });
-  const tableHook: SpreadsheetImportTableHook = jest.fn((table, addError) => {
+  const tableHook: SpreadsheetImportTableHook = vi.fn((table, addError) => {
     addError(0, 'age', ageError);
     return table;
   });

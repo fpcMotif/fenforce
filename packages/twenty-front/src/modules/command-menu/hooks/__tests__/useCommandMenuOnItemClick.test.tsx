@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { act } from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -31,7 +33,7 @@ const renderHooks = () => {
 describe('useCommandMenuOnItemClick', () => {
   it('onItemClick', () => {
     const { result } = renderHooks();
-    const onClickMock = jest.fn();
+    const onClickMock = vi.fn();
 
     act(() => {
       result.current.onItemClick({

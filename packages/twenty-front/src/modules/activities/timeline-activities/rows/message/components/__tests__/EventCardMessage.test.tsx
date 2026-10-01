@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
@@ -7,11 +9,11 @@ import { FIELD_RESTRICTED_ADDITIONAL_PERMISSIONS_REQUIRED } from 'twenty-shared/
 import { EventCardMessage } from '@/activities/timeline-activities/rows/message/components/EventCardMessage';
 import { useFindOneRecord } from '@/object-record/hooks/useFindOneRecord';
 
-jest.mock('@/object-record/hooks/useFindOneRecord', () => ({
-  useFindOneRecord: jest.fn(),
+vi.mock('@/object-record/hooks/useFindOneRecord', () => ({
+  useFindOneRecord: vi.fn(),
 }));
-jest.mock('@/side-panel/hooks/useOpenRecordInSidePanel', () => ({
-  useOpenRecordInSidePanel: () => ({ openRecordInSidePanel: jest.fn() }),
+vi.mock('@/side-panel/hooks/useOpenRecordInSidePanel', () => ({
+  useOpenRecordInSidePanel: () => ({ openRecordInSidePanel: vi.fn() }),
 }));
 
 const renderCard = () =>
@@ -23,7 +25,7 @@ const renderCard = () =>
 
 describe('EventCardMessage', () => {
   it('does not render fields masked by metadata visibility', () => {
-    jest.mocked(useFindOneRecord).mockReturnValue({
+    vi.mocked(useFindOneRecord).mockReturnValue({
       record: {
         id: 'message-id',
         subject: FIELD_RESTRICTED_ADDITIONAL_PERMISSIONS_REQUIRED,
@@ -46,7 +48,7 @@ describe('EventCardMessage', () => {
   });
 
   it('renders the not-shared state when record access is forbidden', () => {
-    jest.mocked(useFindOneRecord).mockReturnValue({
+    vi.mocked(useFindOneRecord).mockReturnValue({
       record: undefined,
       loading: false,
       error: new CombinedGraphQLErrors({
@@ -67,7 +69,7 @@ describe('EventCardMessage', () => {
   });
 
   it('fails closed when a hidden record is omitted without an error', () => {
-    jest.mocked(useFindOneRecord).mockReturnValue({
+    vi.mocked(useFindOneRecord).mockReturnValue({
       record: undefined,
       loading: false,
       error: undefined,

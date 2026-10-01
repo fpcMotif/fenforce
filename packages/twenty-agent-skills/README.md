@@ -77,16 +77,16 @@ Run from the repository root:
 
 ```bash
 # Validate canonical skills and Codex metadata
-npx nx run twenty-agent-skills:validate
+bunx vite-plus run twenty-agent-skills#validate
 
 # Build the shared distribution into ignored dist/
-npx nx run twenty-agent-skills:build
+bunx vite-plus run twenty-agent-skills#build
 
 # Install from that distribution
 npx skills add ./packages/twenty-agent-skills/dist --skill create-app
 
 # Run build and validation tests
-npx nx run twenty-agent-skills:test
+bunx vite-plus run twenty-agent-skills#test
 ```
 
 For local Codex plugin installation, build first, then copy the marketplace template (or merge its entry into an existing config):

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -14,16 +16,16 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-const refreshAgentChatThreads = jest.fn();
-const mockRefreshPermissions = jest.fn();
-jest.mock('@/ai/hooks/useRefreshAgentChatThreadPermissions', () => ({
+const refreshAgentChatThreads = vi.fn();
+const mockRefreshPermissions = vi.fn();
+vi.mock('@/ai/hooks/useRefreshAgentChatThreadPermissions', () => ({
   useRefreshAgentChatThreadPermissions: () => ({
     refreshAgentChatThreadPermissions: mockRefreshPermissions,
   }),
 }));
-const subscribe = jest.fn();
-const disconnect = jest.fn();
-jest.mock('@/ai/hooks/useRefreshAgentChatThreads', () => ({
+const subscribe = vi.fn();
+const disconnect = vi.fn();
+vi.mock('@/ai/hooks/useRefreshAgentChatThreads', () => ({
   useRefreshAgentChatThreads: () => ({ refreshAgentChatThreads }),
 }));
 const key = { instanceId: 'sharing-test', familyKey: { threadId: 'thread' } };
@@ -47,7 +49,7 @@ const denial = [
 
 describe('Shared conversation access revocation', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     resetJotaiStore();
     subscribe.mockReturnValue(disconnect);
     jotaiStore.set(sseClientState.atom, { subscribe } as never);
@@ -64,7 +66,7 @@ describe('Shared conversation access revocation', () => {
   });
 
   it('refreshes only the subscribed thread on heartbeats, at most once every 30 seconds', () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     const { unmount } = renderHook(() => useAgentChatSubscription('thread'), {
       wrapper: Wrapper,
     });
@@ -84,7 +86,7 @@ describe('Shared conversation access revocation', () => {
     });
     expect(mockRefreshPermissions).toHaveBeenCalledTimes(1);
     expect(mockRefreshPermissions).toHaveBeenLastCalledWith(['thread']);
-    act(() => jest.advanceTimersByTime(30_000));
+    act(() => vi.advanceTimersByTime(30_000));
     expect(mockRefreshPermissions).toHaveBeenCalledTimes(1);
     act(heartbeat);
     expect(mockRefreshPermissions).toHaveBeenCalledTimes(2);
@@ -92,7 +94,7 @@ describe('Shared conversation access revocation', () => {
     unmount();
     act(heartbeat);
     expect(mockRefreshPermissions).toHaveBeenCalledTimes(2);
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it.each(['next', 'error'])(

@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
@@ -16,19 +19,19 @@ import { useNavigateApp } from '~/hooks/useNavigateApp';
 import { SOURCE_LOCALE } from 'twenty-shared/translations';
 import { dynamicActivate } from '~/utils/i18n/dynamicActivate';
 
-jest.mock('../useAuth', () => ({
-  useAuth: jest.fn(),
+vi.mock('../useAuth', () => ({
+  useAuth: vi.fn(),
 }));
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
-jest.mock('~/hooks/useNavigateApp', () => ({
-  useNavigateApp: jest.fn(),
+vi.mock('~/hooks/useNavigateApp', () => ({
+  useNavigateApp: vi.fn(),
 }));
 
 dynamicActivate(SOURCE_LOCALE);
@@ -45,20 +48,20 @@ const renderHooks = () => {
 };
 
 describe('useVerifyLogin', () => {
-  const mockGetAuthTokensFromLoginToken = jest.fn();
+  const mockGetAuthTokensFromLoginToken = vi.fn();
 
-  const mockNavigate = jest.fn();
+  const mockNavigate = vi.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     localStorage.clear();
     resetJotaiStore();
 
-    (useAuth as jest.Mock).mockReturnValue({
+    (useAuth as Mock).mockReturnValue({
       getAuthTokensFromLoginToken: mockGetAuthTokensFromLoginToken,
     });
 
-    (useNavigateApp as jest.Mock).mockReturnValue(mockNavigate);
+    (useNavigateApp as Mock).mockReturnValue(mockNavigate);
   });
 
   it('should verify login token', async () => {

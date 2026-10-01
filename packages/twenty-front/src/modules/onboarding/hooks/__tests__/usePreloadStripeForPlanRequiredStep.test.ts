@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { createElement } from 'react';
@@ -14,11 +16,11 @@ import {
 import { loadStripe } from '@stripe/stripe-js/pure';
 import { mockCurrentWorkspace } from '~/testing/mock-data/users';
 
-jest.mock('@stripe/stripe-js/pure', () => ({
-  loadStripe: jest.fn().mockResolvedValue(null),
+vi.mock('@stripe/stripe-js/pure', () => ({
+  loadStripe: vi.fn().mockResolvedValue(null),
 }));
 
-const loadStripeMock = jest.mocked(loadStripe);
+const loadStripeMock = vi.mocked(loadStripe);
 
 const Wrapper = ({ children }: { children: React.ReactNode }) =>
   createElement(JotaiProvider, { store: jotaiStore }, children);
@@ -65,7 +67,7 @@ const renderHooks = ({
 describe('usePreloadStripeForPlanRequiredStep', () => {
   beforeEach(() => {
     resetJotaiStore();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should preload Stripe when billing is enabled and the workspace has no subscription', () => {

@@ -7,12 +7,24 @@
   "types": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build": "npx vite build"
+    "test:ci": "bunx vite-plus run twenty-shared#test -- --ci --maxWorkers=1 --coverage",
+    "test:coverage": "bunx vite-plus run twenty-shared#test -- --coverage --coverageReporters=lcov --coverageReporters=text",
+    "test:watch": "bunx vite-plus run --no-cache twenty-shared#test -- --watch",
+    "lint:ci": "bunx vite-plus run twenty-shared#lint",
+    "fmt:ci": "bunx vite-plus run twenty-shared#fmt",
+    "build:command": "bunx vite build && node node_modules/typescript/bin/tsc -p tsconfig.lib.json --moduleResolution bundler --declaration --emitDeclarationOnly --noEmit false --outDir dist --rootDir src && bunx tsc-alias -p tsconfig.lib.json --outDir dist --outputcheck d.ts",
+    "build:individual:command": "bunx vite build -c vite.config.individual.ts",
+    "generateBarrels": "cd ../.. && bunx tsx packages/twenty-shared/scripts/generateBarrels.ts",
+    "typecheck:command": "node node_modules/typescript/bin/tsc -p tsconfig.json --moduleResolution bundler",
+    "test:command": "bunx jest --config jest.config.mjs --silent",
+    "lint:command": "bunx oxlint -c .oxlintrc.json . && (bunx oxfmt --check . || (echo 'ERROR: oxfmt formatting check failed! Fix with: bun run lint:fix:command' && false))",
+    "lint:fix:command": "bunx oxlint --fix -c .oxlintrc.json . && bunx oxfmt .",
+    "fmt:command": "bunx oxfmt --check src",
+    "fmt:fix": "bunx oxfmt src",
+    "typecheck:watch": "node node_modules/typescript/bin/tsc -p tsconfig.json --moduleResolution bundler --watch"
   },
   "engines": {
-    "node": "^24.5.0",
-    "npm": "please-use-yarn",
-    "yarn": "^4.0.2"
+    "node": "^24.5.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.26.9",
@@ -24,6 +36,7 @@
     "@types/addressparser": "^1.0.3",
     "@types/babel__preset-env": "^7",
     "@types/jest": "^30.0.0",
+    "@types/node": "^24.0.0",
     "@types/lodash.camelcase": "^4.3.7",
     "@types/lodash.escaperegexp": "^4.1.9",
     "@types/qs": "6.9.16",
@@ -39,6 +52,7 @@
     "tsx": "^4.19.3",
     "typescript": "^5.9.3",
     "vite": "^8.0.0",
+    "vite-plus": "1.0.0",
     "vite-plugin-dts": "^4.5.4"
   },
   "dependencies": {
@@ -48,6 +62,7 @@
     "addressparser": "1.0.1",
     "ai": "7.0.103",
     "class-validator": "^0.14.0",
+    "date-fns": "^4.4.0",
     "expr-eval-fork": "3.0.3",
     "libphonenumber-js": "^1.10.26",
     "lodash.camelcase": "^4.3.0",

@@ -72,23 +72,25 @@ jobs:
           fetch-depth: 10
 
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
 
       - name: Set CI version and prepare packages for publish
         run: |
           CI_VERSION="0.0.0-ci.$(date +%s)"
           echo "CI_VERSION=$CI_VERSION" >> $GITHUB_ENV
-          npx nx run-many -t set-local-version -p $PUBLISHABLE_PACKAGES --releaseVersion=$CI_VERSION
+          for pkg in $PUBLISHABLE_PACKAGES; do
+            bunx vite-plus run "$pkg#set-local-version" "$CI_VERSION"
+          done
 
       - name: Build packages
         run: |
           for pkg in $PUBLISHABLE_PACKAGES; do
-            npx nx build $pkg
+            bunx vite-plus run "$pkg#build"
           done
 
       - name: Install and start Verdaccio
         run: |
-          npx verdaccio --config .github/verdaccio-config.yaml &
+          bunx verdaccio --config .github/verdaccio-config.yaml &
 
           for i in $(seq 1 30); do
             if curl -s http://localhost:4873 > /dev/null 2>&1; then
@@ -101,25 +103,21 @@ jobs:
 
       - name: Publish libraries to local registry
         run: |
-          yarn config set npmRegistryServer http://localhost:4873
-          yarn config set unsafeHttpWhitelist --json '["localhost"]'
-          yarn config set npmAuthToken ci-auth-token
-
           for pkg in $LIBRARY_PACKAGES; do
             cd packages/$pkg
-            yarn npm publish --tag ci
+            bun publish --registry http://localhost:4873 --tag ci
             cd ../..
           done
 
       - name: Generate template lockfile
         run: |
-          npx nx run create-twenty-app:generate-template-lock \
+          bunx vite-plus run create-twenty-app#generate-template-lock \
             --releaseVersion=$CI_VERSION --registry=http://localhost:4873
 
       - name: Publish create-twenty-app to local registry
         run: |
           cd packages/create-twenty-app
-          yarn npm publish --tag ci
+          bun publish --registry http://localhost:4873 --tag ci
 
       - name: Scaffold app using published create-twenty-app
         env:
@@ -127,7 +125,7 @@ jobs:
           YARN_NPM_REGISTRY_SERVER: http://localhost:4873
           YARN_UNSAFE_HTTP_WHITELIST: localhost
         run: |
-          npm install -g create-twenty-app@$CI_VERSION --registry http://localhost:4873
+          bun add --global create-twenty-app@$CI_VERSION --registry http://localhost:4873
           create-twenty-app --version
           mkdir -p /tmp/e2e-test-workspace
           cd /tmp/e2e-test-workspace
@@ -180,10 +178,10 @@ jobs:
       - name: Verify SDK CLI is available
         run: |
           cd /tmp/e2e-test-workspace/test-app
-          npx --no-install twenty --version
+          bunx --no-install twenty --version
 
       - name: Setup server environment
-        run: npx nx reset:env:e2e-testing-server twenty-server
+        run: bunx vite-plus run twenty-server#reset:env:e2e-testing-server
 
       - name: Create databases
         run: |
@@ -191,18 +189,18 @@ jobs:
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "test";'
 
       - name: Setup database
-        run: npx nx run twenty-server:database:reset
+        run: bunx vite-plus run twenty-server#database:reset
 
       - name: Start server
-        run: nohup npx nx start:ci twenty-server &
+        run: nohup bunx vite-plus run twenty-server#start:ci &
 
       - name: Wait for server to be ready
-        run: npx wait-on http://localhost:3000/healthz --timeout 120000 --interval 1000
+        run: bunx wait-on http://localhost:3000/healthz --timeout 120000 --interval 1000
 
       - name: Authenticate with twenty-server
         run: |
           cd /tmp/e2e-test-workspace/test-app
-          npx --no-install twenty remote:add --api-key ${{ env.TWENTY_API_KEY }} --url ${{ env.TWENTY_API_URL }}
+          bunx --no-install twenty remote:add --api-key ${{ env.TWENTY_API_KEY }} --url ${{ env.TWENTY_API_URL }}
 
       - name: Run scaffolded app integration test (deploys, installs, and verifies the app)
         run: |

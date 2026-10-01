@@ -1,3 +1,6 @@
+import type * as UtilitiesModule from 'twenty-ui/utilities';
+import { vi } from 'vite-plus/test';
+
 import { useReturnFromExpandedAiChat } from '@/ai/hooks/useReturnFromExpandedAiChat';
 import { useSwitchToNewAiChat } from '@/ai/hooks/useSwitchToNewAiChat';
 import { useDefaultHomePagePath } from '@/navigation/hooks/useDefaultHomePagePath';
@@ -14,29 +17,29 @@ import { createStore, Provider } from 'jotai';
 import { type ReactNode } from 'react';
 import { MemoryRouter, useLocation } from 'react-router-dom';
 
-jest.mock('@/ai/hooks/useReturnFromExpandedAiChat');
-jest.mock('@/ai/hooks/useSwitchToNewAiChat');
-jest.mock('@/navigation/hooks/useDefaultHomePagePath');
-jest.mock('twenty-ui/utilities', () => ({
-  ...jest.requireActual('twenty-ui/utilities'),
-  useIsMobile: jest.fn(),
+vi.mock('@/ai/hooks/useReturnFromExpandedAiChat');
+vi.mock('@/ai/hooks/useSwitchToNewAiChat');
+vi.mock('@/navigation/hooks/useDefaultHomePagePath');
+vi.mock('twenty-ui/utilities', async () => ({
+  ...(await vi.importActual<typeof UtilitiesModule>('twenty-ui/utilities')),
+  useIsMobile: vi.fn(),
 }));
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
-  useSidePanelMenu: () => ({ closeSidePanelMenu: jest.fn() }),
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+  useSidePanelMenu: () => ({ closeSidePanelMenu: vi.fn() }),
 }));
-jest.mock('@/ai/hooks/useSelectAiChatThread', () => ({
-  useSelectAiChatThread: () => ({ selectAiChatThread: jest.fn() }),
+vi.mock('@/ai/hooks/useSelectAiChatThread', () => ({
+  useSelectAiChatThread: () => ({ selectAiChatThread: vi.fn() }),
 }));
-jest.mock('@/side-panel/hooks/useOpenAskAiPageInSidePanel', () => ({
-  useOpenAskAiPageInSidePanel: () => ({ openAskAiPage: jest.fn() }),
+vi.mock('@/side-panel/hooks/useOpenAskAiPageInSidePanel', () => ({
+  useOpenAskAiPageInSidePanel: () => ({ openAskAiPage: vi.fn() }),
 }));
 
 const DEFAULT_HOME_PAGE_PATH = '/objects/companies';
 const AI_CHAT_PATH = '/chat/20202020-0687-4c41-b707-ed1bfca972a7';
 
-const mockSwitchToNewChat = jest.fn();
-const mockReturnFromExpandedAiChat = jest.fn();
+const mockSwitchToNewChat = vi.fn();
+const mockReturnFromExpandedAiChat = vi.fn();
 
 const renderSwitchNavigationDrawerMode = ({
   pathname,
@@ -75,23 +78,23 @@ const renderSwitchNavigationDrawerMode = ({
 
 describe('useSwitchNavigationDrawerMode', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     localStorage.clear();
 
-    jest.mocked(useSwitchToNewAiChat).mockReturnValue({
+    vi.mocked(useSwitchToNewAiChat).mockReturnValue({
       switchToNewChat: mockSwitchToNewChat,
     });
-    jest
-      .mocked(useReturnFromExpandedAiChat)
-      .mockReturnValue(mockReturnFromExpandedAiChat);
-    jest.mocked(useDefaultHomePagePath).mockReturnValue({
+    vi.mocked(useReturnFromExpandedAiChat).mockReturnValue(
+      mockReturnFromExpandedAiChat,
+    );
+    vi.mocked(useDefaultHomePagePath).mockReturnValue({
       defaultHomePagePath: DEFAULT_HOME_PAGE_PATH,
     });
-    jest.mocked(useIsMobile).mockReturnValue(false);
+    vi.mocked(useIsMobile).mockReturnValue(false);
   });
 
   it('leaves settings for the memorized location and restores the mobile drawer', () => {
-    jest.mocked(useIsMobile).mockReturnValue(true);
+    vi.mocked(useIsMobile).mockReturnValue(true);
     const { result, store } = renderSwitchNavigationDrawerMode({
       pathname: '/settings/profile',
       expandedMemorized: false,
@@ -246,16 +249,20 @@ describe('useSwitchNavigationDrawerMode', () => {
     },
   );
 
-  it('stays collapsed through Home → Settings → AI → Home', () => {
-    jest.mocked(useSwitchToNewAiChat).mockImplementation(
-      jest.requireActual<{
-        useSwitchToNewAiChat: typeof useSwitchToNewAiChat;
-      }>('@/ai/hooks/useSwitchToNewAiChat').useSwitchToNewAiChat,
+  it('stays collapsed through Home → Settings → AI → Home', async () => {
+    vi.mocked(useSwitchToNewAiChat).mockImplementation(
+      (
+        await vi.importActual<{
+          useSwitchToNewAiChat: typeof useSwitchToNewAiChat;
+        }>('@/ai/hooks/useSwitchToNewAiChat')
+      ).useSwitchToNewAiChat,
     );
-    jest.mocked(useReturnFromExpandedAiChat).mockImplementation(
-      jest.requireActual<{
-        useReturnFromExpandedAiChat: typeof useReturnFromExpandedAiChat;
-      }>('@/ai/hooks/useReturnFromExpandedAiChat').useReturnFromExpandedAiChat,
+    vi.mocked(useReturnFromExpandedAiChat).mockImplementation(
+      (
+        await vi.importActual<{
+          useReturnFromExpandedAiChat: typeof useReturnFromExpandedAiChat;
+        }>('@/ai/hooks/useReturnFromExpandedAiChat')
+      ).useReturnFromExpandedAiChat,
     );
     const { result, store } = renderSwitchNavigationDrawerMode({
       pathname: DEFAULT_HOME_PAGE_PATH,
@@ -280,7 +287,7 @@ describe('useSwitchNavigationDrawerMode', () => {
   });
 
   it('opens the settings drawer on mobile even when it was closed', () => {
-    jest.mocked(useIsMobile).mockReturnValue(true);
+    vi.mocked(useIsMobile).mockReturnValue(true);
     const { result, store } = renderSwitchNavigationDrawerMode({
       pathname: '/objects/people',
     });
@@ -315,7 +322,7 @@ describe('useSwitchNavigationDrawerMode', () => {
   });
 
   it('opens settings from a page the mobile drawer only thinks is settings', () => {
-    jest.mocked(useIsMobile).mockReturnValue(true);
+    vi.mocked(useIsMobile).mockReturnValue(true);
 
     const { result } = renderSwitchNavigationDrawerMode({
       pathname: '/objects/people',

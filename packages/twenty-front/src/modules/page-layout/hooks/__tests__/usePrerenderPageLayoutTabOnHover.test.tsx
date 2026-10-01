@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 
 import { PAGE_LAYOUT_TAB_PRERENDER_HOVER_INTENT_DELAY_MS } from '@/page-layout/constants/PageLayoutTabPrerenderHoverIntentDelayMs';
@@ -8,11 +10,11 @@ import { PageLayoutTestWrapper } from './PageLayoutTestWrapper';
 
 describe('usePrerenderPageLayoutTabOnHover', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   const renderHoverHook = () =>
@@ -34,7 +36,7 @@ describe('usePrerenderPageLayoutTabOnHover', () => {
     });
 
     act(() => {
-      jest.advanceTimersByTime(
+      vi.advanceTimersByTime(
         PAGE_LAYOUT_TAB_PRERENDER_HOVER_INTENT_DELAY_MS - 1,
       );
     });
@@ -42,7 +44,7 @@ describe('usePrerenderPageLayoutTabOnHover', () => {
     expect(result.current.pageLayoutPrerenderedTabIds).toEqual([]);
 
     act(() => {
-      jest.advanceTimersByTime(1);
+      vi.advanceTimersByTime(1);
     });
 
     expect(result.current.pageLayoutPrerenderedTabIds).toEqual(['tab-1']);
@@ -57,7 +59,7 @@ describe('usePrerenderPageLayoutTabOnHover', () => {
     });
 
     act(() => {
-      jest.advanceTimersByTime(PAGE_LAYOUT_TAB_PRERENDER_HOVER_INTENT_DELAY_MS);
+      vi.advanceTimersByTime(PAGE_LAYOUT_TAB_PRERENDER_HOVER_INTENT_DELAY_MS);
     });
 
     expect(result.current.pageLayoutPrerenderedTabIds).toEqual([]);
@@ -73,7 +75,7 @@ describe('usePrerenderPageLayoutTabOnHover', () => {
     });
 
     act(() => {
-      jest.advanceTimersByTime(PAGE_LAYOUT_TAB_PRERENDER_HOVER_INTENT_DELAY_MS);
+      vi.advanceTimersByTime(PAGE_LAYOUT_TAB_PRERENDER_HOVER_INTENT_DELAY_MS);
     });
 
     expect(result.current.pageLayoutPrerenderedTabIds).toEqual(['tab-2']);

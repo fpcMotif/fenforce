@@ -1,6 +1,8 @@
+import { vi } from 'vite-plus/test';
+
 import { type ComputedSeries, type LineSeries } from '@nivo/line';
 
-jest.mock('d3-shape', () => {
+vi.mock('d3-shape', () => {
   const createAreaGenerator = () => {
     let y0Fn: (d: any, i: number) => number = () => 0;
 

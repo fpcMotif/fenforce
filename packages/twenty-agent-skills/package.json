@@ -6,11 +6,17 @@
   "type": "module",
   "license": "AGPL-3.0",
   "scripts": {
-    "build": "node ./scripts/build.js",
+    "test:ci": "bunx vite-plus run twenty-agent-skills#test",
+    "test:coverage": "bunx vite-plus run twenty-agent-skills#test",
+    "test:watch": "bunx vite-plus run --no-cache twenty-agent-skills#test",
+    "build:command": "node ./scripts/build.js",
     "validate": "node ./scripts/validate-source.js && node ./scripts/build.js && node ./scripts/validate-distribution.js",
-    "test": "node --test ./scripts/__tests__/*.spec.js",
+    "test:command": "node --test ./scripts/__tests__/*.spec.js",
     "verify:install": "node ./scripts/verify-install.js",
-    "setup:mcp": "bash ./scripts/setup-mcp.sh"
+    "setup:mcp": "bash ./scripts/setup-mcp.sh",
+    "fmt:command": "prettier . --check --cache --cache-location ../../.cache/prettier/packages/twenty-agent-skills --cache-strategy metadata",
+    "fmt:ci": "prettier . --check --cache --cache-location ../../.cache/prettier/packages/twenty-agent-skills --cache-strategy metadata",
+    "fmt:fix": "prettier . --write --cache --cache-location ../../.cache/prettier/packages/twenty-agent-skills --cache-strategy metadata"
   },
   "files": [
     ".codex-plugin",
@@ -23,8 +29,6 @@
     "scripts/setup-mcp.sh"
   ],
   "engines": {
-    "node": "^24.5.0",
-    "npm": "please-use-yarn",
-    "yarn": ">=4.0.2"
+    "node": "^24.5.0"
   }
 }

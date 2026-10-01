@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { FormCurrencyAmountFieldInput } from '@/object-record/record-field/ui/form-types/components/FormCurrencyAmountFieldInput';
 import { FormCurrencyFieldInput } from '@/object-record/record-field/ui/form-types/components/FormCurrencyFieldInput';
 import { type FormFieldCurrencyInputSettings } from '@/object-record/record-field/ui/form-types/types/FormFieldCurrencyInputSettings';
@@ -10,7 +12,7 @@ import { createStore, Provider } from 'jotai';
 import { useState } from 'react';
 import { CurrencyCode } from 'twenty-shared/constants';
 
-jest.mock(
+vi.mock(
   '@/object-record/record-field/ui/form-types/components/VariableChipStandalone',
   () => ({
     VariableChipStandalone: ({
@@ -30,7 +32,7 @@ const renderCurrencyInput = ({
   readonly?: boolean;
   amountUnit?: FormFieldCurrencyInputSettings['amountUnit'];
 }) => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const store = createStore();
   const Form = () => {
     const [value, setValue] = useState<FormFieldCurrencyValue>({
@@ -147,7 +149,7 @@ it('displays read-only amounts in currency units', () => {
 
 it('passes selected workflow variables through without converting them', async () => {
   const user = userEvent.setup();
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const reference = '{{step.amount.amountMicros}}';
   render(
     <FormCurrencyAmountFieldInput

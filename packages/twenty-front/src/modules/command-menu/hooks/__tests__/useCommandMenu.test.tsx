@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { act } from 'react';
@@ -39,7 +41,7 @@ const renderHooks = () => {
 
 describe('useSidePanelMenu', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should open and close the command menu', () => {

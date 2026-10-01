@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { AGENT_CHAT_INSTANCE_ID } from '@/ai/constants/AgentChatInstanceId';
 import { agentChatUsageComponentFamilyState } from '@/ai/states/agentChatUsageComponentFamilyState';
 import { metadataStoreState } from '@/metadata-store/states/metadataStoreState';
@@ -15,8 +17,8 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-jest.mock('@/ai/hooks/useProjectAiChatThreadToUrl', () => ({
-  useProjectAiChatThreadToUrl: () => ({ projectAiChatThreadToUrl: jest.fn() }),
+vi.mock('@/ai/hooks/useProjectAiChatThreadToUrl', () => ({
+  useProjectAiChatThreadToUrl: () => ({ projectAiChatThreadToUrl: vi.fn() }),
 }));
 
 const Wrapper = ({ children }: { children: ReactNode }) => (

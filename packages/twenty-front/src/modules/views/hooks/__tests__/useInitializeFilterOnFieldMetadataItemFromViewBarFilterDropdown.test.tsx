@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { act } from 'react';
 import { Provider as JotaiProvider } from 'jotai';
@@ -26,9 +28,9 @@ import { getTestEnrichedObjectMetadataItemsMock } from '~/testing/utils/getTestE
 import { getMockObjectMetadataItemOrThrow } from '~/testing/utils/getMockObjectMetadataItemOrThrow';
 import { setTestObjectMetadataItemsInMetadataStore } from '~/testing/utils/setTestObjectMetadataItemsInMetadataStore';
 
-const mockPushFocusItemToFocusStack = jest.fn();
+const mockPushFocusItemToFocusStack = vi.fn();
 
-jest.mock('@/ui/utilities/focus/hooks/usePushFocusItemToFocusStack', () => ({
+vi.mock('@/ui/utilities/focus/hooks/usePushFocusItemToFocusStack', () => ({
   usePushFocusItemToFocusStack: () => ({
     pushFocusItemToFocusStack: mockPushFocusItemToFocusStack,
   }),
@@ -67,7 +69,7 @@ const wrapper = ({ children }: { children: React.ReactNode }) => {
 describe('useInitializeFilterOnFieldMetadataItemFromViewBarFilterDropdown', () => {
   beforeEach(() => {
     resetJotaiStore();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should initialize filter for a basic text field with no existing filter', () => {

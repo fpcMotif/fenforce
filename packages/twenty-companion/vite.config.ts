@@ -1,8 +1,33 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite-plus';
 import { fileURLToPath } from 'node:url';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
+  run: {
+    tasks: {
+      build: {
+        command: 'bun run build:command',
+        dependsOn: [
+          { task: 'build', from: ['dependencies', 'devDependencies'] },
+        ],
+        cache: true,
+      },
+      typecheck: {
+        command: 'bun run typecheck:command',
+        dependsOn: [
+          { task: 'build', from: ['dependencies', 'devDependencies'] },
+        ],
+        cache: true,
+      },
+      test: {
+        command: 'bun run test:command',
+        dependsOn: [
+          { task: 'build', from: ['dependencies', 'devDependencies'] },
+        ],
+        cache: true,
+      },
+    },
+  },
   base: './',
   // Packaged Electron releases contain large HTML license files, not app entry points.
   optimizeDeps: { entries: ['index.html'] },

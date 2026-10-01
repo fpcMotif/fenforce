@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { gql } from '@apollo/client';
 import { type MockedResponse } from '@apollo/client/testing';
 import { MockedProvider } from '@apollo/client/testing/react';
@@ -42,7 +44,7 @@ const mocks: MockedResponse[] = [
         },
       },
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         track: {
           success: true,
@@ -83,7 +85,7 @@ const mocks: MockedResponse[] = [
         },
       },
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         track: {
           success: true,

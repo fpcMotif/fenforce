@@ -272,7 +272,7 @@ describe('computeOptimisticRecordFromInput', () => {
         objectPermissionsByObjectMetadataId: {},
       }),
     ).toThrowErrorMatchingInlineSnapshot(
-      `"Should never occur, encountered unknown fields unknwon, foo, bar in objectMetadataItem person"`,
+      `[Error: Should never occur, encountered unknown fields unknwon, foo, bar in objectMetadataItem person]`,
     );
   });
 

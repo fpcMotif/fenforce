@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import {
   PAGE_LAYOUT_TEST_INSTANCE_ID,
   PageLayoutTestWrapper,
@@ -24,15 +26,13 @@ import {
   WidgetType,
 } from '~/generated-metadata/graphql';
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu');
-jest.mock('@/side-panel/pages/page-layout/hooks/useIsDashboardPageLayout');
-jest.mock(
-  '@/side-panel/pages/page-layout/hooks/useNavigatePageLayoutSidePanel',
-);
+vi.mock('@/side-panel/hooks/useSidePanelMenu');
+vi.mock('@/side-panel/pages/page-layout/hooks/useIsDashboardPageLayout');
+vi.mock('@/side-panel/pages/page-layout/hooks/useNavigatePageLayoutSidePanel');
 
 describe('useOpenWidgetSettingsInSidePanel', () => {
-  const mockCloseSidePanelMenu = jest.fn();
-  const mockNavigatePageLayoutSidePanel = jest.fn();
+  const mockCloseSidePanelMenu = vi.fn();
+  const mockNavigatePageLayoutSidePanel = vi.fn();
 
   const getDraftAtom = () =>
     pageLayoutDraftComponentState.atomFamily({
@@ -45,13 +45,13 @@ describe('useOpenWidgetSettingsInSidePanel', () => {
     });
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
-    (useSidePanelMenu as jest.Mock).mockReturnValue({
+    (useSidePanelMenu as Mock).mockReturnValue({
       closeSidePanelMenu: mockCloseSidePanelMenu,
     });
-    (useIsDashboardPageLayout as jest.Mock).mockReturnValue(false);
-    (useNavigatePageLayoutSidePanel as jest.Mock).mockReturnValue({
+    (useIsDashboardPageLayout as Mock).mockReturnValue(false);
+    (useNavigatePageLayoutSidePanel as Mock).mockReturnValue({
       navigatePageLayoutSidePanel: mockNavigatePageLayoutSidePanel,
     });
   });
@@ -207,7 +207,7 @@ describe('useOpenWidgetSettingsInSidePanel', () => {
   it.each([false, true])(
     'opens Note settings on record pages and keeps dashboard inline editing (dashboard: %s)',
     (isDashboard) => {
-      (useIsDashboardPageLayout as jest.Mock).mockReturnValue(isDashboard);
+      (useIsDashboardPageLayout as Mock).mockReturnValue(isDashboard);
       const store = createStore();
       const widget = {
         ...makeWidget('note', 0),

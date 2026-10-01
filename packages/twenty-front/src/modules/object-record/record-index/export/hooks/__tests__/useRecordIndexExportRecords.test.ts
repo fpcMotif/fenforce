@@ -1,3 +1,5 @@
+import { type MockedFunction, vi } from 'vite-plus/test';
+
 import { type FieldMetadata } from '@/object-record/record-field/ui/types/FieldMetadata';
 import { type ColumnDefinition } from '@/object-record/record-table/types/ColumnDefinition';
 import { CSV_INJECTION_PREVENTION_ZWJ } from 'twenty-shared/constants';
@@ -10,11 +12,9 @@ import {
 import { saveAs } from 'file-saver';
 import { FieldMetadataType, RelationType } from '~/generated-metadata/graphql';
 
-jest.mock('file-saver', () => ({
-  saveAs: jest.fn(),
+vi.mock('file-saver', () => ({
+  saveAs: vi.fn(),
 }));
-
-jest.useFakeTimers();
 
 describe('generateCsv', () => {
   it('generates a csv with formatted headers', async () => {
@@ -443,7 +443,7 @@ describe('generateCsv', () => {
 });
 
 describe('csvDownloader', () => {
-  const mockSaveAs = saveAs as jest.MockedFunction<typeof saveAs>;
+  const mockSaveAs = saveAs as MockedFunction<typeof saveAs>;
 
   beforeEach(() => {
     mockSaveAs.mockClear();

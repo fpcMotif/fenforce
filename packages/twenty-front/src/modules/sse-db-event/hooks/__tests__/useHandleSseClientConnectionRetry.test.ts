@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { type Client } from 'graphql-sse';
 import { createStore, Provider } from 'jotai';
@@ -9,8 +11,8 @@ import { shouldDestroyEventStreamState } from '@/sse-db-event/states/shouldDestr
 import { sseClientState } from '@/sse-db-event/states/sseClientState';
 import { useHandleSseClientConnectionRetry } from '@/sse-db-event/hooks/useHandleSseClientConnectionRetry';
 
-jest.mock('~/utils/sleep', () => ({
-  sleep: jest.fn().mockResolvedValue(undefined),
+vi.mock('~/utils/sleep', () => ({
+  sleep: vi.fn().mockResolvedValue(undefined),
 }));
 
 // The hook only ever calls dispose, but the atom holds a full Client, so the
@@ -27,7 +29,7 @@ const setupStore = ({
   isCookieAuthActive: boolean;
 }) => {
   const store = createStore();
-  const dispose = jest.fn();
+  const dispose = vi.fn();
 
   store.set(sseClientState.atom, buildSseClient(dispose));
   store.set(shouldDestroyEventStreamState.atom, false);
@@ -49,7 +51,7 @@ const wasStreamDestroyed = (store: ReturnType<typeof createStore>) =>
 
 describe('useHandleSseClientConnectionRetry', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should stop retrying when a cookie-mode client has been signed out', async () => {

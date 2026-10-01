@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, waitFor } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { StrictMode } from 'react';
@@ -10,14 +12,14 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-const verifyLoginTokenMock = jest.fn();
-const navigateMock = jest.fn();
+const verifyLoginTokenMock = vi.fn();
+const navigateMock = vi.fn();
 
-jest.mock('@/auth/hooks/useVerifyLogin', () => ({
+vi.mock('@/auth/hooks/useVerifyLogin', () => ({
   useVerifyLogin: () => ({ verifyLoginToken: verifyLoginTokenMock }),
 }));
 
-jest.mock('~/hooks/useNavigateApp', () => ({
+vi.mock('~/hooks/useNavigateApp', () => ({
   useNavigateApp: () => navigateMock,
 }));
 
@@ -34,7 +36,7 @@ const renderEffect = (initialEntry: string) =>
 
 describe('VerifyLoginTokenEffect', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     localStorage.clear();
     resetJotaiStore();
   });

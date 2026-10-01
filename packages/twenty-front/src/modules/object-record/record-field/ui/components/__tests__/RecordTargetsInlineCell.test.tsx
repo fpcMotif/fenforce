@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
@@ -11,11 +13,11 @@ import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMeta
 
 // Opening the picker performs a record search over the network, which is out of
 // scope here and unreachable through MockedProvider.
-jest.mock(
+vi.mock(
   '@/object-record/record-picker/multiple-record-picker/hooks/useMultipleRecordPickerPerformSearch',
   () => ({
     useMultipleRecordPickerPerformSearch: () => ({
-      performSearch: jest.fn(),
+      performSearch: vi.fn(),
     }),
   }),
 );

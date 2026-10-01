@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { renderHook, waitFor } from '@testing-library/react';
 import { act } from 'react';
 import {
@@ -71,8 +73,8 @@ const Wrapper = getJestMetadataAndApolloMocksAndCommandMenuWrapper({
   contextStoreCurrentObjectMetadataNameSingular: 'person',
 });
 
-jest.mock('@/object-record/hooks/useLazyFetchAllRecords', () => ({
-  useLazyFetchAllRecords: jest.fn(),
+vi.mock('@/object-record/hooks/useLazyFetchAllRecords', () => ({
+  useLazyFetchAllRecords: vi.fn(),
 }));
 
 describe('useRecordData', () => {
@@ -80,11 +82,11 @@ describe('useRecordData', () => {
   const objectMetadataItem = getTestEnrichedObjectMetadataItemsMock().find(
     (item) => item.nameSingular === 'person',
   );
-  let mockFetchAllRecords: jest.Mock;
+  let mockFetchAllRecords: Mock;
 
   beforeEach(() => {
-    mockFetchAllRecords = jest.fn();
-    (useLazyFetchAllRecords as jest.Mock).mockReturnValue({
+    mockFetchAllRecords = vi.fn();
+    (useLazyFetchAllRecords as Mock).mockReturnValue({
       progress: 100,
       isDownloading: false,
       fetchAllRecords: mockFetchAllRecords, // Mock the function
@@ -96,7 +98,7 @@ describe('useRecordData', () => {
 
   describe('data fetching', () => {
     it('should handle no records', async () => {
-      const callback = jest.fn();
+      const callback = vi.fn();
 
       mockFetchAllRecords.mockReturnValue([]);
 
@@ -125,7 +127,7 @@ describe('useRecordData', () => {
     });
 
     it('should call the callback function with fetched data', async () => {
-      const callback = jest.fn();
+      const callback = vi.fn();
       mockFetchAllRecords.mockReturnValue([mockPerson]);
 
       const { result } = renderHook(
@@ -162,9 +164,9 @@ describe('useRecordData', () => {
     });
 
     it('should resolve sleep after given time', async () => {
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       const sleepPromise = sleep(1000);
-      jest.advanceTimersByTime(1000);
+      vi.advanceTimersByTime(1000);
       await expect(sleepPromise).resolves.toBeUndefined();
     });
   });

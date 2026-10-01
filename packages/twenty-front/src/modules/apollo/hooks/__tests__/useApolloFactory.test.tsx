@@ -1,3 +1,6 @@
+import type * as ReactRouterDomModule from 'react-router-dom';
+import { vi } from 'vite-plus/test';
+
 import { useApolloFactory } from '@/apollo/hooks/useApolloFactory';
 import { clearSessionGeneration } from '@/auth/utils/clearSessionGeneration';
 import { getSessionGeneration } from '@/auth/utils/getSessionGeneration';
@@ -5,16 +8,18 @@ import { rotateSessionGeneration } from '@/auth/utils/rotateSessionGeneration';
 import { gql } from '@apollo/client';
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { act, renderHook } from '@testing-library/react';
-import fetchMock, { enableFetchMocks } from 'jest-fetch-mock';
 import { MemoryRouter, useLocation } from 'react-router-dom';
 import { ToastProvider } from 'twenty-ui/components';
 
-enableFetchMocks();
+const fetchMock = vi.fn<typeof fetch>();
+vi.stubGlobal('fetch', fetchMock);
+afterAll(() => vi.unstubAllGlobals());
 
-const mockNavigate = jest.fn();
+const mockNavigate = vi.fn();
 
-jest.mock('react-router-dom', () => {
-  const initialRouter = jest.requireActual('react-router-dom');
+vi.mock('react-router-dom', async () => {
+  const initialRouter =
+    await vi.importActual<typeof ReactRouterDomModule>('react-router-dom');
 
   return {
     ...initialRouter,
@@ -33,8 +38,8 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 
 describe('useApolloFactory', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-    fetchMock.resetMocks();
+    vi.clearAllMocks();
+    fetchMock.mockReset();
     clearSessionGeneration();
   });
 
@@ -65,13 +70,14 @@ describe('useApolloFactory', () => {
         },
       },
     ];
-    fetchMock.mockResponse(() =>
-      Promise.resolve({
-        body: JSON.stringify({
-          data: {},
-          errors,
-        }),
-      }),
+    fetchMock.mockImplementation(
+      async () =>
+        new Response(
+          JSON.stringify({
+            data: {},
+            errors,
+          }),
+        ),
     );
 
     const { result } = renderHook(

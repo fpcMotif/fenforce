@@ -1,20 +1,19 @@
+import { vi } from 'vite-plus/test';
+
 import { usePieChartData } from '@/page-layout/widgets/graph/graph-widget-pie-chart/hooks/usePieChartData';
 import { type PieChartDataItemWithColor } from '@/page-layout/widgets/graph/graph-widget-pie-chart/types/PieChartDataItem';
 import { type PieChartEnrichedData } from '@/page-layout/widgets/graph/graph-widget-pie-chart/types/PieChartEnrichedData';
 import { type GraphColorRegistry } from '@/page-layout/widgets/graph/types/GraphColorRegistry';
 import { renderHook } from '@testing-library/react';
 
-const mockUseAtomComponentStateValue = jest.fn();
-jest.mock(
-  '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
-  () => ({
-    useAtomComponentStateValue: () => mockUseAtomComponentStateValue(),
-  }),
-);
+const mockUseAtomComponentStateValue = vi.fn();
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue', () => ({
+  useAtomComponentStateValue: () => mockUseAtomComponentStateValue(),
+}));
 
 describe('usePieChartData', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockUseAtomComponentStateValue.mockReturnValue([]);
   });
 

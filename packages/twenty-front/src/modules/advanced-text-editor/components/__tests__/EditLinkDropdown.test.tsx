@@ -1,3 +1,5 @@
+import { type Mocked, vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, screen, waitFor } from '@testing-library/react';
@@ -25,18 +27,18 @@ const renderWithStore = (children: ReactNode) => {
 };
 
 const createEditor = () => {
-  const commands: jest.Mocked<ReturnType<EditLinkEditor['chain']>> = {
-    focus: jest.fn().mockImplementation(() => {
+  const commands: Mocked<ReturnType<EditLinkEditor['chain']>> = {
+    focus: vi.fn().mockImplementation(() => {
       setTimeout(
         () => screen.getByRole('textbox', { name: 'Editor' }).focus(),
         0,
       );
       return commands;
     }),
-    extendMarkRange: jest.fn().mockReturnThis(),
-    setLink: jest.fn().mockReturnThis(),
-    unsetLink: jest.fn().mockReturnThis(),
-    run: jest.fn().mockReturnValue(true),
+    extendMarkRange: vi.fn().mockReturnThis(),
+    setLink: vi.fn().mockReturnThis(),
+    unsetLink: vi.fn().mockReturnThis(),
+    run: vi.fn().mockReturnValue(true),
   };
 
   const editor: EditLinkEditor = {

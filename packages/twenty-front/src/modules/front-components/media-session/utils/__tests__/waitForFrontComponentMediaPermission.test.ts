@@ -1,9 +1,11 @@
+import { vi } from 'vite-plus/test';
+
 import { type FrontComponentMediaPermissionRequest } from '@/front-components/media-session/types/FrontComponentMediaPermissionRequest';
 import { waitForFrontComponentMediaPermission } from '@/front-components/media-session/utils/waitForFrontComponentMediaPermission';
 
 describe('waitForFrontComponentMediaPermission', () => {
   it('resolves approval and removes the pending popup', async () => {
-    const onRequestChange = jest.fn();
+    const onRequestChange = vi.fn();
     const pending = waitForFrontComponentMediaPermission({
       capabilities: ['microphone'],
       abortSignal: new AbortController().signal,
@@ -20,7 +22,7 @@ describe('waitForFrontComponentMediaPermission', () => {
 
   it('closes cancelled requests and ignores a late approval', async () => {
     const controller = new AbortController();
-    const onRequestChange = jest.fn();
+    const onRequestChange = vi.fn();
     const pending = waitForFrontComponentMediaPermission({
       capabilities: ['camera'],
       abortSignal: controller.signal,
@@ -40,7 +42,7 @@ describe('waitForFrontComponentMediaPermission', () => {
   it('does not open a popup after cancellation', async () => {
     const controller = new AbortController();
     controller.abort();
-    const onRequestChange = jest.fn();
+    const onRequestChange = vi.fn();
 
     await expect(
       waitForFrontComponentMediaPermission({

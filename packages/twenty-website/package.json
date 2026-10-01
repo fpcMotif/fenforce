@@ -2,13 +2,24 @@
   "name": "twenty-website",
   "private": true,
   "scripts": {
-    "dev": "npx next dev --port 3002",
-    "build": "npx next build",
-    "start": "npx next start --port 3002",
+    "test:ci": "bunx vite-plus run twenty-website#test -- --ci --maxWorkers=1 --coverage",
+    "test:coverage": "bunx vite-plus run twenty-website#test -- --coverage --coverageReporters=lcov --coverageReporters=text",
+    "test:watch": "bunx vite-plus run --no-cache twenty-website#test -- --watch",
+    "lint:ci": "bunx vite-plus run twenty-website#lint",
+    "dev": "bunx next dev --port 3002",
+    "build:command": "bunx next build",
+    "start": "bunx next start --port 3002",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy:dev": "opennextjs-cloudflare build && opennextjs-cloudflare deploy --env dev",
     "deploy:prod": "opennextjs-cloudflare build && opennextjs-cloudflare deploy --env prod",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "typecheck:command": "bunx tsc -p tsconfig.json --noEmit",
+    "test:command": "bunx jest --config=jest.config.mjs",
+    "lint:command": "node scripts/check-conventions.mjs && bunx oxlint -c .oxlintrc.json . && bunx oxfmt --check .",
+    "lint:fix:command": "bunx oxfmt .",
+    "lingui:extract": "lingui extract --overwrite --clean",
+    "lingui:compile": "lingui compile --typescript",
+    "typecheck:watch": "bunx tsc -p tsconfig.json --noEmit --watch"
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
@@ -36,6 +47,10 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
+    "typescript": "^5.9.3",
+    "@swc/core": "^1.15.11",
+    "@swc/jest": "^0.2.39",
+    "@types/jest": "^30.0.0",
     "@babel/plugin-transform-export-namespace-from": "^7.24.6",
     "@babel/preset-react": "^7.24.6",
     "@babel/preset-typescript": "^7.24.6",
@@ -54,6 +69,7 @@
     "@types/three": "^0.184.1",
     "babel-plugin-react-compiler": "1.0.0",
     "jest-environment-jsdom": "30.0.0-beta.3",
+    "jest": "29.7.0",
     "wrangler": "^4.0.0"
   }
 }

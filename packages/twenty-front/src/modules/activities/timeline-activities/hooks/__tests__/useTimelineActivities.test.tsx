@@ -1,10 +1,12 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 
 import { useTimelineActivities } from '@/activities/timeline-activities/hooks/useTimelineActivities';
 import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksWrapper';
 
-jest.mock('@/object-record/hooks/useFindManyRecords', () => ({
-  useFindManyRecords: jest.fn(),
+vi.mock('@/object-record/hooks/useFindManyRecords', () => ({
+  useFindManyRecords: vi.fn(),
 }));
 
 const Wrapper = getJestMetadataAndApolloMocksWrapper({
@@ -13,10 +15,10 @@ const Wrapper = getJestMetadataAndApolloMocksWrapper({
 
 describe('useTimelineActivities', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  it('fetches events correctly for a given targetableObject', () => {
+  it('fetches events correctly for a given targetableObject', async () => {
     const mockedTimelineActivities = [
       {
         __typename: 'Event',
@@ -51,9 +53,9 @@ describe('useTimelineActivities', () => {
       targetObjectNameSingular: 'Opportunity',
     };
 
-    const useFindManyRecordsMock = jest.requireMock(
-      '@/object-record/hooks/useFindManyRecords',
-    );
+    const useFindManyRecordsMock = await vi.importMock<{
+      useFindManyRecords: ReturnType<typeof vi.fn>;
+    }>('@/object-record/hooks/useFindManyRecords');
 
     useFindManyRecordsMock.useFindManyRecords.mockReturnValue({
       records: mockedTimelineActivities,

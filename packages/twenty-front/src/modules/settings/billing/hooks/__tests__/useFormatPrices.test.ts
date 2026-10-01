@@ -1,12 +1,14 @@
+import { vi } from 'vite-plus/test';
+
 import { useFormatPrices } from '@/settings/billing/hooks/useFormatPrices';
 import {
   BillingPlanKey,
   SubscriptionInterval,
 } from '~/generated-metadata/graphql';
 
-const mockGetBaseLicensedPriceByPlanKeyAndInterval = jest.fn();
+const mockGetBaseLicensedPriceByPlanKeyAndInterval = vi.fn();
 
-jest.mock(
+vi.mock(
   '@/settings/billing/hooks/useBaseLicensedPriceByPlanKeyAndInterval',
   () => ({
     useBaseLicensedPriceByPlanKeyAndInterval: () => ({

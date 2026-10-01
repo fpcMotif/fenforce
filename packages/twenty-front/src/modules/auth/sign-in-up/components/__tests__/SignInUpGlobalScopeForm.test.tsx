@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { MockedProvider } from '@apollo/client/testing/react';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
@@ -18,31 +20,31 @@ import {
 } from '@/ui/utilities/state/jotai/jotaiStore';
 import { dynamicActivate } from '~/utils/i18n/dynamicActivate';
 
-const buildWorkspaceUrlMock = jest.fn();
-const signOutMock = jest.fn();
-const createWorkspaceMock = jest.fn();
-const handleResetPasswordMock = jest.fn();
-const resetPasswordClickMock = jest.fn();
+const buildWorkspaceUrlMock = vi.fn();
+const signOutMock = vi.fn();
+const createWorkspaceMock = vi.fn();
+const handleResetPasswordMock = vi.fn();
+const resetPasswordClickMock = vi.fn();
 
-jest.mock('@/auth/hooks/useAuth', () => ({
+vi.mock('@/auth/hooks/useAuth', () => ({
   useAuth: () => ({
     signOut: signOutMock,
   }),
 }));
 
-jest.mock('@/domain-manager/hooks/useBuildWorkspaceUrl', () => ({
+vi.mock('@/domain-manager/hooks/useBuildWorkspaceUrl', () => ({
   useBuildWorkspaceUrl: () => ({
     buildWorkspaceUrl: buildWorkspaceUrlMock,
   }),
 }));
 
-jest.mock('@/auth/sign-in-up/hooks/useSignUpInNewWorkspace', () => ({
+vi.mock('@/auth/sign-in-up/hooks/useSignUpInNewWorkspace', () => ({
   useSignUpInNewWorkspace: () => ({
     createWorkspace: createWorkspaceMock,
   }),
 }));
 
-jest.mock('@/auth/sign-in-up/hooks/useSignInUpForm', () => ({
+vi.mock('@/auth/sign-in-up/hooks/useSignInUpForm', () => ({
   useSignInUpForm: () => ({
     form: {
       getValues: () => 'person@example.com',
@@ -50,35 +52,32 @@ jest.mock('@/auth/sign-in-up/hooks/useSignInUpForm', () => ({
   }),
 }));
 
-jest.mock('@/auth/sign-in-up/hooks/useHandleResetPassword', () => ({
+vi.mock('@/auth/sign-in-up/hooks/useHandleResetPassword', () => ({
   useHandleResetPassword: () => ({
     handleResetPassword: handleResetPasswordMock,
   }),
 }));
 
-jest.mock(
+vi.mock(
   '@/auth/sign-in-up/components/internal/SignInUpWithCredentials',
   () => ({
     SignInUpWithCredentials: () => <div>credentials-form</div>,
   }),
 );
 
-jest.mock('@/auth/sign-in-up/components/internal/SignInUpWithGoogle', () => ({
+vi.mock('@/auth/sign-in-up/components/internal/SignInUpWithGoogle', () => ({
   SignInUpWithGoogle: () => null,
 }));
 
-jest.mock(
-  '@/auth/sign-in-up/components/internal/SignInUpWithMicrosoft',
-  () => ({
-    SignInUpWithMicrosoft: () => null,
-  }),
-);
+vi.mock('@/auth/sign-in-up/components/internal/SignInUpWithMicrosoft', () => ({
+  SignInUpWithMicrosoft: () => null,
+}));
 
 dynamicActivate(SOURCE_LOCALE);
 
 describe('SignInUpGlobalScopeForm', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     resetJotaiStore();
     handleResetPasswordMock.mockReturnValue(resetPasswordClickMock);
   });

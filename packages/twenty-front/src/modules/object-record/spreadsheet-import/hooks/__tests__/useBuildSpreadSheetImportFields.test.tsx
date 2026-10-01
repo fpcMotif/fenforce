@@ -1,7 +1,10 @@
+import { type MockedFunction, vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
 import { useIcons } from 'twenty-ui/icon';
+import type * as IconModule from 'twenty-ui/icon';
 import { JestObjectMetadataItemSetter } from '~/testing/jest/JestObjectMetadataItemSetter';
 
 import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
@@ -20,20 +23,21 @@ const Wrapper = ({ children }: { children: ReactNode }) => {
   );
 };
 
-jest.mock('twenty-ui/icon', () => ({
-  useIcons: jest.fn(),
+vi.mock('twenty-ui/icon', async () => ({
+  ...(await vi.importActual<typeof IconModule>('twenty-ui/icon')),
+  useIcons: vi.fn(),
 }));
 
 describe('useBuildSpreadSheetImportFields', () => {
-  const mockGetIcon = jest.fn().mockReturnValue('MockIcon');
-  const mockUseIcons = useIcons as jest.MockedFunction<typeof useIcons>;
+  const mockGetIcon = vi.fn().mockReturnValue('MockIcon');
+  const mockUseIcons = useIcons as MockedFunction<typeof useIcons>;
 
   beforeEach(() => {
     mockUseIcons.mockReturnValue({
       getIcon: mockGetIcon,
       getIcons: () => ({}),
     });
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     setTestObjectMetadataItemsInMetadataStore(jotaiStore, []);
   });
 

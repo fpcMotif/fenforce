@@ -24,7 +24,7 @@
       "@/*": ["./src/modules/*"],
       "~/*": ["./src/*"]
     },
-    "types": ["node", "jest"],
+    "types": ["node", "vite-plus/test/globals"],
     "plugins": [
       {
         "name": "@styled/typescript-styled-plugin",
@@ -44,10 +44,10 @@
     ".storybook/*.ts",
     ".storybook/*.tsx",
     "lingui.config.ts",
-    "jest.config.mjs",
+    "vite.unit.config.ts",
     "vite.config.ts",
     "vitest.config.ts",
-    "setupTests.ts"
+    "setupVitest.ts"
   ],
   "extends": "../../tsconfig.base.json"
 }

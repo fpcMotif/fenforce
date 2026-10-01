@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { pageLayoutDraftComponentState } from '@/page-layout/states/pageLayoutDraftComponentState';
 import { SidePanelDashboardRecordTableSettings } from '@/side-panel/pages/page-layout/components/dashboard/SidePanelDashboardRecordTableSettings';
 import { i18n } from '@lingui/core';
@@ -8,50 +10,50 @@ import { PageLayoutType } from '~/generated-metadata/graphql';
 
 const PAGE_LAYOUT_ID = 'dashboard-page-layout-id';
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
   useObjectMetadataItems: () => ({ objectMetadataItems: [] }),
 }));
 
-jest.mock(
+vi.mock(
   '@/page-layout/widgets/record-table/hooks/useRecordTableWidgetFieldCallbacks',
   () => ({
     useRecordTableWidgetFieldCallbacks: () => ({
-      handleFieldUpdated: jest.fn(),
-      handleFieldCreated: jest.fn(),
+      handleFieldUpdated: vi.fn(),
+      handleFieldCreated: vi.fn(),
     }),
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/page-layout/widgets/record-table/hooks/useRecordTableWidgetLayoutCallbacks',
   () => ({
     useRecordTableWidgetLayoutCallbacks: () => ({
-      handleShouldHideEmptyGroupsChange: jest.fn(),
+      handleShouldHideEmptyGroupsChange: vi.fn(),
     }),
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/page-layout/widgets/record-table/hooks/useRecordTableWidgetViewForDisplay',
   () => ({
     useRecordTableWidgetViewForDisplay: () => ({ view: undefined }),
   }),
 );
 
-jest.mock('@/side-panel/hooks/useSidePanelSubPageHistory', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelSubPageHistory', () => ({
   useSidePanelSubPageHistory: () => ({
-    navigateToSidePanelSubPage: jest.fn(),
+    navigateToSidePanelSubPage: vi.fn(),
   }),
 }));
 
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/hooks/usePageLayoutIdFromContextStore',
   () => ({
     usePageLayoutIdFromContextStore: () => ({ pageLayoutId: PAGE_LAYOUT_ID }),
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/hooks/useRecordTableSettingsDescriptions',
   () => ({
     useRecordTableSettingsDescriptions: () => ({
@@ -63,16 +65,16 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/hooks/useUpdateCurrentWidgetConfig',
   () => ({
     useUpdateCurrentWidgetConfig: () => ({
-      updateCurrentWidgetConfig: jest.fn(),
+      updateCurrentWidgetConfig: vi.fn(),
     }),
   }),
 );
 
-jest.mock('@/side-panel/pages/page-layout/hooks/useWidgetInEditMode', () => ({
+vi.mock('@/side-panel/pages/page-layout/hooks/useWidgetInEditMode', () => ({
   useWidgetInEditMode: () => ({ widgetInEditMode: undefined }),
 }));
 

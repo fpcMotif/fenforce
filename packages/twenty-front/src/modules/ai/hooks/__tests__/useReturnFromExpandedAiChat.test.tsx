@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -10,24 +12,24 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-const navigateMock = jest.fn();
+const navigateMock = vi.fn();
 
 let locationState: unknown = null;
 
-jest.mock('react-router-dom', () => ({
+vi.mock('react-router-dom', () => ({
   useNavigate: () => navigateMock,
   useLocation: () => ({ state: locationState }),
 }));
 
 const defaultHomePagePath = '/objects/companies';
 
-jest.mock('@/navigation/hooks/useDefaultHomePagePath', () => ({
+vi.mock('@/navigation/hooks/useDefaultHomePagePath', () => ({
   useDefaultHomePagePath: () => ({ defaultHomePagePath }),
 }));
 
-const closeSidePanelMenuMock = jest.fn();
+const closeSidePanelMenuMock = vi.fn();
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({ closeSidePanelMenu: closeSidePanelMenuMock }),
 }));
 
@@ -37,7 +39,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => (
 
 describe('useReturnFromExpandedAiChat', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     sessionStorage.clear();
     resetJotaiStore();
     locationState = null;

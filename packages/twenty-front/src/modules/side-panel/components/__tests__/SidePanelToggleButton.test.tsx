@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { fireEvent, render, screen } from '@testing-library/react';
@@ -20,7 +22,7 @@ import { IconDotsVertical } from 'twenty-ui/icon';
 
 let mockIsMobile = false;
 
-jest.mock('twenty-ui/utilities', () => ({
+vi.mock('twenty-ui/utilities', () => ({
   useIsMobile: () => mockIsMobile,
   getOsControlSymbol: () => '⌘',
 }));

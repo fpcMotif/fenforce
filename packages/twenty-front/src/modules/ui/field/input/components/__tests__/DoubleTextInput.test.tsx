@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -13,9 +15,9 @@ it('replaces the full label and URL when clicking into either field', async () =
       firstValuePlaceholder="Link label"
       secondValuePlaceholder="URL"
       selectOnFocus
-      onEnter={jest.fn()}
-      onEscape={jest.fn()}
-      onClickOutside={jest.fn()}
+      onEnter={vi.fn()}
+      onEscape={vi.fn()}
+      onClickOutside={vi.fn()}
     />,
   );
 

@@ -1,0 +1,21 @@
+2026-10-01: Separate read-only reviewer, base 1790e94c7f, uncommitted preview changes.
+
+Initial findings:
+1. TanStack's default route boundary catches session errors, hides recovery, and leaves protected query cache mounted.
+2. The renamed schema cannot validate existing legacy documents without migration.
+3. Original evidence incorrectly described reload recovery and omitted the auth library's cross-tab storage synchronization.
+
+Final review:
+VERIFIED for the final local delta; no actionable findings.
+PreviewError distinguishes UNAUTHENTICATED, clears cached data, and offers Sign in again.
+Both error boundaries supply the error correctly. The router test throws a real ConvexError.
+Company edits retain the revision captured when editing starts across subscription changes.
+
+Independently executed:
+cd packages/twenty-front
+bunx jest --config jest.config.mjs src/pages/convex-preview --runInBand
+Result: 3 suites passed, 3 tests passed.
+
+The reviewer also independently ran deployments/convex's bun run check: 19 tests and typecheck passed.
+The reviewer did not independently inspect the live deployment or browser evidence.
+Model-diverse and human review are not established.

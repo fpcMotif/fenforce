@@ -1,3 +1,6 @@
+import type * as UuidModule from 'uuid';
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { act } from 'react';
 import gql from 'graphql-tag';
@@ -10,20 +13,20 @@ import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMeta
 
 const COMPANY_ID = 'cb2e9f4b-20c3-4759-9315-4ffeecfaf71a';
 
-jest.mock('uuid', () => ({
-  ...jest.requireActual('uuid'),
-  v4: jest.fn(() => 'cb2e9f4b-20c3-4759-9315-4ffeecfaf71a'),
+vi.mock('uuid', async () => ({
+  ...(await vi.importActual<typeof UuidModule>('uuid')),
+  v4: vi.fn(() => 'cb2e9f4b-20c3-4759-9315-4ffeecfaf71a'),
 }));
 
-const mockBatchCreateManyRecords = jest.fn().mockResolvedValue([]);
+const mockBatchCreateManyRecords = vi.fn().mockResolvedValue([]);
 
-jest.mock('@/object-record/hooks/useBatchCreateManyRecords', () => ({
+vi.mock('@/object-record/hooks/useBatchCreateManyRecords', () => ({
   useBatchCreateManyRecords: () => ({
     batchCreateManyRecords: mockBatchCreateManyRecords,
   }),
 }));
 
-const mockResult = jest.fn(() => ({
+const mockResult = vi.fn(() => ({
   data: {
     createCompanies: [
       {
@@ -72,7 +75,7 @@ const Wrapper = getJestMetadataAndApolloMocksWrapper({
 
 describe('useOpenObjectRecordsSpreadsheetImportDialog', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should open dialog and configure onSubmit function correctly', async () => {

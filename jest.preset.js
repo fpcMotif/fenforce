@@ -1,9 +1,15 @@
-const nxPreset = require('@nx/jest/preset').default;
-
 module.exports = {
-  ...nxPreset,
-  // Override the new testEnvironmentOptions added in @nx/jest 22.3.3
-  // which breaks Lingui's module resolution
+  testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
+  resolver: '<rootDir>/../../jest.resolver.cjs',
+  moduleFileExtensions: ['ts', 'js', 'mjs', 'html'],
+  coverageReporters: ['html'],
+  transform: {
+    '^.+\\.(ts|js)$': [
+      '@swc/jest',
+      { jsc: { parser: { syntax: 'typescript' } } },
+    ],
+  },
+  testEnvironment: 'jsdom',
+  modulePathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/out-tsc/'],
   testEnvironmentOptions: {},
 };
-

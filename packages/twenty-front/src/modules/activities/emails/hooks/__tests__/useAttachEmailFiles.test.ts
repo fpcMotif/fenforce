@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { type EmailAttachment } from 'twenty-shared/types';
 
@@ -5,23 +7,23 @@ import { useAttachEmailFiles } from '@/activities/emails/hooks/useAttachEmailFil
 import { useUploadEmailAttachment } from '@/activities/emails/hooks/useUploadEmailAttachment';
 import { useFileUpload } from '@/file-upload/hooks/useFileUpload';
 
-jest.mock('@/activities/emails/hooks/useUploadEmailAttachment', () => ({
-  useUploadEmailAttachment: jest.fn(),
+vi.mock('@/activities/emails/hooks/useUploadEmailAttachment', () => ({
+  useUploadEmailAttachment: vi.fn(),
 }));
 
-jest.mock('@/file-upload/hooks/useFileUpload', () => ({
-  useFileUpload: jest.fn(),
+vi.mock('@/file-upload/hooks/useFileUpload', () => ({
+  useFileUpload: vi.fn(),
 }));
 
-const mockUseUploadEmailAttachment = useUploadEmailAttachment as jest.Mock;
-const mockUseFileUpload = useFileUpload as jest.Mock;
+const mockUseUploadEmailAttachment = useUploadEmailAttachment as Mock;
+const mockUseFileUpload = useFileUpload as Mock;
 
 const buildAttachment = (id: string): EmailAttachment =>
   ({ id, name: `${id}.pdf` }) as EmailAttachment;
 
 // Captures the onUpload callback the hook hands to the file picker, so a test
 // can drive an upload the way the picker would.
-const setup = (uploadEmailAttachment: jest.Mock) => {
+const setup = (uploadEmailAttachment: Mock) => {
   let triggerUpload: ((files: File[]) => Promise<void>) | undefined;
 
   mockUseUploadEmailAttachment.mockReturnValue({ uploadEmailAttachment });
@@ -35,7 +37,7 @@ const setup = (uploadEmailAttachment: jest.Mock) => {
     },
   });
 
-  const onFilesAttached = jest.fn();
+  const onFilesAttached = vi.fn();
   const view = renderHook(() => useAttachEmailFiles({ onFilesAttached }));
 
   act(() => {
@@ -47,12 +49,12 @@ const setup = (uploadEmailAttachment: jest.Mock) => {
 
 describe('useAttachEmailFiles', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should flag uploads as pending until they resolve', async () => {
     let resolveUpload: (attachment: EmailAttachment) => void = () => {};
-    const uploadEmailAttachment = jest.fn(
+    const uploadEmailAttachment = vi.fn(
       () =>
         new Promise<EmailAttachment>((resolve) => {
           resolveUpload = resolve;
@@ -81,7 +83,7 @@ describe('useAttachEmailFiles', () => {
   });
 
   it('should append uploads against the latest attachments rather than a captured list', async () => {
-    const uploadEmailAttachment = jest.fn(async () => buildAttachment('new'));
+    const uploadEmailAttachment = vi.fn(async () => buildAttachment('new'));
 
     const { onFilesAttached, getTriggerUpload } = setup(uploadEmailAttachment);
 
@@ -103,7 +105,7 @@ describe('useAttachEmailFiles', () => {
   });
 
   it('should not touch the attachments when every upload fails', async () => {
-    const uploadEmailAttachment = jest.fn(async () => undefined);
+    const uploadEmailAttachment = vi.fn(async () => undefined);
 
     const { view, onFilesAttached, getTriggerUpload } = setup(
       uploadEmailAttachment,

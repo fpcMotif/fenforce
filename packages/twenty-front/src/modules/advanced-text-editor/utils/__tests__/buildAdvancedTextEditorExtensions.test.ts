@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { VariableTag } from '@/advanced-text-editor/extensions/variable-tag/VariableTag';
 import { type AdvancedTextEditorProfile } from '@/advanced-text-editor/types/AdvancedTextEditorProfile';
 import { buildAdvancedTextEditorExtensions } from '@/advanced-text-editor/utils/buildAdvancedTextEditorExtensions';
@@ -91,7 +93,7 @@ describe('buildAdvancedTextEditorExtensions', () => {
   });
 
   it('should pass image upload callbacks to the upload extension', () => {
-    const onImageUpload = jest.fn();
+    const onImageUpload = vi.fn();
 
     const extensions = buildAdvancedTextEditorExtensions({
       profile: createProfile({

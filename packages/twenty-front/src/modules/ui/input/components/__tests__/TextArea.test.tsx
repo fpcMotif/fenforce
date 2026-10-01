@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { fireEvent, render, screen } from '@testing-library/react';
 import { createStore, Provider as JotaiProvider } from 'jotai';
 
@@ -8,7 +10,7 @@ import { FocusComponentType } from '@/ui/utilities/focus/types/FocusComponentTyp
 describe('TextArea', () => {
   it('calls onFocus after pushing the text area to the focus stack', () => {
     const store = createStore();
-    const onFocus = jest.fn();
+    const onFocus = vi.fn();
     const textAreaId = 'test-text-area-id';
 
     render(

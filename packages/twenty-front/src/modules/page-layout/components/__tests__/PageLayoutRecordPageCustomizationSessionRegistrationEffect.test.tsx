@@ -1,3 +1,5 @@
+import { type MockedFunction, vi } from 'vite-plus/test';
+
 import { activeCustomizationPageLayoutIdsState } from '@/layout-customization/states/activeCustomizationPageLayoutIdsState';
 import { isLayoutCustomizationModeEnabledState } from '@/layout-customization/states/isLayoutCustomizationModeEnabledState';
 import { PageLayoutRecordPageCustomizationSessionRegistrationEffect } from '@/page-layout/components/PageLayoutRecordPageCustomizationSessionRegistrationEffect';
@@ -17,12 +19,10 @@ import { PageLayoutType, WidgetType } from '~/generated-metadata/graphql';
 
 const PAGE_LAYOUT_ID = 'page-layout-id';
 
-jest.mock('@/page-layout/hooks/useIsPageLayoutInEditMode');
+vi.mock('@/page-layout/hooks/useIsPageLayoutInEditMode');
 
 const mockUseIsPageLayoutInEditMode =
-  useIsPageLayoutInEditMode as jest.MockedFunction<
-    typeof useIsPageLayoutInEditMode
-  >;
+  useIsPageLayoutInEditMode as MockedFunction<typeof useIsPageLayoutInEditMode>;
 
 const setupPageLayout = () => {
   const store = createStore();

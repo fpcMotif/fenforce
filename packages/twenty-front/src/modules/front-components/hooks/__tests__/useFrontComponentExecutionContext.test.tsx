@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { act, renderHook } from '@testing-library/react';
@@ -12,7 +15,7 @@ import { getMockObjectMetadataItemOrThrow } from '~/testing/utils/getMockObjectM
 import { getTestEnrichedObjectMetadataItemsMock } from '~/testing/utils/getTestEnrichedObjectMetadataItemsMock';
 import { setTestObjectMetadataItemsInMetadataStore } from '~/testing/utils/setTestObjectMetadataItemsInMetadataStore';
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
   useObjectMetadataItems: () => ({
     objectMetadataItems: [
       { nameSingular: 'workflow', openRecordIn: 'RECORD_PAGE' },
@@ -21,7 +24,7 @@ jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
   }),
 }));
 
-jest.mock('@/object-metadata/utils/getFieldMetadataItemById', () => ({
+vi.mock('@/object-metadata/utils/getFieldMetadataItemById', () => ({
   getFieldMetadataItemById: (parameters: { fieldMetadataId: string }) => ({
     fieldMetadataItem:
       parameters.fieldMetadataId === 'files-field-id'
@@ -32,36 +35,36 @@ jest.mock('@/object-metadata/utils/getFieldMetadataItemById', () => ({
   }),
 }));
 
-const mockNavigateApp = jest.fn();
-const mockRequestApplicationAccessTokenRefresh = jest.fn();
-const mockOpenConfirmationModal = jest.fn();
-const mockNavigateSidePanel = jest.fn();
-const mockOpenRecordInSidePanel = jest.fn();
-const mockOpenRoutedPageInSidePanel = jest.fn(() => 'routed-page-id');
-const mockOpenRichTextInSidePanel = jest.fn();
-const mockOpenComposeEmailInSidePanel = jest.fn();
-const mockOpenFrontComponentInSidePanel = jest.fn();
-const mockSetSidePanelSearch = jest.fn();
-const mockGetIcon = jest.fn((name: string) => `icon-${name}`);
-const mockUnmountEngineCommand = jest.fn();
+const mockNavigateApp = vi.fn();
+const mockRequestApplicationAccessTokenRefresh = vi.fn();
+const mockOpenConfirmationModal = vi.fn();
+const mockNavigateSidePanel = vi.fn();
+const mockOpenRecordInSidePanel = vi.fn();
+const mockOpenRoutedPageInSidePanel = vi.fn(() => 'routed-page-id');
+const mockOpenRichTextInSidePanel = vi.fn();
+const mockOpenComposeEmailInSidePanel = vi.fn();
+const mockOpenFrontComponentInSidePanel = vi.fn();
+const mockSetSidePanelSearch = vi.fn();
+const mockGetIcon = vi.fn((name: string) => `icon-${name}`);
+const mockUnmountEngineCommand = vi.fn();
 
-const mockCloseSidePanelMenu = jest.fn();
-const mockSetCommandMenuItemProgress = jest.fn();
-const mockCopyToClipboardWithoutSuccessToast = jest.fn();
-const mockDirectUploadFile = jest.fn();
-const mockSetRecordPageActiveTabId = jest.fn();
-const mockStorageSet = jest.fn();
-const mockStorageDelete = jest.fn();
-const mockStorageClear = jest.fn();
+const mockCloseSidePanelMenu = vi.fn();
+const mockSetCommandMenuItemProgress = vi.fn();
+const mockCopyToClipboardWithoutSuccessToast = vi.fn();
+const mockDirectUploadFile = vi.fn();
+const mockSetRecordPageActiveTabId = vi.fn();
+const mockStorageSet = vi.fn();
+const mockStorageDelete = vi.fn();
+const mockStorageClear = vi.fn();
 
 let mockCurrentUser: { id: string } | null = { id: 'user-123' };
 let mockIsMobile = false;
 
-jest.mock('~/hooks/useNavigateApp', () => ({
+vi.mock('~/hooks/useNavigateApp', () => ({
   useNavigateApp: () => mockNavigateApp,
 }));
 
-jest.mock(
+vi.mock(
   '@/front-components/hooks/useFrontComponentApplicationTokenPair',
   () => ({
     useFrontComponentApplicationTokenPair: () => ({
@@ -71,7 +74,7 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/command-menu-item/confirmation-modal/hooks/useCommandMenuConfirmationModal',
   () => ({
     useCommandMenuConfirmationModal: () => ({
@@ -80,97 +83,97 @@ jest.mock(
   }),
 );
 
-jest.mock('@/side-panel/hooks/useNavigateSidePanel', () => ({
+vi.mock('@/side-panel/hooks/useNavigateSidePanel', () => ({
   useNavigateSidePanel: () => ({
     navigateSidePanel: mockNavigateSidePanel,
   }),
 }));
 
-jest.mock('@/side-panel/hooks/useOpenRecordInSidePanel', () => ({
+vi.mock('@/side-panel/hooks/useOpenRecordInSidePanel', () => ({
   useOpenRecordInSidePanel: () => ({
     openRecordInSidePanel: mockOpenRecordInSidePanel,
   }),
 }));
 
-jest.mock('@/side-panel/routing/hooks/useOpenRoutedPageInSidePanel', () => ({
+vi.mock('@/side-panel/routing/hooks/useOpenRoutedPageInSidePanel', () => ({
   useOpenRoutedPageInSidePanel: () => ({
     openRoutedPageInSidePanel: mockOpenRoutedPageInSidePanel,
   }),
 }));
 
-jest.mock('@/side-panel/hooks/useOpenRichTextInSidePanel', () => ({
+vi.mock('@/side-panel/hooks/useOpenRichTextInSidePanel', () => ({
   useOpenRichTextInSidePanel: () => ({
     openRichTextInSidePanel: mockOpenRichTextInSidePanel,
   }),
 }));
 
-jest.mock('@/side-panel/hooks/useOpenComposeEmailInSidePanel', () => ({
+vi.mock('@/side-panel/hooks/useOpenComposeEmailInSidePanel', () => ({
   useOpenComposeEmailInSidePanel: () => ({
     openComposeEmailInSidePanel: mockOpenComposeEmailInSidePanel,
   }),
 }));
 
-jest.mock('@/side-panel/hooks/useOpenFrontComponentInSidePanel', () => ({
+vi.mock('@/side-panel/hooks/useOpenFrontComponentInSidePanel', () => ({
   useOpenFrontComponentInSidePanel: () => ({
     openFrontComponentInSidePanel: mockOpenFrontComponentInSidePanel,
   }),
 }));
 
-jest.mock(
+vi.mock(
   '@/command-menu-item/engine-command/hooks/useUnmountEngineCommand',
   () => ({
     useUnmountCommand: () => mockUnmountEngineCommand,
   }),
 );
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({
     closeSidePanelMenu: mockCloseSidePanelMenu,
   }),
 }));
 
-jest.mock('twenty-ui/icon', () => ({
+vi.mock('twenty-ui/icon', () => ({
   useIcons: () => ({
     getIcon: mockGetIcon,
   }),
 }));
 
-jest.mock('twenty-ui/utilities', () => ({
+vi.mock('twenty-ui/utilities', () => ({
   useIsMobile: () => mockIsMobile,
 }));
 
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
   useAtomStateValue: () => mockCurrentUser,
 }));
 
-jest.mock('@/ui/utilities/state/jotai/hooks/useSetAtomState', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useSetAtomState', () => ({
   useSetAtomState: () => mockSetSidePanelSearch,
 }));
 
-jest.mock('@/ui/utilities/state/jotai/hooks/useSetAtomFamilyState', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useSetAtomFamilyState', () => ({
   useSetAtomFamilyState: () => mockSetCommandMenuItemProgress,
 }));
 
-jest.mock('~/hooks/useCopyToClipboard', () => ({
+vi.mock('~/hooks/useCopyToClipboard', () => ({
   useCopyToClipboard: () => ({
     copyToClipboardWithoutSuccessToast: mockCopyToClipboardWithoutSuccessToast,
   }),
 }));
 
-jest.mock('@/file/hooks/useDirectFileUpload', () => ({
+vi.mock('@/file/hooks/useDirectFileUpload', () => ({
   useDirectFileUpload: () => ({
     uploadFile: mockDirectUploadFile,
   }),
 }));
 
-jest.mock('twenty-front-component-renderer', () => ({
+vi.mock('twenty-front-component-renderer', () => ({
   buildFrontComponentStorageNamespace: ({
     applicationId,
     userId,
@@ -184,7 +187,7 @@ jest.mock('twenty-front-component-renderer', () => ({
   clearFrontComponentStorage: (...args: unknown[]) => mockStorageClear(...args),
 }));
 
-jest.mock('@/page-layout/utils/setRecordPageActiveTabId', () => ({
+vi.mock('@/page-layout/utils/setRecordPageActiveTabId', () => ({
   setRecordPageActiveTabId: (params: unknown) =>
     mockSetRecordPageActiveTabId(params),
 }));
@@ -235,7 +238,7 @@ describe('useFrontComponentExecutionContext', () => {
   });
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockCurrentUser = { id: 'user-123' };
     mockIsMobile = false;
     getDefaultStore().set(parentViewAtom, undefined);
@@ -1304,7 +1307,7 @@ describe('useFrontComponentExecutionContext', () => {
       });
 
       let currentTimeMs = 0;
-      const dateNowSpy = jest
+      const dateNowSpy = vi
         .spyOn(Date, 'now')
         .mockImplementation(() => currentTimeMs);
 

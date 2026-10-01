@@ -1,8 +1,10 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 
 import { PageCardLayout } from '@/ui/layout/page/components/PageCardLayout';
 
-jest.mock('@/information-banner/components/InformationBannerWrapper', () => ({
+vi.mock('@/information-banner/components/InformationBannerWrapper', () => ({
   InformationBannerWrapper: () => <div>Information banner</div>,
 }));
 

@@ -1,3 +1,6 @@
+import type * as ReactModule from '@tiptap/react';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { Editor } from '@tiptap/core';
 import { Document } from '@tiptap/extension-document';
 import { HardBreak } from '@tiptap/extension-hard-break';
@@ -8,23 +11,26 @@ import { SKILL_SUGGESTION_PLUGIN_KEY } from '@/skill-suggestion/constants/SkillS
 import { SkillSuggestion } from '@/skill-suggestion/extensions/SkillSuggestion';
 
 // Mock ReactRenderer (DOM-dependent)
-jest.mock('@tiptap/react', () => ({
-  mergeAttributes: jest.requireActual('@tiptap/react').mergeAttributes,
+vi.mock('@tiptap/react', async () => ({
+  mergeAttributes: (await vi.importActual<typeof ReactModule>('@tiptap/react'))
+    .mergeAttributes,
   ReactNodeViewRenderer: () => () => ({}),
-  ReactRenderer: jest.fn().mockImplementation(() => ({
-    element: document.createElement('div'),
-    ref: null,
-    updateProps: jest.fn(),
-    destroy: jest.fn(),
-  })),
+  ReactRenderer: vi.fn().mockImplementation(function () {
+    return {
+      element: document.createElement('div'),
+      ref: null,
+      updateProps: vi.fn(),
+      destroy: vi.fn(),
+    };
+  }),
 }));
 
 describe('SkillSuggestion', () => {
   let editor: Editor;
-  let mockSearchSkills: jest.Mock;
+  let mockSearchSkills: Mock;
 
   beforeEach(() => {
-    mockSearchSkills = jest.fn().mockResolvedValue([]);
+    mockSearchSkills = vi.fn().mockResolvedValue([]);
 
     editor = new Editor({
       extensions: [
@@ -64,7 +70,7 @@ describe('SkillSuggestion', () => {
   it('should expose the search function through storage', () => {
     const storage = editor.extensionStorage as unknown as Record<
       string,
-      { searchSkills: jest.Mock }
+      { searchSkills: Mock }
     >;
 
     expect(storage['skill-suggestion'].searchSkills).toBe(mockSearchSkills);

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type FieldCurrencyValue } from '@/object-record/record-field/ui/types/FieldMetadata';
 import { type RecordFilter } from '@/object-record/record-filter/types/RecordFilter';
 import { RecordFilterOperand } from '@/object-record/record-filter/types/RecordFilterOperand';
@@ -33,7 +35,7 @@ const mockFilterValueDependencies: RecordFilterValueDependencies = {
   timeZone: 'Europe/Paris',
 };
 
-jest.useFakeTimers().setSystemTime(new Date('2020-01-01'));
+vi.useFakeTimers().setSystemTime(new Date('2020-01-01'));
 
 describe('computeViewRecordGqlOperationFilter', () => {
   it('should work as expected for single filter', () => {

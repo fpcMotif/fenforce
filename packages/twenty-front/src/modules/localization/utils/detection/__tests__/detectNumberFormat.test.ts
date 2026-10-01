@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { detectNumberFormat } from '@/localization/utils/detection/detectNumberFormat';
 
 Object.defineProperty(navigator, 'language', {
@@ -6,6 +8,11 @@ Object.defineProperty(navigator, 'language', {
 });
 
 describe('detectNumberFormat', () => {
+  const originalNumberFormatConstructor = Intl.NumberFormat;
+
+  afterEach(() => {
+    Intl.NumberFormat = originalNumberFormatConstructor;
+  });
   beforeEach(() => {
     Object.defineProperty(navigator, 'language', {
       writable: true,
@@ -81,18 +88,20 @@ describe('detectNumberFormat', () => {
     // Mock formatToParts to return non-breaking space
     const originalNumberFormat = Intl.NumberFormat;
     (global.Intl as any).NumberFormat = Object.assign(
-      jest.fn().mockImplementation(() => ({
-        formatToParts: () => [
-          { type: 'integer', value: '1' },
-          { type: 'group', value: '\u00A0' }, // non-breaking space
-          { type: 'integer', value: '234' },
-          { type: 'group', value: '\u00A0' },
-          { type: 'integer', value: '567' },
-          { type: 'decimal', value: ',' },
-          { type: 'fraction', value: '89' },
-        ],
-      })),
-      { supportedLocalesOf: jest.fn() },
+      vi.fn().mockImplementation(function () {
+        return {
+          formatToParts: () => [
+            { type: 'integer', value: '1' },
+            { type: 'group', value: '\u00A0' }, // non-breaking space
+            { type: 'integer', value: '234' },
+            { type: 'group', value: '\u00A0' },
+            { type: 'integer', value: '567' },
+            { type: 'decimal', value: ',' },
+            { type: 'fraction', value: '89' },
+          ],
+        };
+      }),
+      { supportedLocalesOf: vi.fn() },
     );
 
     expect(detectNumberFormat()).toBe('SPACES_AND_COMMA');
@@ -103,18 +112,20 @@ describe('detectNumberFormat', () => {
     // Mock formatToParts to return narrow no-break space
     const originalNumberFormat = Intl.NumberFormat;
     (global.Intl as any).NumberFormat = Object.assign(
-      jest.fn().mockImplementation(() => ({
-        formatToParts: () => [
-          { type: 'integer', value: '1' },
-          { type: 'group', value: '\u202F' }, // narrow no-break space
-          { type: 'integer', value: '234' },
-          { type: 'group', value: '\u202F' },
-          { type: 'integer', value: '567' },
-          { type: 'decimal', value: ',' },
-          { type: 'fraction', value: '89' },
-        ],
-      })),
-      { supportedLocalesOf: jest.fn() },
+      vi.fn().mockImplementation(function () {
+        return {
+          formatToParts: () => [
+            { type: 'integer', value: '1' },
+            { type: 'group', value: '\u202F' }, // narrow no-break space
+            { type: 'integer', value: '234' },
+            { type: 'group', value: '\u202F' },
+            { type: 'integer', value: '567' },
+            { type: 'decimal', value: ',' },
+            { type: 'fraction', value: '89' },
+          ],
+        };
+      }),
+      { supportedLocalesOf: vi.fn() },
     );
 
     expect(detectNumberFormat()).toBe('SPACES_AND_COMMA');
@@ -124,17 +135,19 @@ describe('detectNumberFormat', () => {
   it('should detect APOSTROPHE_AND_DOT format for locales using regular apostrophe separator', () => {
     const originalNumberFormat = Intl.NumberFormat;
     // @ts-expect-error - Mocking for test
-    global.Intl.NumberFormat = jest.fn().mockImplementation(() => ({
-      formatToParts: () => [
-        { type: 'integer', value: '1' },
-        { type: 'group', value: "'" }, // apostrophe
-        { type: 'integer', value: '234' },
-        { type: 'group', value: "'" },
-        { type: 'integer', value: '567' },
-        { type: 'decimal', value: '.' },
-        { type: 'fraction', value: '89' },
-      ],
-    }));
+    global.Intl.NumberFormat = vi.fn().mockImplementation(function () {
+      return {
+        formatToParts: () => [
+          { type: 'integer', value: '1' },
+          { type: 'group', value: "'" }, // apostrophe
+          { type: 'integer', value: '234' },
+          { type: 'group', value: "'" },
+          { type: 'integer', value: '567' },
+          { type: 'decimal', value: '.' },
+          { type: 'fraction', value: '89' },
+        ],
+      };
+    });
 
     expect(detectNumberFormat()).toBe('APOSTROPHE_AND_DOT');
     global.Intl.NumberFormat = originalNumberFormat;
@@ -144,17 +157,19 @@ describe('detectNumberFormat', () => {
     // Mock formatToParts to return right single quotation mark
     const originalNumberFormat = Intl.NumberFormat;
     // @ts-expect-error - Mocking for test
-    global.Intl.NumberFormat = jest.fn().mockImplementation(() => ({
-      formatToParts: () => [
-        { type: 'integer', value: '1' },
-        { type: 'group', value: '\u2019' }, // right single quotation mark
-        { type: 'integer', value: '234' },
-        { type: 'group', value: '\u2019' },
-        { type: 'integer', value: '567' },
-        { type: 'decimal', value: '.' },
-        { type: 'fraction', value: '89' },
-      ],
-    }));
+    global.Intl.NumberFormat = vi.fn().mockImplementation(function () {
+      return {
+        formatToParts: () => [
+          { type: 'integer', value: '1' },
+          { type: 'group', value: '\u2019' }, // right single quotation mark
+          { type: 'integer', value: '234' },
+          { type: 'group', value: '\u2019' },
+          { type: 'integer', value: '567' },
+          { type: 'decimal', value: '.' },
+          { type: 'fraction', value: '89' },
+        ],
+      };
+    });
 
     expect(detectNumberFormat()).toBe('APOSTROPHE_AND_DOT');
     global.Intl.NumberFormat = originalNumberFormat;
@@ -163,11 +178,13 @@ describe('detectNumberFormat', () => {
   it('should handle formatToParts throwing an error', () => {
     const originalNumberFormat = Intl.NumberFormat;
     // @ts-expect-error - Mocking for test
-    global.Intl.NumberFormat = jest.fn().mockImplementation(() => ({
-      formatToParts: () => {
-        throw new Error('formatToParts failed');
-      },
-    }));
+    global.Intl.NumberFormat = vi.fn().mockImplementation(function () {
+      return {
+        formatToParts: () => {
+          throw new Error('formatToParts failed');
+        },
+      };
+    });
 
     expect(detectNumberFormat()).toBe('COMMAS_AND_DOT');
     global.Intl.NumberFormat = originalNumberFormat;
@@ -176,7 +193,7 @@ describe('detectNumberFormat', () => {
   it('should handle Intl.NumberFormat constructor throwing an error', () => {
     const originalNumberFormat = Intl.NumberFormat;
     // @ts-expect-error - Mocking for test
-    global.Intl.NumberFormat = jest.fn().mockImplementation(() => {
+    global.Intl.NumberFormat = vi.fn().mockImplementation(function () {
       throw new Error('NumberFormat constructor failed');
     });
 
@@ -187,12 +204,14 @@ describe('detectNumberFormat', () => {
   it('should handle formatToParts returning parts without group or decimal types', () => {
     const originalNumberFormat = Intl.NumberFormat;
     // @ts-expect-error - Mocking for test
-    global.Intl.NumberFormat = jest.fn().mockImplementation(() => ({
-      formatToParts: () => [
-        { type: 'integer', value: '1234567' },
-        { type: 'fraction', value: '89' },
-      ],
-    }));
+    global.Intl.NumberFormat = vi.fn().mockImplementation(function () {
+      return {
+        formatToParts: () => [
+          { type: 'integer', value: '1234567' },
+          { type: 'fraction', value: '89' },
+        ],
+      };
+    });
 
     expect(detectNumberFormat()).toBe('COMMAS_AND_DOT');
     global.Intl.NumberFormat = originalNumberFormat;
@@ -202,15 +221,17 @@ describe('detectNumberFormat', () => {
     // Mock formatToParts to return an unknown pattern
     const originalNumberFormat = Intl.NumberFormat;
     // @ts-expect-error - Mocking for test
-    global.Intl.NumberFormat = jest.fn().mockImplementation(() => ({
-      formatToParts: () => [
-        { type: 'integer', value: '1' },
-        { type: 'group', value: '|' }, // unknown separator
-        { type: 'integer', value: '234' },
-        { type: 'decimal', value: ':' }, // unknown decimal
-        { type: 'fraction', value: '89' },
-      ],
-    }));
+    global.Intl.NumberFormat = vi.fn().mockImplementation(function () {
+      return {
+        formatToParts: () => [
+          { type: 'integer', value: '1' },
+          { type: 'group', value: '|' }, // unknown separator
+          { type: 'integer', value: '234' },
+          { type: 'decimal', value: ':' }, // unknown decimal
+          { type: 'fraction', value: '89' },
+        ],
+      };
+    });
 
     expect(detectNumberFormat()).toBe('COMMAS_AND_DOT');
     global.Intl.NumberFormat = originalNumberFormat;

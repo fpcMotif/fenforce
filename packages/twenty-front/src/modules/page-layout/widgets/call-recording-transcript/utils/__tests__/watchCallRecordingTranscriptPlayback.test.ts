@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { watchCallRecordingTranscriptPlayback } from '@/page-layout/widgets/call-recording-transcript/utils/watchCallRecordingTranscriptPlayback';
 
 class FakeVideoElement extends EventTarget {
@@ -20,7 +22,7 @@ const BOUNDED_TIME_POINTS = [
 
 describe('watchCallRecordingTranscriptPlayback', () => {
   let fakeVideoElement: FakeVideoElement;
-  let onPlaybackPositionChange: jest.Mock;
+  let onPlaybackPositionChange: Mock;
 
   const startWatching = (timePoints = TIME_POINTS) =>
     watchCallRecordingTranscriptPlayback({
@@ -30,14 +32,14 @@ describe('watchCallRecordingTranscriptPlayback', () => {
     });
 
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     fakeVideoElement = new FakeVideoElement();
-    onPlaybackPositionChange = jest.fn();
+    onPlaybackPositionChange = vi.fn();
   });
 
   afterEach(() => {
-    jest.useRealTimers();
-    jest.clearAllMocks();
+    vi.useRealTimers();
+    vi.clearAllMocks();
   });
 
   it('should notify the current index immediately on start', () => {
@@ -119,7 +121,7 @@ describe('watchCallRecordingTranscriptPlayback', () => {
     });
 
     fakeVideoElement.currentTime = 2.1;
-    jest.advanceTimersByTime(600);
+    vi.advanceTimersByTime(600);
 
     expect(onPlaybackPositionChange).toHaveBeenLastCalledWith({
       activeIndex: 1,
@@ -141,7 +143,7 @@ describe('watchCallRecordingTranscriptPlayback', () => {
     });
 
     fakeVideoElement.currentTime = 2.1;
-    jest.advanceTimersByTime(600);
+    vi.advanceTimersByTime(600);
 
     expect(onPlaybackPositionChange).toHaveBeenLastCalledWith({
       activeIndex: -1,
@@ -159,7 +161,7 @@ describe('watchCallRecordingTranscriptPlayback', () => {
     const stopWatching = startWatching();
 
     fakeVideoElement.currentTime = 2.1;
-    jest.advanceTimersByTime(300);
+    vi.advanceTimersByTime(300);
 
     expect(onPlaybackPositionChange).toHaveBeenLastCalledWith({
       activeIndex: 1,
@@ -174,7 +176,7 @@ describe('watchCallRecordingTranscriptPlayback', () => {
 
     const stopWatching = startWatching();
 
-    expect(jest.getTimerCount()).toBe(0);
+    expect(vi.getTimerCount()).toBe(0);
 
     stopWatching();
   });
@@ -190,13 +192,13 @@ describe('watchCallRecordingTranscriptPlayback', () => {
 
       const stopWatching = startWatching();
 
-      expect(jest.getTimerCount()).toBe(1);
+      expect(vi.getTimerCount()).toBe(1);
 
       fakeVideoElement.dispatchEvent(new Event(bufferingEventName));
 
-      expect(jest.getTimerCount()).toBe(0);
+      expect(vi.getTimerCount()).toBe(0);
 
-      jest.advanceTimersByTime(100);
+      vi.advanceTimersByTime(100);
 
       expect(onPlaybackPositionChange).toHaveBeenCalledTimes(1);
 
@@ -220,7 +222,7 @@ describe('watchCallRecordingTranscriptPlayback', () => {
 
     fakeVideoElement.dispatchEvent(new Event('stalled'));
 
-    expect(jest.getTimerCount()).toBe(0);
+    expect(vi.getTimerCount()).toBe(0);
 
     fakeVideoElement.currentTime = 2.1;
     fakeVideoElement.dispatchEvent(new Event('timeupdate'));
@@ -229,7 +231,7 @@ describe('watchCallRecordingTranscriptPlayback', () => {
       activeIndex: 1,
       lastStartedIndex: 1,
     });
-    expect(jest.getTimerCount()).toBe(1);
+    expect(vi.getTimerCount()).toBe(1);
 
     stopWatching();
   });
@@ -241,7 +243,7 @@ describe('watchCallRecordingTranscriptPlayback', () => {
 
     fakeVideoElement.currentTime = 5;
     fakeVideoElement.dispatchEvent(new Event('timeupdate'));
-    jest.runAllTimers();
+    vi.runAllTimers();
 
     expect(onPlaybackPositionChange).toHaveBeenCalledTimes(1);
   });

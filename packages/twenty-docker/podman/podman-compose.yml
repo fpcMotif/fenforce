@@ -37,7 +37,7 @@ services:
   worker:
     container_name: twenty-worker
     image: twentycrm/twenty:latest
-    command: yarn worker:prod
+    command: bun run worker:prod
     environment:
       SERVER_URL: ${SERVER_URL}
       PG_DATABASE_URL: "postgresql://twenty:${PG_DATABASE_PASSWORD}@twenty-db:5432/twenty"

@@ -1,3 +1,6 @@
+import type * as ReactModule from '@apollo/client/react';
+import { vi } from 'vite-plus/test';
+
 /* @license Enterprise */
 
 import { renderHook } from '@testing-library/react';
@@ -5,10 +8,10 @@ import { renderHook } from '@testing-library/react';
 import { useDeleteSsoIdentityProvider } from '@/settings/security/hooks/useDeleteSsoIdentityProvider';
 import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksWrapper';
 
-const mutationDeleteSsoIdpCallSpy = jest.fn();
+const mutationDeleteSsoIdpCallSpy = vi.fn();
 
-jest.mock('@apollo/client/react', () => ({
-  ...jest.requireActual('@apollo/client/react'),
+vi.mock('@apollo/client/react', async () => ({
+  ...(await vi.importActual<typeof ReactModule>('@apollo/client/react')),
   useMutation: () => [mutationDeleteSsoIdpCallSpy],
 }));
 
@@ -18,7 +21,7 @@ const Wrapper = getJestMetadataAndApolloMocksWrapper({
 
 describe('useDeleteSsoIdentityProvider', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('delete SSO identity provider', async () => {

@@ -1,13 +1,15 @@
+import { vi } from 'vite-plus/test';
+
 import { formatDateISOStringToRelativeDate } from '@/localization/utils/formatDateISOStringToRelativeDate';
 import { enUS, fr } from 'date-fns/locale';
 
 describe('formatDateISOStringToRelativeDate', () => {
   beforeAll(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   afterAll(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   describe('date-only ISO strings with day-maximum precision', () => {
@@ -18,7 +20,7 @@ describe('formatDateISOStringToRelativeDate', () => {
 
     describe('when the user is in UTC and the current instant is mid-day UTC', () => {
       beforeEach(() => {
-        jest.setSystemTime(new Date('2026-05-18T13:00:00Z'));
+        vi.setSystemTime(new Date('2026-05-18T13:00:00Z'));
       });
 
       it('should return "Today" for the current calendar date in UTC', () => {
@@ -56,7 +58,7 @@ describe('formatDateISOStringToRelativeDate', () => {
       it('should return "Today" when the current calendar date in Tokyo has already rolled over', () => {
         // 2026-05-18 21:00 UTC = 2026-05-19 06:00 in Asia/Tokyo (UTC+9),
         // so today in Tokyo is May 19.
-        jest.setSystemTime(new Date('2026-05-18T21:00:00Z'));
+        vi.setSystemTime(new Date('2026-05-18T21:00:00Z'));
 
         const result = formatDateISOStringToRelativeDate({
           ...baseParams,
@@ -68,7 +70,7 @@ describe('formatDateISOStringToRelativeDate', () => {
       });
 
       it('should return "Tomorrow" for the same value when the user is in UTC', () => {
-        jest.setSystemTime(new Date('2026-05-18T21:00:00Z'));
+        vi.setSystemTime(new Date('2026-05-18T21:00:00Z'));
 
         const result = formatDateISOStringToRelativeDate({
           ...baseParams,
@@ -82,7 +84,7 @@ describe('formatDateISOStringToRelativeDate', () => {
       it('should return "Yesterday" in Los Angeles when UTC has already rolled over', () => {
         // 2026-05-19 02:00 UTC = 2026-05-18 19:00 in America/Los_Angeles (UTC-7),
         // so today in LA is still May 18 and "2026-05-17" is yesterday there.
-        jest.setSystemTime(new Date('2026-05-19T02:00:00Z'));
+        vi.setSystemTime(new Date('2026-05-19T02:00:00Z'));
 
         const result = formatDateISOStringToRelativeDate({
           ...baseParams,
@@ -96,7 +98,7 @@ describe('formatDateISOStringToRelativeDate', () => {
       it('should return "Today" for the same value in UTC at the same instant', () => {
         // At 2026-05-19 02:00 UTC, today in UTC is already May 19,
         // so "2026-05-17" is two days ago in UTC.
-        jest.setSystemTime(new Date('2026-05-19T02:00:00Z'));
+        vi.setSystemTime(new Date('2026-05-19T02:00:00Z'));
 
         const result = formatDateISOStringToRelativeDate({
           ...baseParams,
@@ -110,7 +112,7 @@ describe('formatDateISOStringToRelativeDate', () => {
       it('should return "Today" in Kingston when UTC has already rolled over', () => {
         // 2026-05-19 03:00 UTC = 2026-05-18 22:00 in America/Jamaica (UTC-5),
         // so today in Kingston is still May 18 even though UTC reads May 19.
-        jest.setSystemTime(new Date('2026-05-19T03:00:00Z'));
+        vi.setSystemTime(new Date('2026-05-19T03:00:00Z'));
 
         const result = formatDateISOStringToRelativeDate({
           ...baseParams,
@@ -124,7 +126,7 @@ describe('formatDateISOStringToRelativeDate', () => {
       it('should return "Yesterday" in Kingston at the same UTC-rollover instant', () => {
         // Today in Kingston is May 18, so "2026-05-17" is yesterday there
         // even though UTC sees May 19 as today.
-        jest.setSystemTime(new Date('2026-05-19T03:00:00Z'));
+        vi.setSystemTime(new Date('2026-05-19T03:00:00Z'));
 
         const result = formatDateISOStringToRelativeDate({
           ...baseParams,
@@ -138,7 +140,7 @@ describe('formatDateISOStringToRelativeDate', () => {
       it('should return "Tomorrow" in Kingston for the date UTC already calls today', () => {
         // Today in Kingston is May 18, so "2026-05-19" is tomorrow there
         // even though UTC has already rolled over to May 19.
-        jest.setSystemTime(new Date('2026-05-19T03:00:00Z'));
+        vi.setSystemTime(new Date('2026-05-19T03:00:00Z'));
 
         const result = formatDateISOStringToRelativeDate({
           ...baseParams,
@@ -153,7 +155,7 @@ describe('formatDateISOStringToRelativeDate', () => {
         // 2026-07-19 03:00 UTC = 2026-07-18 22:00 in America/Jamaica.
         // Jamaica stays on UTC-5 year-round, so today in Kingston is July 18
         // (unlike America/New_York which would be on UTC-4 EDT at this date).
-        jest.setSystemTime(new Date('2026-07-19T03:00:00Z'));
+        vi.setSystemTime(new Date('2026-07-19T03:00:00Z'));
 
         const result = formatDateISOStringToRelativeDate({
           ...baseParams,
@@ -167,7 +169,7 @@ describe('formatDateISOStringToRelativeDate', () => {
 
     describe('for distances beyond plus or minus one day', () => {
       beforeEach(() => {
-        jest.setSystemTime(new Date('2026-05-18T13:00:00Z'));
+        vi.setSystemTime(new Date('2026-05-18T13:00:00Z'));
       });
 
       it('should return a forward-looking distance for future dates', () => {
@@ -213,7 +215,7 @@ describe('formatDateISOStringToRelativeDate', () => {
 
     describe('with a non-English locale catalog', () => {
       beforeEach(() => {
-        jest.setSystemTime(new Date('2026-05-18T13:00:00Z'));
+        vi.setSystemTime(new Date('2026-05-18T13:00:00Z'));
       });
 
       it('should localize the distance output via formatDistance', () => {
@@ -231,7 +233,7 @@ describe('formatDateISOStringToRelativeDate', () => {
 
   describe('date-only ISO strings without day-maximum precision', () => {
     beforeEach(() => {
-      jest.setSystemTime(new Date('2026-05-18T13:00:00Z'));
+      vi.setSystemTime(new Date('2026-05-18T13:00:00Z'));
     });
 
     it('should not short-circuit to "Today" and should return a distance instead', () => {
@@ -277,7 +279,7 @@ describe('formatDateISOStringToRelativeDate', () => {
     it('should anchor the diff in the user timezone near midnight boundaries', () => {
       // 2026-05-18 21:00 UTC = 2026-05-19 06:00 in Asia/Tokyo,
       // so today in Tokyo is May 19 and the diff against "2026-05-19" is zero.
-      jest.setSystemTime(new Date('2026-05-18T21:00:00Z'));
+      vi.setSystemTime(new Date('2026-05-18T21:00:00Z'));
 
       const result = formatDateISOStringToRelativeDate({
         isoDate: '2026-05-19',
@@ -291,7 +293,7 @@ describe('formatDateISOStringToRelativeDate', () => {
 
   describe('datetime ISO strings', () => {
     beforeEach(() => {
-      jest.setSystemTime(new Date('2026-05-18T13:00:00Z'));
+      vi.setSystemTime(new Date('2026-05-18T13:00:00Z'));
     });
 
     it('should return a past distance for a datetime in the past', () => {

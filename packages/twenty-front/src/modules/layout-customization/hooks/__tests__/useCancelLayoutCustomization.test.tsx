@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { useCancelLayoutCustomization } from '@/layout-customization/hooks/useCancelLayoutCustomization';
 import { activeCustomizationPageLayoutIdsState } from '@/layout-customization/states/activeCustomizationPageLayoutIdsState';
 import { pageLayoutDraftComponentState } from '@/page-layout/states/pageLayoutDraftComponentState';
@@ -12,16 +14,13 @@ import { createStore, Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
 import { PageLayoutType, WidgetType } from '~/generated-metadata/graphql';
 
-const mockExitLayoutCustomizationMode = jest.fn();
+const mockExitLayoutCustomizationMode = vi.fn();
 
-jest.mock(
-  '@/layout-customization/hooks/useExitLayoutCustomizationMode',
-  () => ({
-    useExitLayoutCustomizationMode: () => ({
-      exitLayoutCustomizationMode: mockExitLayoutCustomizationMode,
-    }),
+vi.mock('@/layout-customization/hooks/useExitLayoutCustomizationMode', () => ({
+  useExitLayoutCustomizationMode: () => ({
+    exitLayoutCustomizationMode: mockExitLayoutCustomizationMode,
   }),
-);
+}));
 
 const PAGE_LAYOUT_ID = 'page-layout-id';
 
@@ -33,7 +32,7 @@ const getWrapper =
 
 describe('useCancelLayoutCustomization', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('restores the persisted order in the draft', () => {

@@ -1,3 +1,6 @@
+import type * as ReactModule from '@tiptap/react';
+import { vi } from 'vite-plus/test';
+
 import { Editor } from '@tiptap/core';
 import { Document } from '@tiptap/extension-document';
 import { Paragraph } from '@tiptap/extension-paragraph';
@@ -6,8 +9,9 @@ import { Text } from '@tiptap/extension-text';
 import { SkillTag } from '@/skill-suggestion/extensions/SkillTag';
 
 // Mock ReactNodeViewRenderer since we're testing in a non-DOM environment
-jest.mock('@tiptap/react', () => ({
-  mergeAttributes: jest.requireActual('@tiptap/react').mergeAttributes,
+vi.mock('@tiptap/react', async () => ({
+  mergeAttributes: (await vi.importActual<typeof ReactModule>('@tiptap/react'))
+    .mergeAttributes,
   ReactNodeViewRenderer: () => () => ({}),
 }));
 

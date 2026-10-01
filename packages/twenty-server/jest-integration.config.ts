@@ -5,6 +5,8 @@ import { NodeEnvironment } from 'src/engine/core-modules/twenty-config/interface
 
 import testTokens from './test/integration/constants/test-tokens.json';
 
+const jestBabelTransform = require('./jest-babel-transform.cjs');
+
 if (process.env.NODE_ENV === 'test') {
   dotenv.config({ path: '.env.test', override: true });
 } else {
@@ -30,7 +32,7 @@ const jestConfig: JestConfigWithTsJest = {
     ...(isBillingEnabled ? [] : ['<rootDir>/test/integration/billing']),
     ...(isClickhouseEnabled ? [] : ['<rootDir>/test/integration/audit']),
     // Requires an app booted as a secure deployment; run through
-    // jest-integration-secure.config.ts (nx test:integration:secure).
+    // jest-integration-secure.config.ts (bunx vite-plus run twenty-server#test:integration:secure).
     '<rootDir>/test/integration/secure-deployment',
   ],
   testRegex: '\\.integration-spec\\.ts$',
@@ -51,36 +53,7 @@ const jestConfig: JestConfigWithTsJest = {
     '/node_modules/(?!(.*/node_modules/)?(jsdom|html-encoding-sniffer|whatwg-encoding|@exodus|parse5|entities|tough-cookie|@csstools|@asamuzakjp|msw|@mswjs|until-async|@bundled-es-modules|@open-draft|strict-event-emitter|headers-polyfill|outvariant|is-node-process|path-to-regexp|statuses|cookie|digest-fetch|md5|email-reply-parser|ai|@ai-sdk|@workflow|htmlparser2|domhandler|domutils|dom-serializer|domelementtype|@faker-js)/)',
   ],
   transform: {
-    '^.+\\.(t|j|mj)s$': [
-      '@swc/jest',
-      {
-        jsc: {
-          parser: {
-            syntax: 'typescript',
-            tsx: false,
-            decorators: true,
-          },
-          transform: {
-            decoratorMetadata: true,
-          },
-          baseUrl: '.',
-          paths: {
-            'src/*': ['./src/*'],
-            'test/*': ['./test/*'],
-          },
-          experimental: {
-            plugins: [
-              [
-                '@lingui/swc-plugin',
-                {
-                  stripNonEssentialFields: false,
-                },
-              ],
-            ],
-          },
-        },
-      },
-    ],
+    '^.+\\.(t|j|mj)s$': jestBabelTransform,
   },
   moduleNameMapper: {
     ...pathsToModuleNameMapper(tsConfig.compilerOptions.paths, {

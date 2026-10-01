@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { WorkflowStepFilterValueCompositeInput } from '@/workflow/workflow-steps/filters/components/WorkflowStepFilterValueCompositeInput';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
@@ -5,7 +7,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ViewFilterOperand } from 'twenty-shared/types';
 
-jest.mock(
+vi.mock(
   '@/workflow/workflow-variables/components/WorkflowVariablePicker',
   () => ({
     WorkflowVariablePicker: () => null,
@@ -14,7 +16,7 @@ jest.mock(
 
 it('preserves raw micros in workflow conditions', async () => {
   const user = userEvent.setup();
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   render(
     <I18nProvider i18n={i18n}>
       <WorkflowStepFilterValueCompositeInput

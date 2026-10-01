@@ -1,15 +1,18 @@
+import type * as UuidModule from 'uuid';
+import { vi } from 'vite-plus/test';
+
 import { FieldMetadataType } from 'twenty-shared/types';
 import { v4 } from 'uuid';
 import { getDefaultFormFieldSettings } from '@/workflow/workflow-steps/workflow-actions/form-action/utils/getDefaultFormFieldSettings';
 
-jest.mock('uuid', () => ({
-  ...jest.requireActual('uuid'),
-  v4: jest.fn(() => 'test-uuid-123'),
+vi.mock('uuid', async () => ({
+  ...(await vi.importActual<typeof UuidModule>('uuid')),
+  v4: vi.fn(() => 'test-uuid-123'),
 }));
 
 describe('getDefaultFormFieldSettings', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should return correct default settings for TEXT field type', () => {

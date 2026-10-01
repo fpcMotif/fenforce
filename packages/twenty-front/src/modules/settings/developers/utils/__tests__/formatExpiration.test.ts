@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import {
   formatExpiration,
   isExpired,
@@ -8,7 +10,7 @@ import { messages as enMessages } from '~/locales/generated/en';
 i18n.load('en', enMessages);
 i18n.activate('en');
 
-jest.useFakeTimers().setSystemTime(new Date('2024-01-01T00:00:00.000Z'));
+vi.useFakeTimers().setSystemTime(new Date('2024-01-01T00:00:00.000Z'));
 
 describe('formatExpiration', () => {
   it('should format properly when expiresAt is great', () => {

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { WorkspaceRouteObjectsContext } from '@/app/routing/components/WorkspaceRouteObjectsProvider';
 import { type WorkspaceRouteObject } from '@/app/routing/types/WorkspaceRouteObject';
 import { getWorkspaceRouteObjectsForSurface } from '@/app/routing/utils/getWorkspaceRouteObjectsForSurface';
@@ -7,21 +9,21 @@ import { type ReactNode } from 'react';
 import { MemoryRouter, Outlet, useRoutes } from 'react-router-dom';
 import { AppPath, SettingsPath } from 'twenty-shared/types';
 
-jest.mock('@/navigation/hooks/useLastVisitedView', () => ({
+vi.mock('@/navigation/hooks/useLastVisitedView', () => ({
   useLastVisitedView: () => ({
     getLastVisitedViewIdFromObjectNamePlural: () => undefined,
   }),
 }));
 
-jest.mock('@/object-metadata/states/objectMetadataItemsSelector', () => ({
+vi.mock('@/object-metadata/states/objectMetadataItemsSelector', () => ({
   objectMetadataItemsSelector: { key: 'object-metadata-items' },
 }));
 
-jest.mock('@/views/states/selectors/viewsSelector', () => ({
+vi.mock('@/views/states/selectors/viewsSelector', () => ({
   viewsSelector: { key: 'views' },
 }));
 
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
   useAtomStateValue: ({ key }: { key: string }) =>
     key === 'object-metadata-items'
       ? [
@@ -66,11 +68,11 @@ jest.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
         ],
 }));
 
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomFamilyStateValue', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomFamilyStateValue', () => ({
   useAtomFamilyStateValue: () => ({ status: 'up-to-date' }),
 }));
 
-jest.mock('@/context-store/components/RouteContextStoreProviderEffect', () => ({
+vi.mock('@/context-store/components/RouteContextStoreProviderEffect', () => ({
   RouteContextStoreProviderEffect: ({
     viewId,
     objectMetadataItem,

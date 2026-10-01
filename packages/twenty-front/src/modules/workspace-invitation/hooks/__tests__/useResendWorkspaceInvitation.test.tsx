@@ -1,12 +1,15 @@
+import type * as ReactModule from '@apollo/client/react';
+import { vi } from 'vite-plus/test';
+
 import { useResendWorkspaceInvitation } from '@/workspace-invitation/hooks/useResendWorkspaceInvitation';
 import { renderHook } from '@testing-library/react';
 import { GetWorkspaceInvitationsDocument } from '~/generated-metadata/graphql';
 import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksWrapper';
 
-const mutationCallSpy = jest.fn();
+const mutationCallSpy = vi.fn();
 
-jest.mock('@apollo/client/react', () => ({
-  ...jest.requireActual('@apollo/client/react'),
+vi.mock('@apollo/client/react', async () => ({
+  ...(await vi.importActual<typeof ReactModule>('@apollo/client/react')),
   useMutation: () => [mutationCallSpy],
 }));
 
@@ -16,7 +19,7 @@ const Wrapper = getJestMetadataAndApolloMocksWrapper({
 
 describe('useResendWorkspaceInvitation', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('Resend Workspace Invitation', async () => {

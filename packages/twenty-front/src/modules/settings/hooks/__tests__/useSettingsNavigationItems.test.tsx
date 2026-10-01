@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { useSettingsNavigationItems } from '@/settings/hooks/useSettingsNavigationItems';
 import { MockedProvider } from '@apollo/client/testing/react';
 import { renderHook } from '@testing-library/react';
@@ -61,13 +63,13 @@ const Wrapper = ({ children }: { children: ReactNode }) => (
   </MockedProvider>
 );
 
-jest.mock('@/settings/roles/hooks/usePermissionFlagMap', () => ({
-  usePermissionFlagMap: jest.fn(),
+vi.mock('@/settings/roles/hooks/usePermissionFlagMap', () => ({
+  usePermissionFlagMap: vi.fn(),
 }));
 
-jest.mock('@/domain-manager/hooks/useRedirectToWorkspaceDomain', () => ({
-  useRedirectToWorkspaceDomain: jest.fn().mockImplementation(() => ({
-    redirectToWorkspaceDomain: jest.fn(),
+vi.mock('@/domain-manager/hooks/useRedirectToWorkspaceDomain', () => ({
+  useRedirectToWorkspaceDomain: vi.fn().mockImplementation(() => ({
+    redirectToWorkspaceDomain: vi.fn(),
   })),
 }));
 
@@ -79,7 +81,7 @@ describe('useSettingsNavigationItems', () => {
   });
 
   it('should hide workspace settings when no permissions', () => {
-    (usePermissionFlagMap as jest.Mock).mockImplementation(() => ({
+    (usePermissionFlagMap as Mock).mockImplementation(() => ({
       [PermissionFlagType.WORKSPACE]: false,
       [PermissionFlagType.WORKSPACE_MEMBERS]: false,
       [PermissionFlagType.DATA_MODEL]: false,
@@ -101,7 +103,7 @@ describe('useSettingsNavigationItems', () => {
   });
 
   it('should show workspace settings when has permissions', () => {
-    (usePermissionFlagMap as jest.Mock).mockImplementation(() => ({
+    (usePermissionFlagMap as Mock).mockImplementation(() => ({
       [PermissionFlagType.WORKSPACE]: true,
       [PermissionFlagType.WORKSPACE_MEMBERS]: true,
       [PermissionFlagType.DATA_MODEL]: true,
@@ -123,7 +125,7 @@ describe('useSettingsNavigationItems', () => {
   });
 
   it('should hide billing navigation when billing is disabled', () => {
-    (usePermissionFlagMap as jest.Mock).mockImplementation(() => ({
+    (usePermissionFlagMap as Mock).mockImplementation(() => ({
       [PermissionFlagType.WORKSPACE]: true,
       [PermissionFlagType.WORKSPACE_MEMBERS]: true,
       [PermissionFlagType.DATA_MODEL]: true,
@@ -151,7 +153,7 @@ describe('useSettingsNavigationItems', () => {
   it('should hide billing navigation until billing config is loaded', () => {
     jotaiStore.set(billingState.atom, null);
 
-    (usePermissionFlagMap as jest.Mock).mockImplementation(() => ({
+    (usePermissionFlagMap as Mock).mockImplementation(() => ({
       [PermissionFlagType.WORKSPACE]: true,
       [PermissionFlagType.WORKSPACE_MEMBERS]: true,
       [PermissionFlagType.DATA_MODEL]: true,
@@ -176,7 +178,7 @@ describe('useSettingsNavigationItems', () => {
   });
 
   it('should show user section items regardless of permissions', () => {
-    (usePermissionFlagMap as jest.Mock).mockImplementation(() => ({
+    (usePermissionFlagMap as Mock).mockImplementation(() => ({
       [PermissionFlagType.WORKSPACE]: false,
       [PermissionFlagType.WORKSPACE_MEMBERS]: false,
       [PermissionFlagType.DATA_MODEL]: false,

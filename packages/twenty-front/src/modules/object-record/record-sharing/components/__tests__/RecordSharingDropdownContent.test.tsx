@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, screen, waitFor } from '@testing-library/react';
@@ -15,11 +17,11 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-const setShare = jest.fn();
-const refetch = jest.fn();
-const copyToClipboard = jest.fn();
+const setShare = vi.fn();
+const refetch = vi.fn();
+const copyToClipboard = vi.fn();
 
-jest.mock('~/hooks/useCopyToClipboard', () => ({
+vi.mock('~/hooks/useCopyToClipboard', () => ({
   useCopyToClipboard: () => ({ copyToClipboard }),
 }));
 
@@ -69,7 +71,7 @@ const renderSharing = (overrides = {}) => {
 
 describe('Record sharing', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     refetch.mockResolvedValue(undefined);
     resetJotaiStore();
     jotaiStore.set(currentWorkspaceMembersState.atom, [

@@ -1,27 +1,27 @@
+import type * as ReactRouterDomModule from 'react-router-dom';
+import { vi } from 'vite-plus/test';
+
 import { WorkspaceSurfaceContext } from '@/ui/layout/contexts/WorkspaceSurfaceContext';
 import { RecordIndexPage } from '~/pages/object-record/RecordIndexPage';
 import { render, screen } from '@testing-library/react';
 
-const mockIsCoreWorkflowsIndexEnabled = jest.fn();
+const mockIsCoreWorkflowsIndexEnabled = vi.fn();
 let mockObjectNamePlural = 'people';
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual<typeof ReactRouterDomModule>('react-router-dom')),
   useParams: () => ({ objectNamePlural: mockObjectNamePlural }),
 }));
 
-jest.mock(
-  '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
-  () => ({
-    useAtomComponentStateValue: () => 'person-object-metadata-id',
-  }),
-);
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue', () => ({
+  useAtomComponentStateValue: () => 'person-object-metadata-id',
+}));
 
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomFamilyStateValue', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomFamilyStateValue', () => ({
   useAtomFamilyStateValue: () => ({ status: 'up-to-date' }),
 }));
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
   useObjectMetadataItems: () => ({
     objectMetadataItems: [
       {
@@ -33,38 +33,38 @@ jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
   }),
 }));
 
-jest.mock('@/workspace/hooks/useIsFeatureEnabled', () => ({
+vi.mock('@/workspace/hooks/useIsFeatureEnabled', () => ({
   useIsFeatureEnabled: () => false,
 }));
 
-jest.mock('@/object-core/workflows/utils/isCoreWorkflowsIndexEnabled', () => ({
+vi.mock('@/object-core/workflows/utils/isCoreWorkflowsIndexEnabled', () => ({
   isCoreWorkflowsIndexEnabled: () => mockIsCoreWorkflowsIndexEnabled(),
 }));
 
-jest.mock(
+vi.mock(
   '@/object-record/record-index/components/RecordIndexContainerGater',
   () => ({
     RecordIndexContainerGater: () => <div data-testid="record-index-gater" />,
   }),
 );
 
-jest.mock('@/ui/layout/page/components/PageContainer', () => ({
+vi.mock('@/ui/layout/page/components/PageContainer', () => ({
   PageContainer: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="page-container">{children}</div>
   ),
 }));
 
-jest.mock('@/app/routing/components/WorkspaceRouteUnavailable', () => ({
+vi.mock('@/app/routing/components/WorkspaceRouteUnavailable', () => ({
   WorkspaceRouteUnavailable: () => <div data-testid="route-unavailable" />,
 }));
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
   useObjectMetadataItem: () => ({
     objectMetadataItem: { labelPlural: 'Workflows' },
   }),
 }));
 
-jest.mock('@/object-core/workflows/hooks/useCoreWorkflows', () => ({
+vi.mock('@/object-core/workflows/hooks/useCoreWorkflows', () => ({
   CORE_WORKFLOWS_INITIAL_SORT: [],
   CORE_WORKFLOWS_TABLE_ID: 'workflow-table',
   useCoreWorkflows: () => ({
@@ -72,46 +72,43 @@ jest.mock('@/object-core/workflows/hooks/useCoreWorkflows', () => ({
     hasNextPage: false,
     loading: false,
     error: undefined,
-    fetchNextPage: jest.fn(),
+    fetchNextPage: vi.fn(),
   }),
 }));
 
-jest.mock('@/object-core/workflows/hooks/useCreateCoreWorkflow', () => ({
+vi.mock('@/object-core/workflows/hooks/useCreateCoreWorkflow', () => ({
   useCreateCoreWorkflow: () => ({
-    createCoreWorkflow: jest.fn(),
+    createCoreWorkflow: vi.fn(),
     canCreateCoreWorkflow: false,
     isCreatingCoreWorkflow: false,
   }),
 }));
 
-jest.mock('react-intersection-observer', () => ({
-  useInView: () => ({ ref: jest.fn(), inView: false }),
+vi.mock('react-intersection-observer', () => ({
+  useInView: () => ({ ref: vi.fn(), inView: false }),
 }));
 
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
   useAtomStateValue: () => ({}),
 }));
 
-jest.mock(
-  '@/object-core/workflows/hooks/useListenToCoreWorkflowEvents',
-  () => ({
-    useListenToCoreWorkflowEvents: () => undefined,
-  }),
-);
+vi.mock('@/object-core/workflows/hooks/useListenToCoreWorkflowEvents', () => ({
+  useListenToCoreWorkflowEvents: () => undefined,
+}));
 
-jest.mock('@/object-core/components/CoreObjectTable', () => ({
+vi.mock('@/object-core/components/CoreObjectTable', () => ({
   CoreObjectTable: () => <div data-testid="workflow-core-index" />,
 }));
 
-jest.mock('@/ui/layout/page/components/PageCardHeader', () => ({
+vi.mock('@/ui/layout/page/components/PageCardHeader', () => ({
   PageCardHeader: () => null,
 }));
 
-jest.mock('@/ui/layout/page/components/PageCardLayout', () => ({
+vi.mock('@/ui/layout/page/components/PageCardLayout', () => ({
   PageCardLayout: ({ children }: { children: React.ReactNode }) => children,
 }));
 
-jest.mock('@/ui/utilities/page-title/components/PageTitle', () => ({
+vi.mock('@/ui/utilities/page-title/components/PageTitle', () => ({
   PageTitle: () => null,
 }));
 

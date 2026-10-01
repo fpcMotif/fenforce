@@ -1,3 +1,6 @@
+import type * as ReactModule from '@apollo/client/react';
+import { type MockedFunction, vi } from 'vite-plus/test';
+
 import { useMutation, useQuery } from '@apollo/client/react';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
@@ -9,47 +12,47 @@ import { SettingsApplicationConnectionDetail } from '~/pages/settings/applicatio
 import { useFindApplicationConnectionProviders } from '~/pages/settings/applications/hooks/useFindApplicationConnectionProviders';
 import { useApplicationConnectedAccounts } from '~/pages/settings/applications/hooks/useApplicationConnectedAccounts';
 
-const mockTriggerAppOAuth = jest.fn();
-const mockDeleteConnectedAccount = jest.fn();
-const mockOpenModal = jest.fn();
+const mockTriggerAppOAuth = vi.fn();
+const mockDeleteConnectedAccount = vi.fn();
+const mockOpenModal = vi.fn();
 
-jest.mock('@apollo/client/react', () => ({
-  ...jest.requireActual('@apollo/client/react'),
-  useMutation: jest.fn(),
-  useQuery: jest.fn(),
+vi.mock('@apollo/client/react', async () => ({
+  ...(await vi.importActual<typeof ReactModule>('@apollo/client/react')),
+  useMutation: vi.fn(),
+  useQuery: vi.fn(),
 }));
 
-jest.mock(
+vi.mock(
   '~/pages/settings/applications/hooks/useFindApplicationConnectionProviders',
   () => ({
-    useFindApplicationConnectionProviders: jest.fn(),
+    useFindApplicationConnectionProviders: vi.fn(),
   }),
 );
 
-jest.mock(
+vi.mock(
   '~/pages/settings/applications/hooks/useApplicationConnectedAccounts',
   () => ({
-    useApplicationConnectedAccounts: jest.fn(),
+    useApplicationConnectedAccounts: vi.fn(),
   }),
 );
 
-jest.mock('~/pages/settings/applications/hooks/useTriggerAppOAuth', () => ({
-  useTriggerAppOAuth: jest.fn(() => ({
+vi.mock('~/pages/settings/applications/hooks/useTriggerAppOAuth', () => ({
+  useTriggerAppOAuth: vi.fn(() => ({
     triggerAppOAuth: mockTriggerAppOAuth,
   })),
 }));
 
-jest.mock('~/hooks/useNavigateSettings', () => ({
-  useNavigateSettings: jest.fn(() => jest.fn()),
+vi.mock('~/hooks/useNavigateSettings', () => ({
+  useNavigateSettings: vi.fn(() => vi.fn()),
 }));
 
-jest.mock('@/ui/layout/dialog/hooks/useDialog', () => ({
-  useDialog: jest.fn(() => ({
+vi.mock('@/ui/layout/dialog/hooks/useDialog', () => ({
+  useDialog: vi.fn(() => ({
     openDialog: mockOpenModal,
   })),
 }));
 
-jest.mock('@/ui/layout/dialog/components/ConfirmationDialog', () => ({
+vi.mock('@/ui/layout/dialog/components/ConfirmationDialog', () => ({
   ConfirmationDialog: ({
     confirmButtonText,
     onConfirmClick,
@@ -59,28 +62,26 @@ jest.mock('@/ui/layout/dialog/components/ConfirmationDialog', () => ({
   }) => <button onClick={onConfirmClick}>{confirmButtonText}</button>,
 }));
 
-jest.mock('@/settings/components/SettingsPageContainer', () => ({
+vi.mock('@/settings/components/SettingsPageContainer', () => ({
   SettingsPageContainer: ({ children }: { children: ReactNode }) => (
     <>{children}</>
   ),
 }));
 
-jest.mock('@/settings/components/layout/SettingsPageLayout', () => ({
+vi.mock('@/settings/components/layout/SettingsPageLayout', () => ({
   SettingsPageLayout: ({ children }: { children: ReactNode }) => (
     <>{children}</>
   ),
 }));
 
-const mockedUseMutation = useMutation as jest.MockedFunction<
-  typeof useMutation
->;
-const mockedUseQuery = useQuery as jest.MockedFunction<typeof useQuery>;
+const mockedUseMutation = useMutation as MockedFunction<typeof useMutation>;
+const mockedUseQuery = useQuery as MockedFunction<typeof useQuery>;
 const mockedUseFindApplicationConnectionProviders =
-  useFindApplicationConnectionProviders as jest.MockedFunction<
+  useFindApplicationConnectionProviders as MockedFunction<
     typeof useFindApplicationConnectionProviders
   >;
 const mockedUseApplicationConnectedAccounts =
-  useApplicationConnectedAccounts as jest.MockedFunction<
+  useApplicationConnectedAccounts as MockedFunction<
     typeof useApplicationConnectedAccounts
   >;
 
@@ -102,7 +103,7 @@ const renderDetailPage = () =>
 
 describe('SettingsApplicationConnectionDetail', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     mockedUseQuery.mockReturnValue({
       data: {
@@ -133,7 +134,7 @@ describe('SettingsApplicationConnectionDetail', () => {
         },
       ],
       loading: false,
-      refetch: jest.fn(),
+      refetch: vi.fn(),
     });
     mockedUseApplicationConnectedAccounts.mockReturnValue({
       accounts: [
@@ -153,7 +154,7 @@ describe('SettingsApplicationConnectionDetail', () => {
         },
       ],
       loading: false,
-      refetch: jest.fn(),
+      refetch: vi.fn(),
     });
   });
 
@@ -204,7 +205,7 @@ describe('SettingsApplicationConnectionDetail', () => {
         },
       ],
       loading: false,
-      refetch: jest.fn(),
+      refetch: vi.fn(),
     });
 
     renderDetailPage();

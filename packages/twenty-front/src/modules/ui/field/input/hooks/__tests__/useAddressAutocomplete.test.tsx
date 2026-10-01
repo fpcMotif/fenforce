@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { useGetPlaceApiData } from '@/geo-map/hooks/useGetPlaceApiData';
 import { useCloseDropdown } from '@/ui/layout/dropdown/hooks/useCloseDropdown';
 import { useOpenDropdown } from '@/ui/layout/dropdown/hooks/useOpenDropdown';
@@ -5,39 +7,39 @@ import { act, renderHook } from '@testing-library/react';
 import { useAddressAutocomplete } from '@/ui/field/input/hooks/useAddressAutocomplete';
 import { useCountryUtils } from '@/ui/field/input/hooks/useCountryUtils';
 
-jest.mock('@/geo-map/hooks/useGetPlaceApiData');
-jest.mock('../useCountryUtils');
-jest.mock('@/ui/layout/dropdown/hooks/useOpenDropdown');
-jest.mock('@/ui/layout/dropdown/hooks/useCloseDropdown');
-jest.mock('use-debounce', () => ({
+vi.mock('@/geo-map/hooks/useGetPlaceApiData');
+vi.mock('../useCountryUtils');
+vi.mock('@/ui/layout/dropdown/hooks/useOpenDropdown');
+vi.mock('@/ui/layout/dropdown/hooks/useCloseDropdown');
+vi.mock('use-debounce', () => ({
   useDebouncedCallback: (fn: (...args: any[]) => any) =>
     Object.assign(fn, { cancel: () => undefined }),
 }));
 
-const mockGetPlaceAutocompleteData = jest.fn();
-const mockGetPlaceDetailsData = jest.fn();
-const mockFindCountryNameByCountryCode = jest.fn();
-const mockOpenDropdown = jest.fn();
-const mockCloseDropdown = jest.fn();
+const mockGetPlaceAutocompleteData = vi.fn();
+const mockGetPlaceDetailsData = vi.fn();
+const mockFindCountryNameByCountryCode = vi.fn();
+const mockOpenDropdown = vi.fn();
+const mockCloseDropdown = vi.fn();
 
 describe('useAddressAutocomplete', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
-    (useGetPlaceApiData as jest.Mock).mockReturnValue({
+    (useGetPlaceApiData as Mock).mockReturnValue({
       getPlaceAutocompleteData: mockGetPlaceAutocompleteData,
       getPlaceDetailsData: mockGetPlaceDetailsData,
     });
 
-    (useCountryUtils as jest.Mock).mockReturnValue({
+    (useCountryUtils as Mock).mockReturnValue({
       findCountryNameByCountryCode: mockFindCountryNameByCountryCode,
     });
 
-    (useOpenDropdown as jest.Mock).mockReturnValue({
+    (useOpenDropdown as Mock).mockReturnValue({
       openDropdown: mockOpenDropdown,
     });
 
-    (useCloseDropdown as jest.Mock).mockReturnValue({
+    (useCloseDropdown as Mock).mockReturnValue({
       closeDropdown: mockCloseDropdown,
     });
   });
@@ -96,7 +98,7 @@ describe('useAddressAutocomplete', () => {
   });
 
   it('should autofill inputs from place details', async () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = vi.fn();
     const mockPlaceData = {
       city: 'New York',
       state: 'NY',
@@ -143,7 +145,7 @@ describe('useAddressAutocomplete', () => {
   });
 
   it('should use place street over full autocomplete text', async () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = vi.fn();
 
     mockGetPlaceDetailsData.mockResolvedValue({
       street: '123 Main St',
@@ -182,7 +184,7 @@ describe('useAddressAutocomplete', () => {
   });
 
   it('should preserve existing values when place data is missing', async () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = vi.fn();
     const mockPlaceData = {
       city: null,
       state: null,
@@ -229,7 +231,7 @@ describe('useAddressAutocomplete', () => {
   });
 
   it('should close dropdown after autofilling', async () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = vi.fn();
     mockGetPlaceDetailsData.mockResolvedValue({});
     mockFindCountryNameByCountryCode.mockReturnValue(null);
 
@@ -246,7 +248,7 @@ describe('useAddressAutocomplete', () => {
   });
 
   it('should set token to null after autofilling', async () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = vi.fn();
     mockGetPlaceDetailsData.mockResolvedValue({});
     mockGetPlaceAutocompleteData.mockResolvedValue([
       { text: '123 Main St', placeId: 'place123' },
@@ -293,7 +295,7 @@ describe('useAddressAutocomplete', () => {
   });
 
   it('should handle country code conversion correctly', async () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = vi.fn();
     const mockPlaceData = {
       country: 'US',
       city: 'Boston',

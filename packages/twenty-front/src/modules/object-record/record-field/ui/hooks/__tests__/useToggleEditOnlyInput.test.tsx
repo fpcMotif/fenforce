@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type MockedResponse } from '@apollo/client/testing';
 import { renderHook, waitFor } from '@testing-library/react';
 import { act, type ReactNode } from 'react';
@@ -36,7 +38,7 @@ const mocks: MockedResponse[] = [
         input: { idealCustomerProfile: true },
       },
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         updateCompany: {
           ...generateMockRecordNode({

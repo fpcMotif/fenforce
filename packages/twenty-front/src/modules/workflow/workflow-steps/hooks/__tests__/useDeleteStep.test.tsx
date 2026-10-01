@@ -1,50 +1,49 @@
+import { vi } from 'vite-plus/test';
+
 import React from 'react';
 
 import { useDeleteStep } from '@/workflow/workflow-steps/hooks/useDeleteStep';
 import { renderHook } from '@testing-library/react';
 import { WorkflowVisualizerComponentInstanceContext } from '@/workflow/workflow-diagram/states/contexts/WorkflowVisualizerComponentInstanceContext';
 
-const mockDeleteWorkflowVersionStep = jest.fn();
-const mockGetUpdatableWorkflowVersion = jest.fn();
-const mockDeleteStepsOutputSchema = jest.fn();
-const mockCloseSidePanel = jest.fn();
+const mockDeleteWorkflowVersionStep = vi.fn();
+const mockGetUpdatableWorkflowVersion = vi.fn();
+const mockDeleteStepsOutputSchema = vi.fn();
+const mockCloseSidePanel = vi.fn();
 
-jest.mock(
-  '@/workflow/workflow-steps/hooks/useDeleteWorkflowVersionStep',
-  () => ({
-    useDeleteWorkflowVersionStep: () => ({
-      deleteWorkflowVersionStep: mockDeleteWorkflowVersionStep,
-    }),
+vi.mock('@/workflow/workflow-steps/hooks/useDeleteWorkflowVersionStep', () => ({
+  useDeleteWorkflowVersionStep: () => ({
+    deleteWorkflowVersionStep: mockDeleteWorkflowVersionStep,
   }),
-);
+}));
 
-jest.mock('@/workflow/hooks/useGetUpdatableWorkflowVersionOrThrow', () => ({
+vi.mock('@/workflow/hooks/useGetUpdatableWorkflowVersionOrThrow', () => ({
   useGetUpdatableWorkflowVersionOrThrow: () => ({
     getUpdatableWorkflowVersion: mockGetUpdatableWorkflowVersion,
   }),
 }));
 
-jest.mock('@/workflow/workflow-variables/hooks/useStepsOutputSchema', () => ({
+vi.mock('@/workflow/workflow-variables/hooks/useStepsOutputSchema', () => ({
   useStepsOutputSchema: () => ({
     deleteStepsOutputSchema: mockDeleteStepsOutputSchema,
   }),
 }));
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({
     closeSidePanelMenu: mockCloseSidePanel,
   }),
 }));
 
-jest.mock('@/workflow/hooks/useWorkflowWithCurrentVersion', () => ({
+vi.mock('@/workflow/hooks/useWorkflowWithCurrentVersion', () => ({
   useWorkflowWithCurrentVersion: () => undefined,
 }));
 
-jest.mock(
+vi.mock(
   '@/workflow/workflow-steps/workflow-actions/ai-agent-action/hooks/useResetWorkflowAiAgentPermissionsStateOnSidePanelClose',
   () => ({
     useResetWorkflowAiAgentPermissionsStateOnSidePanelClose: () => ({
-      resetPermissionState: jest.fn(),
+      resetPermissionState: vi.fn(),
     }),
   }),
 );
@@ -66,7 +65,7 @@ const wrapper = ({ children }: { children: React.ReactNode }) => {
 
 describe('useDeleteStep', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should delete step and clean up dependencies', async () => {

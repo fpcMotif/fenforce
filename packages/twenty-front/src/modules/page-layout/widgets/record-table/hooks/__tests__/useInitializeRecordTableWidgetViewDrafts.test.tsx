@@ -1,3 +1,6 @@
+import type * as JotaiModule from 'jotai';
+import { vi } from 'vite-plus/test';
+
 import { isLayoutCustomizationModeEnabledState } from '@/layout-customization/states/isLayoutCustomizationModeEnabledState';
 import {
   PAGE_LAYOUT_TEST_INSTANCE_ID,
@@ -27,8 +30,8 @@ const view = constructViewFromRecordTableWidgetViewSnapshot(
   ),
 );
 
-jest.mock('@/views/states/selectors/viewsSelector', () => {
-  const { atom } = jest.requireActual('jotai');
+vi.mock('@/views/states/selectors/viewsSelector', async () => {
+  const { atom } = await vi.importActual<typeof JotaiModule>('jotai');
   return {
     viewsSelector: {
       type: 'Selector',

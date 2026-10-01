@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Twenty is an open-source CRM — an Nx / Bun monorepo. Main packages: `twenty-front` (React 18, Jotai, Linaria, Vite), `twenty-server` (NestJS, TypeORM, PostgreSQL, Redis, GraphQL), `twenty-shared` (isomorphic types/utils), `twenty-ui`, `twenty-sdk` (application SDK + CLI), `twenty-e2e-testing` (Playwright).
+Twenty is an open-source CRM — a Bun workspace orchestrated with Vite+. Main packages: `twenty-front` (React 18, Jotai, Linaria, Vite), `twenty-server` (NestJS, TypeORM, PostgreSQL, Redis, GraphQL), `twenty-shared` (isomorphic types/utils), `twenty-ui`, `twenty-sdk` (application SDK + CLI), `twenty-e2e-testing` (Playwright).
 
 Match the surrounding code — the adjacent files in the directory you are editing beat any written rule, including for file naming, which varies by area.
 
@@ -28,25 +28,27 @@ bun start                                    # front + server + worker
 
 bunx jest path/to/file.spec.ts --config=packages/<pkg>/jest.config.mjs   # single test file (preferred)
 bunx vitest run --root packages/twenty-ui --project unit <file>          # twenty-ui runs on vitest, not jest
-bunx nx test twenty-server                     # package unit tests (same for twenty-front, ...)
-bunx nx run twenty-server:test:integration:with-db-reset
-bunx nx storybook:build twenty-front && bunx nx storybook:test twenty-front
+bunx vite-plus run twenty-server#test                 # package unit tests
+bunx vite-plus run twenty-server#test:integration:with-db-reset
+bunx vite-plus run twenty-front#storybook:build && bunx vite-plus run twenty-front#storybook:test
 
-bunx nx lint:diff-with-main twenty-server      # diff-based lint (fast; add --configuration=fix); run with typecheck after changes
-bunx nx fmt <pkg>                              # format
-bunx nx build twenty-shared                    # required before building/testing packages that depend on it
-bunx nx database:reset twenty-server
-bunx nx run twenty-front:graphql:generate      # after GraphQL schema changes (--configuration=metadata for metadata schema)
+bunx vite-plus run twenty-server#lint:diff-with-main   # diff-based lint; run with typecheck after changes
+bunx vite-plus run twenty-server#lint:fix              # apply lint fixes
+bunx vite-plus run twenty-front#fmt                    # format one package
+bunx vite-plus run twenty-shared#build                 # required before building/testing dependents
+bunx vite-plus run twenty-server#database:reset
+bunx vite-plus run twenty-front#graphql:generate      # after GraphQL schema changes
+bunx vite-plus run twenty-front#graphql:generate:metadata  # for metadata schema changes
 ```
 
 ## Gotchas
 
-- **`twenty-shared/dist` is per-branch state nothing tracks.** After switching branches or editing `twenty-shared`, run `bunx nx build twenty-shared --skip-nx-cache` before trusting any typecheck or test failure in a dependent package.
-- **Nx caching can serve a stale pass.** To verify a fix, run `bunx tsgo -p tsconfig.json --noEmit` in the package directly rather than `nx typecheck`.
+- **`twenty-shared/dist` is per-branch state nothing tracks.** After switching branches or editing `twenty-shared`, run `bunx vite-plus run twenty-shared#build --no-cache` before trusting any typecheck or test failure in a dependent package.
+- **Task caching can serve a stale pass.** To verify a fix, run `bunx tsgo -p tsconfig.json --noEmit` in the package directly.
 - **Do not commit translation catalogs unless translations are the task.** `lingui extract`/`compile` regenerate `packages/twenty-server/src/engine/core-modules/i18n/locales/*.po` and `locales/generated/*` with thousands of lines of churn as a side effect of touching any `msg` string. The i18n pipeline maintains them; leave them out of your commit.
 - **Commit messages must not carry AI attribution.** CI rejects commits containing `@anthropic.com` co-author trailers or "Generated with Claude Code" lines.
 - **Upgrade commands** (`packages/twenty-server/src/database/commands/upgrade-version-command/`): add or edit files only under the current `TWENTY_CURRENT_VERSION` directory, with a real epoch-ms timestamp strictly greater than every existing one in that directory — CI enforces both, and the upgrade cursor silently skips a command that sorts before an already-applied one. Include `up` and `down`; never rewrite committed command logic. Keep command-only helpers and constants in the version folder, never in runtime modules, and never make runtime code branch on migration state. See `packages/twenty-server/docs/UPGRADE_COMMANDS.md`.
-- **Entity file changes need a generated instance command**: `bunx nx run twenty-server:database:migrate:generate --name <name> --type <fast|slow>` (slow = adds a data-backfill step).
+- **Entity file changes need a generated instance command**: `bunx vite-plus run twenty-server#database:migrate:generate --name <name> --type <fast|slow>` (slow = adds a data-backfill step).
 - A read-only Postgres MCP server is configured in `.mcp.json` for inspecting workspace data, metadata, and migration results. Writes go through the CLI commands above.
 - E2E login: click "Continue with Email" and use the prefilled credentials.
 

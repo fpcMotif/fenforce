@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -42,9 +44,9 @@ const setCurrentSidePanelPage = (page: ActiveSidePanelPage) => {
   jotaiStore.set(sidePanelNavigationStackState.atom, [navigationItem]);
 };
 
-const closeSidePanelMenuMock = jest.fn();
+const closeSidePanelMenuMock = vi.fn();
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({ closeSidePanelMenu: closeSidePanelMenuMock }),
 }));
 
@@ -54,7 +56,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => (
 
 describe('AiChatPageCloseAskAiPanelEffect', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     resetJotaiStore();
   });
 

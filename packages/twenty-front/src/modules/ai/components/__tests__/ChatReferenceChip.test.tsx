@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { type ReactNode } from 'react';
@@ -20,16 +22,16 @@ import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMeta
 import { getMockObjectMetadataItemOrThrow } from '~/testing/utils/getMockObjectMetadataItemOrThrow';
 import { setTestViewsInMetadataStore } from '~/testing/utils/setTestViewsInMetadataStore';
 
-const openRoutedPageInSidePanelMock = jest.fn();
-const openRecordInSidePanelMock = jest.fn();
+const openRoutedPageInSidePanelMock = vi.fn();
+const openRecordInSidePanelMock = vi.fn();
 
-jest.mock('@/side-panel/routing/hooks/useOpenRoutedPageInSidePanel', () => ({
+vi.mock('@/side-panel/routing/hooks/useOpenRoutedPageInSidePanel', () => ({
   useOpenRoutedPageInSidePanel: () => ({
     openRoutedPageInSidePanel: openRoutedPageInSidePanelMock,
   }),
 }));
 
-jest.mock('@/side-panel/hooks/useOpenRecordInSidePanel', () => ({
+vi.mock('@/side-panel/hooks/useOpenRecordInSidePanel', () => ({
   useOpenRecordInSidePanel: () => ({
     openRecordInSidePanel: openRecordInSidePanelMock,
   }),
@@ -227,7 +229,7 @@ const clickChip = (label: string) => {
 
 describe('ChatReferenceChip', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it.each(referenceCases)(

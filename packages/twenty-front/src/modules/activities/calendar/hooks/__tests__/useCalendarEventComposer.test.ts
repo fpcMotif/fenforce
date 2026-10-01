@@ -1,12 +1,15 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { Temporal } from 'temporal-polyfill';
 
 import { useCalendarEventComposer } from '@/activities/calendar/hooks/useCalendarEventComposer';
 import { type ObjectRecord } from '@/object-record/types/ObjectRecord';
 
-const mockCreateCalendarEvent = jest.fn();
-const mockCreateCalendarEventTargets = jest.fn();
-const mockRefetchTimelineCalendarEvents = jest.fn();
+const mockCreateCalendarEvent = vi.fn();
+const mockCreateCalendarEventTargets = vi.fn();
+const mockRefetchTimelineCalendarEvents = vi.fn();
 const mockContextRecord: { current: ObjectRecord | undefined } = {
   current: undefined,
 };
@@ -14,29 +17,26 @@ const mockTargetObjectMetadataItems: {
   current: { id: string; nameSingular: string }[];
 } = { current: [] };
 
-jest.mock('@/activities/calendar/hooks/useCreateCalendarEvent', () => ({
+vi.mock('@/activities/calendar/hooks/useCreateCalendarEvent', () => ({
   useCreateCalendarEvent: () => ({
     createCalendarEvent: mockCreateCalendarEvent,
     loading: false,
   }),
 }));
 
-jest.mock(
-  '@/activities/calendar/hooks/useRefetchTimelineCalendarEvents',
-  () => ({
-    useRefetchTimelineCalendarEvents: () => ({
-      refetchTimelineCalendarEvents: mockRefetchTimelineCalendarEvents,
-    }),
+vi.mock('@/activities/calendar/hooks/useRefetchTimelineCalendarEvents', () => ({
+  useRefetchTimelineCalendarEvents: () => ({
+    refetchTimelineCalendarEvents: mockRefetchTimelineCalendarEvents,
   }),
-);
+}));
 
-jest.mock('@/activities/calendar/hooks/useCreateCalendarEventTargets', () => ({
+vi.mock('@/activities/calendar/hooks/useCreateCalendarEventTargets', () => ({
   useCreateCalendarEventTargets: () => ({
     createCalendarEventTargets: mockCreateCalendarEventTargets,
   }),
 }));
 
-jest.mock(
+vi.mock(
   '@/activities/calendar/hooks/useCalendarEventTargetObjectMetadataItems',
   () => ({
     useCalendarEventTargetObjectMetadataItems: () =>
@@ -44,18 +44,18 @@ jest.mock(
   }),
 );
 
-jest.mock('@/object-record/hooks/useFindOneRecord', () => ({
+vi.mock('@/object-record/hooks/useFindOneRecord', () => ({
   useFindOneRecord: () => ({ record: mockContextRecord.current }),
 }));
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
-jest.mock('@/settings/accounts/hooks/useMyConnectedAccounts', () => ({
+vi.mock('@/settings/accounts/hooks/useMyConnectedAccounts', () => ({
   useMyConnectedAccounts: () => ({
     accounts: [
       {
@@ -67,20 +67,20 @@ jest.mock('@/settings/accounts/hooks/useMyConnectedAccounts', () => ({
   }),
 }));
 
-jest.mock(
+vi.mock(
   '@/activities/calendar/utils/isCalendarCreationEnabledForAccount',
   () => ({
     isCalendarCreationEnabledForAccount: () => true,
   }),
 );
 
-jest.mock('@/accounts/utils/hasMissingCreateCalendarEventScopes', () => ({
+vi.mock('@/accounts/utils/hasMissingCreateCalendarEventScopes', () => ({
   getMissingCreateCalendarEventScopes: () => [],
 }));
 
 describe('useCalendarEventComposer', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockContextRecord.current = undefined;
     mockTargetObjectMetadataItems.current = [
       { id: 'person-object-metadata-id', nameSingular: 'person' },
@@ -96,7 +96,7 @@ describe('useCalendarEventComposer', () => {
       }),
     );
 
-    const onCreated = jest.fn();
+    const onCreated = vi.fn();
     const { result } = renderHook(() =>
       useCalendarEventComposer({
         initialValues: {
@@ -149,7 +149,7 @@ describe('useCalendarEventComposer', () => {
           defaultAttendees: 'person@example.com',
           timeZone: 'UTC',
         },
-        onCreated: jest.fn(),
+        onCreated: vi.fn(),
       }),
     );
 
@@ -189,7 +189,7 @@ describe('useCalendarEventComposer', () => {
           defaultAttendees: '',
           timeZone: 'UTC',
         },
-        onCreated: jest.fn(),
+        onCreated: vi.fn(),
       }),
     );
 
@@ -237,7 +237,7 @@ describe('useCalendarEventComposer', () => {
           defaultAttendees: '',
           timeZone: 'UTC',
         },
-        onCreated: jest.fn(),
+        onCreated: vi.fn(),
       }),
     );
 
@@ -261,7 +261,7 @@ describe('useCalendarEventComposer', () => {
       calendarEventId: 'calendar-event-id',
     });
 
-    const onCreated = jest.fn();
+    const onCreated = vi.fn();
     const { result } = renderHook(() =>
       useCalendarEventComposer({
         initialValues: {
@@ -304,7 +304,7 @@ describe('useCalendarEventComposer', () => {
           defaultAttendees: '',
           timeZone: 'UTC',
         },
-        onCreated: jest.fn(),
+        onCreated: vi.fn(),
       }),
     );
 

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { createStore, Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -7,15 +9,15 @@ import { recordStoreFamilyState } from '@/object-record/record-store/states/reco
 import { FieldWidgetTextEditor } from '@/page-layout/widgets/field/components/FieldWidgetTextEditor';
 import { getTestEnrichedObjectMetadataItemsMock } from '~/testing/utils/getTestEnrichedObjectMetadataItemsMock';
 
-const mockUpdateOneRecord = jest.fn();
+const mockUpdateOneRecord = vi.fn();
 
-jest.mock('@/object-record/hooks/useUpdateOneRecord', () => ({
+vi.mock('@/object-record/hooks/useUpdateOneRecord', () => ({
   useUpdateOneRecord: () => ({
     updateOneRecord: mockUpdateOneRecord,
   }),
 }));
 
-jest.mock('@/object-record/read-only/hooks/useIsRecordFieldReadOnly', () => ({
+vi.mock('@/object-record/read-only/hooks/useIsRecordFieldReadOnly', () => ({
   useIsRecordFieldReadOnly: () => false,
 }));
 

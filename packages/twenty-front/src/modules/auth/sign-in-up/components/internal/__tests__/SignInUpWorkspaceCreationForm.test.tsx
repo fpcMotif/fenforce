@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
@@ -14,22 +16,22 @@ import {
 } from '@/ui/utilities/state/jotai/jotaiStore';
 import { dynamicActivate } from '~/utils/i18n/dynamicActivate';
 
-const createWorkspaceMock = jest.fn();
-const applySuggestionValueMock = jest.fn();
-const handleSubdomainChangeMock = jest.fn();
-const handleWorkspaceNameChangeMock = jest.fn();
-const useWorkspaceSubdomainFieldMock = jest.fn();
+const createWorkspaceMock = vi.fn();
+const applySuggestionValueMock = vi.fn();
+const handleSubdomainChangeMock = vi.fn();
+const handleWorkspaceNameChangeMock = vi.fn();
+const useWorkspaceSubdomainFieldMock = vi.fn();
 
-jest.mock('@/auth/sign-in-up/hooks/useSignUpInNewWorkspace', () => ({
+vi.mock('@/auth/sign-in-up/hooks/useSignUpInNewWorkspace', () => ({
   useSignUpInNewWorkspace: () => ({ createWorkspace: createWorkspaceMock }),
 }));
 
-jest.mock('@/auth/sign-in-up/hooks/useWorkspaceSubdomainField', () => ({
+vi.mock('@/auth/sign-in-up/hooks/useWorkspaceSubdomainField', () => ({
   useWorkspaceSubdomainField: () => useWorkspaceSubdomainFieldMock(),
 }));
 
-global.URL.createObjectURL = jest.fn(() => 'blob:logo-preview');
-global.URL.revokeObjectURL = jest.fn();
+global.URL.createObjectURL = vi.fn(() => 'blob:logo-preview');
+global.URL.revokeObjectURL = vi.fn();
 
 dynamicActivate(SOURCE_LOCALE);
 
@@ -50,7 +52,7 @@ const renderForm = () =>
 
 describe('SignInUpWorkspaceCreationForm', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     resetJotaiStore();
     useWorkspaceSubdomainFieldMock.mockReturnValue({
       workspaceName: 'Apple',

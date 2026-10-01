@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type RecordTableWidgetContextValue } from '@/object-record/record-table-widget/contexts/RecordTableWidgetContext';
 import { getViewPersistTarget } from '@/object-record/record-table-widget/utils/getViewPersistTarget';
 
@@ -7,8 +9,8 @@ const getWidgetContext = (
   isPageLayoutInEditMode: false,
   pageLayoutId: 'page-layout-id',
   widgetId: 'widget-id',
-  updateViewDraftField: jest.fn(),
-  updateViewDraft: jest.fn(),
+  updateViewDraftField: vi.fn(),
+  updateViewDraft: vi.fn(),
   ...overrides,
 });
 

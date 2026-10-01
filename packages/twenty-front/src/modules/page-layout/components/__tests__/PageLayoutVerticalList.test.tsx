@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { PageLayoutVerticalList } from '@/page-layout/components/PageLayoutVerticalList';
 import { makeWidget as makePageLayoutWidget } from '@/page-layout/testing/pageLayoutDraftFixtures';
 import { type PageLayoutWidget } from '@/page-layout/types/PageLayoutWidget';
@@ -14,14 +16,14 @@ let mockLayoutMode = PageLayoutTabLayoutMode.VERTICAL_LIST;
 let mockIsSideColumnContext = false;
 let mockIsInPinnedTab = false;
 
-jest.mock('@/page-layout/contexts/PageLayoutContentContext', () => ({
+vi.mock('@/page-layout/contexts/PageLayoutContentContext', () => ({
   usePageLayoutContentContext: () => ({
     layoutMode: mockLayoutMode,
     tabId: 'tab-id',
   }),
 }));
 
-jest.mock('@/page-layout/hooks/useIsSideColumnContext', () => ({
+vi.mock('@/page-layout/hooks/useIsSideColumnContext', () => ({
   useIsSideColumnContext: () => ({
     isInPinnedTab: mockIsInPinnedTab,
     isMobile: false,
@@ -29,7 +31,7 @@ jest.mock('@/page-layout/hooks/useIsSideColumnContext', () => ({
   }),
 }));
 
-jest.mock('@/page-layout/widgets/components/WidgetRenderer', () => ({
+vi.mock('@/page-layout/widgets/components/WidgetRenderer', () => ({
   WidgetRenderer: ({ widget }: { widget: PageLayoutWidget }) => {
     const allowPageScroll = useContext(WorkflowDiagramAllowPageScrollContext);
 
@@ -42,14 +44,14 @@ jest.mock('@/page-layout/widgets/components/WidgetRenderer', () => ({
   },
 }));
 
-jest.mock(
+vi.mock(
   '@/ui/utilities/drag-and-drop/components/DragDropItemDropTarget',
   () => ({
     DragDropItemDropTarget: () => null,
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/ui/utilities/drag-and-drop/components/DragDropItemSortableCell',
   () => ({
     DragDropItemSortableCell: ({
@@ -68,8 +70,8 @@ jest.mock(
   }),
 );
 
-jest.mock('@dnd-kit/react', () => ({
-  useDroppable: () => ({ ref: jest.fn() }),
+vi.mock('@dnd-kit/react', () => ({
+  useDroppable: () => ({ ref: vi.fn() }),
 }));
 
 const makeWidget = (id: string, type: WidgetType): PageLayoutWidget => ({

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, fireEvent, render } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -10,11 +12,11 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-const sidePanelCloseAnimationCompleteCleanupMock = jest.fn();
+const sidePanelCloseAnimationCompleteCleanupMock = vi.fn();
 
 let capturedOnContinueChatFromFullWidth: (() => void) | undefined;
 
-jest.mock('@/side-panel/components/SidePanelAskAiHandoffEffect', () => ({
+vi.mock('@/side-panel/components/SidePanelAskAiHandoffEffect', () => ({
   SidePanelAskAiHandoffEffect: ({
     onContinueChatFromFullWidth,
   }: {
@@ -25,34 +27,31 @@ jest.mock('@/side-panel/components/SidePanelAskAiHandoffEffect', () => ({
   },
 }));
 
-jest.mock('framer-motion', () => ({
+vi.mock('framer-motion', () => ({
   useReducedMotion: () => false,
 }));
 
-jest.mock('@/side-panel/components/SidePanelRouter', () => ({
+vi.mock('@/side-panel/components/SidePanelRouter', () => ({
   SidePanelRouter: () => <div data-testid="side-panel-content" />,
 }));
 
-jest.mock('@/side-panel/components/SidePanelWidthEffect', () => ({
+vi.mock('@/side-panel/components/SidePanelWidthEffect', () => ({
   SidePanelWidthEffect: () => null,
 }));
 
-jest.mock('@/ui/layout/resizable-panel/components/ResizablePanelGap', () => ({
+vi.mock('@/ui/layout/resizable-panel/components/ResizablePanelGap', () => ({
   ResizablePanelGap: () => null,
 }));
 
-jest.mock(
-  '@/side-panel/hooks/useSidePanelCloseAnimationCompleteCleanup',
-  () => ({
-    useSidePanelCloseAnimationCompleteCleanup: () => ({
-      sidePanelCloseAnimationCompleteCleanup:
-        sidePanelCloseAnimationCompleteCleanupMock,
-    }),
+vi.mock('@/side-panel/hooks/useSidePanelCloseAnimationCompleteCleanup', () => ({
+  useSidePanelCloseAnimationCompleteCleanup: () => ({
+    sidePanelCloseAnimationCompleteCleanup:
+      sidePanelCloseAnimationCompleteCleanupMock,
   }),
-);
+}));
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
-  useSidePanelMenu: () => ({ closeSidePanelMenu: jest.fn() }),
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+  useSidePanelMenu: () => ({ closeSidePanelMenu: vi.fn() }),
 }));
 
 const Wrapper = ({ children }: { children: ReactNode }) => (
@@ -67,7 +66,7 @@ const startHandoffShrink = () => {
 
 describe('SidePanelForDesktop', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     resetJotaiStore();
     capturedOnContinueChatFromFullWidth = undefined;
     sidePanelCloseAnimationCompleteCleanupMock.mockImplementation(() => {

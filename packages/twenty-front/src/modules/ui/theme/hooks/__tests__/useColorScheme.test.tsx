@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import {
   currentWorkspaceMemberState,
   type CurrentWorkspaceMember,
@@ -9,16 +12,16 @@ import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { act, renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 
-const mockUpdateWorkspaceMemberSettings = jest.fn();
+const mockUpdateWorkspaceMemberSettings = vi.fn();
 
-jest.mock('@apollo/client/react', () => ({
+vi.mock('@apollo/client/react', () => ({
   useMutation: () => [mockUpdateWorkspaceMemberSettings],
 }));
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
@@ -47,7 +50,7 @@ const renderColorSchemeHook = () => {
 
 describe('useColorScheme', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockUpdateWorkspaceMemberSettings.mockResolvedValue({
       data: { updateWorkspaceMemberSettings: true },
     });

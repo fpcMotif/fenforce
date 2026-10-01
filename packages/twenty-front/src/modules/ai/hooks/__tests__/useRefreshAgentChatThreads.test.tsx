@@ -1,3 +1,6 @@
+import type * as ReactModule from '@apollo/client/react';
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { createStore, Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -7,11 +10,11 @@ import { clearMetadataStoreStorage } from '@/metadata-store/storage/metadataStor
 import { metadataStoreState } from '@/metadata-store/states/metadataStoreState';
 import { type AgentChatThread } from '~/generated-metadata/graphql';
 
-const queryMock = jest.fn();
+const queryMock = vi.fn();
 const mockApolloClient = { query: queryMock };
 
-jest.mock('@apollo/client/react', () => ({
-  ...jest.requireActual('@apollo/client/react'),
+vi.mock('@apollo/client/react', async () => ({
+  ...(await vi.importActual<typeof ReactModule>('@apollo/client/react')),
   useApolloClient: () => mockApolloClient,
 }));
 
@@ -38,7 +41,7 @@ const getWrapper = (store: ReturnType<typeof createStore>) =>
 describe('useRefreshAgentChatThreads', () => {
   beforeEach(async () => {
     await clearMetadataStoreStorage();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('keeps the refresh callback stable so render updates do not restart subscriptions', () => {

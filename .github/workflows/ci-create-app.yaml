@@ -35,11 +35,11 @@ jobs:
         with:
           fetch-depth: 10
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
       - name: Build
-        run: npx nx build create-twenty-app
+        run: bunx vite-plus run create-twenty-app#build
       - name: Run ${{ matrix.task }} task
-        uses: ./.github/actions/nx-affected
+        uses: ./.github/actions/affected-tasks
         with:
           tag: scope:create-app
           tasks: ${{ matrix.task }}

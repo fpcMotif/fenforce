@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
@@ -25,11 +27,11 @@ const linkNavigationMenuItem = {
 
 describe('NavigationMenuItemFolderSubItem', () => {
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it('opens a link item in a new tab instead of routing to its absolute URL', async () => {
-    const windowOpen = jest.spyOn(window, 'open').mockImplementation();
+    const windowOpen = vi.spyOn(window, 'open').mockImplementation(() => null);
 
     render(
       <I18nProvider i18n={i18n}>

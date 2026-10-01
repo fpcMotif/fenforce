@@ -59,7 +59,7 @@ When a skill points at a reference, read only what the task needs:
 
 ## How to Verify You're Following Best Practices
 
-When editing the source package, run `npx nx run twenty-agent-skills:validate` and `npx nx run twenty-agent-skills:build` after changes. Every box in `CHECKLIST.md` must be satisfied before a release.
+When editing the source package, run `bunx vite-plus run twenty-agent-skills#validate` and `bunx vite-plus run twenty-agent-skills#build` after changes. Every box in `CHECKLIST.md` must be satisfied before a release.
 
 ## Boundaries
 

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
@@ -45,7 +47,7 @@ describe('SettingsApplicationActionButton', () => {
 
   it('installs the application', async () => {
     const user = userEvent.setup();
-    const onInstall = jest.fn();
+    const onInstall = vi.fn();
 
     renderActionButton({ onInstall });
 

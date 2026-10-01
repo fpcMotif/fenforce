@@ -1,4 +1,4 @@
-import { expect } from '@jest/globals';
+import { expect } from 'vite-plus/test';
 
 import { type MetadataRequestResult } from '@/object-metadata/types/MetadataRequestResult';
 import { type SuccessfulMetadataRequestResult } from '@/object-metadata/types/SuccessfulMetadataRequestResult';

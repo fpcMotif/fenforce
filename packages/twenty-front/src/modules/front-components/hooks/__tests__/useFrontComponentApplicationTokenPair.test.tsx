@@ -1,3 +1,6 @@
+import type * as ReactModule from '@apollo/client/react';
+import { vi } from 'vite-plus/test';
+
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { act, renderHook } from '@testing-library/react';
 import { createStore, Provider as JotaiProvider } from 'jotai';
@@ -12,10 +15,10 @@ import {
   RenewApplicationTokenDocument,
 } from '~/generated-metadata/graphql';
 
-const mockMutate = jest.fn();
+const mockMutate = vi.fn();
 
-jest.mock('@apollo/client/react', () => ({
-  ...jest.requireActual('@apollo/client/react'),
+vi.mock('@apollo/client/react', async () => ({
+  ...(await vi.importActual<typeof ReactModule>('@apollo/client/react')),
   useApolloClient: () => ({
     mutate: mockMutate,
   }),
@@ -112,7 +115,7 @@ const setStoredTokenPair = (
 
 describe('useFrontComponentApplicationTokenPair', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('loadFrontComponentApplicationTokenPair', () => {

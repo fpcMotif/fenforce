@@ -22,13 +22,13 @@ jobs:
           ref: main
 
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
 
       - name: Build dependencies
-        run: npx nx build twenty-shared
+        run: bunx vite-plus run twenty-shared#build
 
       - name: Run sub-processor sync
-        run: npx nx run twenty-server:ts-node-no-deps-transpile-only -- ./scripts/dpa-sync-subprocessors.ts
+        run: bunx vite-plus run twenty-server#ts-node-no-deps-transpile-only ./scripts/dpa-sync-subprocessors.ts
 
       - name: Check for changes
         id: changes

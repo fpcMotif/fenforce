@@ -223,7 +223,7 @@ function summarizeText(runner: string, output: string) {
 
 const sourceFiles = ['packages', 'deployments', 'experiments'].flatMap((path) => files(resolve(ROOT, path)));
 const testFiles = sourceFiles.filter((path) => /(?:\.(?:test|spec)\.[cm]?[jt]sx?|\.integration-(?:spec|test)\.ts|\.e2e-spec\.ts|\.setup\.ts)$/.test(path));
-const configurationFiles = sourceFiles.filter((path) => /\/(?:jest(?:-integration(?:-secure)?)?\.config\.[cm]?[jt]s|vitest(?:\.[\w-]+)?\.config\.[cm]?[jt]s|playwright\.config\.[cm]?[jt]s)$/.test(path));
+const configurationFiles = sourceFiles.filter((path) => /\/(?:jest(?:-integration(?:-secure)?)?\.config\.[cm]?[jt]s|vitest(?:\.[\w-]+)?\.config\.[cm]?[jt]s|vite\.unit\.config\.[cm]?[jt]s|playwright\.config\.[cm]?[jt]s)$/.test(path));
 const sourceRecords = testFiles.map((path) => {
   const content = readFileSync(resolve(ROOT, path), 'utf8');
   const skipMarkers = [...content.matchAll(/\b(?:it|test|describe|suite)\s*\.\s*(skipIf|runIf|skip|todo|only)\s*(?:\.\s*each\s*)?\(/g)]
@@ -251,7 +251,9 @@ const suites: Suite[] = configurationFiles.map((path) => {
   const browser = runner === 'playwright' || /storybook/.test(config + configSource) || ['packages/twenty-front/vitest.config.ts'].includes(path);
   const external = (browser && packageDirectory !== 'packages/twenty-ui') || /integration|e2e/.test(config) || /include:\s*\[\s*['"][^'"]*integration-test/.test(configSource);
   const alias = path === 'packages/twenty-sdk/vitest.unit.config.ts';
-  const executable = ['bunx', '--no-install', runner];
+  const executable = packageDirectory === 'packages/twenty-front' && runner === 'vitest'
+    ? ['bunx', '--no-install', 'vite-plus', 'test']
+    : ['bunx', '--no-install', runner];
   return {
     id: path.replaceAll('/', '--').replace(/\.[^.]+$/, ''), cwd, packageDirectory, runner, config, external, template, alias,
     collectionRequiresFixtures: runner === 'vitest' && external && !browser,

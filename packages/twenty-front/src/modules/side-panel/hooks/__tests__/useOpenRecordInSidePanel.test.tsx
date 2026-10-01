@@ -1,3 +1,7 @@
+import type * as UuidModule from 'uuid';
+import type * as UtilitiesModule from 'twenty-ui/utilities';
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { i18n } from '@lingui/core';
 import { act } from 'react';
@@ -20,26 +24,26 @@ import { PageLayoutType } from '~/generated-metadata/graphql';
 import { getJestMetadataAndApolloMocksAndCommandMenuWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksAndCommandMenuWrapper';
 import { getTestEnrichedObjectMetadataItemsMock } from '~/testing/utils/getTestEnrichedObjectMetadataItemsMock';
 
-jest.mock('uuid', () => ({
-  ...jest.requireActual('uuid'),
-  v4: jest.fn().mockReturnValue('mocked-uuid'),
+vi.mock('uuid', async () => ({
+  ...(await vi.importActual<typeof UuidModule>('uuid')),
+  v4: vi.fn().mockReturnValue('mocked-uuid'),
 }));
 
 i18n.activate('en');
 
-const mockNavigateSidePanel = jest.fn();
-jest.mock('@/side-panel/hooks/useNavigateSidePanel', () => ({
+const mockNavigateSidePanel = vi.fn();
+vi.mock('@/side-panel/hooks/useNavigateSidePanel', () => ({
   useNavigateSidePanel: () => ({
     navigateSidePanel: mockNavigateSidePanel,
   }),
 }));
 
-jest.mock('@/app/routing/utils/isWorkspaceLocationAvailableOnSurface', () => ({
+vi.mock('@/app/routing/utils/isWorkspaceLocationAvailableOnSurface', () => ({
   isWorkspaceLocationAvailableOnSurface: () => true,
 }));
 
-const mockOpenNewRecordTitleCell = jest.fn();
-jest.mock(
+const mockOpenNewRecordTitleCell = vi.fn();
+vi.mock(
   '@/object-record/record-title-cell/hooks/useOpenNewRecordTitleCell',
   () => ({
     useOpenNewRecordTitleCell: () => ({
@@ -48,14 +52,14 @@ jest.mock(
   }),
 );
 
-const mockNavigateApp = jest.fn();
-jest.mock('~/hooks/useNavigateApp', () => ({
+const mockNavigateApp = vi.fn();
+vi.mock('~/hooks/useNavigateApp', () => ({
   useNavigateApp: () => mockNavigateApp,
 }));
 
 let mockIsMobile = false;
-jest.mock('twenty-ui/utilities', () => ({
-  ...jest.requireActual('twenty-ui/utilities'),
+vi.mock('twenty-ui/utilities', async () => ({
+  ...(await vi.importActual<typeof UtilitiesModule>('twenty-ui/utilities')),
   useIsMobile: () => mockIsMobile,
 }));
 
@@ -109,7 +113,7 @@ const renderHooks = () => {
 
 describe('useOpenRecordInSidePanel', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockIsMobile = false;
     jotaiStore.set(newRecordTitleCellToOpenState.atom, null);
     jotaiStore.set(metadataStoreState.atomFamily('pageLayouts'), {

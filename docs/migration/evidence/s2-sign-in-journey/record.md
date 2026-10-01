@@ -2,7 +2,20 @@
 
 Contracts: S2; BE-08; AC-02, AC-03, AC-07. Scope: email and password only, the method the S0 baseline used (`../s0-company-journey/fixture.json`).
 SSO, MFA, other providers, invitations and password changes are not covered.
-No catalog entry is marked verified. Nothing here ran against a deployed Convex preview or a browser.
+No catalog entry is marked verified. Full baseline parity remains incomplete.
+
+## At a glance
+
+Route errors bypassed the recovery screen, retained protected query data, and hid sign-out.
+The preview now clears that cache, offers session recovery, and submits the company revision captured when editing began.
+Existing deployments and unrelated working-tree changes remain untouched.
+
+The October 1 follow-up starts from `1790e94c7f5313b4ce4d71b4c00e176f8b56fe59`; frontend fixes remain uncommitted.
+The user selected a new empty disposable preview instead of migrating existing records.
+Convex created `resilient-bulldog-351`, with reference `franklin-fan:fenforce:preview/s2-session-review-20261001` and a three-day expiry.
+`convex data` confirmed no tables before deployment.
+The schema and functions deployed successfully without touching the original preview.
+The browser ran the local frontend at `http://127.0.0.1:3017` against that deployed backend.
 
 ## Frozen baseline contract (Twenty, upstream `a431f9afb6`, fork `1bf3ec682f`)
 
@@ -24,6 +37,8 @@ Read from source, not re-run in this ticket. S0 ran the sign-in step against a l
 | G2 | A token kept working after sign-out. Convex Auth tokens are stateless and `signOut` only deletes the stored session, so reads and writes with the old token were accepted. | `requireSession` loads the stored session on every call and rejects a missing, mismatched or expired one with `UNAUTHENTICATED`. |
 | G3 | Workspace membership was keyed by `tokenIdentifier`, which contains the session id. A user who signed in again got a new session, lost their workspace, and the old session's membership stayed behind. Found because the same-user second-session test returned `FORBIDDEN`. The S0 journey never read back across two sessions. | Membership and workspace creator are keyed by the stable `users` id. Schema fields and indexes were renamed (`userId`, `by_userId`, `by_workspaceId_and_userId`, `createdByUserId`). |
 | G4 | The query cache is a module singleton and survived sign-out. A different user on the same tab could see the previous user's cached results before the subscription refreshed. | `ClearQueryCacheOnUnmountEffect` clears it when the signed-in tree unmounts, which covers sign-out and a session that ends elsewhere. |
+| G5 | TanStack catches route errors internally. Its default fallback hides recovery, while the cache-clearing sibling remains mounted. | `PreviewRouter` uses `PreviewError`, which clears the cache and offers sign-out. Authentication errors show session-specific recovery. The outer boundary sits inside `Authenticated`, keeping sign-in reachable. |
+| G6 | Company edits omit required `expectedRevision` and fail validation. | The editor captures the revision when editing starts and submits it unchanged after subscription updates. |
 
 Failing run before the fixes: `sessionLifecycle.test.ts` 6 of 7 failed. The assertions that failed: `companies.listDemo` accepted for anonymous; `workspaces.listMine` accepted after sign-out; the same user's second session got `FORBIDDEN`; a forged session id, a subject without a session part, and an expired session were all accepted.
 Front test failed first with `Cannot find module '../ClearQueryCacheOnUnmount'`.
@@ -33,13 +48,13 @@ Front test failed first with `Cannot find module '../ClearQueryCacheOnUnmount'`.
 | Criterion | Status | Evidence |
 | --- | --- | --- |
 | Baseline contract frozen before editing | Partial. The table is read from source, was written after the candidate had already been inspected, and is not backed by a recorded baseline artifact for the session, expiry and sign-out rows. | table above |
-| Permitted user signs in, opens workspace, refreshes a protected URL, signs out | Partial. Sign in, workspace entry and sign out are covered in-process (`companyJourney.test.ts`, `sessionLifecycle.test.ts`). Refresh of `/objects/companies` is not run in a browser; by source the router reads `window.location` and the `Authenticated` gate shows the loading page while the stored token is restored. | `raw/convex-check.txt` |
-| Anonymous cannot read workspace or company data | Met in-process for every public query and the write mutations that exist | `sessionLifecycle.test.ts` "anonymous callers" |
-| Expired or invalid sessions give the recovery state without data | Backend met in-process (expired, forged, no session part). The rendered state is not observed. By source, a rejected query reaches the error boundary ("Unable to load Fenforce", Reload); Reload then fails the token refresh because sign-out and expiry remove the refresh token, and the sign-in form shows. | `sessionLifecycle.test.ts` "invalid and expired sessions" |
-| Sign out clears client state and ends later authenticated reads | Backend met in-process after a real `signIn` with an injected identity; not validated by a deployed auth layer. Query cache cleared in a unit test. The sessionStorage and cross-tab behavior of the baseline has no counterpart here and was not checked. | `sessionLifecycle.test.ts` "sign-out", `ClearQueryCacheOnUnmountEffect.test.tsx` |
-| Real preview identity boundary, translated errors, accessible controls | Not run. See below. | none |
+| Permitted user signs in, opens workspace, refreshes a protected URL, signs out | Observed through the real form against the disposable backend. Protected list refresh and company editing succeeded. | `raw/follow-up-live.json`, `raw/workspace.jpg`, `raw/company.jpg`, `raw/signed-out.jpg` |
+| Anonymous cannot read workspace or company data | All public queries and existing mutations covered in-process. Deployed anonymous workspace and demo-company queries rejected. | `sessionLifecycle.test.ts`, `raw/follow-up-live.json` |
+| Expired or invalid sessions give the recovery state without data | Deployed tampered JWT rejected. Importing expired synthetic sessions invalidated open subscriptions. The browser hid company data and showed session recovery. Keyboard activation returned to sign-in. This does not test passive clock expiry. | `raw/expired.jpg`, `PreviewRouter.test.tsx`, `raw/follow-up-live.json` |
+| Sign out clears client state and ends later authenticated reads | Retained JWT rejected by the deployed guard after sign-out. Another session remained usable. Two browser tabs returned to sign-in after one tab signed out. Cache clearing verified through the real router in Jest. | `raw/follow-up-live.json`, `PreviewRouter.test.tsx`, `ClearQueryCacheOnUnmountEffect.test.tsx` |
+| Real preview identity boundary, translated errors, accessible controls | Real identity boundary verified. English keyboard sign-in and recovery exercised. Translation parity and full accessibility review remain incomplete. | `raw/follow-up-live.json`, browser observations |
 | Revisions, fixtures, commands, results | This file, `raw/`, commit named in the hand-off | `raw/` |
-| Independent review | Not obtained. | none |
+| Independent review | A separate read-only reviewer reproduced the backend and frontend checks and reviewed the final changes. Model-diverse or human review remains unverified. | `raw/follow-up-review.txt` |
 
 ## Differences from the baseline that are not accepted by anyone
 
@@ -47,23 +62,37 @@ Front test failed first with `Cannot find module '../ClearQueryCacheOnUnmount'`.
 - One sign-in per client replaces that client's previous session (library behavior). Baseline keeps several.
 - Failed sign-in shows one generic message for every cause; the baseline's per-cause messages were not compared.
 - Errors in the preview are English only (`en`, empty catalogs). Translated errors are not met.
+- Convex Auth supplies cross-tab token synchronization through localStorage events. Two-tab sign-out was observed; baseline sessionStorage parity remains unverified.
 
 ## Not run
 
-- Sign in against a deployed Convex preview. Needs deployment credentials and preview allowlist values that were not used here. The schema rename needs a data decision before deploying: documents written with `tokenIdentifier` or `createdByTokenIdentifier` no longer validate. No data from the existing preview was inspected.
-- Any browser step, screenshot, keyboard or screen-reader check (AC-09), and the paired Twenty replay.
-- JWT validation by the deployed Convex auth layer, including an invalid or tampered token. The tests inject identities with `withIdentity` after a real in-process `signIn`.
-- Sign out while a subscription is open, and two tabs.
-- `bun docs/migration/check-map.mjs` (red since S0 for an unrelated dead link, F4).
+- Migration of existing preview documents. The renamed schema still rejects legacy fields; the selected empty preview avoids that migration.
+- Paired Twenty replay, screen-reader testing, complete keyboard navigation, and translated-error checks.
+- Passive clock expiry of an already-open subscription and per-request idle-timeout parity.
 - The full front jest suite and the rest of the repository's checks.
 
 ## Commands and results
 
 `raw/convex-check.txt`: `bun run check` in `deployments/convex`, exit 0, 19 tests.
-`raw/front-checks.txt`: preview jest (1 test), oxlint, oxfmt, and the front typecheck. The typecheck still reports the same 8 errors as S0 (7 in legacy settings files, 1 `expectedRevision` in `CompaniesWorkspace.tsx`, S0 finding F5). None is new and none was fixed here; F5 belongs to ticket 7.
+`raw/front-checks.txt` records the original run, before the follow-up fixes.
+Current preview Jest: three suites and three tests pass, including route recovery and revision retention.
+Preview type-aware Oxlint and Oxfmt pass.
+Direct frontend typechecking still fails with seven legacy settings errors; the preview's missing-revision error is fixed.
+`bun docs/migration/check-map.mjs` fails because `criteria-map.md` links to removed `packages/twenty-ui/project.json`.
+That file belongs to the unrelated build-tool changes already present in this checkout.
+
+Regression evidence: the edit test failed because `expectedRevision` was absent.
+Removing the router's recovery component made its test fail on the original "Something went wrong!" screen.
+Restoring the fix passed both tests.
+
+Deployment used `bun run typecheck`, then `convex deploy --codegen disable --typecheck disable` with a deployment-specific credential file.
+Convex's built-in check expects `convex/tsconfig.json`, absent here; the package's root TypeScript check passed separately.
+The initial JWKS upload contained escaped JSON. Publishing the raw JSON fixed discovery before live validation.
+No deployment key, signing key, password, or token is included in evidence.
 
 Fixtures are synthetic: users and sessions are created per test, emails use `example.test`, the invite code and password are throwaway strings in the test files, and the signing key pair is generated per run.
 
 ## Next smallest task
 
-Deploy the renamed schema to a throwaway Convex preview, sign in through the real form with the allowlisted account, and capture the refresh, expired-session and sign-out states with screenshots. That needs the owner's deployment authorization and a decision on existing preview data.
+Resolve session-duration and idle-timeout parity, then verify translations and accessibility against a paired Twenty replay.
+Issue #3 remains open. The disposable backend and local-browser checks do not establish production cutover readiness.

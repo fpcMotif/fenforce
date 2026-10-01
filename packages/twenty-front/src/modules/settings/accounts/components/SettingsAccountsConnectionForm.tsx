@@ -7,7 +7,10 @@ import { Select } from '@/ui/input/components/Select';
 import { SettingsTextInput } from '@/ui/input/components/SettingsTextInput';
 
 import { SettingsAccountsPasswordController } from '@/settings/accounts/components/SettingsAccountsPasswordController';
-import { type ConnectionFormData } from '@/settings/accounts/hooks/useImapSmtpCaldavConnectionForm';
+import {
+  type ConnectionFormData,
+  type ConnectionFormOutput,
+} from '@/settings/accounts/hooks/useImapSmtpCaldavConnectionForm';
 import { type AccountType } from 'twenty-shared/constants';
 import { Section } from 'twenty-ui/components';
 import { MOBILE_VIEWPORT, themeCssVariables } from 'twenty-ui/theme';
@@ -60,7 +63,7 @@ const StyledFieldGroup = styled.div`
 `;
 
 type SettingsAccountsConnectionFormProps = {
-  control: Control<ConnectionFormData>;
+  control: Control<ConnectionFormData, unknown, ConnectionFormOutput>;
   isEditing: boolean;
   existingProtocols?: AccountType[];
 };

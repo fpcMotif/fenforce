@@ -47,11 +47,11 @@ If you don't, make sure you don't have more than one PostgreSQL instance running
 
 #### Cannot find module 'twenty-emails' or its corresponding type declarations.
 
-You have to build the `twenty-emails` package (`npx nx run twenty-emails:build`) before running the database initialization.
+Build the `twenty-emails` package (`bunx vite-plus run twenty-emails#build`) before running database initialization.
 
 #### Missing twenty-x package
 
-Make sure to run yarn in the root directory and then run `npx nx server:dev twenty-server`. If this still doesn't work try building the missing package manually.
+Run `bun install --frozen-lockfile` in the root directory, then `bunx vite-plus run twenty-server#start`. If this still fails, build the missing package manually.
 
 #### Lint on Save not working
 
@@ -65,12 +65,12 @@ This should work out of the box with the Oxc extension (`oxc.oxc-vscode`) instal
 }
 ```
 
-#### While running `npx nx start` or `npx nx start twenty-front`, an out-of-memory error is thrown
+#### While running `bun start` or `bunx vite-plus run twenty-front#start`, an out-of-memory error is thrown
 
-Run only the services you need, instead of `npx nx start`. For instance, if you work on the server, run only `npx nx worker twenty-server`
+Run only the services you need instead of `bun start`. For instance, if you work on the server, run only `bunx vite-plus run twenty-server#worker`.
 
 **If it does not work:**
-If you tried to run only `npx nx run twenty-server:start` on WSL and it's failing with the below memory error:
+If `bunx vite-plus run twenty-server#start` fails on WSL with the following memory error:
 
 `FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory`
 
@@ -87,14 +87,14 @@ Investigate which processes are taking up most of your machine's RAM. At Twenty,
 **If it does not work:**
 Restarting your machine helps clean up ghost processes.
 
-#### While running `npx nx start` there are weird [0] and [1] in logs
+#### While running `bun start` there are [0] and [1] in logs
 
-That's expected as command `npx nx start` is running more commands under the hood
+That is expected: `bun start` runs the frontend, server, and worker concurrently.
 
 #### No emails are sent
 Most of the time, it's because the `worker` is not running in the background. Try to run
 ```
-npx nx worker twenty-server
+bunx vite-plus run twenty-server#worker
 ```
 
 #### Cannot connect my Microsoft 365 account to Twenty

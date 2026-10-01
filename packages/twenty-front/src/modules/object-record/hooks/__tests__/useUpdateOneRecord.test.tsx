@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 
 import {
@@ -28,7 +30,7 @@ const mocks = [
       query,
       variables,
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         updatePerson,
       },
@@ -36,9 +38,9 @@ const mocks = [
   },
 ];
 
-jest.mock('@/object-record/hooks/useRefetchAggregateQueries');
-const mockRefetchAggregateQueries = jest.fn();
-(useRefetchAggregateQueries as jest.Mock).mockReturnValue({
+vi.mock('@/object-record/hooks/useRefetchAggregateQueries');
+const mockRefetchAggregateQueries = vi.fn();
+(useRefetchAggregateQueries as Mock).mockReturnValue({
   refetchAggregateQueries: mockRefetchAggregateQueries,
 });
 
@@ -50,7 +52,7 @@ const idToUpdate = '36abbb63-34ed-4a16-89f5-f549ac55d0f9';
 
 describe('useUpdateOneRecord', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
   it('works as expected', async () => {
     const { result } = renderHook(() => useUpdateOneRecord(), {

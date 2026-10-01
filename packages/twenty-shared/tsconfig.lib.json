@@ -1,11 +1,18 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "moduleResolution": "bundler",
     "declaration": true,
     "declarationMap": true,
     "noEmit": false,
     "outDir": "../../.cache/tsc",
     "types": ["node"]
+  },
+  "tsc-alias": {
+    "replacers": {
+      "base-url": { "enabled": false }
+    },
+    "fileExtensions": { "inputGlob": "d.ts" }
   },
   "include": ["src/**/*.js", "src/**/*.ts"],
   "exclude": [

@@ -20,7 +20,7 @@ inputs:
     required: false
     default: 'latest'
   server-build-cache-key:
-    description: 'Cache key used to speed up the local server build (nx cache).'
+    description: 'Cache key used to speed up the local server build (Vite task cache).'
     required: false
     default: 'server-build'
 
@@ -69,7 +69,7 @@ runs:
 
     - name: Install dependencies
       if: inputs.source == 'local'
-      uses: ./.github/actions/yarn-install
+      uses: ./.github/actions/bun-install
 
     - name: Restore server build cache
       if: inputs.source == 'local'
@@ -81,33 +81,33 @@ runs:
       if: inputs.source == 'local'
       shell: bash
       run: |
-        npx nx build twenty-shared
-        npx nx build twenty-server
+        bunx vite-plus run twenty-shared#build
+        bunx vite-plus run twenty-server#build
 
     - name: Write server env and create databases
       if: inputs.source == 'local'
       shell: bash
       run: |
-        npx nx reset:env:e2e-testing-server twenty-server
+        bunx vite-plus run twenty-server#reset:env:e2e-testing-server
         PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "default";'
         PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "test";'
-        npx nx run twenty-server:database:reset
+        bunx vite-plus run twenty-server#database:reset
 
     - name: Start server
       if: inputs.source == 'local'
       shell: bash
-      run: nohup npx nx start:ci twenty-server &
+      run: nohup bunx vite-plus run twenty-server#start:ci &
 
     - name: Wait for server to be ready
       if: inputs.source == 'local'
       shell: bash
-      run: npx wait-on http://localhost:3000/healthz --timeout 180000 --interval 1000
+      run: bunx wait-on http://localhost:3000/healthz --timeout 180000 --interval 1000
 
     - name: Start worker
       if: inputs.source == 'local'
       shell: bash
       working-directory: packages/twenty-server
-      run: nohup yarn worker:prod > /tmp/twenty-worker.log 2>&1 &
+      run: nohup bun run worker:prod > /tmp/twenty-worker.log 2>&1 &
 
     - name: Resolve server url and api key
       id: resolve

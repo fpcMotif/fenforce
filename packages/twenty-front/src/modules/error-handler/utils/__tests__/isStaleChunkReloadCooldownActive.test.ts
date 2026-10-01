@@ -1,19 +1,21 @@
+import { type MockInstance, vi } from 'vite-plus/test';
+
 import { STALE_CHUNK_RELOAD_TIMESTAMP_KEY } from '@/error-handler/constants/StaleChunkReloadTimestampKey';
 import { isStaleChunkReloadCooldownActive } from '@/error-handler/utils/isStaleChunkReloadCooldownActive';
 
 const NOW = 1_700_000_000_000;
 
 describe('isStaleChunkReloadCooldownActive', () => {
-  let dateNowSpy: jest.SpyInstance;
+  let dateNowSpy: MockInstance;
 
   beforeEach(() => {
     window.sessionStorage.clear();
-    dateNowSpy = jest.spyOn(Date, 'now').mockReturnValue(NOW);
+    dateNowSpy = vi.spyOn(Date, 'now').mockReturnValue(NOW);
   });
 
   afterEach(() => {
     dateNowSpy.mockRestore();
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it('should return false when no timestamp is stored', () => {
@@ -57,7 +59,7 @@ describe('isStaleChunkReloadCooldownActive', () => {
   });
 
   it('should return true without throwing when sessionStorage access throws', () => {
-    jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
       throw new Error('sessionStorage access denied');
     });
 

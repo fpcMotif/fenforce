@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 
 import { EmailThreadMessageSender } from '@/activities/emails/components/EmailThreadMessageSender';
@@ -14,11 +16,11 @@ const SENDER = {
 
 describe('EmailThreadMessageSender', () => {
   beforeEach(() => {
-    jest.useFakeTimers().setSystemTime(NOW);
+    vi.useFakeTimers().setSystemTime(NOW);
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it('renders the sender without a timestamp when the message has no received date', () => {

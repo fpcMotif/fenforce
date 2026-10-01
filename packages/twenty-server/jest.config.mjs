@@ -1,4 +1,5 @@
 import { createRequire } from 'module';
+import jestBabelTransform from './jest-babel-transform.cjs';
 const require = createRequire(import.meta.url);
 
 const isCI = process.env.CI === 'true';
@@ -29,32 +30,7 @@ const jestConfig = {
   ],
   testRegex: '.*\\.spec\\.ts$',
   transform: {
-    // include .mjs so swc transforms ESM-only deps (e.g. jsdom's @csstools/* .mjs)
-    '^.+\\.(t|j|mj)s$': [
-      '@swc/jest',
-      {
-        jsc: {
-          parser: {
-            syntax: 'typescript',
-            tsx: false,
-            decorators: true,
-          },
-          transform: {
-            decoratorMetadata: true,
-          },
-          experimental: {
-            plugins: [
-              [
-                '@lingui/swc-plugin',
-                {
-                  stripNonEssentialFields: false,
-                },
-              ],
-            ],
-          },
-        },
-      },
-    ],
+    '^.+\\.(t|j|mj)s$': jestBabelTransform,
   },
   moduleNameMapper: {
     '^src/(.*)': '<rootDir>/src/$1',

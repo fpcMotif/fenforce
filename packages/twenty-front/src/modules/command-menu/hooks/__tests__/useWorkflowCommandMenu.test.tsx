@@ -1,3 +1,6 @@
+import type * as UuidModule from 'uuid';
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 
 import { SIDE_PANEL_COMPONENT_INSTANCE_ID } from '@/side-panel/constants/SidePanelComponentInstanceId';
@@ -17,13 +20,13 @@ import { IconBolt, IconSettingsAutomation, useIcons } from 'twenty-ui/icon';
 import { getJestMetadataAndApolloMocksAndCommandMenuWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksAndCommandMenuWrapper';
 import { getTestEnrichedObjectMetadataItemsMock } from '~/testing/utils/getTestEnrichedObjectMetadataItemsMock';
 
-jest.mock('uuid', () => ({
-  ...jest.requireActual('uuid'),
-  v4: jest.fn().mockReturnValue('mocked-uuid'),
+vi.mock('uuid', async () => ({
+  ...(await vi.importActual<typeof UuidModule>('uuid')),
+  v4: vi.fn().mockReturnValue('mocked-uuid'),
 }));
 
-const mockNavigateCommandMenu = jest.fn();
-jest.mock('@/side-panel/hooks/useNavigateSidePanel', () => ({
+const mockNavigateCommandMenu = vi.fn();
+vi.mock('@/side-panel/hooks/useNavigateSidePanel', () => ({
   useNavigateSidePanel: () => ({
     navigateSidePanel: mockNavigateCommandMenu,
   }),
@@ -34,8 +37,8 @@ const workflowMockObjectMetadataItem =
     (item) => item.nameSingular === 'workflow',
   )!;
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
-  useObjectMetadataItem: jest.fn(() => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
+  useObjectMetadataItem: vi.fn(() => ({
     objectMetadataItem: workflowMockObjectMetadataItem,
   })),
 }));
@@ -116,7 +119,7 @@ const renderHooks = () => {
 
 describe('useSidePanelWorkflowNavigation', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should navigate to the workflow step select trigger type page', () => {

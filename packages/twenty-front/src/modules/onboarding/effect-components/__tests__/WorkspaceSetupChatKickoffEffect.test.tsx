@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { MockedProvider } from '@apollo/client/testing/react';
 import { act, render } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
@@ -119,7 +121,7 @@ describe('WorkspaceSetupChatKickoffEffect', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('preserves the selected conversation when setup finishes after leaving onboarding', async () => {

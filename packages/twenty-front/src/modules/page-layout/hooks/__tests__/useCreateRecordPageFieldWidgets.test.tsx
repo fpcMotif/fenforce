@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { isLayoutCustomizationModeEnabledState } from '@/layout-customization/states/isLayoutCustomizationModeEnabledState';
 import { PageLayoutContentProvider } from '@/page-layout/contexts/PageLayoutContentContext';
 import {
@@ -22,9 +24,9 @@ import {
   WidgetType,
 } from '~/generated-metadata/graphql';
 
-const mockNavigatePageLayoutSidePanel = jest.fn();
+const mockNavigatePageLayoutSidePanel = vi.fn();
 
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/hooks/useNavigatePageLayoutSidePanel',
   () => ({
     useNavigatePageLayoutSidePanel: () => ({
@@ -33,17 +35,17 @@ jest.mock(
   }),
 );
 
-jest.mock('@/ui/layout/contexts/useTargetRecord', () => ({
+vi.mock('@/ui/layout/contexts/useTargetRecord', () => ({
   useTargetRecord: () => ({ targetObjectNameSingular: 'company' }),
 }));
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
   useObjectMetadataItem: () => ({
     objectMetadataItem: { id: 'company-metadata' },
   }),
 }));
 
-jest.mock(
+vi.mock(
   '@/page-layout/widgets/field/hooks/useFieldWidgetEligibleFields',
   () => ({
     useFieldWidgetEligibleFields: () => [],
@@ -51,7 +53,7 @@ jest.mock(
 );
 
 describe('record-page field widget creation', () => {
-  beforeEach(() => jest.resetAllMocks());
+  beforeEach(() => vi.resetAllMocks());
 
   it.each([
     {

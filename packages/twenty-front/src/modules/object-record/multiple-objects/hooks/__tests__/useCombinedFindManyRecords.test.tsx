@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { gql } from '@apollo/client';
 import { renderHook, waitFor } from '@testing-library/react';
 
@@ -10,10 +12,10 @@ import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
 import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksWrapper';
 import { getTestEnrichedObjectMetadataItemsMock } from '~/testing/utils/getTestEnrichedObjectMetadataItemsMock';
 
-jest.mock(
+vi.mock(
   '@/object-record/multiple-objects/hooks/useGenerateCombinedFindManyRecordsQuery',
   () => ({
-    useGenerateCombinedFindManyRecordsQuery: jest.fn(),
+    useGenerateCombinedFindManyRecordsQuery: vi.fn(),
   }),
 );
 
@@ -107,7 +109,7 @@ const renderUseCombinedFindManyRecordsHook = async ({
   expectedResult = {},
   mockQueryResult = mockQuery,
 }: RenderUseCombinedFindManyRecordsHookParams) => {
-  (useGenerateCombinedFindManyRecordsQuery as jest.Mock).mockReturnValue(
+  (useGenerateCombinedFindManyRecordsQuery as Mock).mockReturnValue(
     mockQueryResult,
   );
 
@@ -153,7 +155,7 @@ const renderUseCombinedFindManyRecordsHook = async ({
 
 describe('useCombinedFindManyRecords', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should return records for multiple objects', async () => {

@@ -1,3 +1,6 @@
+import type * as UuidModule from 'uuid';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,12 +16,12 @@ import {
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
 const mockedUuid = 'mocked-uuid';
-jest.mock('uuid', () => ({
-  ...jest.requireActual('uuid'),
-  v4: jest.fn(),
+vi.mock('uuid', async () => ({
+  ...(await vi.importActual<typeof UuidModule>('uuid')),
+  v4: vi.fn(),
 }));
 
-(uuidv4 as jest.Mock).mockReturnValue(mockedUuid);
+(uuidv4 as Mock).mockReturnValue(mockedUuid);
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
   <JotaiProvider store={jotaiStore}>
@@ -34,7 +37,7 @@ const renderHookConfig = {
   wrapper: Wrapper,
 };
 
-const mockOnclick = jest.fn();
+const mockOnclick = vi.fn();
 
 type DialogOptionsArray = Array<Omit<DialogOptions, 'id'>>;
 

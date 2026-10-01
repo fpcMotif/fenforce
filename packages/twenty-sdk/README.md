@@ -79,19 +79,19 @@ yarn install
 ### Development mode
 
 ```bash
-npx nx run twenty-sdk:dev
+bunx vite-plus run twenty-sdk#dev
 ```
 
 ### Production build
 
 ```bash
-npx nx run twenty-sdk:build
+bunx vite-plus run twenty-sdk#build
 ```
 
 ### Running the CLI locally
 
 ```bash
-npx nx run twenty-sdk:start -- <command>
+bunx vite-plus run twenty-sdk#start -- <command>
 ```
 
 ### Resources

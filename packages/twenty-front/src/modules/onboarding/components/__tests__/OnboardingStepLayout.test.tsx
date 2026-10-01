@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { MockedProvider } from '@apollo/client/testing/react';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
@@ -17,14 +19,14 @@ import {
 import { ToastProvider } from 'twenty-ui/components';
 import { messages } from '~/locales/generated/en';
 
-jest.mock(
+vi.mock(
   '@/onboarding/effect-components/PrefetchPlanRequiredStepEffect',
   () => ({
     PrefetchPlanRequiredStepEffect: () => null,
   }),
 );
 
-jest.mock('@/onboarding/components/OnboardingTransitionOutlet', () => ({
+vi.mock('@/onboarding/components/OnboardingTransitionOutlet', () => ({
   OnboardingTransitionOutlet: () => null,
 }));
 

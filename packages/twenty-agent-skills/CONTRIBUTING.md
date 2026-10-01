@@ -15,9 +15,9 @@ The main-only publishing workflow validates and builds this package, then publis
 Run from the repository root:
 
 ```bash
-npx nx run twenty-agent-skills:validate
-npx nx run twenty-agent-skills:build
-npx nx run twenty-agent-skills:test
+bunx vite-plus run twenty-agent-skills#validate
+bunx vite-plus run twenty-agent-skills#build
+bunx vite-plus run twenty-agent-skills#test
 ```
 
 All must pass before merge. Build validation checks that references remain within each installed skill. Scripts use Node built-ins only; no new runtime dependencies.
@@ -25,7 +25,7 @@ All must pass before merge. Build validation checks that references remain withi
 For an actual installation check, install the built distribution into an isolated directory with the `skills` CLI, then verify its installed copies:
 
 ```bash
-npx nx run twenty-agent-skills:verify:install -- "<install-directory>" create-app
+bunx vite-plus run twenty-agent-skills#verify:install -- "<install-directory>" create-app
 ```
 
 Omit skill names to verify all five. CI exercises both single-skill and all-skill installs. Changes affecting scaffold or sync guidance also need the manual procedure in [`SMOKE-TEST.md`](./SMOKE-TEST.md).

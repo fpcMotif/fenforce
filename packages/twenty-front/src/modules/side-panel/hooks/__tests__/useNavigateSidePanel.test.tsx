@@ -1,3 +1,6 @@
+import type * as UuidModule from 'uuid';
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { act } from 'react';
 
@@ -11,9 +14,9 @@ import { Icon123, useIcons } from 'twenty-ui/icon';
 import { getJestMetadataAndApolloMocksAndCommandMenuWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksAndCommandMenuWrapper';
 import { getTestEnrichedObjectMetadataItemsMock } from '~/testing/utils/getTestEnrichedObjectMetadataItemsMock';
 
-jest.mock('uuid', () => ({
-  ...jest.requireActual('uuid'),
-  v4: jest.fn().mockReturnValue('mocked-uuid'),
+vi.mock('uuid', async () => ({
+  ...(await vi.importActual<typeof UuidModule>('uuid')),
+  v4: vi.fn().mockReturnValue('mocked-uuid'),
 }));
 
 const personMockObjectMetadataItem =
@@ -56,7 +59,7 @@ const renderHooks = () => {
 
 describe('useNavigateSidePanel', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should navigate to the correct page', () => {

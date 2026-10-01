@@ -1,19 +1,21 @@
+import { vi } from 'vite-plus/test';
+
 import { createRecordExportConnection } from '@/record-export/utils/createRecordExportConnection';
 import { createClient, type ExecutionResult, type Sink } from 'graphql-sse';
 import { type ExportRecordsSubscription } from '~/generated-metadata/graphql';
 
 let mockSink: Sink<ExecutionResult<ExportRecordsSubscription>>;
-const mockDispose = jest.fn();
+const mockDispose = vi.fn();
 let mockServerBaseUrl = 'https://workspace.example.test';
 
-jest.mock('~/config', () => ({
+vi.mock('~/config', () => ({
   get REACT_APP_SERVER_BASE_URL() {
     return mockServerBaseUrl;
   },
 }));
 
-jest.mock('graphql-sse', () => ({
-  createClient: jest.fn(() => ({
+vi.mock('graphql-sse', () => ({
+  createClient: vi.fn(() => ({
     dispose: mockDispose,
     subscribe: (_request: unknown, sink: typeof mockSink) => {
       mockSink = sink;
@@ -36,16 +38,16 @@ const update = (values: Partial<ExportRecordsSubscription['exportRecords']>) =>
 
 describe('createRecordExportConnection', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockServerBaseUrl = 'https://workspace.example.test';
   });
-  afterEach(() => jest.restoreAllMocks());
+  afterEach(() => vi.restoreAllMocks());
 
   it('reports server progress and automatically downloads the completed file once', async () => {
-    const click = jest
+    const click = vi
       .spyOn(HTMLAnchorElement.prototype, 'click')
       .mockImplementation(() => {});
-    const onProgress = jest.fn();
+    const onProgress = vi.fn();
     const connection = createRecordExportConnection();
     const finished = connection.exportRecords({ input, onProgress });
     update({});
@@ -86,7 +88,7 @@ describe('createRecordExportConnection', () => {
     'downloads through the authenticated API at $serverBaseUrl',
     async ({ serverBaseUrl, expectedBaseUrl }) => {
       mockServerBaseUrl = serverBaseUrl;
-      const click = jest
+      const click = vi
         .spyOn(HTMLAnchorElement.prototype, 'click')
         .mockImplementation(() => {});
       const finished = createRecordExportConnection().exportRecords({ input });
@@ -116,7 +118,7 @@ describe('createRecordExportConnection', () => {
     '/downloads/generated/company%20export.csv',
   ])('uses the server-provided download path %s', async (downloadPath) => {
     mockServerBaseUrl = 'https://workspace.example.test/twenty/';
-    const click = jest
+    const click = vi
       .spyOn(HTMLAnchorElement.prototype, 'click')
       .mockImplementation(() => {});
     const finished = createRecordExportConnection().exportRecords({ input });
@@ -159,7 +161,7 @@ describe('createRecordExportConnection', () => {
   );
 
   it('ignores late completion after cancellation', async () => {
-    const click = jest
+    const click = vi
       .spyOn(HTMLAnchorElement.prototype, 'click')
       .mockImplementation(() => {});
     const connection = createRecordExportConnection();

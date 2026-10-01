@@ -1,14 +1,16 @@
+import { vi } from 'vite-plus/test';
+
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import { RecordCalendarCard } from '@/object-record/record-calendar/record-calendar-card/components/RecordCalendarCard';
 
-const mockOpenRecordFromIndexView = jest.fn();
-const mockUseGetCurrentViewOnly = jest.fn();
+const mockOpenRecordFromIndexView = vi.fn();
+const mockUseGetCurrentViewOnly = vi.fn();
 
-jest.mock('@/views/hooks/useGetCurrentViewOnly', () => ({
+vi.mock('@/views/hooks/useGetCurrentViewOnly', () => ({
   useGetCurrentViewOnly: () => mockUseGetCurrentViewOnly(),
 }));
-jest.mock(
+vi.mock(
   '@/object-record/record-index/hooks/useOpenRecordFromIndexView',
   () => ({
     useOpenRecordFromIndexView: () => ({
@@ -16,25 +18,23 @@ jest.mock(
     }),
   }),
 );
-jest.mock(
-  '@/ui/utilities/state/jotai/hooks/useAtomComponentFamilyState',
-  () => ({ useAtomComponentFamilyState: () => [false, jest.fn()] }),
-);
-jest.mock(
-  '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
-  () => ({ useAtomComponentStateValue: () => false }),
-);
-jest.mock(
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentFamilyState', () => ({
+  useAtomComponentFamilyState: () => [false, vi.fn()],
+}));
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue', () => ({
+  useAtomComponentStateValue: () => false,
+}));
+vi.mock(
   '@/ui/utilities/state/component-state/hooks/useAvailableComponentInstanceIdOrThrow',
   () => ({ useAvailableComponentInstanceIdOrThrow: () => 'calendar-id' }),
 );
-jest.mock('@/ui/utilities/state/jotai/hooks/useSetAtomComponentState', () => ({
-  useSetAtomComponentState: () => jest.fn(),
+vi.mock('@/ui/utilities/state/jotai/hooks/useSetAtomComponentState', () => ({
+  useSetAtomComponentState: () => vi.fn(),
 }));
-jest.mock('@/ui/layout/dropdown/hooks/useOpenDropdown', () => ({
-  useOpenDropdown: () => ({ openDropdown: jest.fn() }),
+vi.mock('@/ui/layout/dropdown/hooks/useOpenDropdown', () => ({
+  useOpenDropdown: () => ({ openDropdown: vi.fn() }),
 }));
-jest.mock(
+vi.mock(
   '@/object-record/record-field-list/contexts/RecordFieldsScopeContext',
   () => ({
     RecordFieldsScopeContextProvider: ({
@@ -44,27 +44,27 @@ jest.mock(
     }) => children,
   }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar/record-calendar-card/anchored-portal/components/RecordCalendarCardCellHoveredPortal',
   () => ({ RecordCalendarCardCellHoveredPortal: () => null }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar/record-calendar-card/anchored-portal/components/RecordCalendarCardCellEditModePortal',
   () => ({ RecordCalendarCardCellEditModePortal: () => null }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar/record-calendar-card/components/RecordCalendarCardHeader',
   () => ({
     RecordCalendarCardHeader: () => <div data-testid="card-header" />,
   }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar/record-calendar-card/components/RecordCalendarCardBody',
   () => ({
     RecordCalendarCardBody: () => <div data-testid="card-body" />,
   }),
 );
-jest.mock('@/object-record/record-card/components/RecordCard', () => ({
+vi.mock('@/object-record/record-card/components/RecordCard', () => ({
   RecordCard: ({
     children,
     onClick,
@@ -77,7 +77,7 @@ jest.mock('@/object-record/record-card/components/RecordCard', () => ({
     </button>
   ),
 }));
-jest.mock('twenty-ui/primitives/layout', () => ({
+vi.mock('twenty-ui/primitives/layout', () => ({
   AnimatedExpandableContainer: ({
     children,
     isExpanded,
@@ -89,7 +89,7 @@ jest.mock('twenty-ui/primitives/layout', () => ({
 
 describe('RecordCalendarCard', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('shows the full card body without making the whole card clickable', () => {

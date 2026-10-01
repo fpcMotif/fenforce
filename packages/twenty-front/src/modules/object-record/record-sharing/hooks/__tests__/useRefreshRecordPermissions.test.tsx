@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { createStore, Provider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -8,9 +10,9 @@ import { useRefreshRecordPermissions } from '@/object-record/record-sharing/hook
 import { recordPermissionsFamilySelector } from '@/object-record/record-sharing/states/recordPermissionsFamilySelector';
 import { type GetRecordPermissionsQuery } from '~/generated-metadata/graphql';
 
-const mockQuery = jest.fn();
+const mockQuery = vi.fn();
 const mockClient = { query: mockQuery };
-jest.mock('@apollo/client/react', () => ({
+vi.mock('@apollo/client/react', () => ({
   useApolloClient: () => mockClient,
 }));
 const target = { objectMetadataId: 'object', recordId: 'record' };
@@ -54,7 +56,7 @@ const setup = () => {
 
 describe('Viewer-scoped record permissions', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it('loads permissions separately and keeps the refresh callback stable', async () => {

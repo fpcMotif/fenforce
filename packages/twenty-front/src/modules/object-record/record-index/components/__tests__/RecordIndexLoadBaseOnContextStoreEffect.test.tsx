@@ -1,52 +1,53 @@
+import { vi } from 'vite-plus/test';
+
 import { render } from '@testing-library/react';
 
 import { RecordIndexLoadBaseOnContextStoreEffect } from '@/object-record/record-index/components/RecordIndexLoadBaseOnContextStoreEffect';
 
-jest.mock(
-  '@/object-record/record-index/hooks/useLoadRecordIndexStates',
-  () => ({
-    useLoadRecordIndexStates: jest.fn(),
-  }),
-);
-jest.mock(
-  '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
-  () => ({
-    useAtomComponentStateValue: jest.fn(),
-  }),
-);
-jest.mock(
-  '@/ui/utilities/state/jotai/hooks/useAtomFamilySelectorValue',
-  () => ({
-    useAtomFamilySelectorValue: jest.fn(),
-  }),
-);
-jest.mock(
+vi.mock('@/object-record/record-index/hooks/useLoadRecordIndexStates', () => ({
+  useLoadRecordIndexStates: vi.fn(),
+}));
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue', () => ({
+  useAtomComponentStateValue: vi.fn(),
+}));
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomFamilySelectorValue', () => ({
+  useAtomFamilySelectorValue: vi.fn(),
+}));
+vi.mock(
   '@/context-store/hooks/useContextStoreObjectMetadataItemOrThrow',
   () => ({
-    useContextStoreObjectMetadataItemOrThrow: jest.fn(),
+    useContextStoreObjectMetadataItemOrThrow: vi.fn(),
   }),
 );
 
-const useLoadRecordIndexStatesMock = jest.requireMock(
-  '@/object-record/record-index/hooks/useLoadRecordIndexStates',
+const useLoadRecordIndexStatesMock = (
+  await vi.importMock<{ useLoadRecordIndexStates: ReturnType<typeof vi.fn> }>(
+    '@/object-record/record-index/hooks/useLoadRecordIndexStates',
+  )
 ).useLoadRecordIndexStates;
-const useAtomComponentStateValueMock = jest.requireMock(
-  '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
+const useAtomComponentStateValueMock = (
+  await vi.importMock<{ useAtomComponentStateValue: ReturnType<typeof vi.fn> }>(
+    '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
+  )
 ).useAtomComponentStateValue;
-const useAtomFamilySelectorValueMock = jest.requireMock(
-  '@/ui/utilities/state/jotai/hooks/useAtomFamilySelectorValue',
+const useAtomFamilySelectorValueMock = (
+  await vi.importMock<{ useAtomFamilySelectorValue: ReturnType<typeof vi.fn> }>(
+    '@/ui/utilities/state/jotai/hooks/useAtomFamilySelectorValue',
+  )
 ).useAtomFamilySelectorValue;
-const useContextStoreObjectMetadataItemOrThrowMock = jest.requireMock(
-  '@/context-store/hooks/useContextStoreObjectMetadataItemOrThrow',
+const useContextStoreObjectMetadataItemOrThrowMock = (
+  await vi.importMock<{
+    useContextStoreObjectMetadataItemOrThrow: ReturnType<typeof vi.fn>;
+  }>('@/context-store/hooks/useContextStoreObjectMetadataItemOrThrow')
 ).useContextStoreObjectMetadataItemOrThrow;
 
 describe('RecordIndexLoadBaseOnContextStoreEffect', () => {
-  const loadRecordIndexStates = jest.fn();
+  const loadRecordIndexStates = vi.fn();
   const view = { id: 'view-id' };
   const objectMetadataItem = { id: 'object-metadata-id' };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     useLoadRecordIndexStatesMock.mockReturnValue({ loadRecordIndexStates });
     useAtomComponentStateValueMock.mockReturnValue('view-id');
     useAtomFamilySelectorValueMock.mockReturnValue(view);

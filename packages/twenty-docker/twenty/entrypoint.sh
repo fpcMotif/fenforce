@@ -13,18 +13,18 @@ setup_and_migrate_db() {
     has_schema=$(psql -tAc "SELECT EXISTS (SELECT 1 FROM information_schema.schemata WHERE schema_name = 'core')" ${PG_DATABASE_URL})
     if [ "$has_schema" = "f" ]; then
         echo "Database appears to be empty, running migrations."
-        yarn database:init:prod
+        bun run database:init:prod
     fi
 
-    if ! yarn command:prod cache:flush; then
+    if ! bun run command:prod cache:flush; then
         echo "Warning: Failed to flush cache before upgrade, but continuing startup..."
     fi
 
-    if ! yarn command:prod upgrade; then
+    if ! bun run command:prod upgrade; then
         echo "Warning: Upgrade completed with errors. Some workspaces may not be fully migrated. Check logs for details."
     fi
 
-    if ! yarn command:prod cache:flush; then
+    if ! bun run command:prod cache:flush; then
         echo "Warning: Failed to flush cache after upgrade, but continuing startup..."
     fi
 
@@ -38,7 +38,7 @@ register_background_jobs() {
     fi
 
     echo "Registering background sync jobs..."
-    if yarn command:prod cron:register:all; then
+    if bun run command:prod cron:register:all; then
         echo "Successfully registered all background sync jobs!"
     else
         echo "Warning: Failed to register background jobs, but continuing startup..."

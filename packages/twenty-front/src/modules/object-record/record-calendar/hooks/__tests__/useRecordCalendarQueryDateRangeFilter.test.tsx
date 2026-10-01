@@ -1,3 +1,7 @@
+import type * as LocaleModule from 'date-fns/locale';
+import type * as UtilsModule from 'twenty-shared/utils';
+import { vi } from 'vite-plus/test';
+
 import { useRecordCalendarQueryDateRangeFilter } from '@/object-record/record-calendar/hooks/useRecordCalendarQueryDateRangeFilter';
 import { recordIndexCalendarFieldMetadataIdComponentState } from '@/object-record/record-index/states/recordIndexCalendarFieldMetadataIdComponentState';
 import { recordIndexCalendarLayoutComponentState } from '@/object-record/record-index/states/recordIndexCalendarLayoutComponentState';
@@ -15,7 +19,7 @@ const mockCalendarField = {
 };
 let mockLayout = ViewCalendarLayout.DAY;
 
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar/contexts/RecordCalendarContext',
   () => ({
     useRecordCalendarContextOrThrow: () => ({
@@ -24,34 +28,32 @@ jest.mock(
     }),
   }),
 );
-jest.mock('@/ui/input/components/internal/date/hooks/useUserTimezone', () => ({
+vi.mock('@/ui/input/components/internal/date/hooks/useUserTimezone', () => ({
   useUserTimezone: () => ({ userTimezone: 'America/Los_Angeles' }),
 }));
-jest.mock(
+vi.mock(
   '@/object-record/record-filter/hooks/useFilterValueDependencies',
   () => ({
     useFilterValueDependencies: () => ({ filterValueDependencies: {} }),
   }),
 );
-jest.mock(
-  '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
-  () => ({
-    useAtomComponentStateValue: (state: unknown) => {
-      if (state === recordIndexCalendarFieldMetadataIdComponentState)
-        return mockCalendarField.id;
-      if (state === recordIndexCalendarLayoutComponentState) return mockLayout;
-      return [];
-    },
-  }),
-);
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => {
-  const { enUS } = jest.requireActual('date-fns/locale');
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue', () => ({
+  useAtomComponentStateValue: (state: unknown) => {
+    if (state === recordIndexCalendarFieldMetadataIdComponentState)
+      return mockCalendarField.id;
+    if (state === recordIndexCalendarLayoutComponentState) return mockLayout;
+    return [];
+  },
+}));
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', async () => {
+  const { enUS } =
+    await vi.importActual<typeof LocaleModule>('date-fns/locale');
   return {
     useAtomStateValue: () => ({ calendarStartDay: 1, localeCatalog: enUS }),
   };
 });
-jest.mock('twenty-shared/utils', () => ({
-  ...jest.requireActual('twenty-shared/utils'),
+vi.mock('twenty-shared/utils', async () => ({
+  ...(await vi.importActual<typeof UtilsModule>('twenty-shared/utils')),
   computeRecordGqlOperationFilter: () => ({ status: { eq: 'OPEN' } }),
   turnAnyFieldFilterIntoRecordGqlFilter: () => ({
     recordGqlOperationFilter: { name: { ilike: '%Acme%' } },

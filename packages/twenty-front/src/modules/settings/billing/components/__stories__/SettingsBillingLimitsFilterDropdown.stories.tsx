@@ -1,10 +1,12 @@
 import { SettingsBillingLimitsFilterDropdown } from '@/settings/billing/components/SettingsBillingLimitsFilterDropdown';
+import { i18n } from '@lingui/core';
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Button } from 'twenty-ui/primitives/input';
 import { ComponentDecorator } from 'twenty-ui/testing';
 import { UsageResourceType } from '~/generated-metadata/graphql';
+import { messages as frenchMessages } from '~/locales/generated/fr-FR';
 
 const FilterExample = () => {
   const [resource, setResource] = useState<UsageResourceType | null>(null);
@@ -73,5 +75,42 @@ export const PagesRetainChoicesAndReset: Story = {
     await userEvent.click(trigger);
     expect(await body.findByRole('button', { name: /Spender/ })).toBeVisible();
     await userEvent.keyboard('{Escape}');
+  },
+};
+
+export const FrenchControls: Story = {
+  beforeEach: () => {
+    const previousLocale = i18n.locale;
+    i18n.load('fr-FR', frenchMessages);
+    i18n.activate('fr-FR');
+
+    return () => i18n.activate(previousLocale);
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(canvasElement.ownerDocument.body);
+    await userEvent.click(
+      canvas.getByRole('button', { name: 'Filter limits' }),
+    );
+    const popup = await body.findByRole('dialog');
+    await userEvent.click(
+      within(popup).getByRole('button', { name: /Utilisation/ }),
+    );
+    await userEvent.click(
+      await within(popup).findByRole('button', { name: 'IA' }),
+    );
+    await expect(
+      within(popup).getByRole('button', { name: 'IA' }),
+    ).toHaveAttribute('aria-pressed', 'true');
+    await userEvent.click(
+      within(popup).getByRole('button', { name: 'Utilisation' }),
+    );
+    await userEvent.click(
+      await within(popup).findByRole('button', { name: 'Effacer les filtres' }),
+    );
+    await expect(
+      within(popup).queryByRole('button', { name: 'Effacer les filtres' }),
+    ).not.toBeInTheDocument();
+    await expect(popup).toBeVisible();
   },
 };

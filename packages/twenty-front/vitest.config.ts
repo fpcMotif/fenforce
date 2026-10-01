@@ -3,7 +3,7 @@ import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from 'vite-plus';
 
 const MINUTES_IN_MS = 60 * 1000;
 
@@ -31,7 +31,10 @@ export default defineConfig({
             configDir: path.join(dirname, '.storybook'),
             ...(process.env.STORYBOOK_URL
               ? { storybookUrl: process.env.STORYBOOK_URL }
-              : { storybookScript: 'yarn storybook --no-open' }),
+              : {
+                  storybookScript:
+                    'bun run storybook:serve:dev:command --no-open',
+                }),
           }),
           ...(shouldCaptureArgosScreenshots
             ? [
@@ -54,7 +57,7 @@ export default defineConfig({
             enabled: true,
             headless: true,
             viewport: { width: 1200, height: 900 },
-            provider: playwright({}),
+            provider: playwright({ launchOptions: { channel: 'chromium' } }),
             instances: [{ browser: 'chromium' }],
           },
           setupFiles: ['./.storybook/vitest.setup.ts'],

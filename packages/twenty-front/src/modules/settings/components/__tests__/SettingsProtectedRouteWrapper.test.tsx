@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen, waitFor } from '@testing-library/react';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
@@ -14,19 +16,19 @@ i18n.load({
 });
 i18n.activate(SOURCE_LOCALE);
 
-const useIsLoggedMock = jest.fn(() => true);
-const useHasPermissionFlagMock = jest.fn(() => false);
-const useIsFeatureEnabledMock = jest.fn(() => true);
+const useIsLoggedMock = vi.fn(() => true);
+const useHasPermissionFlagMock = vi.fn(() => false);
+const useIsFeatureEnabledMock = vi.fn(() => true);
 
-jest.mock('@/auth/hooks/useIsLogged', () => ({
+vi.mock('@/auth/hooks/useIsLogged', () => ({
   useIsLogged: () => useIsLoggedMock(),
 }));
 
-jest.mock('@/settings/roles/hooks/useHasPermissionFlag', () => ({
+vi.mock('@/settings/roles/hooks/useHasPermissionFlag', () => ({
   useHasPermissionFlag: () => useHasPermissionFlagMock(),
 }));
 
-jest.mock('@/workspace/hooks/useIsFeatureEnabled', () => ({
+vi.mock('@/workspace/hooks/useIsFeatureEnabled', () => ({
   useIsFeatureEnabled: () => useIsFeatureEnabledMock(),
 }));
 
@@ -68,7 +70,7 @@ const renderProtectedRoute = (surface: 'main' | 'side-panel') =>
 
 describe('SettingsProtectedRouteWrapper', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     useIsLoggedMock.mockReturnValue(true);
     useHasPermissionFlagMock.mockReturnValue(false);
     useIsFeatureEnabledMock.mockReturnValue(true);

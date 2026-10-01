@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { MobileNavigationBar } from '@/navigation/components/MobileNavigationBar';
 import { useMobileNavigationBarItems } from '@/navigation/hooks/useMobileNavigationBarItems';
 import { render, screen } from '@testing-library/react';
@@ -5,9 +7,9 @@ import { createStore, Provider } from 'jotai';
 import { MemoryRouter } from 'react-router-dom';
 import { IconHome } from 'twenty-ui/icon';
 
-jest.mock('@/navigation/hooks/useMobileNavigationBarItems');
+vi.mock('@/navigation/hooks/useMobileNavigationBarItems');
 
-jest.mock('@/navigation/components/MobileNavigationBarScrollEffect', () => ({
+vi.mock('@/navigation/components/MobileNavigationBarScrollEffect', () => ({
   MobileNavigationBarScrollEffect: () => null,
 }));
 
@@ -22,10 +24,10 @@ const renderMobileNavigationBar = (pathname: string) =>
 
 describe('MobileNavigationBar', () => {
   beforeEach(() => {
-    jest.mocked(useMobileNavigationBarItems).mockReturnValue({
+    vi.mocked(useMobileNavigationBarItems).mockReturnValue({
       activeItemName: 'home',
       items: [
-        { name: 'home', label: 'Home', Icon: IconHome, onClick: jest.fn() },
+        { name: 'home', label: 'Home', Icon: IconHome, onClick: vi.fn() },
       ],
     });
   });

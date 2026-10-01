@@ -1,19 +1,22 @@
+import type * as ReactModule from '@apollo/client/react';
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 
 import { type MetadataOperationBrowserEventDetail } from '@/browser-event/types/MetadataOperationBrowserEventDetail';
 import { useUpdateSdkClientChecksumsApolloCache } from '@/front-components/hooks/useUpdateSdkClientChecksumsApolloCache';
 import { type ApplicationSdkClientChecksumsBroadcastRecord } from '@/front-components/types/ApplicationSdkClientChecksumsBroadcastRecord';
 
-const mockReadQuery = jest.fn();
-const mockUpdateQuery = jest.fn();
-const mockQuery = jest.fn().mockResolvedValue({ data: undefined });
+const mockReadQuery = vi.fn();
+const mockUpdateQuery = vi.fn();
+const mockQuery = vi.fn().mockResolvedValue({ data: undefined });
 const mockApolloClient = {
   cache: { readQuery: mockReadQuery, updateQuery: mockUpdateQuery },
   query: mockQuery,
 };
 
-jest.mock('@apollo/client/react', () => ({
-  ...jest.requireActual('@apollo/client/react'),
+vi.mock('@apollo/client/react', async () => ({
+  ...(await vi.importActual<typeof ReactModule>('@apollo/client/react')),
   useApolloClient: () => mockApolloClient,
 }));
 
@@ -47,7 +50,7 @@ const buildUpdateDetail = (
 
 describe('useUpdateSdkClientChecksumsApolloCache', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockReadQuery.mockReturnValue(CACHED_CHECKSUM_PAIR);
   });
 

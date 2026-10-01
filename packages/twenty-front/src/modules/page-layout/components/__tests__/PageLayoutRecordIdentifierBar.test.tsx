@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { PageLayoutRecordIdentifierBar } from '@/page-layout/components/PageLayoutRecordIdentifierBar';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
@@ -13,22 +15,22 @@ const TARGET_RECORD_IDENTIFIER = {
 const PINNED_TAB = { id: 'pinned-tab-id', title: 'Tasks' };
 
 let mockRecordCreatedAt: string | null = '2026-08-25T12:00:00.000Z';
-const mockOpenTabSettings = jest.fn();
+const mockOpenTabSettings = vi.fn();
 
-jest.mock(
+vi.mock(
   '@/object-record/record-show/components/RecordIdentifierBarTitle',
   () => ({
     RecordIdentifierBarTitle: () => <div>Google</div>,
   }),
 );
 
-jest.mock('@/page-layout/hooks/useOpenPageLayoutTabSettings', () => ({
+vi.mock('@/page-layout/hooks/useOpenPageLayoutTabSettings', () => ({
   useOpenPageLayoutTabSettings: () => ({
     openTabSettings: mockOpenTabSettings,
   }),
 }));
 
-jest.mock('twenty-ui/components', () => ({
+vi.mock('twenty-ui/components', () => ({
   IconButton: ({
     'aria-label': ariaLabel,
     onClick,
@@ -42,12 +44,9 @@ jest.mock('twenty-ui/components', () => ({
   ),
 }));
 
-jest.mock(
-  '@/ui/utilities/state/jotai/hooks/useAtomFamilySelectorValue',
-  () => ({
-    useAtomFamilySelectorValue: () => mockRecordCreatedAt,
-  }),
-);
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomFamilySelectorValue', () => ({
+  useAtomFamilySelectorValue: () => mockRecordCreatedAt,
+}));
 
 const Wrapper = ({ children }: { children: ReactNode }) => (
   <I18nProvider i18n={i18n}>{children}</I18nProvider>
@@ -55,14 +54,14 @@ const Wrapper = ({ children }: { children: ReactNode }) => (
 
 describe('PageLayoutRecordIdentifierBar', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2026-08-27T12:00:00.000Z'));
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-08-27T12:00:00.000Z'));
     mockRecordCreatedAt = '2026-08-25T12:00:00.000Z';
     mockOpenTabSettings.mockClear();
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it('shows the creation date after the tabs only when no tab is pinned', () => {
@@ -96,7 +95,7 @@ describe('PageLayoutRecordIdentifierBar', () => {
   });
 
   it('keeps the pinned tab settings accessible without a creation date', async () => {
-    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    const user = userEvent.setup();
 
     const { rerender } = render(
       <PageLayoutRecordIdentifierBar

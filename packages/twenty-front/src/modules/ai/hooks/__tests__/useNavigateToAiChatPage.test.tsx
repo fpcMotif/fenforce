@@ -1,3 +1,6 @@
+import type * as ReactRouterDomModule from 'react-router-dom';
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -9,15 +12,15 @@ import { useExpandAskAiSidePanelPage } from '@/side-panel/pages/ask-ai/hooks/use
 import { isLayoutCustomizationModeEnabledState } from '@/layout-customization/states/isLayoutCustomizationModeEnabledState';
 import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
 
-const navigateMock = jest.fn();
-const closeSidePanelMenuMock = jest.fn();
+const navigateMock = vi.fn();
+const closeSidePanelMenuMock = vi.fn();
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual<typeof ReactRouterDomModule>('react-router-dom')),
   useNavigate: () => navigateMock,
 }));
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({ closeSidePanelMenu: closeSidePanelMenuMock }),
 }));
 
@@ -29,7 +32,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => (
 
 describe('useNavigateToAiChatPage', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     jotaiStore.set(isLayoutCustomizationModeEnabledState.atom, false);
     window.history.pushState({}, '', '/objects/people');
   });

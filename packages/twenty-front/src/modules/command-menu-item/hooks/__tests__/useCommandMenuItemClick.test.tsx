@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { type ReactNode } from 'react';
 import { type CommandMenuContextApi } from 'twenty-shared/types';
@@ -9,40 +11,40 @@ import { useCommandMenuItemClick } from '@/command-menu-item/hooks/useCommandMen
 import { CommandMenuItemContainerType } from '@/command-menu-item/types/CommandMenuItemContainerType';
 import { type CommandMenuItemDefinition } from '@/command-menu-item/types/CommandMenuItemDefinition';
 
-const mockOpenFrontComponentInSidePanel = jest.fn();
-const mockMountCommand = jest.fn();
+const mockOpenFrontComponentInSidePanel = vi.fn();
+const mockMountCommand = vi.fn();
 
-jest.mock(
+vi.mock(
   '@/ui/utilities/state/component-state/hooks/useAvailableComponentInstanceIdOrThrow',
   () => ({
     useAvailableComponentInstanceIdOrThrow: () => 'context-store-instance-id',
   }),
 );
 
-jest.mock('@/workspace/hooks/useIsFeatureEnabled', () => ({
+vi.mock('@/workspace/hooks/useIsFeatureEnabled', () => ({
   useIsFeatureEnabled: () => false,
 }));
 
-jest.mock('@/command-menu-item/engine-command/hooks/useMountCommand', () => ({
+vi.mock('@/command-menu-item/engine-command/hooks/useMountCommand', () => ({
   useMountCommand: () => mockMountCommand,
 }));
 
-jest.mock('@/command-menu-item/hooks/useCloseCommandMenu', () => ({
-  useCloseCommandMenu: () => ({ closeCommandMenu: jest.fn() }),
+vi.mock('@/command-menu-item/hooks/useCloseCommandMenu', () => ({
+  useCloseCommandMenu: () => ({ closeCommandMenu: vi.fn() }),
 }));
 
-jest.mock('@/side-panel/hooks/useOpenFrontComponentInSidePanel', () => ({
+vi.mock('@/side-panel/hooks/useOpenFrontComponentInSidePanel', () => ({
   useOpenFrontComponentInSidePanel: () => ({
     openFrontComponentInSidePanel: mockOpenFrontComponentInSidePanel,
   }),
 }));
 
-jest.mock(
+vi.mock(
   '@/command-menu-item/engine-command/constants/EngineComponentKeyHeadlessComponentMap',
   () => ({ ENGINE_COMPONENT_KEY_COMPONENT_MAP: {} }),
 );
 
-jest.mock(
+vi.mock(
   '@/command-menu-item/engine-command/record/components/ExportRecordsCommand',
   () => ({ ExportRecordsCommand: () => null }),
 );
@@ -75,7 +77,7 @@ const getWrapper =
 
 describe('useCommandMenuItemClick', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it.each([

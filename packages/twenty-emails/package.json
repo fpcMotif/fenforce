@@ -6,11 +6,23 @@
   "license": "AGPL-3.0",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "npx vite build"
+    "lint:ci": "bunx vite-plus run twenty-emails#lint",
+    "fmt:ci": "bunx vite-plus run twenty-emails#fmt",
+    "build:command": "bunx vite-plus build && node node_modules/typescript/bin/tsc -p tsconfig.lib.json --declaration --emitDeclarationOnly --outDir dist --rootDir src --composite false && bunx tsc-alias -p tsconfig.lib.json --outDir dist",
+    "start:command": "email dev -d src/emails -p 4001",
+    "typecheck:command": "node node_modules/typescript/bin/tsc -p tsconfig.json",
+    "lint:command": "bunx oxlint -c .oxlintrc.json . && (bunx oxfmt --check . || (echo 'ERROR: oxfmt formatting check failed! Fix with: bun run lint:fix:command' && false))",
+    "fmt:command": "bunx oxfmt --check src",
+    "fmt:fix:command": "bunx oxfmt src",
+    "lingui:extract:command": "lingui extract --overwrite --clean",
+    "lingui:compile:command": "lingui compile --typescript",
+    "lint:fix": "bunx oxlint --fix -c .oxlintrc.json . && bunx oxfmt .",
+    "typecheck:watch": "node node_modules/typescript/bin/tsc -p tsconfig.json --watch"
   },
   "dependencies": {
     "@lingui/core": "^5.9.5",
     "@lingui/react": "^5.9.5",
+    "@sniptt/guards": "^0.2.0",
     "twenty-shared": "workspace:*"
   },
   "peerDependencies": {
@@ -18,17 +30,24 @@
     "react-dom": "^18.2.0 || ^19.0.0"
   },
   "devDependencies": {
+    "@lingui/babel-plugin-lingui-macro": "5.9.5",
     "@lingui/cli": "^5.9.5",
-    "@lingui/swc-plugin": "^5.11.0",
+    "@lingui/conf": "5.9.5",
+    "@lingui/format-po": "5.9.5",
     "@lingui/vite-plugin": "^5.9.5",
+    "@rolldown/plugin-babel": "0.2.4",
     "@react-email/ui": "^6.9.0",
     "@tiptap/core": "^3.4.2",
+    "@types/node": "^24.0.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@typescript/native-preview": "^7.0.0-dev.20260116.1",
-    "@vitejs/plugin-react-swc": "^4.3.1",
+    "@vitejs/plugin-react": "6.1.1",
     "react-email": "^6.9.0",
     "tsc-alias": "^1.8.16",
+    "typescript": "^5.9.3",
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.0.0",
+    "vite-plus": "1.0.0",
     "vite-plugin-dts": "^4.5.4"
   },
   "exports": {
@@ -39,8 +58,6 @@
     }
   },
   "engines": {
-    "node": "^24.5.0",
-    "npm": "please-use-yarn",
-    "yarn": "^4.0.2"
+    "node": "^24.5.0"
   }
 }

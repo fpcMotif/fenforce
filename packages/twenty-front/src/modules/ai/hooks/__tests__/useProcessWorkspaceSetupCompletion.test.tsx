@@ -1,3 +1,6 @@
+import type * as ReactRouterDomModule from 'react-router-dom';
+import { vi } from 'vite-plus/test';
+
 import { AiChatSurfaceContext } from '@/ai/contexts/AiChatSurfaceContext';
 import { AI_CHAT_SURFACE } from '@/ai/constants/AiChatSurface';
 import { shouldOpenAiChatAfterOnboardingState } from '@/onboarding/states/shouldOpenAiChatAfterOnboardingState';
@@ -15,28 +18,28 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-const navigateMock = jest.fn();
+const navigateMock = vi.fn();
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual<typeof ReactRouterDomModule>('react-router-dom')),
   useNavigate: () => navigateMock,
   useLocation: () => ({ state: null }),
 }));
 
 let defaultHomePagePath = '/objects/people';
-jest.mock('@/navigation/hooks/useDefaultHomePagePath', () => ({
+vi.mock('@/navigation/hooks/useDefaultHomePagePath', () => ({
   useDefaultHomePagePath: () => ({ defaultHomePagePath }),
 }));
 
-const closeSidePanelMenuMock = jest.fn();
+const closeSidePanelMenuMock = vi.fn();
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({ closeSidePanelMenu: closeSidePanelMenuMock }),
 }));
 
 let isWorkspaceSetupChat = true;
 
-jest.mock('@/ai/hooks/useIsWorkspaceSetupChat', () => ({
+vi.mock('@/ai/hooks/useIsWorkspaceSetupChat', () => ({
   useIsWorkspaceSetupChat: () => isWorkspaceSetupChat,
 }));
 
@@ -78,7 +81,7 @@ const getProcessedToolCallIds = () =>
 
 describe('useProcessWorkspaceSetupCompletion', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     sessionStorage.clear();
     resetJotaiStore();
     isWorkspaceSetupChat = true;

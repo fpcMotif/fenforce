@@ -4,74 +4,74 @@ icon: "terminal"
 description: Useful commands for developing Twenty.
 ---
 
-Commands can be run from the repository root using `npx nx`. Use `npx nx run {project}:{command}` for explicit targeting.
+Run commands from the repository root after installing dependencies with Bun. Use `bunx vite-plus run {package}#{task}` to run a package task.
 
 ## Starting the App
 
 ```bash
-npx nx start twenty-front          # Frontend dev server (http://localhost:3001)
-npx nx start twenty-server         # Backend server (http://localhost:3000)
-npx nx run twenty-server:worker    # Background worker
+bunx vite-plus run twenty-front#start    # Frontend dev server (http://localhost:3001)
+bunx vite-plus run twenty-server#start   # Backend server (http://localhost:3000)
+bunx vite-plus run twenty-server#worker  # Background worker
 ```
 
 ## Database
 
 ```bash
-npx nx database:reset twenty-server                          # Reset and seed database
-npx nx run twenty-server:database:migrate:prod               # Run migrations
-npx nx run twenty-server:database:migrate:generate --name <name> --type <fast|slow>  # Generate a migration
+bunx vite-plus run twenty-server#database:reset  # Reset and seed database
+bunx vite-plus run twenty-server#database:migrate:prod  # Run migrations
+bunx vite-plus run twenty-server#database:migrate:generate --name <name> --type <fast|slow>  # Generate a migration
 ```
 
 ## Linting
 
 ```bash
-npx nx lint:diff-with-main twenty-front    # Lint changed files (fastest)
-npx nx lint:diff-with-main twenty-server
-npx nx lint twenty-front --configuration=fix  # Auto-fix
+bunx vite-plus run twenty-front#lint:diff-with-main   # Lint changed files
+bunx vite-plus run twenty-server#lint:diff-with-main
+bunx vite-plus run twenty-front#lint:fix              # Auto-fix
 ```
 
 ## Type Checking
 
 ```bash
-npx nx typecheck twenty-front
-npx nx typecheck twenty-server
+bunx vite-plus run twenty-front#typecheck
+bunx vite-plus run twenty-server#typecheck
 ```
 
 ## Testing
 
 ```bash
 # Frontend
-npx nx test twenty-front                          # Jest unit tests
-npx nx storybook:build twenty-front               # Build Storybook
-npx nx storybook:test twenty-front                # Storybook tests
+bunx vite-plus run twenty-front#test              # Jest unit tests
+bunx vite-plus run twenty-front#storybook:build   # Build Storybook
+bunx vite-plus run twenty-front#storybook:test    # Storybook tests
 
 # Backend
-npx nx run twenty-server:test:unit                # Unit tests
-npx nx run twenty-server:test:integration         # Integration tests
-npx nx run twenty-server:test:integration:with-db-reset  # Integration with DB reset
+bunx vite-plus run twenty-server#test             # Unit tests
+bunx vite-plus run twenty-server#test:integration  # Integration tests
+bunx vite-plus run twenty-server#test:integration:with-db-reset  # Integration with DB reset
 
 # Single file (fastest)
-npx jest path/to/test.test.ts --config=packages/{project}/jest.config.mjs
+bunx jest path/to/test.test.ts --config=packages/{project}/jest.config.mjs
 ```
 
 ## GraphQL
 
 ```bash
-npx nx run twenty-front:graphql:generate                        # Regenerate types
-npx nx run twenty-front:graphql:generate --configuration=metadata  # Metadata schema
+bunx vite-plus run twenty-front#graphql:generate           # Regenerate types
+bunx vite-plus run twenty-front#graphql:generate:metadata  # Metadata schema
 ```
 
 ## Translations
 
 ```bash
-npx nx run twenty-front:lingui:extract   # Extract strings
-npx nx run twenty-front:lingui:compile   # Compile translations
+bunx vite-plus run twenty-front#lingui:extract   # Extract strings
+bunx vite-plus run twenty-front#lingui:compile   # Compile translations
 ```
 
 ## Build
 
 ```bash
-npx nx build twenty-shared   # Must be built first
-npx nx build twenty-front
-npx nx build twenty-server
+bunx vite-plus run twenty-shared#build   # Build shared output
+bunx vite-plus run twenty-front#build
+bunx vite-plus run twenty-server#build
 ```

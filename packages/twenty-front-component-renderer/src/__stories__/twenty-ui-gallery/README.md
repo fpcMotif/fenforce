@@ -75,9 +75,9 @@ rendering/CSS or interaction behavior directly.
 ## Run
 
 From the repository root, build the fixture dependencies and sandbox with
-`npx nx run twenty-front-component-renderer:storybook:prebuild`.
+`bunx vite-plus run twenty-front-component-renderer#storybook:prebuild`.
 Then, from `packages/twenty-front-component-renderer`, run:
 
 ```sh
-npx vitest run --config vitest.storybook.config.ts TwentyUiGallery.stories.tsx
+bunx vitest run --config vitest.storybook.config.ts TwentyUiGallery.stories.tsx
 ```

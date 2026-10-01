@@ -1,11 +1,14 @@
+import type * as ReactModule from '@tiptap/react';
+import { vi } from 'vite-plus/test';
+
 import { type Editor, type Range } from '@tiptap/core';
 
-const mockUpdateProps = jest.fn();
-const mockDestroy = jest.fn();
+const mockUpdateProps = vi.fn();
+const mockDestroy = vi.fn();
 let mockElement: HTMLElement;
 
-jest.mock('@tiptap/react', () => ({
-  ReactRenderer: jest.fn().mockImplementation(() => {
+vi.mock('@tiptap/react', () => ({
+  ReactRenderer: vi.fn().mockImplementation(function () {
     mockElement = document.createElement('div');
     return {
       element: mockElement,
@@ -52,7 +55,7 @@ const createMockCallbackProps = (
   }> = {},
 ) => ({
   items: [{ id: '1', label: 'Item A' }],
-  command: jest.fn(),
+  command: vi.fn(),
   clientRect: () => new DOMRect(0, 0, 100, 20),
   range: { from: 0, to: 5 } as Range,
   query: '',
@@ -61,34 +64,37 @@ const createMockCallbackProps = (
 
 describe('createSuggestionRenderLifecycle', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('onStart', () => {
-    it('should not create renderer when clientRect is missing', () => {
+    it('should not create renderer when clientRect is missing', async () => {
       const lifecycle = createTestLifecycle();
 
       lifecycle.onStart(createMockCallbackProps({ clientRect: undefined }));
 
-      const { ReactRenderer } = jest.requireMock('@tiptap/react');
+      const { ReactRenderer } =
+        await vi.importMock<typeof ReactModule>('@tiptap/react');
       expect(ReactRenderer).not.toHaveBeenCalled();
     });
 
-    it('should not create renderer when items are empty', () => {
+    it('should not create renderer when items are empty', async () => {
       const lifecycle = createTestLifecycle();
 
       lifecycle.onStart(createMockCallbackProps({ items: [] }));
 
-      const { ReactRenderer } = jest.requireMock('@tiptap/react');
+      const { ReactRenderer } =
+        await vi.importMock<typeof ReactModule>('@tiptap/react');
       expect(ReactRenderer).not.toHaveBeenCalled();
     });
 
-    it('should create renderer and append element to body', () => {
+    it('should create renderer and append element to body', async () => {
       const lifecycle = createTestLifecycle();
 
       lifecycle.onStart(createMockCallbackProps());
 
-      const { ReactRenderer } = jest.requireMock('@tiptap/react');
+      const { ReactRenderer } =
+        await vi.importMock<typeof ReactModule>('@tiptap/react');
       expect(ReactRenderer).toHaveBeenCalledTimes(1);
       expect(document.body.contains(mockElement)).toBe(true);
 
@@ -163,15 +169,17 @@ describe('createSuggestionRenderLifecycle', () => {
   });
 
   describe('command wrapping', () => {
-    it('should call original command and close menu on select', () => {
+    it('should call original command and close menu on select', async () => {
       const lifecycle = createTestLifecycle();
-      const originalCommand = jest.fn();
+      const originalCommand = vi.fn();
 
       lifecycle.onStart(createMockCallbackProps({ command: originalCommand }));
 
-      const { ReactRenderer } = jest.requireMock('@tiptap/react');
+      const { ReactRenderer } =
+        await vi.importMock<typeof ReactModule>('@tiptap/react');
       const constructorCall = ReactRenderer.mock.calls[0];
       const menuProps = constructorCall[1].props;
+      if (!menuProps) throw new Error('Expected suggestion menu props');
 
       menuProps.onSelect({ id: '1', label: 'Item A' });
 

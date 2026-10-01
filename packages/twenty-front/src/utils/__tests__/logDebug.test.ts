@@ -1,10 +1,12 @@
+import { type MockInstance, vi } from 'vite-plus/test';
+
 import { logDebug } from '~/utils/logDebug';
 
 describe('logDebug', () => {
-  let consoleDebugSpy: jest.SpyInstance;
+  let consoleDebugSpy: MockInstance;
 
   beforeEach(() => {
-    consoleDebugSpy = jest.spyOn(console, 'debug').mockImplementation(() => {});
+    consoleDebugSpy = vi.spyOn(console, 'debug').mockImplementation(() => {});
   });
 
   afterEach(() => {

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { useLabelIdentifierFieldMetadataItem } from '@/object-metadata/hooks/useLabelIdentifierFieldMetadataItem';
 import { useObjectMetadataItem } from '@/object-metadata/hooks/useObjectMetadataItem';
 import { useObjectMetadataItems } from '@/object-metadata/hooks/useObjectMetadataItems';
@@ -7,10 +9,10 @@ import { useFieldListFieldMetadataItems } from '@/object-record/record-field-lis
 import { renderHook } from '@testing-library/react';
 import { CoreObjectNameSingular, FieldMetadataType } from 'twenty-shared/types';
 
-jest.mock('@/object-metadata/hooks/useLabelIdentifierFieldMetadataItem');
-jest.mock('@/object-metadata/hooks/useObjectMetadataItem');
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems');
-jest.mock('@/object-record/hooks/useObjectPermissions');
+vi.mock('@/object-metadata/hooks/useLabelIdentifierFieldMetadataItem');
+vi.mock('@/object-metadata/hooks/useObjectMetadataItem');
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems');
+vi.mock('@/object-record/hooks/useObjectPermissions');
 
 const activityBodyField = {
   id: 'activity-body-field-id',
@@ -21,18 +23,18 @@ const activityBodyField = {
 
 describe('useFieldListFieldMetadataItems', () => {
   beforeEach(() => {
-    jest.mocked(useLabelIdentifierFieldMetadataItem).mockReturnValue({
+    vi.mocked(useLabelIdentifierFieldMetadataItem).mockReturnValue({
       labelIdentifierFieldMetadataItem: undefined,
     });
-    jest.mocked(useObjectMetadataItem).mockReturnValue({
+    vi.mocked(useObjectMetadataItem).mockReturnValue({
       objectMetadataItem: {
         readableFields: [activityBodyField],
       } as ReturnType<typeof useObjectMetadataItem>['objectMetadataItem'],
     });
-    jest.mocked(useObjectMetadataItems).mockReturnValue({
+    vi.mocked(useObjectMetadataItems).mockReturnValue({
       objectMetadataItems: [],
     });
-    jest.mocked(useObjectPermissions).mockReturnValue({
+    vi.mocked(useObjectPermissions).mockReturnValue({
       objectPermissionsByObjectMetadataId: {},
     });
   });

@@ -1,3 +1,6 @@
+import type * as UtilitiesModule from 'twenty-ui/utilities';
+import { vi } from 'vite-plus/test';
+
 import { currentUserState } from '@/auth/states/currentUserState';
 import { currentUserWorkspaceState } from '@/auth/states/currentUserWorkspaceState';
 import { metadataStoreState } from '@/metadata-store/states/metadataStoreState';
@@ -28,12 +31,12 @@ import { setTestViewsInMetadataStore } from '~/testing/utils/setTestViewsInMetad
 let mockIsMobile = false;
 let mockIsInitialObjectViewEnabled = false;
 
-jest.mock('twenty-ui/utilities', () => ({
-  ...jest.requireActual('twenty-ui/utilities'),
+vi.mock('twenty-ui/utilities', async () => ({
+  ...(await vi.importActual<typeof UtilitiesModule>('twenty-ui/utilities')),
   useIsMobile: () => mockIsMobile,
 }));
 
-jest.mock('@/workspace/hooks/useIsFeatureEnabled', () => ({
+vi.mock('@/workspace/hooks/useIsFeatureEnabled', () => ({
   useIsFeatureEnabled: () => mockIsInitialObjectViewEnabled,
 }));
 

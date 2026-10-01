@@ -1,3 +1,7 @@
+import type * as IconModule from 'twenty-ui/icon';
+import type * as RecordIndexCalendarLayoutComponentStateModule from '@/object-record/record-index/states/recordIndexCalendarLayoutComponentState';
+import { vi } from 'vite-plus/test';
+
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { I18nProvider } from '@lingui/react';
@@ -11,89 +15,92 @@ const mockCalendarFields = [
   { id: 'date-field', label: 'Due date', type: 'DATE' },
   { id: 'date-time-field', label: 'Created at', type: 'DATE_TIME' },
 ];
-const mockSetCalendarField = jest.fn();
+const mockSetCalendarField = vi.fn();
 
-jest.mock('@/views/view-picker/hooks/useGetAvailableFieldsForCalendar', () => ({
+vi.mock('@/views/view-picker/hooks/useGetAvailableFieldsForCalendar', () => ({
   useGetAvailableFieldsForCalendar: () => ({
     availableFieldsForCalendar: mockCalendarFields,
-    navigateToDateFieldSettings: jest.fn(),
+    navigateToDateFieldSettings: vi.fn(),
   }),
 }));
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentState', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentState', () => ({
   useAtomComponentState: () => ['date-field', mockSetCalendarField],
 }));
-jest.mock('twenty-ui/icon', () => ({
-  ...jest.requireActual('twenty-ui/icon'),
+vi.mock('twenty-ui/icon', async () => ({
+  ...(await vi.importActual<typeof IconModule>('twenty-ui/icon')),
   useIcons: () => ({ getIcon: () => () => null }),
 }));
 
-const mockCloseDropdown = jest.fn();
-const mockResetContent = jest.fn();
-const mockSetRecordIndexCalendarLayout = jest.fn();
-const mockUpdateCurrentView = jest.fn();
-const mockUseCalendarLayoutValue = jest.fn();
+const mockCloseDropdown = vi.fn();
+const mockResetContent = vi.fn();
+const mockSetRecordIndexCalendarLayout = vi.fn();
+const mockUpdateCurrentView = vi.fn();
+const mockUseCalendarLayoutValue = vi.fn();
 
-jest.mock(
+vi.mock(
   '@/object-record/object-options-dropdown/hooks/useObjectOptionsDropdown',
   () => ({
-    useObjectOptionsDropdown: jest.fn(() => ({
+    useObjectOptionsDropdown: vi.fn(() => ({
       objectMetadataItem: { fields: mockCalendarFields },
       closeDropdown: mockCloseDropdown,
       resetContent: mockResetContent,
     })),
   }),
 );
-jest.mock('@/ui/layout/dropdown/components/LegacyDropdownContent', () => ({
+vi.mock('@/ui/layout/dropdown/components/LegacyDropdownContent', () => ({
   LegacyDropdownContent: ({ children }: { children: React.ReactNode }) =>
     children,
 }));
-jest.mock(
+vi.mock(
   '@/ui/layout/dropdown/components/DropdownMenuHeader/DropdownMenuHeader',
   () => ({
     DropdownMenuHeader: ({ children }: { children: React.ReactNode }) =>
       children,
   }),
 );
-jest.mock(
+vi.mock(
   '@/ui/layout/dropdown/components/DropdownMenuHeader/internal/DropdownMenuHeaderLeftComponent',
   () => ({ DropdownMenuHeaderLeftComponent: () => null }),
 );
-jest.mock('@/ui/layout/dropdown/components/DropdownMenuItemsContainer', () => ({
+vi.mock('@/ui/layout/dropdown/components/DropdownMenuItemsContainer', () => ({
   DropdownMenuItemsContainer: ({ children }: { children: React.ReactNode }) =>
     children,
 }));
-jest.mock('@/ui/layout/selectable-list/components/SelectableList', () => ({
+vi.mock('@/ui/layout/selectable-list/components/SelectableList', () => ({
   SelectableList: ({ children }: { children: React.ReactNode }) => children,
 }));
-jest.mock('@/ui/layout/selectable-list/components/SelectableListItem', () => ({
+vi.mock('@/ui/layout/selectable-list/components/SelectableListItem', () => ({
   SelectableListItem: ({ children }: { children: React.ReactNode }) => children,
 }));
-jest.mock(
+vi.mock(
   '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
-  () => ({
-    useAtomComponentStateValue: (state: unknown) => {
-      const { recordIndexCalendarLayoutComponentState } = jest.requireActual(
-        '@/object-record/record-index/states/recordIndexCalendarLayoutComponentState',
-      );
+  async () => {
+    const { recordIndexCalendarLayoutComponentState } = await vi.importActual<
+      typeof RecordIndexCalendarLayoutComponentStateModule
+    >(
+      '@/object-record/record-index/states/recordIndexCalendarLayoutComponentState',
+    );
 
-      return state === recordIndexCalendarLayoutComponentState
-        ? mockUseCalendarLayoutValue()
-        : null;
-    },
-  }),
+    return {
+      useAtomComponentStateValue: (state: unknown) =>
+        state === recordIndexCalendarLayoutComponentState
+          ? mockUseCalendarLayoutValue()
+          : null,
+    };
+  },
 );
-jest.mock('@/ui/utilities/state/jotai/hooks/useSetAtomComponentState', () => ({
-  useSetAtomComponentState: jest.fn(() => mockSetRecordIndexCalendarLayout),
+vi.mock('@/ui/utilities/state/jotai/hooks/useSetAtomComponentState', () => ({
+  useSetAtomComponentState: vi.fn(() => mockSetRecordIndexCalendarLayout),
 }));
-jest.mock('@/views/hooks/useUpdateCurrentView', () => ({
-  useUpdateCurrentView: jest.fn(() => ({
+vi.mock('@/views/hooks/useUpdateCurrentView', () => ({
+  useUpdateCurrentView: vi.fn(() => ({
     updateCurrentView: mockUpdateCurrentView,
   })),
 }));
-jest.mock('twenty-ui/primitives/data-display', () => ({
+vi.mock('twenty-ui/primitives/data-display', () => ({
   Pill: ({ label }: { label: string }) => <span>{label}</span>,
 }));
-jest.mock('twenty-ui/primitives/navigation', () => ({
+vi.mock('twenty-ui/primitives/navigation', () => ({
   ListItem: ({
     description,
     disabled,
@@ -116,7 +123,7 @@ jest.mock('twenty-ui/primitives/navigation', () => ({
 
 describe('ObjectOptionsDropdownCalendarViewContent', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockUseCalendarLayoutValue.mockReturnValue(ViewCalendarLayout.MONTH);
     mockUpdateCurrentView.mockResolvedValue(undefined);
   });
@@ -152,7 +159,7 @@ describe('ObjectOptionsDropdownCalendarViewContent', () => {
 
 describe('ObjectOptionsDropdownCalendarFieldsContent', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockUpdateCurrentView.mockResolvedValue(undefined);
   });
 

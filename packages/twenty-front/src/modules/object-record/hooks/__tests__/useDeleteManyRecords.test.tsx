@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { renderHook, waitFor } from '@testing-library/react';
 
 import { getRecordFromCache } from '@/object-record/cache/utils/getRecordFromCache';
@@ -28,7 +30,7 @@ const getDefaultMocks = (
       query,
       variables,
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         deletePeople: responseData,
       },
@@ -37,9 +39,9 @@ const getDefaultMocks = (
   },
 ];
 
-jest.mock('@/object-record/hooks/useRefetchAggregateQueries');
-const mockRefetchAggregateQueries = jest.fn();
-(useRefetchAggregateQueries as jest.Mock).mockReturnValue({
+vi.mock('@/object-record/hooks/useRefetchAggregateQueries');
+const mockRefetchAggregateQueries = vi.fn();
+(useRefetchAggregateQueries as Mock).mockReturnValue({
   refetchAggregateQueries: mockRefetchAggregateQueries,
 });
 const objectMetadataItem = getMockObjectMetadataItemOrThrow('person');
@@ -81,7 +83,7 @@ describe('useDeleteManyRecords', () => {
     );
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     cache = new InMemoryCache();
   });
 
@@ -199,7 +201,7 @@ describe('useDeleteManyRecords', () => {
           await result.current.deleteManyRecords({
             recordIdsToDelete: personIds,
           });
-          fail('Should have thrown an error');
+          throw new Error('Should have thrown an error');
         } catch (e) {
           expect(e).toMatchInlineSnapshot(`[Error: Internal server error]`);
           assertCachedRecordsMatch(personRecords);

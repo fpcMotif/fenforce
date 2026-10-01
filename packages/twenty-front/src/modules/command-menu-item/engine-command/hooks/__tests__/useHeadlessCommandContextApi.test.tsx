@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { headlessCommandContextApisState } from '@/command-menu-item/engine-command/states/headlessCommandContextApisState';
 import { type HeadlessEngineCommandContextApi } from '@/command-menu-item/engine-command/types/HeadlessCommandContextApi';
 import { useHeadlessCommandContextApi } from '@/command-menu-item/engine-command/hooks/useHeadlessCommandContextApi';
@@ -8,7 +10,7 @@ import { EngineComponentKey } from '~/generated-metadata/graphql';
 
 const TEST_ENGINE_COMMAND_ID = 'test-engine-cmd-1';
 
-jest.mock(
+vi.mock(
   '@/ui/utilities/state/component-state/hooks/useAvailableComponentInstanceIdOrThrow',
   () => ({
     useAvailableComponentInstanceIdOrThrow: () => TEST_ENGINE_COMMAND_ID,

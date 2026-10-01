@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { AI_CHAT_SCROLL_PIN_MAX_DURATION_IN_MS } from '@/ai/constants/AiChatScrollPinMaxDurationInMs';
 import { AI_CHAT_SCROLL_PIN_MIN_DURATION_IN_MS } from '@/ai/constants/AiChatScrollPinMinDurationInMs';
 import { AI_CHAT_SCROLL_PIN_QUIET_DURATION_IN_MS } from '@/ai/constants/AiChatScrollPinQuietDurationInMs';
@@ -53,31 +55,31 @@ const framesToCover = (durationInMs: number) =>
 
 describe('pinAiChatScrollToBottom', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     currentTimeInMs = 0;
     nextFrameId = 0;
     pendingFrameCallbacksById = new Map();
 
-    jest.spyOn(performance, 'now').mockImplementation(() => currentTimeInMs);
+    vi.spyOn(performance, 'now').mockImplementation(() => currentTimeInMs);
 
-    jest
-      .spyOn(globalThis, 'requestAnimationFrame')
-      .mockImplementation((frameCallback: FrameRequestCallback) => {
+    vi.spyOn(globalThis, 'requestAnimationFrame').mockImplementation(
+      (frameCallback: FrameRequestCallback) => {
         nextFrameId++;
         pendingFrameCallbacksById.set(nextFrameId, frameCallback);
         return nextFrameId;
-      });
+      },
+    );
 
-    jest
-      .spyOn(globalThis, 'cancelAnimationFrame')
-      .mockImplementation((frameId: number) => {
+    vi.spyOn(globalThis, 'cancelAnimationFrame').mockImplementation(
+      (frameId: number) => {
         pendingFrameCallbacksById.delete(frameId);
-      });
+      },
+    );
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
-    jest.useRealTimers();
+    vi.restoreAllMocks();
+    vi.useRealTimers();
   });
 
   it('should pin to the bottom synchronously before any frame runs', () => {
@@ -106,7 +108,7 @@ describe('pinAiChatScrollToBottom', () => {
 
   it('should keep re-pinning past the minimum duration while only the width changes', () => {
     const scrollWrapperElement = buildScrollWrapperElement();
-    const onPinningStopped = jest.fn();
+    const onPinningStopped = vi.fn();
 
     pinAiChatScrollToBottom({ scrollWrapperElement, onPinningStopped });
 
@@ -131,7 +133,7 @@ describe('pinAiChatScrollToBottom', () => {
 
   it('should not stop before the minimum duration even when nothing changes', () => {
     const scrollWrapperElement = buildScrollWrapperElement();
-    const onPinningStopped = jest.fn();
+    const onPinningStopped = vi.fn();
 
     pinAiChatScrollToBottom({ scrollWrapperElement, onPinningStopped });
 
@@ -147,7 +149,7 @@ describe('pinAiChatScrollToBottom', () => {
 
   it('should stop once the content is quiet and the minimum duration has elapsed', () => {
     const scrollWrapperElement = buildScrollWrapperElement();
-    const onPinningStopped = jest.fn();
+    const onPinningStopped = vi.fn();
 
     pinAiChatScrollToBottom({
       scrollWrapperElement,
@@ -161,7 +163,7 @@ describe('pinAiChatScrollToBottom', () => {
 
   it('should extend the window when the content grows after the minimum duration', () => {
     const scrollWrapperElement = buildScrollWrapperElement();
-    const onPinningStopped = jest.fn();
+    const onPinningStopped = vi.fn();
 
     pinAiChatScrollToBottom({ scrollWrapperElement, onPinningStopped });
 
@@ -193,7 +195,7 @@ describe('pinAiChatScrollToBottom', () => {
 
   it('should stop immediately when the user scrolls', () => {
     const scrollWrapperElement = buildScrollWrapperElement();
-    const onPinningStopped = jest.fn();
+    const onPinningStopped = vi.fn();
 
     pinAiChatScrollToBottom({
       scrollWrapperElement,
@@ -212,21 +214,21 @@ describe('pinAiChatScrollToBottom', () => {
 
   it('should stop via the watchdog when frames never run', () => {
     const scrollWrapperElement = buildScrollWrapperElement();
-    const onPinningStopped = jest.fn();
+    const onPinningStopped = vi.fn();
 
     pinAiChatScrollToBottom({
       scrollWrapperElement,
       onPinningStopped,
     });
 
-    jest.advanceTimersByTime(AI_CHAT_SCROLL_PIN_MAX_DURATION_IN_MS);
+    vi.advanceTimersByTime(AI_CHAT_SCROLL_PIN_MAX_DURATION_IN_MS);
 
     expect(onPinningStopped).toHaveBeenCalledTimes(1);
   });
 
   it('should invoke the stop callback exactly once when stopped by the caller', () => {
     const scrollWrapperElement = buildScrollWrapperElement();
-    const onPinningStopped = jest.fn();
+    const onPinningStopped = vi.fn();
 
     const stop = pinAiChatScrollToBottom({
       scrollWrapperElement,
@@ -235,7 +237,7 @@ describe('pinAiChatScrollToBottom', () => {
 
     stop();
     stop();
-    jest.advanceTimersByTime(AI_CHAT_SCROLL_PIN_MAX_DURATION_IN_MS);
+    vi.advanceTimersByTime(AI_CHAT_SCROLL_PIN_MAX_DURATION_IN_MS);
 
     expect(onPinningStopped).toHaveBeenCalledTimes(1);
     expect(listenersByEventName.size).toBe(0);

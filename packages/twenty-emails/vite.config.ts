@@ -1,10 +1,11 @@
 import { builtinModules } from 'node:module';
 
 import { lingui } from '@lingui/vite-plugin';
-import react from '@vitejs/plugin-react-swc';
+import babel from '@rolldown/plugin-babel';
+import react from '@vitejs/plugin-react';
 import * as path from 'path';
 import { APP_LOCALES } from 'twenty-shared/translations';
-import { defineConfig, type Plugin } from 'vite';
+import { defineConfig, type Plugin } from 'vite-plus';
 
 // twenty-emails bundles its deps (the Node server that consumes it doesn't have
 // @react-email et al.) but runs in Node. A plain client/lib build under Vite 8
@@ -36,6 +37,91 @@ const externalizeNodeBuiltins = (): Plugin => ({
 });
 
 export default defineConfig({
+  run: {
+    tasks: {
+      build: {
+        command: 'bun run build:command',
+        dependsOn: [
+          {
+            task: 'build',
+            from: ['dependencies', 'devDependencies'],
+          },
+        ],
+        cache: true,
+      },
+      start: {
+        command: 'bun run start:command',
+        dependsOn: [
+          {
+            task: 'build',
+            from: ['dependencies', 'devDependencies'],
+          },
+        ],
+        cache: false,
+      },
+      typecheck: {
+        command: 'bun run typecheck:command',
+        dependsOn: [
+          {
+            task: 'build',
+            from: ['dependencies', 'devDependencies'],
+          },
+        ],
+        cache: true,
+      },
+      lint: {
+        command: 'bun run lint:command',
+        dependsOn: [
+          {
+            task: 'build',
+            from: ['dependencies', 'devDependencies'],
+          },
+          'twenty-oxlint-rules#build',
+        ],
+        cache: true,
+      },
+      fmt: {
+        command: 'bun run fmt:command',
+        dependsOn: [
+          {
+            task: 'build',
+            from: ['dependencies', 'devDependencies'],
+          },
+        ],
+        cache: true,
+      },
+      'fmt:fix': {
+        command: 'bun run fmt:fix:command',
+        dependsOn: [
+          {
+            task: 'build',
+            from: ['dependencies', 'devDependencies'],
+          },
+        ],
+        cache: false,
+      },
+      'lingui:extract': {
+        command: 'bun run lingui:extract:command',
+        dependsOn: [
+          {
+            task: 'build',
+            from: ['dependencies', 'devDependencies'],
+          },
+        ],
+        cache: false,
+      },
+      'lingui:compile': {
+        command: 'bun run lingui:compile:command',
+        dependsOn: [
+          {
+            task: 'build',
+            from: ['dependencies', 'devDependencies'],
+          },
+        ],
+        cache: false,
+      },
+    },
+  },
   root: __dirname,
   cacheDir: '../../node_modules/.vite/packages/twenty-emails',
 
@@ -55,8 +141,16 @@ export default defineConfig({
 
   plugins: [
     externalizeNodeBuiltins(),
-    react({
-      plugins: [['@lingui/swc-plugin', {}]],
+    react(),
+    babel({
+      presets: [
+        {
+          preset: { plugins: ['@lingui/babel-plugin-lingui-macro'] },
+          rolldown: {
+            filter: { code: /@lingui\/(?:core\/macro|react\/macro|macro)/ },
+          },
+        },
+      ],
     }),
     lingui({
       configPath: path.resolve(__dirname, './lingui.config.ts'),

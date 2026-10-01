@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { AGENT_CHAT_NEW_THREAD_DRAFT_KEY } from '@/ai/states/agentChatDraftsByThreadIdState';
 import { render } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
@@ -14,7 +16,7 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-jest.mock('@/ai/components/suggested-prompts/AiChatSuggestedPrompts', () => ({
+vi.mock('@/ai/components/suggested-prompts/AiChatSuggestedPrompts', () => ({
   AiChatSuggestedPrompts: () => <div data-testid="suggested-prompts" />,
 }));
 
@@ -33,7 +35,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => (
 
 describe('AiChatEmptyState', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     resetJotaiStore();
     jotaiStore.set(currentAiChatThreadState.atom, THREAD_ID);
     jotaiStore.set(agentChatDisplayedThreadState.atom, THREAD_ID);

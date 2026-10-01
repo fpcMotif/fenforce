@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { CommandMenuButton } from '@/command-menu/components/CommandMenuButton';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -55,7 +57,7 @@ describe('CommandMenuButton', () => {
 });
 
 it('shows a disabled percentage button during export and restores the action afterward', async () => {
-  const onClick = jest.fn();
+  const onClick = vi.fn();
   const command = {
     key: 'export',
     label: 'Export',

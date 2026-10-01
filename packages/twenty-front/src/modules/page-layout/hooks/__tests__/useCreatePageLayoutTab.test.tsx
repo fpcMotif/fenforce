@@ -1,3 +1,6 @@
+import type * as UuidModule from 'uuid';
+import { vi } from 'vite-plus/test';
+
 import { useCreatePageLayoutTab } from '@/page-layout/hooks/useCreatePageLayoutTab';
 import { pageLayoutCurrentLayoutsComponentState } from '@/page-layout/states/pageLayoutCurrentLayoutsComponentState';
 import { pageLayoutDraftComponentState } from '@/page-layout/states/pageLayoutDraftComponentState';
@@ -15,19 +18,20 @@ import {
   PageLayoutTestWrapper,
 } from './PageLayoutTestWrapper';
 
-jest.mock('uuid', () => ({
-  ...jest.requireActual('uuid'),
-  v4: jest.fn(),
+const { mockUuid } = vi.hoisted(() => ({ mockUuid: vi.fn<() => string>() }));
+
+vi.mock('uuid', async () => ({
+  ...(await vi.importActual<typeof UuidModule>('uuid')),
+  v4: mockUuid,
 }));
 
 describe('useCreatePageLayoutTab', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  it('should create a new tab with default title', () => {
-    const uuidModule = require('uuid');
-    uuidModule.v4.mockReturnValue('mock-uuid');
+  it('should create a new tab with default title', async () => {
+    mockUuid.mockReturnValue('mock-uuid');
 
     const { result } = renderHook(
       () => ({
@@ -70,9 +74,8 @@ describe('useCreatePageLayoutTab', () => {
     });
   });
 
-  it('should create a new tab with custom title', () => {
-    const uuidModule = require('uuid');
-    uuidModule.v4.mockReturnValue('mock-uuid');
+  it('should create a new tab with custom title', async () => {
+    mockUuid.mockReturnValue('mock-uuid');
 
     const { result } = renderHook(
       () => ({
@@ -101,9 +104,8 @@ describe('useCreatePageLayoutTab', () => {
     );
   });
 
-  it('should increment position for subsequent tabs', () => {
-    const uuidModule = require('uuid');
-    uuidModule.v4
+  it('should increment position for subsequent tabs', async () => {
+    mockUuid
       .mockReturnValueOnce('mock-uuid-1')
       .mockReturnValueOnce('mock-uuid-2');
 
@@ -142,9 +144,8 @@ describe('useCreatePageLayoutTab', () => {
     expect(result.current.pageLayoutDraft.tabs[1].title).toBe('Tab 2');
   });
 
-  it('should default icon to IconPerspective for new RECORD_PAGE tabs', () => {
-    const uuidModule = require('uuid');
-    uuidModule.v4.mockReturnValue('mock-uuid');
+  it('should default icon to IconPerspective for new RECORD_PAGE tabs', async () => {
+    mockUuid.mockReturnValue('mock-uuid');
 
     const { result } = renderHook(
       () => {
@@ -187,9 +188,8 @@ describe('useCreatePageLayoutTab', () => {
     expect(result.current.pageLayoutDraft.tabs[0].icon).toBe('IconPerspective');
   });
 
-  it('should leave icon as null for new DASHBOARD tabs', () => {
-    const uuidModule = require('uuid');
-    uuidModule.v4.mockReturnValue('mock-uuid');
+  it('should leave icon as null for new DASHBOARD tabs', async () => {
+    mockUuid.mockReturnValue('mock-uuid');
 
     const { result } = renderHook(
       () => ({
@@ -216,9 +216,8 @@ describe('useCreatePageLayoutTab', () => {
     expect(result.current.pageLayoutDraft.tabs[0].icon).toBeNull();
   });
 
-  it('should default layoutMode to VERTICAL_LIST for record page layouts', () => {
-    const uuidModule = require('uuid');
-    uuidModule.v4.mockReturnValue('mock-uuid');
+  it('should default layoutMode to VERTICAL_LIST for record page layouts', async () => {
+    mockUuid.mockReturnValue('mock-uuid');
 
     const { result } = renderHook(
       () => {
@@ -264,9 +263,8 @@ describe('useCreatePageLayoutTab', () => {
     );
   });
 
-  it('should create isolated layouts for multiple tabs', () => {
-    const uuidModule = require('uuid');
-    uuidModule.v4
+  it('should create isolated layouts for multiple tabs', async () => {
+    mockUuid
       .mockReturnValueOnce('mock-uuid-1')
       .mockReturnValueOnce('mock-uuid-2');
 
@@ -312,9 +310,8 @@ describe('useCreatePageLayoutTab', () => {
     expect(tabIds[0]).not.toBe(tabIds[1]);
   });
 
-  it('should set newly created tab as active', () => {
-    const uuidModule = require('uuid');
-    uuidModule.v4.mockReturnValue('mock-uuid');
+  it('should set newly created tab as active', async () => {
+    mockUuid.mockReturnValue('mock-uuid');
 
     const { result } = renderHook(
       () => {
@@ -346,9 +343,8 @@ describe('useCreatePageLayoutTab', () => {
     expect(result.current.activeTabId).toBe('mock-uuid');
   });
 
-  it('should handle creating tab when draft already has tabs', () => {
-    const uuidModule = require('uuid');
-    uuidModule.v4.mockReturnValue('mock-uuid-new');
+  it('should handle creating tab when draft already has tabs', async () => {
+    mockUuid.mockReturnValue('mock-uuid-new');
 
     const { result } = renderHook(
       () => {

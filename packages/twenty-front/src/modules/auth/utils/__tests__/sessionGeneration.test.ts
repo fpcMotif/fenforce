@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { clearSessionGeneration } from '@/auth/utils/clearSessionGeneration';
 import { getSessionGeneration } from '@/auth/utils/getSessionGeneration';
 import { rotateSessionGeneration } from '@/auth/utils/rotateSessionGeneration';
@@ -8,7 +10,7 @@ describe('sessionGeneration', () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
     clearSessionGeneration();
   });
 
@@ -27,10 +29,10 @@ describe('sessionGeneration', () => {
   });
 
   it('should keep an in-memory generation when storage is unavailable', () => {
-    jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
       throw new Error('Storage is unavailable');
     });
-    jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
       throw new Error('Storage is unavailable');
     });
 
@@ -47,7 +49,7 @@ describe('sessionGeneration', () => {
     rotateSessionGeneration();
     const persistedGeneration = getSessionGeneration();
 
-    jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
       throw new Error('Storage is read-only');
     });
 

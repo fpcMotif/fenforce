@@ -1,6 +1,7 @@
+import { vi } from 'vite-plus/test';
+
 import { gql, InMemoryCache } from '@apollo/client';
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
-import fetchMock, { enableFetchMocks } from 'jest-fetch-mock';
 
 import { ApolloFactory, type Options } from '@/apollo/services/apollo.factory';
 import { clearSessionGeneration } from '@/auth/utils/clearSessionGeneration';
@@ -13,10 +14,12 @@ import {
   WorkspaceDiscoverability,
 } from '~/generated-metadata/graphql';
 
-enableFetchMocks();
+const fetchMock = vi.fn<typeof fetch>();
+vi.stubGlobal('fetch', fetchMock);
+afterAll(() => vi.unstubAllGlobals());
 
-jest.mock('~/utils/sleep', () => ({
-  sleep: jest.fn().mockResolvedValue(undefined),
+vi.mock('~/utils/sleep', () => ({
+  sleep: vi.fn().mockResolvedValue(undefined),
 }));
 
 const UNAUTHENTICATED_RESPONSE = JSON.stringify({
@@ -34,10 +37,10 @@ const PERMISSION_DENIED_RESPONSE = JSON.stringify({
   ],
 });
 
-const mockOnError = jest.fn();
-const mockOnNetworkError = jest.fn();
-const mockOnPayloadTooLarge = jest.fn();
-const mockOnUnauthenticatedError = jest.fn();
+const mockOnError = vi.fn();
+const mockOnNetworkError = vi.fn();
+const mockOnPayloadTooLarge = vi.fn();
+const mockOnUnauthenticatedError = vi.fn();
 
 const mockWorkspaceMember = {
   id: 'workspace-member-id',
@@ -135,8 +138,8 @@ const makeRequest = async () => makeRequestWithContext();
 
 describe('ApolloFactory', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-    fetchMock.resetMocks();
+    vi.clearAllMocks();
+    fetchMock.mockReset();
     clearSessionGeneration();
   });
 
@@ -156,13 +159,14 @@ describe('ApolloFactory', () => {
 
   it('should call onError when encountering "Unauthorized" error', async () => {
     const errors = [{ message: 'Unauthorized' }];
-    fetchMock.mockResponse(() =>
-      Promise.resolve({
-        body: JSON.stringify({
-          data: {},
-          errors,
-        }),
-      }),
+    fetchMock.mockImplementation(
+      async () =>
+        new Response(
+          JSON.stringify({
+            data: {},
+            errors,
+          }),
+        ),
     );
     try {
       await makeRequest();
@@ -181,13 +185,14 @@ describe('ApolloFactory', () => {
         },
       },
     ];
-    fetchMock.mockResponse(() =>
-      Promise.resolve({
-        body: JSON.stringify({
-          data: {},
-          errors,
-        }),
-      }),
+    fetchMock.mockImplementation(
+      async () =>
+        new Response(
+          JSON.stringify({
+            data: {},
+            errors,
+          }),
+        ),
     );
 
     try {
@@ -207,13 +212,14 @@ describe('ApolloFactory', () => {
         message: 'Unknown error',
       },
     ];
-    fetchMock.mockResponse(() =>
-      Promise.resolve({
-        body: JSON.stringify({
-          data: {},
-          errors,
-        }),
-      }),
+    fetchMock.mockImplementation(
+      async () =>
+        new Response(
+          JSON.stringify({
+            data: {},
+            errors,
+          }),
+        ),
     );
 
     try {
@@ -226,7 +232,7 @@ describe('ApolloFactory', () => {
   }, 10000);
 
   it('should call onNetworkError when the request itself fails', async () => {
-    fetchMock.mockReject(() => Promise.reject({ message: 'Unknown error' }));
+    fetchMock.mockRejectedValue({ message: 'Unknown error' });
 
     try {
       await makeRequest();
@@ -256,11 +262,8 @@ describe('ApolloFactory', () => {
   });
 
   it('should call onPayloadTooLarge when encountering a 413 error', async () => {
-    fetchMock.mockResponse(() =>
-      Promise.resolve({
-        status: 413,
-        body: 'Payload Too Large',
-      }),
+    fetchMock.mockImplementation(
+      async () => new Response('Payload Too Large', { status: 413 }),
     );
 
     try {
@@ -283,8 +286,8 @@ describe('ApolloFactory', () => {
     )?.[1];
 
   it('should not attach an Authorization header', async () => {
-    fetchMock.mockResponse(() =>
-      Promise.resolve({ body: JSON.stringify({ data: {} }) }),
+    fetchMock.mockImplementation(
+      async () => new Response(JSON.stringify({ data: {} })),
     );
 
     await makeRequest();
@@ -302,7 +305,9 @@ describe('ApolloFactory', () => {
   // The session cookie is issued and refreshed server-side, so a rejection is
   // the end of the session rather than something the client can retry.
   it('should sign out on an unauthenticated response', async () => {
-    fetchMock.mockResponse(UNAUTHENTICATED_RESPONSE);
+    fetchMock.mockImplementation(
+      async () => new Response(UNAUTHENTICATED_RESPONSE),
+    );
     mockOnUnauthenticatedError.mockImplementation(clearSessionGeneration);
     rotateSessionGeneration();
 
@@ -325,10 +330,10 @@ describe('ApolloFactory', () => {
       releaseResponse = resolve;
     });
 
-    fetchMock.mockResponse(() => {
+    fetchMock.mockImplementation(async () => {
       markRequestStarted();
-
-      return pendingResponse;
+      const response = await pendingResponse;
+      return new Response(response.body);
     });
 
     rotateSessionGeneration();
@@ -349,7 +354,9 @@ describe('ApolloFactory', () => {
   });
 
   it('should leave a permission denial alone', async () => {
-    fetchMock.mockResponse(PERMISSION_DENIED_RESPONSE);
+    fetchMock.mockImplementation(
+      async () => new Response(PERMISSION_DENIED_RESPONSE),
+    );
 
     await expect(makeRequest()).rejects.toBeInstanceOf(CombinedGraphQLErrors);
 

@@ -1,3 +1,6 @@
+import type * as UtilitiesModule from 'twenty-ui/utilities';
+import { vi } from 'vite-plus/test';
+
 import { PageLayoutTabsRenderer } from '@/page-layout/components/PageLayoutTabsRenderer';
 import { WorkspaceSurfaceContext } from '@/ui/layout/contexts/WorkspaceSurfaceContext';
 import { render, screen } from '@testing-library/react';
@@ -13,7 +16,7 @@ let mockActiveTabId = 'hidden-transcript-tab-id';
 let mockPrerenderedTabIds: string[] = [];
 let mockTargetRecordId = 'calendar-event-id';
 let mockIsInSidePanel = false;
-const mockSetPrerenderedTabIds = jest.fn();
+const mockSetPrerenderedTabIds = vi.fn();
 
 const homeTab = {
   __typename: 'PageLayoutTab' as const,
@@ -48,25 +51,25 @@ const frontComponentTab = {
   widgets: [{ id: 'front-component-widget', type: WidgetType.FRONT_COMPONENT }],
 };
 
-jest.mock('@/page-layout/components/dnd/PageLayoutWidgetDndProvider', () => ({
+vi.mock('@/page-layout/components/dnd/PageLayoutWidgetDndProvider', () => ({
   PageLayoutWidgetDndProvider: ({ children }: { children: ReactNode }) => (
     <>{children}</>
   ),
 }));
 
-jest.mock('@/page-layout/components/PageLayoutLeftPanel', () => ({
+vi.mock('@/page-layout/components/PageLayoutLeftPanel', () => ({
   PageLayoutLeftPanel: () => null,
 }));
 
-jest.mock('@/page-layout/components/PageLayoutRecordIdentifierBar', () => ({
+vi.mock('@/page-layout/components/PageLayoutRecordIdentifierBar', () => ({
   PageLayoutRecordIdentifierBar: () => null,
 }));
 
-jest.mock('@/page-layout/components/PageLayoutTabList', () => ({
+vi.mock('@/page-layout/components/PageLayoutTabList', () => ({
   PageLayoutTabList: () => null,
 }));
 
-jest.mock('@/page-layout/hooks/useCurrentPageLayoutOrThrow', () => ({
+vi.mock('@/page-layout/hooks/useCurrentPageLayoutOrThrow', () => ({
   useCurrentPageLayoutOrThrow: () => ({
     currentPageLayout: {
       id: 'page-layout-id',
@@ -77,28 +80,28 @@ jest.mock('@/page-layout/hooks/useCurrentPageLayoutOrThrow', () => ({
   }),
 }));
 
-jest.mock('@/page-layout/hooks/useIsPageLayoutInEditMode', () => ({
+vi.mock('@/page-layout/hooks/useIsPageLayoutInEditMode', () => ({
   useIsPageLayoutInEditMode: () => false,
 }));
 
-jest.mock('@/page-layout/hooks/usePageLayoutAddTabStrategy', () => ({
+vi.mock('@/page-layout/hooks/usePageLayoutAddTabStrategy', () => ({
   usePageLayoutAddTabStrategy: () => ({ type: 'insert' }),
 }));
 
-jest.mock('@/page-layout/hooks/usePageLayoutRenderableTabs', () => ({
+vi.mock('@/page-layout/hooks/usePageLayoutRenderableTabs', () => ({
   usePageLayoutRenderableTabs: () => ({
     tabsToRenderInTabList: [homeTab, timelineTab, frontComponentTab],
     pinnedLeftTab: undefined,
   }),
 }));
 
-jest.mock('@/page-layout/PageLayoutMainContent', () => ({
+vi.mock('@/page-layout/PageLayoutMainContent', () => ({
   PageLayoutMainContent: ({ tabId }: { tabId: string }) => (
     <div>Rendered tab: {tabId}</div>
   ),
 }));
 
-jest.mock('@/ui/layout/contexts/LayoutRenderingContext', () => ({
+vi.mock('@/ui/layout/contexts/LayoutRenderingContext', () => ({
   useLayoutRenderingContext: () => ({
     layoutType: PageLayoutType.RECORD_PAGE,
     targetRecordIdentifier: {
@@ -108,26 +111,23 @@ jest.mock('@/ui/layout/contexts/LayoutRenderingContext', () => ({
   }),
 }));
 
-jest.mock(
-  '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
-  () => ({
-    useAtomComponentStateValue: (componentState: { key: string }) =>
-      componentState.key === 'pageLayoutPrerenderedTabIdsComponentState'
-        ? mockPrerenderedTabIds
-        : mockActiveTabId,
-  }),
-);
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue', () => ({
+  useAtomComponentStateValue: (componentState: { key: string }) =>
+    componentState.key === 'pageLayoutPrerenderedTabIdsComponentState'
+      ? mockPrerenderedTabIds
+      : mockActiveTabId,
+}));
 
-jest.mock('@/ui/utilities/state/jotai/hooks/useSetAtomComponentState', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useSetAtomComponentState', () => ({
   useSetAtomComponentState: () => mockSetPrerenderedTabIds,
 }));
 
-jest.mock('twenty-ui/utilities', () => ({
-  ...jest.requireActual('twenty-ui/utilities'),
+vi.mock('twenty-ui/utilities', async () => ({
+  ...(await vi.importActual<typeof UtilitiesModule>('twenty-ui/utilities')),
   useIsMobile: () => false,
 }));
 
-jest.mock('@/ui/utilities/scroll/components/ScrollWrapper', () => ({
+vi.mock('@/ui/utilities/scroll/components/ScrollWrapper', () => ({
   ScrollWrapper: ({
     children,
     componentInstanceId,

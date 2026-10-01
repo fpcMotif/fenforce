@@ -16,7 +16,7 @@ describe('CLI ESM bundle startup', () => {
     () => {
       if (!isBundleBuilt) {
         throw new Error(
-          `Expected the built ESM entry at ${bundledCliEntry}. Run \`npx nx build twenty-sdk\` before this test.`,
+          `Expected the built ESM entry at ${bundledCliEntry}. Run \`bunx vite-plus run twenty-sdk#build\` before this test.`,
         );
       }
 

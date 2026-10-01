@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type MockedResponse } from '@apollo/client/testing';
 import { act, renderHook } from '@testing-library/react';
 
@@ -21,7 +23,7 @@ const mockedTasks = mockedTaskRecords.map((record) =>
 );
 
 const mockedDate = '2024-03-15T12:00:00.000Z';
-const toISOStringMock = jest.fn(() => mockedDate);
+const toISOStringMock = vi.fn(() => mockedDate);
 global.Date.prototype.toISOString = toISOStringMock;
 
 const { id, title, bodyV2, status, dueAt } = mockedTasks[0];
@@ -59,7 +61,7 @@ const createOneTaskMutation = generateCreateOneRecordMutation({
   objectPermissionsByObjectMetadataId: {},
 });
 
-const mockResult = jest.fn(() => ({
+const mockResult = vi.fn(() => ({
   data: {
     createTask: {
       ...mockedActivity,

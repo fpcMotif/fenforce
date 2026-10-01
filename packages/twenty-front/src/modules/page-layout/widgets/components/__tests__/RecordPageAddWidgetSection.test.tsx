@@ -1,54 +1,56 @@
+import { vi } from 'vite-plus/test';
+
 import { RecordPageAddWidgetSection } from '@/page-layout/widgets/components/RecordPageAddWidgetSection';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type * as TwentyIcons from 'twenty-ui/icon';
 
-const mockNavigateToMoreWidgets = jest.fn();
-const mockCreateRecordPageNoteWidget = jest.fn(() => ({ id: 'new-note' }));
-const mockCreateRecordPageFieldWidget = jest.fn(() => ({ id: 'new-field' }));
-const mockCreateRecordPageFieldsWidget = jest.fn(() => ({ id: 'new-fields' }));
-const mockInsertCreatedWidgetAtContext = jest.fn();
+const mockNavigateToMoreWidgets = vi.fn();
+const mockCreateRecordPageNoteWidget = vi.fn(() => ({ id: 'new-note' }));
+const mockCreateRecordPageFieldWidget = vi.fn(() => ({ id: 'new-field' }));
+const mockCreateRecordPageFieldsWidget = vi.fn(() => ({ id: 'new-fields' }));
+const mockInsertCreatedWidgetAtContext = vi.fn();
 
-jest.mock('twenty-ui/icon', () => ({
-  ...jest.requireActual<typeof TwentyIcons>('twenty-ui/icon'),
+vi.mock('twenty-ui/icon', async () => ({
+  ...(await vi.importActual<typeof TwentyIcons>('twenty-ui/icon')),
   IconListDetails: () => <svg role="img" aria-label="Fields group icon" />,
   IconListSearch: () => <svg role="img" aria-label="Field icon" />,
   IconNotes: () => <svg role="img" aria-label="Note icon" />,
 }));
 
-jest.mock('@/page-layout/contexts/PageLayoutContentContext', () => ({
+vi.mock('@/page-layout/contexts/PageLayoutContentContext', () => ({
   usePageLayoutContentContext: () => ({ tabId: 'tab-1' }),
 }));
 
-jest.mock('@/page-layout/hooks/useNavigateToMoreWidgets', () => ({
+vi.mock('@/page-layout/hooks/useNavigateToMoreWidgets', () => ({
   useNavigateToMoreWidgets: () => ({
     navigateToMoreWidgets: mockNavigateToMoreWidgets,
   }),
 }));
-jest.mock('@/page-layout/hooks/useCreateRecordPageFieldWidget', () => ({
+vi.mock('@/page-layout/hooks/useCreateRecordPageFieldWidget', () => ({
   useCreateRecordPageFieldWidget: () => ({
     createRecordPageFieldWidget: mockCreateRecordPageFieldWidget,
   }),
 }));
-jest.mock('@/page-layout/hooks/useCreateRecordPageFieldsWidget', () => ({
+vi.mock('@/page-layout/hooks/useCreateRecordPageFieldsWidget', () => ({
   useCreateRecordPageFieldsWidget: () => ({
     createRecordPageFieldsWidget: mockCreateRecordPageFieldsWidget,
   }),
 }));
 
-jest.mock('@/page-layout/hooks/useInsertCreatedWidgetAtContext', () => ({
+vi.mock('@/page-layout/hooks/useInsertCreatedWidgetAtContext', () => ({
   useInsertCreatedWidgetAtContext: () => ({
     insertCreatedWidgetAtContext: mockInsertCreatedWidgetAtContext,
   }),
 }));
-jest.mock('@/page-layout/hooks/useCreateRecordPageNoteWidget', () => ({
+vi.mock('@/page-layout/hooks/useCreateRecordPageNoteWidget', () => ({
   useCreateRecordPageNoteWidget: () => ({
     createRecordPageNoteWidget: mockCreateRecordPageNoteWidget,
   }),
 }));
 
 describe('RecordPageAddWidgetSection', () => {
-  beforeEach(() => jest.clearAllMocks());
+  beforeEach(() => vi.clearAllMocks());
 
   it('opens the existing picker from More widgets', async () => {
     render(<RecordPageAddWidgetSection />);

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { EventRowDynamicComponent } from '@/activities/timeline-activities/rows/components/EventRowDynamicComponent';
 import { type TimelineActivity } from '@/activities/timeline-activities/types/TimelineActivity';
 import { type EnrichedObjectMetadataItem } from '@/object-metadata/types/EnrichedObjectMetadataItem';
@@ -6,12 +8,12 @@ import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-jest.mock(
+vi.mock(
   '@/activities/timeline-activities/rows/main-object/components/EventRowMainObject',
   () => ({ EventRowMainObject: () => <div>Native timeline row</div> }),
 );
 
-jest.mock('@/front-components/components/FrontComponentRenderer', () => ({
+vi.mock('@/front-components/components/FrontComponentRenderer', () => ({
   FrontComponentRenderer: ({
     objectNameSingular,
   }: {

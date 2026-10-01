@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { sanitizeAndValidateInput } from '@/object-record/record-field/ui/meta-types/input/utils/sanitizeAndValidateInput';
 
 describe('sanitizeAndValidateInput', () => {
@@ -14,7 +16,7 @@ describe('sanitizeAndValidateInput', () => {
   });
 
   it('should skip validation for empty input', () => {
-    const validateInput = jest.fn(() => ({
+    const validateInput = vi.fn(() => ({
       isValid: false,
       errorMessage: 'fail',
     }));
@@ -26,7 +28,7 @@ describe('sanitizeAndValidateInput', () => {
   });
 
   it('should validate the trimmed input and propagate the result', () => {
-    const validateInput = jest.fn(() => ({
+    const validateInput = vi.fn(() => ({
       isValid: false,
       errorMessage: 'Invalid format',
     }));

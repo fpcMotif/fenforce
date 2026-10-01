@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, render } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -17,7 +19,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => (
 );
 
 const listenToEvent = (eventName: string) => {
-  const listener = jest.fn();
+  const listener = vi.fn();
   window.addEventListener(eventName, listener);
 
   return listener;
@@ -25,13 +27,13 @@ const listenToEvent = (eventName: string) => {
 
 describe('AgentChatPrepromptEffect', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-    jest.useFakeTimers();
+    vi.clearAllMocks();
+    vi.useFakeTimers();
     resetJotaiStore();
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it('should send the preprompt and clear the composer in SEND mode', () => {
@@ -46,7 +48,7 @@ describe('AgentChatPrepromptEffect', () => {
 
     render(<AgentChatPrepromptEffect />, { wrapper: Wrapper });
     act(() => {
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
 
     expect(sendListener).toHaveBeenCalled();
@@ -67,7 +69,7 @@ describe('AgentChatPrepromptEffect', () => {
 
     render(<AgentChatPrepromptEffect />, { wrapper: Wrapper });
     act(() => {
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
 
     expect(sendListener).not.toHaveBeenCalled();

@@ -1,3 +1,6 @@
+import type * as ReactRouterDomModule from 'react-router-dom';
+import { vi } from 'vite-plus/test';
+
 import { renderHook, waitFor } from '@testing-library/react';
 import { type ReactNode } from 'react';
 
@@ -85,7 +88,7 @@ const mocks: MockedResponse[] = [
         limit: QUERY_DEFAULT_LIMIT_RECORDS,
       },
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         people: generateMockRecordConnection({
           objectNameSingular: 'person',
@@ -100,9 +103,9 @@ const HookMockWrapper = getJestMetadataAndApolloMocksWrapper({
   apolloMocks: mocks,
 });
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useLocation: jest.fn().mockReturnValue({
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual<typeof ReactRouterDomModule>('react-router-dom')),
+  useLocation: vi.fn().mockReturnValue({
     pathname: '/',
     search: '',
     hash: '',

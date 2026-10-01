@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook, waitFor } from '@testing-library/react';
 
 import {
@@ -14,7 +16,7 @@ const mocks = [
       query,
       variables,
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         person: generateMockRecordNode({
           objectNameSingular: 'person',

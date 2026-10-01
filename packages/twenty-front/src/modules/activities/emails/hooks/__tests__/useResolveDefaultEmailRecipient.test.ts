@@ -1,22 +1,24 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 
 import { useResolveDefaultEmailRecipient } from '@/activities/emails/hooks/useResolveDefaultEmailRecipient';
 import { CoreObjectNameSingular } from 'twenty-shared/types';
 
-const mockUseFindOneRecord = jest.fn();
-const mockUseFindManyRecords = jest.fn();
+const mockUseFindOneRecord = vi.fn();
+const mockUseFindManyRecords = vi.fn();
 
-jest.mock('@/object-record/hooks/useFindOneRecord', () => ({
+vi.mock('@/object-record/hooks/useFindOneRecord', () => ({
   useFindOneRecord: (args: unknown) => mockUseFindOneRecord(args),
 }));
 
-jest.mock('@/object-record/hooks/useFindManyRecords', () => ({
+vi.mock('@/object-record/hooks/useFindManyRecords', () => ({
   useFindManyRecords: (args: unknown) => mockUseFindManyRecords(args),
 }));
 
 describe('useResolveDefaultEmailRecipient', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     mockUseFindOneRecord.mockReturnValue({
       record: null,

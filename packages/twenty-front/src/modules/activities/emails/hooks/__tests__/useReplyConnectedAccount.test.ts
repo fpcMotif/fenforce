@@ -1,3 +1,6 @@
+import type * as ReactModule from '@apollo/client/react';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { useQuery } from '@apollo/client/react';
 import { renderHook } from '@testing-library/react';
 
@@ -8,11 +11,11 @@ import {
 } from '~/generated-metadata/graphql';
 import { ConnectedAccountProvider } from 'twenty-shared/types';
 
-const mockUseQuery = useQuery as unknown as jest.Mock;
+const mockUseQuery = useQuery as unknown as Mock;
 
-jest.mock('@apollo/client/react', () => ({
-  ...jest.requireActual('@apollo/client/react'),
-  useQuery: jest.fn(),
+vi.mock('@apollo/client/react', async () => ({
+  ...(await vi.importActual<typeof ReactModule>('@apollo/client/react')),
+  useQuery: vi.fn(),
 }));
 
 const stubQueries = (
@@ -36,7 +39,7 @@ const stubQueries = (
 
 describe('useReplyConnectedAccount', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('returns the account that owns the given channel, not the first connected account', () => {

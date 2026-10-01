@@ -4,7 +4,7 @@ This file is the authoritative compliance matrix. Every row maps an official req
 
 A release is shippable when:
 
-1. `npx nx run twenty-agent-skills:validate` and `npx nx run twenty-agent-skills:build` exit 0 (source and distribution checks pass).
+1. `bunx vite-plus run twenty-agent-skills#validate` and `bunx vite-plus run twenty-agent-skills#build` exit 0 (source and distribution checks pass).
 2. Every `[manual]` row has a current sign-off date.
 
 ## Sources of Truth

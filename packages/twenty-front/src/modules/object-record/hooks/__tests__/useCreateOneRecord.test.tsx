@@ -1,3 +1,6 @@
+import type * as UuidModule from 'uuid';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 
 import { CoreObjectNameSingular } from 'twenty-shared/types';
@@ -11,16 +14,16 @@ import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMeta
 
 const PERSON_ID = 'a7286b9a-c039-4a89-9567-2dfa7953cda9';
 
-jest.mock('uuid', () => ({
-  ...jest.requireActual('uuid'),
-  v4: jest.fn(() => 'a7286b9a-c039-4a89-9567-2dfa7953cda9'),
+vi.mock('uuid', async () => ({
+  ...(await vi.importActual<typeof UuidModule>('uuid')),
+  v4: vi.fn(() => 'a7286b9a-c039-4a89-9567-2dfa7953cda9'),
 }));
 
 const input = { name: { firstName: 'John', lastName: 'Doe' } };
 
-jest.mock('@/object-record/hooks/useRefetchAggregateQueries');
-const mockRefetchAggregateQueries = jest.fn();
-(useRefetchAggregateQueries as jest.Mock).mockReturnValue({
+vi.mock('@/object-record/hooks/useRefetchAggregateQueries');
+const mockRefetchAggregateQueries = vi.fn();
+(useRefetchAggregateQueries as Mock).mockReturnValue({
   refetchAggregateQueries: mockRefetchAggregateQueries,
 });
 
@@ -30,7 +33,7 @@ const mocks = [
       query,
       variables: { input: { ...input, id: PERSON_ID } },
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         createPerson: { ...responseData, ...input, id: PERSON_ID },
       },
@@ -44,7 +47,7 @@ const Wrapper = getJestMetadataAndApolloMocksWrapper({
 
 describe('useCreateOneRecord', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
   it('works as expected', async () => {
     const { result } = renderHook(

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { setAgentChatThreadPermissions } from '@/ai/testing/setAgentChatThreadPermissions';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
@@ -21,35 +23,35 @@ import {
 } from '@/ui/utilities/state/jotai/jotaiStore';
 import { type AgentChatThread } from '~/generated-metadata/graphql';
 
-const switchToNewChat = jest.fn();
-const renameChatThread = jest.fn();
-const archiveChatThread = jest.fn();
-const unarchiveChatThread = jest.fn();
-const deleteChatThread = jest.fn();
+const switchToNewChat = vi.fn();
+const renameChatThread = vi.fn();
+const archiveChatThread = vi.fn();
+const unarchiveChatThread = vi.fn();
+const deleteChatThread = vi.fn();
 
-jest.mock('@/ai/hooks/useSwitchToNewAiChat', () => ({
+vi.mock('@/ai/hooks/useSwitchToNewAiChat', () => ({
   useSwitchToNewAiChat: () => ({ switchToNewChat }),
 }));
-jest.mock('@/ai/hooks/useRenameChatThread', () => ({
+vi.mock('@/ai/hooks/useRenameChatThread', () => ({
   useRenameChatThread: () => ({ renameChatThread }),
 }));
-jest.mock('@/ai/hooks/useChatThreadArchiveActions', () => ({
+vi.mock('@/ai/hooks/useChatThreadArchiveActions', () => ({
   useChatThreadArchiveActions: () => ({
     archiveChatThread,
     unarchiveChatThread,
   }),
 }));
-jest.mock('@/ai/hooks/useDeleteChatThread', () => ({
+vi.mock('@/ai/hooks/useDeleteChatThread', () => ({
   useDeleteChatThread: () => ({ deleteChatThread }),
 }));
-jest.mock('@/navigation/hooks/useNavigationDrawerExpanded', () => ({
+vi.mock('@/navigation/hooks/useNavigationDrawerExpanded', () => ({
   useNavigationDrawerExpanded: () => true,
 }));
-jest.mock('@/ai/components/AiChatCloseButton', () => ({
+vi.mock('@/ai/components/AiChatCloseButton', () => ({
   AiChatCloseButton: () => <button>Close chat</button>,
 }));
 
-jest.mock('@/ai/components/AiChatSharingDropdown', () => ({
+vi.mock('@/ai/components/AiChatSharingDropdown', () => ({
   AiChatSharingDropdown: () => <button>Share</button>,
 }));
 
@@ -92,7 +94,7 @@ const setThreads = (threads: AgentChatThread[]) => {
 
 describe('AiChatPageHeader', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     resetJotaiStore();
     setThreads([THREAD]);
     setAgentChatThreadPermissions(jotaiStore, THREAD.id, {

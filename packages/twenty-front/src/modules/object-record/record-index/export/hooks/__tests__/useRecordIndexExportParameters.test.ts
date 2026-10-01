@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type ContextStoreTargetedRecordsRule } from '@/context-store/states/contextStoreTargetedRecordsRuleComponentState';
 import { currentRecordFieldsComponentState } from '@/object-record/record-field/states/currentRecordFieldsComponentState';
 import { useRecordIndexExportParameters } from '@/object-record/record-index/export/hooks/useRecordIndexExportParameters';
@@ -5,7 +7,7 @@ import { renderHook } from '@testing-library/react';
 import { getJestMetadataAndApolloMocksAndCommandMenuWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksAndCommandMenuWrapper';
 import { getMockObjectMetadataItemOrThrow } from '~/testing/utils/getMockObjectMetadataItemOrThrow';
 
-jest.mock(
+vi.mock(
   '@/object-record/record-index/hooks/useFindManyRecordIndexTableParams',
   () => ({
     useFindManyRecordIndexTableParams: () => ({
@@ -15,7 +17,7 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/object-record/object-options-dropdown/hooks/useObjectOptionsForBoard',
   () => ({
     useObjectOptionsForBoard: () => ({ hiddenBoardFields: [] }),

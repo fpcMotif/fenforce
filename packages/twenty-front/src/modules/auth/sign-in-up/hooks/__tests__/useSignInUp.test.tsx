@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { type UseFormReturn } from 'react-hook-form';
 import { MemoryRouter } from 'react-router-dom';
@@ -18,28 +21,28 @@ import {
 } from '@/ui/utilities/state/jotai/jotaiStore';
 import { type PublicWorkspaceData } from '~/generated-metadata/graphql';
 
-jest.mock('@/auth/hooks/useAuth', () => ({ useAuth: jest.fn() }));
+vi.mock('@/auth/hooks/useAuth', () => ({ useAuth: vi.fn() }));
 
-jest.mock('@/domain-manager/hooks/useIsCurrentLocationOnAWorkspace', () => ({
+vi.mock('@/domain-manager/hooks/useIsCurrentLocationOnAWorkspace', () => ({
   useIsCurrentLocationOnAWorkspace: () => ({ isOnAWorkspace: true }),
 }));
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
-jest.mock('@/client-config/hooks/useCaptcha', () => ({
+vi.mock('@/client-config/hooks/useCaptcha', () => ({
   useCaptcha: () => ({ isCaptchaReady: true }),
 }));
 
-jest.mock('@/captcha/hooks/useReadCaptchaToken', () => ({
+vi.mock('@/captcha/hooks/useReadCaptchaToken', () => ({
   useReadCaptchaToken: () => ({ readCaptchaToken: () => 'captcha-token' }),
 }));
 
-jest.mock(
+vi.mock(
   '@/domain-manager/hooks/useBuildSearchParamsFromUrlSyncedStates',
   () => ({
     useBuildSearchParamsFromUrlSyncedStates: () => ({
@@ -48,13 +51,13 @@ jest.mock(
   }),
 );
 
-const signUpWithCredentialsMock = jest.fn();
-const signUpWithCredentialsInWorkspaceMock = jest.fn();
+const signUpWithCredentialsMock = vi.fn();
+const signUpWithCredentialsInWorkspaceMock = vi.fn();
 
-(useAuth as jest.Mock).mockReturnValue({
+(useAuth as Mock).mockReturnValue({
   signUpWithCredentialsInWorkspace: signUpWithCredentialsInWorkspaceMock,
   signUpWithCredentials: signUpWithCredentialsMock,
-  checkUserExists: { checkUserExistsQuery: jest.fn() },
+  checkUserExists: { checkUserExistsQuery: vi.fn() },
 });
 
 const credentials: Form = {
@@ -82,7 +85,7 @@ const renderUseSignInUp = (workspacePublicData: PublicWorkspaceData | null) => {
 describe('useSignInUp > submitCredentials > sign-up routing', () => {
   beforeEach(() => {
     resetJotaiStore();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('signs up in the workspace when the location resolves one, so its approved access domains are checked', async () => {

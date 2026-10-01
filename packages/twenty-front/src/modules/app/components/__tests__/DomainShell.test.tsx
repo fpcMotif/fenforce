@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 
@@ -11,45 +13,45 @@ import {
 
 let isDefaultDomainValue = true;
 
-jest.mock('@/apollo/components/ApolloProvider', () => ({
+vi.mock('@/apollo/components/ApolloProvider', () => ({
   ApolloProvider: ({ children }: React.PropsWithChildren) => <>{children}</>,
 }));
 
-jest.mock('@/ui/theme/components/BaseThemeProvider', () => ({
+vi.mock('@/ui/theme/components/BaseThemeProvider', () => ({
   BaseThemeProvider: ({ children }: React.PropsWithChildren) => <>{children}</>,
 }));
 
-jest.mock('@/client-config/components/ClientConfigProviderEffect', () => ({
+vi.mock('@/client-config/components/ClientConfigProviderEffect', () => ({
   ClientConfigProviderEffect: () => null,
 }));
 
-jest.mock('@/auth/effect-components/PendingServerSignOutEffect', () => ({
+vi.mock('@/auth/effect-components/PendingServerSignOutEffect', () => ({
   PendingServerSignOutEffect: () => null,
 }));
 
-jest.mock('@/client-config/components/ClientConfigProvider', () => ({
+vi.mock('@/client-config/components/ClientConfigProvider', () => ({
   ClientConfigProvider: ({ children }: React.PropsWithChildren) => (
     <>{children}</>
   ),
 }));
 
-jest.mock('@/app/components/RootApp', () => ({
+vi.mock('@/app/components/RootApp', () => ({
   RootApp: () => <div>ROOT_APP</div>,
 }));
 
-jest.mock('@/app/components/WorkspaceApp', () => ({
+vi.mock('@/app/components/WorkspaceApp', () => ({
   WorkspaceApp: () => <div>WORKSPACE_APP</div>,
 }));
 
-jest.mock('~/loading/components/UserOrMetadataLoader', () => ({
+vi.mock('~/loading/components/UserOrMetadataLoader', () => ({
   UserOrMetadataLoader: () => <div>LOADER</div>,
 }));
 
-jest.mock('@/onboarding/components/OnboardingPageLoader', () => ({
+vi.mock('@/onboarding/components/OnboardingPageLoader', () => ({
   OnboardingPageLoader: () => <div>ONBOARDING_LOADER</div>,
 }));
 
-jest.mock('@/domain-manager/hooks/useIsCurrentLocationOnDefaultDomain', () => ({
+vi.mock('@/domain-manager/hooks/useIsCurrentLocationOnDefaultDomain', () => ({
   useIsCurrentLocationOnDefaultDomain: () => ({
     isDefaultDomain: isDefaultDomainValue,
   }),

@@ -1,3 +1,6 @@
+import type * as ReactModule from '@apollo/client/react';
+import { vi } from 'vite-plus/test';
+
 /* @license Enterprise */
 
 import { renderHook } from '@testing-library/react';
@@ -9,11 +12,11 @@ import {
 } from '~/generated-metadata/graphql';
 import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksWrapper';
 
-const mutationOidcCallSpy = jest.fn();
-const mutationSamlCallSpy = jest.fn();
+const mutationOidcCallSpy = vi.fn();
+const mutationSamlCallSpy = vi.fn();
 
-jest.mock('@apollo/client/react', () => ({
-  ...jest.requireActual('@apollo/client/react'),
+vi.mock('@apollo/client/react', async () => ({
+  ...(await vi.importActual<typeof ReactModule>('@apollo/client/react')),
   useMutation: (document: unknown) => {
     if (document === CreateOidcIdentityProviderDocument) {
       return [mutationOidcCallSpy];
@@ -21,7 +24,7 @@ jest.mock('@apollo/client/react', () => ({
     if (document === CreateSamlIdentityProviderDocument) {
       return [mutationSamlCallSpy];
     }
-    return [jest.fn()];
+    return [vi.fn()];
   },
 }));
 
@@ -31,7 +34,7 @@ const Wrapper = getJestMetadataAndApolloMocksWrapper({
 
 describe('useCreateSsoIdentityProvider', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('create OIDC sso identity provider', async () => {

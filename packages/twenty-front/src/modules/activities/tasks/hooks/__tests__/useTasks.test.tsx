@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { type ReactNode } from 'react';
 
@@ -37,18 +39,18 @@ const tasks = [
   },
 ];
 
-const useActivitiesMock = jest.fn(() => {
+const useActivitiesMock = vi.fn(() => {
   return {
     activities: tasks,
-    fetchMoreActivities: jest.fn(),
+    fetchMoreActivities: vi.fn(),
   };
 });
 
-jest.mock('@/activities/hooks/useActivities', () => ({
-  useActivities: jest.fn(),
+vi.mock('@/activities/hooks/useActivities', () => ({
+  useActivities: vi.fn(),
 }));
 
-(useActivities as jest.Mock).mockImplementation(useActivitiesMock);
+(useActivities as Mock).mockImplementation(useActivitiesMock);
 
 const Wrapper = ({ children }: { children: ReactNode }) => (
   <ObjectFilterDropdownComponentInstanceContext.Provider

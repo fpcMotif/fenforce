@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type FlatViewFilter } from '@/metadata-store/types/FlatViewFilter';
 import { UPSERT_VIEW_WIDGET } from '@/page-layout/graphql/mutations/upsertViewWidget';
 import { useSaveRecordTableWidgetViews } from '@/page-layout/hooks/useSaveRecordTableWidgetViews';
@@ -59,7 +61,7 @@ const recordTableWidget = {
   },
 } as unknown as PageLayoutWidget;
 
-const upsertViewWidgetResult = jest.fn(
+const upsertViewWidgetResult = vi.fn(
   (variables: { input: UpsertViewWidgetInput }) => ({
     data: {
       upsertViewWidget: {
@@ -97,7 +99,7 @@ const getWrapper =
 
 describe('useSaveRecordTableWidgetViews', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should include relationTargetFieldMetadataId in the upsert view filters input', async () => {

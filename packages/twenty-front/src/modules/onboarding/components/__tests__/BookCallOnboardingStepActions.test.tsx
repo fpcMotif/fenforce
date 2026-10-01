@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { act, render, screen } from '@testing-library/react';
@@ -6,22 +9,22 @@ import { dynamicActivate } from '~/utils/i18n/dynamicActivate';
 
 import { BookCallOnboardingStepActions } from '@/onboarding/components/BookCallOnboardingStepActions';
 
-const mockCompleteBookCallOnboardingStep = jest.fn();
+const mockCompleteBookCallOnboardingStep = vi.fn();
 
-const mockCalApi = jest.fn();
+const mockCalApi = vi.fn();
 
-jest.mock('@calcom/embed-react', () => ({
+vi.mock('@calcom/embed-react', () => ({
   getCalApi: () => Promise.resolve(mockCalApi),
 }));
 
-jest.mock('@/onboarding/hooks/useCompleteBookCallOnboardingStep', () => ({
+vi.mock('@/onboarding/hooks/useCompleteBookCallOnboardingStep', () => ({
   useCompleteBookCallOnboardingStep: () => mockCompleteBookCallOnboardingStep,
 }));
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
@@ -52,7 +55,7 @@ const renderActions = async () => {
 
 describe('BookCallOnboardingStepActions', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockCompleteBookCallOnboardingStep.mockResolvedValue(undefined);
   });
 

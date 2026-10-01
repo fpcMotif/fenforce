@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { type I18n, i18n, setupI18n } from '@lingui/core';
 import { msg } from '@lingui/core/macro';
@@ -30,8 +32,8 @@ const Wrapper = ({ children, i18nInstance = i18n }: WrapperProps) => (
 
 describe('AppToaster', () => {
   it('should preserve actions and dismiss a notification through the shared toaster', async () => {
-    const onAction = jest.fn();
-    const onClose = jest.fn();
+    const onAction = vi.fn();
+    const onClose = vi.fn();
     const { result } = renderHook(() => useToast(), { wrapper: Wrapper });
 
     act(() => {
@@ -117,8 +119,8 @@ describe('AppToaster', () => {
         },
       },
     });
-    const onClose = jest.fn();
-    const onCancel = jest.fn();
+    const onClose = vi.fn();
+    const onCancel = vi.fn();
     const { result } = renderHook(() => useToast(), {
       wrapper: ({ children }) => (
         <Wrapper i18nInstance={testI18n}>{children}</Wrapper>

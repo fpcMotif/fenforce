@@ -1,20 +1,19 @@
+import { vi } from 'vite-plus/test';
+
 import { useBarChartData } from '@/page-layout/widgets/graph/graph-widget-bar-chart/hooks/useBarChartData';
 import { type BarChartEnrichedKey } from '@/page-layout/widgets/graph/graph-widget-bar-chart/types/BarChartEnrichedKey';
 import { type BarChartSeriesWithColor } from '@/page-layout/widgets/graph/graph-widget-bar-chart/types/BarChartSeries';
 import { type GraphColorRegistry } from '@/page-layout/widgets/graph/types/GraphColorRegistry';
 import { renderHook } from '@testing-library/react';
 
-const mockUseAtomComponentStateValue = jest.fn();
-jest.mock(
-  '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
-  () => ({
-    useAtomComponentStateValue: () => mockUseAtomComponentStateValue(),
-  }),
-);
+const mockUseAtomComponentStateValue = vi.fn();
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue', () => ({
+  useAtomComponentStateValue: () => mockUseAtomComponentStateValue(),
+}));
 
 describe('useBarChartData', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockUseAtomComponentStateValue.mockReturnValue([]);
   });
 

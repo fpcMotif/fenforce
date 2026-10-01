@@ -1,3 +1,5 @@
+import { type MockedFunction, vi } from 'vite-plus/test';
+
 import {
   PAGE_LAYOUT_TEST_INSTANCE_ID,
   PageLayoutTestWrapper,
@@ -16,22 +18,20 @@ import { createStore } from 'jotai';
 import { type ReactNode } from 'react';
 import { SidePanelPages } from 'twenty-shared/types';
 
-jest.mock(
-  '@/side-panel/pages/page-layout/hooks/useNavigatePageLayoutSidePanel',
-);
+vi.mock('@/side-panel/pages/page-layout/hooks/useNavigatePageLayoutSidePanel');
 
 describe('useOpenReplaceWidgetPicker', () => {
   it('clears an insertion context before opening the replacement picker', () => {
     const store = createStore();
     const widget = makeWidget('widget', 0);
-    const mockNavigatePageLayoutSidePanel = jest.fn();
+    const mockNavigatePageLayoutSidePanel = vi.fn();
     const insertionContextAtom =
       widgetInsertionContextComponentState.atomFamily({
         instanceId: PAGE_LAYOUT_TEST_INSTANCE_ID,
       });
 
     (
-      useNavigatePageLayoutSidePanel as jest.MockedFunction<
+      useNavigatePageLayoutSidePanel as MockedFunction<
         typeof useNavigatePageLayoutSidePanel
       >
     ).mockReturnValue({

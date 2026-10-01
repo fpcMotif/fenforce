@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { useSignInUpForm } from '@/auth/sign-in-up/hooks/useSignInUpForm';
 import { isDeveloperDefaultSignInPrefilledState } from '@/client-config/states/isDeveloperDefaultSignInPrefilledState';
 import {
@@ -31,7 +33,7 @@ const TestWrapper = ({
 
 describe('useSignInUpForm', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     resetJotaiStore();
   });
 

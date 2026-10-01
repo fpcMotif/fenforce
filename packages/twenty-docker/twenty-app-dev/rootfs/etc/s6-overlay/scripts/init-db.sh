@@ -36,7 +36,7 @@ until curl -sf http://localhost:8123/ping > /dev/null 2>&1 || [ "$TRIES" -ge 120
   TRIES=$((TRIES + 1))
   sleep 0.5
 done
-if ! yarn clickhouse:migrate:prod; then
+if ! bun run clickhouse:migrate:prod; then
   echo "Warning: ClickHouse migrations failed, but continuing startup..."
 fi
 step_done
@@ -46,24 +46,24 @@ has_schema=$(PGPASSWORD=twenty psql -h localhost -U twenty -d default -tAc \
 
 if [ "$has_schema" = "f" ]; then
   step_start "Running initial database setup and migrations"
-  yarn database:init:prod
+  bun run database:init:prod
   step_done
 fi
 
 step_start "Flushing cache"
-if ! yarn command:prod cache:flush; then
+if ! bun run command:prod cache:flush; then
   echo "Warning: Failed to flush cache before upgrade, but continuing startup..."
 fi
 step_done
 
 step_start "Running upgrade"
-if ! yarn command:prod upgrade; then
+if ! bun run command:prod upgrade; then
   echo "Warning: Upgrade completed with errors. Some workspaces may not be fully migrated. Check logs for details."
 fi
 step_done
 
 step_start "Flushing cache"
-if ! yarn command:prod cache:flush; then
+if ! bun run command:prod cache:flush; then
   echo "Warning: Failed to flush cache after upgrade, but continuing startup..."
 fi
 step_done
@@ -74,7 +74,7 @@ has_workspace=$(PGPASSWORD=twenty psql -h localhost -U twenty -d default -tAc \
 
 if [ "$has_workspace" = "f" ]; then
   step_start "Seeding workspace data"
-  yarn command:prod workspace:seed:dev --light || true
+  bun run command:prod workspace:seed:dev --light || true
   step_done
 fi
 

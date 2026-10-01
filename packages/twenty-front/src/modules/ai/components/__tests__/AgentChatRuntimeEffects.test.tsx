@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -9,21 +11,21 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-jest.mock('@/ai/components/AgentChatMessagesFetchEffect', () => ({
+vi.mock('@/ai/components/AgentChatMessagesFetchEffect', () => ({
   AgentChatMessagesFetchEffect: () => <div data-testid="messages-fetch" />,
 }));
-jest.mock('@/ai/components/AgentChatStreamSubscriptionEffect', () => ({
+vi.mock('@/ai/components/AgentChatStreamSubscriptionEffect', () => ({
   AgentChatStreamSubscriptionEffect: () => (
     <div data-testid="stream-subscription" />
   ),
 }));
-jest.mock('@/ai/components/AgentChatPrepromptEffect', () => ({
+vi.mock('@/ai/components/AgentChatPrepromptEffect', () => ({
   AgentChatPrepromptEffect: () => <div data-testid="preprompt" />,
 }));
-jest.mock('@/ai/components/AgentChatStreamKeepAliveEffect', () => ({
+vi.mock('@/ai/components/AgentChatStreamKeepAliveEffect', () => ({
   AgentChatStreamKeepAliveEffect: () => <div data-testid="keep-alive" />,
 }));
-jest.mock('@/ai/components/AgentChatSessionStartTimeEffect', () => ({
+vi.mock('@/ai/components/AgentChatSessionStartTimeEffect', () => ({
   AgentChatSessionStartTimeEffect: () => <div data-testid="session-start" />,
 }));
 

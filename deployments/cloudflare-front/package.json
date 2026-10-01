@@ -1,0 +1,30 @@
+{
+  "name": "fenforce-cloudflare-front",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "varlock run -- bun scripts/build.mjs",
+    "env:check": "varlock load --agent",
+    "check": "tsc --noEmit && bun test && vp lint src scripts alchemy.run.ts --deny-warnings && vp fmt src scripts alchemy.run.ts --check && varlock load --agent && varlock scan",
+    "dev": "varlock run -- wrangler dev",
+    "deploy": "varlock run -- wrangler deploy",
+    "alchemy:plan": "varlock run -- alchemy plan --stage fenforce-preview-spike",
+    "alchemy:deploy:spike": "varlock run -- alchemy deploy --stage fenforce-preview-spike"
+  },
+  "devDependencies": {
+    "@effect/platform-bun": "4.0.0-rc.117",
+    "@effect/platform-node": "4.0.0-rc.117",
+    "@effect/platform-node-shared": "4.0.0-rc.117",
+    "@types/bun": "1.4.2",
+    "alchemy": "2.0.0-beta.79",
+    "effect": "4.0.0-rc.117",
+    "typescript": "7.0.2",
+    "varlock": "1.21.0",
+    "vite-plus": "1.0.0",
+    "wrangler": "4.142.0"
+  },
+  "resolutions": {
+    "@effect/platform-node-shared": "4.0.0-rc.117"
+  },
+  "packageManager": "bun@1.4.3"
+}

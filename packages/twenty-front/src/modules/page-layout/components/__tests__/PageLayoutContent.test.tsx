@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { PageLayoutContent } from '@/page-layout/components/PageLayoutContent';
 import { type WidgetInsertionContext } from '@/page-layout/states/widgetInsertionContextComponentState';
 import { makeTab } from '@/page-layout/testing/pageLayoutDraftFixtures';
@@ -14,9 +16,9 @@ import {
 
 let mockIsInEditMode = false;
 let mockLayoutType = PageLayoutType.RECORD_PAGE;
-const mockNavigateToMoreWidgets = jest.fn();
+const mockNavigateToMoreWidgets = vi.fn();
 
-jest.mock('@/page-layout/hooks/useNavigateToMoreWidgets', () => ({
+vi.mock('@/page-layout/hooks/useNavigateToMoreWidgets', () => ({
   useNavigateToMoreWidgets: () => ({
     navigateToMoreWidgets: mockNavigateToMoreWidgets,
   }),
@@ -58,14 +60,14 @@ const mockTab = makeTab(
   PageLayoutTabLayoutMode.VERTICAL_LIST,
 );
 
-jest.mock('@/page-layout/contexts/PageLayoutContentContext', () => ({
+vi.mock('@/page-layout/contexts/PageLayoutContentContext', () => ({
   usePageLayoutContentContext: () => ({
     layoutMode: 'VERTICAL_LIST',
     tabId: 'tab-id',
   }),
 }));
 
-jest.mock('@/page-layout/hooks/useCurrentPageLayoutOrThrow', () => ({
+vi.mock('@/page-layout/hooks/useCurrentPageLayoutOrThrow', () => ({
   useCurrentPageLayoutOrThrow: () => ({
     currentPageLayout: {
       type: mockLayoutType,
@@ -73,27 +75,29 @@ jest.mock('@/page-layout/hooks/useCurrentPageLayoutOrThrow', () => ({
   }),
 }));
 
-jest.mock('@/page-layout/hooks/useIsPageLayoutInEditMode', () => ({
+vi.mock('@/page-layout/hooks/useIsPageLayoutInEditMode', () => ({
   useIsPageLayoutInEditMode: () => mockIsInEditMode,
 }));
 
-jest.mock(
+vi.mock(
   '@/page-layout/hooks/usePageLayoutTabWithVisibleWidgetsOrThrow',
   () => ({
     usePageLayoutTabWithVisibleWidgetsOrThrow: () => mockTab,
   }),
 );
 
-jest.mock('@/page-layout/hooks/useIsSideColumnContext', () => ({
+vi.mock('@/page-layout/hooks/useIsSideColumnContext', () => ({
   useIsSideColumnContext: () => false,
 }));
 
-jest.mock('@/page-layout/widgets/hooks/useIsInPinnedTab', () => ({
+vi.mock('@/page-layout/widgets/hooks/useIsInPinnedTab', () => ({
   useIsInPinnedTab: () => ({ isInPinnedTab: false }),
 }));
 
-jest.mock('@/page-layout/widgets/components/WidgetRenderer', () => {
-  const { useState } = jest.requireActual('react') as typeof React;
+vi.mock('@/page-layout/widgets/components/WidgetRenderer', async () => {
+  const { useState } = (await vi.importActual<typeof React>(
+    'react',
+  )) as typeof React;
 
   return {
     WidgetRenderer: ({ widget }: { widget: PageLayoutWidget }) => {
@@ -113,32 +117,29 @@ jest.mock('@/page-layout/widgets/components/WidgetRenderer', () => {
   };
 });
 
-jest.mock(
-  '@/page-layout/widgets/components/RecordPageAddWidgetSection',
-  () => ({
-    RecordPageAddWidgetSection: ({
-      insertionContext = null,
-    }: {
-      insertionContext?: WidgetInsertionContext;
-    }) => (
-      <div>
-        <span>Add widget</span>
-        <button onClick={() => mockNavigateToMoreWidgets(insertionContext)}>
-          More widgets
-        </button>
-      </div>
-    ),
-  }),
-);
+vi.mock('@/page-layout/widgets/components/RecordPageAddWidgetSection', () => ({
+  RecordPageAddWidgetSection: ({
+    insertionContext = null,
+  }: {
+    insertionContext?: WidgetInsertionContext;
+  }) => (
+    <div>
+      <span>Add widget</span>
+      <button onClick={() => mockNavigateToMoreWidgets(insertionContext)}>
+        More widgets
+      </button>
+    </div>
+  ),
+}));
 
-jest.mock(
+vi.mock(
   '@/ui/utilities/drag-and-drop/components/DragDropItemDropTarget',
   () => ({
     DragDropItemDropTarget: () => null,
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/ui/utilities/drag-and-drop/components/DragDropItemSortableCell',
   () => ({
     DragDropItemSortableCell: ({ children }: { children: React.ReactNode }) =>
@@ -146,17 +147,17 @@ jest.mock(
   }),
 );
 
-jest.mock('@dnd-kit/react', () => ({
-  useDroppable: () => ({ ref: jest.fn() }),
+vi.mock('@dnd-kit/react', () => ({
+  useDroppable: () => ({ ref: vi.fn() }),
 }));
 
-jest.mock('twenty-ui/utilities', () => ({
+vi.mock('twenty-ui/utilities', () => ({
   useIsMobile: () => false,
 }));
 
 describe('PageLayoutContent', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockIsInEditMode = false;
     mockLayoutType = PageLayoutType.RECORD_PAGE;
     mockTab.widgets = [mockWidget];

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
@@ -7,7 +9,7 @@ import { createStore, Provider } from 'jotai';
 import { openNavigationMenuItemFolderIdsState } from '@/navigation-menu-item/common/states/openNavigationMenuItemFolderIdsState';
 import { NavigationMenuItemMenu } from '@/navigation-menu-item/edit/components/NavigationMenuItemMenu';
 
-jest.mock(
+vi.mock(
   '@/navigation-menu-item/edit/components/NavigationMenuItemAddDropdownContent',
   () => ({
     NavigationMenuItemAddDropdownContent: ({

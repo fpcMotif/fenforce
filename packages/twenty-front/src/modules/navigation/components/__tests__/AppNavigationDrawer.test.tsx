@@ -1,30 +1,33 @@
+import type * as UtilitiesModule from 'twenty-ui/utilities';
+import { vi } from 'vite-plus/test';
+
 import { AppNavigationDrawer } from '@/navigation/components/AppNavigationDrawer';
 import { useIsSettingsDrawer } from '@/navigation/hooks/useIsSettingsDrawer';
 import { useIsMobile } from 'twenty-ui/utilities';
 import { render, screen } from '@testing-library/react';
 import { type ReactNode } from 'react';
 
-jest.mock('@/navigation/hooks/useIsSettingsDrawer');
-jest.mock('twenty-ui/utilities', () => ({
-  ...jest.requireActual('twenty-ui/utilities'),
-  useIsMobile: jest.fn(),
+vi.mock('@/navigation/hooks/useIsSettingsDrawer');
+vi.mock('twenty-ui/utilities', async () => ({
+  ...(await vi.importActual<typeof UtilitiesModule>('twenty-ui/utilities')),
+  useIsMobile: vi.fn(),
 }));
 
-jest.mock('@/navigation/components/MainNavigationDrawerContent', () => ({
+vi.mock('@/navigation/components/MainNavigationDrawerContent', () => ({
   MainNavigationDrawerContent: () => <div>Main content</div>,
 }));
 
-jest.mock('@/navigation/components/MainNavigationDrawerModeSwitcher', () => ({
+vi.mock('@/navigation/components/MainNavigationDrawerModeSwitcher', () => ({
   MainNavigationDrawerModeSwitcher: () => (
     <button type="button">Navigation modes</button>
   ),
 }));
 
-jest.mock('@/navigation/components/SettingsNavigationDrawerContent', () => ({
+vi.mock('@/navigation/components/SettingsNavigationDrawerContent', () => ({
   SettingsNavigationDrawerContent: () => <div>Settings content</div>,
 }));
 
-jest.mock(
+vi.mock(
   '@/ui/navigation/navigation-drawer/components/NavigationDrawer',
   () => ({
     NavigationDrawer: ({ children }: { children: ReactNode }) => (
@@ -33,7 +36,7 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/ui/navigation/navigation-drawer/components/NavigationDrawerFixedContent',
   () => ({
     NavigationDrawerFixedContent: ({ children }: { children: ReactNode }) => (
@@ -44,8 +47,8 @@ jest.mock(
 
 describe('AppNavigationDrawer', () => {
   beforeEach(() => {
-    jest.mocked(useIsMobile).mockReturnValue(false);
-    jest.mocked(useIsSettingsDrawer).mockReturnValue(false);
+    vi.mocked(useIsMobile).mockReturnValue(false);
+    vi.mocked(useIsSettingsDrawer).mockReturnValue(false);
   });
 
   it('keeps the mode switcher mounted when the drawer content changes', () => {
@@ -56,7 +59,7 @@ describe('AppNavigationDrawer', () => {
 
     expect(screen.getByText('Main content')).toBeInTheDocument();
 
-    jest.mocked(useIsSettingsDrawer).mockReturnValue(true);
+    vi.mocked(useIsSettingsDrawer).mockReturnValue(true);
     rerender(<AppNavigationDrawer />);
 
     expect(screen.getByText('Settings content')).toBeInTheDocument();
@@ -66,8 +69,8 @@ describe('AppNavigationDrawer', () => {
   });
 
   it('leaves mode switching to the navigation bar on mobile', () => {
-    jest.mocked(useIsMobile).mockReturnValue(true);
-    jest.mocked(useIsSettingsDrawer).mockReturnValue(true);
+    vi.mocked(useIsMobile).mockReturnValue(true);
+    vi.mocked(useIsSettingsDrawer).mockReturnValue(true);
 
     render(<AppNavigationDrawer />);
 

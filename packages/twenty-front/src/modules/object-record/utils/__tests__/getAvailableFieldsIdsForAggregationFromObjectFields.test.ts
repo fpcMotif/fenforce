@@ -1,5 +1,7 @@
+import type * as AggregateOperationsModule from '@/object-record/record-table/constants/AggregateOperations';
+import { vi } from 'vite-plus/test';
+
 import { type FieldMetadataItem } from '@/object-metadata/types/FieldMetadataItem';
-import { AggregateOperations } from '@/object-record/record-table/constants/AggregateOperations';
 import { COUNT_AGGREGATE_OPERATION_OPTIONS } from '@/object-record/record-table/record-table-footer/constants/countAggregateOperationOptions';
 import { NON_STANDARD_AGGREGATE_OPERATION_OPTIONS } from '@/object-record/record-table/record-table-footer/constants/nonStandardAggregateOperationsOptions';
 import { PERCENT_AGGREGATE_OPERATION_OPTIONS } from '@/object-record/record-table/record-table-footer/constants/percentAggregateOperationOptions';
@@ -18,51 +20,59 @@ const FIELDS_MOCKS = [
   { id: ACTIVE_FIELD_ID, type: FieldMetadataType.BOOLEAN, name: 'active' },
 ];
 
-jest.mock(
+vi.mock(
   '@/object-record/utils/getAvailableAggregationsFromObjectFields',
-  () => ({
-    getAvailableAggregationsFromObjectFields: jest.fn().mockReturnValue({
-      active: {
-        [AggregateOperations.COUNT_TRUE]: 'countTrueActive',
-        [AggregateOperations.COUNT_FALSE]: 'CountFalseActive',
-      },
-      amount: {
-        [AggregateOperations.SUM]: 'sumAmount',
-        [AggregateOperations.AVG]: 'avgAmount',
-        [AggregateOperations.MIN]: 'minAmount',
-        [AggregateOperations.MAX]: 'maxAmount',
-        [AggregateOperations.COUNT]: 'totalCount',
-        [AggregateOperations.COUNT_UNIQUE_VALUES]: 'countUniqueValuesAmount',
-        [AggregateOperations.COUNT_EMPTY]: 'countEmptyAmount',
-        [AggregateOperations.COUNT_NOT_EMPTY]: 'countNotEmptyAmount',
-        [AggregateOperations.PERCENTAGE_EMPTY]: 'percentageEmptyAmount',
-        [AggregateOperations.PERCENTAGE_NOT_EMPTY]: 'percentageNotEmptyAmount',
-      },
-      price: {
-        [AggregateOperations.SUM]: 'sumPriceAmountMicros',
-        [AggregateOperations.AVG]: 'avgPriceAmountMicros',
-        [AggregateOperations.MIN]: 'minPriceAmountMicros',
-        [AggregateOperations.MAX]: 'maxPriceAmountMicros',
-        [AggregateOperations.COUNT]: 'totalCount',
-        [AggregateOperations.COUNT_UNIQUE_VALUES]:
-          'countUniqueValuesPriceAmountMicros',
-        [AggregateOperations.COUNT_EMPTY]: 'countEmptyPriceAmountMicros',
-        [AggregateOperations.COUNT_NOT_EMPTY]: 'countNotEmptyPriceAmountMicros',
-        [AggregateOperations.PERCENTAGE_EMPTY]:
-          'percentageEmptyPriceAmountMicros',
-        [AggregateOperations.PERCENTAGE_NOT_EMPTY]:
-          'percentageNotEmptyPriceAmountMicros',
-      },
-      name: {
-        [AggregateOperations.COUNT]: 'totalCount',
-        [AggregateOperations.COUNT_UNIQUE_VALUES]: 'countUniqueValuesName',
-        [AggregateOperations.COUNT_EMPTY]: 'countEmptyName',
-        [AggregateOperations.COUNT_NOT_EMPTY]: 'countNotEmptyName',
-        [AggregateOperations.PERCENTAGE_EMPTY]: 'percentageEmptyName',
-        [AggregateOperations.PERCENTAGE_NOT_EMPTY]: 'percentageNotEmptyName',
-      },
-    }),
-  }),
+  async () => {
+    const { AggregateOperations } = await vi.importActual<
+      typeof AggregateOperationsModule
+    >('@/object-record/record-table/constants/AggregateOperations');
+
+    return {
+      getAvailableAggregationsFromObjectFields: vi.fn().mockReturnValue({
+        active: {
+          [AggregateOperations.COUNT_TRUE]: 'countTrueActive',
+          [AggregateOperations.COUNT_FALSE]: 'CountFalseActive',
+        },
+        amount: {
+          [AggregateOperations.SUM]: 'sumAmount',
+          [AggregateOperations.AVG]: 'avgAmount',
+          [AggregateOperations.MIN]: 'minAmount',
+          [AggregateOperations.MAX]: 'maxAmount',
+          [AggregateOperations.COUNT]: 'totalCount',
+          [AggregateOperations.COUNT_UNIQUE_VALUES]: 'countUniqueValuesAmount',
+          [AggregateOperations.COUNT_EMPTY]: 'countEmptyAmount',
+          [AggregateOperations.COUNT_NOT_EMPTY]: 'countNotEmptyAmount',
+          [AggregateOperations.PERCENTAGE_EMPTY]: 'percentageEmptyAmount',
+          [AggregateOperations.PERCENTAGE_NOT_EMPTY]:
+            'percentageNotEmptyAmount',
+        },
+        price: {
+          [AggregateOperations.SUM]: 'sumPriceAmountMicros',
+          [AggregateOperations.AVG]: 'avgPriceAmountMicros',
+          [AggregateOperations.MIN]: 'minPriceAmountMicros',
+          [AggregateOperations.MAX]: 'maxPriceAmountMicros',
+          [AggregateOperations.COUNT]: 'totalCount',
+          [AggregateOperations.COUNT_UNIQUE_VALUES]:
+            'countUniqueValuesPriceAmountMicros',
+          [AggregateOperations.COUNT_EMPTY]: 'countEmptyPriceAmountMicros',
+          [AggregateOperations.COUNT_NOT_EMPTY]:
+            'countNotEmptyPriceAmountMicros',
+          [AggregateOperations.PERCENTAGE_EMPTY]:
+            'percentageEmptyPriceAmountMicros',
+          [AggregateOperations.PERCENTAGE_NOT_EMPTY]:
+            'percentageNotEmptyPriceAmountMicros',
+        },
+        name: {
+          [AggregateOperations.COUNT]: 'totalCount',
+          [AggregateOperations.COUNT_UNIQUE_VALUES]: 'countUniqueValuesName',
+          [AggregateOperations.COUNT_EMPTY]: 'countEmptyName',
+          [AggregateOperations.COUNT_NOT_EMPTY]: 'countNotEmptyName',
+          [AggregateOperations.PERCENTAGE_EMPTY]: 'percentageEmptyName',
+          [AggregateOperations.PERCENTAGE_NOT_EMPTY]: 'percentageNotEmptyName',
+        },
+      }),
+    };
+  },
 );
 
 describe('getAvailableFieldsIdsForAggregationFromObjectFields', () => {

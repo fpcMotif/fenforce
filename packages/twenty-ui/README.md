@@ -109,10 +109,10 @@ The store factory and subscription hook are internal to the toast module. `@base
 Component interaction and behavior tests belong in Storybook stories (`*.stories.tsx`) using `play` functions. Component unit tests are reserved for conformance (native props, refs, class names, rendering, and prop types). Keep non-interactive utility, hook, and token tests in the Vitest unit project; avoid duplicating story coverage there.
 
 ```bash
-npx nx build twenty-ui                 # Build the library (dual ESM/CJS + types)
-npx nx storybook:serve:dev twenty-ui   # Run Storybook
-npx nx test twenty-ui                  # Run unit tests
-npx vitest run --root packages/twenty-ui --project unit <file>   # Run a single test file
+bunx vite-plus run twenty-ui#build                 # Build the library (dual ESM/CJS + types)
+bunx vite-plus run twenty-ui#storybook:serve:dev   # Run Storybook
+bunx vite-plus run twenty-ui#test                  # Run unit tests
+bunx vitest run --root packages/twenty-ui --project unit <file>   # Run a single test file
 ```
 
 # License

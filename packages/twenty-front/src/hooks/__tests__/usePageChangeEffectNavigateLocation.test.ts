@@ -1,3 +1,6 @@
+import type * as ReactRouterDomModule from 'react-router-dom';
+import { vi } from 'vite-plus/test';
+
 import { useIsLogged } from '@/auth/hooks/useIsLogged';
 import { useDefaultHomePagePath } from '@/navigation/hooks/useDefaultHomePagePath';
 import { useOnboardingStatus } from '@/onboarding/hooks/useOnboardingStatus';
@@ -15,24 +18,24 @@ import { usePageChangeEffectNavigateLocation } from '~/hooks/usePageChangeEffect
 import { UNTESTED_APP_PATHS } from '~/testing/constants/UntestedAppPaths';
 import { isMatchingLocation } from '~/utils/isMatchingLocation';
 
-jest.mock('@/onboarding/hooks/useOnboardingStatus');
+vi.mock('@/onboarding/hooks/useOnboardingStatus');
 const setupMockOnboardingStatus = (
   onboardingStatus: OnboardingStatus | undefined,
 ) => {
-  jest.mocked(useOnboardingStatus).mockReturnValueOnce(onboardingStatus);
+  vi.mocked(useOnboardingStatus).mockReturnValueOnce(onboardingStatus);
 };
 
-jest.mock('@/workspace/hooks/useIsWorkspaceActivationStatusEqualsTo');
+vi.mock('@/workspace/hooks/useIsWorkspaceActivationStatusEqualsTo');
 const setupMockIsWorkspaceActivationStatusEqualsTo = (
   isWorkspaceSuspended: boolean,
 ) => {
-  jest
-    .mocked(useIsWorkspaceActivationStatusEqualsTo)
-    .mockReturnValueOnce(isWorkspaceSuspended);
+  vi.mocked(useIsWorkspaceActivationStatusEqualsTo).mockReturnValueOnce(
+    isWorkspaceSuspended,
+  );
 };
 
-jest.mock('~/utils/isMatchingLocation');
-const mockIsMatchingLocation = jest.mocked(isMatchingLocation);
+vi.mock('~/utils/isMatchingLocation');
+const mockIsMatchingLocation = vi.mocked(isMatchingLocation);
 
 const setupMockIsMatchingLocation = (pathname: string) => {
   mockIsMatchingLocation.mockImplementation(
@@ -40,36 +43,36 @@ const setupMockIsMatchingLocation = (pathname: string) => {
   );
 };
 
-jest.mock('@/auth/hooks/useIsLogged');
+vi.mock('@/auth/hooks/useIsLogged');
 const setupMockIsLogged = (isLogged: boolean) => {
-  jest.mocked(useIsLogged).mockReturnValueOnce(isLogged);
+  vi.mocked(useIsLogged).mockReturnValueOnce(isLogged);
 };
 
 const defaultHomePagePath = '/objects/companies';
 
-jest.mock('@/navigation/hooks/useDefaultHomePagePath');
-jest.mocked(useDefaultHomePagePath).mockReturnValue({
+vi.mock('@/navigation/hooks/useDefaultHomePagePath');
+vi.mocked(useDefaultHomePagePath).mockReturnValue({
   defaultHomePagePath,
 });
 
-jest.mock('@/domain-manager/hooks/useIsCurrentLocationOnAWorkspace');
+vi.mock('@/domain-manager/hooks/useIsCurrentLocationOnAWorkspace');
 const setupMockIsOnAWorkspace = (isOnAWorkspace: boolean) => {
-  jest.mocked(useIsCurrentLocationOnAWorkspace).mockReturnValue({
+  vi.mocked(useIsCurrentLocationOnAWorkspace).mockReturnValue({
     isOnAWorkspace,
   });
 };
 
-jest.mock('@apollo/client/react');
+vi.mock('@apollo/client/react');
 const setupMockUseQuery = (result?: { data?: unknown; loading?: boolean }) => {
-  jest.mocked(useQuery).mockReturnValueOnce({
+  vi.mocked(useQuery).mockReturnValueOnce({
     data: result?.data ?? undefined,
     loading: result?.loading ?? false,
   } as ReturnType<typeof useQuery>);
 };
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useLocation: jest.fn(),
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual<typeof ReactRouterDomModule>('react-router-dom')),
+  useLocation: vi.fn(),
 }));
 
 const setupMockUseLocation = (
@@ -88,7 +91,7 @@ const setupMockUseLocation = (
           ? '/page-layout'
           : loc;
 
-  jest.mocked(useLocation).mockReturnValueOnce({
+  vi.mocked(useLocation).mockReturnValueOnce({
     pathname,
     search: '',
     hash: '',
@@ -97,7 +100,7 @@ const setupMockUseLocation = (
   });
 };
 
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue');
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue');
 const setupMockState = (
   objectNamePlural?: string,
   verifyEmailRedirectPath?: string,
@@ -107,8 +110,7 @@ const setupMockState = (
   isMinimalMetadataReady: boolean = true,
   isOnboardingCheckoutPending: boolean = false,
 ) => {
-  jest
-    .mocked(useAtomStateValue)
+  vi.mocked(useAtomStateValue)
     .mockReturnValueOnce(currentWorkspace)
     .mockReturnValueOnce({ isBillingEnabled })
     .mockReturnValueOnce([{ namePlural: objectNamePlural ?? '' }])

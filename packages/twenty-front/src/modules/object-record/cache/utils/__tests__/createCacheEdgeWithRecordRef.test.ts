@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type Reference } from '@apollo/client';
 
 import { encodeCursor } from '@/apollo/utils/encodeCursor';
@@ -24,7 +26,7 @@ describe('createCacheEdgeWithRecordRef', () => {
       __ref: 'Person:123',
     };
 
-    const toReference: ToReferenceFunction = jest.fn(() => mockReference);
+    const toReference: ToReferenceFunction = vi.fn(() => mockReference);
 
     const result = createCacheEdgeWithRecordRef({
       record,
@@ -51,7 +53,7 @@ describe('createCacheEdgeWithRecordRef', () => {
       nameSingular: 'person',
     } as EnrichedObjectMetadataItem;
 
-    const toReference: ToReferenceFunction = jest.fn(() => undefined);
+    const toReference: ToReferenceFunction = vi.fn(() => undefined);
 
     const result = createCacheEdgeWithRecordRef({
       record,

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 
 import { dispatchBrowserEvent } from '@/browser-event/utils/dispatchBrowserEvent';
@@ -31,7 +33,7 @@ const dispatchJobStatus = (jobId: string, state: JobState) => {
 
 describe('useTrackedQueueJob', () => {
   it('settles a tracked job on its terminal browser event with its context', () => {
-    const onQueueJobSettled = jest.fn();
+    const onQueueJobSettled = vi.fn();
 
     const { result } = renderHook(() =>
       useTrackedQueueJob<string>({ onQueueJobSettled }),
@@ -58,7 +60,7 @@ describe('useTrackedQueueJob', () => {
   });
 
   it('tracks a job the server reports as running', () => {
-    const onQueueJobSettled = jest.fn();
+    const onQueueJobSettled = vi.fn();
 
     const { result } = renderHook(() =>
       useTrackedQueueJob<string>({
@@ -79,7 +81,7 @@ describe('useTrackedQueueJob', () => {
   });
 
   it('ignores terminal events of other jobs', () => {
-    const onQueueJobSettled = jest.fn();
+    const onQueueJobSettled = vi.fn();
 
     const { result } = renderHook(() =>
       useTrackedQueueJob<string>({ onQueueJobSettled }),
@@ -95,7 +97,7 @@ describe('useTrackedQueueJob', () => {
   });
 
   it('does not fall back to a settled running job after a retried job settles', () => {
-    const onQueueJobSettled = jest.fn();
+    const onQueueJobSettled = vi.fn();
 
     const { result } = renderHook(() =>
       useTrackedQueueJob<string>({
@@ -121,7 +123,7 @@ describe('useTrackedQueueJob', () => {
   });
 
   it('settles with the context the job was tracked with', () => {
-    const onQueueJobSettled = jest.fn();
+    const onQueueJobSettled = vi.fn();
 
     const { result, rerender } = renderHook(
       ({ runningJob }: TrackedQueueJobProps) =>

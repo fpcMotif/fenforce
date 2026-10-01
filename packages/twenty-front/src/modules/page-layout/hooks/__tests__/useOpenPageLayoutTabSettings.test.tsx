@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { useOpenPageLayoutTabSettings } from '@/page-layout/hooks/useOpenPageLayoutTabSettings';
 import { pageLayoutTabSettingsOpenTabIdComponentState } from '@/page-layout/states/pageLayoutTabSettingsOpenTabIdComponentState';
 import { act, renderHook } from '@testing-library/react';
@@ -9,9 +11,9 @@ import {
   PageLayoutTestWrapper,
 } from './PageLayoutTestWrapper';
 
-const mockNavigatePageLayoutSidePanel = jest.fn();
+const mockNavigatePageLayoutSidePanel = vi.fn();
 
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/hooks/useNavigatePageLayoutSidePanel',
   () => ({
     useNavigatePageLayoutSidePanel: () => ({
@@ -22,7 +24,7 @@ jest.mock(
 
 describe('useOpenPageLayoutTabSettings', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it.each([false, true])(

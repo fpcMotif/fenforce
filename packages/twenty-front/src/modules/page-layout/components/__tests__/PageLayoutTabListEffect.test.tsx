@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { PageLayoutTabListEffect } from '@/page-layout/components/PageLayoutTabListEffect';
 import { makeTab } from '@/page-layout/testing/pageLayoutDraftFixtures';
 import { LayoutRenderingProvider } from '@/ui/layout/contexts/LayoutRenderingContext';
@@ -151,7 +153,7 @@ describe('PageLayoutTabListEffect', () => {
       expectedNavigationType,
     }) => {
       const store = createStore();
-      const onChangeTab = jest.fn();
+      const onChangeTab = vi.fn();
       const surfaceInstanceId = isInSidePanel ? 'side-panel-page-1' : 'main';
       const activeTabAtom = activeTabIdComponentState.atomFamily({
         instanceId: TAB_LIST_INSTANCE_ID,

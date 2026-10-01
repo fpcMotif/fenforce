@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 
 import { useOpenCreateActivityDrawer } from '@/activities/hooks/useOpenCreateActivityDrawer';
@@ -7,22 +9,22 @@ import { CoreObjectNameSingular } from 'twenty-shared/types';
 import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
 import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksWrapper';
 
-const mockCreateOneNote = jest.fn();
-const mockCreateManyNoteTargets = jest.fn();
+const mockCreateOneNote = vi.fn();
+const mockCreateManyNoteTargets = vi.fn();
 
-jest.mock('@/object-record/hooks/useCreateOneRecord', () => ({
+vi.mock('@/object-record/hooks/useCreateOneRecord', () => ({
   useCreateOneRecord: () => ({ createOneRecord: mockCreateOneNote }),
 }));
 
-jest.mock('@/object-record/hooks/useCreateManyRecords', () => ({
+vi.mock('@/object-record/hooks/useCreateManyRecords', () => ({
   useCreateManyRecords: () => ({
     createManyRecords: mockCreateManyNoteTargets,
   }),
 }));
 
-const mockOpenRecordInSidePanel = jest.fn();
+const mockOpenRecordInSidePanel = vi.fn();
 
-jest.mock('@/side-panel/hooks/useOpenRecordInSidePanel', () => ({
+vi.mock('@/side-panel/hooks/useOpenRecordInSidePanel', () => ({
   useOpenRecordInSidePanel: () => ({
     openRecordInSidePanel: mockOpenRecordInSidePanel,
   }),
@@ -36,7 +38,7 @@ const fakeNoteId = 'fake-note-id';
 
 describe('useOpenCreateActivityDrawer', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockCreateOneNote.mockResolvedValue({ id: fakeNoteId });
     mockCreateManyNoteTargets.mockResolvedValue([]);
   });

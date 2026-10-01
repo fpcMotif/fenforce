@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { SidePanelWorkflowCreateStepContent } from '@/side-panel/pages/workflow/step/create/components/SidePanelWorkflowCreateStepContent';
 import { type WorkflowActionSelection } from '@/side-panel/pages/workflow/action/components/SidePanelWorkflowSelectAction';
 import { flowComponentState } from '@/workflow/states/flowComponentState';
@@ -10,9 +12,9 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createStore, Provider as JotaiProvider } from 'jotai';
 
-const mockCreateStep = jest.fn();
-const mockUpdateStep = jest.fn();
-const mockOpenWorkflowEditStep = jest.fn();
+const mockCreateStep = vi.fn();
+const mockUpdateStep = vi.fn();
+const mockOpenWorkflowEditStep = vi.fn();
 let mockInsertStepIds: StartNodeCreationParams & {
   parentStepId: string | undefined;
   nextStepId: string | undefined;
@@ -45,7 +47,7 @@ const mockParentStep: WorkflowIfElseAction = {
   },
 };
 
-jest.mock(
+vi.mock(
   '@/side-panel/pages/workflow/action/components/SidePanelWorkflowSelectAction',
   () => ({
     SidePanelWorkflowSelectAction: ({
@@ -59,19 +61,19 @@ jest.mock(
     ),
   }),
 );
-jest.mock('@/ui/utilities/state/jotai/hooks/useSetAtomState', () => ({
-  useSetAtomState: () => jest.fn(),
+vi.mock('@/ui/utilities/state/jotai/hooks/useSetAtomState', () => ({
+  useSetAtomState: () => vi.fn(),
 }));
-jest.mock('@/workflow/workflow-steps/hooks/useCreateStep', () => ({
+vi.mock('@/workflow/workflow-steps/hooks/useCreateStep', () => ({
   useCreateStep: () => ({ createStep: mockCreateStep }),
 }));
-jest.mock('@/workflow/workflow-steps/hooks/useUpdateStep', () => ({
+vi.mock('@/workflow/workflow-steps/hooks/useUpdateStep', () => ({
   useUpdateStep: () => ({ updateStep: mockUpdateStep }),
 }));
-jest.mock('@/workflow/workflow-diagram/hooks/useCloseRightClickMenu', () => ({
-  useCloseRightClickMenu: () => ({ closeRightClickMenu: jest.fn() }),
+vi.mock('@/workflow/workflow-diagram/hooks/useCloseRightClickMenu', () => ({
+  useCloseRightClickMenu: () => ({ closeRightClickMenu: vi.fn() }),
 }));
-jest.mock(
+vi.mock(
   '@/side-panel/pages/workflow/hooks/useSidePanelWorkflowNavigation',
   () => ({
     useSidePanelWorkflowNavigation: () => ({
@@ -103,7 +105,7 @@ const renderContent = () => {
 
 describe('SidePanelWorkflowCreateStepContent', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     jotaiStore = createStore();
     jotaiStore.set(
       workflowVisualizerWorkflowIdComponentState.atomFamily({

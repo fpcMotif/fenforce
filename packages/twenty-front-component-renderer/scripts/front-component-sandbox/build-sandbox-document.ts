@@ -34,6 +34,32 @@ const buildSandboxDocument = async (): Promise<void> => {
         '@/': path.resolve(projectRoot, 'src') + '/',
       },
     },
+    worker: {
+      plugins: () => [
+        {
+          name: 'resolve-front-component-src',
+          enforce: 'pre',
+          resolveId(source) {
+            if (!source.startsWith('@/')) {
+              return;
+            }
+
+            const sourcePath = path.resolve(
+              projectRoot,
+              'src',
+              source.slice(2),
+            );
+
+            return [
+              sourcePath,
+              `${sourcePath}.ts`,
+              `${sourcePath}.tsx`,
+              path.join(sourcePath, 'index.ts'),
+            ].find((candidate) => fs.existsSync(candidate));
+          },
+        },
+      ],
+    },
     define: {
       'process.env.NODE_ENV': JSON.stringify('production'),
     },

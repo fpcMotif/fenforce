@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { CommandMenuContext } from '@/command-menu-item/contexts/CommandMenuContext';
 import { useCloseCommandMenu } from '@/command-menu-item/hooks/useCloseCommandMenu';
 import { CommandMenuItemContainerType } from '@/command-menu-item/types/CommandMenuItemContainerType';
@@ -7,23 +9,23 @@ import { ContextStorePageType } from 'twenty-shared/types';
 
 const TEST_COMMAND_MENU_ID = 'test-cmd-menu-1';
 
-const mockCloseSidePanelMenu = jest.fn();
-const mockCloseDropdown = jest.fn();
+const mockCloseSidePanelMenu = vi.fn();
+const mockCloseDropdown = vi.fn();
 
-jest.mock(
+vi.mock(
   '@/ui/utilities/state/component-state/hooks/useAvailableComponentInstanceIdOrThrow',
   () => ({
     useAvailableComponentInstanceIdOrThrow: () => TEST_COMMAND_MENU_ID,
   }),
 );
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({
     closeSidePanelMenu: mockCloseSidePanelMenu,
   }),
 }));
 
-jest.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
+vi.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
   useCloseDropdown: () => ({
     closeDropdown: mockCloseDropdown,
   }),
@@ -80,7 +82,7 @@ const getWrapper =
   );
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('useCloseCommandMenu', () => {

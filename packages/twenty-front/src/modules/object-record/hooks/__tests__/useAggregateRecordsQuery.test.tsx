@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { ObjectOpenRecordIn } from 'twenty-shared/types';
 import { useObjectMetadataItem } from '@/object-metadata/hooks/useObjectMetadataItem';
 import { type FieldMetadataItem } from '@/object-metadata/types/FieldMetadataItem';
@@ -12,8 +14,8 @@ import {
 } from '~/generated-metadata/graphql';
 import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksWrapper';
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItem');
-jest.mock('@/object-record/utils/generateAggregateQuery');
+vi.mock('@/object-metadata/hooks/useObjectMetadataItem');
+vi.mock('@/object-record/utils/generateAggregateQuery');
 
 const fields = [
   {
@@ -70,12 +72,12 @@ const Wrapper = getJestMetadataAndApolloMocksWrapper({
 
 describe('useAggregateRecordsQuery', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-    (useObjectMetadataItem as jest.Mock).mockReturnValue({
+    vi.clearAllMocks();
+    (useObjectMetadataItem as Mock).mockReturnValue({
       objectMetadataItem: mockObjectMetadataItem,
     });
 
-    (generateAggregateQuery as jest.Mock).mockReturnValue({
+    (generateAggregateQuery as Mock).mockReturnValue({
       loc: {
         source: {
           body: 'query AggregateCompanies($filter: CompanyFilterInput) { companies(filter: $filter) { totalCount } }',

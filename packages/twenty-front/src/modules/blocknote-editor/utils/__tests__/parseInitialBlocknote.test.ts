@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { parseInitialBlocknote } from '@/blocknote-editor/utils/parseInitialBlocknote';
 
 describe('parseInitialBlocknote', () => {
@@ -24,7 +26,9 @@ describe('parseInitialBlocknote', () => {
   });
 
   it('should return undefined for invalid JSON', () => {
-    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+    const consoleSpy = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => undefined);
     expect(parseInitialBlocknote('invalid json')).toBeUndefined();
     expect(consoleSpy).toHaveBeenCalled();
     consoleSpy.mockRestore();
@@ -39,7 +43,9 @@ describe('parseInitialBlocknote', () => {
   });
 
   it('should use custom log context when parsing fails', () => {
-    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+    const consoleSpy = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => undefined);
     parseInitialBlocknote('invalid', 'Custom context');
     expect(consoleSpy).toHaveBeenCalledWith('Custom context');
     consoleSpy.mockRestore();

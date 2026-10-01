@@ -1,25 +1,27 @@
+import { vi } from 'vite-plus/test';
+
 import { useLogicFunctionUpdateFormState } from '@/logic-functions/hooks/useLogicFunctionUpdateFormState';
 import { renderHook } from '@testing-library/react';
 
-jest.mock('@/logic-functions/hooks/useGetOneLogicFunction', () => ({
-  useGetOneLogicFunction: jest.fn(),
+vi.mock('@/logic-functions/hooks/useGetOneLogicFunction', () => ({
+  useGetOneLogicFunction: vi.fn(),
 }));
 
-jest.mock('@/logic-functions/hooks/useGetLogicFunctionSourceCode', () => ({
-  useGetLogicFunctionSourceCode: jest.fn(),
+vi.mock('@/logic-functions/hooks/useGetLogicFunctionSourceCode', () => ({
+  useGetLogicFunctionSourceCode: vi.fn(),
 }));
 
 const mockCode = 'export const main = async (): Promise<void> => { return; }';
 
 describe('useLogicFunctionUpdateFormState', () => {
-  test('should return a form', () => {
+  test('should return a form', async () => {
     const logicFunctionId = 'logicFunctionId';
-    const useGetOneLogicFunctionMock = jest.requireMock(
-      '@/logic-functions/hooks/useGetOneLogicFunction',
-    );
-    const useGetLogicFunctionSourceCodeMock = jest.requireMock(
-      '@/logic-functions/hooks/useGetLogicFunctionSourceCode',
-    );
+    const useGetOneLogicFunctionMock = await vi.importMock<{
+      useGetOneLogicFunction: ReturnType<typeof vi.fn>;
+    }>('@/logic-functions/hooks/useGetOneLogicFunction');
+    const useGetLogicFunctionSourceCodeMock = await vi.importMock<{
+      useGetLogicFunctionSourceCode: ReturnType<typeof vi.fn>;
+    }>('@/logic-functions/hooks/useGetLogicFunctionSourceCode');
     useGetOneLogicFunctionMock.useGetOneLogicFunction.mockReturnValue({
       logicFunction: { name: 'name' },
       loading: false,

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { gql } from '@apollo/client';
 
 import { triggerAttachRelationOptimisticEffect } from '@/apollo/optimistic-effect/utils/triggerAttachRelationOptimisticEffect';
@@ -48,7 +50,7 @@ const buildPeopleQueryVariables = (opportunityId: string) => ({
   filter: { pointOfContactForOpportunities: { id: { eq: opportunityId } } },
 });
 
-const upsertRecordsInStore = jest.fn();
+const upsertRecordsInStore = vi.fn();
 
 const buildCache = ({
   personRecord,

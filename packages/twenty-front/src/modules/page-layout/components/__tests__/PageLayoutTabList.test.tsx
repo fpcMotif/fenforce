@@ -1,3 +1,7 @@
+import type * as ReactRouterDomModule from 'react-router-dom';
+import type * as UtilitiesModule from 'twenty-ui/utilities';
+import { vi } from 'vite-plus/test';
+
 import { PageLayoutTabList } from '@/page-layout/components/PageLayoutTabList';
 import { PageLayoutComponentInstanceContext } from '@/page-layout/states/contexts/PageLayoutComponentInstanceContext';
 import { pageLayoutTabSettingsOpenTabIdComponentState } from '@/page-layout/states/pageLayoutTabSettingsOpenTabIdComponentState';
@@ -18,52 +22,52 @@ const TAB_LIST_ID = 'tab-list';
 const TABS = ['Tasks', 'Notes', 'Files'].map((title, index) =>
   makeTab(title, [], index),
 );
-const mockNavigate = jest.fn();
-const mockOpenTabSettings = jest.fn();
-const mockCloseSidePanelMenu = jest.fn();
-const mockCloseDropdown = jest.fn();
+const mockNavigate = vi.fn();
+const mockOpenTabSettings = vi.fn();
+const mockCloseSidePanelMenu = vi.fn();
+const mockCloseDropdown = vi.fn();
 let mockIsInEditMode = true;
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual<typeof ReactRouterDomModule>('react-router-dom')),
   useLocation: () => ({ search: '', state: null }),
   useNavigate: () => mockNavigate,
 }));
 
-jest.mock('@dnd-kit/react', () => ({ useDragDropMonitor: jest.fn() }));
+vi.mock('@dnd-kit/react', () => ({ useDragDropMonitor: vi.fn() }));
 
-jest.mock('@/page-layout/hooks/useIsPageLayoutInEditMode', () => ({
+vi.mock('@/page-layout/hooks/useIsPageLayoutInEditMode', () => ({
   useIsPageLayoutInEditMode: () => mockIsInEditMode,
 }));
 
-jest.mock('@/page-layout/hooks/useOpenPageLayoutTabSettings', () => ({
+vi.mock('@/page-layout/hooks/useOpenPageLayoutTabSettings', () => ({
   useOpenPageLayoutTabSettings: () => ({
     openTabSettings: mockOpenTabSettings,
   }),
 }));
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({ closeSidePanelMenu: mockCloseSidePanelMenu }),
 }));
 
-jest.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
+vi.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
   useCloseDropdown: () => ({ closeDropdown: mockCloseDropdown }),
 }));
 
-jest.mock('@/ui/layout/dropdown/hooks/useOpenDropdown', () => ({
-  useOpenDropdown: () => ({ openDropdown: jest.fn() }),
+vi.mock('@/ui/layout/dropdown/hooks/useOpenDropdown', () => ({
+  useOpenDropdown: () => ({ openDropdown: vi.fn() }),
 }));
 
-jest.mock('@/ui/utilities/pointer-event/hooks/useClickOutsideListener', () => ({
-  useClickOutsideListener: () => ({ toggleClickOutside: jest.fn() }),
+vi.mock('@/ui/utilities/pointer-event/hooks/useClickOutsideListener', () => ({
+  useClickOutsideListener: () => ({ toggleClickOutside: vi.fn() }),
 }));
 
-jest.mock('twenty-ui/utilities', () => ({
-  ...jest.requireActual('twenty-ui/utilities'),
+vi.mock('twenty-ui/utilities', async () => ({
+  ...(await vi.importActual<typeof UtilitiesModule>('twenty-ui/utilities')),
   useIsMobile: () => false,
 }));
 
-jest.mock('@/ui/layout/tab-list/hooks/useTabListMeasurements', () => ({
+vi.mock('@/ui/layout/tab-list/hooks/useTabListMeasurements', () => ({
   useTabListMeasurements: ({
     visibleTabs,
   }: {
@@ -73,22 +77,22 @@ jest.mock('@/ui/layout/tab-list/hooks/useTabListMeasurements', () => ({
     hiddenTabs: visibleTabs.slice(2),
     hiddenTabsCount: 1,
     hasHiddenTabs: true,
-    onTabWidthChange: jest.fn(),
-    onContainerWidthChange: jest.fn(),
-    onMoreButtonWidthChange: jest.fn(),
-    onAddButtonWidthChange: jest.fn(),
+    onTabWidthChange: vi.fn(),
+    onContainerWidthChange: vi.fn(),
+    onMoreButtonWidthChange: vi.fn(),
+    onAddButtonWidthChange: vi.fn(),
   }),
 }));
 
-jest.mock('@/ui/utilities/dimensions/components/NodeDimension', () => ({
+vi.mock('@/ui/utilities/dimensions/components/NodeDimension', () => ({
   NodeDimension: ({ children }: { children: ReactNode }) => <>{children}</>,
 }));
 
-jest.mock('@/ui/layout/tab-list/components/TabListHiddenMeasurements', () => ({
+vi.mock('@/ui/layout/tab-list/components/TabListHiddenMeasurements', () => ({
   TabListHiddenMeasurements: () => null,
 }));
 
-jest.mock('@/page-layout/components/PageLayoutTabListVisibleTabs', () => ({
+vi.mock('@/page-layout/components/PageLayoutTabListVisibleTabs', () => ({
   PageLayoutTabListVisibleTabs: ({
     visibleTabs,
     visibleTabCount,
@@ -114,7 +118,7 @@ jest.mock('@/page-layout/components/PageLayoutTabListVisibleTabs', () => ({
   ),
 }));
 
-jest.mock(
+vi.mock(
   '@/page-layout/components/PageLayoutTabListReorderableOverflowDropdown',
   () => ({
     PageLayoutTabListReorderableOverflowDropdown: ({
@@ -198,7 +202,7 @@ const renderTabList = ({
 
 describe('PageLayoutTabList selection', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockIsInEditMode = true;
   });
 

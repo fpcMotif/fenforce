@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { createStore, Provider } from 'jotai';
 import { flowComponentState } from '@/workflow/states/flowComponentState';
 import { workflowDiagramComponentState } from '@/workflow/workflow-diagram/states/workflowDiagramComponentState';
@@ -6,62 +9,62 @@ import { useUpdateWorkflowVersionStep } from '@/workflow/workflow-steps/hooks/us
 import { act, renderHook } from '@testing-library/react';
 import { createElement, type ReactNode } from 'react';
 
-const mockMutate = jest.fn();
+const mockMutate = vi.fn();
 let mockOnCoreError: (error: Error) => void;
 const jotaiStore = createStore();
 let mockIsCore = false;
-const mockInvalidate = jest.fn();
-jest.mock('@/workflow/hooks/useIsWorkflowCoreEnabled', () => ({
+const mockInvalidate = vi.fn();
+vi.mock('@/workflow/hooks/useIsWorkflowCoreEnabled', () => ({
   useIsWorkflowCoreEnabled: () => mockIsCore,
 }));
-jest.mock(
+vi.mock(
   '@/object-core/workflows/versions/utils/invalidateCoreWorkflowVersions',
   () => ({
     invalidateCoreWorkflowVersions: (...args: unknown[]) =>
       mockInvalidate(...args),
   }),
 );
-const mockGetRecordFromCache = jest.fn();
-const mockMarkStepForRecomputation = jest.fn();
+const mockGetRecordFromCache = vi.fn();
+const mockMarkStepForRecomputation = vi.fn();
 
-jest.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
+vi.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
   useApolloCoreClient: () => ({ cache: {} }),
 }));
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
   useObjectMetadataItems: () => ({ objectMetadataItems: [] }),
 }));
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
   useObjectMetadataItem: () => ({ objectMetadataItem: {} }),
 }));
 
-jest.mock('@/object-record/hooks/useObjectPermissions', () => ({
+vi.mock('@/object-record/hooks/useObjectPermissions', () => ({
   useObjectPermissions: () => ({ objectPermissionsByObjectMetadataId: {} }),
 }));
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
-jest.mock('@/object-record/cache/hooks/useGetRecordFromCache', () => ({
+vi.mock('@/object-record/cache/hooks/useGetRecordFromCache', () => ({
   useGetRecordFromCache: () => mockGetRecordFromCache,
 }));
 
-jest.mock('@/object-record/cache/utils/updateRecordFromCache', () => ({
-  updateRecordFromCache: jest.fn(),
+vi.mock('@/object-record/cache/utils/updateRecordFromCache', () => ({
+  updateRecordFromCache: vi.fn(),
 }));
 
-jest.mock('@/workflow/workflow-variables/hooks/useStepsOutputSchema', () => ({
+vi.mock('@/workflow/workflow-variables/hooks/useStepsOutputSchema', () => ({
   useStepsOutputSchema: () => ({
     markStepForRecomputation: mockMarkStepForRecomputation,
   }),
 }));
 
-jest.mock('@apollo/client/react', () => ({
+vi.mock('@apollo/client/react', () => ({
   useMutation: (
     _document: unknown,
     options: { onError?: (error: Error) => void },
@@ -84,7 +87,7 @@ const Wrapper = ({ children }: { children: ReactNode }) =>
 
 describe('useUpdateWorkflowVersionStep', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockIsCore = false;
     jotaiStore.set(
       flowComponentState.atomFamily({ instanceId: 'workflow-visualizer-test' }),

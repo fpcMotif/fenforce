@@ -7,22 +7,25 @@
   "license": "AGPL-3.0",
   "type": "module",
   "main": "dist/main.cjs",
-  "packageManager": "yarn@4.13.0",
   "engines": {
     "node": "^24.5.0"
   },
   "scripts": {
-    "dev": "yarn native:setup && yarn lingui:compile && node scripts/dev.mjs",
-    "build": "yarn lingui:compile && node scripts/build.mjs",
-    "start": "yarn native:setup && electron .",
-    "preview": "yarn lingui:compile && vite --host 127.0.0.1 --port 4317",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests",
-    "package": "yarn native:setup && yarn lingui:compile && node scripts/package.mjs",
-    "package:archive": "yarn native:setup && yarn lingui:compile && node scripts/archive.mjs",
+    "test:ci": "bunx vite-plus run twenty-companion#test -- --coverage",
+    "test:coverage": "bunx vite-plus run twenty-companion#test -- --coverage",
+    "test:watch": "bunx vite-plus run --no-cache twenty-companion#test -- --watch",
+    "dev": "bun run native:setup && bun run lingui:compile && node scripts/dev.mjs",
+    "build:command": "bun run lingui:compile && node scripts/build.mjs",
+    "start": "bun run native:setup && electron .",
+    "preview": "bun run lingui:compile && vite --host 127.0.0.1 --port 4317",
+    "typecheck:command": "tsc --noEmit",
+    "test:command": "vitest run --passWithNoTests",
+    "package": "bun run native:setup && bun run lingui:compile && node scripts/package.mjs",
+    "package:archive": "bun run native:setup && bun run lingui:compile && node scripts/archive.mjs",
     "lingui:extract": "lingui extract",
     "lingui:compile": "lingui compile",
-    "native:setup": "node scripts/setup-native.mjs"
+    "native:setup": "node scripts/setup-native.mjs",
+    "typecheck:watch": "tsc --noEmit --watch"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
@@ -36,6 +39,7 @@
     "zod": "^4.1.0"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.0",
     "@electron/packager": "^19.0.0",
     "@lingui/cli": "5.9.5",
     "@lingui/conf": "5.9.5",

@@ -1,3 +1,6 @@
+import type * as UuidModule from 'uuid';
+import { type Mock, vi } from 'vite-plus/test';
+
 import {
   type WorkflowStep,
   type WorkflowTrigger,
@@ -7,20 +10,20 @@ import { FieldMetadataType } from 'twenty-shared/types';
 import { StepStatus, type WorkflowRunStepInfos } from 'twenty-shared/workflow';
 import { v4 as uuidv4 } from 'uuid';
 
-jest.mock('uuid', () => ({
-  ...jest.requireActual('uuid'),
-  v4: jest.fn(),
+vi.mock('uuid', async () => ({
+  ...(await vi.importActual<typeof UuidModule>('uuid')),
+  v4: vi.fn(),
 }));
 
 beforeEach(() => {
   let counter = 0;
-  (uuidv4 as jest.Mock).mockImplementation(
+  (uuidv4 as Mock).mockImplementation(
     () => `8f3b2121-f194-4ba4-9fbf-${counter++}`,
   );
 });
 
 afterAll(() => {
-  jest.resetAllMocks();
+  vi.resetAllMocks();
 });
 
 describe('generateWorkflowRunDiagram', () => {

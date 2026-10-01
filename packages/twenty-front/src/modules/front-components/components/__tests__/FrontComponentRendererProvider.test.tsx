@@ -1,13 +1,16 @@
+import type * as TwentyFrontComponentRendererModule from 'twenty-front-component-renderer';
+import { vi } from 'vite-plus/test';
+
 import { act, render, renderHook } from '@testing-library/react';
 import { createStore, Provider as JotaiProvider } from 'jotai';
 import { useContext, type Context, type createContext } from 'react';
 
 type SetEditableFocused = (focused: boolean) => void;
 
-jest.mock('twenty-front-component-renderer', () => {
-  const ReactForMock = require('react') as {
+vi.mock('twenty-front-component-renderer', async () => {
+  const ReactForMock = await vi.importActual<{
     createContext: typeof createContext;
-  };
+  }>('react');
   return {
     FrontComponentInputFocusContext:
       ReactForMock.createContext<SetEditableFocused | null>(null),
@@ -19,9 +22,9 @@ import { focusStackState } from '@/ui/utilities/focus/states/focusStackState';
 import { FocusComponentType } from '@/ui/utilities/focus/types/FocusComponentType';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
 
-const { FrontComponentInputFocusContext } = jest.requireMock(
-  'twenty-front-component-renderer',
-) as {
+const { FrontComponentInputFocusContext } = (await vi.importMock<
+  typeof TwentyFrontComponentRendererModule
+>('twenty-front-component-renderer')) as {
   FrontComponentInputFocusContext: Context<SetEditableFocused | null>;
 };
 

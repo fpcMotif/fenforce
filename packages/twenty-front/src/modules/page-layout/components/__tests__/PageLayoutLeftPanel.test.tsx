@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { PageLayoutLeftPanel } from '@/page-layout/components/PageLayoutLeftPanel';
 import { render, screen } from '@testing-library/react';
 import { type ReactNode } from 'react';
@@ -9,11 +11,11 @@ let mockTargetRecordIdentifier = {
 };
 let mockIsInSidePanel = false;
 
-jest.mock('@/page-layout/components/PageLayoutContent', () => ({
+vi.mock('@/page-layout/components/PageLayoutContent', () => ({
   PageLayoutContent: () => <div>Page layout content</div>,
 }));
 
-jest.mock('@/page-layout/hooks/useCurrentPageLayout', () => ({
+vi.mock('@/page-layout/hooks/useCurrentPageLayout', () => ({
   useCurrentPageLayout: () => ({
     currentPageLayout: {
       type: PageLayoutType.RECORD_PAGE,
@@ -21,7 +23,7 @@ jest.mock('@/page-layout/hooks/useCurrentPageLayout', () => ({
   }),
 }));
 
-jest.mock(
+vi.mock(
   '@/page-layout/hooks/usePageLayoutTabWithVisibleWidgetsOrThrow',
   () => ({
     usePageLayoutTabWithVisibleWidgetsOrThrow: () => ({
@@ -30,28 +32,28 @@ jest.mock(
   }),
 );
 
-jest.mock('@/page-layout/utils/getTabLayoutMode', () => ({
+vi.mock('@/page-layout/utils/getTabLayoutMode', () => ({
   getTabLayoutMode: () => 'VERTICAL_LIST',
 }));
 
-jest.mock('@/ui/layout/contexts/LayoutRenderingContext', () => ({
+vi.mock('@/ui/layout/contexts/LayoutRenderingContext', () => ({
   useLayoutRenderingContext: () => ({
     layoutType: PageLayoutType.RECORD_PAGE,
   }),
 }));
 
-jest.mock('@/ui/layout/hooks/useWorkspaceSurface', () => ({
+vi.mock('@/ui/layout/hooks/useWorkspaceSurface', () => ({
   useWorkspaceSurface: () => ({
     type: mockIsInSidePanel ? 'side-panel' : 'main',
     instanceId: mockIsInSidePanel ? 'side-panel' : 'main',
   }),
 }));
 
-jest.mock('@/ui/layout/contexts/useTargetRecord', () => ({
+vi.mock('@/ui/layout/contexts/useTargetRecord', () => ({
   useTargetRecord: () => mockTargetRecordIdentifier,
 }));
 
-jest.mock('@/ui/utilities/scroll/components/ScrollWrapper', () => ({
+vi.mock('@/ui/utilities/scroll/components/ScrollWrapper', () => ({
   ScrollWrapper: ({
     children,
     componentInstanceId,

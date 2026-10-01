@@ -1,14 +1,16 @@
+import { vi } from 'vite-plus/test';
+
 import { type NavigationMenuItem } from '~/generated-metadata/graphql';
 import { NavigationMenuItemType } from 'twenty-shared/types';
 import { useObjectRecordSearchRecords } from '@/object-record/hooks/useObjectRecordSearchRecords';
 import { act, renderHook } from '@testing-library/react';
 import { useNavigationMenuItemSearchRecords } from '@/navigation-menu-item/edit/hooks/useNavigationMenuItemSearchRecords';
 
-jest.mock('@/side-panel/hooks/useSearchableObjectNameSingulars', () => ({
+vi.mock('@/side-panel/hooks/useSearchableObjectNameSingulars', () => ({
   useSearchableObjectNameSingulars: () => ['person'],
 }));
-jest.mock('@/object-record/hooks/useObjectRecordSearchRecords', () => ({
-  useObjectRecordSearchRecords: jest.fn(() => ({
+vi.mock('@/object-record/hooks/useObjectRecordSearchRecords', () => ({
+  useObjectRecordSearchRecords: vi.fn(() => ({
     loading: false,
     searchRecords: [],
   })),
@@ -16,12 +18,14 @@ jest.mock('@/object-record/hooks/useObjectRecordSearchRecords', () => ({
 
 describe('navigation record search empty state', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
-    jest
-      .mocked(useObjectRecordSearchRecords)
-      .mockReturnValue({ loading: false, searchRecords: [], error: undefined });
+    vi.useFakeTimers();
+    vi.mocked(useObjectRecordSearchRecords).mockReturnValue({
+      loading: false,
+      searchRecords: [],
+      error: undefined,
+    });
   });
-  afterEach(() => jest.useRealTimers());
+  afterEach(() => vi.useRealTimers());
 
   it('keeps loading between quick empty responses until the current search settles', () => {
     const { result, rerender } = renderHook(
@@ -32,15 +36,15 @@ describe('navigation record search empty state', () => {
 
     rerender({ searchInput: 'goo' });
     expect(result.current.recordSearchLoading).toBe(true);
-    act(() => jest.advanceTimersByTime(300));
+    act(() => vi.advanceTimersByTime(300));
     expect(result.current.recordSearchLoading).toBe(true);
 
-    act(() => jest.advanceTimersByTime(100));
+    act(() => vi.advanceTimersByTime(100));
     rerender({ searchInput: 'goog' });
     expect(result.current.recordSearchLoading).toBe(true);
-    act(() => jest.advanceTimersByTime(300));
+    act(() => vi.advanceTimersByTime(300));
     expect(result.current.recordSearchLoading).toBe(true);
-    act(() => jest.advanceTimersByTime(300));
+    act(() => vi.advanceTimersByTime(300));
     expect(result.current.recordSearchLoading).toBe(false);
     expect(result.current.navigationMenuItemSearchRecords).toEqual([]);
   });
@@ -54,7 +58,7 @@ describe('navigation record search duplicates', () => {
       label: 'Ivan Zhao',
       imageUrl: null,
     };
-    jest.mocked(useObjectRecordSearchRecords).mockReturnValue({
+    vi.mocked(useObjectRecordSearchRecords).mockReturnValue({
       loading: false,
       searchRecords: [
         { ...record, objectLabelSingular: 'Person', tsRankCD: 1, tsRank: 1 },

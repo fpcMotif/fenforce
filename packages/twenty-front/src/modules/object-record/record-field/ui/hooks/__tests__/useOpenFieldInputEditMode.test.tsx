@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type FieldMetadataItem } from '@/object-metadata/types/FieldMetadataItem';
 import { formatFieldMetadataItemAsFieldDefinition } from '@/object-metadata/utils/formatFieldMetadataItemAsFieldDefinition';
 import { useOpenFieldInputEditMode } from '@/object-record/record-field/ui/hooks/useOpenFieldInputEditMode';
@@ -9,13 +11,13 @@ import { getMockFieldMetadataItemOrThrow } from '~/testing/utils/getMockFieldMet
 import { getMockObjectMetadataItemOrThrow } from '~/testing/utils/getMockObjectMetadataItemOrThrow';
 import { getTestEnrichedObjectMetadataItemsMock } from '~/testing/utils/getTestEnrichedObjectMetadataItemsMock';
 
-const mockOpenJunctionRelationFieldInput = jest.fn();
-const mockOpenRelationFromManyFieldInput = jest.fn();
-const mockOpenRelationToOneFieldInput = jest.fn();
-const mockOpenMorphRelationOneToManyFieldInput = jest.fn();
-const mockOpenMorphRelationManyToOneFieldInput = jest.fn();
-const mockPushFocusItemToFocusStack = jest.fn();
-const mockRemoveFocusItemFromFocusStackById = jest.fn();
+const mockOpenJunctionRelationFieldInput = vi.fn();
+const mockOpenRelationFromManyFieldInput = vi.fn();
+const mockOpenRelationToOneFieldInput = vi.fn();
+const mockOpenMorphRelationOneToManyFieldInput = vi.fn();
+const mockOpenMorphRelationManyToOneFieldInput = vi.fn();
+const mockPushFocusItemToFocusStack = vi.fn();
+const mockRemoveFocusItemFromFocusStackById = vi.fn();
 
 const mockObjectMetadataItems = getTestEnrichedObjectMetadataItemsMock();
 const mockTaskMetadata = getMockObjectMetadataItemOrThrow('task');
@@ -40,27 +42,27 @@ const mockInvalidFieldDefinition = formatFieldMetadataItemAsFieldDefinition({
   objectMetadataItem: mockTaskMetadata,
 }) as FieldDefinition<FieldRelationMetadata>;
 
-jest.mock('jotai', () => ({
+vi.mock('jotai', () => ({
   useStore: () => ({
     get: () => mockObjectMetadataItems,
   }),
 }));
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
   useObjectMetadataItems: () => ({
     objectMetadataItems: mockObjectMetadataItems,
   }),
 }));
 
-jest.mock('@/object-metadata/states/objectMetadataItemsSelector', () => ({
+vi.mock('@/object-metadata/states/objectMetadataItemsSelector', () => ({
   objectMetadataItemsSelector: { atom: 'object-metadata-items-atom' },
 }));
 
-jest.mock('@/object-record/hooks/useUpdateOneRecord', () => ({
-  useUpdateOneRecord: () => ({ updateOneRecord: jest.fn() }),
+vi.mock('@/object-record/hooks/useUpdateOneRecord', () => ({
+  useUpdateOneRecord: () => ({ updateOneRecord: vi.fn() }),
 }));
 
-jest.mock(
+vi.mock(
   '@/object-record/record-field/ui/hooks/useOpenJunctionRelationFieldInput',
   () => ({
     useOpenJunctionRelationFieldInput: () => ({
@@ -69,14 +71,14 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/object-record/record-field/ui/meta-types/input/hooks/useOpenFilesFieldInput',
   () => ({
-    useOpenFilesFieldInput: () => ({ openFilesFieldInput: jest.fn() }),
+    useOpenFilesFieldInput: () => ({ openFilesFieldInput: vi.fn() }),
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/object-record/record-field/ui/meta-types/input/hooks/useOpenRelationFromManyFieldInput',
   () => ({
     useOpenRelationFromManyFieldInput: () => ({
@@ -85,7 +87,7 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/object-record/record-field/ui/meta-types/input/hooks/useOpenRelationToOneFieldInput',
   () => ({
     useOpenRelationToOneFieldInput: () => ({
@@ -94,7 +96,7 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/object-record/record-field/ui/meta-types/input/hooks/useOpenMorphRelationOneToManyFieldInput',
   () => ({
     useOpenMorphRelationOneToManyFieldInput: () => ({
@@ -104,7 +106,7 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/object-record/record-field/ui/meta-types/input/hooks/useOpenMorphRelationManyToOneFieldInput',
   () => ({
     useOpenMorphRelationManyToOneFieldInput: () => ({
@@ -114,13 +116,13 @@ jest.mock(
   }),
 );
 
-jest.mock('@/ui/utilities/focus/hooks/usePushFocusItemToFocusStack', () => ({
+vi.mock('@/ui/utilities/focus/hooks/usePushFocusItemToFocusStack', () => ({
   usePushFocusItemToFocusStack: () => ({
     pushFocusItemToFocusStack: mockPushFocusItemToFocusStack,
   }),
 }));
 
-jest.mock(
+vi.mock(
   '@/ui/utilities/focus/hooks/useRemoveFocusItemFromFocusStackById',
   () => ({
     useRemoveFocusItemFromFocusStackById: () => ({
@@ -129,7 +131,7 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/ui/utilities/state/component-state/hooks/useAvailableComponentInstanceIdOrThrow',
   () => ({
     useAvailableComponentInstanceIdOrThrow: () => 'field-widget-instance-id',
@@ -138,7 +140,7 @@ jest.mock(
 
 describe('invalid configured junction edit mode', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it.each([

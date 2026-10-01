@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { currentWorkspaceState } from '@/auth/states/currentWorkspaceState';
 import { ExportRecordsCommand } from '@/command-menu-item/engine-command/record/components/ExportRecordsCommand';
 import { CommandComponentInstanceContext } from '@/command-menu-item/engine-command/states/contexts/CommandComponentInstanceContext';
@@ -8,14 +10,14 @@ import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMeta
 import { mockCurrentWorkspace } from '~/testing/mock-data/users';
 import { getMockObjectMetadataItemOrThrow } from '~/testing/utils/getMockObjectMetadataItemOrThrow';
 
-const mockSynchronousDownload = jest.fn().mockResolvedValue(undefined);
-const mockAsyncDownload = jest.fn().mockResolvedValue(undefined);
-const mockCancelAsyncDownload = jest.fn();
-const mockSingleRecordDownload = jest.fn().mockResolvedValue(undefined);
+const mockSynchronousDownload = vi.fn().mockResolvedValue(undefined);
+const mockAsyncDownload = vi.fn().mockResolvedValue(undefined);
+const mockCancelAsyncDownload = vi.fn();
+const mockSingleRecordDownload = vi.fn().mockResolvedValue(undefined);
 const mockObjectMetadataItem = getMockObjectMetadataItemOrThrow('person');
 let mockRecordIndexId: string | undefined;
 
-jest.mock(
+vi.mock(
   '@/command-menu-item/engine-command/hooks/useHeadlessCommandContextApi',
   () => ({
     useHeadlessCommandContextApi: () => ({
@@ -25,7 +27,7 @@ jest.mock(
     }),
   }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-index/export/hooks/useRecordIndexExportRecords',
   () => ({
     useRecordIndexExportRecords: () => ({
@@ -34,7 +36,7 @@ jest.mock(
     }),
   }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-index/export/hooks/useRecordIndexAsyncExportRecords',
   () => ({
     useRecordIndexAsyncExportRecords: () => ({
@@ -43,7 +45,7 @@ jest.mock(
     }),
   }),
 );
-jest.mock('@/object-record/record-show/hooks/useExportSingleRecord', () => ({
+vi.mock('@/object-record/record-show/hooks/useExportSingleRecord', () => ({
   useExportSingleRecord: () => ({ download: mockSingleRecordDownload }),
 }));
 
@@ -79,8 +81,8 @@ const renderExport = (enabled?: boolean) => {
 };
 
 beforeEach(() => {
-  jest.useRealTimers();
-  jest.clearAllMocks();
+  vi.useRealTimers();
+  vi.clearAllMocks();
   mockRecordIndexId = 'record-index';
 });
 

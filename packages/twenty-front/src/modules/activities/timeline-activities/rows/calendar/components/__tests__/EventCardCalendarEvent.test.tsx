@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
@@ -11,15 +13,15 @@ import { UserContext } from '@/users/contexts/UserContext';
 import { DateFormat } from '@/localization/constants/DateFormat';
 import { TimeFormat } from '@/localization/constants/TimeFormat';
 
-jest.mock('@/object-record/hooks/useFindOneRecord', () => ({
-  useFindOneRecord: jest.fn(),
+vi.mock('@/object-record/hooks/useFindOneRecord', () => ({
+  useFindOneRecord: vi.fn(),
 }));
-jest.mock('@/side-panel/hooks/useOpenCalendarEventInSidePanel', () => ({
+vi.mock('@/side-panel/hooks/useOpenCalendarEventInSidePanel', () => ({
   useOpenCalendarEventInSidePanel: () => ({
-    openCalendarEventInSidePanel: jest.fn(),
+    openCalendarEventInSidePanel: vi.fn(),
   }),
 }));
-jest.mock(
+vi.mock(
   '@/activities/calendar/components/CalendarEventParticipantsAvatarGroup',
   () => ({ CalendarEventParticipantsAvatarGroup: () => null }),
 );
@@ -43,7 +45,7 @@ const renderCard = () =>
 
 describe('EventCardCalendarEvent', () => {
   it('does not render a title masked by calendar visibility', () => {
-    jest.mocked(useFindOneRecord).mockReturnValue({
+    vi.mocked(useFindOneRecord).mockReturnValue({
       record: {
         id: 'calendar-event-id',
         title: FIELD_RESTRICTED_ADDITIONAL_PERMISSIONS_REQUIRED,
@@ -66,7 +68,7 @@ describe('EventCardCalendarEvent', () => {
   });
 
   it('renders the not-shared state when record access is forbidden', () => {
-    jest.mocked(useFindOneRecord).mockReturnValue({
+    vi.mocked(useFindOneRecord).mockReturnValue({
       record: undefined,
       loading: false,
       error: new CombinedGraphQLErrors({
@@ -86,7 +88,7 @@ describe('EventCardCalendarEvent', () => {
   });
 
   it('fails closed when a hidden record is omitted without an error', () => {
-    jest.mocked(useFindOneRecord).mockReturnValue({
+    vi.mocked(useFindOneRecord).mockReturnValue({
       record: undefined,
       loading: false,
       error: undefined,

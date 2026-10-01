@@ -1,17 +1,20 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 
 import { usePersistedCampaignDraft } from '@/activities/emails/hooks/usePersistedCampaignDraft';
 
-const mockUpdateOneRecord = jest.fn().mockResolvedValue({});
+const mockUpdateOneRecord = vi.fn().mockResolvedValue({});
 
-jest.mock('@/object-record/hooks/useUpdateOneRecord', () => ({
+vi.mock('@/object-record/hooks/useUpdateOneRecord', () => ({
   useUpdateOneRecord: () => ({ updateOneRecord: mockUpdateOneRecord }),
 }));
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
@@ -30,13 +33,13 @@ const renderDraftHook = (initialSubject: string) =>
 
 describe('usePersistedCampaignDraft', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   afterEach(() => {
-    jest.runOnlyPendingTimers();
-    jest.useRealTimers();
-    jest.clearAllMocks();
+    vi.runOnlyPendingTimers();
+    vi.useRealTimers();
+    vi.clearAllMocks();
   });
 
   it('should adopt a remote change when the draft is pristine', () => {
@@ -58,7 +61,7 @@ describe('usePersistedCampaignDraft', () => {
     });
 
     act(() => {
-      jest.runOnlyPendingTimers();
+      vi.runOnlyPendingTimers();
     });
 
     expect(mockUpdateOneRecord).toHaveBeenCalledWith({
@@ -90,7 +93,7 @@ describe('usePersistedCampaignDraft', () => {
     expect(result.current.draftResyncKey).toBe(resyncKeyBeforeRemoteChange);
 
     act(() => {
-      jest.runOnlyPendingTimers();
+      vi.runOnlyPendingTimers();
     });
 
     expect(mockUpdateOneRecord).toHaveBeenCalledWith({
@@ -108,7 +111,7 @@ describe('usePersistedCampaignDraft', () => {
     });
 
     act(() => {
-      jest.runOnlyPendingTimers();
+      vi.runOnlyPendingTimers();
     });
 
     rerender({ subject: 'Typed locally' });

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook, waitFor } from '@testing-library/react';
 import { Provider as JotaiProvider, createStore } from 'jotai';
 import { type ReactNode } from 'react';
@@ -7,9 +9,9 @@ import { isCookieAuthActiveState } from '@/auth/states/isCookieAuthActiveState';
 import { isPendingServerSignOutState } from '@/auth/states/isPendingServerSignOutState';
 import { clientConfigApiStatusState } from '@/client-config/states/clientConfigApiStatusState';
 
-const mockMutate = jest.fn();
+const mockMutate = vi.fn();
 
-jest.mock('@apollo/client/react', () => ({
+vi.mock('@apollo/client/react', () => ({
   useApolloClient: () => ({ mutate: mockMutate }),
 }));
 
@@ -44,7 +46,7 @@ const renderEffect = ({
 
 describe('PendingServerSignOutEffect', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockMutate.mockResolvedValue({ data: { signOut: true } });
   });
 

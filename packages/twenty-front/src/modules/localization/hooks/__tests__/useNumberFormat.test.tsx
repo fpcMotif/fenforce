@@ -1,3 +1,5 @@
+import { type MockedFunction, vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -6,9 +8,9 @@ import { workspaceMemberFormatPreferencesState } from '@/localization/states/wor
 import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
 import { formatNumber as utilFormatNumber } from '~/utils/format/formatNumber';
 
-jest.mock('~/utils/format/formatNumber');
+vi.mock('~/utils/format/formatNumber');
 
-const mockUtilFormatNumber = utilFormatNumber as jest.MockedFunction<
+const mockUtilFormatNumber = utilFormatNumber as MockedFunction<
   typeof utilFormatNumber
 >;
 
@@ -18,7 +20,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => (
 
 describe('useNumberFormat', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     jotaiStore.set(workspaceMemberFormatPreferencesState.atom, {
       timeZone: 'UTC',
       dateFormat: 'MM/dd/yyyy' as any,

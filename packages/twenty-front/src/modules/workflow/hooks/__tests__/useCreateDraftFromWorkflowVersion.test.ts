@@ -1,26 +1,28 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { useCreateDraftFromWorkflowVersion } from '@/workflow/hooks/useCreateDraftFromWorkflowVersion';
 import { CreateDraftFromCoreWorkflowVersionDocument } from '~/generated/graphql';
 
-const mockCoreMutation = jest.fn();
-const mockWorkspaceMutation = jest.fn();
-const mockInvalidate = jest.fn();
+const mockCoreMutation = vi.fn();
+const mockWorkspaceMutation = vi.fn();
+const mockInvalidate = vi.fn();
 let mockIsCore = true;
 
-jest.mock('@/workflow/hooks/useIsWorkflowCoreEnabled', () => ({
+vi.mock('@/workflow/hooks/useIsWorkflowCoreEnabled', () => ({
   useIsWorkflowCoreEnabled: () => mockIsCore,
 }));
-jest.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
+vi.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
   useApolloCoreClient: () => ({}),
 }));
-jest.mock('@/object-record/hooks/useFindManyRecordsQuery', () => ({
+vi.mock('@/object-record/hooks/useFindManyRecordsQuery', () => ({
   useFindManyRecordsQuery: () => ({ findManyRecordsQuery: {} }),
 }));
-jest.mock(
+vi.mock(
   '@/object-core/workflows/versions/utils/invalidateCoreWorkflowVersions',
   () => ({ invalidateCoreWorkflowVersions: () => mockInvalidate() }),
 );
-jest.mock('@apollo/client/react', () => ({
+vi.mock('@apollo/client/react', () => ({
   useMutation: (document: unknown) => [
     document === CreateDraftFromCoreWorkflowVersionDocument
       ? mockCoreMutation
@@ -30,7 +32,7 @@ jest.mock('@apollo/client/react', () => ({
 
 describe('draft creation ID boundary', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockIsCore = true;
     mockCoreMutation.mockResolvedValue({
       data: { createDraftFromWorkflowVersion: { id: 'returned-core-draft' } },

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { MockedProvider } from '@apollo/client/testing/react';
 import { act, render } from '@testing-library/react';
 import { GraphQLError } from 'graphql';
@@ -25,9 +27,9 @@ import {
   OnboardingStatus,
 } from '~/generated-metadata/graphql';
 
-const mockOnboardingStatus = jest.fn();
+const mockOnboardingStatus = vi.fn();
 
-jest.mock('@/onboarding/hooks/useOnboardingStatus', () => ({
+vi.mock('@/onboarding/hooks/useOnboardingStatus', () => ({
   useOnboardingStatus: () => mockOnboardingStatus(),
 }));
 
@@ -146,7 +148,7 @@ describe('CompanyEnrichmentOnboardingEffect', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('fetches once during onboarding and stores a matched enrichment', async () => {

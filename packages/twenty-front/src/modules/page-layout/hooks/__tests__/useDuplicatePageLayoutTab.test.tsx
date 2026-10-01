@@ -1,3 +1,6 @@
+import type * as UuidModule from 'uuid';
+import { vi } from 'vite-plus/test';
+
 import { metadataStoreState } from '@/metadata-store/states/metadataStoreState';
 import { useDuplicatePageLayoutTab } from '@/page-layout/hooks/useDuplicatePageLayoutTab';
 import { pageLayoutCurrentLayoutsComponentState } from '@/page-layout/states/pageLayoutCurrentLayoutsComponentState';
@@ -25,22 +28,24 @@ import {
   PageLayoutTestWrapper,
 } from './PageLayoutTestWrapper';
 
-jest.mock('uuid', () => ({
-  ...jest.requireActual('uuid'),
-  v4: jest.fn(),
+const { mockUuid } = vi.hoisted(() => ({ mockUuid: vi.fn<() => string>() }));
+
+vi.mock('uuid', async () => ({
+  ...(await vi.importActual<typeof UuidModule>('uuid')),
+  v4: mockUuid,
 }));
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({
-    closeSidePanelMenu: jest.fn(),
+    closeSidePanelMenu: vi.fn(),
   }),
 }));
 
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/hooks/useNavigatePageLayoutSidePanel',
   () => ({
     useNavigatePageLayoutSidePanel: () => ({
-      navigatePageLayoutSidePanel: jest.fn(),
+      navigatePageLayoutSidePanel: vi.fn(),
     }),
   }),
 );
@@ -161,12 +166,11 @@ describe('useDuplicatePageLayoutTab', () => {
     });
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  it('should clone record-table widget views when duplicating a tab', () => {
-    const uuidModule = require('uuid');
-    uuidModule.v4
+  it('should clone record-table widget views when duplicating a tab', async () => {
+    mockUuid
       .mockReturnValueOnce('new-tab-id')
       .mockReturnValueOnce('new-widget-id')
       .mockReturnValueOnce('new-view-id')
@@ -228,9 +232,8 @@ describe('useDuplicatePageLayoutTab', () => {
     );
   });
 
-  it('should clone record-table widget views from metadata when source draft is not initialized', () => {
-    const uuidModule = require('uuid');
-    uuidModule.v4
+  it('should clone record-table widget views from metadata when source draft is not initialized', async () => {
+    mockUuid
       .mockReturnValueOnce('new-tab-id')
       .mockReturnValueOnce('new-widget-id')
       .mockReturnValueOnce('new-view-id')

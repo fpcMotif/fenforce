@@ -19,7 +19,7 @@ jobs:
     with:
       files: |
         package.json
-        yarn.lock
+        bun.lock
         packages/twenty-ui/**
         packages/twenty-shared/**
   ui-task:
@@ -36,15 +36,15 @@ jobs:
         with:
           fetch-depth: 10
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
       - name: Run ${{ matrix.task }}
-        run: npx nx ${{ matrix.task }} twenty-ui
+        run: bunx vite-plus run twenty-ui#${{ matrix.task }}
       - name: Check generated theme artifacts are up to date
         if: matrix.task == 'lint'
-        run: npx nx generate:check twenty-ui
+        run: bunx vite-plus run twenty-ui#generate:check
       - name: Check optional peer dependencies stay out of the root entry point
         if: matrix.task == 'pack-size'
-        run: npx nx test:package twenty-ui
+        run: bunx vite-plus run twenty-ui#test:package
   ui-sb-build:
     needs: changed-files-check
     if: >-
@@ -59,9 +59,9 @@ jobs:
         with:
           fetch-depth: 10
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
       - name: Build storybook
-        run: npx nx storybook:build twenty-ui
+        run: bunx vite-plus run twenty-ui#storybook:build
       - name: Upload storybook build
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
@@ -79,9 +79,9 @@ jobs:
         with:
           fetch-depth: 10
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
       - name: Build dependencies
-        run: npx nx build twenty-shared
+        run: bunx vite-plus run twenty-shared#build
       - name: Download storybook build
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
@@ -90,9 +90,9 @@ jobs:
       - name: Install Playwright
         run: |
           cd packages/twenty-ui
-          npx playwright install
+          bunx playwright install
       - name: Run storybook tests
-        run: npx nx storybook:test twenty-ui
+        run: bunx vite-plus run twenty-ui#storybook:test
       - name: Upload screenshots for visual regression
         if: always() && !cancelled()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

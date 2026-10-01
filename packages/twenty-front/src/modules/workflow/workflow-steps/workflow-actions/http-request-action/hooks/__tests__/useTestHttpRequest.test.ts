@@ -1,3 +1,7 @@
+import type * as ReactModule from '@apollo/client/react';
+import type * as UtilsModule from 'twenty-shared/utils';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { useApolloCoreClient } from '@/object-metadata/hooks/useApolloCoreClient';
 import { type HttpRequestFormData } from '@/workflow/workflow-steps/workflow-actions/http-request-action/constants/HttpRequest';
 import { useMutation } from '@apollo/client/react';
@@ -6,18 +10,18 @@ import React from 'react';
 import { resolveInput } from 'twenty-shared/utils';
 import { useTestHttpRequest } from '@/workflow/workflow-steps/workflow-actions/http-request-action/hooks/useTestHttpRequest';
 
-jest.mock('@apollo/client/react', () => ({
-  ...jest.requireActual('@apollo/client/react'),
-  useMutation: jest.fn(),
+vi.mock('@apollo/client/react', async () => ({
+  ...(await vi.importActual<typeof ReactModule>('@apollo/client/react')),
+  useMutation: vi.fn(),
 }));
 
-jest.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
-  useApolloCoreClient: jest.fn(),
+vi.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
+  useApolloCoreClient: vi.fn(),
 }));
 
-jest.mock('twenty-shared/utils', () => ({
-  ...jest.requireActual('twenty-shared/utils'),
-  resolveInput: jest.fn((input, context) => {
+vi.mock('twenty-shared/utils', async () => ({
+  ...(await vi.importActual<typeof UtilsModule>('twenty-shared/utils')),
+  resolveInput: vi.fn((input, context) => {
     if (typeof input === 'string') {
       return input.replace(/{{([^}]+)}}/g, (match, path) => {
         const parts = path.split('.');
@@ -68,7 +72,7 @@ jest.mock('twenty-shared/utils', () => ({
 describe('useTestHttpRequest', () => {
   const actionId = 'test-action-id';
   const mockApolloClient = {};
-  const mockMutate = jest.fn();
+  const mockMutate = vi.fn();
 
   const mockFormData: HttpRequestFormData = {
     url: 'https://api.example.com/users',
@@ -85,9 +89,9 @@ describe('useTestHttpRequest', () => {
     React.createElement(React.Fragment, null, children);
 
   beforeEach(() => {
-    jest.clearAllMocks();
-    (useApolloCoreClient as jest.Mock).mockReturnValue(mockApolloClient);
-    (useMutation as unknown as jest.Mock).mockReturnValue([mockMutate]);
+    vi.clearAllMocks();
+    (useApolloCoreClient as Mock).mockReturnValue(mockApolloClient);
+    (useMutation as unknown as Mock).mockReturnValue([mockMutate]);
   });
 
   it('should initialize with correct default values', () => {

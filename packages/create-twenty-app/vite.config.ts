@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite-plus';
 import dts from 'vite-plugin-dts';
 import packageJson from './package.json';
 import type { PackageJson } from 'type-fest';
@@ -52,6 +52,71 @@ export default defineConfig(() => {
   const tsConfigPath = path.resolve(__dirname, './tsconfig.lib.json');
 
   return {
+    run: {
+      tasks: {
+        build: {
+          command: 'bun run build:command',
+          dependsOn: [
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+          ],
+          cache: true,
+        },
+        dev: {
+          command: 'bun run dev:command',
+          dependsOn: ['build'],
+          cache: false,
+        },
+        start: {
+          command: 'bun run start:command',
+          dependsOn: ['build'],
+          cache: false,
+        },
+        typecheck: {
+          command: 'bun run typecheck:command',
+          dependsOn: [
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+          ],
+          cache: true,
+        },
+        lint: {
+          command: 'bun run lint:command',
+          dependsOn: [
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+            'twenty-oxlint-rules#build',
+          ],
+          cache: true,
+        },
+        test: {
+          command: 'bun run test:command',
+          dependsOn: [
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+          ],
+          cache: true,
+        },
+        'test:ci': {
+          command: 'bun run test:ci:command',
+          dependsOn: [
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+          ],
+          cache: true,
+        },
+      },
+    },
     root: __dirname,
     cacheDir: '../../node_modules/.vite/packages/create-twenty-app',
     resolve: {

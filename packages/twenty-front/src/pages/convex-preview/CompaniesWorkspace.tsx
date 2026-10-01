@@ -379,7 +379,7 @@ export const CompanyDetailPage = () => {
       companyId: companyId as Id<'workspaceCompanies'>,
     }),
   );
-  const [isEditing, setIsEditing] = useState(false);
+  const [editingRevision, setEditingRevision] = useState<number | null>(null);
 
   if (company.isPending) {
     return (
@@ -407,8 +407,17 @@ export const CompanyDetailPage = () => {
 
   const record = company.data;
   const saveCompany = async (values: CompanyFormValues) => {
-    await updateCompany({ workspaceId, companyId: record._id, ...values });
-    setIsEditing(false);
+    if (editingRevision === null) {
+      return;
+    }
+
+    await updateCompany({
+      workspaceId,
+      companyId: record._id,
+      expectedRevision: editingRevision,
+      ...values,
+    });
+    setEditingRevision(null);
   };
 
   return (
@@ -424,13 +433,16 @@ export const CompanyDetailPage = () => {
           </Link>
           <h1>{record.name}</h1>
         </div>
-        {!isEditing && (
-          <MainButton type="button" onClick={() => setIsEditing(true)}>
+        {editingRevision === null && (
+          <MainButton
+            type="button"
+            onClick={() => setEditingRevision(record.revision)}
+          >
             {t`Edit company`}
           </MainButton>
         )}
       </header>
-      {isEditing ? (
+      {editingRevision !== null ? (
         <section className="fenforce-editor" aria-label={t`Edit company`}>
           <h2>{t`Edit company`}</h2>
           <CompanyForm
@@ -442,7 +454,7 @@ export const CompanyDetailPage = () => {
               accountOwnerId: record.accountOwnerId,
             }}
             onSave={saveCompany}
-            onCancel={() => setIsEditing(false)}
+            onCancel={() => setEditingRevision(null)}
           />
         </section>
       ) : (

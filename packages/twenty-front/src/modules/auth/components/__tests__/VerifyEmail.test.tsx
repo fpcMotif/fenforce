@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, waitFor } from '@testing-library/react';
@@ -15,15 +18,15 @@ import {
 } from '@/ui/utilities/state/jotai/jotaiStore';
 import { dynamicActivate } from '~/utils/i18n/dynamicActivate';
 
-const navigateMock = jest.fn();
-const verifyEmailAndGetWorkspaceAgnosticTokenMock = jest.fn();
-const verifyEmailAndGetLoginTokenMock = jest.fn();
-const verifyLoginTokenMock = jest.fn();
-const redirectToWorkspaceDomainMock = jest.fn();
+const navigateMock = vi.fn();
+const verifyEmailAndGetWorkspaceAgnosticTokenMock = vi.fn();
+const verifyEmailAndGetLoginTokenMock = vi.fn();
+const verifyLoginTokenMock = vi.fn();
+const redirectToWorkspaceDomainMock = vi.fn();
 
 let isOnAWorkspaceValue = false;
 
-jest.mock('@/auth/hooks/useAuth', () => ({
+vi.mock('@/auth/hooks/useAuth', () => ({
   useAuth: () => ({
     verifyEmailAndGetWorkspaceAgnosticToken:
       verifyEmailAndGetWorkspaceAgnosticTokenMock,
@@ -31,35 +34,35 @@ jest.mock('@/auth/hooks/useAuth', () => ({
   }),
 }));
 
-jest.mock('@/auth/hooks/useVerifyLogin', () => ({
+vi.mock('@/auth/hooks/useVerifyLogin', () => ({
   useVerifyLogin: () => ({ verifyLoginToken: verifyLoginTokenMock }),
 }));
 
-jest.mock('@/domain-manager/hooks/useIsCurrentLocationOnAWorkspace', () => ({
+vi.mock('@/domain-manager/hooks/useIsCurrentLocationOnAWorkspace', () => ({
   useIsCurrentLocationOnAWorkspace: () => ({
     isOnAWorkspace: isOnAWorkspaceValue,
   }),
 }));
 
-jest.mock('@/domain-manager/hooks/useRedirectToWorkspaceDomain', () => ({
+vi.mock('@/domain-manager/hooks/useRedirectToWorkspaceDomain', () => ({
   useRedirectToWorkspaceDomain: () => ({
     redirectToWorkspaceDomain: redirectToWorkspaceDomainMock,
   }),
 }));
 
-jest.mock('~/hooks/useNavigateApp', () => ({
+vi.mock('~/hooks/useNavigateApp', () => ({
   useNavigateApp: () => navigateMock,
 }));
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
 // Rendered by VerifyEmail in the error state; isolate it from Apollo.
-jest.mock(
+vi.mock(
   '@/auth/sign-in-up/hooks/useHandleResendEmailVerificationToken',
   () => ({
     useHandleResendEmailVerificationToken: () => ({
@@ -89,7 +92,7 @@ const renderVerifyEmail = (initialEntry: string) =>
 
 describe('VerifyEmail', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     localStorage.clear();
     resetJotaiStore();
     isOnAWorkspaceValue = false;

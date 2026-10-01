@@ -1,9 +1,11 @@
+import { vi } from 'vite-plus/test';
+
 import { getToastOptionsFromError } from '@/error-handler/utils/getToastOptionsFromError';
 
 describe('getToastOptionsFromError', () => {
   it('preserves custom content, actions, and delivery options', () => {
     const action = <a href="/help">Get help</a>;
-    const onClose = jest.fn();
+    const onClose = vi.fn();
 
     expect(
       getToastOptionsFromError({

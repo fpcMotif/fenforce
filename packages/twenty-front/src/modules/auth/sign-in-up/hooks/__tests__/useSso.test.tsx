@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { GET_AUTHORIZATION_URL_FOR_SSO } from '@/auth/graphql/mutations/getAuthorizationUrlForSSO';
 import { useSso } from '@/auth/sign-in-up/hooks/useSso';
 import { useRedirect } from '@/domain-manager/hooks/useRedirect';
@@ -6,18 +9,18 @@ import { MockedProvider } from '@apollo/client/testing/react';
 import { renderHook } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
-jest.mock('@/domain-manager/hooks/useRedirect');
-jest.mock('~/generated/graphql');
+vi.mock('@/domain-manager/hooks/useRedirect');
+vi.mock('~/generated/graphql');
 
-const mockRedirect = jest.fn();
+const mockRedirect = vi.fn();
 
-(useRedirect as jest.Mock).mockReturnValue({
+(useRedirect as Mock).mockReturnValue({
   redirect: mockRedirect,
 });
 
@@ -61,7 +64,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 
 describe('useSso', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should call getAuthorizationUrlForSSO with correct parameters', async () => {

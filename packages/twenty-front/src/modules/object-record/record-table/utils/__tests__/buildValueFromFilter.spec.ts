@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type FieldMetadataItemOption } from '@/object-metadata/types/FieldMetadataItem';
 import { type RecordFilter } from '@/object-record/record-filter/types/RecordFilter';
 import { buildValueFromFilter } from '@/object-record/record-table/utils/buildValueFromFilter';
@@ -12,12 +14,12 @@ import { RelationType } from '~/generated-metadata/graphql';
 const mockDate = new Date('2024-03-20T12:00:00Z');
 
 beforeAll(() => {
-  jest.useFakeTimers();
-  jest.setSystemTime(mockDate);
+  vi.useFakeTimers();
+  vi.setSystemTime(mockDate);
 });
 
 afterAll(() => {
-  jest.useRealTimers();
+  vi.useRealTimers();
 });
 
 describe('buildValueFromFilter', () => {
@@ -176,7 +178,7 @@ describe('buildValueFromFilter', () => {
     });
 
     it('resolves IS_TODAY as today in the user time zone (day boundary)', () => {
-      jest.setSystemTime(new Date('2024-03-20T23:30:00Z'));
+      vi.setSystemTime(new Date('2024-03-20T23:30:00Z'));
       const filter = createTestFilter(ViewFilterOperand.IS_TODAY, '', 'DATE');
 
       expect(buildValueFromFilter({ filter, timeZone: 'UTC' })).toBe(
@@ -186,7 +188,7 @@ describe('buildValueFromFilter', () => {
         '2024-03-21',
       );
 
-      jest.setSystemTime(mockDate);
+      vi.setSystemTime(mockDate);
     });
   });
 

@@ -1,6 +1,9 @@
+import type * as BufferModule from 'buffer/';
+import { vi } from 'vite-plus/test';
+
 import { encodeCursor } from '@/apollo/utils/encodeCursor';
 import { type ObjectRecord } from '@/object-record/types/ObjectRecord';
-import { Buffer } from 'buffer';
+import { Buffer } from 'node:buffer';
 
 describe('encodeCursor', () => {
   it('should create a cursor with id only', () => {
@@ -67,25 +70,30 @@ describe('encodeCursor', () => {
     expect(encodeCursor(record)).toMatch(/^[A-Za-z0-9_-]+$/);
   });
 
-  // Jest resolves 'buffer' to Node's builtin, which implements 'base64url';
+  // Node's builtin Buffer implements 'base64url';
   // the browser build gets the polyfill, which throws on it. Without this the
   // suite would stay green while every optimistic cache write broke in the app
   it('should only use encodings the browser Buffer polyfill implements', async () => {
-    jest.resetModules();
-    jest.doMock('buffer', () => jest.requireActual('buffer/'));
+    vi.resetModules();
+    vi.doMock(
+      'buffer',
+      async () => await vi.importActual<typeof BufferModule>('buffer/'),
+    );
 
-    const { encodeCursor: encodeCursorWithPolyfill } =
-      await import('@/apollo/utils/encodeCursor');
-    const record: ObjectRecord = {
-      __typename: 'ObjectRecord',
-      id: '123',
-      position: 1,
-    };
+    try {
+      const { encodeCursor: encodeCursorWithPolyfill } =
+        await import('@/apollo/utils/encodeCursor');
+      const record: ObjectRecord = {
+        __typename: 'ObjectRecord',
+        id: '123',
+        position: 1,
+      };
 
-    expect(encodeCursorWithPolyfill(record)).toBe(encodeCursor(record));
-
-    jest.dontMock('buffer');
-    jest.resetModules();
+      expect(encodeCursorWithPolyfill(record)).toBe(encodeCursor(record));
+    } finally {
+      vi.doUnmock('buffer');
+      vi.resetModules();
+    }
   });
 
   it('should throw an error if record does not have an id', () => {

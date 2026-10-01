@@ -23,7 +23,7 @@ import { USER_SESSION_SECURE_COOKIE_NAME } from 'src/engine/core-modules/user-se
 // transport: isSecureDeployment() reads SERVER_URL, which is env-only. This
 // suite therefore needs the app booted with an https SERVER_URL, which
 // jest-integration-secure.config.ts guarantees; run it through
-// `nx run twenty-server:test:integration:secure`. It exercises the exact
+// `bunx vite-plus run twenty-server#test:integration:secure`. It exercises the exact
 // production combination: __Host- name, Secure, and the SameSite=Lax default.
 describe('session cookie on a production-like secure deployment (integration)', () => {
   let sessionToken: string;
@@ -31,7 +31,7 @@ describe('session cookie on a production-like secure deployment (integration)', 
   beforeAll(() => {
     if (!IS_SECURE_DEPLOYMENT) {
       throw new Error(
-        'This suite requires an https SERVER_URL; run it via nx run twenty-server:test:integration:secure',
+        'This suite requires an https SERVER_URL; run it via bunx vite-plus run twenty-server#test:integration:secure',
       );
     }
   });

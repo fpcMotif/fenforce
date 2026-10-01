@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { setAgentChatThreadPermissions } from '@/ai/testing/setAgentChatThreadPermissions';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
@@ -12,11 +14,11 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-const useAiChatEditor = jest.fn();
-jest.mock('@/ai/hooks/useAiChatEditor', () => ({
+const useAiChatEditor = vi.fn();
+vi.mock('@/ai/hooks/useAiChatEditor', () => ({
   useAiChatEditor: () => useAiChatEditor(),
 }));
-jest.mock('@/ai/components/AiChatStandaloneError', () => ({
+vi.mock('@/ai/components/AiChatStandaloneError', () => ({
   AiChatStandaloneError: () => null,
 }));
 const Wrapper = ({ children }: { children: ReactNode }) => (
@@ -27,7 +29,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => (
 
 describe('Shared conversation composer', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     resetJotaiStore();
     jotaiStore.set(currentAiChatThreadState.atom, 'shared-thread');
   });

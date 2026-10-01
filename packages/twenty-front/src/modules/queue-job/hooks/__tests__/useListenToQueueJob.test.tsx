@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 
 import { dispatchBrowserEvent } from '@/browser-event/utils/dispatchBrowserEvent';
@@ -18,7 +20,7 @@ const dispatchQueueJobEvent = (jobId: string, state: JobState) => {
 
 describe('useListenToQueueJob', () => {
   it('only forwards state changes of the listened job', () => {
-    const onQueueJobEvent = jest.fn();
+    const onQueueJobEvent = vi.fn();
 
     renderHook(() => useListenToQueueJob({ jobId: JOB_ID, onQueueJobEvent }));
 
@@ -32,7 +34,7 @@ describe('useListenToQueueJob', () => {
   });
 
   it('ignores events without a job id', () => {
-    const onQueueJobEvent = jest.fn();
+    const onQueueJobEvent = vi.fn();
 
     renderHook(() => useListenToQueueJob({ onQueueJobEvent }));
 

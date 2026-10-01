@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { DateFormat } from '@/localization/constants/DateFormat';
 import { FieldDateDisplayFormat } from '@/object-record/record-field/ui/types/FieldMetadata';
 import { subDays } from 'date-fns';
@@ -50,12 +52,6 @@ describe('formatDateString', () => {
     const mockDate = '2023-01-01T12:00:00Z';
     const mockFormattedDate = '1 Jan, 2023';
 
-    jest.mock('@/localization/utils/formatDateISOStringToDateTime', () => ({
-      formatDateISOStringToDateTime: jest
-        .fn()
-        .mockReturnValue(mockFormattedDate),
-    }));
-
     const result = formatDateString({
       ...defaultParams,
       value: mockDate,
@@ -71,15 +67,6 @@ describe('formatDateString', () => {
   it('should format date with custom format when displayFormat is set to CUSTOM', () => {
     const mockDate = '2023-01-01T12:00:00Z';
     const mockFormattedDate = '2023';
-
-    jest.mock(
-      '@/localization/utils/formatDateISOStringToCustomUnicodeFormat',
-      () => ({
-        formatDateISOStringToCustomUnicodeFormat: jest
-          .fn()
-          .mockReturnValue(mockFormattedDate),
-      }),
-    );
 
     const result = formatDateString({
       ...defaultParams,
@@ -97,12 +84,6 @@ describe('formatDateString', () => {
   it('should format date as datetime by default when displayFormat is not provided', () => {
     const mockDate = '2023-01-01T12:00:00Z';
     const mockFormattedDate = '1 Jan, 2023';
-
-    jest.mock('@/localization/utils/formatDateISOStringToDateTime', () => ({
-      formatDateISOStringToDateTime: jest
-        .fn()
-        .mockReturnValue(mockFormattedDate),
-    }));
 
     const result = formatDateString({
       ...defaultParams,
@@ -165,16 +146,16 @@ describe('formatDateString', () => {
 
   describe('date-only values with RELATIVE displayFormat across timezones', () => {
     beforeAll(() => {
-      jest.useFakeTimers();
+      vi.useFakeTimers();
     });
 
     afterAll(() => {
-      jest.useRealTimers();
+      vi.useRealTimers();
     });
 
     it('should return "Tomorrow" when the target value is the next calendar day in the user timezone', () => {
       // 2026-05-18 13:00 UTC: today in UTC is May 18, so "2026-05-19" is tomorrow.
-      jest.setSystemTime(new Date('2026-05-18T13:00:00Z'));
+      vi.setSystemTime(new Date('2026-05-18T13:00:00Z'));
 
       const result = formatDateString({
         ...defaultParams,
@@ -191,7 +172,7 @@ describe('formatDateString', () => {
 
     it('should return "Today" for the same value when the user timezone has already rolled over', () => {
       // 2026-05-18 21:00 UTC = 2026-05-19 06:00 in Asia/Tokyo, so "2026-05-19" is today there.
-      jest.setSystemTime(new Date('2026-05-18T21:00:00Z'));
+      vi.setSystemTime(new Date('2026-05-18T21:00:00Z'));
 
       const result = formatDateString({
         ...defaultParams,

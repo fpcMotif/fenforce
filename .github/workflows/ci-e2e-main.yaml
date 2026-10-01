@@ -77,14 +77,10 @@ jobs:
         with:
           fetch-depth: 10
 
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-        with:
-          node-version: lts/*
-
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
 
-      - name: Restore Nx build cache
+      - name: Restore Vite task cache
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0 (restore)
         with:
           key: v4-e2e-build-${{ github.ref_name }}-${{ github.sha }}
@@ -92,34 +88,34 @@ jobs:
             v4-e2e-build-${{ github.ref_name }}-
             v4-e2e-build-main-
           path: |
-            .nx
+            node_modules/.vite/task-cache
             node_modules/.cache
             packages/*/node_modules/.cache
 
       - name: Build twenty-shared
-        run: npx nx build twenty-shared
+        run: bunx vite-plus run twenty-shared#build
 
       - name: Install Playwright Browsers
-        run: npx nx setup twenty-e2e-testing
+        run: bunx vite-plus run twenty-e2e-testing#setup
 
       - name: Setup environment files
         run: |
           cp packages/twenty-front/.env.example packages/twenty-front/.env
-          npx nx reset:env:e2e-testing-server twenty-server
+          bunx vite-plus run twenty-server#reset:env:e2e-testing-server
 
       - name: Build frontend
-        run: NODE_ENV=production npx nx build twenty-front
+        run: NODE_ENV=production bunx vite-plus run twenty-front#build
 
       - name: Build server
-        run: npx nx build twenty-server
+        run: bunx vite-plus run twenty-server#build
 
-      - name: Save Nx build cache
-        if: always()
+      - name: Save Vite task cache
+        if: success()
         uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0 (save)
         with:
           key: v4-e2e-build-${{ github.ref_name }}-${{ github.sha }}
           path: |
-            .nx
+            node_modules/.vite/task-cache
             node_modules/.cache
             packages/*/node_modules/.cache
 
@@ -127,7 +123,7 @@ jobs:
         run: |
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "default";'
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "test";'
-          npx nx run twenty-server:database:reset
+          bunx vite-plus run twenty-server#database:reset
 
       # Cookie sessions are credentialed, so the front only authenticates from
       # the API's own origin, workspace subdomains included.
@@ -139,19 +135,19 @@ jobs:
       - name: Start server
         run: |
           mkdir -p /tmp/qa-scout
-          npx nx run twenty-server:start:ci 2>&1 | tee /tmp/qa-scout/server.log &
+          bunx vite-plus run twenty-server#start:ci 2>&1 | tee /tmp/qa-scout/server.log &
           echo "Waiting for server to be ready..."
           timeout 120 bash -c 'until curl -sf http://localhost:3000/healthz > /dev/null; do sleep 2; done'
 
       - name: Start worker
         run: |
-          npx nx run twenty-server:worker 2>&1 | tee /tmp/qa-scout/worker.log &
+          bunx vite-plus run twenty-server#worker 2>&1 | tee /tmp/qa-scout/worker.log &
           echo "Worker started"
 
       - name: Run Playwright tests
         env:
           FRONTEND_BASE_URL: http://localhost:3000
-        run: npx nx test twenty-e2e-testing
+        run: bunx vite-plus run twenty-e2e-testing#test
 
       - name: Upload Playwright results
         if: always()
@@ -249,9 +245,8 @@ jobs:
           {
             "mcpServers": {
               "playwright": {
-                "command": "npx",
+                "command": "bunx",
                 "args": [
-                  "-y",
                   "@playwright/mcp@0.0.79",
                   "--headless",
                   "--browser", "chrome",

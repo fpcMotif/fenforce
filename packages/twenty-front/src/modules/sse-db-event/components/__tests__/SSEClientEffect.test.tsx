@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render } from '@testing-library/react';
 import { type ClientOptions } from 'graphql-sse';
 import { createStore, Provider } from 'jotai';
@@ -7,9 +9,9 @@ import { isCookieAuthActiveState } from '@/auth/states/isCookieAuthActiveState';
 import { SSEClientEffect } from '@/sse-db-event/components/SSEClientEffect';
 import { REACT_APP_SERVER_BASE_URL } from '~/config';
 
-const createClientMock = jest.fn();
+const createClientMock = vi.fn();
 
-jest.mock('graphql-sse', () => ({
+vi.mock('graphql-sse', () => ({
   createClient: (options: ClientOptions) => {
     createClientMock(options);
 
@@ -21,8 +23,8 @@ jest.mock('graphql-sse', () => ({
   },
 }));
 
-jest.mock('@/metadata-store/hooks/useResyncMetadataStore', () => ({
-  useResyncMetadataStore: () => ({ resyncMetadataStore: jest.fn() }),
+vi.mock('@/metadata-store/hooks/useResyncMetadataStore', () => ({
+  useResyncMetadataStore: () => ({ resyncMetadataStore: vi.fn() }),
 }));
 
 const renderSseClient = () => {
@@ -41,7 +43,7 @@ const renderSseClient = () => {
 
 describe('SSEClientEffect', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   // The session cookie travels with the request, so the stream needs no header

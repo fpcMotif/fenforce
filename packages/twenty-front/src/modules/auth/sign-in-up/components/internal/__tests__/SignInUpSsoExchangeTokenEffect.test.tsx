@@ -1,12 +1,14 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen, waitFor } from '@testing-library/react';
 import { StrictMode } from 'react';
 import { BrowserRouter, useSearchParams } from 'react-router-dom';
 
 import { SignInUpSsoExchangeTokenEffect } from '@/auth/sign-in-up/components/internal/SignInUpSsoExchangeTokenEffect';
 
-const redeemSsoExchangeTokenMock = jest.fn();
+const redeemSsoExchangeTokenMock = vi.fn();
 
-jest.mock('@/auth/hooks/useRedeemSsoExchangeToken', () => ({
+vi.mock('@/auth/hooks/useRedeemSsoExchangeToken', () => ({
   useRedeemSsoExchangeToken: () => ({
     redeemSsoExchangeToken: redeemSsoExchangeTokenMock,
   }),
@@ -37,7 +39,7 @@ const getSearchParams = () => screen.getByTestId('search-params').textContent;
 
 describe('SignInUpSsoExchangeTokenEffect', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     window.history.replaceState(null, '', '/');
   });
 

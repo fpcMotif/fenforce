@@ -25,7 +25,7 @@ export default defineConfig({
         plugins: [
           storybookTest({
             configDir: path.join(dirname, '.storybook'),
-            storybookScript: 'yarn storybook --no-open --port 6008',
+            storybookScript: 'bun run storybook:serve:dev:command --no-open',
           }),
         ],
         test: {

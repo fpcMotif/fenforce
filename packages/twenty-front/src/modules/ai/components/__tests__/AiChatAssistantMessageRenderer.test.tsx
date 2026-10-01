@@ -1,10 +1,12 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'twenty-ui/theme';
 import { type ExtendedUIMessagePart } from 'twenty-shared/ai';
 
 import { AiChatAssistantMessageRenderer } from '@/ai/components/AiChatAssistantMessageRenderer';
 
-jest.mock('@/ai/components/ThinkingStepsDisplay', () => ({
+vi.mock('@/ai/components/ThinkingStepsDisplay', () => ({
   ThinkingStepsDisplay: ({
     hasAssistantTextResponseStarted,
     parts,
@@ -20,37 +22,37 @@ jest.mock('@/ai/components/ThinkingStepsDisplay', () => ({
   ),
 }));
 
-jest.mock('@/ai/components/ToolStepRenderer', () => ({
+vi.mock('@/ai/components/ToolStepRenderer', () => ({
   ToolStepRenderer: ({ toolPart }: { toolPart: { type: string } }) => (
     <div data-testid="tool-step-renderer">{toolPart.type}</div>
   ),
 }));
 
-jest.mock('@/ai/components/LazyMarkdownRenderer', () => ({
+vi.mock('@/ai/components/LazyMarkdownRenderer', () => ({
   LazyMarkdownContent: ({ text }: { text: string }) => (
     <div data-testid="markdown-renderer">{text}</div>
   ),
 }));
 
-jest.mock('@/ai/components/RoutingStatusDisplay', () => ({
+vi.mock('@/ai/components/RoutingStatusDisplay', () => ({
   RoutingStatusDisplay: ({ data }: { data: { text: string } }) => (
     <div data-testid="routing-status-display">{data.text}</div>
   ),
 }));
 
-jest.mock('@/ai/components/CodeExecutionDisplay', () => ({
+vi.mock('@/ai/components/CodeExecutionDisplay', () => ({
   CodeExecutionDisplay: () => <div data-testid="code-execution-display" />,
 }));
 
-jest.mock('@/ai/components/AiChatToolPartRenderer', () => ({
+vi.mock('@/ai/components/AiChatToolPartRenderer', () => ({
   AiChatToolPartRenderer: ({ toolPart }: { toolPart: { type: string } }) => (
     <div data-testid="tool-widget">{toolPart.type}</div>
   ),
 }));
 
-const mockUseToolWidgetByName = jest.fn(() => new Map());
+const mockUseToolWidgetByName = vi.fn(() => new Map());
 
-jest.mock('@/ai/hooks/useToolWidgetByName', () => ({
+vi.mock('@/ai/hooks/useToolWidgetByName', () => ({
   useToolWidgetByName: () => mockUseToolWidgetByName(),
 }));
 

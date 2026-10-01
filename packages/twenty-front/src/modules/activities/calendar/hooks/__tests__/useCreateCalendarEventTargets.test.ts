@@ -1,22 +1,24 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 
 import { useCreateCalendarEventTargets } from '@/activities/calendar/hooks/useCreateCalendarEventTargets';
 
-const mockCreateManyRecords = jest.fn();
-const mockUseObjectMorphJunctionConfig = jest.fn();
+const mockCreateManyRecords = vi.fn();
+const mockUseObjectMorphJunctionConfig = vi.fn();
 
-jest.mock('@/object-record/hooks/useCreateManyRecords', () => ({
+vi.mock('@/object-record/hooks/useCreateManyRecords', () => ({
   useCreateManyRecords: () => ({ createManyRecords: mockCreateManyRecords }),
 }));
 
-jest.mock(
+vi.mock(
   '@/object-record/record-field/ui/hooks/useObjectMorphJunctionConfig',
   () => ({
     useObjectMorphJunctionConfig: () => mockUseObjectMorphJunctionConfig(),
   }),
 );
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
   useObjectMetadataItems: () => ({ objectMetadataItems: [] }),
 }));
 
@@ -45,7 +47,7 @@ const TARGETS = [
 
 describe('useCreateCalendarEventTargets', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockUseObjectMorphJunctionConfig.mockReturnValue(JUNCTION_CONFIG);
   });
 

@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { type ReactNode } from 'react';
 import { Provider as JotaiProvider } from 'jotai';
@@ -9,19 +11,19 @@ import { captchaState } from '@/client-config/states/captchaState';
 import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
 import { type Captcha, CaptchaDriverType } from '~/generated-metadata/graphql';
 
-jest.mock('@/captcha/utils/isCaptchaRequiredForPath');
+vi.mock('@/captcha/utils/isCaptchaRequiredForPath');
 
 const createWrapper = ({ children }: { children: ReactNode }) => (
   <JotaiProvider store={jotaiStore}>{children}</JotaiProvider>
 );
 
 describe('useRequestFreshCaptchaToken', () => {
-  const mockGrecaptchaExecute = jest.fn();
-  const mockTurnstileRender = jest.fn();
-  const mockTurnstileExecute = jest.fn();
+  const mockGrecaptchaExecute = vi.fn();
+  const mockTurnstileRender = vi.fn();
+  const mockTurnstileExecute = vi.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     window.grecaptcha = {
       execute: mockGrecaptchaExecute,
@@ -32,7 +34,7 @@ describe('useRequestFreshCaptchaToken', () => {
       execute: mockTurnstileExecute,
     };
 
-    (isCaptchaRequiredForPath as jest.Mock).mockReturnValue(true);
+    (isCaptchaRequiredForPath as Mock).mockReturnValue(true);
 
     mockGrecaptchaExecute.mockImplementation((_siteKey, _options) => {
       return Promise.resolve('google-recaptcha-token');
@@ -50,7 +52,7 @@ describe('useRequestFreshCaptchaToken', () => {
   });
 
   it('should not request a token if captcha is not required for the current path', async () => {
-    (isCaptchaRequiredForPath as jest.Mock).mockReturnValue(false);
+    (isCaptchaRequiredForPath as Mock).mockReturnValue(false);
 
     const { result } = renderHook(() => useRequestFreshCaptchaToken(), {
       wrapper: createWrapper,

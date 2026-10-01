@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 
@@ -13,7 +15,7 @@ describe('useUserTimezone', () => {
     // Mock Intl.DateTimeFormat to return a consistent system timezone
     global.Intl = {
       ...originalIntl,
-      DateTimeFormat: jest.fn().mockImplementation(() => ({
+      DateTimeFormat: vi.fn().mockImplementation(() => ({
         resolvedOptions: () => ({ timeZone: mockSystemTimezone }),
       })),
     } as any;

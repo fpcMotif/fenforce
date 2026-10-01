@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, render } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { useEffect } from 'react';
@@ -12,23 +14,23 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-const switchThreadWithDraftMock = jest.fn((toThreadId: string) => {
+const switchThreadWithDraftMock = vi.fn((toThreadId: string) => {
   jotaiStore.set(currentAiChatThreadState.atom, toThreadId);
 });
-const switchToNewChatMock = jest.fn();
-const refreshAgentChatThreadsMock = jest.fn();
+const switchToNewChatMock = vi.fn();
+const refreshAgentChatThreadsMock = vi.fn();
 
-jest.mock('@/ai/hooks/useSwitchToNewAiChat', () => ({
+vi.mock('@/ai/hooks/useSwitchToNewAiChat', () => ({
   useSwitchToNewAiChat: () => ({ switchToNewChat: switchToNewChatMock }),
 }));
 
-jest.mock('@/ai/hooks/useRefreshAgentChatThreads', () => ({
+vi.mock('@/ai/hooks/useRefreshAgentChatThreads', () => ({
   useRefreshAgentChatThreads: () => ({
     refreshAgentChatThreads: refreshAgentChatThreadsMock,
   }),
 }));
 
-jest.mock('@/ai/hooks/useSwitchAgentChatThreadWithDraft', () => ({
+vi.mock('@/ai/hooks/useSwitchAgentChatThreadWithDraft', () => ({
   useSwitchAgentChatThreadWithDraft: () => ({
     switchThreadWithDraft: switchThreadWithDraftMock,
   }),
@@ -65,7 +67,7 @@ const renderEffectAt = (initialPath: string) =>
 
 describe('AiChatPageThreadUrlSyncEffect', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     refreshAgentChatThreadsMock.mockResolvedValue([]);
     resetJotaiStore();
     navigateToThread = undefined;

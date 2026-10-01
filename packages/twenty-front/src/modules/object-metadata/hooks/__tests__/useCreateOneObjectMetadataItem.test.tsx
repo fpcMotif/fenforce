@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 
 import { useCreateOneObjectMetadataItem } from '@/object-metadata/hooks/useCreateOneObjectMetadataItem';
@@ -26,7 +28,7 @@ const mocks = [
       query,
       variables,
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         createOneObject: responseData,
       },
@@ -37,7 +39,7 @@ const mocks = [
       query: GetCurrentUserDocument,
       variables: {},
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         currentUser: mockedUserData,
       },
@@ -48,7 +50,7 @@ const mocks = [
       query: findManyObjectMetadataItemsQuery,
       variables: {},
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: findManyObjectMetadataItemsResponseData,
     })),
   },
@@ -59,7 +61,7 @@ const mocks = [
         objectMetadataId: responseData.id,
       },
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         getViews: [],
       },
@@ -70,7 +72,7 @@ const mocks = [
       query: findManyNavigationMenuItemsQuery,
       variables: {},
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         navigationMenuItems: [],
       },
@@ -81,7 +83,7 @@ const mocks = [
       query: findManyCommandMenuItemsQuery,
       variables: {},
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         commandMenuItems: [],
       },

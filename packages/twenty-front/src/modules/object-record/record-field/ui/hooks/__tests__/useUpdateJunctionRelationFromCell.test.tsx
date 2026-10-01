@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type ReactNode } from 'react';
 import { act, renderHook } from '@testing-library/react';
 import { createStore, Provider as JotaiProvider } from 'jotai';
@@ -14,12 +16,12 @@ import { getMockFieldMetadataItemOrThrow } from '~/testing/utils/getMockFieldMet
 import { getMockObjectMetadataItemOrThrow } from '~/testing/utils/getMockObjectMetadataItemOrThrow';
 import { getTestEnrichedObjectMetadataItemsMock } from '~/testing/utils/getTestEnrichedObjectMetadataItemsMock';
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems');
-jest.mock('@/object-record/hooks/useCreateManyRecords', () => ({
-  useCreateManyRecords: jest.fn(),
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems');
+vi.mock('@/object-record/hooks/useCreateManyRecords', () => ({
+  useCreateManyRecords: vi.fn(),
 }));
-jest.mock('@/object-record/hooks/useDeleteOneRecord', () => ({
-  useDeleteOneRecord: jest.fn(),
+vi.mock('@/object-record/hooks/useDeleteOneRecord', () => ({
+  useDeleteOneRecord: vi.fn(),
 }));
 
 const objectMetadataItems = getTestEnrichedObjectMetadataItemsMock();
@@ -34,8 +36,8 @@ const fieldDefinition = formatFieldMetadataItemAsFieldDefinition({
   objectMetadataItem: rocketMetadata,
 }) as FieldDefinition<FieldRelationMetadata>;
 
-const mockCreateManyRecords = jest.fn();
-const mockDeleteOneRecord = jest.fn();
+const mockCreateManyRecords = vi.fn();
+const mockDeleteOneRecord = vi.fn();
 
 const createWrapper = (store: ReturnType<typeof createStore>) =>
   function Wrapper({ children }: { children: ReactNode }) {
@@ -44,15 +46,15 @@ const createWrapper = (store: ReturnType<typeof createStore>) =>
 
 describe('useUpdateJunctionRelationFromCell', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
-    jest.mocked(useObjectMetadataItems).mockReturnValue({
+    vi.mocked(useObjectMetadataItems).mockReturnValue({
       objectMetadataItems,
     });
-    jest.mocked(useCreateManyRecords).mockReturnValue({
+    vi.mocked(useCreateManyRecords).mockReturnValue({
       createManyRecords: mockCreateManyRecords,
     } as ReturnType<typeof useCreateManyRecords>);
-    jest.mocked(useDeleteOneRecord).mockReturnValue({
+    vi.mocked(useDeleteOneRecord).mockReturnValue({
       deleteOneRecord: mockDeleteOneRecord,
     } as ReturnType<typeof useDeleteOneRecord>);
   });

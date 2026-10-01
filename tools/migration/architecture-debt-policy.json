@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "targetDecision": "All application data, authorization, functions, and durable workflows belong in Convex. Cloudflare hosts frontend assets only.",
+  "targets": [
+    { "name": "convex-backend", "root": "deployments/convex/convex" },
+    {
+      "name": "cloudflare-frontend-host",
+      "root": "deployments/cloudflare-front/src"
+    },
+    {
+      "name": "tanstack-convex-preview",
+      "root": "packages/twenty-front/src/pages/convex-preview"
+    },
+    {
+      "name": "tanstack-convex-entry",
+      "root": "packages/twenty-front/src/convex.tsx"
+    }
+  ],
+  "legacyRoots": [
+    "packages/twenty-front/src",
+    "packages/twenty-server/src",
+    "experiments/cloudflare-workflows/src"
+  ],
+  "workspaceSourceRoots": {
+    "twenty-ui": "packages/twenty-ui/src",
+    "twenty-shared": "packages/twenty-shared/src"
+  },
+  "legacyRules": [
+    { "name": "apollo", "specifier": "^(@apollo/|apollo-)" },
+    {
+      "name": "react-router",
+      "specifier": "^(react-router|react-router-dom)(/|$)"
+    },
+    { "name": "nest", "specifier": "^@nestjs/" },
+    { "name": "typeorm", "specifier": "^typeorm(/|$)" },
+    { "name": "postgres", "specifier": "^(pg|postgres|postgres-pool)(/|$)" },
+    {
+      "name": "redis",
+      "specifier": "^(ioredis|redis|graphql-redis-subscriptions)(/|$)"
+    },
+    {
+      "name": "queue",
+      "specifier": "^(bull|bullmq|@nestjs/bullmq|@nestjs/bull)(/|$)"
+    },
+    {
+      "name": "cloudflare-workflows",
+      "specifier": "^cloudflare:workers$",
+      "symbols": ["WorkflowEntrypoint", "WorkflowEvent", "WorkflowStep"],
+      "namespaceImportForbidden": true
+    },
+    {
+      "name": "cloudflare-workflows",
+      "specifier": "^cloudflare:workflows(/|$)"
+    },
+    {
+      "name": "cloudflare-durable-objects",
+      "specifier": "^cloudflare:workers$",
+      "symbols": [
+        "DurableObject",
+        "DurableObjectNamespace",
+        "DurableObjectState",
+        "DurableObjectStorage"
+      ],
+      "namespaceImportForbidden": true
+    },
+    { "name": "temporal-workflows", "specifier": "^@temporalio/" }
+  ],
+  "forbiddenTargetPaths": [
+    "^packages/twenty-server/",
+    "^experiments/cloudflare-workflows/"
+  ]
+}

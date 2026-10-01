@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { PERSON_FRAGMENT_WITH_DEPTH_ZERO_RELATIONS } from '@/object-record/hooks/__mocks__/personFragments';
 import { useLazyFetchAllRecords } from '@/object-record/hooks/useLazyFetchAllRecords';
 import { type MockedResponse } from '@apollo/client/testing';
@@ -102,7 +104,7 @@ const mock: MockedResponse = {
       limit: 30,
     },
   },
-  result: jest.fn(() => ({
+  result: vi.fn(() => ({
     data: {
       people: {
         ...defaultResponseData,
@@ -123,7 +125,7 @@ const mock: MockedResponse = {
 
 const firstPageMock: MockedResponse = {
   request: mock.request,
-  result: jest.fn(() => ({
+  result: vi.fn(() => ({
     data: {
       people: {
         pageInfo: {

@@ -1,3 +1,6 @@
+import type * as UtilitiesModule from 'twenty-ui/utilities';
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -16,7 +19,7 @@ import { IconDotsVertical } from 'twenty-ui/icon';
 const mockAskAiExpandTarget: SidePanelExpandTarget = {
   label: 'Expand chat',
   hasExpandShortcut: true,
-  expand: jest.fn(),
+  expand: vi.fn(),
 };
 
 let mockRecordExpandTarget: SidePanelExpandTarget | null = null;
@@ -24,52 +27,49 @@ let mockRecordExpandTarget: SidePanelExpandTarget | null = null;
 const RECORD_EXPAND_TARGET: SidePanelExpandTarget = {
   label: 'Expand record',
   hasExpandShortcut: true,
-  expand: jest.fn(),
+  expand: vi.fn(),
 };
 
 const mockRichTextExpandTarget: SidePanelExpandTarget = {
   label: 'Expand record',
   hasExpandShortcut: true,
-  expand: jest.fn(),
+  expand: vi.fn(),
 };
 
 const mockRoutedExpandTarget: SidePanelExpandTarget = {
   label: 'Open in full page',
   hasExpandShortcut: true,
-  expand: jest.fn(),
+  expand: vi.fn(),
 };
 
 let mockHasSidePanelSubPages = false;
 let mockIsMobile = false;
 
-jest.mock('twenty-ui/utilities', () => ({
-  ...jest.requireActual('twenty-ui/utilities'),
+vi.mock('twenty-ui/utilities', async () => ({
+  ...(await vi.importActual<typeof UtilitiesModule>('twenty-ui/utilities')),
   useIsMobile: () => mockIsMobile,
 }));
 
-jest.mock(
-  '@/side-panel/pages/ask-ai/hooks/useExpandAskAiSidePanelPage',
-  () => ({
-    useExpandAskAiSidePanelPage: () => mockAskAiExpandTarget,
-  }),
-);
+vi.mock('@/side-panel/pages/ask-ai/hooks/useExpandAskAiSidePanelPage', () => ({
+  useExpandAskAiSidePanelPage: () => mockAskAiExpandTarget,
+}));
 
-jest.mock('@/side-panel/routing/hooks/useExpandRecordSidePanelPage', () => ({
+vi.mock('@/side-panel/routing/hooks/useExpandRecordSidePanelPage', () => ({
   useExpandRecordSidePanelPage: () => mockRecordExpandTarget,
 }));
 
-jest.mock(
+vi.mock(
   '@/side-panel/pages/rich-text-page/hooks/useExpandRichTextSidePanelPage',
   () => ({
     useExpandRichTextSidePanelPage: () => mockRichTextExpandTarget,
   }),
 );
 
-jest.mock('@/side-panel/routing/hooks/useExpandRoutedSidePanelPage', () => ({
+vi.mock('@/side-panel/routing/hooks/useExpandRoutedSidePanelPage', () => ({
   useExpandRoutedSidePanelPage: () => mockRoutedExpandTarget,
 }));
 
-jest.mock('@/side-panel/hooks/useSidePanelSubPageHistory', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelSubPageHistory', () => ({
   useSidePanelSubPageHistory: () => ({
     hasSidePanelSubPages: mockHasSidePanelSubPages,
   }),
@@ -112,7 +112,7 @@ describe('useSidePanelExpandTarget', () => {
     mockHasSidePanelSubPages = false;
     mockIsMobile = false;
     mockRecordExpandTarget = RECORD_EXPAND_TARGET;
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should return the ask ai target when the ask ai page is open', () => {

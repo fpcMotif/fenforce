@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createStore, Provider as JotaiProvider } from 'jotai';
@@ -16,7 +18,7 @@ const SIDE_PANEL_SURFACE: WorkspaceSurfaceContextValue = {
 };
 
 const renderSelect = (surface?: WorkspaceSurfaceContextValue) => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const Wrapper = ({ children }: { children: ReactNode }) => (
     <JotaiProvider store={createStore()}>

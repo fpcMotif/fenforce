@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { useAuth } from '@/auth/hooks/useAuth';
 import { useSignInWithGoogle } from '@/auth/sign-in-up/hooks/useSignInWithGoogle';
 import { renderHook } from '@testing-library/react';
@@ -8,14 +10,14 @@ import {
 } from '~/generated-metadata/graphql';
 import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksWrapper';
 
-jest.mock('react-router-dom', () => ({
-  useParams: jest.fn(),
-  useSearchParams: jest.fn(),
-  Link: jest.fn(),
+vi.mock('react-router-dom', () => ({
+  useParams: vi.fn(),
+  useSearchParams: vi.fn(),
+  Link: vi.fn(),
 }));
 
-jest.mock('@/auth/hooks/useAuth', () => ({
-  useAuth: jest.fn(),
+vi.mock('@/auth/hooks/useAuth', () => ({
+  useAuth: vi.fn(),
 }));
 
 describe('useSignInWithGoogle', () => {
@@ -30,16 +32,16 @@ describe('useSignInWithGoogle', () => {
   });
 
   it('should call signInWithGoogle with correct params', () => {
-    const signInWithGoogleMock = jest.fn();
+    const signInWithGoogleMock = vi.fn();
     const mockUseParams = { workspaceInviteHash: 'testHash' };
 
     const mockSearchParams = new URLSearchParams(
       'inviteToken=testToken&billingCheckoutSessionState={"plan":"Pro","interval":"Month","requirePaymentMethod":true}',
     );
 
-    (useParams as jest.Mock).mockReturnValue(mockUseParams);
-    (useSearchParams as jest.Mock).mockReturnValue([mockSearchParams]);
-    (useAuth as jest.Mock).mockReturnValue({
+    (useParams as Mock).mockReturnValue(mockUseParams);
+    (useSearchParams as Mock).mockReturnValue([mockSearchParams]);
+    (useAuth as Mock).mockReturnValue({
       signInWithGoogle: signInWithGoogleMock,
     });
 
@@ -59,13 +61,13 @@ describe('useSignInWithGoogle', () => {
   });
 
   it('should call signInWithGoogle with undefined invite token if not present', () => {
-    const signInWithGoogleMock = jest.fn();
+    const signInWithGoogleMock = vi.fn();
     const mockUseParams = { workspaceInviteHash: 'testHash' };
     const mockSearchParams = new URLSearchParams();
 
-    (useParams as jest.Mock).mockReturnValue(mockUseParams);
-    (useSearchParams as jest.Mock).mockReturnValue([mockSearchParams]);
-    (useAuth as jest.Mock).mockReturnValue({
+    (useParams as Mock).mockReturnValue(mockUseParams);
+    (useSearchParams as Mock).mockReturnValue([mockSearchParams]);
+    (useAuth as Mock).mockReturnValue({
       signInWithGoogle: signInWithGoogleMock,
     });
 

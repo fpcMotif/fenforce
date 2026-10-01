@@ -1,10 +1,12 @@
+import { vi } from 'vite-plus/test';
+
 import { createFrontComponentMediaCapabilityPolicy } from '@/front-components/media-session/utils/createFrontComponentMediaCapabilityPolicy';
 
 describe('createFrontComponentMediaCapabilityPolicy', () => {
   const abortSignal = new AbortController().signal;
 
   it('does not prompt for access already granted to the application', async () => {
-    const requestApproval = jest.fn();
+    const requestApproval = vi.fn();
     const policy = createFrontComponentMediaCapabilityPolicy({
       getGrantedCapabilities: () => ['microphone'],
       requestApproval,
@@ -18,7 +20,7 @@ describe('createFrontComponentMediaCapabilityPolicy', () => {
 
   it('waits for the saved grant before allowing capture', async () => {
     let completeApproval: (capabilities: string[]) => void = () => undefined;
-    const requestApproval = jest.fn(
+    const requestApproval = vi.fn(
       () =>
         new Promise<string[]>((resolve) => {
           completeApproval = resolve;
@@ -28,7 +30,7 @@ describe('createFrontComponentMediaCapabilityPolicy', () => {
       getGrantedCapabilities: () => [],
       requestApproval,
     });
-    const onAllowed = jest.fn();
+    const onAllowed = vi.fn();
     const pendingCapture = policy({ mediaTypes: ['audio'], abortSignal }).then(
       onAllowed,
     );
@@ -43,7 +45,7 @@ describe('createFrontComponentMediaCapabilityPolicy', () => {
   it('still denies unapproved media types after a partial approval', async () => {
     const policy = createFrontComponentMediaCapabilityPolicy({
       getGrantedCapabilities: () => [],
-      requestApproval: jest.fn().mockResolvedValue(['microphone']),
+      requestApproval: vi.fn().mockResolvedValue(['microphone']),
     });
 
     await expect(
@@ -57,7 +59,7 @@ describe('createFrontComponentMediaCapabilityPolicy', () => {
   it('denies capture when the user cancels', async () => {
     const policy = createFrontComponentMediaCapabilityPolicy({
       getGrantedCapabilities: () => [],
-      requestApproval: jest.fn().mockResolvedValue([]),
+      requestApproval: vi.fn().mockResolvedValue([]),
     });
 
     await expect(
@@ -70,7 +72,7 @@ describe('createFrontComponentMediaCapabilityPolicy', () => {
   it('does not prompt for an aborted request', async () => {
     const controller = new AbortController();
     controller.abort();
-    const requestApproval = jest.fn();
+    const requestApproval = vi.fn();
     const policy = createFrontComponentMediaCapabilityPolicy({
       getGrantedCapabilities: () => [],
       requestApproval,
@@ -83,7 +85,7 @@ describe('createFrontComponentMediaCapabilityPolicy', () => {
 
   it('reads current grants instead of prompting again after approval', async () => {
     let grantedCapabilities: string[] = [];
-    const requestApproval = jest.fn().mockResolvedValue(['camera']);
+    const requestApproval = vi.fn().mockResolvedValue(['camera']);
     const policy = createFrontComponentMediaCapabilityPolicy({
       getGrantedCapabilities: () => grantedCapabilities,
       requestApproval,

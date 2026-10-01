@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createStore, Provider } from 'jotai';
@@ -76,7 +78,7 @@ const renderMenu = (preselect?: boolean) => {
       },
     },
   ]);
-  const onEnter = jest.fn();
+  const onEnter = vi.fn();
   const renderResult = render(
     <StrictMode>
       <Provider store={store}>

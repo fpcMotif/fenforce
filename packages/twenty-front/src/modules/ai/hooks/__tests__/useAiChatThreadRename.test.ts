@@ -1,10 +1,12 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 
 import { useAiChatThreadRename } from '@/ai/hooks/useAiChatThreadRename';
 import { useRenameChatThread } from '@/ai/hooks/useRenameChatThread';
 import { type AgentChatThread } from '~/generated-metadata/graphql';
 
-jest.mock('@/ai/hooks/useRenameChatThread');
+vi.mock('@/ai/hooks/useRenameChatThread');
 
 const buildThread = (
   overrides: Partial<AgentChatThread> = {},
@@ -24,12 +26,12 @@ const buildThread = (
   }) as AgentChatThread;
 
 describe('useAiChatThreadRename', () => {
-  const renameChatThread = jest.fn();
+  const renameChatThread = vi.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     renameChatThread.mockResolvedValue(true);
-    (useRenameChatThread as jest.Mock).mockReturnValue({ renameChatThread });
+    (useRenameChatThread as Mock).mockReturnValue({ renameChatThread });
   });
 
   it('starts in non-renaming state with the current thread title as draft', () => {

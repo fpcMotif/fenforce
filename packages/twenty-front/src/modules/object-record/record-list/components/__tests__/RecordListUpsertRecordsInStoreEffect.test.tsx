@@ -1,10 +1,12 @@
+import { vi } from 'vite-plus/test';
+
 import { render, waitFor } from '@testing-library/react';
 
 import { RecordListUpsertRecordsInStoreEffect } from '@/object-record/record-list/components/RecordListUpsertRecordsInStoreEffect';
 
-const upsertRecordsInStore = jest.fn();
+const upsertRecordsInStore = vi.fn();
 
-jest.mock('@/object-record/record-store/hooks/useUpsertRecordsInStore', () => ({
+vi.mock('@/object-record/record-store/hooks/useUpsertRecordsInStore', () => ({
   useUpsertRecordsInStore: () => ({ upsertRecordsInStore }),
 }));
 

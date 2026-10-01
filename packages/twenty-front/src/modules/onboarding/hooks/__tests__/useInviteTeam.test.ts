@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { act, renderHook } from '@testing-library/react';
@@ -13,38 +16,38 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-const mockSendInvitation = jest.fn();
-const mockSetNextOnboardingStatus = jest.fn();
-const mockWaitForCompanyEnrichmentSettlement = jest.fn();
+const mockSendInvitation = vi.fn();
+const mockSetNextOnboardingStatus = vi.fn();
+const mockWaitForCompanyEnrichmentSettlement = vi.fn();
 
-jest.mock('@/workspace-invitation/hooks/useCreateWorkspaceInvitation', () => ({
+vi.mock('@/workspace-invitation/hooks/useCreateWorkspaceInvitation', () => ({
   useCreateWorkspaceInvitation: () => ({
     sendInvitation: mockSendInvitation,
   }),
 }));
 
-jest.mock('@/onboarding/hooks/useSetNextOnboardingStatus', () => ({
+vi.mock('@/onboarding/hooks/useSetNextOnboardingStatus', () => ({
   useSetNextOnboardingStatus: () => mockSetNextOnboardingStatus,
 }));
 
-jest.mock('@/onboarding/utils/waitForCompanyEnrichmentSettlement', () => ({
+vi.mock('@/onboarding/utils/waitForCompanyEnrichmentSettlement', () => ({
   waitForCompanyEnrichmentSettlement: (...args: unknown[]) =>
     mockWaitForCompanyEnrichmentSettlement(...args),
 }));
 
-jest.mock('@apollo/client/react', () => ({
+vi.mock('@apollo/client/react', () => ({
   useQuery: () => ({ data: undefined, loading: false }),
 }));
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
-jest.mock('@/ui/utilities/hotkey/hooks/useHotkeysOnFocusedElement', () => ({
-  useHotkeysOnFocusedElement: jest.fn(),
+vi.mock('@/ui/utilities/hotkey/hooks/useHotkeysOnFocusedElement', () => ({
+  useHotkeysOnFocusedElement: vi.fn(),
 }));
 
 dynamicActivate(SOURCE_LOCALE);
@@ -63,7 +66,7 @@ describe('useInviteTeam', () => {
     localStorage.clear();
     sessionStorage.clear();
     resetJotaiStore();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockSendInvitation.mockResolvedValue({});
     mockWaitForCompanyEnrichmentSettlement.mockResolvedValue(undefined);
     jotaiStore.set(isBookCallOnboardingStepEnabledState.atom, true);

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { SOURCE_LOCALE } from 'twenty-shared/translations';
@@ -18,24 +20,24 @@ import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
 i18n.load({ [SOURCE_LOCALE]: messages });
 i18n.activate(SOURCE_LOCALE);
 
-const mockIsCoreEnabled = jest.fn();
-const mockHasPermission = jest.fn();
-const mockCanSoftDeleteWorkflow = jest.fn();
+const mockIsCoreEnabled = vi.fn();
+const mockHasPermission = vi.fn();
+const mockCanSoftDeleteWorkflow = vi.fn();
 
-jest.mock('@/workspace/hooks/useIsFeatureEnabled', () => ({
+vi.mock('@/workspace/hooks/useIsFeatureEnabled', () => ({
   useIsFeatureEnabled: () => mockIsCoreEnabled(),
 }));
-jest.mock('@/settings/roles/hooks/useHasPermissionFlag', () => ({
+vi.mock('@/settings/roles/hooks/useHasPermissionFlag', () => ({
   useHasPermissionFlag: () => mockHasPermission(),
 }));
-jest.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
   useObjectMetadataItem: () => ({
     objectMetadataItem: {
       id: '20202020-9e2b-4f2b-8f47-61b41565859a',
     },
   }),
 }));
-jest.mock('@/object-record/hooks/useObjectPermissionsForObject', () => ({
+vi.mock('@/object-record/hooks/useObjectPermissionsForObject', () => ({
   useObjectPermissionsForObject: () => ({
     canSoftDeleteObjectRecords: mockCanSoftDeleteWorkflow(),
   }),

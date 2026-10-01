@@ -1,3 +1,6 @@
+import type * as ReactRouterDomModule from 'react-router-dom';
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { act, type ReactNode } from 'react';
 import { type Store } from 'jotai/vanilla/store';
@@ -20,22 +23,22 @@ import { WorkspaceSurfaceContext } from '@/ui/layout/contexts/WorkspaceSurfaceCo
 import { getSidePanelCommandMenuDropdownIdFromCommandMenuId } from '@/command-menu-item/utils/getSidePanelCommandMenuDropdownIdFromCommandMenuId';
 import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksWrapper';
 
-const navigateMock = jest.fn();
-const closeSidePanelMenuMock = jest.fn();
-const closeDropdownMock = jest.fn();
+const navigateMock = vi.fn();
+const closeSidePanelMenuMock = vi.fn();
+const closeDropdownMock = vi.fn();
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual<typeof ReactRouterDomModule>('react-router-dom')),
   useNavigate: () => navigateMock,
 }));
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({
     closeSidePanelMenu: closeSidePanelMenuMock,
   }),
 }));
 
-jest.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
+vi.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
   useCloseDropdown: () => ({ closeDropdown: closeDropdownMock }),
 }));
 
@@ -119,7 +122,7 @@ const renderNavigateToRecordPage = ({
 
 describe('useNavigateToRecordPageFromSidePanel', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('expands the canonical routed record path, including query and tab hash', () => {

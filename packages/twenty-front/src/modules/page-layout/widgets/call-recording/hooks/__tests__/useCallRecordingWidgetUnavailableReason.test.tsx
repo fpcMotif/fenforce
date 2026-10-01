@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { useCallRecordingWidgetUnavailableReason } from '@/page-layout/widgets/call-recording/hooks/useCallRecordingWidgetUnavailableReason';
 import { renderHook } from '@testing-library/react';
 
@@ -10,11 +12,11 @@ const mockLayoutRenderingContext: {
 
 let objectMetadataItems: { nameSingular: string }[];
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
   useObjectMetadataItems: () => ({ objectMetadataItems }),
 }));
 
-jest.mock('@/ui/layout/contexts/LayoutRenderingContext', () => ({
+vi.mock('@/ui/layout/contexts/LayoutRenderingContext', () => ({
   useLayoutRenderingContext: () => mockLayoutRenderingContext,
 }));
 

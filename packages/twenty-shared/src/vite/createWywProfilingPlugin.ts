@@ -1,5 +1,5 @@
 /* oxlint-disable no-console */
-import { type Plugin } from 'vite';
+import { type Plugin } from 'vite-plus';
 
 const LINARIA_IMPORT_RE = /@linaria/;
 

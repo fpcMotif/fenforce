@@ -17,7 +17,7 @@ This file tracks what was lost or temporarily disabled during the ESLint to Oxli
 
 | Rule | Violations Fixed | Method |
 |------|-----------------|--------|
-| `twenty/sort-css-properties-alphabetically` | 578 | Auto-fix via `npx nx lint twenty-front --configuration=fix` |
+| `twenty/sort-css-properties-alphabetically` | 578 | Auto-fix via `bunx vite-plus run twenty-front#lint:fix` |
 
 ## Dropped Plugins (No Oxlint Equivalent)
 
@@ -39,7 +39,7 @@ These plugins were in use but have no oxlint equivalent. Consider whether altern
 
 ## IDE Integration
 
-The `oxc.oxc-vscode` extension provides inline diagnostics for built-in oxlint rules but does **not** yet support `jsPlugins` (custom `twenty/*` rules). Custom rule violations are only caught by `nx lint` and CI.
+The `oxc.oxc-vscode` extension provides inline diagnostics for built-in oxlint rules but does **not** yet support `jsPlugins` (custom `twenty/*` rules). Custom rule violations are caught by the package lint task and CI.
 
 ## Remaining Re-activation Plan
 

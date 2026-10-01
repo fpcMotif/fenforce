@@ -1,3 +1,6 @@
+import type * as ReactModule from '@tiptap/react';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { Editor } from '@tiptap/core';
 import { Document } from '@tiptap/extension-document';
 import { Paragraph } from '@tiptap/extension-paragraph';
@@ -7,23 +10,26 @@ import { MentionSuggestion } from '@/mention/extensions/MentionSuggestion';
 import { MentionTag } from '@/mention/extensions/MentionTag';
 
 // Mock ReactNodeViewRenderer and ReactRenderer (DOM-dependent)
-jest.mock('@tiptap/react', () => ({
-  mergeAttributes: jest.requireActual('@tiptap/react').mergeAttributes,
+vi.mock('@tiptap/react', async () => ({
+  mergeAttributes: (await vi.importActual<typeof ReactModule>('@tiptap/react'))
+    .mergeAttributes,
   ReactNodeViewRenderer: () => () => ({}),
-  ReactRenderer: jest.fn().mockImplementation(() => ({
-    element: document.createElement('div'),
-    ref: null,
-    updateProps: jest.fn(),
-    destroy: jest.fn(),
-  })),
+  ReactRenderer: vi.fn().mockImplementation(function () {
+    return {
+      element: document.createElement('div'),
+      ref: null,
+      updateProps: vi.fn(),
+      destroy: vi.fn(),
+    };
+  }),
 }));
 
 describe('MentionSuggestion', () => {
   let editor: Editor;
-  let mockSearchFn: jest.Mock;
+  let mockSearchFn: Mock;
 
   beforeEach(() => {
-    mockSearchFn = jest.fn().mockResolvedValue([]);
+    mockSearchFn = vi.fn().mockResolvedValue([]);
 
     editor = new Editor({
       extensions: [

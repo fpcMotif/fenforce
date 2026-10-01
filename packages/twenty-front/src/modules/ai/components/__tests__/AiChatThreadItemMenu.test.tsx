@@ -1,3 +1,6 @@
+import type * as UtilitiesModule from 'twenty-ui/utilities';
+import { vi } from 'vite-plus/test';
+
 import { setAgentChatThreadPermissions } from '@/ai/testing/setAgentChatThreadPermissions';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
@@ -12,26 +15,26 @@ import { AiChatThreadItemMenu } from '@/ai/components/AiChatThreadItemMenu';
 import { AI_CHAT_THREAD_ACTIONS_SURFACE } from '@/ai/constants/AiChatThreadActionsSurface';
 import { NavigationDrawerItem } from '@/ui/navigation/navigation-drawer/components/NavigationDrawerItem';
 
-const archiveChatThread = jest.fn();
-const unarchiveChatThread = jest.fn();
+const archiveChatThread = vi.fn();
+const unarchiveChatThread = vi.fn();
 
-jest.mock('@/ai/hooks/useChatThreadArchiveActions', () => ({
+vi.mock('@/ai/hooks/useChatThreadArchiveActions', () => ({
   useChatThreadArchiveActions: () => ({
     archiveChatThread,
     unarchiveChatThread,
   }),
 }));
 
-jest.mock('@/ui/layout/dialog/hooks/useDialog', () => ({
-  useDialog: () => ({ openDialog: jest.fn() }),
+vi.mock('@/ui/layout/dialog/hooks/useDialog', () => ({
+  useDialog: () => ({ openDialog: vi.fn() }),
 }));
 
-jest.mock('@/navigation/hooks/useIsNavigationDrawerContentExpanded', () => ({
+vi.mock('@/navigation/hooks/useIsNavigationDrawerContentExpanded', () => ({
   useIsNavigationDrawerContentExpanded: () => true,
 }));
 
-jest.mock('twenty-ui/utilities', () => ({
-  ...jest.requireActual('twenty-ui/utilities'),
+vi.mock('twenty-ui/utilities', async () => ({
+  ...(await vi.importActual<typeof UtilitiesModule>('twenty-ui/utilities')),
   useIsMobile: () => false,
 }));
 
@@ -48,7 +51,7 @@ it.each([
   'keeps $label drawer menu actions local and closes during an archive request',
   async ({ to }) => {
     const user = userEvent.setup();
-    const onRowClick = jest.fn();
+    const onRowClick = vi.fn();
     archiveChatThread.mockReturnValue(new Promise(() => {}));
     const store = createStore();
     setAgentChatThreadPermissions(store, 'thread-archive', {
@@ -73,7 +76,7 @@ it.each([
                   threadTitle="Leads"
                   isArchived={false}
                   surface={AI_CHAT_THREAD_ACTIONS_SURFACE.NAV_DRAWER}
-                  onRenameRequested={jest.fn()}
+                  onRenameRequested={vi.fn()}
                   trigger={
                     <IconButton aria-label="Chat actions" variant="outline">
                       <IconDotsVertical />

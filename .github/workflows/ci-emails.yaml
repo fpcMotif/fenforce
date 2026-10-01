@@ -32,17 +32,17 @@ jobs:
         with:
           fetch-depth: 10
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
       - name: Build twenty-emails
-        run: npx nx build twenty-emails
+        run: bunx vite-plus run twenty-emails#build
       - name: Extract translations (lingui)
-        run: npx nx run twenty-emails:lingui:extract
+        run: bunx vite-plus run twenty-emails#lingui:extract
       - name: Compile translations (lingui)
-        run: npx nx run twenty-emails:lingui:compile
+        run: bunx vite-plus run twenty-emails#lingui:compile
       - name: Run email tests
         run: |
           # Start the email server in the background
-          npx nx run twenty-emails:start &
+          bunx vite-plus run twenty-emails#start &
           SERVER_PID=$!
 
           # Wait for server to start

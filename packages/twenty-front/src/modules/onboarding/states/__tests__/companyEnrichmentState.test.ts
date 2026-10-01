@@ -1,5 +1,7 @@
+import { vi } from 'vite-plus/test';
+
 const loadCompanyEnrichmentState = async () => {
-  jest.resetModules();
+  vi.resetModules();
 
   const { companyEnrichmentState } =
     await import('@/onboarding/states/companyEnrichmentState');

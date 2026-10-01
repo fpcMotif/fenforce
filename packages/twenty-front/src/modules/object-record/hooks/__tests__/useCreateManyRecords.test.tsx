@@ -1,3 +1,6 @@
+import type * as UuidModule from 'uuid';
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { v4 } from 'uuid';
 
@@ -12,21 +15,21 @@ import { useCreateManyRecords } from '@/object-record/hooks/useCreateManyRecords
 import { useRefetchAggregateQueries } from '@/object-record/hooks/useRefetchAggregateQueries';
 import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksWrapper';
 
-jest.mock('uuid', () => ({
-  ...jest.requireActual('uuid'),
-  v4: jest.fn(),
+vi.mock('uuid', async () => ({
+  ...(await vi.importActual<typeof UuidModule>('uuid')),
+  v4: vi.fn(),
 }));
 
-jest.mock('@/object-record/hooks/useRefetchAggregateQueries');
-jest.mock(
+vi.mock('@/object-record/hooks/useRefetchAggregateQueries');
+vi.mock(
   '@/apollo/optimistic-effect/utils/triggerCreateRecordsOptimisticEffect',
 );
-const mockRefetchAggregateQueries = jest.fn();
-jest.mocked(useRefetchAggregateQueries).mockReturnValue({
+const mockRefetchAggregateQueries = vi.fn();
+vi.mocked(useRefetchAggregateQueries).mockReturnValue({
   refetchAggregateQueries: mockRefetchAggregateQueries,
 });
 
-jest
+vi
   // uuid v11+ types add a Uint8Array overload to v4; pin to the string
   // signature so the mocked return values type-check.
   .mocked(v4 as () => string)
@@ -41,7 +44,7 @@ const mocks = [
       query,
       variables,
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         createPeople: response,
       },
@@ -55,7 +58,7 @@ const mocks = [
         upsert: true,
       },
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         createPeople: response,
       },
@@ -69,7 +72,7 @@ const Wrapper = getJestMetadataAndApolloMocksWrapper({
 
 describe('useCreateManyRecords', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
   it('works as expected', async () => {
     const { result } = renderHook(

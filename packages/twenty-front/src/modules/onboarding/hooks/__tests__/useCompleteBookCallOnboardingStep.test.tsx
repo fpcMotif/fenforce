@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { MockedProvider } from '@apollo/client/testing/react';
 import { act, renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
@@ -17,15 +19,15 @@ import {
 import { CompleteBookCallOnboardingStepDocument } from '~/generated-metadata/graphql';
 import { mockCurrentWorkspace } from '~/testing/mock-data/users';
 
-const mockNavigate = jest.fn();
+const mockNavigate = vi.fn();
 
-jest.mock('react-router-dom', () => ({
+vi.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
-const mockSetNextOnboardingStatus = jest.fn();
+const mockSetNextOnboardingStatus = vi.fn();
 
-jest.mock('@/onboarding/hooks/useSetNextOnboardingStatus', () => ({
+vi.mock('@/onboarding/hooks/useSetNextOnboardingStatus', () => ({
   useSetNextOnboardingStatus: () => mockSetNextOnboardingStatus,
 }));
 
@@ -77,7 +79,7 @@ const renderCompleteHook = ({
 describe('useCompleteBookCallOnboardingStep', () => {
   beforeEach(() => {
     resetJotaiStore();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should navigate to the plan step when a plan is still required', async () => {

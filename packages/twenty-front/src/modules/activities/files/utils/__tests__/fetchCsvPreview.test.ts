@@ -1,7 +1,9 @@
+import { vi } from 'vite-plus/test';
+
 import { fetchCsvPreview } from '@/activities/files/utils/fetchCsvPreview';
 
 const mockFetch = (text: string) => {
-  global.fetch = jest.fn(() =>
+  global.fetch = vi.fn(() =>
     Promise.resolve({
       text: () => Promise.resolve(text),
     } as unknown as Response),
@@ -10,7 +12,7 @@ const mockFetch = (text: string) => {
 
 describe('fetchCsvPreview', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should parse headers and rows from CSV', async () => {

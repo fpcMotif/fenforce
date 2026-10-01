@@ -59,13 +59,13 @@ jobs:
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
 
       - name: Build SDK packages
-        run: npx nx build twenty-sdk
+        run: bunx vite-plus run twenty-sdk#build
 
       - name: Setup server environment
-        run: npx nx reset:env:e2e-testing-server twenty-server
+        run: bunx vite-plus run twenty-server#reset:env:e2e-testing-server
 
       - name: Create databases
         run: |
@@ -73,17 +73,17 @@ jobs:
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "test";'
 
       - name: Setup database
-        run: npx nx run twenty-server:database:reset
+        run: bunx vite-plus run twenty-server#database:reset
 
       - name: Start server
-        run: nohup npx nx start:ci twenty-server &
+        run: nohup bunx vite-plus run twenty-server#start:ci &
 
       - name: Wait for server to be ready
-        run: npx wait-on http://localhost:3000/healthz --timeout 120000 --interval 1000
+        run: bunx wait-on http://localhost:3000/healthz --timeout 120000 --interval 1000
 
       - name: Run integration tests
         working-directory: packages/twenty-apps/examples/postcard
-        run: npx vitest run
+        run: bunx vitest run
 
       - name: Configure remote for SDK CLI
         run: |

@@ -1,18 +1,20 @@
+import { type Mock, type MockedFunction, vi } from 'vite-plus/test';
+
 import { gql } from '@apollo/client';
 import { type Operation } from '@apollo/client/core';
 import { StreamingRestLink } from '@/apollo/utils/streamingRestLink';
 
-global.fetch = jest.fn();
+global.fetch = vi.fn();
 describe('StreamingRestLink', () => {
   let streamingLink: StreamingRestLink;
-  let mockForward: jest.MockedFunction<(operation: Operation) => any>;
+  let mockForward: MockedFunction<(operation: Operation) => any>;
 
   beforeEach(() => {
     streamingLink = new StreamingRestLink({
       uri: 'https://api.example.com',
     });
-    mockForward = jest.fn();
-    (global.fetch as jest.Mock).mockClear();
+    mockForward = vi.fn();
+    (global.fetch as Mock).mockClear();
   });
 
   describe('request', () => {
@@ -46,28 +48,28 @@ describe('StreamingRestLink', () => {
           }
         `,
         variables: { threadId: '123', requestBody: { threadId: '123' } },
-        getContext: () => ({ onChunk: jest.fn() }),
+        getContext: () => ({ onChunk: vi.fn() }),
         operationName: 'StreamTest',
         extensions: {},
-        setContext: jest.fn(),
+        setContext: vi.fn(),
       } as unknown as Operation;
 
       const mockResponse = {
         ok: true,
         body: {
           getReader: () => ({
-            read: jest.fn().mockResolvedValue({ done: true }),
-            releaseLock: jest.fn(),
+            read: vi.fn().mockResolvedValue({ done: true }),
+            releaseLock: vi.fn(),
           }),
         },
       };
-      (global.fetch as jest.Mock).mockResolvedValue(mockResponse);
+      (global.fetch as Mock).mockResolvedValue(mockResponse);
 
       const observable = streamingLink.request(operation, mockForward);
       const observer = {
-        next: jest.fn(),
-        error: jest.fn(),
-        complete: jest.fn(),
+        next: vi.fn(),
+        error: vi.fn(),
+        complete: vi.fn(),
       };
 
       observable.subscribe(observer);
@@ -104,26 +106,26 @@ describe('StreamingRestLink', () => {
           }
         `,
         variables: { threadId: '123', requestBody: { threadId: '123' } },
-        getContext: () => ({ onChunk: jest.fn() }),
+        getContext: () => ({ onChunk: vi.fn() }),
         operationName: 'StreamTest',
         extensions: {},
-        setContext: jest.fn(),
+        setContext: vi.fn(),
       } as unknown as Operation;
 
-      (global.fetch as jest.Mock).mockResolvedValue({
+      (global.fetch as Mock).mockResolvedValue({
         ok: true,
         body: {
           getReader: () => ({
-            read: jest.fn().mockResolvedValue({ done: true }),
-            releaseLock: jest.fn(),
+            read: vi.fn().mockResolvedValue({ done: true }),
+            releaseLock: vi.fn(),
           }),
         },
       });
 
       credentialedLink.request(operation, mockForward).subscribe({
-        next: jest.fn(),
-        error: jest.fn(),
-        complete: jest.fn(),
+        next: vi.fn(),
+        error: vi.fn(),
+        complete: vi.fn(),
       });
 
       expect(global.fetch).toHaveBeenCalledWith(
@@ -145,26 +147,26 @@ describe('StreamingRestLink', () => {
           }
         `,
         variables: { threadId: '123', requestBody: { threadId: '123' } },
-        getContext: () => ({ onChunk: jest.fn() }),
+        getContext: () => ({ onChunk: vi.fn() }),
         operationName: 'StreamTest',
         extensions: {},
-        setContext: jest.fn(),
+        setContext: vi.fn(),
       } as unknown as Operation;
 
-      (global.fetch as jest.Mock).mockResolvedValue({
+      (global.fetch as Mock).mockResolvedValue({
         ok: true,
         body: {
           getReader: () => ({
-            read: jest.fn().mockResolvedValue({ done: true }),
-            releaseLock: jest.fn(),
+            read: vi.fn().mockResolvedValue({ done: true }),
+            releaseLock: vi.fn(),
           }),
         },
       });
 
       streamingLink.request(operation, mockForward).subscribe({
-        next: jest.fn(),
-        error: jest.fn(),
-        complete: jest.fn(),
+        next: vi.fn(),
+        error: vi.fn(),
+        complete: vi.fn(),
       });
 
       expect(global.fetch).toHaveBeenCalledWith(
@@ -184,13 +186,13 @@ describe('StreamingRestLink', () => {
         getContext: () => ({}),
       } as unknown as Operation;
 
-      (global.fetch as jest.Mock).mockRejectedValue(new Error('Network error'));
+      (global.fetch as Mock).mockRejectedValue(new Error('Network error'));
 
       const observable = streamingLink.request(operation, mockForward);
       const observer = {
-        next: jest.fn(),
-        error: jest.fn(),
-        complete: jest.fn(),
+        next: vi.fn(),
+        error: vi.fn(),
+        complete: vi.fn(),
       };
 
       observable.subscribe(observer);
@@ -212,13 +214,13 @@ describe('StreamingRestLink', () => {
       } as unknown as Operation;
 
       const mockResponse = { ok: false, status: 404 };
-      (global.fetch as jest.Mock).mockResolvedValue(mockResponse);
+      (global.fetch as Mock).mockResolvedValue(mockResponse);
 
       const observable = streamingLink.request(operation, mockForward);
       const observer = {
-        next: jest.fn(),
-        error: jest.fn(),
-        complete: jest.fn(),
+        next: vi.fn(),
+        error: vi.fn(),
+        complete: vi.fn(),
       };
 
       observable.subscribe(observer);
@@ -226,7 +228,11 @@ describe('StreamingRestLink', () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
 
       expect(observer.error).toHaveBeenCalledWith(
-        new Error('HTTP error! status: 404'),
+        expect.objectContaining({
+          name: 'ServerError',
+          message: 'HTTP error! status: 404',
+          statusCode: 404,
+        }),
       );
     });
   });
@@ -291,7 +297,7 @@ describe('StreamingRestLink', () => {
         `,
         operationName: 'Test',
         extensions: {},
-        setContext: jest.fn(),
+        setContext: vi.fn(),
         getContext: () => ({}),
       } as unknown as Operation;
 

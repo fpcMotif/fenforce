@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { flowComponentState } from '@/workflow/states/flowComponentState';
 import { type WorkflowAction } from '@/workflow/types/Workflow';
 import { useReconnectWorkflowEdge } from '@/workflow/workflow-diagram/hooks/useReconnectWorkflowEdge';
@@ -7,8 +9,8 @@ import { renderHook } from '@testing-library/react';
 import { createStore, Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
 
-const mockUpdateStep = jest.fn();
-const mockUpdateTrigger = jest.fn();
+const mockUpdateStep = vi.fn();
+const mockUpdateTrigger = vi.fn();
 const workflowVisualizerComponentInstanceId = 'workflow-visualizer-instance-id';
 let jotaiStore: ReturnType<typeof createStore>;
 
@@ -51,10 +53,10 @@ const Wrapper = ({ children }: { children: ReactNode }) => (
   </JotaiProvider>
 );
 
-jest.mock('@/workflow/workflow-steps/hooks/useUpdateStep', () => ({
+vi.mock('@/workflow/workflow-steps/hooks/useUpdateStep', () => ({
   useUpdateStep: () => ({ updateStep: mockUpdateStep }),
 }));
-jest.mock(
+vi.mock(
   '@/workflow/workflow-trigger/hooks/useUpdateWorkflowVersionTrigger',
   () => ({
     useUpdateWorkflowVersionTrigger: () => ({
@@ -79,7 +81,7 @@ const connection = {
 
 describe('useReconnectWorkflowEdge', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     jotaiStore = createStore();
     jotaiStore.set(flowAtom(), {
       workflowVersionId: 'workflow-version-id',

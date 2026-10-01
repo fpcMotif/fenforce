@@ -20,6 +20,8 @@ build-storybook.log
 
 # production
 /build
+/build-convex
+/src/pages/convex-preview/locales
 dist
 dist-ssr
 

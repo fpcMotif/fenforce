@@ -4,7 +4,10 @@ import { type Control, Controller } from 'react-hook-form';
 
 import { type AccountType } from 'twenty-shared/constants';
 
-import { type ConnectionFormData } from '@/settings/accounts/hooks/useImapSmtpCaldavConnectionForm';
+import {
+  type ConnectionFormData,
+  type ConnectionFormOutput,
+} from '@/settings/accounts/hooks/useImapSmtpCaldavConnectionForm';
 import { SettingsTextInput } from '@/ui/input/components/SettingsTextInput';
 import { ClickToActionLink } from 'twenty-ui/primitives/navigation';
 import { themeCssVariables } from 'twenty-ui/theme';
@@ -24,7 +27,7 @@ const MASKED_PASSWORD_PLACEHOLDER = '••••••••';
 type SettingsAccountsPasswordControllerProps = {
   protocol: AccountType;
   label: string;
-  control: Control<ConnectionFormData>;
+  control: Control<ConnectionFormData, unknown, ConnectionFormOutput>;
   disabled: boolean;
   onUnlock: () => void;
 };

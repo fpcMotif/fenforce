@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { pageLayoutDraftComponentState } from '@/page-layout/states/pageLayoutDraftComponentState';
 import { recordTableWidgetViewDraftComponentState } from '@/page-layout/states/recordTableWidgetViewDraftComponentState';
 import {
@@ -27,18 +29,18 @@ const getWrapper =
 
 describe('useAddDraftViewForRecordTableWidget', () => {
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it('merges the new view id into the latest widget configuration', () => {
     let scheduledFrame: FrameRequestCallback | undefined;
 
-    jest
-      .spyOn(globalThis, 'requestAnimationFrame')
-      .mockImplementation((callback: FrameRequestCallback) => {
+    vi.spyOn(globalThis, 'requestAnimationFrame').mockImplementation(
+      (callback: FrameRequestCallback) => {
         scheduledFrame = callback;
         return 1;
-      });
+      },
+    );
 
     const store = createStore();
     const pageLayoutDraftState = pageLayoutDraftComponentState.atomFamily({

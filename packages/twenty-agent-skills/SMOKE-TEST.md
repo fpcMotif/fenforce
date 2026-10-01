@@ -9,7 +9,7 @@ Run it when `create-app`, `develop-app`, or `manage-app` guidance changes in a w
 Build from a checkout and install the skills into the agent used for this run:
 
 ```bash
-npx nx run twenty-agent-skills:build
+bunx vite-plus run twenty-agent-skills#build
 npx skills add ./packages/twenty-agent-skills/dist --skill create-app develop-app manage-app
 ```
 
@@ -21,8 +21,8 @@ Any instance works. For a local one from a checkout of this repository:
 
 ```bash
 bash packages/twenty-utils/setup-dev-env.sh
-npx nx database:reset twenty-server   # init only builds the schema; reset also seeds
-npx nx start twenty-server
+bunx vite-plus run twenty-server#database:reset   # init only builds the schema; reset also seeds
+bunx vite-plus run twenty-server#start
 ```
 
 Wait for `http://localhost:3000/healthz` to return 200. This instance is self-hosted for the purposes of the test: a non-`twenty.com` host, over plain HTTP, on a port the user chose.

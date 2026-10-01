@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { MockedProvider } from '@apollo/client/testing/react';
 import { act, renderHook } from '@testing-library/react';
 import { type ReactNode } from 'react';
@@ -5,15 +8,15 @@ import { type ReactNode } from 'react';
 import { SEND_EMAIL } from '@/activities/emails/graphql/mutations/sendEmail';
 import { useEmailComposerState } from '@/activities/emails/hooks/useEmailComposerState';
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
-jest.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
-  useApolloCoreClient: () => ({ refetchQueries: jest.fn() }),
+vi.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
+  useApolloCoreClient: () => ({ refetchQueries: vi.fn() }),
 }));
 
 const createSendEmailMock = (input: {
@@ -68,11 +71,11 @@ const renderComposerState = (
 
 describe('useEmailComposerState', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('sends from the connected account when no alias was picked', async () => {
-    const onSent = jest.fn();
+    const onSent = vi.fn();
 
     const { result } = renderComposerState(
       [
@@ -92,7 +95,7 @@ describe('useEmailComposerState', () => {
   });
 
   it('sends from the picked alias together with the account owning it', async () => {
-    const onSent = jest.fn();
+    const onSent = vi.fn();
 
     const { result } = renderComposerState(
       [

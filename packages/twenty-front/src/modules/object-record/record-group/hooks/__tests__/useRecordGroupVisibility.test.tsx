@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { useRecordGroupVisibility } from '@/object-record/record-group/hooks/useRecordGroupVisibility';
 import { recordIndexGroupLoadLimitComponentState } from '@/object-record/record-index/states/recordIndexGroupLoadLimitComponentState';
 import { ViewComponentInstanceContext } from '@/views/states/contexts/ViewComponentInstanceContext';
@@ -5,17 +7,17 @@ import { act, renderHook } from '@testing-library/react';
 import { createStore, Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
 
-const updateCurrentViewMock = jest.fn();
+const updateCurrentViewMock = vi.fn();
 
-jest.mock('@/views/hooks/useUpdateCurrentView', () => ({
+vi.mock('@/views/hooks/useUpdateCurrentView', () => ({
   useUpdateCurrentView: () => ({
     updateCurrentView: updateCurrentViewMock,
   }),
 }));
 
-jest.mock('@/views/hooks/useSaveCurrentViewGroups', () => ({
+vi.mock('@/views/hooks/useSaveCurrentViewGroups', () => ({
   useSaveCurrentViewGroups: () => ({
-    saveViewGroup: jest.fn(),
+    saveViewGroup: vi.fn(),
   }),
 }));
 
@@ -51,7 +53,7 @@ const createDeferredViewUpdate = () => {
 
 describe('useRecordGroupVisibility', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should keep the new group load limit when the view update succeeds', async () => {

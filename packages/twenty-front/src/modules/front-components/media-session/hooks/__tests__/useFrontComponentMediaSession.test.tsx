@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { InMemoryCache } from '@apollo/client';
 import { type MockedResponse } from '@apollo/client/testing';
 import { MockedProvider } from '@apollo/client/testing/react';
@@ -8,9 +10,9 @@ import { type FrontComponentMediaSessionHost } from 'twenty-front-component-rend
 import { useFrontComponentMediaSession } from '@/front-components/media-session/hooks/useFrontComponentMediaSession';
 import { FindFrontComponentApplicationCapabilitiesDocument } from '~/generated-metadata/graphql';
 
-jest.mock('@quilted/threads', () => ({}));
-jest.mock('@/ui/layout/dialog/hooks/useDialog', () => ({
-  useDialog: () => ({ openDialog: jest.fn(), closeDialog: jest.fn() }),
+vi.mock('@quilted/threads', () => ({}));
+vi.mock('@/ui/layout/dialog/hooks/useDialog', () => ({
+  useDialog: () => ({ openDialog: vi.fn(), closeDialog: vi.fn() }),
 }));
 
 const FRONT_COMPONENT_ID = 'front-component-id';
@@ -20,7 +22,7 @@ const CAPABILITY_QUERY = {
 };
 
 describe('useFrontComponentMediaSession', () => {
-  const getUserMedia = jest.fn();
+  const getUserMedia = vi.fn();
   const hosts: FrontComponentMediaSessionHost[] = [];
 
   beforeEach(() => {
@@ -31,8 +33,8 @@ describe('useFrontComponentMediaSession', () => {
           id: 'audio-track',
           kind: 'audio',
           readyState: 'live',
-          stop: jest.fn(),
-          addEventListener: jest.fn(),
+          stop: vi.fn(),
+          addEventListener: vi.fn(),
         },
       ],
     }));

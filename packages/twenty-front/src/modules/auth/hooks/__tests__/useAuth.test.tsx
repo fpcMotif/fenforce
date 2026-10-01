@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { useAuth } from '@/auth/hooks/useAuth';
 
 import { MockedProvider } from '@apollo/client/testing/react';
@@ -25,47 +27,47 @@ import { getDefaultStore } from 'jotai';
 import { WorkspaceActivationStatus } from 'twenty-shared/workspace';
 import { ToastProvider } from 'twenty-ui/components';
 
-const redirectSpy = jest.fn();
+const redirectSpy = vi.fn();
 
-jest.mock('@/domain-manager/hooks/useRedirect', () => ({
-  useRedirect: jest.fn().mockImplementation(() => ({
+vi.mock('@/domain-manager/hooks/useRedirect', () => ({
+  useRedirect: vi.fn().mockImplementation(() => ({
     redirect: redirectSpy,
   })),
 }));
 
-jest.mock('@/domain-manager/hooks/useOrigin', () => ({
-  useOrigin: jest.fn().mockImplementation(() => ({
+vi.mock('@/domain-manager/hooks/useOrigin', () => ({
+  useOrigin: vi.fn().mockImplementation(() => ({
     origin: 'http://localhost',
   })),
 }));
 
-jest.mock('@/captcha/hooks/useRequestFreshCaptchaToken', () => ({
-  useRequestFreshCaptchaToken: jest.fn().mockImplementation(() => ({
-    requestFreshCaptchaToken: jest.fn(),
+vi.mock('@/captcha/hooks/useRequestFreshCaptchaToken', () => ({
+  useRequestFreshCaptchaToken: vi.fn().mockImplementation(() => ({
+    requestFreshCaptchaToken: vi.fn(),
   })),
 }));
 
-jest.mock('@/auth/sign-in-up/hooks/useSignUpInNewWorkspace', () => ({
-  useSignUpInNewWorkspace: jest.fn().mockImplementation(() => ({
-    createWorkspace: jest.fn(),
+vi.mock('@/auth/sign-in-up/hooks/useSignUpInNewWorkspace', () => ({
+  useSignUpInNewWorkspace: vi.fn().mockImplementation(() => ({
+    createWorkspace: vi.fn(),
   })),
 }));
 
-jest.mock('@/domain-manager/hooks/useRedirectToWorkspaceDomain', () => ({
-  useRedirectToWorkspaceDomain: jest.fn().mockImplementation(() => ({
-    redirectToWorkspaceDomain: jest.fn(),
+vi.mock('@/domain-manager/hooks/useRedirectToWorkspaceDomain', () => ({
+  useRedirectToWorkspaceDomain: vi.fn().mockImplementation(() => ({
+    redirectToWorkspaceDomain: vi.fn(),
   })),
 }));
 
-jest.mock('@/domain-manager/hooks/useIsCurrentLocationOnAWorkspace', () => ({
-  useIsCurrentLocationOnAWorkspace: jest.fn().mockImplementation(() => ({
+vi.mock('@/domain-manager/hooks/useIsCurrentLocationOnAWorkspace', () => ({
+  useIsCurrentLocationOnAWorkspace: vi.fn().mockImplementation(() => ({
     isOnAWorkspace: true,
   })),
 }));
 
-jest.mock('@/domain-manager/hooks/useLastAuthenticatedWorkspaceDomain', () => ({
-  useLastAuthenticatedWorkspaceDomain: jest.fn().mockImplementation(() => ({
-    setLastAuthenticateWorkspaceDomain: jest.fn(),
+vi.mock('@/domain-manager/hooks/useLastAuthenticatedWorkspaceDomain', () => ({
+  useLastAuthenticatedWorkspaceDomain: vi.fn().mockImplementation(() => ({
+    setLastAuthenticateWorkspaceDomain: vi.fn(),
   })),
 }));
 
@@ -91,7 +93,7 @@ const renderHooks = () => {
 
 describe('useAuth', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     getDefaultStore().set(returnToPathState.atom, '');
   });
 

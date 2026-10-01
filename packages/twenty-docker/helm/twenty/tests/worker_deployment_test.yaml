@@ -39,7 +39,10 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].command
-          content: yarn
+          content: bun
+      - contains:
+          path: spec.template.spec.containers[0].command
+          content: run
       - contains:
           path: spec.template.spec.containers[0].command
           content: worker:prod

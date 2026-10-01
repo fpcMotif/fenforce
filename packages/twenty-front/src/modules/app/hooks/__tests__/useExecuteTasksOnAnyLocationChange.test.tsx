@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { useExecuteTasksOnAnyLocationChange } from '@/app/hooks/useExecuteTasksOnAnyLocationChange';
 import { currentPageLayoutIdState } from '@/page-layout/states/currentPageLayoutIdState';
 import { isDashboardInEditModeComponentState } from '@/page-layout/states/isDashboardInEditModeComponentState';
@@ -14,9 +16,9 @@ import { act, renderHook } from '@testing-library/react';
 import { createStore, Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
 
-const mockCloseAnyOpenDropdown = jest.fn();
+const mockCloseAnyOpenDropdown = vi.fn();
 
-jest.mock('@/ui/layout/dropdown/hooks/useCloseAnyOpenDropdown', () => ({
+vi.mock('@/ui/layout/dropdown/hooks/useCloseAnyOpenDropdown', () => ({
   useCloseAnyOpenDropdown: () => ({
     closeAnyOpenDropdown: mockCloseAnyOpenDropdown,
   }),
@@ -32,7 +34,7 @@ const getWrapper =
 
 describe('useExecuteTasksOnAnyLocationChange', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should reset page layout edit state when layout customization is inactive', () => {

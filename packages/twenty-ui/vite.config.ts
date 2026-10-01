@@ -1,7 +1,7 @@
 import react from '@vitejs/plugin-react-swc';
 import * as fs from 'fs';
 import * as path from 'path';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite-plus';
 import checker from 'vite-plugin-checker';
 import dts, { type PluginOptions } from 'vite-plugin-dts';
 import sassDts from 'vite-plugin-sass-dts';
@@ -50,6 +50,105 @@ export default defineConfig(({ command }) => {
   }).filter((dep) => !BUNDLED_DEPS.includes(dep));
 
   return {
+    run: {
+      tasks: {
+        build: {
+          command: 'bun run build:command',
+          dependsOn: [
+            { task: 'build', from: ['dependencies', 'devDependencies'] },
+          ],
+          cache: true,
+        },
+        fmt: {
+          command: 'bun run fmt:command',
+          dependsOn: [
+            { task: 'build', from: ['dependencies', 'devDependencies'] },
+          ],
+          cache: true,
+        },
+        typecheck: {
+          command: 'bun run typecheck:command',
+          dependsOn: [
+            { task: 'build', from: ['dependencies', 'devDependencies'] },
+          ],
+          cache: true,
+        },
+        'storybook:build': {
+          command: 'bun run storybook:build:command',
+          dependsOn: [
+            { task: 'build', from: ['dependencies', 'devDependencies'] },
+          ],
+          cache: true,
+        },
+        'storybook:serve:dev': {
+          command: 'bun run storybook:serve:dev:command',
+          dependsOn: [
+            { task: 'build', from: ['dependencies', 'devDependencies'] },
+          ],
+          cache: false,
+        },
+        'check:ownership': {
+          command: 'bun run check:ownership:command',
+          dependsOn: ['generateBarrels'],
+          cache: true,
+        },
+        'build:individual': {
+          command: 'bun run build:individual:command',
+          dependsOn: ['build'],
+          cache: true,
+        },
+        size: {
+          command: 'bun run size:command',
+          dependsOn: ['build'],
+          cache: true,
+        },
+        'size:why': {
+          command: 'bun run size:why:command',
+          dependsOn: ['build'],
+          cache: true,
+        },
+        'pack-size': {
+          command: 'bun run pack-size:command',
+          dependsOn: ['build'],
+          cache: true,
+        },
+        'test:package': {
+          command: 'bun run test:package:command',
+          dependsOn: ['build'],
+          cache: true,
+        },
+        lint: {
+          command: 'bun run lint:command',
+          dependsOn: ['twenty-oxlint-rules#build'],
+          cache: true,
+        },
+        test: {
+          command: 'bun run test:command',
+          dependsOn: ['check:ownership'],
+          cache: true,
+        },
+        'test:watch': {
+          command: 'bun run test:watch:command',
+          dependsOn: ['check:ownership'],
+          cache: false,
+        },
+        'storybook:serve:static': {
+          command: 'bun run storybook:serve:static:command',
+          dependsOn: ['storybook:build'],
+          cache: false,
+        },
+        'storybook:serve:static:test': {
+          command: 'bun run storybook:serve:static:test:command',
+          dependsOn: ['storybook:build'],
+          cache: false,
+        },
+        'storybook:visual-diff': {
+          command: 'bun run storybook:visual-diff:command',
+          dependsOn: ['storybook:build'],
+          cache: false,
+        },
+      },
+    },
     resolve: {
       tsconfigPaths: true,
       alias: {

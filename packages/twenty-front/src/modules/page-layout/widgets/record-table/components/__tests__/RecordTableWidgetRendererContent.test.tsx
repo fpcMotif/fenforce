@@ -1,48 +1,50 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 
 import { RecordTableWidgetRendererContent } from '@/page-layout/widgets/record-table/components/RecordTableWidgetRendererContent';
 import { ViewCalendarLayout, ViewType } from '~/generated-metadata/graphql';
 
-const mockUseViewById = jest.fn();
-const mockIsPageLayoutInEditMode = jest.fn();
+const mockUseViewById = vi.fn();
+const mockIsPageLayoutInEditMode = vi.fn();
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItemById', () => ({
-  useObjectMetadataItemById: jest.fn(() => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItemById', () => ({
+  useObjectMetadataItemById: vi.fn(() => ({
     objectMetadataItem: { nameSingular: 'company' },
   })),
 }));
-jest.mock('@/page-layout/hooks/useIsPageLayoutInEditMode', () => ({
+vi.mock('@/page-layout/hooks/useIsPageLayoutInEditMode', () => ({
   useIsPageLayoutInEditMode: () => mockIsPageLayoutInEditMode(),
 }));
-jest.mock(
+vi.mock(
   '@/ui/utilities/state/jotai/hooks/useAtomComponentFamilySelectorValue',
-  () => ({ useAtomComponentFamilySelectorValue: jest.fn(() => undefined) }),
+  () => ({ useAtomComponentFamilySelectorValue: vi.fn(() => undefined) }),
 );
-jest.mock('@/views/hooks/useViewById', () => ({
+vi.mock('@/views/hooks/useViewById', () => ({
   useViewById: () => mockUseViewById(),
 }));
-jest.mock(
+vi.mock(
   '@/object-record/record-table-widget/components/RecordTableWidgetProvider',
   () => ({
     RecordTableWidgetProvider: ({ children }: { children: React.ReactNode }) =>
       children,
   }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-table-widget/components/RecordTableWidget',
   () => ({ RecordTableWidget: () => <div>record table widget</div> }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-board-widget/components/RecordBoardWidget',
   () => ({ RecordBoardWidget: () => <div>record board widget</div> }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-list-widget/components/RecordListWidget',
   () => ({
     RecordListWidget: () => <div>record list widget</div>,
   }),
 );
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar-widget/components/RecordCalendarWidget',
   () => ({
     RecordCalendarWidget: ({ isReadOnly }: { isReadOnly: boolean }) => (
@@ -71,7 +73,7 @@ const renderWidgetForViewType = (viewType: ViewType | undefined) => {
 
 describe('RecordTableWidgetRendererContent', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockIsPageLayoutInEditMode.mockReturnValue(false);
   });
 

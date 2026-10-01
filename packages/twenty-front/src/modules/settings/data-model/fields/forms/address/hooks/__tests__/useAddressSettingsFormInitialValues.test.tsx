@@ -1,3 +1,5 @@
+import { type MockedFunction, vi } from 'vite-plus/test';
+
 import { type EnrichedObjectMetadataItem } from '@/object-metadata/types/EnrichedObjectMetadataItem';
 import { renderHook } from '@testing-library/react';
 import { useFormContext } from 'react-hook-form';
@@ -6,12 +8,12 @@ import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMeta
 import { getTestEnrichedObjectMetadataItemsMock } from '~/testing/utils/getTestEnrichedObjectMetadataItemsMock';
 import { useAddressSettingsFormInitialValues } from '@/settings/data-model/fields/forms/address/hooks/useAddressSettingsFormInitialValues';
 
-jest.mock('react-hook-form', () => ({
-  useFormContext: jest.fn(),
+vi.mock('react-hook-form', () => ({
+  useFormContext: vi.fn(),
 }));
 
-const mockResetField = jest.fn();
-const mockUseFormContext = useFormContext as jest.MockedFunction<
+const mockResetField = vi.fn();
+const mockUseFormContext = useFormContext as MockedFunction<
   typeof useFormContext
 >;
 
@@ -22,7 +24,7 @@ const Wrapper = getJestMetadataAndApolloMocksWrapper({
 
 describe('useAddressSettingsFormInitialValues', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockUseFormContext.mockReturnValue({
       resetField: mockResetField,
     } as any);

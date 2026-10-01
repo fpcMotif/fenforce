@@ -1,19 +1,18 @@
+import { vi } from 'vite-plus/test';
+
 import { useUpdateStep } from '@/workflow/workflow-steps/hooks/useUpdateStep';
 import { act, renderHook } from '@testing-library/react';
 
-const mockUpdateWorkflowVersionStep = jest.fn();
-const mockGetUpdatableWorkflowVersion = jest.fn();
+const mockUpdateWorkflowVersionStep = vi.fn();
+const mockGetUpdatableWorkflowVersion = vi.fn();
 
-jest.mock(
-  '@/workflow/workflow-steps/hooks/useUpdateWorkflowVersionStep',
-  () => ({
-    useUpdateWorkflowVersionStep: () => ({
-      updateWorkflowVersionStep: mockUpdateWorkflowVersionStep,
-    }),
+vi.mock('@/workflow/workflow-steps/hooks/useUpdateWorkflowVersionStep', () => ({
+  useUpdateWorkflowVersionStep: () => ({
+    updateWorkflowVersionStep: mockUpdateWorkflowVersionStep,
   }),
-);
+}));
 
-jest.mock('@/workflow/hooks/useGetUpdatableWorkflowVersionOrThrow', () => ({
+vi.mock('@/workflow/hooks/useGetUpdatableWorkflowVersionOrThrow', () => ({
   useGetUpdatableWorkflowVersionOrThrow: () => ({
     getUpdatableWorkflowVersion: mockGetUpdatableWorkflowVersion,
   }),
@@ -21,7 +20,7 @@ jest.mock('@/workflow/hooks/useGetUpdatableWorkflowVersionOrThrow', () => ({
 
 describe('useUpdateStep', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should update step in workflow version', async () => {

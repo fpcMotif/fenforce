@@ -1,19 +1,24 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import type * as ReactModule from '@sentry/react';
+import { vi } from 'vite-plus/test';
+
 import { render, waitFor } from '@testing-library/react';
 
 import { PromiseRejectionEffect } from '@/error-handler/components/PromiseRejectionEffect';
 
-jest.mock('@sentry/react', () => ({
-  captureException: jest.fn(),
+vi.mock('@sentry/react', () => ({
+  captureException: vi.fn(),
 }));
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
-const { captureException } = jest.requireMock('@sentry/react');
+const { captureException } =
+  await vi.importMock<typeof ReactModule>('@sentry/react');
 
 const dispatchUnhandledRejection = (reason: unknown) => {
   const event = new Event('unhandledrejection');
@@ -24,7 +29,7 @@ const dispatchUnhandledRejection = (reason: unknown) => {
 
 describe('PromiseRejectionEffect', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     render(<PromiseRejectionEffect />);
   });
 

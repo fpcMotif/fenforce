@@ -70,28 +70,28 @@ No Recall API key or Twenty OAuth token is exposed to the renderer. OAuth tokens
 
 ## Development
 
-Use Node 24 and the repository's Yarn version. Desktop is the `@twentyhq/companion` Yarn workspace and `twenty-companion` Nx project. Install from the repository root; the root lockfile owns desktop, Twenty UI, and their dependencies. Do not install a separate desktop dependency tree.
+Use Node 24 and the repository's Bun version. Desktop is the `@twentyhq/companion` Bun workspace. Install from the repository root; the root lockfile owns desktop, Twenty UI, and their dependencies. Do not install a separate desktop dependency tree.
 
 ```sh
-yarn install --immutable
-yarn workspace @twentyhq/companion dev
+bun install --frozen-lockfile
+bun run --filter @twentyhq/companion dev
 ```
 
 `dev` shares the production Electron build configuration and watches main/preload dependencies. A successful rebuild requests a graceful Electron restart; capture startup, active or paused recording, and stopping defer it until idle. Repeated rebuilds use the latest successful output. Failed compilations leave the running app untouched. Renderer edits continue to use Vite. Quitting Electron closes the watcher and Vite server.
 
-`yarn workspace @twentyhq/companion preview` serves the renderer at `http://127.0.0.1:4317`. Use `?preview` for an interactive sample Home, `?preview=welcome` for the full setup, `?preview=permissions` for permission setup, `?preview=denied` for denial, or `?preview=recording` for active capture controls. The native menu is available only in the desktop app. Preview actions simulate state transitions; no audio is captured, no workspace writes or external calls are made. This mode is excluded from production. Stop the preview before running the desktop `dev` command, which uses the same port.
+`bun run --filter @twentyhq/companion preview` serves the renderer at `http://127.0.0.1:4317`. Use `?preview` for an interactive sample Home, `?preview=welcome` for the full setup, `?preview=permissions` for permission setup, `?preview=denied` for denial, or `?preview=recording` for active capture controls. The native menu is available only in the desktop app. Preview actions simulate state transitions; no audio is captured, no workspace writes or external calls are made. This mode is excluded from production. Stop the preview before running the desktop `dev` command, which uses the same port.
 
 From the repository root:
 
 ```sh
-yarn workspace @twentyhq/companion typecheck
-yarn workspace @twentyhq/companion test
-yarn workspace @twentyhq/companion build
-yarn workspace @twentyhq/companion package
+bunx vite-plus run @twentyhq/companion#typecheck
+bunx vite-plus run @twentyhq/companion#test
+bunx vite-plus run @twentyhq/companion#build
+bunx vite-plus run @twentyhq/companion#package
 "packages/twenty-companion/release/Twenty-darwin-arm64/Twenty.app/Contents/MacOS/Twenty" --smoke
 ```
 
-The equivalent Nx project targets are `twenty-companion:build`, `:typecheck`, and `:test`. Native packaging targets are uncached and run only when requested. Desktop imports the current Twenty UI workspace source through Vite aliases; its explicit workspace dependency provides the shared dependency graph.
+Native packaging tasks are uncached and run only when requested. Desktop imports the current Twenty UI workspace source through Vite aliases; its explicit workspace dependency provides the shared dependency graph.
 
 Root installs keep native install scripts disabled. `dev`, `start`, `package`, and `package:archive` run `native:setup`, which downloads missing Electron and Recall binaries on Apple Silicon macOS. Typecheck, unit tests, renderer preview, and JavaScript builds do not require these downloads.
 

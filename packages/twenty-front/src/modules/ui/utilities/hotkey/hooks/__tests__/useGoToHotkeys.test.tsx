@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, fireEvent, renderHook } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, useLocation } from 'react-router-dom';
@@ -41,7 +43,7 @@ describe('useGoToHotkeys', () => {
     expect(result.current.pathname).toBe('/three');
   });
   it('blocks navigation and side effects while disabled and restores them when enabled', async () => {
-    const preNavigateFunction = jest.fn();
+    const preNavigateFunction = vi.fn();
     const user = userEvent.setup();
     const { result, rerender } = renderHook(
       ({ isEnabled }) => {

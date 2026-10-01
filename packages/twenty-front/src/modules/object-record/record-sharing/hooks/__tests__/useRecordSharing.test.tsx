@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import {
   ApolloClient,
   ApolloLink,
@@ -5,15 +7,15 @@ import {
   Observable,
 } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client/react';
-import { act, render, renderHook, waitFor } from '@testing-library/react';
+import { act, render, renderHook } from '@testing-library/react';
 import { type ReactNode } from 'react';
 
 import { RecordSharingRefreshEffect } from '@/object-record/record-sharing/components/RecordSharingRefreshEffect';
 import { useRecordSharing } from '@/object-record/record-sharing/hooks/useRecordSharing';
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
+vi.mock('twenty-ui/components', () => ({
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
@@ -32,7 +34,7 @@ const createHarness = () => {
     shares: [],
     roles: [],
   };
-  const request = jest.fn((operationName: string | undefined) =>
+  const request = vi.fn((operationName: string | undefined) =>
     operationName === 'SetRecordShare'
       ? {
           setRecordShare: {
@@ -73,10 +75,10 @@ const createHarness = () => {
 
 describe('useRecordSharing', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
-    jest.clearAllMocks();
+    vi.useFakeTimers();
+    vi.clearAllMocks();
   });
-  afterEach(() => jest.useRealTimers());
+  afterEach(() => vi.useRealTimers());
 
   it('updates the audience from the successful mutation without another request', async () => {
     const { request, wrapper } = createHarness();
@@ -90,7 +92,9 @@ describe('useRecordSharing', () => {
         wrapper,
       },
     );
-    await waitFor(() => expect(result.current.sharing?.isEnabled).toBe(true));
+    await act(async () => {
+      await vi.waitFor(() => expect(result.current.sharing?.isEnabled).toBe(true));
+    });
     await act(async () => {
       await result.current.setShare({
         principal: { workspaceMemberId: 'member' },
@@ -116,7 +120,9 @@ describe('useRecordSharing', () => {
         wrapper,
       },
     );
-    await waitFor(() => expect(result.current.sharing?.isEnabled).toBe(true));
+    await act(async () => {
+      await vi.waitFor(() => expect(result.current.sharing?.isEnabled).toBe(true));
+    });
     request.mockImplementationOnce(() => {
       throw new Error('Save failed');
     });
@@ -140,19 +146,21 @@ describe('useRecordSharing', () => {
         }),
       { wrapper, initialProps: { isOpen: false } },
     );
-    await waitFor(() => expect(result.current.sharing?.isEnabled).toBe(true));
     await act(async () => {
-      jest.advanceTimersByTime(60_000);
+      await vi.waitFor(() => expect(result.current.sharing?.isEnabled).toBe(true));
+    });
+    await act(async () => {
+      vi.advanceTimersByTime(60_000);
     });
     expect(request).toHaveBeenCalledTimes(1);
     rerender({ isOpen: true });
     await act(async () => {
-      jest.advanceTimersByTime(30_001);
+      vi.advanceTimersByTime(30_001);
     });
     expect(request).toHaveBeenCalledTimes(2);
     rerender({ isOpen: false });
     await act(async () => {
-      jest.advanceTimersByTime(60_000);
+      vi.advanceTimersByTime(60_000);
     });
     expect(request).toHaveBeenCalledTimes(2);
   });
@@ -167,7 +175,9 @@ describe('useRecordSharing', () => {
       return <RecordSharingRefreshEffect refetch={refetch} />;
     };
     const { unmount } = render(<TestSharingRefresh />, { wrapper });
-    await waitFor(() => expect(request).toHaveBeenCalledTimes(1));
+    await act(async () => {
+      await vi.waitFor(() => expect(request).toHaveBeenCalledTimes(1));
+    });
     await act(async () => {
       window.dispatchEvent(new Event('focus'));
     });
@@ -189,7 +199,9 @@ describe('useRecordSharing', () => {
         wrapper,
       },
     );
-    await waitFor(() => expect(result.current.sharing?.isEnabled).toBe(true));
+    await act(async () => {
+      await vi.waitFor(() => expect(result.current.sharing?.isEnabled).toBe(true));
+    });
     request.mockImplementationOnce(() => {
       throw new Error('Network unavailable');
     });

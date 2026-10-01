@@ -1,6 +1,7 @@
 import { lingui } from '@lingui/vite-plugin';
+import babel from '@rolldown/plugin-babel';
 import { isNonEmptyString } from '@sniptt/guards';
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import wyw from '@wyw-in-js/vite';
 import fs from 'fs';
 import path from 'path';
@@ -10,7 +11,7 @@ import {
   loadEnv,
   type PluginOption,
   searchForWorkspaceRoot,
-} from 'vite';
+} from 'vite-plus';
 import svgr from 'vite-plugin-svgr';
 
 import { createWywProfilingPlugin } from 'twenty-shared/vite';
@@ -62,6 +63,128 @@ export default defineConfig(({ mode }) => {
 
   return {
     root: __dirname,
+    run: {
+      tasks: {
+        build: {
+          command: 'bun run build:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+        },
+        'build:sourcemaps': {
+          command: 'bun run build:sourcemaps:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+        },
+        start: {
+          command: 'bun run start:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+          cache: false,
+        },
+        typecheck: {
+          command: 'bun run typecheck:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+        },
+        lint: {
+          command: 'bun run lint:command',
+          dependsOn: ['twenty-oxlint-rules#build', 'twenty-shared#build'],
+        },
+        'lint:diff-with-main': {
+          command: 'bun run lint:diff-with-main:command',
+          dependsOn: ['twenty-oxlint-rules#build'],
+          cache: false,
+        },
+        fmt: {
+          command: 'bun run fmt:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+        },
+        test: {
+          command:
+            process.env.CI === 'true'
+              ? 'bun run test:ci'
+              : 'bun run test:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+          cache: false,
+        },
+        'lingui:extract': {
+          command: 'bun run lingui:extract:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+          cache: false,
+        },
+        'lingui:compile': {
+          command: 'bun run lingui:compile:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+          cache: false,
+        },
+        'storybook:build': {
+          command: 'bun run storybook:build:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+        },
+        'storybook:build:docs': {
+          command: 'bun run storybook:build:docs:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+        },
+        'storybook:build:modules': {
+          command: 'bun run storybook:build:modules:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+        },
+        'storybook:build:pages': {
+          command: 'bun run storybook:build:pages:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+        },
+        'storybook:build:performance': {
+          command: 'bun run storybook:build:performance:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+        },
+        'storybook:serve:dev': {
+          command: 'bun run storybook:serve:dev:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+          cache: false,
+        },
+        'storybook:serve:dev:docs': {
+          command: 'bun run storybook:serve:dev:docs:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+          cache: false,
+        },
+        'storybook:serve:dev:modules': {
+          command: 'bun run storybook:serve:dev:modules:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+          cache: false,
+        },
+        'storybook:serve:dev:pages': {
+          command: 'bun run storybook:serve:dev:pages:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+          cache: false,
+        },
+        'storybook:serve:dev:performance': {
+          command: 'bun run storybook:serve:dev:performance:command',
+          dependsOn: [{ task: 'build', from: 'dependencies' }],
+          cache: false,
+        },
+        'storybook:serve:static': {
+          command: 'bun run storybook:serve:static:command',
+          dependsOn: ['storybook:build'],
+          cache: false,
+        },
+        'storybook:serve:static:docs': {
+          command: 'bun run storybook:serve:static:docs:command',
+          dependsOn: ['storybook:build:docs'],
+          cache: false,
+        },
+        'storybook:serve:static:modules': {
+          command: 'bun run storybook:serve:static:modules:command',
+          dependsOn: ['storybook:build:modules'],
+          cache: false,
+        },
+        'storybook:serve:static:pages': {
+          command: 'bun run storybook:serve:static:pages:command',
+          dependsOn: ['storybook:build:pages'],
+          cache: false,
+        },
+        'storybook:serve:static:performance': {
+          command: 'bun run storybook:serve:static:performance:command',
+          dependsOn: ['storybook:build:performance'],
+          cache: false,
+        },
+      },
+    },
     cacheDir: '../../node_modules/.vite/packages/twenty-front',
 
     server: {
@@ -88,8 +211,16 @@ export default defineConfig(({ mode }) => {
     },
 
     plugins: [
-      react({
-        plugins: [['@lingui/swc-plugin', {}]],
+      react(),
+      babel({
+        presets: [
+          {
+            preset: { plugins: ['@lingui/babel-plugin-lingui-macro'] },
+            rolldown: {
+              filter: { code: /@lingui\/(?:core\/macro|react\/macro|macro)/ },
+            },
+          },
+        ],
       }),
       svgr(),
       lingui({
@@ -172,7 +303,7 @@ export default defineConfig(({ mode }) => {
     },
 
     build: {
-      minify: 'esbuild',
+      minify: 'oxc',
       outDir: 'build',
       sourcemap: VITE_BUILD_SOURCEMAP === 'true' ? 'hidden' : false,
       chunkSizeWarningLimit: CHUNK_SIZE_WARNING_LIMIT,

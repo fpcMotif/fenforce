@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { watchCallRecordingTranscriptFollowScroll } from '@/page-layout/widgets/call-recording-transcript/utils/watchCallRecordingTranscriptFollowScroll';
 
 class FakeVideoElement extends EventTarget {}
@@ -39,7 +41,7 @@ describe('watchCallRecordingTranscriptFollowScroll', () => {
   let fakeVideoElement: FakeVideoElement;
 
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     fakeVideoElement = new FakeVideoElement();
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
@@ -48,8 +50,8 @@ describe('watchCallRecordingTranscriptFollowScroll', () => {
   });
 
   afterEach(() => {
-    jest.useRealTimers();
-    jest.clearAllMocks();
+    vi.useRealTimers();
+    vi.clearAllMocks();
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       value: originalMatchMedia,
@@ -83,7 +85,7 @@ describe('watchCallRecordingTranscriptFollowScroll', () => {
     });
 
     fakeVideoElement.dispatchEvent(new Event('timeupdate'));
-    jest.advanceTimersByTime(20);
+    vi.advanceTimersByTime(20);
 
     expect(scrollToCalls).toEqual([{ behavior: 'smooth', top: 55 }]);
 
@@ -102,7 +104,7 @@ describe('watchCallRecordingTranscriptFollowScroll', () => {
     });
 
     fakeVideoElement.dispatchEvent(new Event('timeupdate'));
-    jest.advanceTimersByTime(20);
+    vi.advanceTimersByTime(20);
 
     expect(scrollToCalls).toEqual([]);
 
@@ -119,7 +121,7 @@ describe('watchCallRecordingTranscriptFollowScroll', () => {
     });
 
     fakeVideoElement.dispatchEvent(new Event('timeupdate'));
-    jest.advanceTimersByTime(20);
+    vi.advanceTimersByTime(20);
 
     expect(scrollToCalls).toEqual([{ behavior: 'smooth', top: 85 }]);
 
@@ -133,7 +135,7 @@ describe('watchCallRecordingTranscriptFollowScroll', () => {
     const stopWatching = startWatching({ scrollContainerElement });
 
     fakeVideoElement.dispatchEvent(new Event('timeupdate'));
-    jest.advanceTimersByTime(20);
+    vi.advanceTimersByTime(20);
 
     expect(scrollToCalls).toEqual([]);
 
@@ -154,7 +156,7 @@ describe('watchCallRecordingTranscriptFollowScroll', () => {
     stopWatching();
 
     fakeVideoElement.dispatchEvent(new Event('timeupdate'));
-    jest.advanceTimersByTime(20);
+    vi.advanceTimersByTime(20);
 
     expect(scrollToCalls).toEqual([]);
   });

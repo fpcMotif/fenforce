@@ -144,7 +144,7 @@ worker:
   enabled: true
   replicaCount: 1
   image: {}
-  command: ["yarn", "worker:prod"]
+  command: ["bun", "run", "worker:prod"]
 
   resources:
     requests:

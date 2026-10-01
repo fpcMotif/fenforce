@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { act, render, waitFor } from '@testing-library/react';
@@ -21,7 +23,7 @@ import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMeta
 import { getMockFieldMetadataItemOrThrow } from '~/testing/utils/getMockFieldMetadataItemOrThrow';
 import { getMockObjectMetadataItemOrThrow } from '~/testing/utils/getMockObjectMetadataItemOrThrow';
 
-jest.mock('~/hooks/usePageChangeEffectNavigateLocation', () => ({
+vi.mock('~/hooks/usePageChangeEffectNavigateLocation', () => ({
   usePageChangeEffectNavigateLocation: () => undefined,
 }));
 

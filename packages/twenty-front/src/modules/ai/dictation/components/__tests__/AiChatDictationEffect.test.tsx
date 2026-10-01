@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { act, render } from '@testing-library/react';
 import { getDefaultStore } from 'jotai';
 
@@ -10,16 +13,16 @@ type SpeechRecognitionTestWindow = {
   SpeechRecognition?: WebSpeechRecognitionConstructor;
 };
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
 const renderEffect = () =>
   render(
-    <AiChatDictationEffect onInterimText={jest.fn()} onFinalText={jest.fn()} />,
+    <AiChatDictationEffect onInterimText={vi.fn()} onFinalText={vi.fn()} />,
   );
 
 const readEngine = () => getDefaultStore().get(dictationEngineState.atom);
@@ -31,7 +34,7 @@ describe('AiChatDictationEffect', () => {
     (window as SpeechRecognitionTestWindow).SpeechRecognition =
       function SpeechRecognition() {} as unknown as WebSpeechRecognitionConstructor;
     Object.defineProperty(navigator, 'mediaDevices', {
-      value: { getUserMedia: jest.fn() },
+      value: { getUserMedia: vi.fn() },
       configurable: true,
     });
     Object.defineProperty(window, 'isSecureContext', {

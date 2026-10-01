@@ -238,9 +238,9 @@ ok "Databases 'default' and 'test' ready"
 info "Setting up .env files..."
 cd "$REPO_ROOT"
 
-if command -v npx &>/dev/null && [ -d node_modules ]; then
-  npx nx reset:env twenty-front
-  npx nx reset:env twenty-server
+if command -v bun &>/dev/null && [ -d node_modules ]; then
+  bun run --cwd packages/twenty-front reset:env
+  bun run --cwd packages/twenty-server reset:env
 else
   for pkg in twenty-front twenty-server; do
     src="packages/$pkg/.env.example"
@@ -255,12 +255,12 @@ fi
 # =============================================================================
 # 4. Initialize database schema
 # =============================================================================
-if command -v npx &>/dev/null && [ -d node_modules ]; then
+if command -v bun &>/dev/null && [ -d node_modules ]; then
   if schema_exists; then
     ok "Database schema already initialized"
   else
     info "Initializing database schema (running migrations)..."
-    if npx nx database:init twenty-server; then
+    if bunx vite-plus run twenty-server#database:init; then
       ok "Database schema initialized"
     else
       fail "Database schema initialization failed"
@@ -268,14 +268,14 @@ if command -v npx &>/dev/null && [ -d node_modules ]; then
     fi
   fi
 else
-  info "Run 'npx nx database:init twenty-server' to initialize the schema"
+  info "Run 'bunx vite-plus run twenty-server#database:init' to initialize the schema"
 fi
 
 # =============================================================================
 echo ""
 echo "Dev environment ready."
 echo ""
-echo "  yarn start                         # start everything"
-echo "  npx nx start twenty-front          # frontend  -> http://localhost:3001"
-echo "  npx nx start twenty-server         # backend   -> http://localhost:3000"
+echo "  bun start                                      # start everything"
+echo "  bun run --cwd packages/twenty-front start      # frontend  -> http://localhost:3001"
+echo "  bun run --cwd packages/twenty-server start     # backend   -> http://localhost:3000"
 echo ""

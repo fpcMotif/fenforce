@@ -1,3 +1,5 @@
+import { type MockedFunction, vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
@@ -8,41 +10,41 @@ import { SettingsApplicationConnectionsSection } from '~/pages/settings/applicat
 import { useFindApplicationConnectionProviders } from '~/pages/settings/applications/hooks/useFindApplicationConnectionProviders';
 import { useApplicationConnectedAccounts } from '~/pages/settings/applications/hooks/useApplicationConnectedAccounts';
 
-const mockTriggerAppOAuth = jest.fn();
+const mockTriggerAppOAuth = vi.fn();
 
-jest.mock(
+vi.mock(
   '~/pages/settings/applications/hooks/useFindApplicationConnectionProviders',
   () => ({
-    useFindApplicationConnectionProviders: jest.fn(),
+    useFindApplicationConnectionProviders: vi.fn(),
   }),
 );
 
-jest.mock(
+vi.mock(
   '~/pages/settings/applications/hooks/useApplicationConnectedAccounts',
   () => ({
-    useApplicationConnectedAccounts: jest.fn(),
+    useApplicationConnectedAccounts: vi.fn(),
   }),
 );
 
-jest.mock('~/pages/settings/applications/hooks/useTriggerAppOAuth', () => ({
-  useTriggerAppOAuth: jest.fn(() => ({
+vi.mock('~/pages/settings/applications/hooks/useTriggerAppOAuth', () => ({
+  useTriggerAppOAuth: vi.fn(() => ({
     triggerAppOAuth: mockTriggerAppOAuth,
   })),
 }));
 
 const mockedUseFindApplicationConnectionProviders =
-  useFindApplicationConnectionProviders as jest.MockedFunction<
+  useFindApplicationConnectionProviders as MockedFunction<
     typeof useFindApplicationConnectionProviders
   >;
 
 const mockedUseApplicationConnectedAccounts =
-  useApplicationConnectedAccounts as jest.MockedFunction<
+  useApplicationConnectedAccounts as MockedFunction<
     typeof useApplicationConnectedAccounts
   >;
 
 describe('SettingsApplicationConnectionsSection', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('renders app connection rows as links to the connection detail page', () => {
@@ -62,7 +64,7 @@ describe('SettingsApplicationConnectionsSection', () => {
         },
       ],
       loading: false,
-      refetch: jest.fn(),
+      refetch: vi.fn(),
     });
 
     mockedUseApplicationConnectedAccounts.mockReturnValue({
@@ -83,7 +85,7 @@ describe('SettingsApplicationConnectionsSection', () => {
         },
       ],
       loading: false,
-      refetch: jest.fn(),
+      refetch: vi.fn(),
     });
 
     render(
@@ -127,13 +129,13 @@ describe('SettingsApplicationConnectionsSection', () => {
         },
       ],
       loading: false,
-      refetch: jest.fn(),
+      refetch: vi.fn(),
     });
 
     mockedUseApplicationConnectedAccounts.mockReturnValue({
       accounts: [],
       loading: false,
-      refetch: jest.fn(),
+      refetch: vi.fn(),
     });
 
     render(

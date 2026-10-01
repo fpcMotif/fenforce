@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 import { createStore, Provider as JotaiProvider } from 'jotai';
 
@@ -7,7 +9,7 @@ import { viewableFrontComponentRecordContextComponentState } from '@/side-panel/
 import { type FrontComponentRecordContext } from '@/side-panel/pages/front-component/types/FrontComponentRecordContext';
 import { SidePanelPageComponentInstanceContext } from '@/side-panel/states/contexts/SidePanelPageComponentInstanceContext';
 
-jest.mock('@/front-components/components/FrontComponentRenderer', () => ({
+vi.mock('@/front-components/components/FrontComponentRenderer', () => ({
   FrontComponentRenderer: ({
     frontComponentId,
     selectedRecordIds,
@@ -23,7 +25,7 @@ jest.mock('@/front-components/components/FrontComponentRenderer', () => ({
   ),
 }));
 
-jest.mock('@/front-components/components/FrontComponentSkeletonLoader', () => ({
+vi.mock('@/front-components/components/FrontComponentSkeletonLoader', () => ({
   FrontComponentSkeletonLoader: () => <div data-testid="skeleton" />,
 }));
 

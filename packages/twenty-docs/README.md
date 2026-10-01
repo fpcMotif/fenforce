@@ -19,7 +19,7 @@ To run the documentation locally:
 
 ```bash
 # From the twenty monorepo root
-npx nx run twenty-docs:dev
+bunx vite-plus run twenty-docs#dev
 ```
 
 The documentation will be available at `http://localhost:3000`
@@ -68,20 +68,19 @@ Your content here...
 - `navigation/base-structure.json` - Source of truth for tabs, groups, icons, and page slugs (English source labels, not sent to Crowdin).
 - `navigation/navigation.template.json` - Generated translation template (labels only) that is uploaded to Crowdin.
 - `<language>/navigation.json` - Locale-specific label files pulled from Crowdin.
-- `docs.json` - Generated Mintlify configuration (always run `yarn docs:generate` after modifying navigation files).
-- `package.json` - Package dependencies and scripts (`docs:generate`, `docs:generate-navigation-template`, …).
-- `project.json` - Nx workspace configuration
+- `docs.json` - Generated Mintlify configuration (always run `bun run docs:generate` after modifying navigation files).
+- `package.json` - Package dependencies and Vite+ tasks (`docs:generate`, `docs:generate-navigation-template`, …).
 
 ## 📦 Validation
 
 ```bash
 # Validate the documentation build
-npx nx run twenty-docs:validate
+bunx vite-plus run twenty-docs#validate
 ```
 
 ## UI reference generation
 
-Run `npx nx generate:ui twenty-docs` after changing documented component props or theme tokens. Run `npx nx check:ui twenty-docs` to check generated references and compile the UI guide examples against the public entry points. Hand-written pages live under `ui/`; generated snippets live under `snippets/ui/generated/`.
+Run `bunx vite-plus run twenty-docs#generate:ui` after changing documented component props or theme tokens. Run `bunx vite-plus run twenty-docs#check:ui` to check generated references and compile the UI guide examples against the public entry points. Hand-written pages live under `ui/`; generated snippets live under `snippets/ui/generated/`.
 
 UI guides, component pages, and navigation labels use the existing Crowdin translation workflow. Translated pages appear in their locale’s navigation once the corresponding files exist. Generated API and token snippets are shared across locales and maintained by the reference generator.
 
@@ -97,7 +96,7 @@ To contribute to the documentation:
 
 1. Fork the repository
 2. Make your changes in the `packages/twenty-docs` directory
-3. Test locally with `npx nx run twenty-docs:dev`
+3. Test locally with `bunx vite-plus run twenty-docs#dev`
 4. Submit a pull request
 
 ## 📄 License

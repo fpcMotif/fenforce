@@ -454,7 +454,7 @@
       },
       {
         "name": "defaultValue",
-        "type": "number | (readonly string[] & number)",
+        "type": "string | number | readonly string[]",
         "required": false,
         "defaultValue": "150",
         "description": "Initial size when the handle owns its state."
@@ -1287,7 +1287,7 @@
       },
       {
         "name": "color",
-        "type": "\"accent\" | \"danger\" | \"neutral\" | \"success\"",
+        "type": "string",
         "required": false,
         "defaultValue": null,
         "description": "Shared semantic color that overrides the color of buttons in the group."

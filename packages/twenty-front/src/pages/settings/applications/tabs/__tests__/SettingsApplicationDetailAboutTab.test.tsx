@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, screen, waitFor, within } from '@testing-library/react';
@@ -6,7 +8,7 @@ import userEvent from '@testing-library/user-event';
 import { type DeveloperLinks } from '@/settings/applications/components/SettingsApplicationAboutSidebar';
 import { SettingsApplicationDetailAboutTab } from '~/pages/settings/applications/tabs/SettingsApplicationDetailAboutTab';
 
-jest.mock('@/ai/components/LazyMarkdownRenderer', () => ({
+vi.mock('@/ai/components/LazyMarkdownRenderer', () => ({
   LazyMarkdownRenderer: ({
     text,
     noImage,
@@ -20,7 +22,7 @@ jest.mock('@/ai/components/LazyMarkdownRenderer', () => ({
   ),
 }));
 
-jest.mock('@/applications/components/AppChip', () => ({
+vi.mock('@/applications/components/AppChip', () => ({
   AppChip: () => <div data-testid="app-chip" />,
 }));
 
@@ -50,7 +52,7 @@ const renderAboutTab = ({
   description = SHORT_DESCRIPTION,
   developerLinks = DEVELOPER_LINKS,
   installCount = 7,
-  onShare = jest.fn(),
+  onShare = vi.fn(),
 }: RenderAboutTabOptions = {}) =>
   render(
     <I18nProvider i18n={i18n}>
@@ -182,7 +184,7 @@ describe('SettingsApplicationDetailAboutTab', () => {
 
   it('calls onShare when clicking the share button', async () => {
     const user = userEvent.setup();
-    const onShare = jest.fn();
+    const onShare = vi.fn();
 
     renderAboutTab({ onShare });
 

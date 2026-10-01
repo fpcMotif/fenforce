@@ -1,8 +1,10 @@
+import { vi } from 'vite-plus/test';
+
 import { getInitialClientConfig } from '@/client-config/utils/getInitialClientConfig';
 import { getClientConfig } from '@/client-config/utils/getClientConfig';
 
-jest.mock('@/client-config/utils/getClientConfig', () => ({
-  getClientConfig: jest.fn(),
+vi.mock('@/client-config/utils/getClientConfig', () => ({
+  getClientConfig: vi.fn(),
 }));
 
 const config = {
@@ -13,7 +15,7 @@ const config = {
 describe('getInitialClientConfig', () => {
   beforeEach(() => {
     document.head.innerHTML = '';
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   const addBootstrap = (content: string) => {
@@ -33,11 +35,9 @@ describe('getInitialClientConfig', () => {
   });
 
   it('uses the compatibility endpoint for static HTML and Vite', async () => {
-    jest
-      .mocked(getClientConfig)
-      .mockResolvedValueOnce(
-        config as Awaited<ReturnType<typeof getClientConfig>>,
-      );
+    vi.mocked(getClientConfig).mockResolvedValueOnce(
+      config as Awaited<ReturnType<typeof getClientConfig>>,
+    );
 
     expect(await getInitialClientConfig()).toEqual(config);
     expect(getClientConfig).toHaveBeenCalledTimes(1);

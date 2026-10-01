@@ -8,6 +8,7 @@ import type { Doc, Id } from './_generated/dataModel';
 import type { MutationCtx, QueryCtx } from './_generated/server';
 import { mutation, query } from './_generated/server';
 import { requireWorkspaceAdmin, requireWorkspaceMember } from './authorization';
+import { normalizeCompanyDomain } from './companyDomain';
 
 const domainNameValidator = v.object({
   primaryLinkUrl: v.string(),
@@ -43,39 +44,15 @@ const normalizeName = (value: string) => {
 };
 
 const normalizeDomainName = (value: string) => {
-  const input = value.trim();
+  const domain = normalizeCompanyDomain(value);
 
-  if (input === '') {
-    return { primaryLinkUrl: '', primaryLinkLabel: '', secondaryLinks: [] };
-  }
-
-  if (input.length > 2048) {
-    throw new ConvexError('INVALID_DOMAIN_NAME');
-  }
-
-  let url: URL;
-
-  try {
-    url = new URL(input.includes('://') ? input : `https://${input}`);
-  } catch {
-    throw new ConvexError('INVALID_DOMAIN_NAME');
-  }
-
-  if (
-    !['http:', 'https:'].includes(url.protocol) ||
-    url.username !== '' ||
-    url.password !== '' ||
-    url.hostname === '' ||
-    url.pathname !== '/' ||
-    url.search !== '' ||
-    url.hash !== ''
-  ) {
+  if (domain === null) {
     throw new ConvexError('INVALID_DOMAIN_NAME');
   }
 
   return {
-    primaryLinkUrl: url.origin,
-    primaryLinkLabel: url.hostname,
+    primaryLinkUrl: domain === '' ? '' : `https://${domain}`,
+    primaryLinkLabel: domain,
     secondaryLinks: [],
   };
 };

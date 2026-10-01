@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { createElement } from 'react';
@@ -13,9 +15,9 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-const mockTriggerInstallAppsOnboardingStep = jest.fn();
+const mockTriggerInstallAppsOnboardingStep = vi.fn();
 
-jest.mock('@/onboarding/hooks/useTriggerInstallAppsOnboardingStep', () => ({
+vi.mock('@/onboarding/hooks/useTriggerInstallAppsOnboardingStep', () => ({
   useTriggerInstallAppsOnboardingStep: () =>
     mockTriggerInstallAppsOnboardingStep,
 }));

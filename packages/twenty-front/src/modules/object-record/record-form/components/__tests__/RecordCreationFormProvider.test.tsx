@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { RecordCreationFormProvider } from '@/object-record/record-form/components/RecordCreationFormProvider';
 import { useRecordCreationFormContextOrThrow } from '@/object-record/record-form/contexts/RecordCreationFormContext';
 import { type ObjectRecord } from '@/object-record/types/ObjectRecord';
@@ -11,18 +14,18 @@ import { createStore, Provider } from 'jotai';
 import { type ReactNode } from 'react';
 import { getMockObjectMetadataItemOrThrow } from '~/testing/utils/getMockObjectMetadataItemOrThrow';
 
-const mockNavigateSidePanelMenu = jest.fn();
-const mockCloseSidePanelMenu = jest.fn();
+const mockNavigateSidePanelMenu = vi.fn();
+const mockCloseSidePanelMenu = vi.fn();
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({
     navigateSidePanelMenu: mockNavigateSidePanelMenu,
     closeSidePanelMenu: mockCloseSidePanelMenu,
   }),
 }));
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
-  useToast: () => ({ enqueueToast: jest.fn() }),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
+  useToast: () => ({ enqueueToast: vi.fn() }),
 }));
 
 const setup = () => {
@@ -44,12 +47,12 @@ const setup = () => {
   };
 };
 
-beforeEach(() => jest.clearAllMocks());
+beforeEach(() => vi.clearAllMocks());
 
 it('removes the form from deeper in the history when the user moved on before creation finished', async () => {
   const { result, store } = setup();
   let completeCreation: (record: ObjectRecord) => void = () => {};
-  const createRecord = jest.fn(
+  const createRecord = vi.fn(
     () =>
       new Promise<ObjectRecord>((resolve) => {
         completeCreation = resolve;

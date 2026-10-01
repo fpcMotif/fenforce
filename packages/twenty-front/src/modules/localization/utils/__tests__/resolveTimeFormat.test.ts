@@ -1,8 +1,10 @@
+import { vi } from 'vite-plus/test';
+
 import { TimeFormat } from '@/localization/constants/TimeFormat';
 import { resolveTimeFormat } from '@/localization/utils/resolveTimeFormat';
 
-jest.mock('@/localization/utils/detection/detectTimeFormat', () => ({
-  detectTimeFormat: jest.fn(() => 'HOUR_24'),
+vi.mock('@/localization/utils/detection/detectTimeFormat', () => ({
+  detectTimeFormat: vi.fn(() => 'HOUR_24'),
 }));
 
 describe('resolveTimeFormat', () => {

@@ -4,7 +4,18 @@
   "sideEffects": false,
   "license": "MIT",
   "scripts": {
-    "build": "npx rimraf dist && npx vite build && npx vite build -c vite.metadata.config.ts && tsgo -p tsconfig.lib.json --declaration --emitDeclarationOnly --noEmit false --outDir dist --rootDir src && npx tsc-alias -p tsconfig.lib.json --outDir dist"
+    "test:coverage": "bunx vite-plus run twenty-client-sdk#test -- --coverage",
+    "test:watch": "bunx vite-plus run --no-cache twenty-client-sdk#test -- --watch",
+    "lint:ci": "bunx vite-plus run twenty-client-sdk#lint",
+    "build:command": "bunx rimraf dist && bunx vite build && bunx vite build -c vite.metadata.config.ts && node node_modules/typescript/bin/tsc -p tsconfig.lib.json --declaration --emitDeclarationOnly --noEmit false --outDir dist --rootDir src && bunx tsc-alias -p tsconfig.lib.json --outDir dist",
+    "generate-metadata-client:command": "tsx scripts/generate-metadata-client.ts",
+    "test:command": "bunx vitest run --config vitest.config.ts",
+    "test:ci:command": "bunx vitest run --config vitest.config.ts",
+    "set-local-version": "bun -e 'const fs = require(\"fs\"); const version = process.argv[1]; if (!version) throw new Error(\"releaseVersion required\"); const pkg = JSON.parse(fs.readFileSync(\"package.json\", \"utf8\")); pkg.version = version; fs.writeFileSync(\"package.json\", JSON.stringify(pkg, null, 2) + \"\\n\");'",
+    "typecheck:command": "tsgo -p tsconfig.json",
+    "lint:command": "bunx oxlint -c .oxlintrc.json . && (bunx oxfmt --check . || (echo 'ERROR: oxfmt formatting check failed! Fix with: bun run lint:fix:command' && false))",
+    "lint:fix": "bunx oxlint --fix -c .oxlintrc.json . && bunx oxfmt .",
+    "typecheck:watch": "bunx tsgo -p tsconfig.json --watch"
   },
   "exports": {
     "./core": {
@@ -55,7 +66,9 @@
     "prettier": "^3.8.3"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.0",
     "@types/lodash": "^4.17.24",
+    "@types/node": "^24.0.0",
     "@typescript/native-preview": "^7.0.0-dev.20260116.1",
     "tsc-alias": "^1.8.16",
     "twenty-shared": "workspace:*",
@@ -65,7 +78,6 @@
     "vitest": "^4.1.0"
   },
   "engines": {
-    "node": "^24.5.0",
-    "yarn": "^4.0.2"
+    "node": "^24.5.0"
   }
 }

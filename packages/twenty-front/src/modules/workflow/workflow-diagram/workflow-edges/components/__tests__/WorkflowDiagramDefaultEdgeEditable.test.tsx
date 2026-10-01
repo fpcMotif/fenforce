@@ -1,3 +1,6 @@
+import type * as ReactModule from '@xyflow/react';
+import { vi } from 'vite-plus/test';
+
 import { WorkflowDiagramDefaultEdgeEditable } from '@/workflow/workflow-diagram/workflow-edges/components/WorkflowDiagramDefaultEdgeEditable';
 import { type WorkflowDiagramEdgeComponentProps } from '@/workflow/workflow-diagram/workflow-edges/types/WorkflowDiagramEdgeComponentProps';
 import { i18n } from '@lingui/core';
@@ -6,23 +9,23 @@ import { Position } from '@xyflow/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-const mockStartNodeCreation = jest.fn();
+const mockStartNodeCreation = vi.fn();
 
-jest.mock('@/workflow/workflow-diagram/hooks/useStartNodeCreation', () => ({
+vi.mock('@/workflow/workflow-diagram/hooks/useStartNodeCreation', () => ({
   useStartNodeCreation: () => ({
     startNodeCreation: mockStartNodeCreation,
     isNodeCreationStarted: () => false,
   }),
 }));
 
-jest.mock(
+vi.mock(
   '@/workflow/workflow-diagram/workflow-edges/components/WorkflowDiagramBaseEdge',
   () => ({
     WorkflowDiagramBaseEdge: () => null,
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/workflow/workflow-diagram/workflow-edges/components/WorkflowDiagramEdgeButtonGroup',
   () => ({
     WorkflowDiagramEdgeButtonGroup: ({
@@ -33,7 +36,7 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/workflow/workflow-diagram/workflow-edges/components/WorkflowDiagramEdgeV2VisibilityContainer',
   () => ({
     WorkflowDiagramEdgeV2VisibilityContainer: ({
@@ -44,7 +47,7 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/workflow/workflow-diagram/workflow-edges/hooks/useEdgeState',
   () => ({
     useEdgeState: () => ({
@@ -53,14 +56,14 @@ jest.mock(
   }),
 );
 
-jest.mock('@/workflow/workflow-steps/hooks/useDeleteEdge', () => ({
+vi.mock('@/workflow/workflow-steps/hooks/useDeleteEdge', () => ({
   useDeleteEdge: () => ({
-    deleteEdge: jest.fn(),
+    deleteEdge: vi.fn(),
   }),
 }));
 
-jest.mock('@xyflow/react', () => ({
-  ...jest.requireActual('@xyflow/react'),
+vi.mock('@xyflow/react', async () => ({
+  ...(await vi.importActual<typeof ReactModule>('@xyflow/react')),
   EdgeLabelRenderer: ({ children }: { children: React.ReactNode }) => children,
 }));
 
@@ -113,7 +116,7 @@ const renderEdge = (deletable: boolean) =>
 
 describe('WorkflowDiagramDefaultEdgeEditable', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('inserts on each shared-destination branch using its own control and branch identity', async () => {

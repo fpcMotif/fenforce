@@ -21,7 +21,7 @@ Three screenshots, all PNG, at marketplace resolution (preferably 1600×1000 or 
      "./assets/screenshots/03-use-twenty-mcp.png"
    ]
    ```
-3. Run `npx nx run twenty-agent-skills:validate` — the planned `assertAssets` check confirms every referenced screenshot exists and is PNG.
+3. Run `bunx vite-plus run twenty-agent-skills#validate` — the planned `assertAssets` check confirms every referenced screenshot exists and is PNG.
 4. Tick rows A4, A5, A6 in `CHECKLIST.md` with the reviewer's date.
 
 ## What Not to Include

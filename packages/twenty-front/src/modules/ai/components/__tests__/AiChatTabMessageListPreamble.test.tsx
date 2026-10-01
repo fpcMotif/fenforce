@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, render, screen } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -15,36 +17,36 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-jest.mock('@/ai/components/AiChatInitialLoadingIndicator', () => ({
+vi.mock('@/ai/components/AiChatInitialLoadingIndicator', () => ({
   AiChatInitialLoadingIndicator: () => (
     <div data-testid="initial-loading-indicator" />
   ),
 }));
 
-jest.mock('@/ui/utilities/scroll/components/ScrollWrapper', () => ({
+vi.mock('@/ui/utilities/scroll/components/ScrollWrapper', () => ({
   ScrollWrapper: ({ children }: { children: ReactNode }) => (
     <div data-testid="scroll-wrapper">{children}</div>
   ),
 }));
 
-jest.mock('@/ai/components/AiChatNonLastMessageIdsList', () => ({
-  AiChatNonLastMessageIdsList: jest.fn(() => null),
+vi.mock('@/ai/components/AiChatNonLastMessageIdsList', () => ({
+  AiChatNonLastMessageIdsList: vi.fn(() => null),
 }));
-jest.mock('@/ai/components/AiChatLastMessageWithStreamingState', () => ({
+vi.mock('@/ai/components/AiChatLastMessageWithStreamingState', () => ({
   AiChatLastMessageWithStreamingState: () => null,
 }));
-jest.mock('@/ai/components/AiChatErrorUnderMessageList', () => ({
+vi.mock('@/ai/components/AiChatErrorUnderMessageList', () => ({
   AiChatErrorUnderMessageList: () => null,
 }));
-jest.mock('@/ai/components/AiChatScrollToBottomButton', () => ({
+vi.mock('@/ai/components/AiChatScrollToBottomButton', () => ({
   AiChatScrollToBottomButton: () => null,
 }));
-const mockPinScrollToBottom = jest.fn();
+const mockPinScrollToBottom = vi.fn();
 
-jest.mock(
+vi.mock(
   '@/ai/components/AgentChatScrollToBottomOnDisplayedThreadChangeLayoutEffect',
-  () => {
-    const { useLayoutEffect } = jest.requireActual<typeof React>('react');
+  async () => {
+    const { useLayoutEffect } = await vi.importActual<typeof React>('react');
     return {
       AgentChatScrollToBottomOnDisplayedThreadChangeLayoutEffect: () => {
         useLayoutEffect(mockPinScrollToBottom, []);
@@ -53,11 +55,11 @@ jest.mock(
     };
   },
 );
-jest.mock('@/ai/components/AgentChatStreamingAutoScrollEffect', () => ({
+vi.mock('@/ai/components/AgentChatStreamingAutoScrollEffect', () => ({
   AgentChatStreamingAutoScrollEffect: () => null,
 }));
 
-jest.mock('@/ai/components/LazyMarkdownRenderer', () => ({
+vi.mock('@/ai/components/LazyMarkdownRenderer', () => ({
   MarkdownLoadingSkeleton: () => <div role="status">Loading conversation</div>,
 }));
 
@@ -81,7 +83,7 @@ const renderPreambleBranch = () =>
 
 describe('AiChatTabMessageList preamble branch', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     resetJotaiStore();
     jotaiStore.set(agentChatDisplayedThreadState.atom, THREAD_ID);
   });
@@ -112,7 +114,7 @@ describe('AiChatTabMessageList preamble branch', () => {
 
 describe('AiChatTabMessageList loading', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     resetJotaiStore();
     jotaiStore.set(agentChatDisplayedThreadState.atom, THREAD_ID);
     jotaiStore.set(
@@ -131,7 +133,7 @@ describe('AiChatTabMessageList loading', () => {
       finishLoading = resolve;
     });
 
-    jest.mocked(AiChatNonLastMessageIdsList).mockImplementation(() => {
+    vi.mocked(AiChatNonLastMessageIdsList).mockImplementation(() => {
       if (!isLoaded) {
         throw loading;
       }

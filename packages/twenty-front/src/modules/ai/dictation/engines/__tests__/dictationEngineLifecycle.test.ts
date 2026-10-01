@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { createWebSpeechDictationEngine } from '@/ai/dictation/engines/createWebSpeechDictationEngine';
 import { type DictationEngineEvent } from '@/ai/dictation/types/DictationEngineEvent';
 import { type WebSpeechRecognitionConstructor } from '@/ai/dictation/types/WebSpeechRecognitionConstructor';
@@ -7,9 +9,9 @@ import { type WebSpeechRecognitionInstance } from '@/ai/dictation/types/WebSpeec
 // endSession is the test's stand-in for the recognizer reporting it finished,
 // which is the only thing that releases the started slot below.
 type FakeRecognition = WebSpeechRecognitionInstance & {
-  start: jest.Mock;
-  stop: jest.Mock;
-  abort: jest.Mock;
+  start: Mock;
+  stop: Mock;
+  abort: Mock;
   endSession: () => void;
 };
 
@@ -27,7 +29,7 @@ const createDeferred = <TValue>() => {
 };
 
 const createFakeStream = () => {
-  const stop = jest.fn();
+  const stop = vi.fn();
 
   return {
     stream: { getTracks: () => [{ stop }] } as unknown as MediaStream,
@@ -37,7 +39,7 @@ const createFakeStream = () => {
 
 const mockGetUserMedia = (implementation: () => Promise<MediaStream>) => {
   Object.defineProperty(navigator, 'mediaDevices', {
-    value: { getUserMedia: jest.fn(implementation) },
+    value: { getUserMedia: vi.fn(implementation) },
     configurable: true,
   });
 };
@@ -52,7 +54,7 @@ const stubSpeechRecognition = () => {
     function SpeechRecognition(this: FakeRecognition) {
       let isStarted = false;
 
-      this.start = jest.fn(() => {
+      this.start = vi.fn(() => {
         if (isStarted) {
           throw new DOMException(
             'recognition has already started',
@@ -62,8 +64,8 @@ const stubSpeechRecognition = () => {
 
         isStarted = true;
       });
-      this.stop = jest.fn();
-      this.abort = jest.fn();
+      this.stop = vi.fn();
+      this.abort = vi.fn();
       this.endSession = () => {
         isStarted = false;
         this.onend?.();
@@ -117,7 +119,7 @@ describe('createWebSpeechDictationEngine', () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
     delete (window as SpeechRecognitionTestWindow).SpeechRecognition;
   });
 
@@ -246,7 +248,7 @@ describe('createWebSpeechDictationEngine', () => {
   it.each(['stop', 'cancel'] as const)(
     'removes the visibility listener on %s even when onend never fires',
     async (method) => {
-      const removeEventListener = jest.spyOn(document, 'removeEventListener');
+      const removeEventListener = vi.spyOn(document, 'removeEventListener');
       const engine = createTestEngine({ isIOS: true });
 
       await engine.start();

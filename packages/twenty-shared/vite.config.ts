@@ -1,5 +1,5 @@
 import path from 'path';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite-plus';
 import packageJson from './package.json';
 
 const moduleEntries = Object.keys((packageJson as any).exports || {})
@@ -33,6 +33,51 @@ const entryFileNames = (chunk: any, extension: 'cjs' | 'mjs') => {
 
 export default defineConfig(() => {
   return {
+    run: {
+      tasks: {
+        build: {
+          command: 'bun run build:command',
+          dependsOn: ['generateBarrels'],
+          cache: true,
+        },
+        'build:individual': {
+          command: 'bun run build:individual:command',
+          dependsOn: ['build'],
+          cache: true,
+        },
+        typecheck: {
+          command: 'bun run typecheck:command',
+          dependsOn: [
+            { task: 'build', from: ['dependencies', 'devDependencies'] },
+          ],
+          cache: true,
+        },
+        test: {
+          command: 'bun run test:command',
+          dependsOn: [
+            { task: 'build', from: ['dependencies', 'devDependencies'] },
+          ],
+          cache: true,
+        },
+        fmt: {
+          command: 'bun run fmt:command',
+          dependsOn: [
+            { task: 'build', from: ['dependencies', 'devDependencies'] },
+          ],
+          cache: true,
+        },
+        lint: {
+          command: 'bun run lint:command',
+          dependsOn: ['twenty-oxlint-rules#build'],
+          cache: true,
+        },
+        'lint:fix': {
+          command: 'bun run lint:fix:command',
+          dependsOn: ['twenty-oxlint-rules#build'],
+          cache: false,
+        },
+      },
+    },
     root: __dirname,
     cacheDir: '../../node_modules/.vite/packages/twenty-shared',
     resolve: {

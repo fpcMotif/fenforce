@@ -1,14 +1,16 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { useActivities } from '@/activities/hooks/useActivities';
 import { type Task } from '@/activities/types/Task';
 import { CoreObjectNameSingular } from 'twenty-shared/types';
 
-jest.mock('@/activities/hooks/useActivityTargetsForTargetableObjects', () => ({
-  useActivityTargetsForTargetableObjects: jest.fn(),
+vi.mock('@/activities/hooks/useActivityTargetsForTargetableObjects', () => ({
+  useActivityTargetsForTargetableObjects: vi.fn(),
 }));
 
-jest.mock('@/object-record/hooks/useFindManyRecords', () => ({
-  useFindManyRecords: jest.fn(),
+vi.mock('@/object-record/hooks/useFindManyRecords', () => ({
+  useFindManyRecords: vi.fn(),
 }));
 
 const mockActivityTarget = {
@@ -38,13 +40,13 @@ const mockActivity = {
 
 describe('useActivities', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('fetches activities', async () => {
-    const useActivityTargetsForTargetableObjectsMock = jest.requireMock(
-      '@/activities/hooks/useActivityTargetsForTargetableObjects',
-    );
+    const useActivityTargetsForTargetableObjectsMock = await vi.importMock<{
+      useActivityTargetsForTargetableObjects: ReturnType<typeof vi.fn>;
+    }>('@/activities/hooks/useActivityTargetsForTargetableObjects');
     useActivityTargetsForTargetableObjectsMock.useActivityTargetsForTargetableObjects.mockReturnValue(
       {
         activityTargets: [{ ...mockActivityTarget, task: mockActivity }],

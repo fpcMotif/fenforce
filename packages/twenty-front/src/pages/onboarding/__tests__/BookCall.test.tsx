@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
@@ -15,13 +17,13 @@ import {
 import { BookCall } from '~/pages/onboarding/BookCall';
 import { OnboardingStatus } from '~/generated-metadata/graphql';
 
-const mockOnboardingStatus = jest.fn();
+const mockOnboardingStatus = vi.fn();
 
-jest.mock('@/onboarding/hooks/useOnboardingStatus', () => ({
+vi.mock('@/onboarding/hooks/useOnboardingStatus', () => ({
   useOnboardingStatus: () => mockOnboardingStatus(),
 }));
 
-jest.mock('@/onboarding/components/BookCallEmbed', () => ({
+vi.mock('@/onboarding/components/BookCallEmbed', () => ({
   BookCallEmbed: ({
     calendarBookingPageId,
   }: {
@@ -29,7 +31,7 @@ jest.mock('@/onboarding/components/BookCallEmbed', () => ({
   }) => <div data-testid="book-call-embed">{calendarBookingPageId}</div>,
 }));
 
-jest.mock('@/onboarding/components/BookCallOnboardingStepActions', () => ({
+vi.mock('@/onboarding/components/BookCallOnboardingStepActions', () => ({
   BookCallOnboardingStepActions: () => <div>Skip</div>,
 }));
 
@@ -55,7 +57,7 @@ const renderPage = () =>
 describe('BookCall', () => {
   beforeEach(() => {
     resetJotaiStore();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockOnboardingStatus.mockReturnValue(OnboardingStatus.BOOK_CALL);
   });
 

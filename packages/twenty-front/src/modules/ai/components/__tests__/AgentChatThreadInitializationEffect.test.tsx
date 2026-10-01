@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { currentAiChatThreadState } from '@/ai/states/currentAiChatThreadState';
 import { agentChatUsageComponentFamilyState } from '@/ai/states/agentChatUsageComponentFamilyState';
 import { metadataStoreState } from '@/metadata-store/states/metadataStoreState';
@@ -8,26 +10,26 @@ import { createStore, Provider as JotaiProvider } from 'jotai';
 import { AgentChatThreadInitializationEffect } from '@/ai/components/AgentChatThreadInitializationEffect';
 import { AgentChatComponentInstanceContext } from '@/ai/contexts/AgentChatComponentInstanceContext';
 
-const refreshAgentChatThreadsMock = jest.fn();
+const refreshAgentChatThreadsMock = vi.fn();
 
-jest.mock('@/ai/hooks/useRefreshAgentChatThreads', () => ({
+vi.mock('@/ai/hooks/useRefreshAgentChatThreads', () => ({
   useRefreshAgentChatThreads: () => ({
     refreshAgentChatThreads: refreshAgentChatThreadsMock,
   }),
 }));
 
-jest.mock('@/settings/roles/hooks/useHasPermissionFlag', () => ({
+vi.mock('@/settings/roles/hooks/useHasPermissionFlag', () => ({
   useHasPermissionFlag: () => true,
 }));
 
 describe('AgentChatThreadInitializationEffect', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
-    jest.clearAllMocks();
+    vi.useFakeTimers();
+    vi.clearAllMocks();
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it('retries when the initial thread request fails', async () => {
@@ -52,7 +54,7 @@ describe('AgentChatThreadInitializationEffect', () => {
     expect(refreshAgentChatThreadsMock).toHaveBeenCalledTimes(1);
 
     await act(async () => {
-      jest.advanceTimersByTime(3000);
+      vi.advanceTimersByTime(3000);
       await Promise.resolve();
     });
 

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
@@ -8,15 +10,15 @@ import { activeDropdownFocusIdState } from '@/ui/layout/dropdown/states/activeDr
 import { isDropdownOpenComponentState } from '@/ui/layout/dropdown/states/isDropdownOpenComponentState';
 import { focusStackState } from '@/ui/utilities/focus/states/focusStackState';
 
-const mockRefetch = jest.fn().mockResolvedValue(undefined);
+const mockRefetch = vi.fn().mockResolvedValue(undefined);
 let mockEnabled = true;
-jest.mock('@/object-record/record-sharing/hooks/useRecordSharing', () => ({
+vi.mock('@/object-record/record-sharing/hooks/useRecordSharing', () => ({
   useRecordSharing: () => ({
     sharing: { isEnabled: mockEnabled },
     refetch: mockRefetch,
   }),
 }));
-jest.mock(
+vi.mock(
   '@/object-record/record-sharing/components/RecordSharingDropdownContent',
   () => ({
     RecordSharingDropdownContent: () => <div>Sharing settings</div>,

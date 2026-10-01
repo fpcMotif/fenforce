@@ -16,14 +16,14 @@ import { IS_SECURE_DEPLOYMENT } from 'test/integration/graphql/suites/auth/user-
 
 // The secure/insecure cookie branch is decided by configuration, never by the
 // transport: isSecureCookieDeployment() reads SERVER_URL, which is env-only.
-// Run through `nx run twenty-server:test:integration:secure`.
+// Run through `bunx vite-plus run twenty-server#test:integration:secure`.
 describe('claim state cookie on a production-like secure deployment (integration)', () => {
   let registrationId: string;
 
   beforeAll(async () => {
     if (!IS_SECURE_DEPLOYMENT) {
       throw new Error(
-        'This suite requires an https SERVER_URL; run it via nx run twenty-server:test:integration:secure',
+        'This suite requires an https SERVER_URL; run it via bunx vite-plus run twenty-server#test:integration:secure',
       );
     }
 

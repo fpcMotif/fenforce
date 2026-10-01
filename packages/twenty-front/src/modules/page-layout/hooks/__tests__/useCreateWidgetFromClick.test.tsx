@@ -1,3 +1,5 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { useCreateWidgetFromClick } from '@/page-layout/hooks/useCreateWidgetFromClick';
 import { pageLayoutDraggedAreaComponentState } from '@/page-layout/states/pageLayoutDraggedAreaComponentState';
 import { pageLayoutEditingWidgetIdComponentState } from '@/page-layout/states/pageLayoutEditingWidgetIdComponentState';
@@ -12,16 +14,14 @@ import {
   PageLayoutTestWrapper,
 } from './PageLayoutTestWrapper';
 
-jest.mock(
-  '@/side-panel/pages/page-layout/hooks/useNavigatePageLayoutSidePanel',
-);
+vi.mock('@/side-panel/pages/page-layout/hooks/useNavigatePageLayoutSidePanel');
 
 describe('useCreateWidgetFromClick', () => {
-  const mockNavigatePageLayoutSidePanel = jest.fn();
+  const mockNavigatePageLayoutSidePanel = vi.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
-    (useNavigatePageLayoutSidePanel as jest.Mock).mockReturnValue({
+    vi.clearAllMocks();
+    (useNavigatePageLayoutSidePanel as Mock).mockReturnValue({
       navigatePageLayoutSidePanel: mockNavigatePageLayoutSidePanel,
     });
   });

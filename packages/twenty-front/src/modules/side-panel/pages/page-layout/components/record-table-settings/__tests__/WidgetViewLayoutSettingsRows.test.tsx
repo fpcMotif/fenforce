@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
@@ -5,53 +7,53 @@ import { render, screen } from '@testing-library/react';
 import { WidgetViewLayoutSettingsRows } from '@/side-panel/pages/page-layout/components/record-table-settings/WidgetViewLayoutSettingsRows';
 import { ViewType } from '~/generated-metadata/graphql';
 
-const mockUseRecordTableWidgetViewForDisplay = jest.fn();
+const mockUseRecordTableWidgetViewForDisplay = vi.fn();
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
-  useObjectMetadataItems: jest.fn(() => ({ objectMetadataItems: [] })),
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
+  useObjectMetadataItems: vi.fn(() => ({ objectMetadataItems: [] })),
 }));
-jest.mock(
+vi.mock(
   '@/page-layout/widgets/record-table/hooks/useRecordTableWidgetLayoutCallbacks',
   () => ({
-    useRecordTableWidgetLayoutCallbacks: jest.fn(() => ({
-      handleShouldHideEmptyGroupsChange: jest.fn(),
+    useRecordTableWidgetLayoutCallbacks: vi.fn(() => ({
+      handleShouldHideEmptyGroupsChange: vi.fn(),
     })),
   }),
 );
-jest.mock(
+vi.mock(
   '@/page-layout/widgets/record-table/hooks/useRecordTableWidgetViewForDisplay',
   () => ({
     useRecordTableWidgetViewForDisplay: () =>
       mockUseRecordTableWidgetViewForDisplay(),
   }),
 );
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/components/record-table-settings/RecordTableCalendarFieldDropdownContent',
   () => ({ RecordTableCalendarFieldDropdownContent: () => null }),
 );
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/components/record-table-settings/RecordTableCalendarLayoutDropdownContent',
   () => ({ RecordTableCalendarLayoutDropdownContent: () => null }),
 );
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/components/record-table-settings/RecordTableGroupByDropdownContent',
   () => ({ RecordTableGroupByDropdownContent: () => null }),
 );
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/components/record-table-settings/RecordTableLayoutDropdownContent',
   () => ({ RecordTableLayoutDropdownContent: () => null }),
 );
-jest.mock('@/ui/layout/dropdown/components/LegacyDropdownContent', () => ({
+vi.mock('@/ui/layout/dropdown/components/LegacyDropdownContent', () => ({
   LegacyDropdownContent: ({ children }: { children: React.ReactNode }) =>
     children,
 }));
-jest.mock('@/ui/layout/selectable-list/components/SelectableListItem', () => ({
+vi.mock('@/ui/layout/selectable-list/components/SelectableListItem', () => ({
   SelectableListItem: ({ children }: { children: React.ReactNode }) => children,
 }));
-jest.mock('@/command-menu/components/CommandMenuItemSwitch', () => ({
+vi.mock('@/command-menu/components/CommandMenuItemSwitch', () => ({
   CommandMenuItemSwitch: () => null,
 }));
-jest.mock('@/command-menu/components/CommandMenuItemDropdown', () => ({
+vi.mock('@/command-menu/components/CommandMenuItemDropdown', () => ({
   CommandMenuItemDropdown: ({
     Icon,
     label,
@@ -88,7 +90,7 @@ const renderLayoutRows = (widgetViewType: ViewType) => {
 };
 
 describe('WidgetViewLayoutSettingsRows', () => {
-  beforeEach(() => jest.clearAllMocks());
+  beforeEach(() => vi.clearAllMocks());
 
   it('includes calendar layout settings without a feature flag', () => {
     renderLayoutRows(ViewType.CALENDAR_WIDGET);

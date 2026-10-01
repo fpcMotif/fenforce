@@ -1,8 +1,5 @@
 import ReactDOM from 'react-dom/client';
 
-import { App } from '@/app/components/App';
-import '@/app/utils/setupMonacoEnvironment';
-import { hydrateMetadataStore } from '@/metadata-store/storage/metadataStoreStorage';
 import '@fontsource/dm-mono/400.css';
 import '@fontsource/dm-mono/500.css';
 import '@fontsource/inter/400.css';
@@ -15,12 +12,23 @@ import 'twenty-ui/theme-light.css';
 import 'twenty-ui/theme-dark.css';
 import './index.css';
 
-const renderApp = () => {
-  const root = ReactDOM.createRoot(
-    document.getElementById('root') ?? document.body,
+const root = ReactDOM.createRoot(
+  document.getElementById('root') ?? document.body,
+);
+
+if (import.meta.env.REACT_APP_FENFORCE_CONVEX_URL) {
+  import('./pages/convex-preview/ConvexCompaniesPreview').then(
+    ({ ConvexCompaniesPreview }) => root.render(<ConvexCompaniesPreview />),
   );
-
-  root.render(<App />);
-};
-
-hydrateMetadataStore().then(renderApp, renderApp);
+} else {
+  Promise.all([
+    import('@/app/components/App'),
+    import('@/app/utils/setupMonacoEnvironment'),
+    import('@/metadata-store/storage/metadataStoreStorage'),
+  ]).then(([{ App }, , { hydrateMetadataStore }]) => {
+    hydrateMetadataStore().then(
+      () => root.render(<App />),
+      () => root.render(<App />),
+    );
+  });
+}

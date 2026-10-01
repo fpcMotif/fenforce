@@ -1,19 +1,26 @@
+import type * as ReactModule from '@sentry/react';
+import type * as ReloadWindowModule from '~/utils/reloadWindow';
+import { type MockInstance, vi } from 'vite-plus/test';
+
 import { render, screen, waitFor } from '@testing-library/react';
 
 import { AppErrorBoundary } from '@/error-handler/components/AppErrorBoundary';
 import { STALE_CHUNK_RELOAD_TIMESTAMP_KEY } from '@/error-handler/constants/StaleChunkReloadTimestampKey';
 
-jest.mock('@sentry/react', () => ({
-  captureException: jest.fn(),
-  flush: jest.fn().mockResolvedValue(true),
+vi.mock('@sentry/react', () => ({
+  captureException: vi.fn(),
+  flush: vi.fn().mockResolvedValue(true),
 }));
 
-jest.mock('~/utils/reloadWindow', () => ({
-  reloadWindow: jest.fn(),
+vi.mock('~/utils/reloadWindow', () => ({
+  reloadWindow: vi.fn(),
 }));
 
-const { captureException, flush } = jest.requireMock('@sentry/react');
-const { reloadWindow } = jest.requireMock('~/utils/reloadWindow');
+const { captureException, flush } =
+  await vi.importMock<typeof ReactModule>('@sentry/react');
+const { reloadWindow } = await vi.importMock<typeof ReloadWindowModule>(
+  '~/utils/reloadWindow',
+);
 
 const STALE_CHUNK_ERROR_MESSAGE =
   'Failed to fetch dynamically imported module: /assets/Page.js';
@@ -39,18 +46,18 @@ const renderWithBoundary = (error: Error) =>
   );
 
 describe('AppErrorBoundary', () => {
-  let consoleErrorSpy: jest.SpyInstance;
+  let consoleErrorSpy: MockInstance;
 
   beforeEach(() => {
     window.sessionStorage.clear();
-    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   afterEach(() => {
     consoleErrorSpy.mockRestore();
-    jest.restoreAllMocks();
-    jest.clearAllMocks();
-    jest.useRealTimers();
+    vi.restoreAllMocks();
+    vi.clearAllMocks();
+    vi.useRealTimers();
   });
 
   it('should capture with Sentry then reload on a stale chunk error when no reload happened recently', async () => {
@@ -71,17 +78,17 @@ describe('AppErrorBoundary', () => {
   });
 
   it('should still reload after the flush timeout when the Sentry flush hangs', async () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     flush.mockImplementationOnce(() => new Promise(() => {}));
 
     renderWithBoundary(new Error(STALE_CHUNK_ERROR_MESSAGE));
 
-    await jest.advanceTimersByTimeAsync(0);
+    await vi.advanceTimersByTimeAsync(0);
 
     expect(captureException).toHaveBeenCalledTimes(1);
     expect(reloadWindow).not.toHaveBeenCalled();
 
-    await jest.advanceTimersByTimeAsync(2_000);
+    await vi.advanceTimersByTimeAsync(2_000);
 
     expect(reloadWindow).toHaveBeenCalledTimes(1);
   });
@@ -104,7 +111,7 @@ describe('AppErrorBoundary', () => {
   });
 
   it('should not reload on a stale chunk error when the reload timestamp cannot be stored', async () => {
-    jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
       throw new Error('sessionStorage access denied');
     });
 

@@ -1,13 +1,15 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 import { type ToolUIPart } from 'ai';
 
 import { AiChatToolWidget } from '@/ai/components/AiChatToolWidget';
 
-jest.mock('@/ai/components/ToolStepRenderer', () => ({
+vi.mock('@/ai/components/ToolStepRenderer', () => ({
   ToolStepRenderer: () => <div data-testid="tool-step-renderer" />,
 }));
 
-jest.mock('@/front-components/components/FrontComponentRenderer', () => ({
+vi.mock('@/front-components/components/FrontComponentRenderer', () => ({
   FrontComponentRenderer: ({
     toolCall,
   }: {
@@ -19,7 +21,7 @@ jest.mock('@/front-components/components/FrontComponentRenderer', () => ({
   ),
 }));
 
-jest.mock('@/front-components/components/FrontComponentSkeletonLoader', () => ({
+vi.mock('@/front-components/components/FrontComponentSkeletonLoader', () => ({
   FrontComponentSkeletonLoader: () => <div data-testid="skeleton" />,
 }));
 

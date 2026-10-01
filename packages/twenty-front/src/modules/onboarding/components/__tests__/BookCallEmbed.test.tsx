@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 
@@ -9,9 +11,9 @@ import {
   resetJotaiStore,
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
-const mockCalConfig = jest.fn();
+const mockCalConfig = vi.fn();
 
-jest.mock('@calcom/embed-react', () => ({
+vi.mock('@calcom/embed-react', () => ({
   __esModule: true,
   default: (props: { config?: unknown }) => {
     mockCalConfig(props.config);
@@ -20,7 +22,7 @@ jest.mock('@calcom/embed-react', () => ({
   },
 }));
 
-jest.mock('@/ui/utilities/scroll/components/ScrollWrapper', () => ({
+vi.mock('@/ui/utilities/scroll/components/ScrollWrapper', () => ({
   ScrollWrapper: ({ children }: { children: React.ReactNode }) => children,
 }));
 
@@ -57,7 +59,7 @@ const renderEmbed = ({
 describe('BookCallEmbed', () => {
   beforeEach(() => {
     resetJotaiStore();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should prefill the name entered at the profile step', () => {

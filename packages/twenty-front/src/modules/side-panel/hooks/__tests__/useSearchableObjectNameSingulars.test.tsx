@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -8,7 +10,7 @@ import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
 
 let isWorkflowCoreEnabled = false;
 
-jest.mock('@/object-metadata/hooks/useReadableObjectMetadataItems', () => ({
+vi.mock('@/object-metadata/hooks/useReadableObjectMetadataItems', () => ({
   useReadableObjectMetadataItems: () => ({
     readableObjectMetadataItems: [
       { nameSingular: 'company', isSearchable: true },
@@ -18,7 +20,7 @@ jest.mock('@/object-metadata/hooks/useReadableObjectMetadataItems', () => ({
   }),
 }));
 
-jest.mock('@/workflow/hooks/useIsWorkflowCoreEnabled', () => ({
+vi.mock('@/workflow/hooks/useIsWorkflowCoreEnabled', () => ({
   useIsWorkflowCoreEnabled: () => isWorkflowCoreEnabled,
 }));
 

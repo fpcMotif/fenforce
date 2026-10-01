@@ -1,21 +1,23 @@
+import { type MockedFunction, vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 
 import { type CurrentWorkspaceMember } from '@/auth/states/currentWorkspaceMemberState';
 import { useInitializeFormatPreferences } from '@/localization/hooks/useInitializeFormatPreferences';
 import { getFormatPreferencesFromWorkspaceMember } from '@/localization/utils/format-preferences/getFormatPreferencesFromWorkspaceMember';
 
-jest.mock(
+vi.mock(
   '@/localization/utils/format-preferences/getFormatPreferencesFromWorkspaceMember',
 );
 
 const mockGetFormatPreferencesFromWorkspaceMember =
-  getFormatPreferencesFromWorkspaceMember as jest.MockedFunction<
+  getFormatPreferencesFromWorkspaceMember as MockedFunction<
     typeof getFormatPreferencesFromWorkspaceMember
   >;
 
 describe('useInitializeFormatPreferences', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should be a function', () => {

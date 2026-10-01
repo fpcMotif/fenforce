@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { DropdownRoot } from '@/ui/layout/dropdown/components/DropdownRoot';
 import { useCloseDropdown } from '@/ui/layout/dropdown/hooks/useCloseDropdown';
 import { useOpenDropdown } from '@/ui/layout/dropdown/hooks/useOpenDropdown';
@@ -87,7 +89,7 @@ describe('DropdownRoot', () => {
   it('updates focus and global shortcuts before notifying opening and dismissal', async () => {
     const user = userEvent.setup();
     const store = createTestStore();
-    const onOpenChange = jest.fn((open: boolean) => ({
+    const onOpenChange = vi.fn((open: boolean) => ({
       open,
       focusStack: store.get(focusStackState.atom),
       globalHotkeysConfig: store.get(currentGlobalHotkeysConfigSelector.atom),
@@ -238,7 +240,7 @@ describe('DropdownRoot', () => {
 
   it('opens and closes the declared dropdown through external hooks', async () => {
     const store = createTestStore();
-    const onOpenChange = jest.fn((open: boolean) => ({
+    const onOpenChange = vi.fn((open: boolean) => ({
       open,
       focusStack: store.get(focusStackState.atom),
       globalHotkeysConfig: store.get(currentGlobalHotkeysConfigSelector.atom),
@@ -339,8 +341,8 @@ describe('DropdownRoot', () => {
 
   it('uses the latest callback and stops notifying after unmount', () => {
     const store = createTestStore();
-    const initialOnOpenChange = jest.fn();
-    const latestOnOpenChange = jest.fn();
+    const initialOnOpenChange = vi.fn();
+    const latestOnOpenChange = vi.fn();
     const { result } = renderHook(
       () => ({ ...useOpenDropdown(), ...useCloseDropdown() }),
       {

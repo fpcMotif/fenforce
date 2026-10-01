@@ -151,7 +151,7 @@ jobs:
               (`✅ already updated in this PR` / `⚠️ needs update`), and **Suggested fix**
               (one concrete sentence, e.g. the exact command to replace).
             - When any row needs an update, end with one line reminding the author to run
-              `npx nx run twenty-agent-skills:validate` after editing the canonical content.
+              `bunx vite-plus run twenty-agent-skills#validate` after editing the canonical content.
             - Be terse. No preamble, no sign-off. Only report genuine drift — if unsure
               whether something is user-facing, say it's uncertain rather than asserting.
 

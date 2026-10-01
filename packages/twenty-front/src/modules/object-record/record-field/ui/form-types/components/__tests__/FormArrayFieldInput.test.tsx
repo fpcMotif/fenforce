@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { FormArrayFieldInput } from '@/object-record/record-field/ui/form-types/components/FormArrayFieldInput';
 import { FormLinksFieldInput } from '@/object-record/record-field/ui/form-types/components/FormLinksFieldInput';
 import { i18n } from '@lingui/core';
@@ -22,7 +24,7 @@ const renderWithProviders = (children: ReactNode) => {
 const renderArrayField = ({
   defaultValue = [],
 }: { defaultValue?: string[] } = {}) => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   renderWithProviders(
     <>
       <button>Before</button>
@@ -125,7 +127,7 @@ it('keeps a blank first item draft in place without adding it when Tab leaves th
 
 it('adds the typed secondary link when Tab leaves the links field', async () => {
   const user = userEvent.setup();
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   renderWithProviders(
     <>
       <FormLinksFieldInput

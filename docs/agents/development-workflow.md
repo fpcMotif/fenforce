@@ -83,6 +83,10 @@ See [Convex runtime constraints](https://docs.convex.dev/functions/runtimes).
 
 ## Migration sequence
 
+Use the [feature, criteria, and critical-path maps](../migration/README.md) when selecting and reviewing migration slices.
+Every assignment names its feature IDs and applicable acceptance gates.
+The source coverage checker detects catalog drift; it does not establish runtime parity.
+
 The proposed first vertical slice is an authenticated approval request, matching the existing workflow experiment.
 Confirm its business fields and approver policy before treating the slice as a production requirement.
 

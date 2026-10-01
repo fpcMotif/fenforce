@@ -1,12 +1,15 @@
+import type * as ReactRouterDomModule from 'react-router-dom';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { MemoryRouter, useNavigate } from 'react-router-dom';
 
 import { CoreObjectNameSingular, AppPath } from 'twenty-shared/types';
 import { useNavigateApp } from '~/hooks/useNavigateApp';
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: jest.fn(),
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual<typeof ReactRouterDomModule>('react-router-dom')),
+  useNavigate: vi.fn(),
 }));
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
@@ -14,11 +17,11 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 describe('useNavigateApp', () => {
-  const mockNavigate = jest.fn();
+  const mockNavigate = vi.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
-    (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
+    vi.clearAllMocks();
+    (useNavigate as Mock).mockReturnValue(mockNavigate);
   });
 
   it('should navigate to the correct path without params', () => {

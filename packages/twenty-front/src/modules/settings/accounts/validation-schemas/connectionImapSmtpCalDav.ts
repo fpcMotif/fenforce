@@ -1,6 +1,6 @@
 import { ACCOUNT_TYPES } from 'twenty-shared/constants';
 import { z } from 'zod';
-import { type ConnectionParametersInput } from '~/generated-metadata/graphql';
+import { EmailConnectionSecurity } from '~/generated-metadata/graphql';
 
 import {
   isProtocolConfigured,
@@ -14,8 +14,12 @@ const connectionParameters = z
     username: z.string().optional(),
     password: z.string().default(''),
     connectionSecurity: z
-      .enum(['NONE', 'STARTTLS', 'SSL_TLS'])
-      .default('SSL_TLS'),
+      .enum([
+        EmailConnectionSecurity.NONE,
+        EmailConnectionSecurity.STARTTLS,
+        EmailConnectionSecurity.SSL_TLS,
+      ])
+      .default(EmailConnectionSecurity.SSL_TLS),
   })
   .refine(
     (data) => {
@@ -41,7 +45,7 @@ export const connectionImapSmtpCalDav = z
   .refine(
     (data) => {
       return ACCOUNT_TYPES.some((protocol) =>
-        isProtocolConfigured(data[protocol] as ConnectionParametersInput),
+        isProtocolConfigured(data[protocol]),
       );
     },
     {
@@ -62,9 +66,7 @@ export const connectionImapSmtpCalDavUpdate = z
   .refine(
     (data) => {
       return ACCOUNT_TYPES.some((protocol) =>
-        isProtocolConfiguredForUpdate(
-          data[protocol] as ConnectionParametersInput,
-        ),
+        isProtocolConfiguredForUpdate(data[protocol]),
       );
     },
     {

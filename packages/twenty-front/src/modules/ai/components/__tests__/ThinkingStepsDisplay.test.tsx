@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from 'twenty-ui/theme';
@@ -5,13 +7,13 @@ import { ThemeProvider } from 'twenty-ui/theme';
 import { ThinkingStepsDisplay } from '@/ai/components/ThinkingStepsDisplay';
 import { type ThinkingStepPart } from '@/ai/utils/thinkingStepPart';
 
-jest.mock('~/hooks/useCopyToClipboard', () => ({
+vi.mock('~/hooks/useCopyToClipboard', () => ({
   useCopyToClipboard: () => ({
-    copyToClipboard: jest.fn(),
+    copyToClipboard: vi.fn(),
   }),
 }));
 
-jest.mock('@/ai/hooks/useGetToolIndex', () => ({
+vi.mock('@/ai/hooks/useGetToolIndex', () => ({
   useGetToolIndex: () => ({
     toolIndex: [],
     loading: false,
@@ -19,14 +21,14 @@ jest.mock('@/ai/hooks/useGetToolIndex', () => ({
   }),
 }));
 
-jest.mock(
+vi.mock(
   '@/ui/utilities/state/jotai/hooks/useAtomComponentSelectorValue',
   () => ({
     useAtomComponentSelectorValue: () => 'output',
   }),
 );
 
-jest.mock('@/ui/layout/tab-list/components/TabList', () => ({
+vi.mock('@/ui/layout/tab-list/components/TabList', () => ({
   TabList: ({
     tabs,
     onTabChange,

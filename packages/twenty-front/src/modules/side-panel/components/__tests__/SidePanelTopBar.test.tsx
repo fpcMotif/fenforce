@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
@@ -22,27 +24,27 @@ import { FocusComponentType } from '@/ui/utilities/focus/types/FocusComponentTyp
 import { SidePanelPages } from 'twenty-shared/types';
 import { IconDotsVertical } from 'twenty-ui/icon';
 
-jest.mock('@/side-panel/components/SidePanelTopBarInputFocusEffect', () => ({
+vi.mock('@/side-panel/components/SidePanelTopBarInputFocusEffect', () => ({
   SidePanelTopBarInputFocusEffect: () => null,
 }));
 
-jest.mock('@/side-panel/components/SidePanelTopBarRightCornerIcon', () => ({
+vi.mock('@/side-panel/components/SidePanelTopBarRightCornerIcon', () => ({
   SidePanelTopBarRightCornerIcon: () => null,
 }));
 
-jest.mock('@/side-panel/components/SidePanelExpandButton', () => ({
+vi.mock('@/side-panel/components/SidePanelExpandButton', () => ({
   SidePanelExpandButton: () => null,
 }));
 
-const mockCloseSidePanelMenu = jest.fn();
+const mockCloseSidePanelMenu = vi.fn();
 
 let mockContextChips: SidePanelContextChipProps[] = [];
 
-jest.mock('@/side-panel/hooks/useSidePanelContextChips', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelContextChips', () => ({
   useSidePanelContextChips: () => ({ contextChips: mockContextChips }),
 }));
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({
     closeSidePanelMenu: mockCloseSidePanelMenu,
   }),
@@ -50,7 +52,7 @@ jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
 
 let mockIsMobile = false;
 
-jest.mock('twenty-ui/utilities', () => ({
+vi.mock('twenty-ui/utilities', () => ({
   useIsMobile: () => mockIsMobile,
 }));
 
@@ -189,7 +191,7 @@ describe('SidePanelTopBar', () => {
   });
 
   it('handles Escape before the underlying page hotkeys', () => {
-    const underlyingPageEscapeHandler = jest.fn();
+    const underlyingPageEscapeHandler = vi.fn();
 
     document.addEventListener('keydown', underlyingPageEscapeHandler);
 

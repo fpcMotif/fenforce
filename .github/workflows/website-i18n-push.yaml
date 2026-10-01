@@ -36,13 +36,13 @@ jobs:
           git checkout -B i18n-website origin/i18n-website || git checkout -b i18n-website
 
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
 
       - name: Build dependencies
-        run: npx nx build twenty-shared
+        run: bunx vite-plus run twenty-shared#build
 
       - name: Extract website translations
-        run: npx nx run twenty-website:lingui:extract
+        run: bunx vite-plus run twenty-website#lingui:extract
 
       - name: Check and commit extracted files
         id: check_extract_changes
@@ -58,7 +58,7 @@ jobs:
           fi
 
       - name: Compile website translations
-        run: npx nx run twenty-website:lingui:compile
+        run: bunx vite-plus run twenty-website#lingui:compile
 
       - name: Check and commit compiled files
         id: check_compile_changes

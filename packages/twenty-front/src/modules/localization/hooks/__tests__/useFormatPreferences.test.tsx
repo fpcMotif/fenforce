@@ -1,3 +1,5 @@
+import { type MockedFunction, vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { type ReactNode } from 'react';
 import { Provider as JotaiProvider } from 'jotai';
@@ -19,42 +21,43 @@ import { useUpdateWorkspaceMemberSettings } from '@/settings/profile/hooks/useUp
 import { CalendarStartDay } from 'twenty-shared/constants';
 import { FirstDayOfTheWeek } from 'twenty-shared/types';
 
-jest.mock('@/settings/profile/hooks/useUpdateWorkspaceMemberSettings', () => ({
-  useUpdateWorkspaceMemberSettings: jest.fn(),
+vi.mock('@/settings/profile/hooks/useUpdateWorkspaceMemberSettings', () => ({
+  useUpdateWorkspaceMemberSettings: vi.fn(),
 }));
-jest.mock('@/localization/utils/detection/detectTimeZone');
-jest.mock('@/localization/utils/detection/detectDateFormat');
-jest.mock('@/localization/utils/detection/detectTimeFormat');
-jest.mock('@/localization/utils/detection/detectNumberFormat');
-jest.mock('@/localization/utils/detection/detectCalendarStartDay');
-jest.mock(
+vi.mock('@/localization/utils/detection/detectTimeZone');
+vi.mock('@/localization/utils/detection/detectDateFormat');
+vi.mock('@/localization/utils/detection/detectTimeFormat');
+vi.mock('@/localization/utils/detection/detectNumberFormat');
+vi.mock('@/localization/utils/detection/detectCalendarStartDay');
+vi.mock(
   '@/localization/utils/format-preferences/getWorkspaceMemberUpdateFromFormatPreferences',
 );
 
 const mockUseUpdateWorkspaceMemberSettings =
-  useUpdateWorkspaceMemberSettings as jest.MockedFunction<
+  useUpdateWorkspaceMemberSettings as MockedFunction<
     typeof useUpdateWorkspaceMemberSettings
   >;
-const mockDetectTimeZone = detectTimeZone as jest.MockedFunction<
+const mockDetectTimeZone = detectTimeZone as MockedFunction<
   typeof detectTimeZone
 >;
-const mockDetectDateFormat = detectDateFormat as jest.MockedFunction<
+const mockDetectDateFormat = detectDateFormat as MockedFunction<
   typeof detectDateFormat
 >;
-const mockDetectTimeFormat = detectTimeFormat as jest.MockedFunction<
+const mockDetectTimeFormat = detectTimeFormat as MockedFunction<
   typeof detectTimeFormat
 >;
-const mockDetectNumberFormat = detectNumberFormat as jest.MockedFunction<
+const mockDetectNumberFormat = detectNumberFormat as MockedFunction<
   typeof detectNumberFormat
 >;
-const mockDetectCalendarStartDay =
-  detectCalendarStartDay as jest.MockedFunction<typeof detectCalendarStartDay>;
+const mockDetectCalendarStartDay = detectCalendarStartDay as MockedFunction<
+  typeof detectCalendarStartDay
+>;
 const mockGetWorkspaceMemberUpdateFromFormatPreferences =
-  getWorkspaceMemberUpdateFromFormatPreferences as jest.MockedFunction<
+  getWorkspaceMemberUpdateFromFormatPreferences as MockedFunction<
     typeof getWorkspaceMemberUpdateFromFormatPreferences
   >;
 
-const mockUpdateWorkspaceMemberSettingsFn = jest.fn();
+const mockUpdateWorkspaceMemberSettingsFn = vi.fn();
 
 const mockCurrentWorkspaceMember = {
   id: 'workspace-member-1',
@@ -83,7 +86,7 @@ const createWrapper =
 
 describe('useFormatPreferences', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     jotaiStore.set(
       workspaceMemberFormatPreferencesState.atom,

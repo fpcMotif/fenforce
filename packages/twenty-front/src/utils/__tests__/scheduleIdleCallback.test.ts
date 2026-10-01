@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { scheduleIdleCallback } from '~/utils/scheduleIdleCallback';
 
 type RequestIdleCallback = typeof window.requestIdleCallback;
@@ -25,16 +27,16 @@ describe('scheduleIdleCallback', () => {
 
   afterEach(() => {
     setIdleCallbackApi(originalRequestIdleCallback, originalCancelIdleCallback);
-    jest.useRealTimers();
-    jest.clearAllMocks();
+    vi.useRealTimers();
+    vi.clearAllMocks();
   });
 
   describe('when requestIdleCallback is available', () => {
     it('schedules the callback through requestIdleCallback with the timeout', () => {
-      const requestIdleCallbackMock = jest.fn(() => 42);
-      setIdleCallbackApi(requestIdleCallbackMock, jest.fn());
+      const requestIdleCallbackMock = vi.fn(() => 42);
+      setIdleCallbackApi(requestIdleCallbackMock, vi.fn());
 
-      const callback = jest.fn();
+      const callback = vi.fn();
       scheduleIdleCallback(callback, { timeout: 2000 });
 
       expect(requestIdleCallbackMock).toHaveBeenCalledWith(callback, {
@@ -43,13 +45,13 @@ describe('scheduleIdleCallback', () => {
     });
 
     it('cancels the scheduled callback through cancelIdleCallback', () => {
-      const cancelIdleCallbackMock = jest.fn();
+      const cancelIdleCallbackMock = vi.fn();
       setIdleCallbackApi(
-        jest.fn(() => 42),
+        vi.fn(() => 42),
         cancelIdleCallbackMock,
       );
 
-      const cancel = scheduleIdleCallback(jest.fn(), { timeout: 2000 });
+      const cancel = scheduleIdleCallback(vi.fn(), { timeout: 2000 });
       cancel();
 
       expect(cancelIdleCallbackMock).toHaveBeenCalledWith(42);
@@ -58,27 +60,27 @@ describe('scheduleIdleCallback', () => {
 
   describe('when requestIdleCallback is not available (e.g. Safari/iOS)', () => {
     beforeEach(() => {
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       setIdleCallbackApi(undefined, undefined);
     });
 
     it('falls back to running the callback after the timeout', () => {
-      const callback = jest.fn();
+      const callback = vi.fn();
       scheduleIdleCallback(callback, { timeout: 2000 });
 
       expect(callback).not.toHaveBeenCalled();
 
-      jest.advanceTimersByTime(2000);
+      vi.advanceTimersByTime(2000);
 
       expect(callback).toHaveBeenCalledTimes(1);
     });
 
     it('cancels the fallback timeout before it runs', () => {
-      const callback = jest.fn();
+      const callback = vi.fn();
       const cancel = scheduleIdleCallback(callback, { timeout: 2000 });
 
       cancel();
-      jest.advanceTimersByTime(2000);
+      vi.advanceTimersByTime(2000);
 
       expect(callback).not.toHaveBeenCalled();
     });

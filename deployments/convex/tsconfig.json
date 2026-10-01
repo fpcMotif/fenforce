@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "plugins": [
+      {
+        "name": "@effect/language-service",
+        "diagnosticSeverity": { "floatingEffect": "error" }
+      }
+    ],
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "Bundler",
@@ -8,5 +14,5 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["convex/**/*.ts", "testing/**/*.ts"]
+  "include": ["convex/**/*.ts", "testing/**/*.ts", "oxlint.config.ts"]
 }

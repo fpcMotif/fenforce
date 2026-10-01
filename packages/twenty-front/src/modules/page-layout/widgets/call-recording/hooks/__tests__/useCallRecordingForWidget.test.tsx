@@ -1,26 +1,28 @@
+import { vi } from 'vite-plus/test';
+
 import { useFindOneRecord } from '@/object-record/hooks/useFindOneRecord';
 import { useCallRecordingForWidget } from '@/page-layout/widgets/call-recording/hooks/useCallRecordingForWidget';
 import { renderHook } from '@testing-library/react';
 
 let restrictedFields = new Set<string>();
 
-jest.mock('@/object-record/hooks/useFindOneRecord', () => ({
-  useFindOneRecord: jest.fn(() => ({ loading: false, refetch: jest.fn() })),
+vi.mock('@/object-record/hooks/useFindOneRecord', () => ({
+  useFindOneRecord: vi.fn(() => ({ loading: false, refetch: vi.fn() })),
 }));
 
-jest.mock(
+vi.mock(
   '@/page-layout/widgets/call-recording/hooks/useCallRecordingIdForWidget',
   () => ({
     useCallRecordingIdForWidget: () => ({
       callRecordingId: 'call-recording-id',
       targetKind: 'callRecording',
       loading: false,
-      refetchCallRecordingId: jest.fn(),
+      refetchCallRecordingId: vi.fn(),
     }),
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/page-layout/widgets/call-recording/hooks/useCallRecordingWidgetRestriction',
   () => ({
     useCallRecordingWidgetRestriction: () => ({
@@ -31,11 +33,11 @@ jest.mock(
 );
 
 const getRequestedFields = () =>
-  jest.mocked(useFindOneRecord).mock.calls.at(-1)?.[0].recordGqlFields;
+  vi.mocked(useFindOneRecord).mock.calls.at(-1)?.[0].recordGqlFields;
 
 describe('useCallRecordingForWidget', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     restrictedFields = new Set();
   });
 

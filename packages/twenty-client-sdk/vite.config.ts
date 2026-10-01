@@ -1,5 +1,5 @@
 import path from 'path';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite-plus';
 
 import { entryFileNames, isExternal } from './vite.shared';
 
@@ -11,6 +11,71 @@ const entries = [
 
 export default defineConfig(() => {
   return {
+    run: {
+      tasks: {
+        build: {
+          command: 'bun run build:command',
+          dependsOn: [
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+          ],
+          cache: true,
+        },
+        'generate-metadata-client': {
+          command: 'bun run generate-metadata-client:command',
+          dependsOn: [
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+          ],
+          cache: false,
+        },
+        test: {
+          command: 'bun run test:command',
+          dependsOn: [
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+          ],
+          cache: true,
+        },
+        'test:ci': {
+          command: 'bun run test:ci:command',
+          dependsOn: [
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+          ],
+          cache: true,
+        },
+        typecheck: {
+          command: 'bun run typecheck:command',
+          dependsOn: [
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+          ],
+          cache: true,
+        },
+        lint: {
+          command: 'bun run lint:command',
+          dependsOn: [
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+            'twenty-oxlint-rules#build',
+          ],
+          cache: true,
+        },
+      },
+    },
     root: __dirname,
     cacheDir: '../../node_modules/.vite/packages/twenty-client-sdk',
     resolve: {

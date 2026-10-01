@@ -1,3 +1,6 @@
+import type * as UtilitiesModule from 'twenty-ui/utilities';
+import { vi } from 'vite-plus/test';
+
 import { createStore, Provider as JotaiProvider } from 'jotai';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
@@ -13,17 +16,17 @@ import { useNavigationDrawerModes } from '@/navigation/hooks/useNavigationDrawer
 import { useSwitchNavigationDrawerMode } from '@/navigation/hooks/useSwitchNavigationDrawerMode';
 import { NAVIGATION_DRAWER_TABS } from '@/ui/navigation/states/navigationDrawerTabs';
 
-jest.mock('@/navigation/hooks/useActiveNavigationDrawerMode');
-jest.mock('@/navigation/hooks/useIsNavigationDrawerContentExpanded');
-jest.mock('@/navigation/hooks/useNavigationDrawerModes');
-jest.mock('@/navigation/hooks/useSwitchNavigationDrawerMode');
+vi.mock('@/navigation/hooks/useActiveNavigationDrawerMode');
+vi.mock('@/navigation/hooks/useIsNavigationDrawerContentExpanded');
+vi.mock('@/navigation/hooks/useNavigationDrawerModes');
+vi.mock('@/navigation/hooks/useSwitchNavigationDrawerMode');
 
-jest.mock('twenty-ui/utilities', () => ({
-  ...jest.requireActual('twenty-ui/utilities'),
+vi.mock('twenty-ui/utilities', async () => ({
+  ...(await vi.importActual<typeof UtilitiesModule>('twenty-ui/utilities')),
   useIsMobile: () => false,
 }));
 
-const mockSwitchNavigationDrawerMode = jest.fn();
+const mockSwitchNavigationDrawerMode = vi.fn();
 
 const renderModeSwitcher = (isLayoutCustomizationModeEnabled = false) => {
   const store = createStore();
@@ -46,9 +49,9 @@ const renderModeSwitcher = (isLayoutCustomizationModeEnabled = false) => {
 
 describe('MainNavigationDrawerModeSwitcher', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
-    jest.mocked(useNavigationDrawerModes).mockReturnValue([
+    vi.mocked(useNavigationDrawerModes).mockReturnValue([
       {
         Icon: IconHome,
         label: 'Home',
@@ -65,17 +68,17 @@ describe('MainNavigationDrawerModeSwitcher', () => {
         mode: NAVIGATION_DRAWER_TABS.SETTINGS,
       },
     ]);
-    jest
-      .mocked(useActiveNavigationDrawerMode)
-      .mockReturnValue(NAVIGATION_DRAWER_TABS.NAVIGATION_MENU);
-    jest.mocked(useSwitchNavigationDrawerMode).mockReturnValue({
+    vi.mocked(useActiveNavigationDrawerMode).mockReturnValue(
+      NAVIGATION_DRAWER_TABS.NAVIGATION_MENU,
+    );
+    vi.mocked(useSwitchNavigationDrawerMode).mockReturnValue({
       switchNavigationDrawerMode: mockSwitchNavigationDrawerMode,
     });
-    jest.mocked(useIsNavigationDrawerContentExpanded).mockReturnValue(true);
+    vi.mocked(useIsNavigationDrawerContentExpanded).mockReturnValue(true);
   });
 
   it('switches mode from the collapsed icon rail', async () => {
-    jest.mocked(useIsNavigationDrawerContentExpanded).mockReturnValue(false);
+    vi.mocked(useIsNavigationDrawerContentExpanded).mockReturnValue(false);
 
     renderModeSwitcher();
 
@@ -106,9 +109,9 @@ describe('MainNavigationDrawerModeSwitcher', () => {
   ] as const)(
     'disables navigation while editing layout with expanded=%s and mode=%s and restores it afterward',
     async (isExpanded, label, mode) => {
-      jest
-        .mocked(useIsNavigationDrawerContentExpanded)
-        .mockReturnValue(isExpanded);
+      vi.mocked(useIsNavigationDrawerContentExpanded).mockReturnValue(
+        isExpanded,
+      );
       const { store } = renderModeSwitcher(true);
       const settingsButton = screen.getByRole('button', { name: label });
 
@@ -138,7 +141,7 @@ describe('MainNavigationDrawerModeSwitcher', () => {
   );
 
   it('renders nothing when no mode is available', () => {
-    jest.mocked(useNavigationDrawerModes).mockReturnValue([]);
+    vi.mocked(useNavigationDrawerModes).mockReturnValue([]);
 
     renderModeSwitcher();
 

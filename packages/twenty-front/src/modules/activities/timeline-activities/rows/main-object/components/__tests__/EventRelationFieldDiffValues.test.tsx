@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
@@ -8,29 +10,29 @@ import { FieldMetadataType } from 'twenty-shared/types';
 import { EventRelationFieldDiffValues } from '@/activities/timeline-activities/rows/main-object/components/EventRelationFieldDiffValues';
 import { type FieldMetadataItem } from '@/object-metadata/types/FieldMetadataItem';
 
-jest.mock('@/object-record/hooks/useFindManyRecords', () => ({
-  useFindManyRecords: jest.fn(),
+vi.mock('@/object-record/hooks/useFindManyRecords', () => ({
+  useFindManyRecords: vi.fn(),
 }));
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
-  useObjectMetadataItem: jest.fn(),
+vi.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
+  useObjectMetadataItem: vi.fn(),
 }));
 
 // getObjectRecordIdentifier depends on label-identifier metadata; mocking it to
 // echo the record name keeps these tests focused on the diff rendering logic.
-jest.mock('@/object-metadata/utils/getObjectRecordIdentifier', () => ({
-  getObjectRecordIdentifier: jest.fn(),
+vi.mock('@/object-metadata/utils/getObjectRecordIdentifier', () => ({
+  getObjectRecordIdentifier: vi.fn(),
 }));
 
-const { useFindManyRecords } = jest.requireMock(
-  '@/object-record/hooks/useFindManyRecords',
-);
-const { useObjectMetadataItem } = jest.requireMock(
-  '@/object-metadata/hooks/useObjectMetadataItem',
-);
-const { getObjectRecordIdentifier } = jest.requireMock(
-  '@/object-metadata/utils/getObjectRecordIdentifier',
-);
+const { useFindManyRecords } = await vi.importMock<{
+  useFindManyRecords: ReturnType<typeof vi.fn>;
+}>('@/object-record/hooks/useFindManyRecords');
+const { useObjectMetadataItem } = await vi.importMock<{
+  useObjectMetadataItem: ReturnType<typeof vi.fn>;
+}>('@/object-metadata/hooks/useObjectMetadataItem');
+const { getObjectRecordIdentifier } = await vi.importMock<{
+  getObjectRecordIdentifier: ReturnType<typeof vi.fn>;
+}>('@/object-metadata/utils/getObjectRecordIdentifier');
 
 const WORKSPACE_MEMBER_RECORDS = [
   { id: 'before-id', name: 'Tim A' },
@@ -77,7 +79,7 @@ describe('EventRelationFieldDiffValues', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   // Regression test: clearing a relation must show "Empty", not the stale

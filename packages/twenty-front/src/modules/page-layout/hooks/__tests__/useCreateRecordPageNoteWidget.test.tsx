@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import {
   PAGE_LAYOUT_TEST_INSTANCE_ID,
   PageLayoutTestWrapper,
@@ -25,7 +27,7 @@ import {
   WidgetType,
 } from '~/generated-metadata/graphql';
 
-const mockNavigatePageLayoutSidePanel = jest.fn();
+const mockNavigatePageLayoutSidePanel = vi.fn();
 
 type NotePlacementTestCase = {
   mode: string;
@@ -35,7 +37,7 @@ type NotePlacementTestCase = {
   expectedTitles: string[];
 };
 
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/hooks/useNavigatePageLayoutSidePanel',
   () => ({
     useNavigatePageLayoutSidePanel: () => ({
@@ -45,7 +47,7 @@ jest.mock(
 );
 
 describe('useCreateRecordPageNoteWidget', () => {
-  beforeEach(() => jest.resetAllMocks());
+  beforeEach(() => vi.resetAllMocks());
 
   it.each<NotePlacementTestCase>([
     { mode: 'append', expectedTitles: ['first', 'second', 'third', 'Note'] },

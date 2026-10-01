@@ -18,7 +18,7 @@ jobs:
     with:
       files: |
         package.json
-        yarn.lock
+        bun.lock
         packages/twenty-website/**
         packages/twenty-shared/**
         packages/twenty-ui/**
@@ -38,9 +38,9 @@ jobs:
         with:
           fetch-depth: 10
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
       - name: Run ${{ matrix.task }} task
-        uses: ./.github/actions/nx-affected
+        uses: ./.github/actions/affected-tasks
         with:
           tag: scope:website
           tasks: ${{ matrix.task }}

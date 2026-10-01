@@ -1,10 +1,12 @@
+import { vi } from 'vite-plus/test';
+
 import { useExportProcessRecordsForCSV } from '@/object-record/object-options-dropdown/hooks/useExportProcessRecordsForCSV';
 import { renderHook } from '@testing-library/react';
 import { act } from 'react';
 import { FieldMetadataType } from '~/generated-metadata/graphql';
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
-  useObjectMetadataItem: jest.fn(() => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
+  useObjectMetadataItem: vi.fn(() => ({
     objectMetadataItem: {
       fields: [
         { type: FieldMetadataType.CURRENCY, name: 'price' },

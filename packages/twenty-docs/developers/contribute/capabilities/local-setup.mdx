@@ -13,12 +13,11 @@ description: "The guide for contributors (or curious developers) who want to run
 Before you can install and use Twenty, make sure you install the following on your computer:
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [Node v24.5.0](https://nodejs.org/en/download)
-- [yarn v4](https://yarnpkg.com/getting-started/install)
+- [Bun 1.4.3](https://bun.com/docs/installation)
 - [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md)
 
 <Warning>
-`npm` won't work, you should use `yarn` instead. Yarn is now shipped with Node.js, so you don't need to install it separately.
-You only have to run `corepack enable` to enable Yarn if you haven't done it yet.
+Use Bun for this workspace. The repository pins its version in `package.json`.
 </Warning>
 
 </Tab>
@@ -45,7 +44,7 @@ git config --global user.name "Your Name"
 git config --global user.email "youremail@domain.com"
 ```
 
-3. Install nvm, node.js and yarn
+3. Install nvm, Node.js, and [Bun](https://bun.com/docs/installation)
 
 <Warning>
 Use `nvm` to install the correct `node` version. The `.nvmrc` ensures all contributors use the same version.
@@ -64,7 +63,7 @@ nvm install # installs recommended node version
 
 nvm use # use recommended node version
 
-corepack enable
+bun --version
 ```
 
 </Tab>
@@ -251,11 +250,11 @@ cp ./packages/twenty-server/.env.example ./packages/twenty-server/.env
 </Info>
 
 ## Step 6: Installing dependencies
-To build Twenty server and seed some data into your database, run the following command:
+Install workspace dependencies with the following command:
 ```bash
-yarn
+bun install --frozen-lockfile
 ```
-Note that `npm` or `pnpm` won't work
+Use Bun for this workspace.
 
 ## Step 7: Running the project
 
@@ -279,19 +278,19 @@ Note that `npm` or `pnpm` won't work
 
 Set up your database with the following command:
 ```bash
-npx nx database:reset twenty-server
+bunx vite-plus run twenty-server#database:reset
 ```
 
 Start the server, the worker and the frontend services:
 ```bash
-npx nx start twenty-server
-npx nx worker twenty-server
-npx nx start twenty-front
+bunx vite-plus run twenty-server#start
+bunx vite-plus run twenty-server#worker
+bunx vite-plus run twenty-front#start
 ```
 
 Alternatively, you can start all services at once:
 ```bash
-npx nx start
+bun start
 ```
 
 ## Step 8: Use Twenty

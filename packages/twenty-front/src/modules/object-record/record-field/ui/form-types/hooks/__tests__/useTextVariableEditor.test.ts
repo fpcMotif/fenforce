@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { Fragment, Slice } from '@tiptap/pm/model';
 import type { Editor } from '@tiptap/react';
@@ -38,7 +40,7 @@ const setup = (
     defaultValue: string | null;
   }> = {},
 ) => {
-  const onUpdate = jest.fn();
+  const onUpdate = vi.fn();
   const { result, unmount } = renderHook(() =>
     useTextVariableEditor({
       placeholder: 'Enter text',

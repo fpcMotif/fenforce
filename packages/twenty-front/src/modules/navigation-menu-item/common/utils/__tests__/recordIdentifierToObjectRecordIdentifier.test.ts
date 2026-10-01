@@ -1,13 +1,15 @@
+import { vi } from 'vite-plus/test';
+
 import { recordIdentifierToObjectRecordIdentifier } from '@/navigation-menu-item/common/utils/recordIdentifierToObjectRecordIdentifier';
 import { CoreObjectNameSingular } from 'twenty-shared/types';
 import { type EnrichedObjectMetadataItem } from '@/object-metadata/types/EnrichedObjectMetadataItem';
 
-jest.mock('@/object-metadata/utils/getAvatarShape', () => ({
-  getAvatarShape: jest.fn(() => 'circle'),
+vi.mock('@/object-metadata/utils/getAvatarShape', () => ({
+  getAvatarShape: vi.fn(() => 'circle'),
 }));
 
-jest.mock('@/object-metadata/utils/getBasePathToShowPage', () => ({
-  getBasePathToShowPage: jest.fn(
+vi.mock('@/object-metadata/utils/getBasePathToShowPage', () => ({
+  getBasePathToShowPage: vi.fn(
     ({ objectNameSingular }: { objectNameSingular: string }) =>
       `/object/${objectNameSingular}/`,
   ),
@@ -25,7 +27,7 @@ describe('recordIdentifierToObjectRecordIdentifier', () => {
   } as EnrichedObjectMetadataItem;
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should return ObjectRecordIdentifier with id, name, avatarUrl, avatarShape, and linkToShowPage', () => {

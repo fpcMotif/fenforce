@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 
 import { useDeleteOneObjectMetadataItem } from '@/object-metadata/hooks/useDeleteOneObjectMetadataItem';
@@ -26,7 +28,7 @@ const mocks = [
       query,
       variables,
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         deleteOneObject: responseData,
       },
@@ -37,7 +39,7 @@ const mocks = [
       query: GET_CURRENT_USER,
       variables: {},
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         currentUser: mockedUserData,
       },
@@ -48,7 +50,7 @@ const mocks = [
       query: FIND_ALL_VIEWS,
       variables: {},
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         getViews: mockedViews,
       },
@@ -59,7 +61,7 @@ const mocks = [
       query: findManyObjectMetadataItemsQuery,
       variables: {},
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: findManyObjectMetadataItemsResponseData,
     })),
   },
@@ -68,7 +70,7 @@ const mocks = [
       query: FindManyCommandMenuItemsDocument,
       variables: {},
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         commandMenuItems: [],
       },

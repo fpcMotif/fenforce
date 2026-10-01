@@ -5,15 +5,28 @@
   "private": true,
   "license": "AGPL-3.0",
   "scripts": {
+    "lint:ci": "bunx vite-plus run twenty-docs#lint",
+    "test:ci": "bunx vite-plus run twenty-docs#test -- --coverage",
+    "test:coverage": "bunx vite-plus run twenty-docs#test -- --coverage",
+    "test:watch": "bunx vite-plus run --no-cache twenty-docs#test -- --watch",
     "dev": "mintlify dev",
     "validate": "mintlify validate",
     "fix-links": "tsx scripts/fix-translated-links.ts",
-    "lint": "npx oxlint -c .oxlintrc.json ."
+    "lint:command": "bunx oxlint -c .oxlintrc.json . && bunx tsx scripts/lint-mdx.ts",
+    "fmt:command": "prettier . --check --cache --cache-location ../../.cache/prettier/packages/twenty-docs --cache-strategy metadata",
+    "fmt:ci:command": "prettier . --check --cache --cache-location ../../.cache/prettier/packages/twenty-docs --cache-strategy metadata",
+    "fmt:fix:command": "prettier . --write --cache --cache-location ../../.cache/prettier/packages/twenty-docs --cache-strategy metadata",
+    "test:command": "cd ../.. && bunx vitest run --config packages/twenty-docs/vitest.config.mts",
+    "generate:ui": "cd ../.. && bunx tsx packages/twenty-ui/scripts/generateDocsData.ts && bunx tsx packages/twenty-docs/scripts/generate-ui-reference.ts",
+    "check:ui": "cd ../.. && bunx tsx packages/twenty-ui/scripts/generateDocsData.ts --check && bunx tsx packages/twenty-docs/scripts/generate-ui-reference.ts --check && bunx tsx packages/twenty-ui/scripts/checkDocsExamples.ts",
+    "check:ui-stories:command": "cd ../.. && bunx tsx packages/twenty-docs/scripts/check-ui-story-embeds.mts .cache/ui-docs/storybook-index.json",
+    "lint:fix": "bunx oxlint --fix -c .oxlintrc.json . && bunx tsx scripts/lint-mdx.ts"
   },
   "dependencies": {
     "mintlify": "^4.2.790"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.0",
     "@mdx-js/mdx": "^3.1.1",
     "@sniptt/guards": "^0.2.0",
     "remark-frontmatter": "^5.0.0",
@@ -23,8 +36,6 @@
     "vitest": "^4.1.0"
   },
   "engines": {
-    "node": "^24.5.0",
-    "npm": "please-use-yarn",
-    "yarn": "^4.0.2"
+    "node": "^24.5.0"
   }
 }

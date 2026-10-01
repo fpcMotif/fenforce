@@ -1,15 +1,17 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { getWidgetSize } from '@/page-layout/utils/getWidgetSize';
 import { updateLayoutItemConstraints } from '@/page-layout/utils/updateLayoutItemConstraints';
 import { updateWidgetMinimumSizeForGraphType } from '@/page-layout/utils/updateWidgetMinimumSizeForGraphType';
 import { type ResponsiveLayouts } from 'react-grid-layout';
 import { WidgetConfigurationType } from '~/generated-metadata/graphql';
 
-jest.mock('../getWidgetSize');
-jest.mock('../updateLayoutItemConstraints');
+vi.mock('../getWidgetSize');
+vi.mock('../updateLayoutItemConstraints');
 
 describe('updateWidgetMinimumSizeForGraphType', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should update widget minimum size for a valid graph type and existing tab', () => {
@@ -26,8 +28,8 @@ describe('updateWidgetMinimumSizeForGraphType', () => {
       desktop: [{ i: 'widget-1', x: 0, y: 0, w: 4, h: 3, minW: 3, minH: 2 }],
     };
 
-    (getWidgetSize as jest.Mock).mockReturnValue({ w: 3, h: 2 });
-    (updateLayoutItemConstraints as jest.Mock).mockReturnValue(updatedLayouts);
+    (getWidgetSize as Mock).mockReturnValue({ w: 3, h: 2 });
+    (updateLayoutItemConstraints as Mock).mockReturnValue(updatedLayouts);
 
     const result = updateWidgetMinimumSizeForGraphType({
       configurationType: WidgetConfigurationType.PIE_CHART,
@@ -58,7 +60,7 @@ describe('updateWidgetMinimumSizeForGraphType', () => {
       },
     };
 
-    (getWidgetSize as jest.Mock).mockReturnValue({ w: 3, h: 2 });
+    (getWidgetSize as Mock).mockReturnValue({ w: 3, h: 2 });
 
     const result = updateWidgetMinimumSizeForGraphType({
       configurationType: WidgetConfigurationType.BAR_CHART,
@@ -90,8 +92,8 @@ describe('updateWidgetMinimumSizeForGraphType', () => {
 
     configurationTypes.forEach((configurationType, index) => {
       const mockSize = { w: index + 2, h: index + 1 };
-      (getWidgetSize as jest.Mock).mockReturnValue(mockSize);
-      (updateLayoutItemConstraints as jest.Mock).mockReturnValue({
+      (getWidgetSize as Mock).mockReturnValue(mockSize);
+      (updateLayoutItemConstraints as Mock).mockReturnValue({
         desktop: [
           {
             i: 'widget-1',
@@ -139,10 +141,8 @@ describe('updateWidgetMinimumSizeForGraphType', () => {
       desktop: [{ i: 'widget-2', x: 0, y: 0, w: 5, h: 4, minW: 4, minH: 3 }],
     };
 
-    (getWidgetSize as jest.Mock).mockReturnValue({ w: 4, h: 3 });
-    (updateLayoutItemConstraints as jest.Mock).mockReturnValue(
-      updatedTab2Layouts,
-    );
+    (getWidgetSize as Mock).mockReturnValue({ w: 4, h: 3 });
+    (updateLayoutItemConstraints as Mock).mockReturnValue(updatedTab2Layouts);
 
     const result = updateWidgetMinimumSizeForGraphType({
       configurationType: WidgetConfigurationType.LINE_CHART,
@@ -161,7 +161,7 @@ describe('updateWidgetMinimumSizeForGraphType', () => {
   it('should handle empty layouts object', () => {
     const mockLayouts: Record<string, ResponsiveLayouts> = {};
 
-    (getWidgetSize as jest.Mock).mockReturnValue({ w: 3, h: 2 });
+    (getWidgetSize as Mock).mockReturnValue({ w: 3, h: 2 });
 
     const result = updateWidgetMinimumSizeForGraphType({
       configurationType: WidgetConfigurationType.PIE_CHART,
@@ -187,8 +187,8 @@ describe('updateWidgetMinimumSizeForGraphType', () => {
       mobile: [{ i: 'widget-1', x: 0, y: 0, w: 2, h: 2, minW: 3, minH: 2 }],
     };
 
-    (getWidgetSize as jest.Mock).mockReturnValue({ w: 3, h: 2 });
-    (updateLayoutItemConstraints as jest.Mock).mockReturnValue(updatedLayouts);
+    (getWidgetSize as Mock).mockReturnValue({ w: 3, h: 2 });
+    (updateLayoutItemConstraints as Mock).mockReturnValue(updatedLayouts);
 
     const result = updateWidgetMinimumSizeForGraphType({
       configurationType: WidgetConfigurationType.BAR_CHART,
@@ -209,10 +209,8 @@ describe('updateWidgetMinimumSizeForGraphType', () => {
 
     const unchangedLayouts = mockLayouts['tab-1'];
 
-    (getWidgetSize as jest.Mock).mockReturnValue({ w: 3, h: 2 });
-    (updateLayoutItemConstraints as jest.Mock).mockReturnValue(
-      unchangedLayouts,
-    );
+    (getWidgetSize as Mock).mockReturnValue({ w: 3, h: 2 });
+    (updateLayoutItemConstraints as Mock).mockReturnValue(unchangedLayouts);
 
     const result = updateWidgetMinimumSizeForGraphType({
       configurationType: WidgetConfigurationType.PIE_CHART,
@@ -239,8 +237,8 @@ describe('updateWidgetMinimumSizeForGraphType', () => {
       },
     };
 
-    (getWidgetSize as jest.Mock).mockReturnValue({ w: 5, h: 4 });
-    (updateLayoutItemConstraints as jest.Mock).mockReturnValue({
+    (getWidgetSize as Mock).mockReturnValue({ w: 5, h: 4 });
+    (updateLayoutItemConstraints as Mock).mockReturnValue({
       desktop: [
         { i: 'widget-1', x: 0, y: 0, w: 4, h: 3 },
         { i: 'widget-2', x: 4, y: 0, w: 4, h: 3, minW: 5, minH: 4 },
@@ -269,7 +267,7 @@ describe('updateWidgetMinimumSizeForGraphType', () => {
       'tab-2': undefined as any, // Simulating an edge case
     };
 
-    (getWidgetSize as jest.Mock).mockReturnValue({ w: 3, h: 2 });
+    (getWidgetSize as Mock).mockReturnValue({ w: 3, h: 2 });
 
     const result = updateWidgetMinimumSizeForGraphType({
       configurationType: WidgetConfigurationType.PIE_CHART,

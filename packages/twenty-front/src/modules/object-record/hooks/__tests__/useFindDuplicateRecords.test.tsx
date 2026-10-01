@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook, waitFor } from '@testing-library/react';
 
 import { useFindDuplicateRecords } from '@/object-record/hooks/useFindDuplicateRecords';
@@ -15,7 +17,7 @@ const mocks = [
       query,
       variables,
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: responseData,
     })),
   },

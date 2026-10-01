@@ -1,6 +1,6 @@
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createStore, Provider } from 'jotai';
 
@@ -56,9 +56,11 @@ describe('AiChatThreadFilterDropdown', () => {
     await waitFor(() => expect(store.get(focusStackState.atom)).toEqual([]));
 
     await user.click(trigger);
-    expect(
-      await screen.findByRole('menuitem', { name: /Status Archived/ }),
-    ).toBeVisible();
+    const statusMenuItem = await screen.findByRole('menuitem', {
+      name: /Status/,
+    });
+    expect(statusMenuItem).toBeVisible();
+    expect(within(statusMenuItem).getByText('Archived')).toBeVisible();
     await user.click(screen.getByRole('menuitem', { name: 'Clear filters' }));
     expect(store.get(agentChatThreadFilterStatusState.atom)).toBe('active');
   });

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { detectCalendarStartDay } from '@/localization/utils/detection/detectCalendarStartDay';
 
 Object.defineProperty(navigator, 'language', {
@@ -16,7 +18,7 @@ describe('detectCalendarStartDay', () => {
 
     // Store original and mock Intl.Locale to force fallback logic
     originalIntlLocale = global.Intl.Locale;
-    (global.Intl as any).Locale = jest.fn().mockImplementation(() => {
+    (global.Intl as any).Locale = vi.fn().mockImplementation(function () {
       throw new Error('Force fallback');
     });
   });
@@ -91,18 +93,22 @@ describe('detectCalendarStartDay', () => {
 
   it('should handle Intl.Locale with weekInfo support', () => {
     // Temporarily restore original and mock with weekInfo
-    (global.Intl as any).Locale = jest.fn().mockImplementation(() => ({
-      weekInfo: { firstDay: 1 }, // Monday
-    }));
+    (global.Intl as any).Locale = vi.fn().mockImplementation(function () {
+      return {
+        weekInfo: { firstDay: 1 }, // Monday
+      };
+    });
 
     expect(detectCalendarStartDay()).toBe('MONDAY');
   });
 
   it('should handle Intl.Locale with Saturday firstDay', () => {
     // Temporarily restore original and mock with weekInfo
-    (global.Intl as any).Locale = jest.fn().mockImplementation(() => ({
-      weekInfo: { firstDay: 6 }, // Saturday
-    }));
+    (global.Intl as any).Locale = vi.fn().mockImplementation(function () {
+      return {
+        weekInfo: { firstDay: 6 }, // Saturday
+      };
+    });
 
     expect(detectCalendarStartDay()).toBe('SATURDAY');
   });

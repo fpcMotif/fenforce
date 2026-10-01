@@ -1,3 +1,6 @@
+import type * as ReactErrorBoundaryModule from 'react-error-boundary';
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 import { type FallbackProps } from 'react-error-boundary';
 
@@ -12,18 +15,18 @@ let mockLocation = {
 };
 let mockShouldThrow = true;
 
-jest.mock('@/side-panel/routing/hooks/useCurrentSidePanelRoutedPath', () => ({
+vi.mock('@/side-panel/routing/hooks/useCurrentSidePanelRoutedPath', () => ({
   useCurrentSidePanelRoutedLocation: () => mockLocation,
 }));
 
-jest.mock(
+vi.mock(
   '@/ui/utilities/state/component-state/hooks/useComponentInstanceStateContext',
   () => ({
     useComponentInstanceStateContext: () => ({ instanceId: 'panel-page-1' }),
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/side-panel/routing/components/SidePanelRouteNavigatorProvider',
   () => ({
     SidePanelRouteNavigatorProvider: ({
@@ -34,7 +37,7 @@ jest.mock(
   }),
 );
 
-jest.mock('@/app/routing/components/WorkspaceRoutes', () => ({
+vi.mock('@/app/routing/components/WorkspaceRoutes', () => ({
   WorkspaceRoutes: () => {
     if (mockShouldThrow) {
       throw new Error('stale routed resource');
@@ -44,14 +47,14 @@ jest.mock('@/app/routing/components/WorkspaceRoutes', () => ({
   },
 }));
 
-jest.mock('@/app/routing/components/WorkspaceRouteUnavailable', () => ({
+vi.mock('@/app/routing/components/WorkspaceRouteUnavailable', () => ({
   WorkspaceRouteUnavailable: () => <div data-testid="route-unavailable" />,
 }));
 
-jest.mock('@/error-handler/components/AppErrorBoundary', () => {
-  const { ErrorBoundary: MockErrorBoundary } = jest.requireActual(
-    'react-error-boundary',
-  );
+vi.mock('@/error-handler/components/AppErrorBoundary', async () => {
+  const { ErrorBoundary: MockErrorBoundary } = await vi.importActual<
+    typeof ReactErrorBoundaryModule
+  >('react-error-boundary');
 
   return {
     AppErrorBoundary: ({
@@ -78,11 +81,11 @@ describe('SidePanelRoutedPage', () => {
       key: 'route-1',
     };
     mockShouldThrow = true;
-    jest.spyOn(console, 'error').mockImplementation(() => undefined);
+    vi.spyOn(console, 'error').mockImplementation(() => undefined);
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it('contains route errors and resets the boundary for the next location', () => {

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { useDeletePageLayoutWidget } from '@/page-layout/hooks/useDeletePageLayoutWidget';
 import { pageLayoutEditingWidgetIdComponentState } from '@/page-layout/states/pageLayoutEditingWidgetIdComponentState';
 import { act, renderHook } from '@testing-library/react';
@@ -8,21 +10,21 @@ import {
   PageLayoutTestWrapper,
 } from './PageLayoutTestWrapper';
 
-jest.mock(
+vi.mock(
   '@/page-layout/widgets/record-table/hooks/useRemoveDraftViewForRecordTableWidget',
   () => ({
     useRemoveDraftViewForRecordTableWidget: () => ({
-      removeDraftViewForRecordTableWidget: jest.fn(),
+      removeDraftViewForRecordTableWidget: vi.fn(),
     }),
   }),
 );
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({
-    closeSidePanelMenu: jest.fn(),
-    openSidePanelMenu: jest.fn(),
-    navigateSidePanelMenu: jest.fn(),
-    toggleSidePanelMenu: jest.fn(),
+    closeSidePanelMenu: vi.fn(),
+    openSidePanelMenu: vi.fn(),
+    navigateSidePanelMenu: vi.fn(),
+    toggleSidePanelMenu: vi.fn(),
   }),
 }));
 

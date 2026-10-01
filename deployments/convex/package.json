@@ -3,15 +3,24 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prepare": "effect-tsgo patch --typescript",
     "dev": "varlock run -- convex dev",
     "dev:once": "varlock run -- convex dev --once",
     "typecheck": "tsc --noEmit",
+    "effect:check": "effect-tsgo diagnostics --project tsconfig.json --strict",
+    "lint": "oxlint --type-aware --tsconfig tsconfig.json --deny-warnings convex testing oxlint.config.ts",
+    "format:check": "oxfmt --check .",
     "test": "vitest run",
-    "check": "bun run typecheck && bun run test"
+    "check": "bun run typecheck && bun run effect:check && bun run lint && bun run format:check && bun run test"
   },
   "devDependencies": {
+    "@effect/tsgo": "0.46.1",
     "@types/node": "^24.0.0",
     "convex-test": "^0.0.60",
+    "oxfmt": "0.70.0",
+    "oxlint": "1.85.0",
+    "oxlint-plugin-complexity": "3.0.0",
+    "oxlint-tsgolint": "7.0.2003",
     "typescript": "7.0.2",
     "varlock": "1.21.0",
     "vitest": "^5.0.2"
@@ -20,6 +29,10 @@
   "dependencies": {
     "@auth/core": "0.41.1",
     "@convex-dev/auth": "^0.0.95",
-    "convex": "^1.46.0"
+    "@convex-dev/workflow": "0.4.8",
+    "@convex-dev/workpool": "0.4.12",
+    "convex": "^1.46.0",
+    "convex-helpers": "0.1.124",
+    "effect": "4.0.0-rc.117"
   }
 }

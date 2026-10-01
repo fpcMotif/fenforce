@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { dispatchObjectRecordOperationBrowserEvent } from '@/browser-event/utils/dispatchObjectRecordOperationBrowserEvent';
 import { useRemoveNavigationMenuItemByTargetRecordId } from '@/navigation-menu-item/common/hooks/useRemoveNavigationMenuItemByTargetRecordId';
 import { useApolloCoreClient } from '@/object-metadata/hooks/useApolloCoreClient';
@@ -8,56 +10,56 @@ import { useRefetchAggregateQueries } from '@/object-record/hooks/useRefetchAggr
 import { renderHook } from '@testing-library/react';
 import { getMockObjectMetadataItemOrThrow } from '~/testing/utils/getMockObjectMetadataItemOrThrow';
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItem');
-jest.mock('@/object-metadata/hooks/useApolloCoreClient');
-jest.mock('@/object-record/hooks/useIncrementalFetchAndMutateRecords');
-jest.mock('@/object-record/hooks/useRefetchAggregateQueries');
-jest.mock('@/browser-event/utils/dispatchObjectRecordOperationBrowserEvent');
-jest.mock(
+vi.mock('@/object-metadata/hooks/useObjectMetadataItem');
+vi.mock('@/object-metadata/hooks/useApolloCoreClient');
+vi.mock('@/object-record/hooks/useIncrementalFetchAndMutateRecords');
+vi.mock('@/object-record/hooks/useRefetchAggregateQueries');
+vi.mock('@/browser-event/utils/dispatchObjectRecordOperationBrowserEvent');
+vi.mock(
   '@/navigation-menu-item/common/hooks/useRemoveNavigationMenuItemByTargetRecordId',
 );
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
   useObjectMetadataItems: () => ({ objectMetadataItems: [] }),
 }));
-jest.mock('@/object-record/hooks/useDeleteManyRecordsMutation', () => ({
+vi.mock('@/object-record/hooks/useDeleteManyRecordsMutation', () => ({
   useDeleteManyRecordsMutation: () => ({ deleteManyRecordsMutation: {} }),
 }));
-jest.mock('@/object-record/cache/hooks/useGetRecordFromCache', () => ({
+vi.mock('@/object-record/cache/hooks/useGetRecordFromCache', () => ({
   useGetRecordFromCache: () => () => undefined,
 }));
-jest.mock('@/object-record/hooks/useObjectPermissions', () => ({
+vi.mock('@/object-record/hooks/useObjectPermissions', () => ({
   useObjectPermissions: () => ({ objectPermissionsByObjectMetadataId: {} }),
 }));
-jest.mock('@/object-record/record-store/hooks/useUpsertRecordsInStore', () => ({
-  useUpsertRecordsInStore: () => ({ upsertRecordsInStore: jest.fn() }),
+vi.mock('@/object-record/record-store/hooks/useUpsertRecordsInStore', () => ({
+  useUpsertRecordsInStore: () => ({ upsertRecordsInStore: vi.fn() }),
 }));
-jest.mock(
+vi.mock(
   '@/apollo/optimistic-effect/utils/triggerUpdateRecordOptimisticEffectByBatch',
   () => ({
-    triggerUpdateRecordOptimisticEffectByBatch: jest.fn(),
+    triggerUpdateRecordOptimisticEffectByBatch: vi.fn(),
   }),
 );
 
-const mockUseObjectMetadataItem = jest.mocked(useObjectMetadataItem);
-const mockUseApolloCoreClient = jest.mocked(useApolloCoreClient);
-const mockUseIncrementalFetchAndMutateRecords = jest.mocked(
+const mockUseObjectMetadataItem = vi.mocked(useObjectMetadataItem);
+const mockUseApolloCoreClient = vi.mocked(useApolloCoreClient);
+const mockUseIncrementalFetchAndMutateRecords = vi.mocked(
   useIncrementalFetchAndMutateRecords,
 );
-const mockUseRefetchAggregateQueries = jest.mocked(useRefetchAggregateQueries);
-const mockDispatchObjectRecordOperationBrowserEvent = jest.mocked(
+const mockUseRefetchAggregateQueries = vi.mocked(useRefetchAggregateQueries);
+const mockDispatchObjectRecordOperationBrowserEvent = vi.mocked(
   dispatchObjectRecordOperationBrowserEvent,
 );
-const mockUseRemoveNavigationMenuItemByTargetRecordId = jest.mocked(
+const mockUseRemoveNavigationMenuItemByTargetRecordId = vi.mocked(
   useRemoveNavigationMenuItemByTargetRecordId,
 );
 
 const objectMetadataItem = getMockObjectMetadataItemOrThrow('company');
 
 describe('useIncrementalDeleteManyRecords', () => {
-  const mockIncrementalFetchAndMutate = jest.fn();
-  const mockRemoveNavigationMenuItemsByTargetRecordIds = jest.fn();
-  const mockRefetchAggregateQueries = jest.fn();
-  const mockMutate = jest.fn();
+  const mockIncrementalFetchAndMutate = vi.fn();
+  const mockRemoveNavigationMenuItemsByTargetRecordIds = vi.fn();
+  const mockRefetchAggregateQueries = vi.fn();
+  const mockMutate = vi.fn();
 
   const renderDeleteHook = () =>
     renderHook(() =>
@@ -75,7 +77,7 @@ describe('useIncrementalDeleteManyRecords', () => {
   });
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     mockUseObjectMetadataItem.mockReturnValue({ objectMetadataItem });
 
@@ -89,8 +91,8 @@ describe('useIncrementalDeleteManyRecords', () => {
       incrementalFetchAndMutate: mockIncrementalFetchAndMutate,
       progress: { displayType: 'number' },
       isProcessing: false,
-      updateProgress: jest.fn(),
-      cancel: jest.fn(),
+      updateProgress: vi.fn(),
+      cancel: vi.fn(),
     });
 
     mockRefetchAggregateQueries.mockResolvedValue(undefined);

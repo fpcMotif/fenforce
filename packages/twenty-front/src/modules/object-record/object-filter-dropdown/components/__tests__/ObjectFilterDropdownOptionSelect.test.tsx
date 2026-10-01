@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render } from '@testing-library/react';
 import { useEffect, useState } from 'react';
 
@@ -11,33 +13,33 @@ import { FieldMetadataType, ViewFilterOperand } from 'twenty-shared/types';
 import { getMockObjectMetadataItemOrThrow } from '~/testing/utils/getMockObjectMetadataItemOrThrow';
 import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksWrapper';
 
-jest.mock(
+vi.mock(
   '@/object-record/object-filter-dropdown/hooks/useOptionsForSelect',
   () => ({
     useOptionsForSelect: () => ({ selectOptions: [] }),
   }),
 );
 
-jest.mock('@/ui/utilities/hotkey/hooks/useHotkeysOnFocusedElement', () => ({
+vi.mock('@/ui/utilities/hotkey/hooks/useHotkeysOnFocusedElement', () => ({
   useHotkeysOnFocusedElement: () => undefined,
 }));
 
-jest.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
-  useCloseDropdown: () => ({ closeDropdown: jest.fn() }),
+vi.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
+  useCloseDropdown: () => ({ closeDropdown: vi.fn() }),
 }));
 
-jest.mock('@/ui/layout/selectable-list/hooks/useSelectableList', () => ({
+vi.mock('@/ui/layout/selectable-list/hooks/useSelectableList', () => ({
   useSelectableList: () => ({
-    resetSelectedItem: jest.fn(),
-    setSelectedItemId: jest.fn(),
+    resetSelectedItem: vi.fn(),
+    setSelectedItemId: vi.fn(),
   }),
 }));
 
-jest.mock(
+vi.mock(
   '@/object-record/object-filter-dropdown/hooks/useApplyObjectFilterDropdownFilterValue',
   () => ({
     useApplyObjectFilterDropdownFilterValue: () => ({
-      applyObjectFilterDropdownFilterValue: jest.fn(),
+      applyObjectFilterDropdownFilterValue: vi.fn(),
     }),
   }),
 );

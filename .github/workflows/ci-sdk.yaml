@@ -31,18 +31,18 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        task: [lint, typecheck, test:unit, test:integration]
+        task: [lint, typecheck, 'test:unit', 'test:integration']
     steps:
       - name: Fetch custom Github Actions and base branch history
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           fetch-depth: 10
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
       - name: Build
-        run: npx nx build twenty-sdk
+        run: bunx vite-plus run twenty-sdk#build
       - name: Run ${{ matrix.task }} task
-        uses: ./.github/actions/nx-affected
+        uses: ./.github/actions/affected-tasks
         with:
           tag: scope:sdk
           tasks: ${{ matrix.task }}
@@ -77,23 +77,23 @@ jobs:
         with:
           fetch-depth: 10
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
       - name: Build SDK
-        run: npx nx build twenty-sdk
+        run: bunx vite-plus run twenty-sdk#build
       - name: Setup server environment
-        run: npx nx reset:env:e2e-testing-server twenty-server
+        run: bunx vite-plus run twenty-server#reset:env:e2e-testing-server
       - name: Create databases
         run: |
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "default";'
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "test";'
       - name: Setup database
-        run: npx nx run twenty-server:database:reset
+        run: bunx vite-plus run twenty-server#database:reset
       - name: Start server
-        run: nohup npx nx start:ci twenty-server > /tmp/twenty-server.log 2>&1 &
+        run: nohup bunx vite-plus run twenty-server#start:ci > /tmp/twenty-server.log 2>&1 &
       - name: Wait for server to be ready
-        run: npx wait-on http://localhost:3000/healthz --timeout 120000 --interval 1000
+        run: bunx wait-on http://localhost:3000/healthz --timeout 120000 --interval 1000
       - name: SDK / Run e2e Tests
-        run: NODE_ENV=test npx vitest run --config ./vitest.e2e.config.ts
+        run: NODE_ENV=test bunx vitest run --config ./vitest.e2e.config.ts
         working-directory: packages/twenty-sdk
       - name: Server / Dump logs on failure
         if: failure()

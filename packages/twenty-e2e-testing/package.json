@@ -7,5 +7,15 @@
   "devDependencies": {
     "@playwright/test": "^1.60.0",
     "playwright": "^1.60.0"
+  },
+  "scripts": {
+    "test:ci": "bunx vite-plus run twenty-e2e-testing#test",
+    "test:coverage": "bunx vite-plus run twenty-e2e-testing#test",
+    "test:watch": "bunx vite-plus run --no-cache twenty-e2e-testing#test",
+    "setup": "bunx playwright install && cp .env.example .env",
+    "test:command": "bunx playwright test",
+    "test:ui": "bunx playwright test --ui",
+    "test:debug": "bunx playwright test --debug",
+    "test:report": "bunx playwright show-report"
   }
 }

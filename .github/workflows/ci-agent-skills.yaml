@@ -39,18 +39,18 @@ jobs:
           fetch-depth: 10
 
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
 
       - name: Agent Skills / Build and validate
-        run: npx nx run twenty-agent-skills:validate
+        run: bunx vite-plus run twenty-agent-skills#validate
 
       - name: Agent Skills / Test
-        run: npx nx run twenty-agent-skills:test
+        run: bunx vite-plus run twenty-agent-skills#test
 
       - name: Agent Skills / List with the skills CLI
         run: |
           set -euo pipefail
-          LISTING="$(npx -y skills@latest add ./packages/twenty-agent-skills/dist --list)"
+          LISTING="$(bunx skills@latest add ./packages/twenty-agent-skills/dist --list)"
           echo "$LISTING"
 
           for SKILL in create-app develop-app manage-app publish-app use-twenty-mcp; do
@@ -74,10 +74,10 @@ jobs:
             INSTALL_DIR="$(mktemp -d)"
             (
               cd "$INSTALL_DIR"
-              npx -y skills@latest add "$GITHUB_WORKSPACE/packages/twenty-agent-skills/dist" \
+              bunx skills@latest add "$GITHUB_WORKSPACE/packages/twenty-agent-skills/dist" \
                 --skill "$SKILL" --agent claude-code --agent codex --copy -y
             )
-            npx nx run twenty-agent-skills:verify:install -- "$INSTALL_DIR" "$SKILL"
+            bunx vite-plus run twenty-agent-skills#verify:install "$INSTALL_DIR" "$SKILL"
             rm -rf "$INSTALL_DIR"
           done
 
@@ -87,10 +87,10 @@ jobs:
           INSTALL_DIR="$(mktemp -d)"
           (
             cd "$INSTALL_DIR"
-            npx -y skills@latest add "$GITHUB_WORKSPACE/packages/twenty-agent-skills/dist" \
+            bunx skills@latest add "$GITHUB_WORKSPACE/packages/twenty-agent-skills/dist" \
               --skill '*' --agent claude-code --agent codex --copy -y
           )
-          npx nx run twenty-agent-skills:verify:install -- "$INSTALL_DIR"
+          bunx vite-plus run twenty-agent-skills#verify:install "$INSTALL_DIR"
           rm -rf "$INSTALL_DIR"
 
       - name: Archive the verified distribution
@@ -192,7 +192,7 @@ jobs:
           INSTALL_DIR="$(mktemp -d)"
           (
             cd "$INSTALL_DIR"
-            npx -y skills@latest add 'https://github.com/twentyhq/twenty/tree/agent-skills' \
+            bunx skills@latest add 'https://github.com/twentyhq/twenty/tree/agent-skills' \
               --skill '*' --agent claude-code --agent codex --copy -y
           )
           node packages/twenty-agent-skills/scripts/verify-install.js "$INSTALL_DIR"

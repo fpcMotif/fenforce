@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 
 import { useRecordSeededDraft } from '@/object-record/record-seeded-draft/hooks/useRecordSeededDraft';
@@ -7,7 +9,7 @@ type DraftProps = {
   resetKey?: string;
 };
 
-const mockPersist = jest.fn();
+const mockPersist = vi.fn();
 
 const renderDraftHook = (initialProps: DraftProps) =>
   renderHook(
@@ -22,13 +24,13 @@ const renderDraftHook = (initialProps: DraftProps) =>
 
 describe('useRecordSeededDraft', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   afterEach(() => {
-    jest.runOnlyPendingTimers();
-    jest.useRealTimers();
-    jest.clearAllMocks();
+    vi.runOnlyPendingTimers();
+    vi.useRealTimers();
+    vi.clearAllMocks();
   });
 
   it('should adopt a remote change when the draft is pristine', () => {
@@ -50,7 +52,7 @@ describe('useRecordSeededDraft', () => {
     });
 
     act(() => {
-      jest.runOnlyPendingTimers();
+      vi.runOnlyPendingTimers();
     });
 
     expect(mockPersist).toHaveBeenCalledWith({ subject: 'Typed locally' });
@@ -76,7 +78,7 @@ describe('useRecordSeededDraft', () => {
     expect(result.current.isDirty).toBe(true);
 
     act(() => {
-      jest.runOnlyPendingTimers();
+      vi.runOnlyPendingTimers();
     });
 
     expect(mockPersist).toHaveBeenCalledWith({ subject: 'Typed locally' });
@@ -90,7 +92,7 @@ describe('useRecordSeededDraft', () => {
     });
 
     act(() => {
-      jest.runOnlyPendingTimers();
+      vi.runOnlyPendingTimers();
     });
 
     rerender({ subject: 'Typed locally' });
@@ -135,7 +137,7 @@ describe('useRecordSeededDraft', () => {
     expect(result.current.draftResyncKey).not.toBe(resyncKeyBeforeReset);
 
     act(() => {
-      jest.runOnlyPendingTimers();
+      vi.runOnlyPendingTimers();
     });
 
     expect(mockPersist).not.toHaveBeenCalled();
@@ -155,7 +157,7 @@ describe('useRecordSeededDraft', () => {
     rerender({ subject: 'Record A body', resetKey: 'record-a' });
 
     act(() => {
-      jest.runOnlyPendingTimers();
+      vi.runOnlyPendingTimers();
     });
 
     expect(mockPersist).not.toHaveBeenCalled();
@@ -180,7 +182,7 @@ describe('useRecordSeededDraft', () => {
     });
 
     act(() => {
-      jest.runOnlyPendingTimers();
+      vi.runOnlyPendingTimers();
     });
 
     expect(mockPersist).toHaveBeenCalledWith({

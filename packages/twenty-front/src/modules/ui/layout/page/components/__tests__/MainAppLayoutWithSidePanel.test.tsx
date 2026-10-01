@@ -1,4 +1,7 @@
-jest.mock(
+import type * as ReactRouterDomModule from 'react-router-dom';
+import { vi } from 'vite-plus/test';
+
+vi.mock(
   '@/onboarding/effect-components/WorkspaceSetupChatSidePanelEffect',
   () => ({
     WorkspaceSetupChatSidePanelEffect: () => null,
@@ -21,8 +24,9 @@ import { MainAppLayoutWithSidePanel } from '@/ui/layout/page/components/MainAppL
 const mockProviderStats = { current: 0, max: 0 };
 const mockSeenParams: Record<string, string | undefined>[] = [];
 
-jest.mock('@/context-store/components/RouteContextStoreProvider', () => {
-  const { useParams } = jest.requireActual('react-router-dom');
+vi.mock('@/context-store/components/RouteContextStoreProvider', async () => {
+  const { useParams } =
+    await vi.importActual<typeof ReactRouterDomModule>('react-router-dom');
 
   return {
     RouteContextStoreProvider: () => {
@@ -45,19 +49,19 @@ jest.mock('@/context-store/components/RouteContextStoreProvider', () => {
   };
 });
 
-jest.mock('@/side-panel/components/SidePanelForDesktop', () => ({
+vi.mock('@/side-panel/components/SidePanelForDesktop', () => ({
   SidePanelForDesktop: () => null,
 }));
 
-jest.mock('@/command-menu/components/CommandMenuForMobile', () => ({
+vi.mock('@/command-menu/components/CommandMenuForMobile', () => ({
   CommandMenuForMobile: () => null,
 }));
 
-jest.mock('@/side-panel/routing/components/SidePanelPathUrlSyncEffect', () => ({
+vi.mock('@/side-panel/routing/components/SidePanelPathUrlSyncEffect', () => ({
   SidePanelPathUrlSyncEffect: () => null,
 }));
 
-jest.mock('@/command-menu/hooks/useCommandMenuHotKeys', () => ({
+vi.mock('@/command-menu/hooks/useCommandMenuHotKeys', () => ({
   useCommandMenuHotKeys: () => {},
 }));
 

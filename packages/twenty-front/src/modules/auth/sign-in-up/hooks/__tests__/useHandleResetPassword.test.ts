@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { act, renderHook } from '@testing-library/react';
@@ -15,15 +18,15 @@ import { SOURCE_LOCALE } from 'twenty-shared/translations';
 import { type PublicWorkspaceData } from '~/generated-metadata/graphql';
 import { dynamicActivate } from '~/utils/i18n/dynamicActivate';
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
-jest.mock('@apollo/client/react');
-jest.mock('@/captcha/hooks/useReadCaptchaToken');
-jest.mock('@/client-config/hooks/useCaptcha');
+vi.mock('@apollo/client/react');
+vi.mock('@/captcha/hooks/useReadCaptchaToken');
+vi.mock('@/client-config/hooks/useCaptcha');
 
 dynamicActivate(SOURCE_LOCALE);
 
@@ -58,16 +61,16 @@ const renderHooksWithoutWorkspace = () => {
 };
 
 describe('useHandleResetPassword', () => {
-  const emailPasswordResetLinkMock = jest.fn();
+  const emailPasswordResetLinkMock = vi.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
-    (useMutation as unknown as jest.Mock).mockReturnValue([
+    (useMutation as unknown as Mock).mockReturnValue([
       emailPasswordResetLinkMock,
     ]);
-    (useCaptcha as jest.Mock).mockReturnValue({ isCaptchaReady: true });
-    (useReadCaptchaToken as jest.Mock).mockReturnValue({
+    (useCaptcha as Mock).mockReturnValue({ isCaptchaReady: true });
+    (useReadCaptchaToken as Mock).mockReturnValue({
       readCaptchaToken: () => 'mock-captcha-token',
     });
   });
@@ -126,7 +129,7 @@ describe('useHandleResetPassword', () => {
   });
 
   it('should show error message if captcha is not ready', async () => {
-    (useCaptcha as jest.Mock).mockReturnValue({ isCaptchaReady: false });
+    (useCaptcha as Mock).mockReturnValue({ isCaptchaReady: false });
 
     const { result } = renderHooks();
     await act(() => result.current.handleResetPassword('test@example.com')());

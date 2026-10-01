@@ -3,7 +3,21 @@
   "private": true,
   "type": "module",
   "devDependencies": {
+    "@typescript/native-preview": "^7.0.0-dev.20260116.1",
     "@oxlint/plugins": "^1.51.0",
+    "@vitest/coverage-v8": "^4.1.0",
+    "esbuild": "^0.28.1",
+    "oxlint": "^1.51.0",
+    "vitest": "^4.1.0",
     "twenty-shared": "workspace:*"
+  },
+  "scripts": {
+    "test:ci": "bunx vite-plus run twenty-oxlint-rules#test -- --coverage",
+    "test:coverage": "bunx vite-plus run twenty-oxlint-rules#test -- --coverage",
+    "test:watch": "bunx vite-plus run --no-cache twenty-oxlint-rules#test -- --watch",
+    "build:command": "bunx esbuild oxlint-plugin.ts --bundle --format=esm --platform=node --outfile=dist/oxlint-plugin.mjs \"--define:__filename='\"[plugin]\"'\" \"--define:__dirname='\"[plugin]\"'\" \"--banner:js=import { createRequire } from 'module'; const require = createRequire(import.meta.url);\"",
+    "typecheck:command": "tsgo -p tsconfig.json",
+    "test:command": "cd ../.. && bunx vitest run --config packages/twenty-oxlint-rules/vitest.config.mts",
+    "typecheck:watch": "bunx tsgo -p tsconfig.json --watch"
   }
 }

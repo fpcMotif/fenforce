@@ -9,39 +9,40 @@ icon: "terminal"
 ### Starting the app
 
 ```bash
-npx nx start twenty-front
+bunx vite-plus run twenty-front#start
 ```
 
 ### Regenerate graphql schema based on API graphql schema
 
 ```bash
-npx nx run twenty-front:graphql:generate --configuration=metadata
+bunx vite-plus run twenty-front#graphql:generate:metadata
 ```
 OR
 ```bash
-npx nx run twenty-front:graphql:generate
+bunx vite-plus run twenty-front#graphql:generate
 ```
 
 ### Lint
 
 ```bash
-npx nx run twenty-front:lint # pass --fix to fix lint errors
+bunx vite-plus run twenty-front#lint
+bunx vite-plus run twenty-front#lint:fix # fix lint errors
 ```
 
 ## Translations
 
 ```bash
-npx nx run twenty-front:lingui:extract
-npx nx run twenty-front:lingui:compile
+bunx vite-plus run twenty-front#lingui:extract
+bunx vite-plus run twenty-front#lingui:compile
 ```
 
 ### Test
 
 ```bash
-npx nx run twenty-front:test # run jest tests
-npx nx run twenty-front:storybook:serve:dev # run storybook
-npx nx run twenty-front:storybook:test # run tests # (needs yarn storybook:serve:dev to be running)
-npx nx run twenty-front:storybook:coverage # (needs yarn storybook:serve:dev to be running)
+bunx vite-plus run twenty-front#test # run jest tests
+bunx vite-plus run twenty-front#storybook:serve:dev # run storybook
+bunx vite-plus run twenty-front#storybook:test # run tests (requires Storybook to be running)
+bunx vite-plus run twenty-front#storybook:coverage # requires Storybook to be running
 ```
 
 ## Tech Stack
@@ -63,8 +64,8 @@ The project has a clean and simple stack, with minimal boilerplate code.
 
 **Tooling**
 
-- [Yarn](https://yarnpkg.com/)
-- [Craco](https://craco.js.org/docs/)
+- [Bun](https://bun.com/)
+- [Vite+](https://viteplus.dev/)
 - [Oxlint](https://oxc.rs/docs/guide/usage/linter.html)
 
 ## Architecture
@@ -88,5 +89,3 @@ See [best practices](/developers/contribute/capabilities/frontend-development/be
 Jest is mainly for testing utility functions, and not components themselves.
 
 Storybook is for testing the behavior of isolated components, as well as displaying the design system.
-
-

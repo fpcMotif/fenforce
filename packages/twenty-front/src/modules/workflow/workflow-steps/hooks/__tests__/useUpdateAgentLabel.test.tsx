@@ -1,18 +1,21 @@
+import type * as ReactModule from '@apollo/client/react';
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { useUpdateAgentLabel } from '@/workflow/workflow-steps/hooks/useUpdateAgentLabel';
 
-const mockUpdateAgent = jest.fn();
-const mockUseFindOneAgentQuery = jest.fn();
+const mockUpdateAgent = vi.fn();
+const mockUseFindOneAgentQuery = vi.fn();
 
-jest.mock('@apollo/client/react', () => ({
-  ...jest.requireActual('@apollo/client/react'),
+vi.mock('@apollo/client/react', async () => ({
+  ...(await vi.importActual<typeof ReactModule>('@apollo/client/react')),
   useQuery: (...args: unknown[]) => mockUseFindOneAgentQuery(...args),
   useMutation: () => [mockUpdateAgent],
 }));
 
 describe('useUpdateAgentLabel', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockUseFindOneAgentQuery.mockReturnValue({
       data: undefined,
     });

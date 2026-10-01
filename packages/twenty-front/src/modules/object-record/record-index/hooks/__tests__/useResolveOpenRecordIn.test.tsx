@@ -1,3 +1,7 @@
+import type * as UtilitiesModule from 'twenty-ui/utilities';
+import type * as UseAtomFamilySelectorValueModule from '@/ui/utilities/state/jotai/hooks/useAtomFamilySelectorValue';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 
@@ -7,21 +11,20 @@ import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
 import { act } from 'react';
 import { ObjectOpenRecordIn, OpenRecordIn } from 'twenty-shared/types';
 
-jest.mock('twenty-ui/utilities', () => ({
-  ...jest.requireActual('twenty-ui/utilities'),
-  useIsMobile: jest.fn().mockReturnValue(false),
+vi.mock('twenty-ui/utilities', async () => ({
+  ...(await vi.importActual<typeof UtilitiesModule>('twenty-ui/utilities')),
+  useIsMobile: vi.fn().mockReturnValue(false),
 }));
 
-jest.mock(
-  '@/ui/utilities/state/jotai/hooks/useAtomFamilySelectorValue',
-  () => ({
-    useAtomFamilySelectorValue: jest.fn(),
-  }),
-);
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomFamilySelectorValue', () => ({
+  useAtomFamilySelectorValue: vi.fn(),
+}));
 
-const mockUseAtomFamilySelectorValue = jest.requireMock(
-  '@/ui/utilities/state/jotai/hooks/useAtomFamilySelectorValue',
-).useAtomFamilySelectorValue as jest.Mock;
+const mockUseAtomFamilySelectorValue = (
+  await vi.importMock<typeof UseAtomFamilySelectorValueModule>(
+    '@/ui/utilities/state/jotai/hooks/useAtomFamilySelectorValue',
+  )
+).useAtomFamilySelectorValue as Mock;
 
 const setObjectOpenRecordIn = (
   openRecordIn: ObjectOpenRecordIn | undefined,

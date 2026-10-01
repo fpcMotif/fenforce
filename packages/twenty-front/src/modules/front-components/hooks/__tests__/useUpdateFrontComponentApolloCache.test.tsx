@@ -1,16 +1,19 @@
+import type * as ReactModule from '@apollo/client/react';
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 
 import { type MetadataOperationBrowserEventDetail } from '@/browser-event/types/MetadataOperationBrowserEventDetail';
 import { useUpdateFrontComponentApolloCache } from '@/front-components/hooks/useUpdateFrontComponentApolloCache';
 import { type FrontComponent } from '~/generated-metadata/graphql';
 
-const mockUpdateQuery = jest.fn();
+const mockUpdateQuery = vi.fn();
 const mockApolloClient = {
   cache: { updateQuery: mockUpdateQuery },
 };
 
-jest.mock('@apollo/client/react', () => ({
-  ...jest.requireActual('@apollo/client/react'),
+vi.mock('@apollo/client/react', async () => ({
+  ...(await vi.importActual<typeof ReactModule>('@apollo/client/react')),
   useApolloClient: () => mockApolloClient,
 }));
 
@@ -28,7 +31,7 @@ const buildFrontComponentRecord = (
 
 describe('useUpdateFrontComponentApolloCache', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should call cache.updateQuery when operation is update and record ID matches', () => {

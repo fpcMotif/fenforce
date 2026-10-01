@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import {
   PAGE_LAYOUT_TEST_INSTANCE_ID,
   PageLayoutTestWrapper,
@@ -15,34 +17,34 @@ import { type ReactNode } from 'react';
 import { type IconComponent } from 'twenty-ui/icon';
 import type * as TwentyIcons from 'twenty-ui/icon';
 
-const mockNavigatePageLayoutSidePanel = jest.fn();
+const mockNavigatePageLayoutSidePanel = vi.fn();
 
-jest.mock('twenty-ui/icon', () => ({
-  ...jest.requireActual<typeof TwentyIcons>('twenty-ui/icon'),
+vi.mock('twenty-ui/icon', async () => ({
+  ...(await vi.importActual<typeof TwentyIcons>('twenty-ui/icon')),
   IconListDetails: () => <svg role="img" aria-label="Fields group icon" />,
   IconListSearch: () => <svg role="img" aria-label="Field icon" />,
 }));
 
-jest.mock('@apollo/client/react', () => ({
+vi.mock('@apollo/client/react', () => ({
   useQuery: () => ({ data: { frontComponents: [] } }),
 }));
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItem', () => ({
   useObjectMetadataItem: () => ({ objectMetadataItem: { id: 'company' } }),
 }));
 
-jest.mock(
+vi.mock(
   '@/page-layout/widgets/field/hooks/useFieldWidgetEligibleFields',
   () => ({
     useFieldWidgetEligibleFields: () => [],
   }),
 );
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
-  useSidePanelMenu: () => ({ closeSidePanelMenu: jest.fn() }),
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+  useSidePanelMenu: () => ({ closeSidePanelMenu: vi.fn() }),
 }));
 
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/hooks/useNavigatePageLayoutSidePanel',
   () => ({
     useNavigatePageLayoutSidePanel: () => ({
@@ -51,7 +53,7 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/hooks/usePageLayoutIdFromContextStore',
   () => ({
     usePageLayoutIdFromContextStore: () => ({
@@ -61,11 +63,11 @@ jest.mock(
   }),
 );
 
-jest.mock('@/side-panel/components/SidePanelList', () => ({
+vi.mock('@/side-panel/components/SidePanelList', () => ({
   SidePanelList: ({ children }: { children: ReactNode }) => <>{children}</>,
 }));
 
-jest.mock('@/side-panel/components/SidePanelGroup', () => ({
+vi.mock('@/side-panel/components/SidePanelGroup', () => ({
   SidePanelGroup: ({
     heading,
     children,
@@ -80,13 +82,13 @@ jest.mock('@/side-panel/components/SidePanelGroup', () => ({
   ),
 }));
 
-jest.mock('@/ui/layout/selectable-list/components/SelectableListItem', () => ({
+vi.mock('@/ui/layout/selectable-list/components/SelectableListItem', () => ({
   SelectableListItem: ({ children }: { children: ReactNode }) => (
     <>{children}</>
   ),
 }));
 
-jest.mock('@/command-menu/components/CommandMenuItem', () => ({
+vi.mock('@/command-menu/components/CommandMenuItem', () => ({
   CommandMenuItem: ({
     label,
     onClick,
@@ -104,7 +106,7 @@ jest.mock('@/command-menu/components/CommandMenuItem', () => ({
 }));
 
 describe('SidePanelPageLayoutRecordPageWidgetTypeSelect', () => {
-  beforeEach(() => jest.clearAllMocks());
+  beforeEach(() => vi.clearAllMocks());
 
   it('labels standard widgets and distinguishes a fields group from a single field', () => {
     const store = createStore();

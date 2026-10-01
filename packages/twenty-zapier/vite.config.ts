@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite-plus';
 
 import packageJson from './package.json';
 import type { PackageJson } from 'type-fest';
@@ -26,6 +26,77 @@ const entryFileNames = (chunk: any, extension: 'cjs') => {
 
 export default defineConfig(() => {
   return {
+    run: {
+      tasks: {
+        build: {
+          command: 'bun run build:command',
+          dependsOn: [
+            'clean',
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+          ],
+          cache: true,
+        },
+        test: {
+          command: 'bun run test:command',
+          dependsOn: [
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+          ],
+          cache: true,
+        },
+        lint: {
+          command: 'bun run lint:command',
+          dependsOn: [
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+            'twenty-oxlint-rules#build',
+          ],
+          cache: true,
+        },
+        typecheck: {
+          command: 'bun run typecheck:command',
+          dependsOn: [
+            {
+              task: 'build',
+              from: ['dependencies', 'devDependencies'],
+            },
+          ],
+          cache: true,
+        },
+        validate: {
+          command: 'bun run validate:command',
+          dependsOn: ['build'],
+          cache: false,
+        },
+        versions: {
+          command: 'bun run versions:command',
+          dependsOn: ['build'],
+          cache: false,
+        },
+        watch: {
+          command: 'bun run watch:command',
+          dependsOn: ['build'],
+          cache: false,
+        },
+        deploy: {
+          command: 'bun run deploy:command',
+          dependsOn: ['build'],
+          cache: false,
+        },
+        promote: {
+          command: 'bun run promote:command',
+          dependsOn: ['build'],
+          cache: false,
+        },
+      },
+    },
     root: __dirname,
     cacheDir: '../../node_modules/.vite/packages/twenty-zapier',
     resolve: {

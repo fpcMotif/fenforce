@@ -1,3 +1,6 @@
+import type * as ReactModule from '@apollo/client/react';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { useObjectMetadataItem } from '@/object-metadata/hooks/useObjectMetadataItem';
 import {
   AGGREGATE_QUERY,
@@ -10,12 +13,12 @@ import { useQuery } from '@apollo/client/react';
 import { renderHook } from '@testing-library/react';
 import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksWrapper';
 
-jest.mock('@apollo/client/react', () => ({
-  ...jest.requireActual('@apollo/client/react'),
-  useQuery: jest.fn(),
+vi.mock('@apollo/client/react', async () => ({
+  ...(await vi.importActual<typeof ReactModule>('@apollo/client/react')),
+  useQuery: vi.fn(),
 }));
-jest.mock('@/object-metadata/hooks/useObjectMetadataItem');
-jest.mock('@/object-record/hooks/useAggregateRecordsQuery');
+vi.mock('@/object-metadata/hooks/useObjectMetadataItem');
+vi.mock('@/object-record/hooks/useAggregateRecordsQuery');
 
 const mockObjectMetadataItem = {
   nameSingular: 'opportunity',
@@ -34,16 +37,16 @@ const Wrapper = getJestMetadataAndApolloMocksWrapper({
 
 describe('useAggregateRecords', () => {
   beforeEach(() => {
-    (useObjectMetadataItem as jest.Mock).mockReturnValue({
+    (useObjectMetadataItem as Mock).mockReturnValue({
       objectMetadataItem: mockObjectMetadataItem,
     });
 
-    (useAggregateRecordsQuery as jest.Mock).mockReturnValue({
+    (useAggregateRecordsQuery as Mock).mockReturnValue({
       aggregateQuery: AGGREGATE_QUERY,
       gqlFieldToFieldMap: mockGqlFieldToFieldMap,
     });
 
-    (useQuery as unknown as jest.Mock).mockReturnValue({
+    (useQuery as unknown as Mock).mockReturnValue({
       data: mockResponse,
       loading: false,
       error: undefined,
@@ -79,7 +82,7 @@ describe('useAggregateRecords', () => {
   });
 
   it('should handle loading state', () => {
-    (useQuery as unknown as jest.Mock).mockReturnValue({
+    (useQuery as unknown as Mock).mockReturnValue({
       data: undefined,
       loading: true,
       error: undefined,
@@ -104,7 +107,7 @@ describe('useAggregateRecords', () => {
 
   it('should handle error state', () => {
     const mockError = new Error('Query failed');
-    (useQuery as unknown as jest.Mock).mockReturnValue({
+    (useQuery as unknown as Mock).mockReturnValue({
       data: undefined,
       loading: false,
       error: mockError,

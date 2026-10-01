@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { fireEvent, render, screen } from '@testing-library/react';
@@ -8,66 +10,63 @@ import { ViewType } from '~/generated-metadata/graphql';
 
 const OBJECT_METADATA_ID = '11111111-1111-4111-8111-111111111111';
 
-const mockHandleLayoutChange = jest.fn();
-const mockCloseDropdown = jest.fn();
-const mockIsAvailableAsGroupByField = jest.fn();
-const mockIsAvailableAsCalendarField = jest.fn();
+const mockHandleLayoutChange = vi.fn();
+const mockCloseDropdown = vi.fn();
+const mockIsAvailableAsGroupByField = vi.fn();
+const mockIsAvailableAsCalendarField = vi.fn();
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
-  useObjectMetadataItems: jest.fn(() => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
+  useObjectMetadataItems: vi.fn(() => ({
     objectMetadataItems: [
       { id: OBJECT_METADATA_ID, readableFields: [{ id: 'field-id' }] },
     ],
   })),
 }));
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar/utils/isFieldMetadataItemAvailableAsCalendarField',
   () => ({
     isFieldMetadataItemAvailableAsCalendarField: (...args: unknown[]) =>
       mockIsAvailableAsCalendarField(...args),
   }),
 );
-jest.mock(
+vi.mock(
   '@/page-layout/widgets/record-table/utils/isFieldMetadataItemAvailableAsWidgetGroupByField',
   () => ({
     isFieldMetadataItemAvailableAsWidgetGroupByField: (...args: unknown[]) =>
       mockIsAvailableAsGroupByField(...args),
   }),
 );
-jest.mock(
+vi.mock(
   '@/page-layout/widgets/record-table/hooks/useRecordTableWidgetLayoutCallbacks',
   () => ({
-    useRecordTableWidgetLayoutCallbacks: jest.fn(() => ({
+    useRecordTableWidgetLayoutCallbacks: vi.fn(() => ({
       handleLayoutChange: mockHandleLayoutChange,
     })),
   }),
 );
-jest.mock('@/ui/layout/dropdown/components/DropdownMenuItemsContainer', () => ({
+vi.mock('@/ui/layout/dropdown/components/DropdownMenuItemsContainer', () => ({
   DropdownMenuItemsContainer: ({ children }: { children: React.ReactNode }) =>
     children,
 }));
-jest.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
-  useCloseDropdown: jest.fn(() => ({ closeDropdown: mockCloseDropdown })),
+vi.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
+  useCloseDropdown: vi.fn(() => ({ closeDropdown: mockCloseDropdown })),
 }));
-jest.mock('@/ui/layout/selectable-list/components/SelectableList', () => ({
+vi.mock('@/ui/layout/selectable-list/components/SelectableList', () => ({
   SelectableList: ({ children }: { children: React.ReactNode }) => children,
 }));
-jest.mock('@/ui/layout/selectable-list/components/SelectableListItem', () => ({
+vi.mock('@/ui/layout/selectable-list/components/SelectableListItem', () => ({
   SelectableListItem: ({ children }: { children: React.ReactNode }) => children,
 }));
-jest.mock(
+vi.mock(
   '@/ui/utilities/state/component-state/hooks/useAvailableComponentInstanceIdOrThrow',
   () => ({
-    useAvailableComponentInstanceIdOrThrow: jest.fn(() => 'dropdown-id'),
+    useAvailableComponentInstanceIdOrThrow: vi.fn(() => 'dropdown-id'),
   }),
 );
-jest.mock(
-  '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
-  () => ({
-    useAtomComponentStateValue: jest.fn(() => null),
-  }),
-);
-jest.mock('twenty-ui/primitives/navigation', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue', () => ({
+  useAtomComponentStateValue: vi.fn(() => null),
+}));
+vi.mock('twenty-ui/primitives/navigation', () => ({
   ListItem: ({
     description,
     disabled,
@@ -109,7 +108,7 @@ const layoutLabels = () =>
 
 describe('RecordTableLayoutDropdownContent', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockIsAvailableAsGroupByField.mockReturnValue(true);
     mockIsAvailableAsCalendarField.mockReturnValue(true);
   });

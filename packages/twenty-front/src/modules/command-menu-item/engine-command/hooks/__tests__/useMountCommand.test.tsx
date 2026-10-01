@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { headlessCommandContextApisState } from '@/command-menu-item/engine-command/states/headlessCommandContextApisState';
 import { type HeadlessEngineCommandContextApi } from '@/command-menu-item/engine-command/types/HeadlessCommandContextApi';
 import { useMountCommand } from '@/command-menu-item/engine-command/hooks/useMountCommand';
@@ -9,9 +11,9 @@ import {
   EngineComponentKey,
 } from '~/generated-metadata/graphql';
 
-const mockEnrichFn = jest.fn();
+const mockEnrichFn = vi.fn();
 
-jest.mock(
+vi.mock(
   '@/command-menu-item/engine-command/hooks/useEnrichHeadlessCommandContextApiWithWorkflowVersionTriggerInformation',
   () => ({
     useEnrichHeadlessCommandContextApiWithWorkflowVersionTriggerInformation:
@@ -35,7 +37,7 @@ const baseContextApi: HeadlessEngineCommandContextApi = {
   navigationTargetObjectMetadataId: null,
 };
 
-jest.mock(
+vi.mock(
   '@/command-menu-item/engine-command/utils/buildHeadlessCommandContextApi',
   () => ({
     buildHeadlessCommandContextApi: () => baseContextApi,
@@ -50,7 +52,7 @@ const getWrapper =
 
 describe('useMountCommand', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should mount with frontComponentId when provided', async () => {

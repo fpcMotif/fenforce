@@ -43,10 +43,10 @@ jobs:
           git checkout -B i18n-website origin/i18n-website || git checkout -b i18n-website
 
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
 
       - name: Build twenty-shared
-        run: npx nx build twenty-shared
+        run: bunx vite-plus run twenty-shared#build
 
       - name: Stash any changes before pulling translations
         run: |
@@ -59,7 +59,7 @@ jobs:
       # catalogs that reach the repo are already correct rather than a cycle behind.
       - name: Normalize translations in Crowdin
         if: inputs.force_pull == true || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-        run: npx tsx packages/twenty-utils/crowdin-normalizer/normalize-crowdin-translations.ts --project=4 --format=po --apply || echo "::warning::translation normalization failed (non-blocking)"
+        run: bunx tsx packages/twenty-utils/crowdin-normalizer/normalize-crowdin-translations.ts --project=4 --format=po --apply || echo "::warning::translation normalization failed (non-blocking)"
         env:
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
@@ -96,12 +96,12 @@ jobs:
         run: sudo chown -R runner:docker .
 
       - name: Normalize downloaded catalogs to lingui format
-        run: npx nx run twenty-website:lingui:extract
+        run: bunx vite-plus run twenty-website#lingui:extract
 
       - name: Compile website translations
         id: compile_translations
         run: |
-          npx nx run twenty-website:lingui:compile
+          bunx vite-plus run twenty-website#lingui:compile
           git status
           git add packages/twenty-website/src/locales
           if ! git diff --staged --quiet --exit-code; then

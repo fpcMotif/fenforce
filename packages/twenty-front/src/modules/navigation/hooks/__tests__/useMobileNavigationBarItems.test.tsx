@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { useSwitchToNewAiChat } from '@/ai/hooks/useSwitchToNewAiChat';
 import { useMobileNavigationBarItems } from '@/navigation/hooks/useMobileNavigationBarItems';
 import { useHasPermissionFlag } from '@/settings/roles/hooks/useHasPermissionFlag';
@@ -8,26 +10,26 @@ import { createStore, Provider } from 'jotai';
 import { type ReactNode } from 'react';
 import { MemoryRouter, useLocation, useNavigate } from 'react-router-dom';
 
-jest.mock('@/ai/hooks/useSwitchToNewAiChat');
-jest.mock('@/settings/roles/hooks/useHasPermissionFlag');
+vi.mock('@/ai/hooks/useSwitchToNewAiChat');
+vi.mock('@/settings/roles/hooks/useHasPermissionFlag');
 
-jest.mock('@/object-metadata/hooks/useFilteredObjectMetadataItems', () => ({
+vi.mock('@/object-metadata/hooks/useFilteredObjectMetadataItems', () => ({
   useFilteredObjectMetadataItems: () => ({
     alphaSortedActiveNonSystemObjectMetadataItems: [],
   }),
 }));
 
-jest.mock('@/side-panel/hooks/useOpenRecordsSearchPageInSidePanel', () => ({
+vi.mock('@/side-panel/hooks/useOpenRecordsSearchPageInSidePanel', () => ({
   useOpenRecordsSearchPageInSidePanel: () => ({
-    openRecordsSearchPage: jest.fn(),
+    openRecordsSearchPage: vi.fn(),
   }),
 }));
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
-  useSidePanelMenu: () => ({ closeSidePanelMenu: jest.fn() }),
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+  useSidePanelMenu: () => ({ closeSidePanelMenu: vi.fn() }),
 }));
 
-const mockSwitchToNewChat = jest.fn();
+const mockSwitchToNewChat = vi.fn();
 
 const renderMobileNavigationBarItems = (
   pathname: string,
@@ -64,11 +66,11 @@ const tapItem = (
 
 describe('useMobileNavigationBarItems', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     localStorage.clear();
 
-    jest.mocked(useHasPermissionFlag).mockReturnValue(true);
-    jest.mocked(useSwitchToNewAiChat).mockReturnValue({
+    vi.mocked(useHasPermissionFlag).mockReturnValue(true);
+    vi.mocked(useSwitchToNewAiChat).mockReturnValue({
       switchToNewChat: mockSwitchToNewChat,
     });
   });
@@ -84,7 +86,7 @@ describe('useMobileNavigationBarItems', () => {
   });
 
   it('drops the new chat when the workspace has no AI permission', () => {
-    jest.mocked(useHasPermissionFlag).mockReturnValue(false);
+    vi.mocked(useHasPermissionFlag).mockReturnValue(false);
 
     const { result } = renderMobileNavigationBarItems('/objects/people');
 

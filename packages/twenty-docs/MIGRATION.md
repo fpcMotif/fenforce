@@ -64,7 +64,7 @@ packages/twenty-docs/
 
 Start the local Mintlify dev server:
 ```bash
-npx nx run twenty-docs:dev
+bunx vite-plus run twenty-docs#dev
 ```
 
 Open http://localhost:3000 to preview all migrated documentation.

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type ApolloCache } from '@apollo/client';
 
 import { type EnrichedObjectMetadataItem } from '@/object-metadata/types/EnrichedObjectMetadataItem';
@@ -18,7 +20,7 @@ describe('triggerUpdateGroupByQueriesOptimisticEffect', () => {
   };
 
   it('should call cache.modify with correct field name', () => {
-    const mockModify = jest.fn();
+    const mockModify = vi.fn();
     const mockCache = {
       modify: mockModify,
     } as unknown as ApolloCache;
@@ -41,7 +43,7 @@ describe('triggerUpdateGroupByQueriesOptimisticEffect', () => {
   });
 
   it('should handle update operation', () => {
-    const mockModify = jest.fn();
+    const mockModify = vi.fn();
     const mockCache = {
       modify: mockModify,
     } as unknown as ApolloCache;
@@ -59,7 +61,7 @@ describe('triggerUpdateGroupByQueriesOptimisticEffect', () => {
   });
 
   it('should handle delete operation', () => {
-    const mockModify = jest.fn();
+    const mockModify = vi.fn();
     const mockCache = {
       modify: mockModify,
     } as unknown as ApolloCache;
@@ -77,7 +79,7 @@ describe('triggerUpdateGroupByQueriesOptimisticEffect', () => {
   });
 
   it('should handle empty records array', () => {
-    const mockModify = jest.fn();
+    const mockModify = vi.fn();
     const mockCache = {
       modify: mockModify,
     } as unknown as ApolloCache;

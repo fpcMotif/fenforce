@@ -1,8 +1,10 @@
+import { vi } from 'vite-plus/test';
+
 import { useIsNavigationDrawerContentExpanded } from '@/navigation/hooks/useIsNavigationDrawerContentExpanded';
 import { NavigationDrawerAnimatedCollapseWrapper } from '@/ui/navigation/navigation-drawer/components/NavigationDrawerAnimatedCollapseWrapper';
 import { render, screen, waitFor } from '@testing-library/react';
 
-jest.mock('@/navigation/hooks/useIsNavigationDrawerContentExpanded');
+vi.mock('@/navigation/hooks/useIsNavigationDrawerContentExpanded');
 
 const NavigationModes = () => (
   <NavigationDrawerAnimatedCollapseWrapper>
@@ -12,7 +14,7 @@ const NavigationModes = () => (
 
 describe('NavigationDrawerAnimatedCollapseWrapper', () => {
   beforeEach(() => {
-    jest.mocked(useIsNavigationDrawerContentExpanded).mockReturnValue(true);
+    vi.mocked(useIsNavigationDrawerContentExpanded).mockReturnValue(true);
   });
 
   it('keeps its children mounted while collapsing and expanding the drawer', async () => {
@@ -22,7 +24,7 @@ describe('NavigationDrawerAnimatedCollapseWrapper', () => {
     });
     const animatedContainer = navigationModesButton.parentElement;
 
-    jest.mocked(useIsNavigationDrawerContentExpanded).mockReturnValue(false);
+    vi.mocked(useIsNavigationDrawerContentExpanded).mockReturnValue(false);
     rerender(<NavigationModes />);
 
     await waitFor(() => {
@@ -37,7 +39,7 @@ describe('NavigationDrawerAnimatedCollapseWrapper', () => {
       navigationModesButton,
     );
 
-    jest.mocked(useIsNavigationDrawerContentExpanded).mockReturnValue(true);
+    vi.mocked(useIsNavigationDrawerContentExpanded).mockReturnValue(true);
     rerender(<NavigationModes />);
 
     await waitFor(() => {

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { detectTimeZone } from '@/localization/utils/detection/detectTimeZone';
 
 describe('detectTimeZone', () => {
@@ -10,7 +12,7 @@ describe('detectTimeZone', () => {
   it('should return UTC when Intl.DateTimeFormat throws error', () => {
     const originalDateTimeFormat = global.Intl.DateTimeFormat;
     // @ts-expect-error - Mocking for test
-    global.Intl.DateTimeFormat = jest.fn().mockImplementation(() => {
+    global.Intl.DateTimeFormat = vi.fn().mockImplementation(() => {
       throw new Error('DateTimeFormat not supported');
     });
 
@@ -21,7 +23,7 @@ describe('detectTimeZone', () => {
   it('should return UTC when resolvedOptions throws error', () => {
     const originalDateTimeFormat = global.Intl.DateTimeFormat;
     // @ts-expect-error - Mocking for test
-    global.Intl.DateTimeFormat = jest.fn().mockImplementation(() => ({
+    global.Intl.DateTimeFormat = vi.fn().mockImplementation(() => ({
       resolvedOptions: () => {
         throw new Error('resolvedOptions failed');
       },
@@ -34,7 +36,7 @@ describe('detectTimeZone', () => {
   it('should return specific timezone when mocked', () => {
     const originalDateTimeFormat = global.Intl.DateTimeFormat;
     // @ts-expect-error - Mocking for test
-    global.Intl.DateTimeFormat = jest.fn().mockImplementation(() => ({
+    global.Intl.DateTimeFormat = vi.fn().mockImplementation(() => ({
       resolvedOptions: () => ({ timeZone: 'America/New_York' }),
     }));
 

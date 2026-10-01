@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { DragDropManager, Draggable } from '@dnd-kit/dom';
 import { PointerSensor } from '@dnd-kit/react';
 
@@ -37,7 +39,7 @@ describe('PointerSensorWithSourceGuard', () => {
 
   afterEach(() => {
     manager.destroy();
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   const createUnregisteredDraggable = () =>
@@ -84,7 +86,7 @@ describe('PointerSensorWithSourceGuard', () => {
     // pointer capture, which jsdom does not implement.
     const abortedController = new AbortController();
     abortedController.abort();
-    const startSpy = jest
+    const startSpy = vi
       .spyOn(manager.actions, 'start')
       .mockReturnValue(abortedController);
 

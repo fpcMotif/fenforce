@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, waitFor } from '@testing-library/react';
 import { createStore, Provider as JotaiProvider } from 'jotai';
 
@@ -10,7 +12,7 @@ const selectableListInstanceId = 'test-selectable-list';
 const originalScrollIntoView = HTMLElement.prototype.scrollIntoView;
 
 describe('SelectableListItem', () => {
-  const scrollIntoViewMock = jest.fn();
+  const scrollIntoViewMock = vi.fn();
 
   beforeEach(() => {
     scrollIntoViewMock.mockClear();

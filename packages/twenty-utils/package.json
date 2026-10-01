@@ -2,13 +2,20 @@
   "name": "twenty-utils",
   "private": true,
   "scripts": {
-    "nx": "NX_DEFAULT_PROJECT=twenty-front node ../../node_modules/nx/bin/nx.js",
+    "test:ci": "bunx vite-plus run twenty-utils#test -- --ci --maxWorkers=1 --coverage",
+    "test:coverage": "bunx vite-plus run twenty-utils#test -- --coverage --coverageReporters=lcov --coverageReporters=text",
+    "test:watch": "bunx vite-plus run --no-cache twenty-utils#test -- --watch",
     "danger:ci": "danger ci --use-github-checks --failOnErrors",
     "danger:congratulate": "danger ci --dangerfile ./congratulate-dangerfile.ts --use-github-checks --failOnErrors",
-    "release": "node release.js"
+    "release": "node release.js",
+    "test:command": "bunx jest --config jest.config.mjs --silent"
   },
   "devDependencies": {
-    "danger": "patch:danger@npm%3A13.0.8#~/.yarn/patches/danger-npm-13.0.8-48aba2788c.patch",
-    "danger-plugin-todos": "^1.3.1"
+    "@swc/core": "^1.15.11",
+    "@swc/jest": "^0.2.39",
+    "@types/jest": "^30.0.0",
+    "danger": "13.0.8",
+    "danger-plugin-todos": "^1.3.1",
+    "jest": "29.7.0"
   }
 }

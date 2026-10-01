@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import {
   GetCoreWorkflowVersionDocument,
   GetCoreWorkflowVersionLegacyMappingDocument,
@@ -12,14 +14,14 @@ import {
   EngineComponentKey,
 } from '~/generated-metadata/graphql';
 
-const mockFindOneWorkflowVersion = jest.fn();
-const mockCoreQuery = jest.fn();
+const mockFindOneWorkflowVersion = vi.fn();
+const mockCoreQuery = vi.fn();
 let mockIsCore = false;
-jest.mock('@/workflow/hooks/useIsWorkflowCoreEnabled', () => ({
+vi.mock('@/workflow/hooks/useIsWorkflowCoreEnabled', () => ({
   useIsWorkflowCoreEnabled: () => mockIsCore,
 }));
 
-jest.mock('@/object-record/hooks/useLazyFindOneRecord', () => ({
+vi.mock('@/object-record/hooks/useLazyFindOneRecord', () => ({
   useLazyFindOneRecord: () => ({
     findOneRecord: mockFindOneWorkflowVersion,
   }),
@@ -47,13 +49,13 @@ const buildBaseContextApi = (
   ...overrides,
 });
 
-jest.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
+vi.mock('@/object-metadata/hooks/useApolloCoreClient', () => ({
   useApolloCoreClient: () => ({ query: mockCoreQuery }),
 }));
 
 describe('useEnrichHeadlessCommandContextApiWithWorkflowVersionTriggerInformation', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockIsCore = false;
     mockCoreQuery.mockReset().mockResolvedValue({
       data: { workflowVersionContent: { trigger: { type: 'MANUAL' } } },

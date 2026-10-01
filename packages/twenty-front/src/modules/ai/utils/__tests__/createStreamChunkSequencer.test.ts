@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type UIMessageChunk } from 'ai';
 
 import { createStreamChunkSequencer } from '@/ai/utils/createStreamChunkSequencer';
@@ -7,16 +9,16 @@ const chunk = (text: string) =>
 
 describe('createStreamChunkSequencer', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   const build = () => {
     const applied: string[] = [];
-    const onGapStalled = jest.fn();
+    const onGapStalled = vi.fn();
     const sequencer = createStreamChunkSequencer({
       onApply: (appliedChunk) =>
         applied.push((appliedChunk as { delta: string }).delta),
@@ -66,7 +68,7 @@ describe('createStreamChunkSequencer', () => {
     sequencer.push(chunk('e'), 5);
     expect(onGapStalled).not.toHaveBeenCalled();
 
-    jest.advanceTimersByTime(2_100);
+    vi.advanceTimersByTime(2_100);
     expect(onGapStalled).toHaveBeenCalledTimes(1);
     expect(applied).toEqual([]);
 
@@ -80,7 +82,7 @@ describe('createStreamChunkSequencer', () => {
     sequencer.push(chunk('b'), 2);
     sequencer.push(chunk('a'), 1);
 
-    jest.advanceTimersByTime(3_000);
+    vi.advanceTimersByTime(3_000);
     expect(onGapStalled).not.toHaveBeenCalled();
   });
 
@@ -101,11 +103,11 @@ describe('createStreamChunkSequencer', () => {
     sequencer.push(chunk('d'), 4);
     sequencer.push(chunk('c'), 3);
 
-    jest.advanceTimersByTime(2_100);
+    vi.advanceTimersByTime(2_100);
     expect(onGapStalled).toHaveBeenCalledTimes(1);
     expect(applied).toEqual([]);
 
-    jest.advanceTimersByTime(2_100);
+    vi.advanceTimersByTime(2_100);
     expect(applied).toEqual(['c', 'd']);
 
     sequencer.push(chunk('e'), 5);

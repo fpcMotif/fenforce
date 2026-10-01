@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { enUS } from 'date-fns/locale';
@@ -9,34 +11,34 @@ import { recordCalendarSelectedDateComponentState } from '@/object-record/record
 import { recordIndexCalendarLayoutComponentState } from '@/object-record/record-index/states/recordIndexCalendarLayoutComponentState';
 import { ViewCalendarLayout } from '~/generated-metadata/graphql';
 
-const mockSetRecordCalendarSelectedDate = jest.fn();
-const mockSetRecordIndexCalendarLayout = jest.fn();
-const mockUpdateCurrentView = jest.fn();
-const mockUseAtomComponentState = jest.fn();
-const mockUseAtomStateValue = jest.fn();
-const mockUseRecordCalendarDaysRange = jest.fn();
+const mockSetRecordCalendarSelectedDate = vi.fn();
+const mockSetRecordIndexCalendarLayout = vi.fn();
+const mockUpdateCurrentView = vi.fn();
+const mockUseAtomComponentState = vi.fn();
+const mockUseAtomStateValue = vi.fn();
+const mockUseRecordCalendarDaysRange = vi.fn();
 
-jest.mock('@/localization/hooks/useDateTimeFormat', () => ({
-  useDateTimeFormat: jest.fn(() => ({ timeZone: 'UTC' })),
+vi.mock('@/localization/hooks/useDateTimeFormat', () => ({
+  useDateTimeFormat: vi.fn(() => ({ timeZone: 'UTC' })),
 }));
-jest.mock(
+vi.mock(
   '@/object-record/record-calendar/hooks/useRecordCalendarDaysRange',
   () => ({
     useRecordCalendarDaysRange: (...args: unknown[]) =>
       mockUseRecordCalendarDaysRange(...args),
   }),
 );
-jest.mock(
+vi.mock(
   '@/ui/input/components/internal/date/components/DatePickerWithoutCalendar',
   () => ({ DatePickerWithoutCalendar: () => null }),
 );
-jest.mock(
+vi.mock(
   '@/ui/input/components/internal/date/components/TimeZoneAbbreviation',
   () => ({
     TimeZoneAbbreviation: () => <span data-testid="time-zone" />,
   }),
 );
-jest.mock('@/ui/input/components/Select', () => ({
+vi.mock('@/ui/input/components/Select', () => ({
   Select: ({
     options,
     value,
@@ -59,39 +61,39 @@ jest.mock('@/ui/input/components/Select', () => ({
     </select>
   ),
 }));
-jest.mock('@/ui/input/components/SelectControl', () => ({
+vi.mock('@/ui/input/components/SelectControl', () => ({
   SelectControl: ({
     selectedOption,
   }: {
     selectedOption: { label: string };
   }) => <span data-testid="selected-date">{selectedOption.label}</span>,
 }));
-jest.mock('@/ui/layout/dropdown/components/Dropdown', () => ({
+vi.mock('@/ui/layout/dropdown/components/Dropdown', () => ({
   Dropdown: ({ clickableComponent }: { clickableComponent: React.ReactNode }) =>
     clickableComponent,
 }));
-jest.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
-  useCloseDropdown: jest.fn(() => ({ closeDropdown: jest.fn() })),
+vi.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
+  useCloseDropdown: vi.fn(() => ({ closeDropdown: vi.fn() })),
 }));
-jest.mock(
+vi.mock(
   '@/ui/utilities/state/component-state/hooks/useAvailableComponentInstanceIdOrThrow',
   () => ({
-    useAvailableComponentInstanceIdOrThrow: jest.fn(() => 'calendar-id'),
+    useAvailableComponentInstanceIdOrThrow: vi.fn(() => 'calendar-id'),
   }),
 );
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentState', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentState', () => ({
   useAtomComponentState: (...args: unknown[]) =>
     mockUseAtomComponentState(...args),
 }));
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
   useAtomStateValue: (...args: unknown[]) => mockUseAtomStateValue(...args),
 }));
-jest.mock('@/views/hooks/useUpdateCurrentView', () => ({
-  useUpdateCurrentView: jest.fn(() => ({
+vi.mock('@/views/hooks/useUpdateCurrentView', () => ({
+  useUpdateCurrentView: vi.fn(() => ({
     updateCurrentView: mockUpdateCurrentView,
   })),
 }));
-jest.mock('twenty-ui/primitives/input', () => ({
+vi.mock('twenty-ui/primitives/input', () => ({
   Button: ({
     'aria-label': ariaLabel,
     children,
@@ -105,7 +107,7 @@ jest.mock('twenty-ui/primitives/input', () => ({
 
 describe('RecordCalendarTopBar', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockUseAtomComponentState.mockImplementation((state: unknown) => {
       if (state === recordIndexCalendarLayoutComponentState) {
         return [ViewCalendarLayout.DAY, mockSetRecordIndexCalendarLayout];
@@ -118,7 +120,7 @@ describe('RecordCalendarTopBar', () => {
         ];
       }
 
-      return [undefined, jest.fn()];
+      return [undefined, vi.fn()];
     });
     mockUseAtomStateValue.mockReturnValue({
       locale: 'en-US',

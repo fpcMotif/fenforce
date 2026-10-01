@@ -1,10 +1,12 @@
+import { vi } from 'vite-plus/test';
+
 import { detectTimeFormat } from '@/localization/utils/detection/detectTimeFormat';
 
 describe('detectTimeFormat', () => {
   it('should return HOUR_12 if the hour format is 12-hour', () => {
     // Mock the resolvedOptions method to return hour12 as true
-    const mockResolvedOptions = jest.fn(() => ({ hour12: true }));
-    Intl.DateTimeFormat = jest.fn().mockImplementation(() => ({
+    const mockResolvedOptions = vi.fn(() => ({ hour12: true }));
+    Intl.DateTimeFormat = vi.fn().mockImplementation(() => ({
       resolvedOptions: mockResolvedOptions,
     })) as any;
 
@@ -16,8 +18,8 @@ describe('detectTimeFormat', () => {
 
   it('should return HOUR_24 if the hour format is 24-hour', () => {
     // Mock the resolvedOptions method to return hour12 as false
-    const mockResolvedOptions = jest.fn(() => ({ hour12: false }));
-    Intl.DateTimeFormat = jest.fn().mockImplementation(() => ({
+    const mockResolvedOptions = vi.fn(() => ({ hour12: false }));
+    Intl.DateTimeFormat = vi.fn().mockImplementation(() => ({
       resolvedOptions: mockResolvedOptions,
     })) as any;
 

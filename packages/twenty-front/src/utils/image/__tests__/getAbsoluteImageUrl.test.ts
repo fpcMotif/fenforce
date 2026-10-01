@@ -1,6 +1,8 @@
+import { vi } from 'vite-plus/test';
+
 import { getAbsoluteImageUrl } from '~/utils/image/getAbsoluteImageUrl';
 
-jest.mock('~/config', () => ({
+vi.mock('~/config', () => ({
   REACT_APP_SERVER_BASE_URL: 'https://example.com',
 }));
 

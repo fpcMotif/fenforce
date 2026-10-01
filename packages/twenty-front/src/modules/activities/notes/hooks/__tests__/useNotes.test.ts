@@ -1,23 +1,25 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 
 import { useNotes } from '@/activities/notes/hooks/useNotes';
 import { type ActivityTargetableObject } from '@/activities/types/ActivityTargetableEntity';
 
-jest.mock('@/activities/hooks/useActivities', () => ({
-  useActivities: jest.fn(() => ({
+vi.mock('@/activities/hooks/useActivities', () => ({
+  useActivities: vi.fn(() => ({
     activities: [{ id: '1', content: 'Example Note', __typename: 'Note' }],
     loading: false,
-    fetchMoreActivities: jest.fn(),
+    fetchMoreActivities: vi.fn(),
   })),
 }));
 
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomState', () => ({
-  useAtomState: jest.fn(() => {
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomState', () => ({
+  useAtomState: vi.fn(() => {
     const mockCurrentNotesQueryVariables = {
       filter: {},
       orderBy: 'mockOrderBy',
     };
-    return [mockCurrentNotesQueryVariables, jest.fn()];
+    return [mockCurrentNotesQueryVariables, vi.fn()];
   }),
 }));
 

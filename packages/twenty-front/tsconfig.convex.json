@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "node",
+      "vite-plus/test/globals",
+      "@testing-library/jest-dom",
+      "vite/client"
+    ]
+  },
+  "include": [
+    "src/convex.tsx",
+    "src/pages/convex-preview/**/*.ts",
+    "src/pages/convex-preview/**/*.tsx",
+    "lingui.convex.config.ts",
+    "vite.convex.config.ts"
+  ]
+}

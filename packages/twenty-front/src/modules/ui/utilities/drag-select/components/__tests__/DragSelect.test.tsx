@@ -1,3 +1,5 @@
+import { type MockedFunction, vi } from 'vite-plus/test';
+
 import { render } from '@testing-library/react';
 import { act } from 'react';
 
@@ -5,14 +7,14 @@ import { type PointerEventListener } from '@/ui/utilities/pointer-event/types/Po
 import { useDragSelect } from '@/ui/utilities/drag-select/hooks/useDragSelect';
 import { DragSelect } from '@/ui/utilities/drag-select/components/DragSelect';
 
-jest.mock('../../hooks/useDragSelect');
-jest.mock('../../hooks/useDragSelectWithAutoScroll', () => ({
+vi.mock('../../hooks/useDragSelect');
+vi.mock('../../hooks/useDragSelectWithAutoScroll', () => ({
   useDragSelectWithAutoScroll: () => ({
-    handleAutoScroll: jest.fn(),
+    handleAutoScroll: vi.fn(),
   }),
 }));
 
-jest.mock('@/ui/utilities/pointer-event/hooks/useTrackPointer', () => ({
+vi.mock('@/ui/utilities/pointer-event/hooks/useTrackPointer', () => ({
   useTrackPointer: ({ onMouseDown }: { onMouseDown: PointerEventListener }) => {
     (window as any).trackPointerCallbacks = {
       onMouseDown,
@@ -20,22 +22,20 @@ jest.mock('@/ui/utilities/pointer-event/hooks/useTrackPointer', () => ({
   },
 }));
 
-const mockUseDragSelect = useDragSelect as jest.MockedFunction<
-  typeof useDragSelect
->;
+const mockUseDragSelect = useDragSelect as MockedFunction<typeof useDragSelect>;
 
 describe('DragSelect', () => {
-  const mockOnDragSelectionChange = jest.fn();
+  const mockOnDragSelectionChange = vi.fn();
   const mockSelectableContainer = document.createElement('div');
   const mockContainerRef = { current: mockSelectableContainer };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockUseDragSelect.mockReturnValue({
-      isDragSelectionStartEnabled: jest.fn().mockReturnValue(true),
-      setDragSelectionStartEnabled: jest.fn(),
+      isDragSelectionStartEnabled: vi.fn().mockReturnValue(true),
+      setDragSelectionStartEnabled: vi.fn(),
     });
-    mockSelectableContainer.getBoundingClientRect = jest.fn().mockReturnValue({
+    mockSelectableContainer.getBoundingClientRect = vi.fn().mockReturnValue({
       left: 100,
       top: 100,
       width: 500,
@@ -61,11 +61,11 @@ describe('DragSelect', () => {
     const mockTarget = document.createElement('div');
     mockTarget.dataset.selectDisable = 'true';
     mockSelectableContainer.appendChild(mockTarget);
-    mockSelectableContainer.contains = jest.fn().mockReturnValue(true);
+    mockSelectableContainer.contains = vi.fn().mockReturnValue(true);
 
     const mockEvent = {
       target: mockTarget,
-      preventDefault: jest.fn(),
+      preventDefault: vi.fn(),
     };
 
     act(() => {
@@ -85,11 +85,11 @@ describe('DragSelect', () => {
     const callbacks = (window as any).trackPointerCallbacks;
     const mockTarget = document.createElement('div');
     mockSelectableContainer.appendChild(mockTarget);
-    mockSelectableContainer.contains = jest.fn().mockReturnValue(true);
+    mockSelectableContainer.contains = vi.fn().mockReturnValue(true);
 
     const mockEvent = {
       target: mockTarget,
-      preventDefault: jest.fn(),
+      preventDefault: vi.fn(),
     };
 
     act(() => {
@@ -126,16 +126,16 @@ describe('DragSelect', () => {
     const mockBoundaryElement = document.createElement('div');
     mockBoundaryElement.className = selectionBoundaryClass;
 
-    mockSelectableContainer.closest = jest
+    mockSelectableContainer.closest = vi
       .fn()
       .mockReturnValue(mockBoundaryElement);
-    mockBoundaryElement.contains = jest.fn().mockReturnValue(true);
+    mockBoundaryElement.contains = vi.fn().mockReturnValue(true);
 
     act(() => {
       callbacks.onMouseDown({
         x: 150,
         y: 150,
-        event: { target: mockTarget, preventDefault: jest.fn() },
+        event: { target: mockTarget, preventDefault: vi.fn() },
       });
     });
 
@@ -157,14 +157,14 @@ describe('DragSelect', () => {
     const callbacks = (window as any).trackPointerCallbacks;
     const mockTarget = document.createElement('div');
     mockSelectableContainer.appendChild(mockTarget);
-    mockSelectableContainer.contains = jest.fn().mockReturnValue(true);
+    mockSelectableContainer.contains = vi.fn().mockReturnValue(true);
 
     expect(() => {
       act(() => {
         callbacks.onMouseDown({
           x: 150,
           y: 150,
-          event: { target: mockTarget, preventDefault: jest.fn() },
+          event: { target: mockTarget, preventDefault: vi.fn() },
         });
       });
     }).not.toThrow();

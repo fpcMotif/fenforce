@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { usePageLayoutRenderableTabs } from '@/page-layout/hooks/usePageLayoutRenderableTabs';
 import { type PageLayoutTab } from '@/page-layout/types/PageLayoutTab';
 import { renderHook } from '@testing-library/react';
@@ -20,11 +22,11 @@ const homeTab: PageLayoutTab = {
   updatedAt: '2026-08-07T00:00:00.000Z',
 };
 
-jest.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
+vi.mock('@/object-metadata/hooks/useObjectMetadataItems', () => ({
   useObjectMetadataItems: () => ({ objectMetadataItems: [] }),
 }));
 
-jest.mock('@/page-layout/hooks/useCurrentPageLayoutOrThrow', () => ({
+vi.mock('@/page-layout/hooks/useCurrentPageLayoutOrThrow', () => ({
   useCurrentPageLayoutOrThrow: () => ({
     currentPageLayout: {
       id: 'page-layout-id',
@@ -34,21 +36,21 @@ jest.mock('@/page-layout/hooks/useCurrentPageLayoutOrThrow', () => ({
   }),
 }));
 
-jest.mock('@/page-layout/hooks/useIsPageLayoutInEditMode', () => ({
+vi.mock('@/page-layout/hooks/useIsPageLayoutInEditMode', () => ({
   useIsPageLayoutInEditMode: () => false,
 }));
 
-jest.mock('@/ui/layout/contexts/LayoutRenderingContext', () => ({
+vi.mock('@/ui/layout/contexts/LayoutRenderingContext', () => ({
   useLayoutRenderingContext: () => ({
     targetRecordIdentifier: undefined,
   }),
 }));
 
-jest.mock('@/ui/layout/hooks/useWorkspaceSurface', () => ({
+vi.mock('@/ui/layout/hooks/useWorkspaceSurface', () => ({
   useWorkspaceSurface: () => ({ type: mockWorkspaceSurfaceType }),
 }));
 
-jest.mock('twenty-ui/utilities', () => ({
+vi.mock('twenty-ui/utilities', () => ({
   useIsMobile: () => mockIsMobile,
 }));
 

@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { getToastOptionsFromError } from '@/error-handler/utils/getToastOptionsFromError';
 import { useToast } from 'twenty-ui/components';
@@ -39,6 +40,8 @@ export type ConnectionFormData = {
   handle: string;
 } & ImapSmtpCaldavAccountInput;
 
+export type ConnectionFormOutput = z.output<typeof connectionImapSmtpCalDav>;
+
 const DEFAULT_PROTOCOL_VALUES: Record<string, ConnectionParametersInput> = {
   IMAP: {
     host: '',
@@ -67,10 +70,17 @@ export const useImapSmtpCaldavConnectionForm = ({
 }: UseConnectionFormProps = {}) => {
   const navigate = useNavigateSettings();
 
-  const formMethods = useForm<ConnectionFormData>({
+  const formMethods = useForm<
+    ConnectionFormData,
+    unknown,
+    ConnectionFormOutput
+  >({
     mode: 'onSubmit',
     resolver: zodResolver(
-      isEditing ? connectionImapSmtpCalDavUpdate : connectionImapSmtpCalDav,
+      z.preprocess(
+        (values: ConnectionFormData) => values,
+        isEditing ? connectionImapSmtpCalDavUpdate : connectionImapSmtpCalDav,
+      ),
     ),
     defaultValues: {
       name: '',
@@ -117,7 +127,7 @@ export const useImapSmtpCaldavConnectionForm = ({
 
   const getConfiguredProtocols = useCallback(
     (
-      values: ConnectionFormData = watchedValues,
+      values: ConnectionFormData | ConnectionFormOutput = watchedValues,
     ): (keyof ImapSmtpCaldavAccountInput)[] => {
       const isProtocolConfiguredCheckFunction = isEditing
         ? isProtocolConfiguredForUpdate
@@ -142,7 +152,7 @@ export const useImapSmtpCaldavConnectionForm = ({
   }, [getConfiguredProtocols, watchedValues.handle]);
 
   const handleSave = useCallback(
-    async (formValues: ConnectionFormData): Promise<void> => {
+    async (formValues: ConnectionFormOutput): Promise<void> => {
       const configuredProtocols = getConfiguredProtocols(formValues);
 
       if (configuredProtocols.length === 0) {
@@ -155,12 +165,17 @@ export const useImapSmtpCaldavConnectionForm = ({
       configuredProtocols.forEach((protocol) => {
         const protocolConfig = formValues[protocol];
         if (isDefined(protocolConfig)) {
-          const { password, ...withoutPassword } = protocolConfig;
+          const { password, port, ...withoutPassword } = protocolConfig;
+          if (port === null) {
+            throw new Error(
+              'Port must be a positive number when configuring this protocol',
+            );
+          }
           const hasPassword = isNonEmptyString(password);
 
           connectionParameters[protocol] = hasPassword
-            ? { ...withoutPassword, password }
-            : withoutPassword;
+            ? { ...withoutPassword, port, password }
+            : { ...withoutPassword, port };
         }
       });
 

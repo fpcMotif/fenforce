@@ -1,26 +1,28 @@
+import { vi } from 'vite-plus/test';
+
 import { clear, createStore, del, entries, set } from 'idb-keyval';
 
 import { createIndexedDbBackedJotaiStorage } from '@/ui/utilities/state/jotai/utils/createIndexedDbBackedJotaiStorage';
 import { isIndexedDbAvailable } from '@/ui/utilities/state/jotai/utils/isIndexedDbAvailable';
 import { logError } from '~/utils/logError';
 
-jest.mock('idb-keyval', () => ({
-  createStore: jest.fn(() => ({ store: 'mock' })),
-  set: jest.fn(() => Promise.resolve()),
-  del: jest.fn(() => Promise.resolve()),
-  clear: jest.fn(() => Promise.resolve()),
-  entries: jest.fn(() => Promise.resolve([])),
+vi.mock('idb-keyval', () => ({
+  createStore: vi.fn(() => ({ store: 'mock' })),
+  set: vi.fn(() => Promise.resolve()),
+  del: vi.fn(() => Promise.resolve()),
+  clear: vi.fn(() => Promise.resolve()),
+  entries: vi.fn(() => Promise.resolve([])),
 }));
-jest.mock('@/ui/utilities/state/jotai/utils/isIndexedDbAvailable');
-jest.mock('~/utils/logError');
+vi.mock('@/ui/utilities/state/jotai/utils/isIndexedDbAvailable');
+vi.mock('~/utils/logError');
 
-const mockedSet = jest.mocked(set);
-const mockedDel = jest.mocked(del);
-const mockedClear = jest.mocked(clear);
-const mockedEntries = jest.mocked(entries);
-const mockedCreateStore = jest.mocked(createStore);
-const mockedIsIndexedDbAvailable = jest.mocked(isIndexedDbAvailable);
-const mockedLogError = jest.mocked(logError);
+const mockedSet = vi.mocked(set);
+const mockedDel = vi.mocked(del);
+const mockedClear = vi.mocked(clear);
+const mockedEntries = vi.mocked(entries);
+const mockedCreateStore = vi.mocked(createStore);
+const mockedIsIndexedDbAvailable = vi.mocked(isIndexedDbAvailable);
+const mockedLogError = vi.mocked(logError);
 
 const flushMicrotasks = () => new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -30,7 +32,7 @@ const INITIAL: Item = { value: 0 };
 
 describe('createIndexedDbBackedJotaiStorage', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     localStorage.clear();
     mockedIsIndexedDbAvailable.mockReturnValue(true);
     mockedEntries.mockResolvedValue([]);
@@ -114,7 +116,7 @@ describe('createIndexedDbBackedJotaiStorage', () => {
   it('should register and unregister cross-tab subscribers cleanly', () => {
     const { storage } = createIndexedDbBackedJotaiStorage<Item>('test');
 
-    const callback = jest.fn();
+    const callback = vi.fn();
     const unsubscribe = storage.subscribe?.('k', callback, INITIAL);
 
     expect(typeof unsubscribe).toBe('function');

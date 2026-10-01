@@ -22,16 +22,16 @@ jobs:
           ref: main
 
       - name: Install dependencies
-        uses: ./.github/actions/yarn-install
+        uses: ./.github/actions/bun-install
 
       - name: Build dependencies
-        run: npx nx build twenty-shared
+        run: bunx vite-plus run twenty-shared#build
 
       - name: Run catalog sync
         env:
           ARTIFICIAL_ANALYSIS_API_KEY: ${{ secrets.ARTIFICIAL_ANALYSIS_API_KEY }}
         run: |
-          npx nx run twenty-server:ts-node-no-deps-transpile-only -- \
+          bunx vite-plus run twenty-server#ts-node-no-deps-transpile-only \
             ./scripts/ai-catalog-sync/index.ts --report "${RUNNER_TEMP}/coverage.md"
 
       - name: Check for changes

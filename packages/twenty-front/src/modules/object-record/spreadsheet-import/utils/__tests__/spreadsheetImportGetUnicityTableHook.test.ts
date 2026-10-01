@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type EnrichedObjectMetadataItem } from '@/object-metadata/types/EnrichedObjectMetadataItem';
 import { spreadsheetImportGetUnicityTableHook } from '@/object-record/spreadsheet-import/utils/spreadsheetImportGetUnicityTableHook';
 import { type ImportedStructuredRow } from '@/spreadsheet-import/types';
@@ -78,7 +80,7 @@ describe('spreadsheetImportGetUnicityTableHook', () => {
       { 'Link URL (domainName)': 'https://other.com' },
     ];
 
-    const addErrorMock = jest.fn();
+    const addErrorMock = vi.fn();
 
     const result = hook(testData, addErrorMock);
 
@@ -104,7 +106,7 @@ describe('spreadsheetImportGetUnicityTableHook', () => {
       { 'Link URL (domainName)': 'test3.com', id: '3' },
     ];
 
-    const addErrorMock = jest.fn();
+    const addErrorMock = vi.fn();
 
     const result = hook(testData, addErrorMock);
 
@@ -128,7 +130,7 @@ describe('spreadsheetImportGetUnicityTableHook', () => {
       { name: 'test', employees: '101', id: '3' },
     ];
 
-    const addErrorMock = jest.fn();
+    const addErrorMock = vi.fn();
 
     const result = hook(testData, addErrorMock);
 
@@ -175,7 +177,7 @@ describe('spreadsheetImportGetUnicityTableHook', () => {
       },
     ];
 
-    const addErrorMock = jest.fn();
+    const addErrorMock = vi.fn();
 
     const result = hook(testData, addErrorMock);
 

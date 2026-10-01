@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { NavigationMenuItemType } from 'twenty-shared/types';
 import { type NavigationMenuItem } from '~/generated-metadata/graphql';
@@ -5,11 +7,11 @@ import { type NavigationMenuItem } from '~/generated-metadata/graphql';
 import { isLayoutCustomizationModeEnabledState } from '@/layout-customization/states/isLayoutCustomizationModeEnabledState';
 import { useReadableNavigationMenuItems } from '@/navigation-menu-item/display/hooks/useReadableNavigationMenuItems';
 
-jest.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomStateValue', () => ({
   useAtomStateValue: (state: unknown) =>
     state === isLayoutCustomizationModeEnabledState ? false : [],
 }));
-jest.mock('@/object-record/hooks/useObjectPermissions', () => ({
+vi.mock('@/object-record/hooks/useObjectPermissions', () => ({
   useObjectPermissions: () => ({ objectPermissionsByObjectMetadataId: {} }),
 }));
 

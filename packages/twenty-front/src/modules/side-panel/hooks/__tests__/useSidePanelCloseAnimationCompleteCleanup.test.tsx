@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { act } from 'react';
@@ -13,23 +15,23 @@ import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
 import { SidePanelPages } from 'twenty-shared/types';
 import { IconList } from 'twenty-ui/icon';
 
-const mockCloseDropdown = jest.fn();
-const mockResetSelectedItem = jest.fn();
-const mockEmitSidePanelCloseEvent = jest.fn();
+const mockCloseDropdown = vi.fn();
+const mockResetSelectedItem = vi.fn();
+const mockEmitSidePanelCloseEvent = vi.fn();
 
-jest.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
+vi.mock('@/ui/layout/dropdown/hooks/useCloseDropdown', () => ({
   useCloseDropdown: () => ({
     closeDropdown: mockCloseDropdown,
   }),
 }));
 
-jest.mock('@/ui/layout/selectable-list/hooks/useSelectableList', () => ({
+vi.mock('@/ui/layout/selectable-list/hooks/useSelectableList', () => ({
   useSelectableList: () => ({
     resetSelectedItem: mockResetSelectedItem,
   }),
 }));
 
-jest.mock('@/ui/layout/side-panel/utils/emitSidePanelCloseEvent', () => ({
+vi.mock('@/ui/layout/side-panel/utils/emitSidePanelCloseEvent', () => ({
   emitSidePanelCloseEvent: () => {
     mockEmitSidePanelCloseEvent();
   },
@@ -43,7 +45,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 
 describe('useSidePanelCloseAnimationCompleteCleanup', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   const renderHooks = () => {

@@ -1,17 +1,20 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { act, renderHook } from '@testing-library/react';
 
 import { useCopyToClipboard } from '~/hooks/useCopyToClipboard';
 
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
-const mockWriteText = jest.fn();
+const mockWriteText = vi.fn();
 
 const setIsSecureContext = (isSecureContext: boolean) => {
   Object.defineProperty(window, 'isSecureContext', {
@@ -27,7 +30,7 @@ const renderUseCopyToClipboard = () =>
 
 describe('useCopyToClipboard', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockWriteText.mockResolvedValue(undefined);
     // jsdom ships no clipboard implementation
     Object.defineProperty(navigator, 'clipboard', {

@@ -4,9 +4,7 @@
   "description": "Effortlessly sync Twenty with 3000+ apps. Automate tasks, boost productivity, and supercharge your customer relationships!",
   "main": "lib/index.cjs",
   "engines": {
-    "node": "^24.5.0",
-    "npm": "please-use-yarn",
-    "yarn": "^4.0.2"
+    "node": "^24.5.0"
   },
   "private": true,
   "zapier": {
@@ -20,6 +18,8 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
+    "@typescript/native-preview": "^7.0.0-dev.20260116.1",
+    "typescript": "^5.9.3",
     "@types/jest": "^30.0.0",
     "jest": "29.7.0",
     "jest-environment-node": "^29.4.1",
@@ -29,5 +29,25 @@
     "vite": "^8.0.0",
     "vite-plugin-dts": "^4.5.4",
     "zapier-platform-cli": "^19.0.0"
+  },
+  "scripts": {
+    "test:ci": "bunx vite-plus run twenty-zapier#test -- --ci --maxWorkers=1 --coverage",
+    "test:coverage": "bunx vite-plus run twenty-zapier#test -- --coverage --coverageReporters=lcov --coverageReporters=text",
+    "test:watch": "bunx vite-plus run --no-cache twenty-zapier#test -- --watch",
+    "lint:ci": "bunx vite-plus run twenty-zapier#lint",
+    "build:command": "bunx vite build",
+    "format": "bunx oxfmt .",
+    "format:check": "bunx oxfmt --check .",
+    "test:command": "NODE_ENV=test jest --testTimeout 10000",
+    "lint:command": "bunx oxlint -c .oxlintrc.json . && (bunx oxfmt --check . || (echo 'ERROR: oxfmt formatting check failed! Fix with: bun run lint:fix:command' && false))",
+    "typecheck:command": "tsgo -p tsconfig.json",
+    "validate:command": "zapier-platform validate",
+    "versions:command": "zapier-platform versions",
+    "watch:command": "bun run clean && bunx tsc --watch",
+    "clean": "rimraf ./lib",
+    "deploy:command": "zapier-platform push --disable-dependency-detection",
+    "promote:command": "zapier-platform promote",
+    "lint:fix": "bunx oxlint --fix -c .oxlintrc.json . && bunx oxfmt .",
+    "typecheck:watch": "bunx tsgo -p tsconfig.json --watch"
   }
 }

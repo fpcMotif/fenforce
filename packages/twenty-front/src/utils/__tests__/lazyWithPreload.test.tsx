@@ -1,3 +1,5 @@
+import { type MockInstance, vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 import { Suspense, type ComponentType } from 'react';
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary';
@@ -27,7 +29,7 @@ const createDeferredLoader = () => {
   );
 
   return {
-    loader: jest.fn(() => modulePromise),
+    loader: vi.fn(() => modulePromise),
     resolveModule: () => resolveModule({ default: PageContent }),
     rejectModule: () => rejectModule(new Error(PRELOAD_ERROR_MESSAGE)),
   };
@@ -37,10 +39,10 @@ const flushPendingPromises = () =>
   new Promise<void>((resolve) => setTimeout(resolve, 0));
 
 describe('lazyWithPreload', () => {
-  let consoleErrorSpy: jest.SpyInstance;
+  let consoleErrorSpy: MockInstance;
 
   beforeEach(() => {
-    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -48,7 +50,7 @@ describe('lazyWithPreload', () => {
   });
 
   it('should not produce an unhandled rejection when the preload fails', async () => {
-    const onUnhandledRejection = jest.fn();
+    const onUnhandledRejection = vi.fn();
     process.on('unhandledRejection', onUnhandledRejection);
 
     try {
@@ -78,7 +80,7 @@ describe('lazyWithPreload', () => {
   });
 
   it('should treat a synchronous loader throw as a failed load instead of throwing from preload', async () => {
-    const loader = jest.fn(() => {
+    const loader = vi.fn(() => {
       throw new Error(PRELOAD_ERROR_MESSAGE);
     });
     const Component = lazyWithPreload(loader);
@@ -110,7 +112,7 @@ describe('lazyWithPreload', () => {
   it('should render without ever showing the suspense fallback once preloaded', async () => {
     const { loader, resolveModule } = createDeferredLoader();
     const Component = lazyWithPreload(loader);
-    const Fallback = jest.fn(() => <div>loading</div>);
+    const Fallback = vi.fn(() => <div>loading</div>);
 
     Component.preload();
     resolveModule();

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { useNavigateToMoreWidgets } from '@/page-layout/hooks/useNavigateToMoreWidgets';
 import { pageLayoutEditingWidgetIdComponentState } from '@/page-layout/states/pageLayoutEditingWidgetIdComponentState';
 import { widgetCreationTargetTabIdComponentState } from '@/page-layout/states/widgetCreationTargetTabIdComponentState';
@@ -11,14 +13,14 @@ import {
   PageLayoutTestWrapper,
 } from './PageLayoutTestWrapper';
 
-const mockNavigatePageLayoutSidePanel = jest.fn();
+const mockNavigatePageLayoutSidePanel = vi.fn();
 let mockTabId = 'main-tab';
 
-jest.mock('@/page-layout/contexts/PageLayoutContentContext', () => ({
+vi.mock('@/page-layout/contexts/PageLayoutContentContext', () => ({
   usePageLayoutContentContext: () => ({ tabId: mockTabId }),
 }));
 
-jest.mock(
+vi.mock(
   '@/side-panel/pages/page-layout/hooks/useNavigatePageLayoutSidePanel',
   () => ({
     useNavigatePageLayoutSidePanel: () => ({
@@ -57,7 +59,7 @@ describe('useNavigateToMoreWidgets', () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockTabId = 'main-tab';
   });
 

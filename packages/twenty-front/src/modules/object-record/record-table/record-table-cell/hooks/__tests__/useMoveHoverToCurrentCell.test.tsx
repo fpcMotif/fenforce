@@ -1,3 +1,6 @@
+import type * as UtilitiesModule from 'twenty-ui/utilities';
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider, useAtomValue } from 'jotai';
 import { act } from 'react';
@@ -16,13 +19,13 @@ import {
 import { useMoveHoverToCurrentCell } from '@/object-record/record-table/record-table-cell/hooks/useMoveHoverToCurrentCell';
 import { recordTableHoverPositionComponentState } from '@/object-record/record-table/states/recordTableHoverPositionComponentState';
 
-jest.mock('twenty-ui/utilities', () => ({
-  ...jest.requireActual('twenty-ui/utilities'),
-  useIsTouchDevice: jest.fn(),
+vi.mock('twenty-ui/utilities', async () => ({
+  ...(await vi.importActual<typeof UtilitiesModule>('twenty-ui/utilities')),
+  useIsTouchDevice: vi.fn(),
 }));
 
 const mockIsTouchDevice = (isTouchDevice: boolean) => {
-  jest.mocked(useIsTouchDevice).mockReturnValue(isTouchDevice);
+  vi.mocked(useIsTouchDevice).mockReturnValue(isTouchDevice);
 };
 
 const createWrapper =

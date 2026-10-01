@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { type Mock, vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider, createStore } from 'jotai';
 import { type ReactNode } from 'react';
@@ -7,20 +10,20 @@ import { isLayoutCustomizationModeEnabledState } from '@/layout-customization/st
 import { metadataStoreState } from '@/metadata-store/states/metadataStoreState';
 import { useHasPermissionFlag } from '@/settings/roles/hooks/useHasPermissionFlag';
 
-jest.mock('@/settings/roles/hooks/useHasPermissionFlag');
-jest.mock('@/side-panel/hooks/useNavigateSidePanel', () => ({
+vi.mock('@/settings/roles/hooks/useHasPermissionFlag');
+vi.mock('@/side-panel/hooks/useNavigateSidePanel', () => ({
   useNavigateSidePanel: () => ({
-    navigateSidePanel: jest.fn(),
+    navigateSidePanel: vi.fn(),
   }),
 }));
-const mockEnqueueToast = jest.fn();
+const mockEnqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast: mockEnqueueToast }),
 }));
 
-const mockUseHasPermissionFlag = useHasPermissionFlag as jest.Mock;
+const mockUseHasPermissionFlag = useHasPermissionFlag as Mock;
 
 const getWrapper =
   (store = createStore()) =>
@@ -30,7 +33,7 @@ const getWrapper =
 
 describe('useEnterLayoutCustomizationMode', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should return false and not enable customization mode when user lacks LAYOUTS permission', () => {

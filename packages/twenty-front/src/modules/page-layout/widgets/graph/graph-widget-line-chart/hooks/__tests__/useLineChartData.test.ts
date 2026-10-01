@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type LineChartEnrichedSeries } from '@/page-layout/widgets/graph/graph-widget-line-chart/types/LineChartEnrichedSeries';
 import { type LineChartSeriesWithColor } from '@/page-layout/widgets/graph/graph-widget-line-chart/types/LineChartSeriesWithColor';
 import { type GraphColorRegistry } from '@/page-layout/widgets/graph/types/GraphColorRegistry';
@@ -5,17 +7,14 @@ import { renderHook } from '@testing-library/react';
 
 import { useLineChartData } from '@/page-layout/widgets/graph/graph-widget-line-chart/hooks/useLineChartData';
 
-const mockUseAtomComponentStateValue = jest.fn();
-jest.mock(
-  '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue',
-  () => ({
-    useAtomComponentStateValue: () => mockUseAtomComponentStateValue(),
-  }),
-);
+const mockUseAtomComponentStateValue = vi.fn();
+vi.mock('@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue', () => ({
+  useAtomComponentStateValue: () => mockUseAtomComponentStateValue(),
+}));
 
 describe('useLineChartData', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockUseAtomComponentStateValue.mockReturnValue([]);
   });
 

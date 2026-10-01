@@ -4,7 +4,7 @@
 
 Existing Vitest 4 adapters conflict with the checkout's Vite+ 1 and Vitest 5 dependencies.
 This isolated, locked package measures a candidate compatibility matrix and supplies fail-closed CI commands.
-Existing Jest, Playwright, Storybook, and Bun-native suites retain their current entrypoints.
+Package migrations update their own entrypoints separately; this compatibility package does not replace browser or Bun-native lanes.
 
 This package implements preparatory infrastructure for [#16](https://github.com/fpcMotif/fenforce/issues/16).
 It does not close #15 or establish CRM journey coverage.

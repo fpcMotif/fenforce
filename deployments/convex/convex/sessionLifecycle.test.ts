@@ -219,10 +219,10 @@ describe('sign-out', () => {
 
     await firstSession.action(api.auth.signOut, {});
 
-    const companies = await secondSession.query(
-      api.workspaceCompanies.list,
-      { workspaceId, paginationOpts },
-    );
+    const companies = await secondSession.query(api.workspaceCompanies.list, {
+      workspaceId,
+      paginationOpts,
+    });
     expect(companies.page.map(({ name }) => name)).toEqual([
       'Session Fixture Co',
     ]);
@@ -266,9 +266,7 @@ describe('invalid and expired sessions', () => {
     });
 
     expect(
-      await outcomeOf(
-        bare.query(api.workspaces.listMine, { paginationOpts }),
-      ),
+      await outcomeOf(bare.query(api.workspaces.listMine, { paginationOpts })),
     ).toBe('rejected: UNAUTHENTICATED');
   });
 

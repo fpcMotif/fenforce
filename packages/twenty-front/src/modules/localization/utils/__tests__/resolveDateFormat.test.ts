@@ -1,8 +1,10 @@
+import { vi } from 'vite-plus/test';
+
 import { DateFormat } from '@/localization/constants/DateFormat';
 import { resolveDateFormat } from '@/localization/utils/resolveDateFormat';
 
-jest.mock('@/localization/utils/detection/detectDateFormat', () => ({
-  detectDateFormat: jest.fn(() => 'DAY_FIRST'),
+vi.mock('@/localization/utils/detection/detectDateFormat', () => ({
+  detectDateFormat: vi.fn(() => 'DAY_FIRST'),
 }));
 
 describe('resolveDateFormat', () => {

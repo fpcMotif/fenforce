@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -8,14 +10,14 @@ import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
 import { SidePanelPages } from 'twenty-shared/types';
 import { IconSparkles } from 'twenty-ui/icon';
 
-const navigateSidePanelMenuMock = jest.fn();
+const navigateSidePanelMenuMock = vi.fn();
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({
     navigateSidePanelMenu: navigateSidePanelMenuMock,
-    openSidePanelMenu: jest.fn(),
-    closeSidePanelMenu: jest.fn(),
-    toggleSidePanelMenu: jest.fn(),
+    openSidePanelMenu: vi.fn(),
+    closeSidePanelMenu: vi.fn(),
+    toggleSidePanelMenu: vi.fn(),
   }),
 }));
 
@@ -25,7 +27,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => (
 
 describe('useOpenAskAiPageInSidePanel', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     jotaiStore.set(isSidePanelOpenedState.atom, false);
     window.history.pushState({}, '', '/objects/companies');
   });

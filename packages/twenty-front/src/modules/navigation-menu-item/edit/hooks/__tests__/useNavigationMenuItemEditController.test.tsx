@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { act, renderHook } from '@testing-library/react';
@@ -11,25 +14,25 @@ import { useUpdateManyNavigationMenuItems } from '@/navigation-menu-item/common/
 import { navigationMenuItemsDraftState } from '@/navigation-menu-item/common/states/navigationMenuItemsDraftState';
 import { useNavigationMenuItemEditController } from '@/navigation-menu-item/edit/hooks/useNavigationMenuItemEditController';
 
-jest.mock(
+vi.mock(
   '@/navigation-menu-item/common/hooks/useCreateManyNavigationMenuItems',
   () => ({
-    useCreateManyNavigationMenuItems: jest.fn(),
+    useCreateManyNavigationMenuItems: vi.fn(),
   }),
 );
-jest.mock(
+vi.mock(
   '@/navigation-menu-item/common/hooks/useUpdateManyNavigationMenuItems',
   () => ({
-    useUpdateManyNavigationMenuItems: jest.fn(),
+    useUpdateManyNavigationMenuItems: vi.fn(),
   }),
 );
-jest.mock(
+vi.mock(
   '@/navigation-menu-item/common/hooks/useDeleteManyNavigationMenuItems',
   () => ({
-    useDeleteManyNavigationMenuItems: jest.fn(),
+    useDeleteManyNavigationMenuItems: vi.fn(),
   }),
 );
-jest.mock(
+vi.mock(
   '@/navigation-menu-item/display/hooks/useNavigationMenuItemsData',
   () => ({
     useNavigationMenuItemsData: () => ({
@@ -39,25 +42,25 @@ jest.mock(
     }),
   }),
 );
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
-  useToast: () => ({ enqueueToast: jest.fn() }),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
+  useToast: () => ({ enqueueToast: vi.fn() }),
 }));
 
 describe('useNavigationMenuItemEditController', () => {
   it('keeps simultaneous Favorites mutations separate from Workspace drafts', async () => {
-    const createManyNavigationMenuItems = jest.fn().mockResolvedValue([]);
-    const updateManyNavigationMenuItems = jest.fn().mockResolvedValue([]);
-    const deleteManyNavigationMenuItems = jest.fn().mockResolvedValue([]);
-    jest
-      .mocked(useCreateManyNavigationMenuItems)
-      .mockReturnValue({ createManyNavigationMenuItems });
-    jest
-      .mocked(useUpdateManyNavigationMenuItems)
-      .mockReturnValue({ updateManyNavigationMenuItems });
-    jest
-      .mocked(useDeleteManyNavigationMenuItems)
-      .mockReturnValue({ deleteManyNavigationMenuItems });
+    const createManyNavigationMenuItems = vi.fn().mockResolvedValue([]);
+    const updateManyNavigationMenuItems = vi.fn().mockResolvedValue([]);
+    const deleteManyNavigationMenuItems = vi.fn().mockResolvedValue([]);
+    vi.mocked(useCreateManyNavigationMenuItems).mockReturnValue({
+      createManyNavigationMenuItems,
+    });
+    vi.mocked(useUpdateManyNavigationMenuItems).mockReturnValue({
+      updateManyNavigationMenuItems,
+    });
+    vi.mocked(useDeleteManyNavigationMenuItems).mockReturnValue({
+      deleteManyNavigationMenuItems,
+    });
     const store = createStore();
     store.set(navigationMenuItemsDraftState.atom, []);
     const { result } = renderHook(

@@ -258,7 +258,7 @@ for (const output of outputs) {
       readFileSync(outputPath, 'utf8') !== content
     ) {
       process.stderr.write(
-        `Stale documentation data: ${relative(packageRoot, outputPath)}. Run npx nx generate:ui twenty-docs.\n`,
+        `Stale documentation data: ${relative(packageRoot, outputPath)}. Run bun run --cwd packages/twenty-docs generate:ui from the repository root.\n`,
       );
       process.exitCode = 1;
     }

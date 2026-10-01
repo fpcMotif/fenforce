@@ -9,7 +9,29 @@
     "package.json"
   ],
   "scripts": {
-    "build": "npx rimraf dist && npx vite build"
+    "lint:ci": "bunx vite-plus run twenty-front-component-renderer#lint",
+    "test:ci": "bunx vite-plus run twenty-front-component-renderer#test -- --ci --maxWorkers=1 --coverage",
+    "test:coverage": "bunx vite-plus run twenty-front-component-renderer#test -- --coverage --coverageReporters=lcov --coverageReporters=text",
+    "test:watch": "bunx vite-plus run --no-cache twenty-front-component-renderer#test -- --watch",
+    "storybook:coverage:text": "bunx nyc report --reporter=text --reporter=text-summary -t coverage/storybook --report-dir coverage/storybook --check-coverage=true --cwd=.",
+    "build:command": "bunx rimraf dist && bunx vite build -c vite.config.ts && node node_modules/typescript/bin/tsc -p tsconfig.lib.json --declaration --emitDeclarationOnly --noEmit false --outDir dist --rootDir src && bunx tsc-alias -p tsconfig.lib.json --outDir dist --outputcheck d.ts",
+    "typecheck:command": "tsgo -p tsconfig.json",
+    "lint:command": "bunx oxlint -c .oxlintrc.json . && (bunx oxfmt --check . || (echo 'ERROR: oxfmt formatting check failed! Fix with: bun run lint:fix:command' && false))",
+    "test:command": "bunx jest --config jest.config.mjs --silent",
+    "generate-remote-dom-elements:command": "tsx -r tsconfig-paths/register scripts/remote-dom/generate-remote-dom-elements.ts",
+    "generate-remote-dom-elements:verbose:command": "tsx -r tsconfig-paths/register scripts/remote-dom/generate-remote-dom-elements.ts --verbose",
+    "sandbox:prebuild:command": "tsx -r tsconfig-paths/register scripts/front-component-sandbox/build-sandbox-document.ts",
+    "storybook:prebuild:command": "cd ../.. && bunx tsx packages/twenty-front-component-renderer/scripts/front-component-stories/build-source-examples.ts",
+    "storybook:build:command": "NODE_OPTIONS='--max-old-space-size=10240' storybook build --test",
+    "storybook:build:test:command": "NODE_OPTIONS='--max-old-space-size=10240' storybook build --test",
+    "storybook:serve:dev:command": "bunx storybook dev --port 6008",
+    "storybook:serve:static:command": "bunx http-server storybook-static -a=localhost --port=6008 --silent",
+    "storybook:serve:static:test:command": "bunx http-server storybook-static -a=localhost --port=6006 --silent=true",
+    "storybook:test:command": "vitest run --coverage --config vitest.storybook.config.ts",
+    "storybook:test:no-coverage:command": "vitest run --config vitest.storybook.config.ts",
+    "storybook:coverage": "bunx nyc report --reporter=lcov --reporter=text-summary -t coverage/storybook --report-dir coverage/storybook --check-coverage=true --cwd=.",
+    "lint:fix": "bunx oxlint --fix -c .oxlintrc.json . && bunx oxfmt .",
+    "typecheck:watch": "bunx tsgo -p tsconfig.json --watch"
   },
   "exports": {
     ".": {
@@ -20,6 +42,7 @@
   },
   "license": "AGPL-3.0",
   "dependencies": {
+    "@remote-dom/polyfill": "1.6.0",
     "@quilted/threads": "^4.0.1",
     "@remote-dom/core": "^1.10.1",
     "@remote-dom/react": "^1.2.2",
@@ -30,6 +53,12 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
+    "@prettier/sync": "^0.5.2",
+    "@swc/core": "^1.15.11",
+    "@swc/jest": "^0.2.39",
+    "@types/jest": "^30.0.0",
+    "vite": "^8.0.0",
+    "type-fest": "4.10.1",
     "@chakra-ui/react": "^3.33.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
@@ -42,7 +71,10 @@
     "@types/react-dom": "^19.2.0",
     "@typescript/native-preview": "^7.0.0-dev.20260116.1",
     "@vitest/browser-playwright": "^4.1.0",
+    "@vitest/coverage-istanbul": "^4.1.0",
     "monaco-editor": "0.52.2",
+    "jest": "29.7.0",
+    "jest-environment-jsdom": "30.0.0-beta.3",
     "playwright": "^1.60.0",
     "prettier": "^3.1.1",
     "recharts": "^3.9.2",
@@ -50,13 +82,16 @@
     "styled-components": "^6.1.0",
     "ts-morph": "^25.0.0",
     "tsc-alias": "^1.8.16",
+    "tsconfig-paths": "^4.2.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.9.3",
     "tsx": "^4.7.0",
+    "vitest": "^4.1.0",
     "twenty-sdk": "workspace:*",
     "twenty-shared": "workspace:*",
     "twenty-ui": "workspace:*"
   },
   "engines": {
-    "node": "^24.5.0",
-    "yarn": "^4.0.2"
+    "node": "^24.5.0"
   }
 }

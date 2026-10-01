@@ -31,7 +31,7 @@ rather than by `vendor`, because `readVendors` would otherwise ask models.dev
 for a vendor it does not carry and the payload assertion would refuse the run.
 
 ```bash
-npx nx run twenty-server:ts-node-no-deps-transpile-only -- \
+bunx vite-plus run twenty-server#ts-node-no-deps-transpile-only -- \
   ./scripts/ai-catalog-sync/index.ts --dry-run
 ```
 
@@ -43,7 +43,7 @@ own — which routes exist, their credentials, and which catalog models each one
 serves — and this projects the catalog through that spec.
 
 ```bash
-npx tsx ./scripts/ai-catalog-sync/project.ts \
+bunx tsx ./scripts/ai-catalog-sync/project.ts \
   --spec ./my-deployment.json \
   --out ./ai-catalog.json
 ```

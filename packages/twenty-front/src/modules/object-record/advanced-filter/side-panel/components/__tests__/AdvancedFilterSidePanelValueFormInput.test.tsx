@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, waitFor } from '@testing-library/react';
 import { useEffect, useState } from 'react';
 
@@ -15,11 +17,11 @@ import { FieldMetadataType, ViewFilterOperand } from 'twenty-shared/types';
 import { getMockObjectMetadataItemOrThrow } from '~/testing/utils/getMockObjectMetadataItemOrThrow';
 import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksWrapper';
 
-jest.mock('@/object-record/record-field/ui/components/FormFieldInput', () => ({
+vi.mock('@/object-record/record-field/ui/components/FormFieldInput', () => ({
   FormFieldInput: () => <div data-testid="form-field-input" />,
 }));
 
-jest.mock(
+vi.mock(
   '@/object-record/record-field/ui/form-types/components/FormMultiSelectFieldInput',
   () => ({
     FormMultiSelectFieldInput: ({
@@ -30,7 +32,7 @@ jest.mock(
   }),
 );
 
-jest.mock(
+vi.mock(
   '@/object-record/record-field/ui/form-types/components/FormWorkspaceMemberFilterValueInput',
   () => ({
     FormWorkspaceMemberFilterValueInput: () => (

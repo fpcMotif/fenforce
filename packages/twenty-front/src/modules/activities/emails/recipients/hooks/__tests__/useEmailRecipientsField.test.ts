@@ -1,10 +1,12 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 
 import { useEmailRecipientsField } from '@/activities/emails/recipients/hooks/useEmailRecipientsField';
 import { type EmailRecipient } from '@/activities/emails/recipients/types/EmailRecipient';
 
 const setup = (initialRecipients: EmailRecipient[] = []) => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const view = renderHook(
     ({ recipients }: { recipients: EmailRecipient[] }) =>

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { i18n } from '@lingui/core';
@@ -29,8 +31,8 @@ const EMPTY_ADDRESS = {
 };
 
 const renderAddressInput = (surface?: WorkspaceSurfaceContextValue) => {
-  const onChange = jest.fn();
-  const onClickOutside = jest.fn();
+  const onChange = vi.fn();
+  const onClickOutside = vi.fn();
   const BaseWrapper = getJestMetadataAndApolloMocksWrapper({});
 
   const Wrapper = ({ children }: { children: ReactNode }) => (
@@ -51,10 +53,10 @@ const renderAddressInput = (surface?: WorkspaceSurfaceContextValue) => {
     <AddressInput
       instanceId="address-input"
       value={EMPTY_ADDRESS}
-      onTab={jest.fn()}
-      onShiftTab={jest.fn()}
-      onEnter={jest.fn()}
-      onEscape={jest.fn()}
+      onTab={vi.fn()}
+      onShiftTab={vi.fn()}
+      onEnter={vi.fn()}
+      onEscape={vi.fn()}
       onClickOutside={onClickOutside}
       onChange={onChange}
     />,

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, renderHook } from '@testing-library/react';
 import { getDefaultStore } from 'jotai';
 
@@ -26,7 +28,7 @@ describe('useDictationAvailability', () => {
     (window as unknown as SpeechRecognitionTestWindow).SpeechRecognition =
       function SpeechRecognition() {} as unknown as WebSpeechRecognitionConstructor;
     Object.defineProperty(navigator, 'mediaDevices', {
-      value: { getUserMedia: jest.fn() },
+      value: { getUserMedia: vi.fn() },
       configurable: true,
     });
     Object.defineProperty(window, 'isSecureContext', {

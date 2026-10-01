@@ -1,3 +1,7 @@
+import type * as ReactModule from 'react';
+import type * as AiChatSurfaceContextModule from '@/ai/contexts/AiChatSurfaceContext';
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render } from '@testing-library/react';
@@ -17,11 +21,11 @@ import { AiChatPage } from '~/pages/ai-chat/AiChatPage';
 i18n.load({ [SOURCE_LOCALE]: messages });
 i18n.activate(SOURCE_LOCALE);
 
-jest.mock('@/ai/components/AiChatTab', () => {
-  const { useContext } = jest.requireActual('react');
-  const { AiChatSurfaceContext } = jest.requireActual(
-    '@/ai/contexts/AiChatSurfaceContext',
-  );
+vi.mock('@/ai/components/AiChatTab', async () => {
+  const { useContext } = await vi.importActual<typeof ReactModule>('react');
+  const { AiChatSurfaceContext } = await vi.importActual<
+    typeof AiChatSurfaceContextModule
+  >('@/ai/contexts/AiChatSurfaceContext');
   return {
     AiChatTab: () => (
       <div data-testid="ai-chat-tab">{useContext(AiChatSurfaceContext)}</div>
@@ -29,15 +33,15 @@ jest.mock('@/ai/components/AiChatTab', () => {
   };
 });
 
-jest.mock('@/ai/components/AiChatPageHeader', () => ({
+vi.mock('@/ai/components/AiChatPageHeader', () => ({
   AiChatPageHeader: () => <div>Chat header</div>,
 }));
 
-jest.mock('@/ai/components/AiChatPageThreadUrlSyncEffect', () => ({
+vi.mock('@/ai/components/AiChatPageThreadUrlSyncEffect', () => ({
   AiChatPageThreadUrlSyncEffect: () => null,
 }));
 
-jest.mock('@/ai/components/AiChatPageCloseAskAiPanelEffect', () => ({
+vi.mock('@/ai/components/AiChatPageCloseAskAiPanelEffect', () => ({
   AiChatPageCloseAskAiPanelEffect: () => null,
 }));
 
@@ -49,7 +53,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => (
 
 describe('AiChatPage', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     sessionStorage.clear();
     resetJotaiStore();
   });

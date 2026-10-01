@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render } from '@testing-library/react';
@@ -13,7 +15,7 @@ import {
 } from '@/ui/utilities/state/jotai/jotaiStore';
 import { messages } from '~/locales/generated/en';
 
-jest.mock('@/onboarding/components/WelcomeOverlay/WelcomePersonChip', () => ({
+vi.mock('@/onboarding/components/WelcomeOverlay/WelcomePersonChip', () => ({
   WelcomePersonChip: () => <span data-testid="person-chip" />,
 }));
 

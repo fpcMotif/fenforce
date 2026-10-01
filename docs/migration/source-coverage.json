@@ -1,0 +1,1292 @@
+{
+  "schemaVersion": 1,
+  "upstreamBaseline": "a431f9afb6e761322109ea3b1b942e007b31eef2",
+  "auditedFork": "1bf3ec682fcc7b768d1ea895d1a39ec917299b5c",
+  "scope": "Five declared enum catalogs only. Grouped feature maps cover additional source areas. Neither is exhaustive runtime parity.",
+  "inventories": [
+    {
+      "kind": "routes",
+      "source": "packages/twenty-shared/src/types/AppPath.ts",
+      "sourceSha256": "789ed35c17bf3887f8b780f3af31620f0462c48a5d41ff1c5c77707af21903cc",
+      "entries": [
+        {
+          "member": "Verify",
+          "feature": "FE-17",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "VerifyEmail",
+          "feature": "FE-17",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "SignInUp",
+          "feature": "FE-17",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Invite",
+          "feature": "FE-17",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ResetPassword",
+          "feature": "FE-17",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "WorkspaceActivation",
+          "feature": "FE-17",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "CreateProfile",
+          "feature": "FE-17",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "SyncEmails",
+          "feature": "FE-24",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "InstallApps",
+          "feature": "FE-28",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "InviteTeam",
+          "feature": "FE-17",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "PlanRequired",
+          "feature": "FE-26",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "PlanRequiredSuccess",
+          "feature": "FE-26",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "BookCall",
+          "feature": "EXTRA-03",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AiChat",
+          "feature": "FE-29",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Index",
+          "feature": "FE-01",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Home",
+          "feature": "FE-01",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "TasksPage",
+          "feature": "FE-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "OpportunitiesPage",
+          "feature": "FE-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "RecordIndexPage",
+          "feature": "FE-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "RecordShowPage",
+          "feature": "FE-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "PageLayoutPage",
+          "feature": "FE-14",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "WorkflowCoreIndexPage",
+          "feature": "FE-30",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "WorkflowCoreShowPage",
+          "feature": "FE-30",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Settings",
+          "feature": "FE-01",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "SettingsCatchAll",
+          "feature": "FE-01",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Developers",
+          "feature": "FE-27",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "DevelopersCatchAll",
+          "feature": "FE-27",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Authorize",
+          "feature": "FE-17",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Dpa",
+          "feature": "EXTRA-03",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "NotFoundWildcard",
+          "feature": "FE-01",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "NotFound",
+          "feature": "FE-01",
+          "status": "unverified",
+          "evidence": []
+        }
+      ],
+      "acceptance": {
+        "positive": "Direct navigation, refresh, history, query/hash and main/side-panel behavior match the frozen route fixture.",
+        "negative": "Unknown IDs and denied actors show a safe error without retained data.",
+        "additional": "Apply the mapped feature group's positive and negative checks and all applicable AC gates."
+      }
+    },
+    {
+      "kind": "settings",
+      "source": "packages/twenty-shared/src/types/SettingsPath.ts",
+      "sourceSha256": "d6384ca4fde4c58682fb7abfbf6961e440b791629c53ad2a2d88d4ed199911da",
+      "entries": [
+        {
+          "member": "ProfilePage",
+          "feature": "FE-18",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "TwoFactorAuthenticationStrategyConfig",
+          "feature": "FE-18",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Experience",
+          "feature": "FE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Accounts",
+          "feature": "FE-24",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "NewAccount",
+          "feature": "FE-24",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AccountsConfiguration",
+          "feature": "FE-24",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AccountsCalendars",
+          "feature": "FE-24",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AccountsEmails",
+          "feature": "FE-24",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "NewImapSmtpCaldavConnection",
+          "feature": "FE-24",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "EditImapSmtpCaldavConnection",
+          "feature": "FE-24",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Billing",
+          "feature": "FE-26",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "BillingPlans",
+          "feature": "FE-26",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Usage",
+          "feature": "FE-26",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "UsageUserDetail",
+          "feature": "FE-26",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "BillingLimits",
+          "feature": "FE-26",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "BillingNewLimit",
+          "feature": "FE-26",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "BillingLimitEdit",
+          "feature": "FE-26",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Enterprise",
+          "feature": "FE-21",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Objects",
+          "feature": "FE-23",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ObjectOverview",
+          "feature": "FE-23",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ObjectDetail",
+          "feature": "FE-23",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ObjectNewFieldSelect",
+          "feature": "FE-23",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ObjectNewFieldConfigure",
+          "feature": "FE-23",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ObjectNewIndex",
+          "feature": "FE-23",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ObjectFieldEdit",
+          "feature": "FE-23",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ObjectTranslations",
+          "feature": "FE-23",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ObjectFieldTranslations",
+          "feature": "FE-23",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "NewObject",
+          "feature": "FE-23",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Layout",
+          "feature": "FE-16",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "WorkspaceMembersPage",
+          "feature": "FE-22",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "WorkspaceMemberPage",
+          "feature": "FE-22",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "General",
+          "feature": "FE-20",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Subdomain",
+          "feature": "FE-20",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "CustomDomain",
+          "feature": "FE-20",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "WorkspaceCommunications",
+          "feature": "FE-25",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "EmailGroupChannelDetail",
+          "feature": "FE-25",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "NewEmailGroupChannel",
+          "feature": "FE-25",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "NewUnsubscribeTopic",
+          "feature": "FE-25",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "UnsubscribeTopicDetail",
+          "feature": "FE-25",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Unsubscribe",
+          "feature": "FE-25",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "NewApprovedAccessDomain",
+          "feature": "FE-21",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Community",
+          "feature": "EXTRA-03",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AI",
+          "feature": "FE-29",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AiUsageUserDetail",
+          "feature": "FE-29",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AiPrompts",
+          "feature": "FE-29",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AiNewAgent",
+          "feature": "FE-29",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AiAgentDetail",
+          "feature": "FE-29",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AiAgentTurnDetail",
+          "feature": "FE-29",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AiNewSkill",
+          "feature": "FE-29",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AiSkillDetail",
+          "feature": "FE-29",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AiToolDetail",
+          "feature": "FE-29",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Applications",
+          "feature": "FE-28",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ApplicationDetail",
+          "feature": "FE-28",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ApplicationConnectionDetail",
+          "feature": "FE-28",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ApplicationPublicDomainNew",
+          "feature": "FE-28",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ApplicationPublicDomainDetail",
+          "feature": "FE-28",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ApplicationLogicFunctionDetail",
+          "feature": "FE-28",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ApplicationFrontComponentDetail",
+          "feature": "FE-28",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ApplicationCommandMenuItemDetail",
+          "feature": "FE-28",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ApplicationTimelineActivityTypeDetail",
+          "feature": "FE-28",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ApplicationViewDetail",
+          "feature": "FE-28",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ApplicationPageLayoutDetail",
+          "feature": "FE-28",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AvailableApplicationDetail",
+          "feature": "FE-28",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ApplicationRegistrationDetail",
+          "feature": "FE-28",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "LogicFunctions",
+          "feature": "BE-22",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "NewLogicFunction",
+          "feature": "BE-22",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "LogicFunctionDetail",
+          "feature": "BE-22",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ApiWebhooks",
+          "feature": "FE-27",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "RestPlayground",
+          "feature": "FE-27",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "GraphQLPlayground",
+          "feature": "FE-27",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "NewApiKey",
+          "feature": "FE-27",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ApiKeyDetail",
+          "feature": "FE-27",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "NewWebhook",
+          "feature": "FE-27",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "WebhookDetail",
+          "feature": "FE-27",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Integrations",
+          "feature": "FE-27",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Security",
+          "feature": "FE-21",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Logs",
+          "feature": "FE-21",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "NewSsoIdentityProvider",
+          "feature": "FE-21",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanel",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelOrganization",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelHealthStatus",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelIndicatorHealthStatus",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelInferredVersion",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelInstanceStatus",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelWorkspacesStatus",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelQueueDetail",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelConfigVariableDetails",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelNewAiProvider",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelAiProviderDetail",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelNewAiModel",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelUserDetail",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelWorkspaceDetail",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelApplicationRegistrationDetail",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelWorkspaceChatThread",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AdminPanelChats",
+          "feature": "EXTRA-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Roles",
+          "feature": "FE-22",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "RoleCreate",
+          "feature": "FE-22",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "RoleDetail",
+          "feature": "FE-22",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "RoleObjectLevel",
+          "feature": "FE-22",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "RoleAddObjectLevel",
+          "feature": "FE-22",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Legal",
+          "feature": "EXTRA-03",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "LegalDpa",
+          "feature": "EXTRA-03",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "LegalDpaNew",
+          "feature": "EXTRA-03",
+          "status": "unverified",
+          "evidence": []
+        }
+      ],
+      "acceptance": {
+        "positive": "An authorized actor saves the supported setting and observes persistence and its downstream effect.",
+        "negative": "A denied actor cannot bypass permissions through a direct URL, hash or side panel.",
+        "additional": "Apply the mapped feature group's positive and negative checks and all applicable AC gates."
+      }
+    },
+    {
+      "kind": "flags",
+      "source": "packages/twenty-shared/src/types/FeatureFlagKey.ts",
+      "sourceSha256": "c0fdea83e8e76a41b24143b3cdd230b2d8b074e0ce8f5a26d20b04bab6e1761c",
+      "entries": [
+        {
+          "member": "IS_ASYNC_CSV_EXPORT_ENABLED",
+          "feature": "FE-11",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_UNIQUE_INDEXES_ENABLED",
+          "feature": "BE-01",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_CONFIGURABLE_SEARCH_FIELDS_ENABLED",
+          "feature": "FE-12",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_JSON_FILTER_ENABLED",
+          "feature": "BE-03",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_MESSAGE_CAMPAIGN_ENABLED",
+          "feature": "BE-16",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_JUNCTION_RELATIONS_ENABLED",
+          "feature": "BE-02",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_REST_METADATA_API_NEW_FORMAT_DIRECT",
+          "feature": "BE-09",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_LOGIC_FUNCTION_PREBUILT_MODE_ENABLED",
+          "feature": "BE-22",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_WORKFLOW_CORE_INDEX_PAGE_ENABLED",
+          "feature": "FE-30",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_RECORD_SHARING_ENABLED",
+          "feature": "BE-07",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_AI_CHAT_SHARING_DROPDOWN_ENABLED",
+          "feature": "BE-24",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_INITIAL_OBJECT_VIEW_ENABLED",
+          "feature": "FE-04",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_WEBHOOK_RATE_LIMIT_ENABLED",
+          "feature": "BE-11",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_DEFERRED_WORKSPACE_MIGRATION_ACTIONS_ENABLED",
+          "feature": "BE-01",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_EXECUTION_QUOTA_ENABLED",
+          "feature": "BE-25",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IS_RECORD_CREATION_FORM_ENABLED",
+          "feature": "FE-06",
+          "status": "unverified",
+          "evidence": []
+        }
+      ],
+      "acceptance": {
+        "positive": "With the flag enabled, the feature-specific positive scenario matches the frozen baseline.",
+        "negative": "With the flag disabled or changed during use, availability and authorization match the frozen contract.",
+        "additional": "Apply the mapped feature group's positive and negative checks and all applicable AC gates."
+      }
+    },
+    {
+      "kind": "actions",
+      "source": "packages/twenty-shared/src/workflow/types/WorkflowActionType.ts",
+      "sourceSha256": "d1dd0ea393f1b442d37295ad34536750379f083916ae1ef96528a1b0f7efa2ba",
+      "entries": [
+        {
+          "member": "CODE",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "LOGIC_FUNCTION",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "SEND_EMAIL",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "DRAFT_EMAIL",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "CREATE_CALENDAR_EVENT",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "CREATE_RECORD",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "UPDATE_RECORD",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "DELETE_RECORD",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "UPSERT_RECORD",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "FIND_RECORDS",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "PICK_RECORD",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "FORM",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "FILTER",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "IF_ELSE",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "HTTP_REQUEST",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "AI_AGENT",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "CLASSIFY",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ITERATOR",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "EMPTY",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "DELAY",
+          "feature": "BE-19",
+          "status": "unverified",
+          "evidence": []
+        }
+      ],
+      "acceptance": {
+        "positive": "Run this action with frozen inputs; compare output, persisted state, history and permitted side-effect count.",
+        "negative": "Inject invalid input, denied authority and interruption; resume or fail with the accepted state and effect count.",
+        "additional": "Apply the mapped feature group's positive and negative checks and all applicable AC gates."
+      }
+    },
+    {
+      "kind": "objects",
+      "source": "packages/twenty-shared/src/types/CoreObjectNameSingular.ts",
+      "sourceSha256": "7c941d036aafd15329ca691e8993d917a5235e3ccc99c4d676d5c1c0ff86a1c1",
+      "entries": [
+        {
+          "member": "Activity",
+          "feature": "FE-09",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ActivityTarget",
+          "feature": "FE-09",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "ApiKey",
+          "feature": "BE-09",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Attachment",
+          "feature": "BE-20",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Blocklist",
+          "feature": "BE-15",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "CalendarChannel",
+          "feature": "BE-14",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "CalendarEvent",
+          "feature": "BE-14",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "CalendarEventTarget",
+          "feature": "BE-14",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "CallRecording",
+          "feature": "BE-23",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Comment",
+          "feature": "FE-09",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Company",
+          "feature": "BE-03",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Dashboard",
+          "feature": "FE-14",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "TimelineActivity",
+          "feature": "FE-09",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Message",
+          "feature": "BE-13",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "MessageCampaign",
+          "feature": "BE-16",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "MessageChannel",
+          "feature": "BE-13",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "MessageList",
+          "feature": "BE-16",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "MessageParticipant",
+          "feature": "BE-13",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "MessageFolder",
+          "feature": "BE-13",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "MessageThread",
+          "feature": "BE-13",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "MessageThreadTarget",
+          "feature": "BE-13",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Note",
+          "feature": "FE-09",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "NoteTarget",
+          "feature": "FE-09",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Opportunity",
+          "feature": "BE-03",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Person",
+          "feature": "BE-03",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Task",
+          "feature": "FE-09",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "TaskTarget",
+          "feature": "FE-09",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Webhook",
+          "feature": "BE-11",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "WorkspaceMember",
+          "feature": "FE-22",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "MessageThreadSubscriber",
+          "feature": "BE-13",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "Workflow",
+          "feature": "BE-17",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "MessageChannelMessageAssociation",
+          "feature": "BE-13",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "WorkflowVersion",
+          "feature": "BE-17",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "member": "WorkflowRun",
+          "feature": "BE-17",
+          "status": "unverified",
+          "evidence": []
+        }
+      ],
+      "acceptance": {
+        "positive": "Round-trip every supported field and relation for this object; compare canonical values and identifiers.",
+        "negative": "Reject cross-workspace access and invalid relations; verify deletion, restoration and permission boundaries.",
+        "additional": "Apply the mapped feature group's positive and negative checks and all applicable AC gates."
+      }
+    }
+  ]
+}

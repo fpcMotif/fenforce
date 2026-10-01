@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { render, screen } from '@testing-library/react';
 
 import { HeadlessFrontComponentRendererEngineCommand } from '@/command-menu-item/engine-command/components/HeadlessFrontComponentRendererEngineCommand';
@@ -7,14 +9,14 @@ import { type EnrichedObjectMetadataItem } from '@/object-metadata/types/Enriche
 
 let mockHeadlessCommandContextApi: HeadlessFrontComponentCommandContextApi;
 
-jest.mock(
+vi.mock(
   '@/command-menu-item/engine-command/hooks/useHeadlessCommandContextApi',
   () => ({
     useHeadlessCommandContextApi: () => mockHeadlessCommandContextApi,
   }),
 );
 
-jest.mock('@/front-components/components/FrontComponentRenderer', () => ({
+vi.mock('@/front-components/components/FrontComponentRenderer', () => ({
   FrontComponentRenderer: ({
     frontComponentId,
     commandMenuItemId,

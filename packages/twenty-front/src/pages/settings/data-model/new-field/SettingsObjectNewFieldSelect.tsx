@@ -7,7 +7,6 @@ import { SETTINGS_FIELD_TYPE_CONFIGS } from '@/settings/data-model/constants/Set
 import { SettingsObjectNewFieldHeaderIcon } from '@/settings/data-model/fields/components/SettingsObjectNewFieldHeaderIcon';
 import { SettingsObjectNewFieldSelector } from '@/settings/data-model/fields/forms/components/SettingsObjectNewFieldSelector';
 import { type FieldType } from '@/settings/data-model/types/FieldType';
-import { type SettingsFieldType } from '@/settings/data-model/types/SettingsFieldType';
 import { useWorkspaceSurface } from '@/ui/layout/hooks/useWorkspaceSurface';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { t } from '@lingui/core/macro';
@@ -23,10 +22,12 @@ import { useNavigateApp } from '~/hooks/useNavigateApp';
 
 export const settingsDataModelFieldTypeFormSchema = z.object({
   type: z.enum(
-    Object.keys(SETTINGS_FIELD_TYPE_CONFIGS) as [
-      SettingsFieldType,
-      ...SettingsFieldType[],
-    ],
+    Object.keys(SETTINGS_FIELD_TYPE_CONFIGS).filter(
+      (fieldType): fieldType is FieldMetadataType =>
+        Object.values(FieldMetadataType).some(
+          (metadataType) => metadataType === fieldType,
+        ),
+    ),
   ),
 });
 

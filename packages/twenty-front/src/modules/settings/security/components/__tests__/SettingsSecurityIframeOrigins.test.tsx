@@ -1,3 +1,6 @@
+import type * as ComponentsModule from 'twenty-ui/components';
+import { vi } from 'vite-plus/test';
+
 import { type MockedResponse } from '@apollo/client/testing';
 import { MockedProvider } from '@apollo/client/testing/react';
 import { i18n } from '@lingui/core';
@@ -13,10 +16,10 @@ import {
   UpdateWorkspaceAllowedIframeOriginsDocument,
 } from '~/generated-metadata/graphql';
 
-const enqueueToast = jest.fn();
+const enqueueToast = vi.fn();
 
-jest.mock('twenty-ui/components', () => ({
-  ...jest.requireActual('twenty-ui/components'),
+vi.mock('twenty-ui/components', async () => ({
+  ...(await vi.importActual<typeof ComponentsModule>('twenty-ui/components')),
   useToast: () => ({ enqueueToast }),
 }));
 
@@ -54,19 +57,19 @@ const editableInput = async () => {
   return input;
 };
 
-beforeEach(() => jest.clearAllMocks());
+beforeEach(() => vi.clearAllMocks());
 
 it.each(['button', 'Enter'])(
   'adds normalized origins with %s and removes the last origin',
   async (method) => {
-    const added = jest.fn(() => ({
+    const added = vi.fn(() => ({
       data: {
         updateWorkspaceAllowedIframeOrigins: workspace([
           'https://portal.example.com',
         ]),
       },
     }));
-    const removed = jest.fn(() => ({
+    const removed = vi.fn(() => ({
       data: { updateWorkspaceAllowedIframeOrigins: workspace([]) },
     }));
     renderSettings(
@@ -162,7 +165,7 @@ it('allows an addition when another administrator frees a slot in a full list', 
   );
   const newOrigin = 'https://new.example.com';
   const updatedOrigins = [...staleOrigins.slice(1), newOrigin];
-  const saved = jest.fn(() => ({
+  const saved = vi.fn(() => ({
     data: { updateWorkspaceAllowedIframeOrigins: workspace(updatedOrigins) },
   }));
   renderSettings(staleOrigins, [

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { unlockAudioContext } from '@/ai/dictation/utils/unlockAudioContext';
 
 type AudioContextTestWindow = {
@@ -7,8 +9,8 @@ type AudioContextTestWindow = {
 const stubAudioContext = ({
   doesResumeReject = false,
 }: { doesResumeReject?: boolean } = {}) => {
-  const close = jest.fn(() => Promise.resolve());
-  const resume = jest.fn(() =>
+  const close = vi.fn(() => Promise.resolve());
+  const resume = vi.fn(() =>
     doesResumeReject
       ? Promise.reject(new DOMException('not allowed', 'InvalidStateError'))
       : Promise.resolve(),

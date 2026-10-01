@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 
 import { currentWorkspaceMemberState } from '@/auth/states/currentWorkspaceMemberState';
@@ -26,7 +28,7 @@ describe('useFindManyRecords', () => {
       userEmail: 'userEmail',
     });
 
-    const onCompleted = jest.fn();
+    const onCompleted = vi.fn();
 
     const { result } = renderHook(
       () => {

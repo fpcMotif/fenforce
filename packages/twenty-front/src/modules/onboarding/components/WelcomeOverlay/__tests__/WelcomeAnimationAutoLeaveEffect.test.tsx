@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, render } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
@@ -25,12 +27,12 @@ const isLeaving = () => jotaiStore.get(isWelcomeAnimationLeavingState.atom);
 describe('WelcomeAnimationAutoLeaveEffect', () => {
   beforeEach(() => {
     resetJotaiStore();
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     document.body.innerHTML = '';
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it('should leave at the minimum hold once the handoff target exists', () => {
@@ -38,12 +40,12 @@ describe('WelcomeAnimationAutoLeaveEffect', () => {
     render(<WelcomeAnimationAutoLeaveEffect />, { wrapper: Wrapper });
 
     act(() => {
-      jest.advanceTimersByTime(2899);
+      vi.advanceTimersByTime(2899);
     });
     expect(isLeaving()).toBe(false);
 
     act(() => {
-      jest.advanceTimersByTime(1);
+      vi.advanceTimersByTime(1);
     });
     expect(isLeaving()).toBe(true);
   });
@@ -52,7 +54,7 @@ describe('WelcomeAnimationAutoLeaveEffect', () => {
     render(<WelcomeAnimationAutoLeaveEffect />, { wrapper: Wrapper });
 
     act(() => {
-      jest.advanceTimersByTime(2900);
+      vi.advanceTimersByTime(2900);
     });
     expect(isLeaving()).toBe(false);
   });
@@ -61,12 +63,12 @@ describe('WelcomeAnimationAutoLeaveEffect', () => {
     render(<WelcomeAnimationAutoLeaveEffect />, { wrapper: Wrapper });
 
     act(() => {
-      jest.advanceTimersByTime(4999);
+      vi.advanceTimersByTime(4999);
     });
     expect(isLeaving()).toBe(false);
 
     act(() => {
-      jest.advanceTimersByTime(1);
+      vi.advanceTimersByTime(1);
     });
     expect(isLeaving()).toBe(true);
   });
@@ -76,12 +78,12 @@ describe('WelcomeAnimationAutoLeaveEffect', () => {
     render(<WelcomeAnimationAutoLeaveEffect />, { wrapper: Wrapper });
 
     act(() => {
-      jest.advanceTimersByTime(2900);
+      vi.advanceTimersByTime(2900);
     });
     jotaiStore.set(isWelcomeAnimationLeavingState.atom, false);
 
     act(() => {
-      jest.advanceTimersByTime(5000);
+      vi.advanceTimersByTime(5000);
     });
     expect(isLeaving()).toBe(false);
   });

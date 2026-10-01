@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 /* oxlint-disable twenty/no-navigate-prefer-link */
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { createStore, Provider as JotaiProvider } from 'jotai';
@@ -22,32 +24,32 @@ import { WorkspaceSurfaceContext } from '@/ui/layout/contexts/WorkspaceSurfaceCo
 import { useNavigateApp } from '~/hooks/useNavigateApp';
 import { useNavigateSettings } from '~/hooks/useNavigateSettings';
 
-const openRoutedPageInSidePanelMock = jest.fn();
-const closeSidePanelMenuMock = jest.fn();
-const goBackFromSidePanelMock = jest.fn();
-const navigateSidePanelHistoryMock = jest.fn();
-const openSettingsMenuMock = jest.fn();
+const openRoutedPageInSidePanelMock = vi.fn();
+const closeSidePanelMenuMock = vi.fn();
+const goBackFromSidePanelMock = vi.fn();
+const navigateSidePanelHistoryMock = vi.fn();
+const openSettingsMenuMock = vi.fn();
 
-jest.mock('@/side-panel/routing/hooks/useOpenRoutedPageInSidePanel', () => ({
+vi.mock('@/side-panel/routing/hooks/useOpenRoutedPageInSidePanel', () => ({
   useOpenRoutedPageInSidePanel: () => ({
     openRoutedPageInSidePanel: openRoutedPageInSidePanelMock,
   }),
 }));
 
-jest.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelMenu', () => ({
   useSidePanelMenu: () => ({
     closeSidePanelMenu: closeSidePanelMenuMock,
   }),
 }));
 
-jest.mock('@/side-panel/hooks/useSidePanelHistory', () => ({
+vi.mock('@/side-panel/hooks/useSidePanelHistory', () => ({
   useSidePanelHistory: () => ({
     goBackFromSidePanel: goBackFromSidePanelMock,
     navigateSidePanelHistory: navigateSidePanelHistoryMock,
   }),
 }));
 
-jest.mock('@/navigation/hooks/useOpenSettings', () => ({
+vi.mock('@/navigation/hooks/useOpenSettings', () => ({
   useOpenSettingsMenu: () => ({ openSettingsMenu: openSettingsMenuMock }),
 }));
 
@@ -194,7 +196,7 @@ const renderNavigationProbe = () => {
 
 describe('SidePanelRouteNavigatorProvider', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('keeps Link navigation in the panel and exposes a canonical href', () => {

@@ -11,7 +11,7 @@ The active upgrade system is **instance commands** (fast / slow) and
 `@RegisteredWorkspaceCommand`. Generate one with:
 
 ```bash
-npx nx run twenty-server:database:migrate:generate --name <name> --type <fast|slow>
+bunx vite-plus run twenty-server#database:migrate:generate --name <name> --type <fast|slow>
 ```
 
 See `packages/twenty-server/docs/UPGRADE_COMMANDS.md` for the full guide and

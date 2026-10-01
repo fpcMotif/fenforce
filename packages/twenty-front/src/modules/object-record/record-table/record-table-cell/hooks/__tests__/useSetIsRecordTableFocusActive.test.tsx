@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { renderHook } from '@testing-library/react';
 import { useAtomValue } from 'jotai';
 import React, { act } from 'react';
@@ -10,11 +12,11 @@ import { type TableCellPosition } from '@/object-record/record-table/types/Table
 import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
 
 const mockClassList = {
-  add: jest.fn(),
-  remove: jest.fn(),
+  add: vi.fn(),
+  remove: vi.fn(),
 };
 
-const mockGetElementById = jest.spyOn(document, 'getElementById');
+const mockGetElementById = vi.spyOn(document, 'getElementById');
 
 const instanceId = { instanceId: 'test-table-id' };
 
@@ -51,7 +53,7 @@ const renderHooks = () => {
 
 describe('useSetIsRecordTableFocusActive', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     jotaiStore.set(
       isRecordTableCellFocusActiveComponentState.atomFamily(instanceId),

@@ -1,13 +1,15 @@
+import { type Mock, vi } from 'vite-plus/test';
+
 import { downloadFile } from '@/activities/files/utils/downloadFile';
 import { saveAs } from 'file-saver';
 
-jest.mock('file-saver', () => ({
-  saveAs: jest.fn(),
+vi.mock('file-saver', () => ({
+  saveAs: vi.fn(),
 }));
 
 const mockBlob = new Blob(['test content'], { type: 'application/pdf' });
 
-global.fetch = jest.fn(() =>
+global.fetch = vi.fn(() =>
   Promise.resolve({
     status: 200,
     blob: () => Promise.resolve(mockBlob),
@@ -16,7 +18,7 @@ global.fetch = jest.fn(() =>
 
 describe('downloadFile', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should download a file', async () => {
@@ -27,7 +29,7 @@ describe('downloadFile', () => {
   });
 
   it('should reject when fetch fails', async () => {
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
+    (global.fetch as Mock).mockResolvedValueOnce({
       status: 404,
       blob: () => Promise.resolve(mockBlob),
     });

@@ -1,10 +1,12 @@
+import { vi } from 'vite-plus/test';
+
 import { createDictationEventEmitter } from '@/ai/dictation/utils/createDictationEventEmitter';
 
 describe('createDictationEventEmitter', () => {
   it('delivers events to every subscriber', () => {
     const emitter = createDictationEventEmitter();
-    const first = jest.fn();
-    const second = jest.fn();
+    const first = vi.fn();
+    const second = vi.fn();
 
     emitter.subscribe(first);
     emitter.subscribe(second);
@@ -16,7 +18,7 @@ describe('createDictationEventEmitter', () => {
 
   it('stops delivering after unsubscribe', () => {
     const emitter = createDictationEventEmitter();
-    const listener = jest.fn();
+    const listener = vi.fn();
 
     const unsubscribe = emitter.subscribe(listener);
 
@@ -30,7 +32,7 @@ describe('createDictationEventEmitter', () => {
   // registered after it from being called for that same event.
   it('still reaches later listeners when an earlier one unsubscribes mid-emit', () => {
     const emitter = createDictationEventEmitter();
-    const later = jest.fn();
+    const later = vi.fn();
 
     const unsubscribeFirst = emitter.subscribe(() => {
       unsubscribeFirst();
@@ -44,7 +46,7 @@ describe('createDictationEventEmitter', () => {
 
   it('drops every listener on clear', () => {
     const emitter = createDictationEventEmitter();
-    const listener = jest.fn();
+    const listener = vi.fn();
 
     emitter.subscribe(listener);
     emitter.clear();

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
@@ -7,7 +9,7 @@ import { SettingsApplicationMissingConfigurationBanner } from '~/pages/settings/
 
 const renderBanner = ({
   missingApplicationVariables = [{ key: 'API_KEY', label: 'API key' }],
-  onConfigure = jest.fn(),
+  onConfigure = vi.fn(),
 }: {
   missingApplicationVariables?: { key: string; label: string }[];
   onConfigure?: () => void;

@@ -12,7 +12,23 @@
     "package.json"
   ],
   "scripts": {
-    "build": "npx rimraf dist && npx vite build"
+    "lint:ci": "bunx vite-plus run twenty-sdk#lint",
+    "test:coverage": "bunx vite-plus run twenty-sdk#test -- --coverage",
+    "test:watch": "bunx vite-plus run --no-cache twenty-sdk#test -- --watch",
+    "build:command": "bunx rimraf dist && bunx vite build -c vite.config.node.ts && bunx vite build -c vite.config.define.ts && bunx vite build -c vite.config.billing.ts && bunx vite build -c vite.config.front-component.ts && bunx vite build -c vite.config.logic-function.ts && bunx vite build -c vite.config.utils.ts && bunx vite build -c vite.config.browser.ts && tsgo -p tsconfig.lib.json --declaration --emitDeclarationOnly --noEmit false --outDir dist --rootDir src && bunx tsc-alias -p tsconfig.lib.json --outDir dist && bunx rimraf 'dist/sdk' 'dist/define/**/*.d.ts' 'dist/define/**/*.d.ts.map' 'dist/billing/**/*.d.ts' 'dist/billing/**/*.d.ts.map' 'dist/front-component/**/*.d.ts' 'dist/front-component/**/*.d.ts.map' 'dist/logic-function/**/*.d.ts' 'dist/logic-function/**/*.d.ts.map' 'dist/utils/**/*.d.ts' 'dist/utils/**/*.d.ts.map' && bunx rollup -c rollup.config.sdk-dts.mjs",
+    "dev:command": "bunx vite-plus run twenty-sdk#build && bunx concurrently \"bunx vite build -c vite.config.node.ts --watch\" \"bunx vite build -c vite.config.define.ts --watch\" \"bunx vite build -c vite.config.billing.ts --watch\" \"bunx vite build -c vite.config.front-component.ts --watch\" \"bunx vite build -c vite.config.logic-function.ts --watch\" \"bunx vite build -c vite.config.utils.ts --watch\" \"bunx vite build -c vite.config.browser.ts --watch\"",
+    "start:command": "node dist/cli.cjs",
+    "set-local-version": "bun -e 'const fs = require(\"fs\"); const version = process.argv[1]; if (!version) throw new Error(\"releaseVersion required\"); const pkg = JSON.parse(fs.readFileSync(\"package.json\", \"utf8\")); pkg.version = version; fs.writeFileSync(\"package.json\", JSON.stringify(pkg, null, 2) + \"\\n\");'",
+    "typecheck:command": "tsgo -p tsconfig.json",
+    "lint:command": "bunx oxlint -c .oxlintrc.json . && (bunx oxfmt --check . || (echo 'ERROR: oxfmt formatting check failed! Fix with: bun run lint:fix:command' && false))",
+    "test:command": "bunx vitest run --config vitest.config.ts",
+    "test:ci:command": "bunx vitest run --config vitest.config.ts --coverage",
+    "test:unit": "bunx vitest run --config vitest.unit.config.ts",
+    "test:integration": "bunx vitest run --config vitest.integration.config.ts",
+    "test:e2e:command": "bunx wait-on http://localhost:3000/healthz --timeout 600000 --interval 1000 --log && NODE_ENV=test bunx vitest run --config ./vitest.e2e.config.ts",
+    "build:sdk:command": "bunx vite build -c vite.config.define.ts && bunx vite build -c vite.config.billing.ts && bunx vite build -c vite.config.front-component.ts && bunx vite build -c vite.config.logic-function.ts && bunx vite build -c vite.config.utils.ts && bunx rollup -c rollup.config.sdk-dts.mjs",
+    "lint:fix": "bunx oxlint --fix -c .oxlintrc.json . && bunx oxfmt .",
+    "typecheck:watch": "bunx tsgo -p tsconfig.json --watch"
   },
   "keywords": [
     "twenty",
@@ -80,6 +96,7 @@
     "preact": "^10.28.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-router-dom": "^7.18.4",
     "semver": "7.6.3",
     "sharp": "^0.35.3",
     "tinyglobby": "^0.2.15",
@@ -89,6 +106,8 @@
   },
   "devDependencies": {
     "@prettier/sync": "^0.5.2",
+    "@types/jest": "^30.0.0",
+    "@types/lodash": "^4.17.24",
     "@types/node": "^24.0.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
@@ -103,12 +122,12 @@
     "twenty-shared": "workspace:*",
     "twenty-ui": "workspace:*",
     "vite": "^8.0.0",
+    "vitest": "^4.1.0",
     "vite-plugin-dts": "^4.5.4",
     "wait-on": "^9.0.10"
   },
   "engines": {
     "node": "^24.5.0",
-    "yarn": "^4.0.2",
     "twenty": ">=2.40.0"
   },
   "typesVersions": {

@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { act, render, screen } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom';
@@ -13,17 +15,17 @@ import {
 } from '@/ui/utilities/state/jotai/jotaiStore';
 
 let defaultHomePagePath = '/objects/companies';
-jest.mock('@/navigation/hooks/useDefaultHomePagePath', () => ({
+vi.mock('@/navigation/hooks/useDefaultHomePagePath', () => ({
   useDefaultHomePagePath: () => ({ defaultHomePagePath }),
 }));
 
-const openAskAiPageMock = jest.fn();
+const openAskAiPageMock = vi.fn();
 
-jest.mock('@/side-panel/hooks/useOpenAskAiPageInSidePanel', () => ({
+vi.mock('@/side-panel/hooks/useOpenAskAiPageInSidePanel', () => ({
   useOpenAskAiPageInSidePanel: () => ({ openAskAiPage: openAskAiPageMock }),
 }));
 
-const onContinueChatFromFullWidthMock = jest.fn();
+const onContinueChatFromFullWidthMock = vi.fn();
 
 let navigateAwayFromChatPage: ((pathname?: string) => void) | undefined;
 
@@ -63,7 +65,7 @@ const RouterUnderTest = ({ initialPath }: { initialPath: string }) => (
 
 describe('SidePanelAskAiHandoffEffect', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     sessionStorage.clear();
     resetJotaiStore();
     navigateAwayFromChatPage = undefined;

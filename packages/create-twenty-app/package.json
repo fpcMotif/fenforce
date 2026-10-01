@@ -10,7 +10,20 @@
     "package.json"
   ],
   "scripts": {
-    "build": "npx rimraf dist && npx vite build"
+    "lint:ci": "bunx vite-plus run create-twenty-app#lint",
+    "build:command": "bunx vite build",
+    "dev:command": "tsx src/cli.ts",
+    "start:command": "node dist/cli.cjs",
+    "set-local-version": "bun -e 'const fs = require(\"fs\"); const version = process.argv[1]; if (!version) throw new Error(\"releaseVersion required\"); const pkg = JSON.parse(fs.readFileSync(\"package.json\", \"utf8\")); pkg.version = version; fs.writeFileSync(\"package.json\", JSON.stringify(pkg, null, 2) + \"\\n\");'",
+    "generate-template-lock": "bunx tsx src/scripts/generate-template-lock.ts",
+    "typecheck:command": "tsgo -p tsconfig.json",
+    "lint:command": "bunx oxlint -c .oxlintrc.json . && (bunx oxfmt --check . || (echo 'ERROR: oxfmt formatting check failed! Fix with: bun run lint:fix:command' && false))",
+    "test:command": "bunx jest --config jest.config.mjs --silent",
+    "test:ci:command": "bunx jest --config jest.config.mjs --ci --coverage --watchAll=false",
+    "lint:fix": "bunx oxlint --fix -c .oxlintrc.json . && bunx oxfmt .",
+    "typecheck:watch": "bunx tsgo -p tsconfig.json --watch",
+    "test:watch": "bunx jest --config jest.config.mjs --silent --watch",
+    "test:coverage": "bunx jest --config jest.config.mjs --silent --coverage --coverageReporters=lcov --coverageReporters=text"
   },
   "keywords": [
     "twenty",
@@ -38,6 +51,7 @@
     "uuid": "^13.0.2"
   },
   "devDependencies": {
+    "@typescript/native-preview": "^7.0.0-dev.20260116.1",
     "@swc/core": "^1.15.11",
     "@swc/jest": "^0.2.39",
     "@types/fs-extra": "^11.0.0",
@@ -56,7 +70,6 @@
     "yaml": "^2.9.0"
   },
   "engines": {
-    "node": "^24.5.0",
-    "yarn": "^4.0.2"
+    "node": "^24.5.0"
   }
 }

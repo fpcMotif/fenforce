@@ -1,3 +1,5 @@
+import { vi } from 'vite-plus/test';
+
 import { type MockedResponse } from '@apollo/client/testing';
 import { act, renderHook } from '@testing-library/react';
 
@@ -40,7 +42,7 @@ const mocks: MockedResponse[] = [
         input: { status: task.status },
       },
     },
-    result: jest.fn(() => ({
+    result: vi.fn(() => ({
       data: {
         updateTask: {
           __typename: 'Task',
