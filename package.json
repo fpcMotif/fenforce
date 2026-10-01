@@ -57,6 +57,9 @@
   "version": "0.2.1",
   "nx": {},
   "scripts": {
+    "test:compatibility": "bun run --cwd tools/test-compatibility test:pr",
+    "test:compatibility:integration": "bun run --cwd tools/test-compatibility test:integration",
+    "test:compatibility:extended": "bun run --cwd tools/test-compatibility test:extended",
     "docs:generate": "tsx packages/twenty-docs/scripts/generate-docs-json.ts",
     "docs:generate-navigation-template": "tsx packages/twenty-docs/scripts/generate-navigation-template.ts",
     "docs:generate-paths": "tsx packages/twenty-docs/scripts/generate-documentation-paths.ts",

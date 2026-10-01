@@ -1,0 +1,107 @@
+name: Test runner compatibility
+
+on:
+  pull_request:
+    paths:
+      - 'tools/test-compatibility/**'
+      - '.github/workflows/ci-test-compatibility.yaml'
+  workflow_dispatch:
+    inputs:
+      extended:
+        description: Run all required projects, including currently blocked provider gates
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  compatibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: tools/test-compatibility
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - project: node
+            shard: 1/2
+            artifact: node-1
+          - project: node
+            shard: 2/2
+            artifact: node-2
+          - project: node
+            artifact: node-coverage
+          - project: dom
+            artifact: dom
+          - project: browser
+            artifact: browser
+          - project: storybook
+            artifact: storybook
+          - project: integration
+            artifact: integration
+    services:
+      postgres:
+        image: postgres:16.4@sha256:e62fbf9d3e2b49816a32c400ed2dba83e3b361e6833e624024309c35d334b412
+        env:
+          POSTGRES_USER: compatibility
+          POSTGRES_DB: fenforce_compatibility
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432/tcp
+        options: >-
+          --health-cmd "pg_isready -U compatibility -d fenforce_compatibility"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.16.0
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - run: bun install --frozen-lockfile
+      - run: bun run typecheck
+      - if: matrix.project == 'browser' || matrix.project == 'storybook'
+        run: bunx --no-install playwright install --with-deps chromium
+      - run: bun check.mts "$COMPATIBILITY_PROJECT" $COMPATIBILITY_SHARD
+        env:
+          COMPATIBILITY_PROJECT: ${{ matrix.project }}
+          COMPATIBILITY_SHARD: ${{ matrix.shard }}
+          COMPATIBILITY_DATABASE_URL: postgres://compatibility@127.0.0.1:${{ job.services.postgres.ports[5432] }}/fenforce_compatibility
+          STORYBOOK_DISABLE_TELEMETRY: '1'
+      - if: matrix.project == 'node' && matrix.shard == '1/2'
+        run: bun run mutation
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compatibility-${{ matrix.artifact }}
+          path: tools/test-compatibility/artifacts
+          if-no-files-found: error
+  extended-gates:
+    if: github.event_name == 'workflow_dispatch' && inputs.extended
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: tools/test-compatibility
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.16.0
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - run: bun install --frozen-lockfile
+      - run: bun check.mts secure-deployment
+      - if: always()
+        run: bun check.mts provider
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compatibility-extended-gates
+          path: tools/test-compatibility/artifacts
+          if-no-files-found: error
