@@ -1,4 +1,5 @@
 import type * as ComponentsModule from 'twenty-ui/components';
+import type * as UtilitiesModule from 'twenty-ui/utilities';
 import { vi } from 'vite-plus/test';
 
 import { i18n } from '@lingui/core';
@@ -145,7 +146,8 @@ vi.mock('twenty-ui/icon', () => ({
   }),
 }));
 
-vi.mock('twenty-ui/utilities', () => ({
+vi.mock('twenty-ui/utilities', async () => ({
+  ...(await vi.importActual<typeof UtilitiesModule>('twenty-ui/utilities')),
   useIsMobile: () => mockIsMobile,
 }));
 

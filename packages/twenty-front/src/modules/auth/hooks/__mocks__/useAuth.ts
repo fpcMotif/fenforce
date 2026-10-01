@@ -47,6 +47,7 @@ export const variables = {
 export const results = {
   getLoginTokenFromCredentials: {
     loginToken: {
+      __typename: 'AuthToken',
       token,
       expiresAt: '2022-01-01',
     },
@@ -57,9 +58,11 @@ export const results = {
       refreshToken: { token, expiresAt: 'expiresAt' },
     },
   },
-  signUp: { loginToken: { token, expiresAt: 'expiresAt' } },
+  signUp: {
+    loginToken: { __typename: 'AuthToken', token, expiresAt: 'expiresAt' },
+  },
   signUpInWorkspace: {
-    loginToken: { token, expiresAt: 'expiresAt' },
+    loginToken: { __typename: 'AuthToken', token, expiresAt: 'expiresAt' },
     workspace: {
       id: 'workspace-id',
       workspaceUrls: {

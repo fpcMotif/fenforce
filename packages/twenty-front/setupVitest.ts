@@ -56,4 +56,23 @@ if (globalThis.ResizeObserver === undefined) {
     ResizeObserverMock as unknown as typeof ResizeObserver;
 }
 
+// jsdom does not implement AnimationEvent, so React DOM subscribes to the
+// prefixed webkitAnimationEnd and never sees a dispatched animationend.
+class AnimationEventMock extends Event {
+  readonly animationName: string;
+  readonly elapsedTime: number;
+  readonly pseudoElement: string;
+
+  constructor(type: string, init: AnimationEventInit = {}) {
+    super(type, init);
+    this.animationName = init.animationName ?? '';
+    this.elapsedTime = init.elapsedTime ?? 0;
+    this.pseudoElement = init.pseudoElement ?? '';
+  }
+}
+
+if (typeof window !== 'undefined' && !('AnimationEvent' in window)) {
+  Object.assign(window, { AnimationEvent: AnimationEventMock });
+}
+
 global.structuredClone = (value) => JSON.parse(JSON.stringify(value));
