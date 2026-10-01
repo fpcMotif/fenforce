@@ -209,6 +209,8 @@ jobs:
           fetch-depth: 10
       - name: Install dependencies
         uses: ./.github/actions/bun-install
+      - name: Install isolated Convex dependencies
+        run: bun install --cwd deployments/convex --frozen-lockfile --ignore-scripts
       - name: Restore ${{ matrix.task }} cache
         id: restore-task-cache
         uses: ./.github/actions/restore-cache
