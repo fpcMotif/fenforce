@@ -1,0 +1,97 @@
+{
+  "numTotalTests": 10,
+  "numPassedTests": 10,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 2,
+  "numPassedTestSuites": 2,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-apps/public/exa/src/logic-functions/__tests__/exa-web-search.test.ts",
+      "name": "exa_web_search handler should return a configuration error and skip the search when EXA_API_KEY is not set",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/exa/src/logic-functions/__tests__/exa-web-search.test.ts",
+      "name": "exa_web_search handler should map Exa results to title/url/snippet and report success",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/exa/src/logic-functions/__tests__/exa-web-search.test.ts",
+      "name": "exa_web_search handler should default to DEFAULT_NUM_RESULTS and search with type \"auto\" and highlights when numResults is omitted",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/exa/src/logic-functions/__tests__/exa-web-search.test.ts",
+      "name": "exa_web_search handler should forward an explicit numResults to Exa",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/exa/src/logic-functions/__tests__/exa-web-search.test.ts",
+      "name": "exa_web_search handler should include the category in the success message when one is provided",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/exa/src/logic-functions/__tests__/exa-web-search.test.ts",
+      "name": "exa_web_search handler should fall back to empty strings for a missing title and missing highlights",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/exa/src/logic-functions/__tests__/exa-web-search.test.ts",
+      "name": "exa_web_search handler should charge the Exa base price (7000 micro-credits) for up to DEFAULT_NUM_RESULTS results",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/exa/src/logic-functions/__tests__/exa-web-search.test.ts",
+      "name": "exa_web_search handler should add 1000 micro-credits per result beyond DEFAULT_NUM_RESULTS",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/exa/src/logic-functions/__tests__/exa-web-search.test.ts",
+      "name": "exa_web_search handler should return a failure result and not charge credits when the Exa search throws",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/exa/src/logic-functions/__tests__/exa-web-search.test.ts",
+      "name": "exa_web_search handler should time out and fail when Exa does not respond within the inner timeout",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-apps/public/exa/src/logic-functions/__tests__/exa-web-search.test.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

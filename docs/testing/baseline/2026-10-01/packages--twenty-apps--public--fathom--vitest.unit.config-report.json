@@ -1,0 +1,1091 @@
+{
+  "numTotalTests": 154,
+  "numPassedTests": 154,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 54,
+  "numPassedTestSuites": 54,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-apps/public/fathom/src/__tests__/application-config.test.ts",
+      "name": "application identifiers should expose the application metadata constants",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-disconnect.test.ts",
+      "name": "fathomDisconnectHandler deletes the Fathom webhook, the registration and the server claim",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-disconnect.test.ts",
+      "name": "fathomDisconnectHandler schedules the media cleanup for the disconnected account",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-disconnect.test.ts",
+      "name": "fathomDisconnectHandler releases the server claim when no webhook was ever registered",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-disconnect.test.ts",
+      "name": "fathomDisconnectHandler completes the cleanup when Fathom already dropped the webhook",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-disconnect.test.ts",
+      "name": "fathomDisconnectHandler keeps the inactive registration and logs the leaked webhook when Fathom fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-disconnect.test.ts",
+      "name": "fathomDisconnectHandler skips the webhook deletion when the media cleanup cannot be scheduled",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-list-calls-by-participant.test.ts",
+      "name": "fathomListCallsByParticipantHandler returns the calls whose invitees include the email, most recent first",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-list-calls-by-participant.test.ts",
+      "name": "fathomListCallsByParticipantHandler merges the calls seen by several connected accounts without duplicates",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-register-connection.test.ts",
+      "name": "fathomRegisterConnectionHandler claims the connection and registers a webhook pointing at the server route",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-register-connection.test.ts",
+      "name": "fathomRegisterConnectionHandler starts the initial import once the registration is stored",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-register-connection.test.ts",
+      "name": "fathomRegisterConnectionHandler enqueues the initial import on retry when the active registration is still missing it",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-register-connection.test.ts",
+      "name": "fathomRegisterConnectionHandler asks the queue to retry when Fathom fails transiently",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-register-connection.test.ts",
+      "name": "fathomRegisterConnectionHandler surfaces a rejected webhook without retrying",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-register-connection.test.ts",
+      "name": "fathomRegisterConnectionHandler deletes the webhook it just created when the registration cannot be stored",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-register-connection.test.ts",
+      "name": "fathomRegisterConnectionHandler keeps the webhook when the failed write turns out to have committed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-register-connection.test.ts",
+      "name": "fathomRegisterConnectionHandler reports the storage failure even when the created webhook cannot be deleted",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-register-connection.test.ts",
+      "name": "fathomRegisterConnectionHandler reuses the webhook of an already active registration",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-register-connection.test.ts",
+      "name": "fathomRegisterConnectionHandler replaces an inactive registration whose webhook Fathom already dropped",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-register-connection.test.ts",
+      "name": "fathomRegisterConnectionHandler does not replace an inactive registration when its webhook cannot be deleted",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-uninstall.test.ts",
+      "name": "fathomUninstallHandler deletes the Fathom webhook of every connected account",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-uninstall.test.ts",
+      "name": "fathomUninstallHandler keeps deleting the remaining webhooks when Fathom rejects one",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-uninstall.test.ts",
+      "name": "fathomUninstallHandler counts a webhook Fathom already dropped as deleted",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-uninstall.test.ts",
+      "name": "fathomUninstallHandler keeps cleaning the remaining connections when one KV read fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-uninstall.test.ts",
+      "name": "fathomUninstallHandler skips connections that never registered a webhook",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/schemas/__tests__/fathom-media-download-payload.schema.test.ts",
+      "name": "fathom media download payload schemas accepts a local call recording identifier",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/schemas/__tests__/fathom-media-download-payload.schema.test.ts",
+      "name": "fathom media download payload schemas accepts a generation-fenced poll payload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/schemas/__tests__/fathom-media-download-payload.schema.test.ts",
+      "name": "fathom media download payload schemas rejects a poll payload without its download generation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/schemas/__tests__/fathom-media-download-payload.schema.test.ts",
+      "name": "fathom media download payload schemas rejects invalid poll attempt -1",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/schemas/__tests__/fathom-media-download-payload.schema.test.ts",
+      "name": "fathom media download payload schemas rejects invalid poll attempt 0.5",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/schemas/__tests__/fathom-media-download-payload.schema.test.ts",
+      "name": "fathom media download payload schemas rejects invalid poll attempt NaN",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-disconnected-fathom-media-reconciliation-plan.test.ts",
+      "name": "buildDisconnectedFathomMediaReconciliationPlan settles missing media and completes imports only when a transcript exists",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-title.test.ts",
+      "name": "buildFathomCallRecordingTitle immediately distinguishes Impromptu with its recording time in UTC",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-title.test.ts",
+      "name": "buildFathomCallRecordingTitle immediately distinguishes Impromptu meeting with its recording time in UTC",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-title.test.ts",
+      "name": "buildFathomCallRecordingTitle immediately distinguishes Impromptu Zoom Meeting with its recording time in UTC",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-title.test.ts",
+      "name": "buildFathomCallRecordingTitle immediately distinguishes Impromptu Google Meet Meeting with its recording time in UTC",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-title.test.ts",
+      "name": "buildFathomCallRecordingTitle immediately distinguishes Impromptu Microsoft Teams Meeting with its recording time in UTC",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-title.test.ts",
+      "name": "buildFathomCallRecordingTitle immediately distinguishes Impromptu Slack Huddle with its recording time in UTC",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-title.test.ts",
+      "name": "buildFathomCallRecordingTitle immediately distinguishes impromptu zoom call with its recording time in UTC",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-title.test.ts",
+      "name": "buildFathomCallRecordingTitle keeps the meaningful title Acme onboarding review ineligible for generation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-title.test.ts",
+      "name": "buildFathomCallRecordingTitle keeps the meaningful title Impromptu product strategy review ineligible for generation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-title.test.ts",
+      "name": "buildFathomCallRecordingTitle keeps a renamed Fathom recording when the calendar title is generic",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-title.test.ts",
+      "name": "buildFathomCallRecordingTitle uses the recording title when there is no calendar title",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields creates new recordings in processing while media is pending",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields does not move an existing recording back to processing automatically",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields does not request an automatic retry for settled media",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields reopens a settled failure only for an explicit media retry",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields keeps the owner of an active private Fathom download",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields replaces a download owned by another connection",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields requests missing media after an interrupted enqueue with owner undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields requests missing media after an interrupted enqueue with owner current-connected-account-id",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields preserves populated transcript and summary on a repeated import",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields fills an empty summary without replacing a populated transcript",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields does not automatically reopen terminal failure download_forbidden",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields does not automatically reopen terminal failure no_downloadable_media",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields does not automatically reopen terminal failure download_expired",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields does not automatically reopen terminal failure media_file_too_large",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields does not automatically reopen terminal failure download_timed_out",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields does not automatically reopen terminal failure connected_account_unavailable",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "name": "buildFathomCallRecordingUpsertFields does not automatically reopen terminal failure completed_without_file",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-media-reconciliation-plan.test.ts",
+      "name": "buildFathomMediaReconciliationPlan completes settled recordings and groups missing imports by account",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-media-reconciliation-plan.test.ts",
+      "name": "buildFathomMediaReconciliationPlan does not retry settled media while its transcript is still absent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-media-reconciliation-plan.test.ts",
+      "name": "buildFathomMediaReconciliationPlan repairs missing media on a legacy completed recording",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-media-reconciliation-plan.test.ts",
+      "name": "buildFathomMediaReconciliationPlan routes unfinished imports for disconnected accounts to cleanup",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/compute-call-recording-id-for-fathom-meeting.test.ts",
+      "name": "computeCallRecordingIdForFathomMeeting returns one stable UUID for a Fathom recording",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/compute-call-recording-id-for-fathom-meeting.test.ts",
+      "name": "computeCallRecordingIdForFathomMeeting uses a different UUID for a different recording",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/find-matching-calendar-event.test.ts",
+      "name": "findMatchingCalendarEvent queries live events in a five minute window around the scheduled start",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/find-matching-calendar-event.test.ts",
+      "name": "findMatchingCalendarEvent matches an exact meeting URL to the nearest scheduled event",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/find-matching-calendar-event.test.ts",
+      "name": "findMatchingCalendarEvent ignores www, case, query strings, fragments and trailing slashes when comparing URLs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/find-matching-calendar-event.test.ts",
+      "name": "findMatchingCalendarEvent does not guess when two reused-link events are equally close",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/find-matching-calendar-event.test.ts",
+      "name": "findMatchingCalendarEvent matches an event that only appears on a later page",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/find-matching-calendar-event.test.ts",
+      "name": "findMatchingCalendarEvent does not guess from a window it could not read to the end",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/find-matching-calendar-event.test.ts",
+      "name": "findMatchingCalendarEvent does not guess when a page claims more results but carries no cursor",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/find-matching-calendar-event.test.ts",
+      "name": "findMatchingCalendarEvent does not query CalendarEvents without Fathom meeting_url",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/format-fathom-summary.test.ts",
+      "name": "formatFathomSummary combines the Fathom summary and action items",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/format-fathom-summary.test.ts",
+      "name": "formatFathomSummary returns action items when no summary is available",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "name": "generateFathomCallRecordingTitle preserves a specific topic without a word-count cutoff: Acme onboarding delays and next steps",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "name": "generateFathomCallRecordingTitle preserves a specific topic without a word-count cutoff: Northstar Health renewal pricing and timeline",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "name": "generateFathomCallRecordingTitle preserves a specific topic without a word-count cutoff: Microsoft Entra ID setup for the customer support team",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "name": "generateFathomCallRecordingTitle does not propose a rename for an unusable agent result null",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "name": "generateFathomCallRecordingTitle does not propose a rename for an unusable agent result {}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "name": "generateFathomCallRecordingTitle does not propose a rename for an unusable agent result {\"response\":\"\"}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "name": "generateFathomCallRecordingTitle does not propose a rename for an unusable agent result {\"response\":123}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "name": "generateFathomCallRecordingTitle does not propose a rename for an unusable agent result {\"response\":\"NO_TOPIC\"}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "name": "generateFathomCallRecordingTitle does not propose a rename for an unusable agent result {\"response\":\"First line\\nSecond line\"}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "name": "generateFathomCallRecordingTitle does not propose a rename for an unusable agent result {\"response\":\"(Acme onboarding next steps)\"}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "name": "generateFathomCallRecordingTitle does not propose a rename for an unusable agent result {\"response\":\"[Acme onboarding next steps]\"}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "name": "generateFathomCallRecordingTitle does not propose a rename for an unusable agent result {\"response\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "name": "generateFathomCallRecordingTitle does not propose a rename when AI is unavailable",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "name": "generateFathomCallRecordingTitle uses a background response arriving after the former ten-second deadline",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-download-failure-reason.test.ts",
+      "name": "getFathomMediaDownloadFailureReason 'processing without files remains pend…'",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-download-failure-reason.test.ts",
+      "name": "getFathomMediaDownloadFailureReason 'completed video is importable'",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-download-failure-reason.test.ts",
+      "name": "getFathomMediaDownloadFailureReason 'completed audio is importable'",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-download-failure-reason.test.ts",
+      "name": "getFathomMediaDownloadFailureReason 'expired downloads cannot reuse an exp…'",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-download-failure-reason.test.ts",
+      "name": "getFathomMediaDownloadFailureReason 'failed downloads retain the provider …'",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-download-failure-reason.test.ts",
+      "name": "getFathomMediaDownloadFailureReason 'failed downloads without a reason use…'",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-download-failure-reason.test.ts",
+      "name": "getFathomMediaDownloadFailureReason 'completed downloads without media are…'",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-download-poll-delay.test.ts",
+      "name": "getFathomMediaDownloadPollDelay starts at the initial delay and grows with each attempt",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-download-poll-delay.test.ts",
+      "name": "getFathomMediaDownloadPollDelay caps the delay so a stalled download keeps polling on a fixed cadence",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-failure-reason-for-error.test.ts",
+      "name": "getFathomMediaFailureReasonForError classifies Fathom status 403 as download_forbidden",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-failure-reason-for-error.test.ts",
+      "name": "getFathomMediaFailureReasonForError classifies Fathom status 422 as no_downloadable_media",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-failure-reason-for-error.test.ts",
+      "name": "getFathomMediaFailureReasonForError classifies Fathom status 404 as undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-failure-reason-for-error.test.ts",
+      "name": "getFathomMediaFailureReasonForError classifies Fathom status 429 as undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-failure-reason-for-error.test.ts",
+      "name": "getFathomMediaFailureReasonForError classifies Fathom status 503 as undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-failure-reason-for-error.test.ts",
+      "name": "getFathomMediaFailureReasonForError does not classify unrelated errors: undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-failure-reason-for-error.test.ts",
+      "name": "getFathomMediaFailureReasonForError does not classify unrelated errors: null",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-failure-reason-for-error.test.ts",
+      "name": "getFathomMediaFailureReasonForError does not classify unrelated errors: Error: Upload failed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-failure-reason-for-error.test.ts",
+      "name": "getFathomMediaFailureReasonForError does not classify unrelated errors: { statusCode: 403 }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after 120 by 120000 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after 0 by 0 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after 1.5 by 1500 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after  90  by 90000 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after Sat, 05 Sep 2026 12:02:00 GMT by 120000 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after Sat, 05 Sep 2026 12:00:00 GMT by 0 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after Sat, 05 Sep 2026 11:59:00 GMT by 60000 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after undefined by 60000 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after  by 60000 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after   by 60000 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after invalid by 60000 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after -1 by 60000 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after Infinity by 60000 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after NaN by 60000 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after 1e309 by 60000 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay delays retry-after 1e308 by 60000 milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay does not classify other Fathom errors as rate limits",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay ignores errors without a Fathom rate-limit response: undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay ignores errors without a Fathom rate-limit response: null",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay ignores errors without a Fathom rate-limit response: Error: Request failed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "name": "getFathomRetryAfterDelay ignores errors without a Fathom rate-limit response: { statusCode: 429 }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-webhook-destination-url.test.ts",
+      "name": "getFathomWebhookDestinationUrl builds the server route with the connection identifier",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-webhook-destination-url.test.ts",
+      "name": "getFathomWebhookDestinationUrl preserves a base path on the API URL",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/is-fathom-call-recording-import-complete.test.ts",
+      "name": "isFathomCallRecordingImportComplete completes when transcript and media are terminal",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/is-fathom-call-recording-import-complete.test.ts",
+      "name": "isFathomCallRecordingImportComplete completes when transcript and media are terminal",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/is-fathom-call-recording-import-complete.test.ts",
+      "name": "isFathomCallRecordingImportComplete completes when transcript and media are terminal",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/is-fathom-call-recording-import-complete.test.ts",
+      "name": "isFathomCallRecordingImportComplete waits for media after the transcript arrives",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/is-fathom-call-recording-import-complete.test.ts",
+      "name": "isFathomCallRecordingImportComplete waits for the transcript after media arrives",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/list-fathom-connections-for-request.test.ts",
+      "name": "listFathomConnectionsForRequest returns every connected account for a run with nobody behind it",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/list-fathom-meetings.test.ts",
+      "name": "listFathomMeetings stops paging as soon as the caller is satisfied",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/list-fathom-meetings.test.ts",
+      "name": "listFathomMeetings gives up instead of walking an unbounded history",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/map-call-recording-media-state.test.ts",
+      "name": "mapCallRecordingMediaState maps persisted media state and a valid upload checkpoint",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/map-call-recording-media-state.test.ts",
+      "name": "mapCallRecordingMediaState normalizes empty media fields and rejects a malformed checkpoint",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/map-call-recording-media-state.test.ts",
+      "name": "mapCallRecordingMediaState detects summary content stored as blocknote",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/map-fathom-transcript-to-entries.test.ts",
+      "name": "mapFathomTranscriptToEntries maps Fathom utterances to CallRecording transcript entries",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/map-fathom-transcript-to-entries.test.ts",
+      "name": "mapFathomTranscriptToEntries drops empty utterances and tolerates an invalid timestamp",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/open-fathom-media-download.test.ts",
+      "name": "openFathomMediaDownload reports an empty provider download without opening an upload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/parse-fathom-media-reconciliation-page.test.ts",
+      "name": "parseFathomMediaReconciliationPage returns an empty terminal page for an absent connection: {}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/parse-fathom-media-reconciliation-page.test.ts",
+      "name": "parseFathomMediaReconciliationPage returns an empty terminal page for an absent connection: {\"callRecordings\":null}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/parse-fathom-media-reconciliation-page.test.ts",
+      "name": "parseFathomMediaReconciliationPage preserves the continuation flag false and normalizes reconciliation state",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/parse-fathom-media-reconciliation-page.test.ts",
+      "name": "parseFathomMediaReconciliationPage preserves the continuation flag true and normalizes reconciliation state",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/parse-fathom-media-reconciliation-page.test.ts",
+      "name": "parseFathomMediaReconciliationPage rejects malformed pages instead of treating them as completed runs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/parse-fathom-media-reconciliation-page.test.ts",
+      "name": "parseFathomMediaReconciliationPage rejects a recording without its optimistic concurrency timestamp",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/put-fathom-media-body-to-upload-target.test.ts",
+      "name": "putFathomMediaBodyToUploadTarget streams the media body to an upload target with its declared headers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/put-fathom-media-body-to-upload-target.test.ts",
+      "name": "putFathomMediaBodyToUploadTarget rejects a failed storage response",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/put-fathom-media-body-to-upload-target.test.ts",
+      "name": "putFathomMediaBodyToUploadTarget cancels the media body when the upload request cannot be created",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-apps/public/fathom/src/__tests__/application-config.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-disconnect.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-list-calls-by-participant.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-register-connection.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/__tests__/fathom-uninstall.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/schemas/__tests__/fathom-media-download-payload.schema.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-disconnected-fathom-media-reconciliation-plan.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-title.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-call-recording-upsert-fields.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/build-fathom-media-reconciliation-plan.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/compute-call-recording-id-for-fathom-meeting.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/find-matching-calendar-event.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/format-fathom-summary.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/generate-fathom-call-recording-title.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-download-failure-reason.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-download-poll-delay.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-media-failure-reason-for-error.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-retry-after-delay.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/get-fathom-webhook-destination-url.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/is-fathom-call-recording-import-complete.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/list-fathom-connections-for-request.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/list-fathom-meetings.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/map-call-recording-media-state.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/map-fathom-transcript-to-entries.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/open-fathom-media-download.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/parse-fathom-media-reconciliation-page.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fathom/src/logic-functions/utils/__tests__/put-fathom-media-body-to-upload-target.test.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

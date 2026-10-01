@@ -1,0 +1,167 @@
+{
+  "numTotalTests": 20,
+  "numPassedTests": 20,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 3,
+  "numPassedTestSuites": 3,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "didUpdate": false,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0
+  },
+  "assertions": [
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/app-template.spec.ts",
+      "name": "copyBaseApplicationProject should call fs.copy to copy base application template",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/app-template.spec.ts",
+      "name": "copyBaseApplicationProject should replace placeholders in universal-identifiers.ts with real values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/app-template.spec.ts",
+      "name": "copyBaseApplicationProject should generate different UUIDs for each identifier",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/app-template.spec.ts",
+      "name": "copyBaseApplicationProject should update package.json with app name and matching package versions",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/app-template.spec.ts",
+      "name": "copyBaseApplicationProject should create an empty public directory in the scaffolded project",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/app-template.spec.ts",
+      "name": "copyBaseApplicationProject should rename yarnrc.yml to .yarnrc.yml in the scaffolded project",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/app-template.spec.ts",
+      "name": "copyBaseApplicationProject should handle empty description",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/app-template.spec.ts",
+      "name": "copyBaseApplicationProject should seed CHANGELOG.md in the base template",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/app-template.spec.ts",
+      "name": "copyBaseApplicationProject should seed SETUP.md in the base template",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/app-template.spec.ts",
+      "name": "copyBaseApplicationProject should seed locales/en.json in the base template",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/app-template.spec.ts",
+      "name": "copyBaseApplicationProject should generate unique UUIDs across different scaffolds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/install.spec.ts",
+      "name": "install installs without immutable mode so the template lockfile can be finalised",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/install.spec.ts",
+      "name": "install reports the failure instead of leaving a project without dependencies",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/install.spec.ts",
+      "name": "install says how to recover, since the scaffolded project itself is intact",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/install.spec.ts",
+      "name": "install names the packages the gate actually quarantined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/install.spec.ts",
+      "name": "install waives the third-party package Yarn named, not the first-party ones",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/install.spec.ts",
+      "name": "install waives a quarantined dist-tag by name, since a tag is not a usable range",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/install.spec.ts",
+      "name": "install falls back to the yarn output when no package can be identified",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/install.spec.ts",
+      "name": "install tolerates corepack being unavailable when yarn still installs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/convert-to-label.spec.ts",
+      "name": "convertToLabel should convert to label",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/app-template.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/install.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/create-twenty-app/src/utils/__tests__/convert-to-label.spec.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

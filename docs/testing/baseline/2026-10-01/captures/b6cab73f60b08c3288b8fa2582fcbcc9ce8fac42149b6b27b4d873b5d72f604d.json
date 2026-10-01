@@ -1,0 +1,1150 @@
+{
+  "captureId": "b6cab73f60b08c3288b8fa2582fcbcc9ce8fac42149b6b27b4d873b5d72f604d",
+  "provenance": {
+    "revision": "1790e94c7f5313b4ce4d71b4c00e176f8b56fe59",
+    "branch": "codex/cloudflare-workflow-spike",
+    "trackedDiffSha256": "de481e80d15a62558d66c96da92d593fb2b20dabb254a075207429cb016d05f5",
+    "lockfiles": [
+      {
+        "path": "bun.lock",
+        "sha256": "f272458ed03ad5e716e8ed4d14e7b71a1ac3a46a37bb7f9fb3271e1376933688"
+      },
+      {
+        "path": "deployments/convex/bun.lock",
+        "sha256": "c29e33a5350f20d396b8cb4fe4674575bfc85108bedce36464dc3a7ca3df0d5d"
+      },
+      {
+        "path": "deployments/cloudflare-front/bun.lock",
+        "sha256": "f9925415212ec69dc5d5360b854eac1d62fc32a6b132f199dac0eddb1748d4e8"
+      },
+      {
+        "path": "experiments/cloudflare-workflows/bun.lock",
+        "sha256": "39a4c18510831cbe918d7826e9c17207c53e13ee973adcdd577905655df94405"
+      }
+    ],
+    "sourceManifestSha256": "165924e06db82dec57811929839d8ac42bb8276b41c19dcae6777fd331c4181e",
+    "configurationFiles": [
+      {
+        "path": "packages/twenty-ui/vitest.config.ts",
+        "sha256": "5f35b05a6977766df2cf947f3b7b7edf8ddc5165fedae7f43d46f020dff24e28"
+      },
+      {
+        "path": "packages/twenty-website/jest.config.mjs",
+        "sha256": "6f2f4282fa8eae67db80845f3a4010c78ed8f960efb8565b1e63b565238dc794"
+      },
+      {
+        "path": "packages/twenty-docs/vitest.config.mts",
+        "sha256": "4433e2ff32402fde72fe9baf76deb6c781c2a068214b4010e4b4d35713fd4e3c"
+      },
+      {
+        "path": "packages/twenty-oxlint-rules/vitest.config.mts",
+        "sha256": "7b28dcf5370c9e26e1450d44317836ee245e26da0cac60aebb1a239da8ff9e3c"
+      },
+      {
+        "path": "packages/twenty-server/jest-integration.config.ts",
+        "sha256": "0ae36d032c717b08642e1df8b1619663ce9f4c2f517486a07002ae856c338ed4"
+      },
+      {
+        "path": "packages/twenty-server/jest-integration-secure.config.ts",
+        "sha256": "e7e8ce1681bfbd9b62d5777356f693642e0935bf99bc5502b3b6204766b8a631"
+      },
+      {
+        "path": "packages/twenty-server/jest.config.mjs",
+        "sha256": "b956f5d2c128647d8efbec053088e1c10277c87db0423ad5cb0017c827fbd0b9"
+      },
+      {
+        "path": "packages/twenty-sdk/vitest.e2e.config.ts",
+        "sha256": "c29199d682fddc6a6c9226dc92baec01da2d655589613d4dfdba681f993504c9"
+      },
+      {
+        "path": "packages/twenty-sdk/vitest.integration.config.ts",
+        "sha256": "36a4d02598a7c17741db76b4a6e9486d6a5c6558dc7a22fda8efd51ea2d082a1"
+      },
+      {
+        "path": "packages/twenty-sdk/vitest.unit.config.ts",
+        "sha256": "c09d3177bcc44f95457e9f47a7f7904cc5d4e3841eec55b8a2c5eed40c0c07e6"
+      },
+      {
+        "path": "packages/twenty-sdk/vitest.config.ts",
+        "sha256": "0849824610725bac6beab9f6e28020d63621cc88b7077949aea2c7688f855596"
+      },
+      {
+        "path": "packages/twenty-shared/jest.config.mjs",
+        "sha256": "cb3a3dc9aa61e829ce3d19ed20d456a4f801f65a10000a7416e47085ac396db8"
+      },
+      {
+        "path": "packages/twenty-front-component-renderer/vitest.storybook.config.ts",
+        "sha256": "f34f906c8865524d061b658db2f35b06556fdf8b28088759e488cc0f01f17cbb"
+      },
+      {
+        "path": "packages/twenty-front-component-renderer/jest.config.mjs",
+        "sha256": "728aa9a7e1e6238a4cebadde0fe7acb9fb5b0a7a9c94bc3899bfbd39b3c8a9bc"
+      },
+      {
+        "path": "packages/twenty-front-component-renderer/vitest.config.ts",
+        "sha256": "404d2e3d2f386f0ca1edc6736fa9a6c9453c5cf64c3f2a781fe3ff780cf0de95"
+      },
+      {
+        "path": "packages/twenty-zapier/jest.config.mjs",
+        "sha256": "8367a30052cb3a7eeea219f5916140e2aa435cb0029f661c7c68bb70a8d42d29"
+      },
+      {
+        "path": "packages/twenty-utils/jest.config.mjs",
+        "sha256": "2c608506abf3de4566111d4e62e695361e5c316a9a6cd4c9531ad7a23c6759f6"
+      },
+      {
+        "path": "packages/twenty-client-sdk/vitest.config.ts",
+        "sha256": "f6973af18ecb92b3cefc8bdc9f9ba538f0907a6c634edbdcea95cd0013539b1a"
+      },
+      {
+        "path": "packages/twenty-apps/public/granola/vitest.unit.config.ts",
+        "sha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46"
+      },
+      {
+        "path": "packages/twenty-apps/public/granola/vitest.config.ts",
+        "sha256": "7f1118e6b889f151b064bae24f27b98f721404a8e52d5f825c3cf44bf640e25d"
+      },
+      {
+        "path": "packages/twenty-apps/public/discord/vitest.unit.config.ts",
+        "sha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46"
+      },
+      {
+        "path": "packages/twenty-apps/public/discord/vitest.config.ts",
+        "sha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9"
+      },
+      {
+        "path": "packages/twenty-apps/public/last-contact/vitest.unit.config.ts",
+        "sha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46"
+      },
+      {
+        "path": "packages/twenty-apps/public/last-contact/vitest.config.ts",
+        "sha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9"
+      },
+      {
+        "path": "packages/twenty-apps/public/linear/vitest.unit.config.ts",
+        "sha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46"
+      },
+      {
+        "path": "packages/twenty-apps/public/linear/vitest.config.ts",
+        "sha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9"
+      },
+      {
+        "path": "packages/twenty-apps/public/exa/vitest.unit.config.ts",
+        "sha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46"
+      },
+      {
+        "path": "packages/twenty-apps/public/exa/vitest.config.ts",
+        "sha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9"
+      },
+      {
+        "path": "packages/twenty-apps/public/fireflies/vitest.unit.config.ts",
+        "sha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46"
+      },
+      {
+        "path": "packages/twenty-apps/public/fireflies/vitest.config.ts",
+        "sha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9"
+      },
+      {
+        "path": "packages/twenty-apps/public/people-data-labs/vitest.unit.config.ts",
+        "sha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46"
+      },
+      {
+        "path": "packages/twenty-apps/public/people-data-labs/vitest.config.ts",
+        "sha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9"
+      },
+      {
+        "path": "packages/twenty-apps/public/fathom/vitest.unit.config.ts",
+        "sha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46"
+      },
+      {
+        "path": "packages/twenty-apps/public/fathom/vitest.config.ts",
+        "sha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9"
+      },
+      {
+        "path": "packages/twenty-apps/public/teams/vitest.unit.config.ts",
+        "sha256": "4d7ad14fe9068dae0251b34fa5c2bd12ce3c9fcf86914442d89e44c9dc5a5e12"
+      },
+      {
+        "path": "packages/twenty-apps/public/teams/vitest.config.ts",
+        "sha256": "7fcb8945c638e6a01b4dc92b5d367b5d1a42352e35b0aea8494bbd247e618d96"
+      },
+      {
+        "path": "packages/twenty-apps/public/call-recorder/vitest.unit.config.ts",
+        "sha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46"
+      },
+      {
+        "path": "packages/twenty-apps/public/call-recorder/vitest.config.ts",
+        "sha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9"
+      },
+      {
+        "path": "packages/twenty-apps/public/slack/vitest.unit.config.ts",
+        "sha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46"
+      },
+      {
+        "path": "packages/twenty-apps/public/slack/vitest.config.ts",
+        "sha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9"
+      },
+      {
+        "path": "packages/twenty-apps/public/companion/vitest.unit.config.ts",
+        "sha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46"
+      },
+      {
+        "path": "packages/twenty-apps/public/companion/vitest.config.ts",
+        "sha256": "0e120d3733dc7f765005bf5dc5da80439bdd1e29e9267601f4e551d646ed0829"
+      },
+      {
+        "path": "packages/twenty-apps/examples/postcard/playwright.config.ts",
+        "sha256": "2036f52c5ee99d67eb0ae354737eb4f4b02318193969b3d075c808bb346ec337"
+      },
+      {
+        "path": "packages/twenty-apps/examples/postcard/vitest.config.ts",
+        "sha256": "590095f9b26cb4bad935e73252f075be45c6673cc70d776b39305b34c713da53"
+      },
+      {
+        "path": "packages/twenty-apps/examples/media-notes/playwright.config.ts",
+        "sha256": "288b0b39ba8597bfb7a0834721366bee1f6256aa4088ee9bb30092fe84981d7f"
+      },
+      {
+        "path": "packages/twenty-apps/examples/hello-world/vitest.config.ts",
+        "sha256": "036919685a60c645ff7a3038463d468dddedd69db328198b01cbdc409513ea0d"
+      },
+      {
+        "path": "packages/twenty-apps/examples/document-generator/vitest.unit.config.ts",
+        "sha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46"
+      },
+      {
+        "path": "packages/twenty-apps/examples/document-generator/vitest.config.ts",
+        "sha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9"
+      },
+      {
+        "path": "packages/create-twenty-app/jest.config.mjs",
+        "sha256": "294f8ef65c309e08987f49aa2bc86f701c8daac48be1cf38ae59444afa2aaeb6"
+      },
+      {
+        "path": "packages/create-twenty-app/src/constants/template/vitest.unit.config.ts",
+        "sha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46"
+      },
+      {
+        "path": "packages/create-twenty-app/src/constants/template/vitest.config.ts",
+        "sha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9"
+      },
+      {
+        "path": "packages/twenty-front/jest.config.mjs",
+        "sha256": "a3c63e49afbcfb47bfd54e14a34ed6240633e7ce1a77c3f4ca2ec1f5711fa8d8"
+      },
+      {
+        "path": "packages/twenty-front/vitest.config.ts",
+        "sha256": "ed7ed9795c05e6ec92169c79023dd27e02b4f9b6e04e219f9732ad82a7512f23"
+      },
+      {
+        "path": "packages/twenty-e2e-testing/playwright.config.ts",
+        "sha256": "052c41fd5625174f6f3728b89d33564aed43a1f80af9070b673685c281f9bb5c"
+      }
+    ],
+    "packageManifests": [
+      {
+        "path": "packages/twenty-ui/package.json",
+        "sha256": "d07a527d3607e11a52d2abdfb05874c7a010831e0ca2c3008ff4c5d4a0acafa2"
+      },
+      {
+        "path": "packages/twenty-website/package.json",
+        "sha256": "90c44356b07b94d7ae82263738d40c97d894bc2063020e60d38129542353210a"
+      },
+      {
+        "path": "packages/twenty-docs/package.json",
+        "sha256": "2d328e1c744e0f80f92e299bff50e3dcb631b3e3f26ddfb08ae71f49c7ad036d"
+      },
+      {
+        "path": "packages/twenty-oxlint-rules/package.json",
+        "sha256": "80771e531cd72a2787a67e578a29aaf2173f503a8874fb7f67ebf34124dc0dc8"
+      },
+      {
+        "path": "packages/twenty-server/package.json",
+        "sha256": "ba400a92b701ec5e6a97eb5609c10d2fafa75cf958b0034ecee9b9d103b8f57d"
+      },
+      {
+        "path": "packages/twenty-server/.local-storage/20202020-1c25-4d02-bf25-6aeccf7ea419/977ffa23-f9da-4d81-af03-9ca8b689179b/dependencies/package.json",
+        "sha256": "1fae02144cc77142bf58ac42df1d9bccd95bb70051ced0bdba11cc260d12d837"
+      },
+      {
+        "path": "packages/twenty-server/.local-storage/20202020-1c25-4d02-bf25-6aeccf7ea419/20202020-64aa-4b6f-b003-9c74b97cee20/dependencies/package.json",
+        "sha256": "1fae02144cc77142bf58ac42df1d9bccd95bb70051ced0bdba11cc260d12d837"
+      },
+      {
+        "path": "packages/twenty-server/.local-storage/3b8e6458-5fc1-4e63-8563-008ccddaa6db/68b65a0e-8b4a-4593-9382-9be1fad181cb/dependencies/package.json",
+        "sha256": "1fae02144cc77142bf58ac42df1d9bccd95bb70051ced0bdba11cc260d12d837"
+      },
+      {
+        "path": "packages/twenty-server/.local-storage/3b8e6458-5fc1-4e63-8563-008ccddaa6db/20202020-64aa-4b6f-b003-9c74b97cee20/dependencies/package.json",
+        "sha256": "1fae02144cc77142bf58ac42df1d9bccd95bb70051ced0bdba11cc260d12d837"
+      },
+      {
+        "path": "packages/twenty-server/src/engine/core-modules/logic-function/logic-function-drivers/constants/common-layer-dependencies/package.json",
+        "sha256": "63ec88f0f7f4b1c8647227f64a95bc03bd20d19e0896a9f6e4be4078c9cce7cf"
+      },
+      {
+        "path": "packages/twenty-server/src/engine/core-modules/application/application-package/constants/seed-dependencies/package.json",
+        "sha256": "1fae02144cc77142bf58ac42df1d9bccd95bb70051ced0bdba11cc260d12d837"
+      },
+      {
+        "path": "packages/twenty-sdk/package.json",
+        "sha256": "5cec010f3b2dcb7d2d29a3a7ccd8e7add5c501f9e7041c0eac77fe9965c8ef35"
+      },
+      {
+        "path": "packages/twenty-shared/package.json",
+        "sha256": "f421fe87e02c228f76534c338485cdbcc7535f06265dfb794eb84165e4796e3e"
+      },
+      {
+        "path": "packages/twenty-claude-skills/package.json",
+        "sha256": "b9d50de4c93fab55867cd8c987f31b2bf96fda2c586157326363763e428c5589"
+      },
+      {
+        "path": "packages/twenty-front-component-renderer/package.json",
+        "sha256": "336e1c88b6ee539f2c28fc5f6d221f67dd6e6696d96f087421bfdffe6f5e3010"
+      },
+      {
+        "path": "packages/twenty-zapier/package.json",
+        "sha256": "d6bd76d151a5e7fe7522fef634c9d35329940ecc861c99fe5cca134a2dca9093"
+      },
+      {
+        "path": "packages/twenty-utils/package.json",
+        "sha256": "e0c4b5d8b9780ccb852eb50443cb5b43dabff91d3f4d66edcb45054acf3cb812"
+      },
+      {
+        "path": "packages/twenty-emails/package.json",
+        "sha256": "e86829ab4dbc229f1da2ca2f57fc0de5f17d58788fe523273e2fe117c65f74d6"
+      },
+      {
+        "path": "packages/twenty-cli/package.json",
+        "sha256": "90787403dd56bfb1c335239ea305ca9a52051434f61da2c97ce85800f26c1d1e"
+      },
+      {
+        "path": "packages/twenty-companion/package.json",
+        "sha256": "28a9eed434c7769ec95c38248a8eb1b17ca9365ffbd2b440747ce20d51731d3f"
+      },
+      {
+        "path": "packages/twenty-client-sdk/package.json",
+        "sha256": "41dc12257b1db968a1eddd7f1ef3947edfb7c37321dfca4eca69a3e2b3e0677a"
+      },
+      {
+        "path": "packages/twenty-apps/internal/real-estate/package.json",
+        "sha256": "4233f596075bf89780dea4d65d06e90f5d7a7d37f44fffd337fcf6e677e7aa5a"
+      },
+      {
+        "path": "packages/twenty-apps/public/granola/package.json",
+        "sha256": "b54ac51f9889cc3c4869af1e3622dab4701ff491a96578d81b7ee68db696acd9"
+      },
+      {
+        "path": "packages/twenty-apps/public/discord/package.json",
+        "sha256": "1773655fa79790be15237221edb384593da68f0a50ea0a6899cd870e6905e277"
+      },
+      {
+        "path": "packages/twenty-apps/public/last-contact/package.json",
+        "sha256": "a25057264f45a51e7c3c01ee16ef19c9dfc5949a3482a64f350127e378aa5ad9"
+      },
+      {
+        "path": "packages/twenty-apps/public/linear/package.json",
+        "sha256": "f9d6abb64d83ecc55744ee771bf470f308ddad28b5ffdfe715b38f708b2b1e0a"
+      },
+      {
+        "path": "packages/twenty-apps/public/exa/package.json",
+        "sha256": "718a144bd2f3f4b6ad05d0a388531896dfa1ebbe60c9e5df5197c03425fa5750"
+      },
+      {
+        "path": "packages/twenty-apps/public/fireflies/package.json",
+        "sha256": "17f46ebf135507ebdc102c08887418be50bc0451d6b5f66d0d53b704f1cee2db"
+      },
+      {
+        "path": "packages/twenty-apps/public/people-data-labs/package.json",
+        "sha256": "c2182d4fe80a53e9fb0ec74f264e6da2cafe8018b90efbd81a49235320817901"
+      },
+      {
+        "path": "packages/twenty-apps/public/fathom/package.json",
+        "sha256": "e15d68d3c9ef6af3fb86b9fddd68c5faa163762f6e60e5a44d40b0667713cc61"
+      },
+      {
+        "path": "packages/twenty-apps/public/teams/package.json",
+        "sha256": "e1a2b00e6076bc23fb19ed283cb9663227b141f1d7921c332835f898cc8ef6cd"
+      },
+      {
+        "path": "packages/twenty-apps/public/call-recorder/package.json",
+        "sha256": "af60705fc2ba05327af6eb67899f6daadaefcb9a048c59a97402b067908ff1de"
+      },
+      {
+        "path": "packages/twenty-apps/public/slack/package.json",
+        "sha256": "66cbb9568b3aa12c22685144b3cf2eba4b42a8ad5ebe586b51fe9fc7bf38406b"
+      },
+      {
+        "path": "packages/twenty-apps/public/companion/package.json",
+        "sha256": "57abd89e289f402599637f01e9312ff7510712d7bd6537d3f11b463e55c12afe"
+      },
+      {
+        "path": "packages/twenty-apps/examples/postcard/package.json",
+        "sha256": "3c422f538b2af731d8db5b3984153c2ca52a1b32be410e60cfd291146ba222e9"
+      },
+      {
+        "path": "packages/twenty-apps/examples/media-notes/package.json",
+        "sha256": "cca49a708f9285139cddce6c3115b3267aebad0354d957bfc6739065d3e98a20"
+      },
+      {
+        "path": "packages/twenty-apps/examples/hello-world/package.json",
+        "sha256": "0c9675a23f3d403c261ff49f4ca0d635809dd15cc8f96f8e419e643d6055c0f3"
+      },
+      {
+        "path": "packages/twenty-apps/examples/document-generator/package.json",
+        "sha256": "14e1784a7e111d57ed5933d9c2d93ff061d87d8f9968c9061fa9222be433a14f"
+      },
+      {
+        "path": "packages/twenty-apps/fixtures/invalid-app/package.json",
+        "sha256": "6c044fcf9445c3dee5c2e1102c411266208674528bbdb883e65c207ca5249a77"
+      },
+      {
+        "path": "packages/twenty-apps/fixtures/minimal-app/package.json",
+        "sha256": "2518233290856e9899e712ae4994d01c99296f2d8f4c7a12065b02d0654d526c"
+      },
+      {
+        "path": "packages/twenty-apps/fixtures/shared-dependencies-app/package.json",
+        "sha256": "52fa957c3d21d1167eb755b7be234f47be9024e951edbff02b690786befb889c"
+      },
+      {
+        "path": "packages/twenty-apps/fixtures/function-execute-app/package.json",
+        "sha256": "17e4e0b312a999f79f15cca32346f5fb696899b9f70a5e0a2cd55342264cffa6"
+      },
+      {
+        "path": "packages/twenty-apps/fixtures/rich-app/package.json",
+        "sha256": "54f159bce3e58ce34591448f2945e50152c381a160808d7e5c5c09eaf3a36659"
+      },
+      {
+        "path": "packages/create-twenty-app/package.json",
+        "sha256": "a748ae2ff7ce74afda3713db7a742ca8ad6dfb4de3b978200ca23cbeb50675dd"
+      },
+      {
+        "path": "packages/create-twenty-app/src/constants/template/package.json",
+        "sha256": "0b9c9b149f18ecd4f68a7aa39c75a1bd630f5176de64bf5a4f167b08033f1aa8"
+      },
+      {
+        "path": "packages/twenty-agent-skills/package.json",
+        "sha256": "2903afdc20107ba48c73c19ab83f6e6034a8020f1a24bebf38961cde1f0bfbac"
+      },
+      {
+        "path": "packages/twenty-front/package.json",
+        "sha256": "2ab775bc92842f5b45d4b1012dae509ca899b99326eed1a32f98da0f54ddec30"
+      },
+      {
+        "path": "packages/twenty-e2e-testing/package.json",
+        "sha256": "37f0da52ad5ce29710397ace4c643aa8118f2aa9624ef456814bf2d3811da493"
+      },
+      {
+        "path": "deployments/cloudflare-front/package.json",
+        "sha256": "966b1897c694c9a0ecb86db177d168680c560f2c104d2360e29e5962f6268951"
+      },
+      {
+        "path": "deployments/convex/package.json",
+        "sha256": "a48a0e78abc7f7a8208229c9fc59f86c38eb88718ecf035cab93ceb86a3b82e0"
+      },
+      {
+        "path": "experiments/cloudflare-workflows/package.json",
+        "sha256": "f19da1a022a54ba7ebfe0b488cb99735140bae38058acecf5587c02efd183881"
+      }
+    ],
+    "lanes": [
+      {
+        "id": "packages--twenty-ui--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": "10.6.0",
+          "@vitest/coverage-v8": "4.1.11",
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-website--jest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": null,
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-docs--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": "4.1.11",
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-oxlint-rules--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": "4.1.11",
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-server--jest-integration.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": null,
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-server--jest-integration-secure.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": null,
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-server--jest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": null,
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-sdk--vitest.e2e.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": "4.1.11",
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-sdk--vitest.integration.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": "4.1.11",
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-sdk--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": "4.1.11",
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-sdk--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": "4.1.11",
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-shared--jest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": null,
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-front-component-renderer--vitest.storybook.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": "10.6.0",
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": "4.1.11"
+        }
+      },
+      {
+        "id": "packages--twenty-front-component-renderer--jest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": "10.6.0",
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": "4.1.11"
+        }
+      },
+      {
+        "id": "packages--twenty-front-component-renderer--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": "10.6.0",
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": "4.1.11"
+        }
+      },
+      {
+        "id": "packages--twenty-zapier--jest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": null,
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-utils--jest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": null,
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-client-sdk--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": "4.1.11",
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--granola--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--granola--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--discord--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--discord--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--last-contact--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--last-contact--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--linear--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--linear--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--exa--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--exa--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--fireflies--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--fireflies--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--people-data-labs--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--people-data-labs--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--fathom--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--fathom--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--teams--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--teams--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--call-recorder--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--call-recorder--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--slack--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--slack--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--companion--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--public--companion--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--examples--postcard--playwright.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": "1.63.0",
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--examples--postcard--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": "1.63.0",
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--examples--media-notes--playwright.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": null,
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--examples--hello-world--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--examples--document-generator--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-apps--examples--document-generator--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--create-twenty-app--jest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": null,
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--create-twenty-app--src--constants--template--vitest.unit.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": null,
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--create-twenty-app--src--constants--template--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": null,
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-front--jest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": "10.6.0",
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": "4.1.11"
+        }
+      },
+      {
+        "id": "packages--twenty-front--vitest.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": "29.7.0",
+          "@playwright/test": null,
+          "@storybook/addon-vitest": "10.6.0",
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": "4.1.11"
+        }
+      },
+      {
+        "id": "packages--twenty-e2e-testing--playwright.config",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": null,
+          "jest": null,
+          "@playwright/test": "1.63.0",
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "deployments--convex--default",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "5.0.2",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "deployments--cloudflare-front--bun",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "5.0.1",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-agent-skills--node",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": null,
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": null,
+          "@vitest/coverage-istanbul": null
+        }
+      },
+      {
+        "id": "packages--twenty-companion--vitest-default",
+        "versions": {
+          "vite-plus": "1.0.0",
+          "vitest": "4.1.11",
+          "jest": null,
+          "@playwright/test": null,
+          "@storybook/addon-vitest": null,
+          "@vitest/coverage-v8": "4.1.11",
+          "@vitest/coverage-istanbul": null
+        }
+      }
+    ],
+    "collectorSha256": "1e267d6ea21c08ef5d0e44e3744461649f8e56acc7644c0dcc918c9d1e292de0"
+  }
+}

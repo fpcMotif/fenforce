@@ -1,0 +1,90 @@
+{
+  "numTotalTests": 8,
+  "numPassedTests": 8,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 4,
+  "numPassedTestSuites": 4,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-apps/public/linear/src/logic-functions/__tests__/create-linear-issue.test.ts",
+      "name": "createLinearIssueHandler returns an error when required input fields are missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/linear/src/logic-functions/__tests__/create-linear-issue.test.ts",
+      "name": "createLinearIssueHandler returns an error when no Linear connection exists",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/linear/src/logic-functions/__tests__/create-linear-issue.test.ts",
+      "name": "createLinearIssueHandler calls Linear with the only available connection and returns the issue",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/linear/src/logic-functions/__tests__/create-linear-issue.test.ts",
+      "name": "createLinearIssueHandler prefers a workspace-shared connection over a user-visibility one",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/linear/src/logic-functions/__tests__/create-linear-issue.test.ts",
+      "name": "createLinearIssueHandler surfaces Linear GraphQL errors as the handler error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/linear/src/logic-functions/__tests__/list-linear-teams.test.ts",
+      "name": "listLinearTeamsHandler returns the teams when the Linear query succeeds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/linear/src/logic-functions/__tests__/list-linear-teams.test.ts",
+      "name": "listLinearTeamsHandler returns success=false when no Linear connection exists",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/linear/src/logic-functions/__tests__/list-linear-teams.test.ts",
+      "name": "listLinearTeamsHandler surfaces Linear errors",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-apps/public/linear/src/logic-functions/__tests__/create-linear-issue.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/linear/src/logic-functions/__tests__/list-linear-teams.test.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

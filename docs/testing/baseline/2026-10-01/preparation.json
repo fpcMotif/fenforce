@@ -1,0 +1,265 @@
+{
+  "before": {
+    "package.json": "c56e6a04c2983dcbcd71212a2d6d6296299e0ecca8096653fbfff45910d769ec",
+    "bun.lock": "f272458ed03ad5e716e8ed4d14e7b71a1ac3a46a37bb7f9fb3271e1376933688",
+    "packages/twenty-apps/public/granola/package.json": "b54ac51f9889cc3c4869af1e3622dab4701ff491a96578d81b7ee68db696acd9",
+    "packages/twenty-apps/public/discord/package.json": "1773655fa79790be15237221edb384593da68f0a50ea0a6899cd870e6905e277",
+    "packages/twenty-apps/public/last-contact/package.json": "a25057264f45a51e7c3c01ee16ef19c9dfc5949a3482a64f350127e378aa5ad9",
+    "packages/twenty-apps/public/linear/package.json": "f9d6abb64d83ecc55744ee771bf470f308ddad28b5ffdfe715b38f708b2b1e0a",
+    "packages/twenty-apps/public/exa/package.json": "718a144bd2f3f4b6ad05d0a388531896dfa1ebbe60c9e5df5197c03425fa5750",
+    "packages/twenty-apps/public/fireflies/package.json": "17f46ebf135507ebdc102c08887418be50bc0451d6b5f66d0d53b704f1cee2db",
+    "packages/twenty-apps/public/people-data-labs/package.json": "c2182d4fe80a53e9fb0ec74f264e6da2cafe8018b90efbd81a49235320817901",
+    "packages/twenty-apps/public/fathom/package.json": "e15d68d3c9ef6af3fb86b9fddd68c5faa163762f6e60e5a44d40b0667713cc61",
+    "packages/twenty-apps/public/teams/package.json": "e1a2b00e6076bc23fb19ed283cb9663227b141f1d7921c332835f898cc8ef6cd",
+    "packages/twenty-apps/public/call-recorder/package.json": "af60705fc2ba05327af6eb67899f6daadaefcb9a048c59a97402b067908ff1de",
+    "packages/twenty-apps/public/slack/package.json": "66cbb9568b3aa12c22685144b3cf2eba4b42a8ad5ebe586b51fe9fc7bf38406b",
+    "packages/twenty-apps/public/companion/package.json": "57abd89e289f402599637f01e9312ff7510712d7bd6537d3f11b463e55c12afe",
+    "packages/twenty-apps/examples/postcard/package.json": "3c422f538b2af731d8db5b3984153c2ca52a1b32be410e60cfd291146ba222e9",
+    "packages/twenty-apps/examples/media-notes/package.json": "cca49a708f9285139cddce6c3115b3267aebad0354d957bfc6739065d3e98a20",
+    "packages/twenty-apps/examples/hello-world/package.json": "0c9675a23f3d403c261ff49f4ca0d635809dd15cc8f96f8e419e643d6055c0f3",
+    "packages/twenty-apps/examples/document-generator/package.json": "14e1784a7e111d57ed5933d9c2d93ff061d87d8f9968c9061fa9222be433a14f"
+  },
+  "after": {
+    "package.json": "c56e6a04c2983dcbcd71212a2d6d6296299e0ecca8096653fbfff45910d769ec",
+    "bun.lock": "f272458ed03ad5e716e8ed4d14e7b71a1ac3a46a37bb7f9fb3271e1376933688",
+    "packages/twenty-apps/public/granola/package.json": "b54ac51f9889cc3c4869af1e3622dab4701ff491a96578d81b7ee68db696acd9",
+    "packages/twenty-apps/public/discord/package.json": "1773655fa79790be15237221edb384593da68f0a50ea0a6899cd870e6905e277",
+    "packages/twenty-apps/public/last-contact/package.json": "a25057264f45a51e7c3c01ee16ef19c9dfc5949a3482a64f350127e378aa5ad9",
+    "packages/twenty-apps/public/linear/package.json": "f9d6abb64d83ecc55744ee771bf470f308ddad28b5ffdfe715b38f708b2b1e0a",
+    "packages/twenty-apps/public/exa/package.json": "718a144bd2f3f4b6ad05d0a388531896dfa1ebbe60c9e5df5197c03425fa5750",
+    "packages/twenty-apps/public/fireflies/package.json": "17f46ebf135507ebdc102c08887418be50bc0451d6b5f66d0d53b704f1cee2db",
+    "packages/twenty-apps/public/people-data-labs/package.json": "c2182d4fe80a53e9fb0ec74f264e6da2cafe8018b90efbd81a49235320817901",
+    "packages/twenty-apps/public/fathom/package.json": "e15d68d3c9ef6af3fb86b9fddd68c5faa163762f6e60e5a44d40b0667713cc61",
+    "packages/twenty-apps/public/teams/package.json": "e1a2b00e6076bc23fb19ed283cb9663227b141f1d7921c332835f898cc8ef6cd",
+    "packages/twenty-apps/public/call-recorder/package.json": "af60705fc2ba05327af6eb67899f6daadaefcb9a048c59a97402b067908ff1de",
+    "packages/twenty-apps/public/slack/package.json": "66cbb9568b3aa12c22685144b3cf2eba4b42a8ad5ebe586b51fe9fc7bf38406b",
+    "packages/twenty-apps/public/companion/package.json": "57abd89e289f402599637f01e9312ff7510712d7bd6537d3f11b463e55c12afe",
+    "packages/twenty-apps/examples/postcard/package.json": "3c422f538b2af731d8db5b3984153c2ca52a1b32be410e60cfd291146ba222e9",
+    "packages/twenty-apps/examples/media-notes/package.json": "cca49a708f9285139cddce6c3115b3267aebad0354d957bfc6739065d3e98a20",
+    "packages/twenty-apps/examples/hello-world/package.json": "0c9675a23f3d403c261ff49f4ca0d635809dd15cc8f96f8e419e643d6055c0f3",
+    "packages/twenty-apps/examples/document-generator/package.json": "14e1784a7e111d57ed5933d9c2d93ff061d87d8f9968c9061fa9222be433a14f"
+  },
+  "runs": [
+    {
+      "cwd": "packages/twenty-apps/public/granola",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 0,
+      "durationMs": 3473,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\n\n+ @emotion/react@11.14.0\n+ @emotion/styled@11.14.1\n+ @types/node@24.19.0 (v26.6.3 available)\n+ @types/react@19.3.0\n+ @typescript/native-preview@7.0.0-dev.20260707.2\n+ oxlint@0.16.12 (v1.86.0 available)\n+ react@19.3.0\n+ react-dom@19.3.0\n+ twenty-client-sdk@2.38.0 (v2.43.0 available)\n+ twenty-sdk@2.38.0 (v2.43.0 available)\n+ twenty-ui@1.0.0-alpha.2\n+ typescript@5.9.3 (v7.0.2 available)\n+ vite-tsconfig-paths@4.3.2 (v6.1.1 available)\n+ vitest@4.1.11 (v5.0.3 available)\n+ @sniptt/guards@0.2.0\n+ zod@4.6.5\n\n285 packages installed [3.46s]\nResolving dependencies\nResolved, downloaded and extracted [5]\n"
+    },
+    {
+      "cwd": "packages/twenty-apps/public/discord",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 0,
+      "durationMs": 2650,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\n\n+ @types/node@24.19.0 (v26.6.3 available)\n+ @types/react@18.3.31 (v19.3.0 available)\n+ @typescript/native-preview@7.0.0-dev.20260707.2\n+ oxlint@0.16.12 (v1.86.0 available)\n+ react@18.3.1 (v19.3.0 available)\n+ react-dom@18.3.1 (v19.3.0 available)\n+ twenty-client-sdk@2.37.0 (v2.43.0 available)\n+ twenty-sdk@2.37.0 (v2.43.0 available)\n+ typescript@5.9.3 (v7.0.2 available)\n+ vite-tsconfig-paths@4.3.2 (v6.1.1 available)\n+ vitest@4.1.11 (v5.0.3 available)\n\n205 packages installed [2.65s]\nResolving dependencies\nResolved, downloaded and extracted [3]\n"
+    },
+    {
+      "cwd": "packages/twenty-apps/public/last-contact",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 0,
+      "durationMs": 2800,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\n\n+ @types/node@24.19.0 (v26.6.3 available)\n+ @types/react@19.3.0\n+ @types/semver@7.8.0\n+ @typescript/native-preview@7.0.0-dev.20260707.2\n+ oxlint@0.16.12 (v1.86.0 available)\n+ react@19.3.0\n+ react-dom@19.3.0\n+ twenty-client-sdk@2.42.0 (v2.43.0 available)\n+ twenty-sdk@2.42.0 (v2.43.0 available)\n+ twenty-ui@2.43.0\n+ typescript@5.9.3 (v7.0.2 available)\n+ vite-tsconfig-paths@4.3.2 (v6.1.1 available)\n+ vitest@4.1.11 (v5.0.3 available)\n+ semver@7.8.5\n\n215 packages installed [2.79s]\nResolving dependencies\nResolved, downloaded and extracted [9]\n"
+    },
+    {
+      "cwd": "packages/twenty-apps/public/linear",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 0,
+      "durationMs": 301,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\n\n+ @types/node@24.19.0 (v26.6.3 available)\n+ @types/react@18.3.31 (v19.3.0 available)\n+ @typescript/native-preview@7.0.0-dev.20260707.2\n+ oxlint@0.16.12 (v1.86.0 available)\n+ react@18.3.1 (v19.3.0 available)\n+ react-dom@18.3.1 (v19.3.0 available)\n+ twenty-client-sdk@2.37.0 (v2.43.0 available)\n+ twenty-sdk@2.37.0 (v2.43.0 available)\n+ typescript@5.9.3 (v7.0.2 available)\n+ vite-tsconfig-paths@4.3.2 (v6.1.1 available)\n+ vitest@4.1.11 (v5.0.3 available)\n\n205 packages installed [291.00ms]\nResolving dependencies\nResolved, downloaded and extracted [0]\n"
+    },
+    {
+      "cwd": "packages/twenty-apps/public/exa",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 0,
+      "durationMs": 2606,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\n\n+ @types/node@24.19.0 (v26.6.3 available)\n+ @typescript/native-preview@7.0.0-dev.20260707.2\n+ oxlint@0.16.12 (v1.86.0 available)\n+ twenty-client-sdk@2.37.0 (v2.43.0 available)\n+ twenty-sdk@2.37.0 (v2.43.0 available)\n+ typescript@5.9.3 (v7.0.2 available)\n+ vite-tsconfig-paths@4.3.2 (v6.1.1 available)\n+ vitest@4.1.11 (v5.0.3 available)\n+ exa-js@2.23.0\n\n203 packages installed [2.60s]\nResolving dependencies\nResolved, downloaded and extracted [20]\n"
+    },
+    {
+      "cwd": "packages/twenty-apps/public/fireflies",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 0,
+      "durationMs": 2013,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\n\n+ @emotion/react@11.14.0\n+ @emotion/styled@11.14.1\n+ @types/node@24.19.0 (v26.6.3 available)\n+ @types/react@18.3.31 (v19.3.0 available)\n+ @typescript/native-preview@7.0.0-dev.20260707.2\n+ oxlint@0.16.12 (v1.86.0 available)\n+ react@18.3.1 (v19.3.0 available)\n+ react-dom@18.3.1 (v19.3.0 available)\n+ twenty-client-sdk@2.37.0 (v2.43.0 available)\n+ twenty-sdk@2.37.0 (v2.43.0 available)\n+ twenty-ui@1.0.0-alpha.2\n+ typescript@5.9.3 (v7.0.2 available)\n+ use-debounce@10.1.1\n+ vite-tsconfig-paths@4.3.2 (v6.1.1 available)\n+ vitest@4.1.11 (v5.0.3 available)\n+ @sniptt/guards@0.2.0\n+ zod@4.6.5\n\n290 packages installed [2.00s]\nResolving dependencies\nResolved, downloaded and extracted [4]\n"
+    },
+    {
+      "cwd": "packages/twenty-apps/public/people-data-labs",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 0,
+      "durationMs": 599,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\n\n+ @types/node@24.19.0 (v26.6.3 available)\n+ @types/react@19.3.0\n+ @typescript/native-preview@7.0.0-dev.20260707.2\n+ oxlint@0.16.12 (v1.86.0 available)\n+ react@19.3.0\n+ react-dom@19.3.0\n+ twenty-client-sdk@2.43.0\n+ twenty-sdk@2.43.0\n+ typescript@5.9.3 (v7.0.2 available)\n+ vite-tsconfig-paths@4.3.2 (v6.1.1 available)\n+ vitest@4.1.11 (v5.0.3 available)\n\n199 packages installed [592.00ms]\nResolving dependencies\nResolved, downloaded and extracted [0]\n"
+    },
+    {
+      "cwd": "packages/twenty-apps/public/fathom",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 0,
+      "durationMs": 3061,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\n\n+ @types/node@24.19.0 (v26.6.3 available)\n+ @typescript/native-preview@7.0.0-dev.20260707.2\n+ oxlint@0.16.12 (v1.86.0 available)\n+ twenty-client-sdk@2.38.0 (v2.43.0 available)\n+ twenty-sdk@2.38.0 (v2.43.0 available)\n+ typescript@5.9.3 (v7.0.2 available)\n+ vite-tsconfig-paths@4.3.2 (v6.1.1 available)\n+ vitest@4.1.11 (v5.0.3 available)\n+ @sniptt/guards@0.2.0\n+ fathom-typescript@0.0.43\n+ zod@4.6.5\n\n203 packages installed [3.05s]\nResolving dependencies\nResolved, downloaded and extracted [20]\n"
+    },
+    {
+      "cwd": "packages/twenty-apps/public/teams",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 0,
+      "durationMs": 3212,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\n\n+ @emotion/react@11.14.0\n+ @emotion/styled@11.14.1\n+ @testing-library/dom@10.4.2\n+ @testing-library/react@16.3.3\n+ @testing-library/user-event@14.6.7\n+ @types/node@24.19.0 (v26.6.3 available)\n+ @types/react@19.3.0\n+ @typescript/native-preview@7.0.0-dev.20260707.2\n+ jsdom@26.1.0 (v30.1.1 available)\n+ oxlint@0.16.12 (v1.86.0 available)\n+ react@19.3.0\n+ react-dom@19.3.0\n+ twenty-client-sdk@2.43.0\n+ twenty-sdk@2.43.0\n+ twenty-ui@1.0.0-alpha.2\n+ typescript@5.9.3 (v7.0.2 available)\n+ vite-tsconfig-paths@4.3.2 (v6.1.1 available)\n+ vitest@4.1.11 (v5.0.3 available)\n+ @sniptt/guards@0.2.0\n+ jose@6.2.12\n\n333 packages installed [3.20s]\nResolving dependencies\nResolved, downloaded and extracted [152]\n"
+    },
+    {
+      "cwd": "packages/twenty-apps/public/call-recorder",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 0,
+      "durationMs": 561,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\n\n+ @emotion/react@11.14.0\n+ @emotion/styled@11.14.1\n+ @types/node@24.19.0 (v26.6.3 available)\n+ @types/react@19.3.0\n+ @typescript/native-preview@7.0.0-dev.20260707.2\n+ oxlint@0.16.12 (v1.86.0 available)\n+ react@19.3.0\n+ react-dom@19.3.0\n+ twenty-client-sdk@2.38.0 (v2.43.0 available)\n+ twenty-sdk@2.38.0 (v2.43.0 available)\n+ twenty-ui@1.0.0-alpha.2\n+ typescript@5.9.3 (v7.0.2 available)\n+ use-debounce@10.1.1\n+ vite-tsconfig-paths@4.3.2 (v6.1.1 available)\n+ vitest@4.1.11 (v5.0.3 available)\n+ @sniptt/guards@0.2.0\n+ sharp@0.35.5\n\n286 packages installed [556.00ms]\nResolving dependencies\nResolved, downloaded and extracted [0]\n"
+    },
+    {
+      "cwd": "packages/twenty-apps/public/companion",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 0,
+      "durationMs": 2763,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\n\n+ @types/node@24.19.0 (v26.6.3 available)\n+ @types/react@19.3.0\n+ @typescript/native-preview@7.0.0-dev.20260707.2\n+ oxlint@0.16.12 (v1.86.0 available)\n+ react@19.3.0\n+ react-dom@19.3.0\n+ twenty-client-sdk@2.39.0 (v2.43.0 available)\n+ twenty-sdk@2.39.0 (v2.43.0 available)\n+ twenty-ui@1.0.0-alpha.1\n+ typescript@5.9.3 (v7.0.2 available)\n+ vite-tsconfig-paths@4.3.2 (v6.1.1 available)\n+ vitest@4.1.11 (v5.0.3 available)\n+ @sniptt/guards@0.2.0\n\n235 packages installed [2.76s]\nResolving dependencies\nResolved, downloaded and extracted [9]\n"
+    },
+    {
+      "cwd": "packages/twenty-apps/examples/postcard",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 0,
+      "durationMs": 3299,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\n\n+ @playwright/test@1.63.0\n+ @types/node@24.19.0 (v26.6.3 available)\n+ @types/react@19.3.0\n+ oxlint@0.16.12 (v1.86.0 available)\n+ playwright@1.63.0\n+ react@19.3.0\n+ react-dom@19.3.0\n+ twenty-client-sdk@2.31.0 (v2.43.0 available)\n+ twenty-sdk@2.31.0 (v2.43.0 available)\n+ typescript@5.9.3 (v7.0.2 available)\n+ vitest@4.1.11 (v5.0.3 available)\n\n197 packages installed [3.29s]\nResolving dependencies\nResolved, downloaded and extracted [14]\n"
+    },
+    {
+      "cwd": "packages/twenty-apps/examples/media-notes",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 1,
+      "durationMs": 11,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\nerror: No version matching \"2.32.0\" found for specifier \"twenty-client-sdk\" (but package exists)\n\nerror: No version matching \"2.32.0\" found for specifier \"twenty-sdk\" (but package exists)\nerror: twenty-client-sdk@2.32.0 failed to resolve\nerror: twenty-sdk@2.32.0 failed to resolve\n"
+    },
+    {
+      "cwd": "packages/twenty-apps/examples/hello-world",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 0,
+      "durationMs": 2180,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\n\n+ @types/node@24.19.0 (v26.6.3 available)\n+ @types/react@18.3.31 (v19.3.0 available)\n+ oxlint@0.16.12 (v1.86.0 available)\n+ react@18.3.1 (v19.3.0 available)\n+ twenty-client-sdk@2.13.0 (v2.43.0 available)\n+ twenty-sdk@2.13.0 (v2.43.0 available)\n+ typescript@5.9.3 (v7.0.2 available)\n+ vitest@4.1.11 (v5.0.3 available)\n\n192 packages installed [2.17s]\nResolving dependencies\nResolved, downloaded and extracted [3]\n"
+    },
+    {
+      "cwd": "packages/twenty-apps/examples/document-generator",
+      "command": [
+        "bun",
+        "install",
+        "--no-save",
+        "--ignore-scripts",
+        "--prefer-offline"
+      ],
+      "exitCode": 0,
+      "durationMs": 3260,
+      "diagnostics": "bun install v1.4.3-canary.1 (9f70da074)\n\n+ @types/node@24.19.0 (v26.6.3 available)\n+ @types/react@18.3.31 (v19.3.0 available)\n+ @typescript/native-preview@7.0.0-dev.20260707.2\n+ oxlint@0.16.12 (v1.86.0 available)\n+ react@18.3.1 (v19.3.0 available)\n+ react-dom@18.3.1 (v19.3.0 available)\n+ twenty-client-sdk@2.31.0 (v2.43.0 available)\n+ twenty-sdk@2.31.0 (v2.43.0 available)\n+ typescript@5.9.3 (v7.0.2 available)\n+ vite-tsconfig-paths@4.3.2 (v6.1.1 available)\n+ vitest@4.1.11 (v5.0.3 available)\n+ marked@18.0.14\n+ pdf-lib@1.17.1\n\n210 packages installed [3.25s]\nResolving dependencies\nResolved, downloaded and extracted [17]\n"
+    }
+  ],
+  "initialSlackPreparation": {
+    "command": [
+      "bun",
+      "install",
+      "--no-save",
+      "--ignore-scripts",
+      "--prefer-offline"
+    ],
+    "cwd": "packages/twenty-apps/public/slack",
+    "status": "prepared-before-this-journal"
+  },
+  "storyPreparation": {
+    "cwd": "packages/twenty-front-component-renderer",
+    "command": [
+      "bun",
+      "run",
+      "storybook:prebuild:command"
+    ],
+    "exitCode": 1,
+    "reason": "Declared source prebuild failed with300module-resolutionerrors, including absent root react-dom alias. No tracked source was changed."
+  },
+  "collectorCorrections": [
+    "Root docs/oxlint initial Bun runtime invocation was replaced with package-bin PATH plus bunx, using Node26.10.0. Those initial errors are not baseline regressions.",
+    "Initial stdout JSON parser omitted UI/server/Convex counts; corrected outputFile reports replace those incomplete captures.",
+    "Credentials, NODE_ENV and immutable provenance handling were corrected after independent review."
+  ]
+}

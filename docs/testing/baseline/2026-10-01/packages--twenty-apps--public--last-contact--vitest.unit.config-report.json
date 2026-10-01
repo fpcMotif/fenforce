@@ -1,0 +1,503 @@
+{
+  "numTotalTests": 66,
+  "numPassedTests": 66,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 34,
+  "numPassedTestSuites": 34,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/__tests__/default-role.test.ts",
+      "name": "default role only grants write access to the CRM records with last-contact fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/__tests__/default-role.test.ts",
+      "name": "default role keeps interaction source records read-only",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/backfill-last-contact.test.ts",
+      "name": "backfill-last-contact should backfill every batch within the run, one after the other",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/backfill-last-contact.test.ts",
+      "name": "backfill-last-contact should hand each opportunity to its batch with its point of contact",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/backfill-last-contact.test.ts",
+      "name": "backfill-last-contact should backfill on an upgrade from 1.4.1 to 1.6.0",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/backfill-last-contact.test.ts",
+      "name": "backfill-last-contact should backfill on an upgrade from 1.5.0 to 1.6.0",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/backfill-last-contact.test.ts",
+      "name": "backfill-last-contact should skip the backfill on an upgrade from 1.6.0",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/health-check.test.ts",
+      "name": "health-check should be a valid health check",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/health-check.test.ts",
+      "name": "health-check should report nothing once emails are synced",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/health-check.test.ts",
+      "name": "health-check should report nothing once meetings are synced",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/health-check.test.ts",
+      "name": "health-check should ask to connect an account when nothing is synced",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/health-check.test.ts",
+      "name": "health-check should read a single participant of each kind",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-calendar-event-started.test.ts",
+      "name": "on-calendar-event-started definition should be valid and run on a cron schedule",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-calendar-event-started.test.ts",
+      "name": "on-calendar-event-started handler should paginate calendar events past the query record cap",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-calendar-event-started.test.ts",
+      "name": "on-calendar-event-started handler should paginate participants and update each person once",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-calendar-event-started.test.ts",
+      "name": "on-calendar-event-started handler should do nothing when no event started in the time window",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-calendar-interaction.test.ts",
+      "name": "on-calendar-interaction definition should be valid and batch personId updates",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-calendar-interaction.test.ts",
+      "name": "on-calendar-interaction handler updates the person from the calendar event carried by the participant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-calendar-interaction.test.ts",
+      "name": "on-calendar-interaction handler should do nothing when no participant has both a person and a calendar event",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-email-interaction.test.ts",
+      "name": "on-email-interaction definition should be valid and batch personId updates",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-email-interaction.test.ts",
+      "name": "on-email-interaction handler sets interaction, owner, item, contacted and lastEmail for an outbound email",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-email-interaction.test.ts",
+      "name": "on-email-interaction handler resolves every message of the batch in one query and updates each person once",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-email-interaction.test.ts",
+      "name": "on-email-interaction handler should do nothing when no participant has both a person and a message",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-email-interaction.test.ts",
+      "name": "on-email-interaction handler should not update the person when the message has no receivedAt",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-opportunity-created.test.ts",
+      "name": "on-opportunity-created should batch opportunity creations",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-opportunity-created.test.ts",
+      "name": "on-opportunity-created computes the last contact from the point of contact",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-person-updated.test.ts",
+      "name": "on-person-updated definition should batch companyId updates",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-person-updated.test.ts",
+      "name": "on-person-updated handler recomputes both the former and the current company",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-person-updated.test.ts",
+      "name": "on-person-updated handler recomputes a single company when the person only gains one",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-person-updated.test.ts",
+      "name": "on-person-updated handler recomputes a company shared by several people in the batch only once",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-person-updated.test.ts",
+      "name": "on-person-updated handler does nothing when no company is involved",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/apply-meeting-interactions.test.ts",
+      "name": "applyMeetingInteractions resolves the whole batch through one participants query",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/apply-meeting-interactions.test.ts",
+      "name": "applyMeetingInteractions sets lastContactAt, the organizer member and the calendarEvent item",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/apply-meeting-interactions.test.ts",
+      "name": "applyMeetingInteractions writes every person of the batch in a single upsert",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/apply-meeting-interactions.test.ts",
+      "name": "applyMeetingInteractions keeps only the most recent meeting when a person attended several in the batch",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/apply-meeting-interactions.test.ts",
+      "name": "applyMeetingInteractions skips a meeting that has not started yet",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/apply-meeting-interactions.test.ts",
+      "name": "applyMeetingInteractions skips a canceled meeting",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/apply-meeting-interactions.test.ts",
+      "name": "applyMeetingInteractions leaves out a person that no longer exists rather than upserting it back",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/execute-with-retry.test.ts",
+      "name": "executeWithRetry returns the result on first success",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/execute-with-retry.test.ts",
+      "name": "executeWithRetry retries rate-limited requests until they succeed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/execute-with-retry.test.ts",
+      "name": "executeWithRetry does not retry non-retryable errors",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/execute-with-retry.test.ts",
+      "name": "executeWithRetry gives up after exhausting retries",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/execute-with-retry.test.ts",
+      "name": "executeWithRetry waits for the server-provided retry_after when it exceeds the backoff",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/pick-contact-team-member.test.ts",
+      "name": "pickContactTeamMemberId prefers the from participant for email",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/pick-contact-team-member.test.ts",
+      "name": "pickContactTeamMemberId falls back to the first member when no from member exists",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/pick-contact-team-member.test.ts",
+      "name": "pickContactTeamMemberId prefers the organizer for calendar",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/pick-contact-team-member.test.ts",
+      "name": "pickContactTeamMemberId returns null when no participant is a workspace member",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/recompute-company-last-contact.test.ts",
+      "name": "recomputeCompaniesLastContact mirrors the most recent contact among the company people",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/recompute-company-last-contact.test.ts",
+      "name": "recomputeCompaniesLastContact keeps the first row a company produces, since the scan is ordered by recency",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/recompute-company-last-contact.test.ts",
+      "name": "recomputeCompaniesLastContact clears the company last contact when no person has a contact",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/recompute-company-last-contact.test.ts",
+      "name": "recomputeCompaniesLastContact resolves the whole batch with one scan and one write",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/recompute-company-last-contact.test.ts",
+      "name": "recomputeCompaniesLastContact stops scanning as soon as every company is resolved",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/recompute-company-last-contact.test.ts",
+      "name": "recomputeCompaniesLastContact falls back to a direct lookup for a company the capped scan never reached",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/recompute-company-last-contact.test.ts",
+      "name": "recomputeCompaniesLastContact leaves out a company that no longer exists rather than upserting it back",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/recompute-opportunity-last-contact.test.ts",
+      "name": "recomputeOpportunitiesLastContact mirrors the point of contact last contact onto the opportunity",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/recompute-opportunity-last-contact.test.ts",
+      "name": "recomputeOpportunitiesLastContact clears the opportunity last contact when there is no point of contact",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/recompute-opportunity-last-contact.test.ts",
+      "name": "recomputeOpportunitiesLastContact resolves a whole batch with one opportunity query, one people query and one write",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/update-related-last-contact.test.ts",
+      "name": "updateRelatedLastContactForPeople updates the company and point-of-contact opportunities for an email",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/update-related-last-contact.test.ts",
+      "name": "updateRelatedLastContactForPeople sets the calendar event item for a meeting",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/update-related-last-contact.test.ts",
+      "name": "updateRelatedLastContactForPeople leaves a company and an opportunity already contacted more recently alone",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/update-related-last-contact.test.ts",
+      "name": "updateRelatedLastContactForPeople skips the company update when the person has no company but still updates opportunities",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/update-related-last-contact.test.ts",
+      "name": "updateRelatedLastContactForPeople leaves out a company that no longer exists rather than upserting it back",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/update-related-last-contact.test.ts",
+      "name": "updateRelatedLastContactForPeople updates a shared company once, with the most recent contact of its people",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/upsert-records-in-batches.test.ts",
+      "name": "upsertRecordsInBatches writes a whole batch of distinct payloads in one call",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/upsert-records-in-batches.test.ts",
+      "name": "upsertRecordsInBatches splits at the maximum number of records the API accepts",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/upsert-records-in-batches.test.ts",
+      "name": "upsertRecordsInBatches does not call the API when there is nothing to write",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/__tests__/default-role.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/backfill-last-contact.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/health-check.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-calendar-event-started.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-calendar-interaction.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-email-interaction.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-opportunity-created.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/logic-functions/__tests__/on-person-updated.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/apply-meeting-interactions.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/execute-with-retry.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/pick-contact-team-member.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/recompute-company-last-contact.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/recompute-opportunity-last-contact.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/update-related-last-contact.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/last-contact/src/utils/__tests__/upsert-records-in-batches.test.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

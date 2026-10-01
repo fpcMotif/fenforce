@@ -1,0 +1,2312 @@
+[
+  {
+    "id": "packages--twenty-ui--vitest.config",
+    "cwd": "packages/twenty-ui",
+    "packageDirectory": "packages/twenty-ui",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": "10.6.0",
+      "@vitest/coverage-v8": "4.1.11",
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "5f35b05a6977766df2cf947f3b7b7edf8ddc5165fedae7f43d46f020dff24e28",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json",
+      "--project",
+      "unit"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json",
+      "--project",
+      "unit"
+    ]
+  },
+  {
+    "id": "packages--twenty-website--jest.config",
+    "cwd": "packages/twenty-website",
+    "packageDirectory": "packages/twenty-website",
+    "runner": "jest",
+    "config": "jest.config.mjs",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": null,
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "6f2f4282fa8eae67db80845f3a4010c78ed8f960efb8565b1e63b565238dc794",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--listTests",
+      "--json",
+      "--runInBand"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--runInBand",
+      "--no-cache",
+      "--json",
+      "--ci",
+      "--updateSnapshot=false"
+    ]
+  },
+  {
+    "id": "packages--twenty-docs--vitest.config",
+    "cwd": ".",
+    "packageDirectory": "packages/twenty-docs",
+    "runner": "vitest",
+    "config": "packages/twenty-docs/vitest.config.mts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": "4.1.11",
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": "packages/twenty-docs/node_modules/.bin",
+    "configSha256": "4433e2ff32402fde72fe9baf76deb6c781c2a068214b4010e4b4d35713fd4e3c",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "packages/twenty-docs/vitest.config.mts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "packages/twenty-docs/vitest.config.mts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-oxlint-rules--vitest.config",
+    "cwd": ".",
+    "packageDirectory": "packages/twenty-oxlint-rules",
+    "runner": "vitest",
+    "config": "packages/twenty-oxlint-rules/vitest.config.mts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": "4.1.11",
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": "packages/twenty-oxlint-rules/node_modules/.bin",
+    "configSha256": "7b28dcf5370c9e26e1450d44317836ee245e26da0cac60aebb1a239da8ff9e3c",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "packages/twenty-oxlint-rules/vitest.config.mts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "packages/twenty-oxlint-rules/vitest.config.mts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-server--jest-integration.config",
+    "cwd": "packages/twenty-server",
+    "packageDirectory": "packages/twenty-server",
+    "runner": "jest",
+    "config": "jest-integration.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": null,
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "0ae36d032c717b08642e1df8b1619663ce9f4c2f517486a07002ae856c338ed4",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest-integration.config.ts",
+      "--listTests",
+      "--json",
+      "--runInBand"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest-integration.config.ts",
+      "--runInBand",
+      "--no-cache",
+      "--json",
+      "--ci",
+      "--updateSnapshot=false"
+    ]
+  },
+  {
+    "id": "packages--twenty-server--jest-integration-secure.config",
+    "cwd": "packages/twenty-server",
+    "packageDirectory": "packages/twenty-server",
+    "runner": "jest",
+    "config": "jest-integration-secure.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": null,
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "e7e8ce1681bfbd9b62d5777356f693642e0935bf99bc5502b3b6204766b8a631",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest-integration-secure.config.ts",
+      "--listTests",
+      "--json",
+      "--runInBand"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest-integration-secure.config.ts",
+      "--runInBand",
+      "--no-cache",
+      "--json",
+      "--ci",
+      "--updateSnapshot=false"
+    ]
+  },
+  {
+    "id": "packages--twenty-server--jest.config",
+    "cwd": "packages/twenty-server",
+    "packageDirectory": "packages/twenty-server",
+    "runner": "jest",
+    "config": "jest.config.mjs",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": null,
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "b956f5d2c128647d8efbec053088e1c10277c87db0423ad5cb0017c827fbd0b9",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--listTests",
+      "--json",
+      "--runInBand"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--runInBand",
+      "--no-cache",
+      "--json",
+      "--ci",
+      "--updateSnapshot=false"
+    ]
+  },
+  {
+    "id": "packages--twenty-sdk--vitest.e2e.config",
+    "cwd": "packages/twenty-sdk",
+    "packageDirectory": "packages/twenty-sdk",
+    "runner": "vitest",
+    "config": "vitest.e2e.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": "4.1.11",
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "c29199d682fddc6a6c9226dc92baec01da2d655589613d4dfdba681f993504c9",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.e2e.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.e2e.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-sdk--vitest.integration.config",
+    "cwd": "packages/twenty-sdk",
+    "packageDirectory": "packages/twenty-sdk",
+    "runner": "vitest",
+    "config": "vitest.integration.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": "4.1.11",
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "36a4d02598a7c17741db76b4a6e9486d6a5c6558dc7a22fda8efd51ea2d082a1",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.integration.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.integration.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-sdk--vitest.unit.config",
+    "cwd": "packages/twenty-sdk",
+    "packageDirectory": "packages/twenty-sdk",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": false,
+    "alias": true,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": "4.1.11",
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "c09d3177bcc44f95457e9f47a7f7904cc5d4e3841eec55b8a2c5eed40c0c07e6",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-sdk--vitest.config",
+    "cwd": "packages/twenty-sdk",
+    "packageDirectory": "packages/twenty-sdk",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": "4.1.11",
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "0849824610725bac6beab9f6e28020d63621cc88b7077949aea2c7688f855596",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-shared--jest.config",
+    "cwd": "packages/twenty-shared",
+    "packageDirectory": "packages/twenty-shared",
+    "runner": "jest",
+    "config": "jest.config.mjs",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": null,
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "cb3a3dc9aa61e829ce3d19ed20d456a4f801f65a10000a7416e47085ac396db8",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--listTests",
+      "--json",
+      "--runInBand"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--runInBand",
+      "--no-cache",
+      "--json",
+      "--ci",
+      "--updateSnapshot=false"
+    ]
+  },
+  {
+    "id": "packages--twenty-front-component-renderer--vitest.storybook.config",
+    "cwd": "packages/twenty-front-component-renderer",
+    "packageDirectory": "packages/twenty-front-component-renderer",
+    "runner": "vitest",
+    "config": "vitest.storybook.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": "10.6.0",
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": "4.1.11"
+    },
+    "binaryDirectory": null,
+    "configSha256": "f34f906c8865524d061b658db2f35b06556fdf8b28088759e488cc0f01f17cbb",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.storybook.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.storybook.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-front-component-renderer--jest.config",
+    "cwd": "packages/twenty-front-component-renderer",
+    "packageDirectory": "packages/twenty-front-component-renderer",
+    "runner": "jest",
+    "config": "jest.config.mjs",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": "10.6.0",
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": "4.1.11"
+    },
+    "binaryDirectory": null,
+    "configSha256": "728aa9a7e1e6238a4cebadde0fe7acb9fb5b0a7a9c94bc3899bfbd39b3c8a9bc",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--listTests",
+      "--json",
+      "--runInBand"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--runInBand",
+      "--no-cache",
+      "--json",
+      "--ci",
+      "--updateSnapshot=false"
+    ]
+  },
+  {
+    "id": "packages--twenty-front-component-renderer--vitest.config",
+    "cwd": "packages/twenty-front-component-renderer",
+    "packageDirectory": "packages/twenty-front-component-renderer",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": "10.6.0",
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": "4.1.11"
+    },
+    "binaryDirectory": null,
+    "configSha256": "404d2e3d2f386f0ca1edc6736fa9a6c9453c5cf64c3f2a781fe3ff780cf0de95",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-zapier--jest.config",
+    "cwd": "packages/twenty-zapier",
+    "packageDirectory": "packages/twenty-zapier",
+    "runner": "jest",
+    "config": "jest.config.mjs",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": null,
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "8367a30052cb3a7eeea219f5916140e2aa435cb0029f661c7c68bb70a8d42d29",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--listTests",
+      "--json",
+      "--runInBand"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--runInBand",
+      "--no-cache",
+      "--json",
+      "--ci",
+      "--updateSnapshot=false"
+    ]
+  },
+  {
+    "id": "packages--twenty-utils--jest.config",
+    "cwd": "packages/twenty-utils",
+    "packageDirectory": "packages/twenty-utils",
+    "runner": "jest",
+    "config": "jest.config.mjs",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": null,
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "2c608506abf3de4566111d4e62e695361e5c316a9a6cd4c9531ad7a23c6759f6",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--listTests",
+      "--json",
+      "--runInBand"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--runInBand",
+      "--no-cache",
+      "--json",
+      "--ci",
+      "--updateSnapshot=false"
+    ]
+  },
+  {
+    "id": "packages--twenty-client-sdk--vitest.config",
+    "cwd": "packages/twenty-client-sdk",
+    "packageDirectory": "packages/twenty-client-sdk",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": "4.1.11",
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "f6973af18ecb92b3cefc8bdc9f9ba538f0907a6c634edbdcea95cd0013539b1a",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--granola--vitest.unit.config",
+    "cwd": "packages/twenty-apps/public/granola",
+    "packageDirectory": "packages/twenty-apps/public/granola",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--granola--vitest.config",
+    "cwd": "packages/twenty-apps/public/granola",
+    "packageDirectory": "packages/twenty-apps/public/granola",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "7f1118e6b889f151b064bae24f27b98f721404a8e52d5f825c3cf44bf640e25d",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--discord--vitest.unit.config",
+    "cwd": "packages/twenty-apps/public/discord",
+    "packageDirectory": "packages/twenty-apps/public/discord",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--discord--vitest.config",
+    "cwd": "packages/twenty-apps/public/discord",
+    "packageDirectory": "packages/twenty-apps/public/discord",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--last-contact--vitest.unit.config",
+    "cwd": "packages/twenty-apps/public/last-contact",
+    "packageDirectory": "packages/twenty-apps/public/last-contact",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--last-contact--vitest.config",
+    "cwd": "packages/twenty-apps/public/last-contact",
+    "packageDirectory": "packages/twenty-apps/public/last-contact",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--linear--vitest.unit.config",
+    "cwd": "packages/twenty-apps/public/linear",
+    "packageDirectory": "packages/twenty-apps/public/linear",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--linear--vitest.config",
+    "cwd": "packages/twenty-apps/public/linear",
+    "packageDirectory": "packages/twenty-apps/public/linear",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--exa--vitest.unit.config",
+    "cwd": "packages/twenty-apps/public/exa",
+    "packageDirectory": "packages/twenty-apps/public/exa",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--exa--vitest.config",
+    "cwd": "packages/twenty-apps/public/exa",
+    "packageDirectory": "packages/twenty-apps/public/exa",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--fireflies--vitest.unit.config",
+    "cwd": "packages/twenty-apps/public/fireflies",
+    "packageDirectory": "packages/twenty-apps/public/fireflies",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--fireflies--vitest.config",
+    "cwd": "packages/twenty-apps/public/fireflies",
+    "packageDirectory": "packages/twenty-apps/public/fireflies",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--people-data-labs--vitest.unit.config",
+    "cwd": "packages/twenty-apps/public/people-data-labs",
+    "packageDirectory": "packages/twenty-apps/public/people-data-labs",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--people-data-labs--vitest.config",
+    "cwd": "packages/twenty-apps/public/people-data-labs",
+    "packageDirectory": "packages/twenty-apps/public/people-data-labs",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--fathom--vitest.unit.config",
+    "cwd": "packages/twenty-apps/public/fathom",
+    "packageDirectory": "packages/twenty-apps/public/fathom",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--fathom--vitest.config",
+    "cwd": "packages/twenty-apps/public/fathom",
+    "packageDirectory": "packages/twenty-apps/public/fathom",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--teams--vitest.unit.config",
+    "cwd": "packages/twenty-apps/public/teams",
+    "packageDirectory": "packages/twenty-apps/public/teams",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "4d7ad14fe9068dae0251b34fa5c2bd12ce3c9fcf86914442d89e44c9dc5a5e12",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--teams--vitest.config",
+    "cwd": "packages/twenty-apps/public/teams",
+    "packageDirectory": "packages/twenty-apps/public/teams",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "7fcb8945c638e6a01b4dc92b5d367b5d1a42352e35b0aea8494bbd247e618d96",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--call-recorder--vitest.unit.config",
+    "cwd": "packages/twenty-apps/public/call-recorder",
+    "packageDirectory": "packages/twenty-apps/public/call-recorder",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--call-recorder--vitest.config",
+    "cwd": "packages/twenty-apps/public/call-recorder",
+    "packageDirectory": "packages/twenty-apps/public/call-recorder",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--slack--vitest.unit.config",
+    "cwd": "packages/twenty-apps/public/slack",
+    "packageDirectory": "packages/twenty-apps/public/slack",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--slack--vitest.config",
+    "cwd": "packages/twenty-apps/public/slack",
+    "packageDirectory": "packages/twenty-apps/public/slack",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--companion--vitest.unit.config",
+    "cwd": "packages/twenty-apps/public/companion",
+    "packageDirectory": "packages/twenty-apps/public/companion",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--public--companion--vitest.config",
+    "cwd": "packages/twenty-apps/public/companion",
+    "packageDirectory": "packages/twenty-apps/public/companion",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "0e120d3733dc7f765005bf5dc5da80439bdd1e29e9267601f4e551d646ed0829",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--examples--postcard--playwright.config",
+    "cwd": "packages/twenty-apps/examples/postcard",
+    "packageDirectory": "packages/twenty-apps/examples/postcard",
+    "runner": "playwright",
+    "config": "playwright.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": "1.63.0",
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "2036f52c5ee99d67eb0ae354737eb4f4b02318193969b3d075c808bb346ec337",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "playwright",
+      "test",
+      "--config",
+      "playwright.config.ts",
+      "--list",
+      "--reporter=json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "playwright",
+      "test",
+      "--config",
+      "playwright.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--examples--postcard--vitest.config",
+    "cwd": "packages/twenty-apps/examples/postcard",
+    "packageDirectory": "packages/twenty-apps/examples/postcard",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": "1.63.0",
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "590095f9b26cb4bad935e73252f075be45c6673cc70d776b39305b34c713da53",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--examples--media-notes--playwright.config",
+    "cwd": "packages/twenty-apps/examples/media-notes",
+    "packageDirectory": "packages/twenty-apps/examples/media-notes",
+    "runner": "playwright",
+    "config": "playwright.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": null,
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "288b0b39ba8597bfb7a0834721366bee1f6256aa4088ee9bb30092fe84981d7f",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "playwright",
+      "test",
+      "--config",
+      "playwright.config.ts",
+      "--list",
+      "--reporter=json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "playwright",
+      "test",
+      "--config",
+      "playwright.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--examples--hello-world--vitest.config",
+    "cwd": "packages/twenty-apps/examples/hello-world",
+    "packageDirectory": "packages/twenty-apps/examples/hello-world",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "036919685a60c645ff7a3038463d468dddedd69db328198b01cbdc409513ea0d",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--examples--document-generator--vitest.unit.config",
+    "cwd": "packages/twenty-apps/examples/document-generator",
+    "packageDirectory": "packages/twenty-apps/examples/document-generator",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-apps--examples--document-generator--vitest.config",
+    "cwd": "packages/twenty-apps/examples/document-generator",
+    "packageDirectory": "packages/twenty-apps/examples/document-generator",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--create-twenty-app--jest.config",
+    "cwd": "packages/create-twenty-app",
+    "packageDirectory": "packages/create-twenty-app",
+    "runner": "jest",
+    "config": "jest.config.mjs",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": null,
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "294f8ef65c309e08987f49aa2bc86f701c8daac48be1cf38ae59444afa2aaeb6",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--listTests",
+      "--json",
+      "--runInBand"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--runInBand",
+      "--no-cache",
+      "--json",
+      "--ci",
+      "--updateSnapshot=false"
+    ]
+  },
+  {
+    "id": "packages--create-twenty-app--src--constants--template--vitest.unit.config",
+    "cwd": "packages/create-twenty-app/src/constants/template",
+    "packageDirectory": "packages/create-twenty-app/src/constants/template",
+    "runner": "vitest",
+    "config": "vitest.unit.config.ts",
+    "external": false,
+    "template": true,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": null,
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "e4a27b85c3afd68e186f599b49908e0f804e7c405afe8e707aa125136da87e46",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.unit.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.unit.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--create-twenty-app--src--constants--template--vitest.config",
+    "cwd": "packages/create-twenty-app/src/constants/template",
+    "packageDirectory": "packages/create-twenty-app/src/constants/template",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": true,
+    "alias": false,
+    "collectionRequiresFixtures": true,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": null,
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "d53774eba683fa4bf37e9c06bcf03017f32245ef67bbc93f9f06c346cc839cf9",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-front--jest.config",
+    "cwd": "packages/twenty-front",
+    "packageDirectory": "packages/twenty-front",
+    "runner": "jest",
+    "config": "jest.config.mjs",
+    "external": false,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": "10.6.0",
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": "4.1.11"
+    },
+    "binaryDirectory": null,
+    "configSha256": "a3c63e49afbcfb47bfd54e14a34ed6240633e7ce1a77c3f4ca2ec1f5711fa8d8",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--listTests",
+      "--json",
+      "--runInBand"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "jest",
+      "--config",
+      "jest.config.mjs",
+      "--runInBand",
+      "--no-cache",
+      "--json",
+      "--ci",
+      "--updateSnapshot=false"
+    ]
+  },
+  {
+    "id": "packages--twenty-front--vitest.config",
+    "cwd": "packages/twenty-front",
+    "packageDirectory": "packages/twenty-front",
+    "runner": "vitest",
+    "config": "vitest.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": "29.7.0",
+      "@playwright/test": null,
+      "@storybook/addon-vitest": "10.6.0",
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": "4.1.11"
+    },
+    "binaryDirectory": null,
+    "configSha256": "ed7ed9795c05e6ec92169c79023dd27e02b4f9b6e04e219f9732ad82a7512f23",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--config",
+      "vitest.config.ts",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "packages--twenty-e2e-testing--playwright.config",
+    "cwd": "packages/twenty-e2e-testing",
+    "packageDirectory": "packages/twenty-e2e-testing",
+    "runner": "playwright",
+    "config": "playwright.config.ts",
+    "external": true,
+    "template": false,
+    "alias": false,
+    "collectionRequiresFixtures": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": null,
+      "jest": null,
+      "@playwright/test": "1.63.0",
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    },
+    "binaryDirectory": null,
+    "configSha256": "052c41fd5625174f6f3728b89d33564aed43a1f80af9070b673685c281f9bb5c",
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "playwright",
+      "test",
+      "--config",
+      "playwright.config.ts",
+      "--list",
+      "--reporter=json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "playwright",
+      "test",
+      "--config",
+      "playwright.config.ts",
+      "--reporter=json"
+    ]
+  },
+  {
+    "id": "deployments--convex--default",
+    "cwd": "deployments/convex",
+    "runner": "vitest",
+    "config": null,
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--reporter=json"
+    ],
+    "external": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "5.0.2",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    }
+  },
+  {
+    "id": "deployments--cloudflare-front--bun",
+    "cwd": "deployments/cloudflare-front",
+    "runner": "bun",
+    "config": null,
+    "collectArgs": null,
+    "executeArgs": [
+      "bun",
+      "test"
+    ],
+    "external": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "5.0.1",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    }
+  },
+  {
+    "id": "packages--twenty-agent-skills--node",
+    "cwd": "packages/twenty-agent-skills",
+    "runner": "node",
+    "config": null,
+    "collectArgs": null,
+    "executeArgs": [
+      "bun",
+      "run",
+      "test:command"
+    ],
+    "external": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": null,
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": null,
+      "@vitest/coverage-istanbul": null
+    }
+  },
+  {
+    "id": "packages--twenty-companion--vitest-default",
+    "cwd": "packages/twenty-companion",
+    "runner": "vitest",
+    "config": null,
+    "collectArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "list",
+      "--json"
+    ],
+    "executeArgs": [
+      "bunx",
+      "--no-install",
+      "vitest",
+      "run",
+      "--reporter=json"
+    ],
+    "external": false,
+    "versions": {
+      "vite-plus": "1.0.0",
+      "vitest": "4.1.11",
+      "jest": null,
+      "@playwright/test": null,
+      "@storybook/addon-vitest": null,
+      "@vitest/coverage-v8": "4.1.11",
+      "@vitest/coverage-istanbul": null
+    }
+  }
+]

@@ -1,0 +1,166 @@
+{
+  "numTotalTests": 19,
+  "numPassedTests": 19,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 10,
+  "numPassedTestSuites": 10,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "assertions": [
+    {
+      "file": "deployments/convex/convex/auth.test.ts",
+      "name": "preview password enrollment keeps signup disabled without all server-side configuration",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/auth.test.ts",
+      "name": "preview password enrollment rejects another email or an incorrect invite code",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/auth.test.ts",
+      "name": "preview password enrollment normalizes the allowlisted email and requires a strong password",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/auth.test.ts",
+      "name": "preview password enrollment does not treat the static preview code as a one-time invite",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/auth.test.ts",
+      "name": "preview password enrollment permits sign-in for an existing account without an invite",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/companyJourney.test.ts",
+      "name": "company journey on the Convex candidate signs in, opens a workspace, writes a company, and rejects unauthorized callers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/sessionLifecycle.test.ts",
+      "name": "anonymous callers cannot read workspace or company data",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/sessionLifecycle.test.ts",
+      "name": "anonymous callers cannot create a workspace or write a company",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/sessionLifecycle.test.ts",
+      "name": "sign-out ends the session so a retained token can no longer read",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/sessionLifecycle.test.ts",
+      "name": "sign-out leaves the same user’s other session working",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/sessionLifecycle.test.ts",
+      "name": "invalid and expired sessions rejects a token whose session does not exist",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/sessionLifecycle.test.ts",
+      "name": "invalid and expired sessions rejects a token without a session component",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/sessionLifecycle.test.ts",
+      "name": "invalid and expired sessions rejects a session past its expiration time",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/workspaceCompanies.test.ts",
+      "name": "workspace companies authorization requires authentication before creating or reading a workspace",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/workspaceCompanies.test.ts",
+      "name": "workspace companies authorization keeps workspaces and their companies isolated by membership",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/workspaceCompanies.test.ts",
+      "name": "workspace companies authorization projects owner and creator names without changing company pagination",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/workspaceCompanies.test.ts",
+      "name": "workspace companies authorization rejects owners from another workspace and reserves deletion for admins",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/workspaceCompanies.test.ts",
+      "name": "workspace companies authorization rejects a stale second writer without losing the first edit or domain",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "deployments/convex/convex/workspaceCompanies.test.ts",
+      "name": "workspace companies authorization paginates past 100 workspaces and workspace members",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "deployments/convex/convex/auth.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "deployments/convex/convex/companyJourney.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "deployments/convex/convex/sessionLifecycle.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "deployments/convex/convex/workspaceCompanies.test.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

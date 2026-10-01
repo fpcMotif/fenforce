@@ -1,0 +1,3542 @@
+{
+  "numTotalTests": 515,
+  "numPassedTests": 515,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 84,
+  "numPassedTestSuites": 84,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "didUpdate": false,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding claims a free production slot and persists the binding in stripe",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding allows the already-bound production server (refreshes lastSeenAt)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding rejects a foreign production server while the binding is fresh",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding auto-releases a stale binding to a new production server",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding binds a development instance into the dev slot as non-billable",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding rejects a second development instance while the dev slot is fresh",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding auto-releases a stale dev slot to a new development server",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding rejects a development instance that does not report a serverId",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding rejects a development instance when there is no production binding",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding rejects a development instance when the production binding is stale",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding rejects a production instance that lost its serverId while a binding exists",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding allows legacy instances without a serverId without binding",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding rejects a production instance sending an empty serverId while a binding exists",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding does not let an empty serverId claim a free key as the bound id",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "resolveServerBinding rejects a development instance sending a whitespace serverId",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "isBillableSeatReporter bills the bound production server",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "isBillableSeatReporter does not bill a foreign server",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "isBillableSeatReporter does not bill a development instance (no production binding)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "isBillableSeatReporter bills legacy instances with no serverId and no binding",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "isBillableSeatReporter does not bill an empty serverId against a bound production server",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "parseInstanceType returns development only for the development literal",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "evaluateReleaseRateLimit allows a release under the limit and records the new timestamp",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "evaluateReleaseRateLimit allows the first ever release (no prior timestamps)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "evaluateReleaseRateLimit blocks a release when the limit is reached within the window",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "evaluateReleaseRateLimit ignores releases older than the window (rolling)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "evaluateValidityTokenEmissionRateLimit allows the first ever emission (no prior timestamps)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "evaluateValidityTokenEmissionRateLimit allows a second emission within 24h and records it",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "evaluateValidityTokenEmissionRateLimit blocks a third emission within the 24h window",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "evaluateValidityTokenEmissionRateLimit prunes emissions older than the 24h window (rolling)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "name": "evaluateValidityTokenEmissionRateLimit tracks production and development budgets independently",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application returns 415 when content-type is not JSON",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application returns 413 when content-length declares a too-large body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application returns 400 on malformed JSON",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application returns 400 when required fields are missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application returns 400 when email is invalid",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application returns 400 when an extra (legacy) field is present (strictObject)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application returns 400 when applicationNotes is present (removed from apply)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application returns 400 when experience narrative is too short",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application returns 400 when twentyExperience is empty",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application returns 400 when country enum is unknown",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application forwards a valid submission to the webhook with camelCase payload + header auth and returns 200",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application forwards rich optional wizard fields with camelCase keys",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application omits optional rich fields when not provided",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application returns 502 when the webhook responds with a non-2xx status",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application returns 502 when the webhook fetch throws (network error)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application returns 502 when the webhook returns ok:false in its body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application returns 504 when the webhook surfaces an AbortError (timeout path)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application rate-limits the same IP after the burst capacity is spent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "name": "POST /api/partner-application attaches a Retry-After header on 429 responses",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief returns 503 when env vars are missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief returns 415 when content-type is not JSON",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief returns 413 when content-length declares a too-large body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief returns 400 on malformed JSON",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief returns 400 when required fields are missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief returns 400 when email is invalid",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief returns 400 when an extra field is present (strictObject)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief forwards a valid submission to the webhook with header auth and returns 200",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief forwards optional context fields when provided",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief strips an empty languages array before forwarding",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief returns 502 when the webhook responds with a non-2xx status",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief returns 502 when the webhook fetch throws (network error)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief returns 502 when the webhook returns ok:false in its body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief returns 504 when the webhook surfaces an AbortError (timeout path)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief rate-limits the same IP after the burst capacity is spent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "name": "POST /api/client-brief attaches a Retry-After header on 429 responses",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/exporters.test.ts",
+      "name": "halftone export naming normalizes free-form export names into safe component and file names",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/exporters.test.ts",
+      "name": "halftone export naming sanitizes generated React component identifiers for the default Twenty export",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/exporters.test.ts",
+      "name": "halftone export naming sanitizes generated standalone HTML titles",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/exporters.test.ts",
+      "name": "halftone export naming parses legacy exported presets without a hover dash color",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/exporters.test.ts",
+      "name": "halftone export naming preserves dark-area halftone presets through export parsing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/exporters.test.ts",
+      "name": "halftone export naming uses the initial pose as the export runtime rotation baseline",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/exporters.test.ts",
+      "name": "halftone react export presets emits a Twenty-ready GLB export with Draco support and no torus fallback",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/exporters.test.ts",
+      "name": "halftone react export presets emits a Twenty-ready image export without model loaders",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/exporters.test.ts",
+      "name": "halftone react export presets keeps pointer cancel wiring and removes window listeners from window in the model runtime",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/exporters.test.ts",
+      "name": "halftone react export presets parses Twenty exports with header comments and named/default exports",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/exporters.test.ts",
+      "name": "halftone react export presets keeps the generic React export available with relative asset paths",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/exporters.test.ts",
+      "name": "parseExportedPreset legacy presets falls back to the reference preview distance for legacy presets",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "ghost detected, thin is not",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "awards four points per approved case study with a twelve-point cap",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "one approved case study outweighs picture, calendar and rate together",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "awards one extra point per approved case study that has a cover",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "never counts more covers than counted case studies",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "caps the cover bonus at the three counted case studies",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "completeness wins over partner tier",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "partner tier wins when completeness is equal",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "weekly rotation wins when completeness and tier are equal",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "super partner pins above completeness and tier",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "super partners keep completeness among themselves",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "super partners keep partner tier when completeness is equal",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "super partners keep weekly rotation when completeness and tier are equal",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "the description threshold sits at one hundred and twenty characters",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "whitespace alone never earns the description points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "a full profile scores twenty-three points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "each signal contributes its documented weight",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "name": "unused portfolio and client arrays no longer score",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer orders steps identity → profile → expertise → experience → commercials",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer starts at stepIndex 0 with empty fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer SET_FIELD updates the field and clears any prior error for it",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer TOGGLE_SCOPE adds and then removes a scope value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer TOGGLE_EXPERIENCE adds and then removes a milestone",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer GO_NEXT on Identity with missing required fields fills errors and stays",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer GO_NEXT on Identity with valid required fields advances to Profile",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer GO_NEXT on Identity rejects a malformed email",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer GO_BACK clamps at 0 and clears errors",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer GO_NEXT on Profile requires country and typeOfTeam",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer GO_NEXT on Expertise advances to Experience when partnerScope is set",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer GO_NEXT on Experience gates on milestones, narrative length, and proof URL",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer GO_NEXT on Commercials gates on hourly rate and minimum budget",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer SET_SUBMITTED flips isSubmitted and clears submitError + isSubmitting",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "name": "partnerApplicationReducer RESET returns to the initial state from any state",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/engine/create-webgl-context-budget.test.ts",
+      "name": "createWebGlContextBudget should grant up to maxActive and queue the rest",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/engine/create-webgl-context-budget.test.ts",
+      "name": "createWebGlContextBudget should grant a queued request when a held slot settles",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/engine/create-webgl-context-budget.test.ts",
+      "name": "createWebGlContextBudget REGRESSION (acquire race): a slot released while another consumer is between try and subscribe is never missed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/engine/create-webgl-context-budget.test.ts",
+      "name": "createWebGlContextBudget REGRESSION (dispose double-release): a stale settle can never release the next epoch's slot",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/engine/create-webgl-context-budget.test.ts",
+      "name": "createWebGlContextBudget should never exceed maxActive across fuzzed interleavings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/engine/create-webgl-context-budget.test.ts",
+      "name": "createWebGlContextBudget should settle a pending request without it ever granting",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/engine/create-webgl-context-budget.test.ts",
+      "name": "createWebGlContextBudget should drain the priority class before normal, FIFO within class",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "name": "clientBriefReducer starts at stepIndex 0 with empty fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "name": "clientBriefReducer SET_FIELD updates the field and clears any prior error for it",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "name": "clientBriefReducer SET_FIELD_ERRORS updates fieldErrors without advancing the step",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "name": "clientBriefReducer GO_NEXT on brief with missing need fills errors and stays",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "name": "clientBriefReducer GO_NEXT on brief with valid need advances to context",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "name": "clientBriefReducer SKIP_CONTEXT jumps from context to identity",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "name": "clientBriefReducer SKIP_CONTEXT is a no-op when not on context step",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "name": "clientBriefReducer GO_NEXT on context advances to identity without required fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "name": "clientBriefReducer GO_NEXT on identity requires firstName, email, and companyName",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "name": "clientBriefReducer GO_NEXT on identity rejects a malformed email",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "name": "clientBriefReducer GO_NEXT on identity with valid fields stays on identity (submit step)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "name": "clientBriefReducer GO_BACK reverses steps and clears errors",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "name": "clientBriefReducer SET_SUBMITTED flips isSubmitted and clears submitError + isSubmitting",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "name": "clientBriefReducer RESET returns to the initial state from any state",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-marketplace-partners.test.ts",
+      "name": "fetchLiveMarketplacePartners normalizes the CRM payload (micros -> USD, links -> URLs, nulls)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-marketplace-partners.test.ts",
+      "name": "fetchLiveMarketplacePartners reads a missing superPartner as false so an old API still ranks",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-marketplace-partners.test.ts",
+      "name": "fetchLiveMarketplacePartners reads superPartner true from the API",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-marketplace-partners.test.ts",
+      "name": "fetchLiveMarketplacePartners reads superPartner null as false",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-marketplace-partners.test.ts",
+      "name": "fetchLiveMarketplacePartners degrades to [] and names the offending partner when the payload breaks the ranking contract on rotationKey",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-marketplace-partners.test.ts",
+      "name": "fetchLiveMarketplacePartners degrades to [] and names the offending partner when the payload breaks the ranking contract on serviceCount",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-marketplace-partners.test.ts",
+      "name": "fetchLiveMarketplacePartners degrades to [] and names the offending partner when the payload breaks the ranking contract on approvedCaseStudyCount",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-marketplace-partners.test.ts",
+      "name": "fetchLiveMarketplacePartners degrades to [] and names the offending partner when the payload breaks the ranking contract on approvedCaseStudyWithCoverCount",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-marketplace-partners.test.ts",
+      "name": "fetchLiveMarketplacePartners reads an unknown partner tier as unranked",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-marketplace-partners.test.ts",
+      "name": "fetchLiveMarketplacePartners degrades to [] when the fetch throws",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-marketplace-partners.test.ts",
+      "name": "fetchLiveMarketplacePartners degrades to [] when the payload has no partners array",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/editor/terminal-editor-state.test.ts",
+      "name": "terminalEditorState should choose the correct fallback file for generated and starter modes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/editor/terminal-editor-state.test.ts",
+      "name": "terminalEditorState should create an initial editor state from visibility mode",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/editor/terminal-editor-state.test.ts",
+      "name": "terminalEditorState should activate and open the generated default file when generated files become visible",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/editor/terminal-editor-state.test.ts",
+      "name": "terminalEditorState should remove generated files and fall back to the starter file when generated files are hidden",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/editor/terminal-editor-state.test.ts",
+      "name": "terminalEditorState should keep a non-generated active file only when it remains open after generated files are hidden",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/editor/terminal-editor-state.test.ts",
+      "name": "terminalEditorState should select a file without duplicating an already open tab",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/editor/terminal-editor-state.test.ts",
+      "name": "terminalEditorState should close inactive tabs without changing the active file",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/editor/terminal-editor-state.test.ts",
+      "name": "terminalEditorState should close active tabs and activate the previous remaining tab",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/editor/terminal-editor-state.test.ts",
+      "name": "terminalEditorState should keep one fallback tab open when the last tab closes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/editor/terminal-editor-state.test.ts",
+      "name": "terminalEditorState should filter generated explorer nodes only when generated files are hidden",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/product-hero-scroll-model.test.ts",
+      "name": "computeHeroScrollModel should rest at the intro before any scroll",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/product-hero-scroll-model.test.ts",
+      "name": "computeHeroScrollModel should complete the morph at 55% of the scrollable run",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/product-hero-scroll-model.test.ts",
+      "name": "computeHeroScrollModel should ease the morph through smoothstep",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/product-hero-scroll-model.test.ts",
+      "name": "computeHeroScrollModel should pin the stack phases to their authored keyframes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/product-hero-scroll-model.test.ts",
+      "name": "computeHeroScrollModel should hold the Ask-AI panel back until the post-morph hold",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/product-hero-scroll-model.test.ts",
+      "name": "computeHeroScrollModel should gate the AI layer at the wipe midpoint",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/product-hero-scroll-model.test.ts",
+      "name": "computeHeroScrollModel should report transparent menu while the wipe crosses the nav band",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/product-hero-scroll-model.test.ts",
+      "name": "computeHeroScrollModel should settle the menu dark once the morph completes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/product-hero-scroll-model.test.ts",
+      "name": "computeHeroScrollModel should release to the ambient observer once the track bottom enters the nav band",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/product-hero-scroll-model.test.ts",
+      "name": "computeHeroScrollModel should release the menu as the track scrolls out",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/product-hero-scroll-model.test.ts",
+      "name": "computeHeroScrollModel should treat a degenerate track as unscrolled",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/build-partner-application-request-body.test.ts",
+      "name": "buildPartnerApplicationRequestBody includes required fields and experience data",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/build-partner-application-request-body.test.ts",
+      "name": "buildPartnerApplicationRequestBody trims the required string fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/build-partner-application-request-body.test.ts",
+      "name": "buildPartnerApplicationRequestBody omits optional string fields that are blank or whitespace-only",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/build-partner-application-request-body.test.ts",
+      "name": "buildPartnerApplicationRequestBody trims optional string fields when present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/build-partner-application-request-body.test.ts",
+      "name": "buildPartnerApplicationRequestBody omits enum/array fields when unset and forwards them when set",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/build-partner-application-request-body.test.ts",
+      "name": "buildPartnerApplicationRequestBody parses hourlyRate and projectBudgetMin into non-negative numbers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "name": "partnerApplicationRequestSchema accepts the minimal required payload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "name": "partnerApplicationRequestSchema accepts the full payload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "name": "partnerApplicationRequestSchema rejects an unknown country enum value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "name": "partnerApplicationRequestSchema rejects an unknown scope enum value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "name": "partnerApplicationRequestSchema rejects unknown top-level keys (strictObject)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "name": "partnerApplicationRequestSchema rejects legacy applicationNotes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "name": "partnerApplicationRequestSchema rejects an invalid email",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "name": "partnerApplicationRequestSchema rejects a missing required field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "name": "partnerApplicationRequestSchema rejects when a newly-required field is missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "name": "partnerApplicationRequestSchema rejects empty twentyExperience",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "name": "partnerApplicationRequestSchema rejects an unknown twentyExperience milestone",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "name": "partnerApplicationRequestSchema rejects twentyExperienceNotes shorter than 200 characters",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "name": "partnerApplicationRequestSchema rejects an invalid twentyExperienceProofLink",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "name": "partnerApplicationRequestSchema rejects a negative hourly rate",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/footprint.test.ts",
+      "name": "halftone footprint helpers computes the visible contained image rect",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/footprint.test.ts",
+      "name": "halftone footprint helpers computes the visible covered image rect",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/footprint.test.ts",
+      "name": "halftone footprint helpers derives image footprint scale from preview distance",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/footprint.test.ts",
+      "name": "halftone footprint helpers derives mesh footprint scale from projected bounds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/footprint.test.ts",
+      "name": "halftone footprint helpers keeps the exported runtime helpers aligned with the typed helpers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-partner-profile.test.ts",
+      "name": "fetchLivePartnerProfile maps profile payload including flat link URLs and nested collections",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-partner-profile.test.ts",
+      "name": "fetchLivePartnerProfile reads superPartner true from the profile API",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-partner-profile.test.ts",
+      "name": "fetchLivePartnerProfile reads superPartner null as false",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-partner-profile.test.ts",
+      "name": "fetchLivePartnerProfile returns undefined when the API reports not found",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/display-page.test.ts",
+      "name": "displayPage.getStreamProgress should treat an empty answer as fully streamed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/display-page.test.ts",
+      "name": "displayPage.getStreamProgress should clamp to 1",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/display-page.test.ts",
+      "name": "displayPage.buildFocusedOpportunitiesPage should drop empty lanes and retitle the board",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/display-page.test.ts",
+      "name": "displayPage.buildFocusedOpportunitiesPage should reveal no cards before 18% stream progress",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/display-page.test.ts",
+      "name": "displayPage.buildFocusedOpportunitiesPage should fill lanes left to right as progress advances",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/display-page.test.ts",
+      "name": "displayPage.resolveDisplayPage should mark the kanban generating at zero progress and hide the count",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/display-page.test.ts",
+      "name": "displayPage.resolveDisplayPage should swap the tasks table to the generated rows",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/display-page.test.ts",
+      "name": "displayPage.resolveDisplayPage should pass through pages the scene does not touch",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/sign-validity-token.test.ts",
+      "name": "signValidityToken signs a verifiable \"valid\" token carrying the subscription id",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/sign-validity-token.test.ts",
+      "name": "signValidityToken defaults exp to the duration window when no cancellation is set",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/sign-validity-token.test.ts",
+      "name": "signValidityToken clamps exp down to a cancellation inside the window",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/sign-validity-token.test.ts",
+      "name": "signValidityToken ignores a cancellation beyond the default window",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/sign-validity-token.test.ts",
+      "name": "signValidityToken treats a non-positive cancellation as no cancellation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/sign-validity-token.test.ts",
+      "name": "signValidityToken caps the token at the end of the grace period",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/sign-validity-token.test.ts",
+      "name": "signValidityToken keeps the earliest of a cancellation and a grace deadline",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/sign-validity-token.test.ts",
+      "name": "signValidityToken signs a grace token with the standard valid status",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/fetch-with-timeout.test.ts",
+      "name": "fetchWithTimeout returns the response when the upstream resolves before the timeout",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/fetch-with-timeout.test.ts",
+      "name": "fetchWithTimeout forwards method, headers, and body to the underlying fetch",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/fetch-with-timeout.test.ts",
+      "name": "fetchWithTimeout returns a `timeout` result when the upstream hangs past the timeout",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/fetch-with-timeout.test.ts",
+      "name": "fetchWithTimeout returns a `network` result for non-abort errors",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/fetch-with-timeout.test.ts",
+      "name": "fetchWithTimeout clears the timer on success so the process does not hang",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/fetch-with-timeout.test.ts",
+      "name": "fetchWithTimeout clears the timer on failure too",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/community/get-community-stats.test.ts",
+      "name": "getCommunityStats should return live numbers when both APIs succeed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/community/get-community-stats.test.ts",
+      "name": "getCommunityStats should fall back to the cached value when a fetch fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/community/get-community-stats.test.ts",
+      "name": "getCommunityStats should return null when a fetch fails and the cache is empty",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/community/get-community-stats.test.ts",
+      "name": "getCommunityStats should return nulls and not write the cache when everything fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/community/get-community-stats.test.ts",
+      "name": "getCommunityStats should serve cached values without writing when both fetches fail",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/engine/studio-settings.test.ts",
+      "name": "halftone studio state defaults keeps the default scene aligned with the solid material preset",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/engine/studio-settings.test.ts",
+      "name": "halftone studio state defaults fills missing nested fields from the selected solid surface defaults",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/engine/studio-settings.test.ts",
+      "name": "halftone studio state defaults fills missing nested fields from the selected glass surface defaults",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/engine/studio-settings.test.ts",
+      "name": "halftone studio state defaults backfills the hover dash color when older presets do not include it",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/engine/studio-settings.test.ts",
+      "name": "halftone studio state defaults preserves a dark-area halftone target from newer presets",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/rate-limit.test.ts",
+      "name": "createRateLimiter rejects invalid options",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/rate-limit.test.ts",
+      "name": "createRateLimiter allows up to `capacity` requests instantly per key",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/rate-limit.test.ts",
+      "name": "createRateLimiter rejects the next request after the burst is spent and reports retryAfterMs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/rate-limit.test.ts",
+      "name": "createRateLimiter refills tokens linearly over time",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/rate-limit.test.ts",
+      "name": "createRateLimiter caps refilled tokens at `capacity` (no negative interest)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/rate-limit.test.ts",
+      "name": "createRateLimiter keeps separate buckets per key",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/rate-limit.test.ts",
+      "name": "createRateLimiter treats time going backwards as zero elapsed (clock guard)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/read-json-body.test.ts",
+      "name": "readJsonBody parses a valid JSON body within the size cap",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/read-json-body.test.ts",
+      "name": "readJsonBody rejects a non-JSON content-type",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/read-json-body.test.ts",
+      "name": "readJsonBody rejects a missing content-type",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/read-json-body.test.ts",
+      "name": "readJsonBody accepts content-types with parameters",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/read-json-body.test.ts",
+      "name": "readJsonBody accepts +json content-types (e.g. application/vnd.api+json)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/read-json-body.test.ts",
+      "name": "readJsonBody rejects when declared content-length exceeds maxBytes (fast path)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/read-json-body.test.ts",
+      "name": "readJsonBody rejects when actual body length exceeds maxBytes (no content-length)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/read-json-body.test.ts",
+      "name": "readJsonBody rejects malformed JSON",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/read-json-body.test.ts",
+      "name": "readJsonBody parses a body that is exactly maxBytes bytes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/routing/locale-rewrite-patterns.test.ts",
+      "name": "locale rewrites should rewrite the root to the source locale",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/routing/locale-rewrite-patterns.test.ts",
+      "name": "locale rewrites should rewrite unprefixed pages to the source locale",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/routing/locale-rewrite-patterns.test.ts",
+      "name": "locale rewrites should rewrite unprefixed nested paths to the source locale",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/routing/locale-rewrite-patterns.test.ts",
+      "name": "locale rewrites should leave locale-prefixed paths untouched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/routing/locale-rewrite-patterns.test.ts",
+      "name": "locale rewrites should leave asset directories untouched (rewrites run before public/)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/routing/locale-rewrite-patterns.test.ts",
+      "name": "locale rewrites should leave reserved prefixes untouched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/routing/locale-rewrite-patterns.test.ts",
+      "name": "locale rewrites should leave well-known files untouched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/routing/locale-rewrite-patterns.test.ts",
+      "name": "locale rewrites should leave the .well-known directory untouched, including extensionless files",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/build-logic-function-payload.test.ts",
+      "name": "buildLogicFunctionPayload splits firstName/lastName from name and uses camelCase keys",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/build-logic-function-payload.test.ts",
+      "name": "buildLogicFunctionPayload forwards website as domainName when provided",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/build-logic-function-payload.test.ts",
+      "name": "buildLogicFunctionPayload forwards twenty experience fields to the webhook payload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/build-logic-function-payload.test.ts",
+      "name": "buildLogicFunctionPayload omits keys for undefined optional fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/build-logic-function-payload.test.ts",
+      "name": "buildLogicFunctionPayload omits empty arrays for optional multi-selects",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/community/community-stats-store.test.ts",
+      "name": "communityStatsStore should read stored stats",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/community/community-stats-store.test.ts",
+      "name": "communityStatsStore should return null when no bucket is bound",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/community/community-stats-store.test.ts",
+      "name": "communityStatsStore should keep the stored value for a field the caller has no value for",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/community/community-stats-store.test.ts",
+      "name": "communityStatsStore should skip the write when the stored entry cannot be read",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/community/community-stats-store.test.ts",
+      "name": "communityStatsStore should overwrite a corrupt stored entry",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/TasksVisual.test.tsx",
+      "name": "TasksVisual renders each task with its body and due date",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/TasksVisual.test.tsx",
+      "name": "TasksVisual renders the completed task alongside the open ones",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/TasksVisual.test.tsx",
+      "name": "TasksVisual assigns every task to Félix Malfait",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/TasksVisual.test.tsx",
+      "name": "TasksVisual offers an add-task action",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/TasksVisual.test.tsx",
+      "name": "TasksVisual completes a task when its checkbox is clicked",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/TasksVisual.test.tsx",
+      "name": "TasksVisual completes a task with the keyboard",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/TasksVisual.test.tsx",
+      "name": "TasksVisual removes the add-task button instead of moving it to Done when every task is done",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/pages/record/record-tabs.test.ts",
+      "name": "recordTabs.getAvailable should expose only tabs whose panels have content",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/pages/record/record-tabs.test.ts",
+      "name": "recordTabs.getAvailable should keep the authored tab order when everything is populated",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/pages/record/record-tabs.test.ts",
+      "name": "recordTabs.getAvailable should return no tabs for an empty record",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-partners.test.ts",
+      "name": "filterPartners returns every partner when no facet is selected",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-partners.test.ts",
+      "name": "filterPartners keeps only partners matching a selected region",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-partners.test.ts",
+      "name": "filterPartners ANDs across facets (region AND language)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-partners.test.ts",
+      "name": "filterPartners ORs within a facet (either region)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-partners.test.ts",
+      "name": "hasAnyFilter is false for empty criteria",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-partners.test.ts",
+      "name": "hasAnyFilter is true once a facet has a selection",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/three-cards/card-reveal-frame.test.ts",
+      "name": "cardReveal should hold zero progress while the grid sits below the viewport",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/three-cards/card-reveal-frame.test.ts",
+      "name": "cardReveal should reach full progress when the grid top hits 20% of the viewport",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/three-cards/card-reveal-frame.test.ts",
+      "name": "cardReveal should run progress linearly across the travel band",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/three-cards/card-reveal-frame.test.ts",
+      "name": "cardReveal should start every card hidden at the initial pose",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/three-cards/card-reveal-frame.test.ts",
+      "name": "cardReveal should settle every card at rest at full progress",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/three-cards/card-reveal-frame.test.ts",
+      "name": "cardReveal should stagger later cards a quarter-progress behind",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/three-cards/card-reveal-frame.test.ts",
+      "name": "cardReveal should fade in over the first 40% of a card travel",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/three-cards/card-reveal-frame.test.ts",
+      "name": "cardReveal should ease travel out by the quintic curve",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-query.test.ts",
+      "name": "buildFilterQuery is empty for no selection",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-query.test.ts",
+      "name": "buildFilterQuery encodes selected facets, sorted",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-query.test.ts",
+      "name": "parseFilterCriteria parses valid facet values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-query.test.ts",
+      "name": "parseFilterCriteria drops values outside the facet vocabulary",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-query.test.ts",
+      "name": "parseFilterCriteria round-trips with buildFilterQuery",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-query.test.ts",
+      "name": "toggleInSet adds a missing value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-query.test.ts",
+      "name": "toggleInSet removes a present value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-query.test.ts",
+      "name": "toggleInSet does not mutate the input set",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/prompt-easter-egg-state.test.ts",
+      "name": "promptEasterEgg should advance from no easter egg to the first message",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/prompt-easter-egg-state.test.ts",
+      "name": "promptEasterEgg should cycle through easter egg messages in authored order",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/prompt-easter-egg-state.test.ts",
+      "name": "promptEasterEgg should trigger the traffic-light escape event every fifth click",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/prompt-easter-egg-state.test.ts",
+      "name": "promptEasterEgg should stop the prompt wiggle without changing the selected message",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/prompt-easter-egg-state.test.ts",
+      "name": "promptEasterEgg should reset to the initial state",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-subscription-license-state.test.ts",
+      "name": "resolveSubscriptionLicenseState licenses a active subscription",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-subscription-license-state.test.ts",
+      "name": "resolveSubscriptionLicenseState licenses a trialing subscription",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-subscription-license-state.test.ts",
+      "name": "resolveSubscriptionLicenseState rejects a canceled subscription",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-subscription-license-state.test.ts",
+      "name": "resolveSubscriptionLicenseState rejects a unpaid subscription",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-subscription-license-state.test.ts",
+      "name": "resolveSubscriptionLicenseState rejects a incomplete subscription",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-subscription-license-state.test.ts",
+      "name": "resolveSubscriptionLicenseState rejects a incomplete_expired subscription",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-subscription-license-state.test.ts",
+      "name": "resolveSubscriptionLicenseState rejects a paused subscription",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-subscription-license-state.test.ts",
+      "name": "resolveSubscriptionLicenseState grants grace while Stripe still has a retry scheduled",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-subscription-license-state.test.ts",
+      "name": "resolveSubscriptionLicenseState refuses grace once Stripe has stopped retrying",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-subscription-license-state.test.ts",
+      "name": "resolveSubscriptionLicenseState keeps the license through a retry that has just fired",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-subscription-license-state.test.ts",
+      "name": "resolveSubscriptionLicenseState refuses grace when the scheduled retry has gone stale",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-subscription-license-state.test.ts",
+      "name": "resolveSubscriptionLicenseState follows the dunning schedule forward instead of the billing period",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-request-schema.test.ts",
+      "name": "clientBriefRequestSchema accepts the minimal required payload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-request-schema.test.ts",
+      "name": "clientBriefRequestSchema accepts the full payload with optional context fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-request-schema.test.ts",
+      "name": "clientBriefRequestSchema rejects unknown top-level keys (strictObject)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-request-schema.test.ts",
+      "name": "clientBriefRequestSchema rejects an invalid email",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-request-schema.test.ts",
+      "name": "clientBriefRequestSchema rejects a missing required field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-request-schema.test.ts",
+      "name": "clientBriefRequestSchema rejects an unknown hostingType enum value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-request-schema.test.ts",
+      "name": "clientBriefRequestSchema rejects empty need after trim",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-request-schema.test.ts",
+      "name": "clientBriefRequestSchema accepts a payload carrying a referring partner slug",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-request-schema.test.ts",
+      "name": "clientBriefRequestSchema rejects a malformed partner slug",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/pricing-plan-table/plan-table-visible-rows.test.ts",
+      "name": "resolveVisibleRows drops self-host-only rows in cloud mode",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/pricing-plan-table/plan-table-visible-rows.test.ts",
+      "name": "resolveVisibleRows drops cloud-only rows in self-host mode",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/pricing-plan-table/plan-table-visible-rows.test.ts",
+      "name": "resolveVisibleRows swaps in self-host tier values only in self-host mode",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/pricing-plan-table/plan-table-visible-rows.test.ts",
+      "name": "resolveVisibleRows drops a category left with no rows beneath it",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/engine/interaction-state.test.ts",
+      "name": "halftone interaction state hydrates pose fields while defaulting transient pointer state",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/engine/interaction-state.test.ts",
+      "name": "halftone interaction state applies one damped spring integration step",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/engine/interaction-state.test.ts",
+      "name": "halftone interaction state resets pointer and velocity fields without always resetting elapsed auto rotation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/engine/interaction-state.test.ts",
+      "name": "halftone interaction state resets auto rotation elapsed time when auto rotation is enabled",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/streamed-markdown.test.ts",
+      "name": "streamedMarkdown.getVisibleLength should count characters without the bold markers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/streamed-markdown.test.ts",
+      "name": "streamedMarkdown.getVisibleLength should sum across paragraphs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/streamed-markdown.test.ts",
+      "name": "streamedMarkdown.getVisibleLength should return zero for no paragraphs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/streamed-markdown.test.ts",
+      "name": "streamedMarkdown.sliceVisibleParagraphs should reveal a prefix across plain and bold runs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/streamed-markdown.test.ts",
+      "name": "streamedMarkdown.sliceVisibleParagraphs should stop mid-bold and omit later paragraphs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/streamed-markdown.test.ts",
+      "name": "streamedMarkdown.sliceVisibleParagraphs should skip the empty bold run when the budget ends at a marker",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/streamed-markdown.test.ts",
+      "name": "streamedMarkdown.sliceVisibleParagraphs should span paragraphs once the first is fully revealed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/streamed-markdown.test.ts",
+      "name": "streamedMarkdown.sliceVisibleParagraphs should render every character at full length",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/validate-partner-application-step.test.ts",
+      "name": "validatePartnerApplicationStep requires experience milestones, narrative, and proof URL on Experience",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/validate-partner-application-step.test.ts",
+      "name": "validatePartnerApplicationStep rejects a narrative under 200 characters on Experience",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/validate-partner-application-step.test.ts",
+      "name": "validatePartnerApplicationStep rejects an invalid proof URL on Experience",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/validate-partner-application-step.test.ts",
+      "name": "validatePartnerApplicationStep accepts a complete Experience step",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/cursor-tour-phases.test.ts",
+      "name": "cursorTour.nextPhaseIndex should advance through the tour",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/cursor-tour-phases.test.ts",
+      "name": "cursorTour.nextPhaseIndex should loop back to the start after the last phase",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/cursor-tour-phases.test.ts",
+      "name": "cursorTour phase tables should keep the desktop tour at 17 phases and mobile at 9",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/cursor-tour-phases.test.ts",
+      "name": "cursorTour phase tables should only target record tabs that exist",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/cursor-tour-phases.test.ts",
+      "name": "cursorTour phase tables should alternate the three cursors on mobile",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/cursor-tour-phases.test.ts",
+      "name": "cursorGlide should clamp the glide duration to the authored hand speed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/cursor-tour-phases.test.ts",
+      "name": "cursorGlide should measure percent distances against the overlay box",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/cursor-tour-phases.test.ts",
+      "name": "cursorGlide should skip sub-threshold hops",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/window-geometry.test.ts",
+      "name": "windowGeometry should clamp a window position inside its parent bounds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/window-geometry.test.ts",
+      "name": "windowGeometry should resize from the right edge without moving the origin",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/window-geometry.test.ts",
+      "name": "windowGeometry should keep the opposite edge fixed when resizing from the left",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/window-geometry.test.ts",
+      "name": "windowGeometry should respect the minimum size when shrinking",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/traffic-light-physics.test.ts",
+      "name": "trafficLightPhysics should create deterministic launch state from an element origin",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/traffic-light-physics.test.ts",
+      "name": "trafficLightPhysics should mark a dot as resting when the floor impact is below the rest threshold",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/traffic-light-physics.test.ts",
+      "name": "trafficLightPhysics should clamp side-wall collisions and reflect horizontal velocity",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/traffic-light-physics.test.ts",
+      "name": "trafficLightPhysics should apply a scroll disturbance and clear resting state",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/timeout-registry.test.ts",
+      "name": "createTimeoutRegistry should track and run scheduled callbacks once",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/timeout-registry.test.ts",
+      "name": "createTimeoutRegistry should cancel one scheduled callback without clearing unrelated callbacks",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/timeout-registry.test.ts",
+      "name": "createTimeoutRegistry should ignore double-cancels after the callback already ran",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/timeout-registry.test.ts",
+      "name": "createTimeoutRegistry should clear every pending timeout",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/conversation-scroll.test.ts",
+      "name": "conversation-scroll should use smooth scrolling and auto when reduced motion is preferred",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/conversation-scroll.test.ts",
+      "name": "conversation-scroll should scroll to the bottom with native scrollTo when available",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/conversation-scroll.test.ts",
+      "name": "conversation-scroll should fall back to scrollTop when scrollTo is missing or unsupported",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/find-next-payment-attempt.test.ts",
+      "name": "findNextPaymentAttempt lists the open invoices of the subscription",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/find-next-payment-attempt.test.ts",
+      "name": "findNextPaymentAttempt finds the retry on an older open invoice when a newer one carries none",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/find-next-payment-attempt.test.ts",
+      "name": "findNextPaymentAttempt returns the latest retry when several invoices are being retried",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/find-next-payment-attempt.test.ts",
+      "name": "findNextPaymentAttempt returns null when no open invoice has a retry scheduled",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/find-next-payment-attempt.test.ts",
+      "name": "findNextPaymentAttempt returns null when the subscription has no open invoice",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/heading-notation.test.ts",
+      "name": "parseHeadingNotation returns a single text segment for plain copy",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/heading-notation.test.ts",
+      "name": "parseHeadingNotation marks *spans* as accent segments",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/heading-notation.test.ts",
+      "name": "parseHeadingNotation keeps newlines as breaks while collapsing other whitespace",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/heading-notation.test.ts",
+      "name": "parseHeadingNotation supports multiple accents",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/heading-notation.test.ts",
+      "name": "parseHeadingNotation treats an unbalanced trailing asterisk as opening an accent to the end",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/heading-notation.test.ts",
+      "name": "parseHeadingNotation ignores empty accent markers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/heading-notation.test.ts",
+      "name": "parseHeadingNotation should keep a message-authored newline as a break segment",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/heading-notation.test.ts",
+      "name": "parseHeadingNotation should still normalize ordinary whitespace runs to single spaces",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/pricing-salesfarce/calculate-price-amounts.test.ts",
+      "name": "calculatePriceAmounts adds the per-seat cost of each checked add-on to the base",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/pricing-salesfarce/calculate-price-amounts.test.ts",
+      "name": "calculatePriceAmounts ignores unchecked add-ons",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/pricing-salesfarce/calculate-price-amounts.test.ts",
+      "name": "calculatePriceAmounts levies a shared-cost per-seat fee only once",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/pricing-salesfarce/calculate-price-amounts.test.ts",
+      "name": "calculatePriceAmounts adds fixed costs to the total but not the per-seat price",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/pricing-salesfarce/calculate-price-amounts.test.ts",
+      "name": "calculatePriceAmounts applies a net-spend rate as a multiplier on the totals",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/partner-link-entries.test.ts",
+      "name": "formatPartnerLinkLabel shows the hostname for a website URL",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/partner-link-entries.test.ts",
+      "name": "formatPartnerLinkLabel includes a path when present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/partner-link-entries.test.ts",
+      "name": "collectPartnerLinks returns website before social links and dedupes identical URLs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/partner-link-entries.test.ts",
+      "name": "collectPartnerLinkUrls preserves API order and dedupes identical URLs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/TagInput.test.tsx",
+      "name": "TagInput offers the suggestions as quick-add chips but never the search pool",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/TagInput.test.tsx",
+      "name": "TagInput autocompletes the menu against both the suggestions and the search pool",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/TagInput.test.tsx",
+      "name": "TagInput adds a search-pool entry from the menu as a removable chip",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/assistant-response-stage.test.ts",
+      "name": "assistantResponseStage should order every stage exactly once",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/assistant-response-stage.test.ts",
+      "name": "assistantResponseStage should walk the streaming chain from rocket to the card",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/assistant-response-stage.test.ts",
+      "name": "assistantResponseStage should report no transition for terminal stages",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/assistant-response-stage.test.ts",
+      "name": "assistantResponseStage should compare stage progress by authored order",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/verify-organization-key.test.ts",
+      "name": "verifyEnterpriseKey recovers the claims from a key it signed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/verify-organization-key.test.ts",
+      "name": "verifyEnterpriseKey rejects a token whose payload was swapped under the original signature",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/verify-organization-key.test.ts",
+      "name": "verifyEnterpriseKey rejects a malformed token",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/get-licensee-from-stripe-customer.test.ts",
+      "name": "getLicenseeFromStripeCustomer should return the customer name when present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/get-licensee-from-stripe-customer.test.ts",
+      "name": "getLicenseeFromStripeCustomer should fall back to the email when the name is missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/get-licensee-from-stripe-customer.test.ts",
+      "name": "getLicenseeFromStripeCustomer should return Unknown when both name and email are missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/get-licensee-from-stripe-customer.test.ts",
+      "name": "getLicenseeFromStripeCustomer should return Unknown for a deleted customer",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/get-licensee-from-stripe-customer.test.ts",
+      "name": "getLicenseeFromStripeCustomer should return Unknown for an unexpanded customer id string",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/get-licensee-from-stripe-customer.test.ts",
+      "name": "getLicenseeFromStripeCustomer should return Unknown when there is no customer",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/changes-summary-card-state.test.ts",
+      "name": "changesSummaryCardState should compute the number of hidden collapsed changes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/changes-summary-card-state.test.ts",
+      "name": "changesSummaryCardState should return collapsed or expanded visible changes deterministically",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/changes-summary-card-state.test.ts",
+      "name": "changesSummaryCardState should compute stable row animation delays",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/EmailsVisual/EmailsVisual.test.tsx",
+      "name": "EmailsVisual renders the inbox chrome",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/EmailsVisual/EmailsVisual.test.tsx",
+      "name": "EmailsVisual renders every thread subject",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/EmailsVisual/EmailsVisual.test.tsx",
+      "name": "EmailsVisual renders thread previews, participants and dates",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/menu-style/find-active-surface-scheme.test.ts",
+      "name": "findActiveSurfaceScheme should return the scheme of the surface spanning the line",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/menu-style/find-active-surface-scheme.test.ts",
+      "name": "findActiveSurfaceScheme should treat the top edge as inclusive and the bottom edge as exclusive",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/menu-style/find-active-surface-scheme.test.ts",
+      "name": "findActiveSurfaceScheme should return the first matching surface in document order",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/menu-style/find-active-surface-scheme.test.ts",
+      "name": "findActiveSurfaceScheme should return null when no surface spans the line",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/menu-style/find-active-surface-scheme.test.ts",
+      "name": "findActiveSurfaceScheme should return null when the spanning surface declares no scheme",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/i18n/localize-href.test.ts",
+      "name": "localizeHref leaves source-locale hrefs unprefixed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/i18n/localize-href.test.ts",
+      "name": "localizeHref prefixes non-source locales with their url segment",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/i18n/localize-href.test.ts",
+      "name": "localizeHref re-localizes an already-prefixed href",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/i18n/localize-href.test.ts",
+      "name": "localizeHref preserves query strings and hashes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/i18n/localize-href.test.ts",
+      "name": "localizeHref passes through external and protocol-relative urls",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/i18n/localize-href.test.ts",
+      "name": "stripLocale removes a known locale prefix",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/i18n/localize-href.test.ts",
+      "name": "stripLocale leaves unprefixed paths alone",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/PipelineVisual/utils/pipeline-move-card.test.ts",
+      "name": "movePipelineCard should reorder within a lane when the target is the same lane",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/PipelineVisual/utils/pipeline-move-card.test.ts",
+      "name": "movePipelineCard should move a card across lanes at the requested index",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/PipelineVisual/utils/pipeline-move-card.test.ts",
+      "name": "movePipelineCard should clamp an out-of-range index to the lane end",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/PipelineVisual/utils/pipeline-move-card.test.ts",
+      "name": "movePipelineCard should clamp a negative index to the lane start",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/PipelineVisual/utils/pipeline-move-card.test.ts",
+      "name": "movePipelineCard should keep a dropped-in-place card where it was",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/PipelineVisual/utils/pipeline-move-card.test.ts",
+      "name": "movePipelineCard should not mutate the input lanes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/client-ip-key.test.ts",
+      "name": "getClientIpKey uses the first entry in x-forwarded-for",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/client-ip-key.test.ts",
+      "name": "getClientIpKey trims whitespace in x-forwarded-for",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/client-ip-key.test.ts",
+      "name": "getClientIpKey falls back to x-real-ip",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/client-ip-key.test.ts",
+      "name": "getClientIpKey returns \"unknown\" when no proxy headers are present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/client-ip-key.test.ts",
+      "name": "getClientIpKey falls through an empty x-forwarded-for to x-real-ip then unknown",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/routing/organization-activation-redirects.test.ts",
+      "name": "Organization activation redirects redirects /enterprise/activate to /organization/activate",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/routing/organization-activation-redirects.test.ts",
+      "name": "Organization activation redirects redirects /fr/enterprise/activate to /fr/organization/activate",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/routing/organization-activation-redirects.test.ts",
+      "name": "Organization activation redirects redirects /ja/enterprise/activate to /ja/organization/activate",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/ImportVisual/ImportVisual.test.tsx",
+      "name": "ImportVisual renders the imported-data and twenty-fields columns",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/ImportVisual/ImportVisual.test.tsx",
+      "name": "ImportVisual renders each imported column with its example value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/ImportVisual/ImportVisual.test.tsx",
+      "name": "ImportVisual maps the imported columns onto Twenty fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/split-full-name.test.ts",
+      "name": "splitFullName splits a standard \"first last\" name",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/split-full-name.test.ts",
+      "name": "splitFullName returns an empty lastName for a single-token name",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/split-full-name.test.ts",
+      "name": "splitFullName keeps middle and additional names in lastName",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/split-full-name.test.ts",
+      "name": "splitFullName collapses arbitrary whitespace between tokens",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/split-full-name.test.ts",
+      "name": "splitFullName treats tabs and newlines as separators",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/split-full-name.test.ts",
+      "name": "splitFullName returns empty fields for an empty or whitespace-only string",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/subscription-current-period.test.ts",
+      "name": "getSubscriptionCurrentPeriodEnd reads the period bounds from the subscription item",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/subscription-current-period.test.ts",
+      "name": "getSubscriptionCurrentPeriodEnd ignores period bounds sitting on the subscription itself",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/subscription-current-period.test.ts",
+      "name": "getSubscriptionCurrentPeriodEnd returns null when the item carries no bounds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/engine/bounded-failure-cache.test.ts",
+      "name": "createBoundedFailureCache should remember added urls",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/engine/bounded-failure-cache.test.ts",
+      "name": "createBoundedFailureCache should evict the oldest entry at capacity",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/engine/bounded-failure-cache.test.ts",
+      "name": "createBoundedFailureCache should treat re-adding as a no-op (insertion order is not refreshed)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/engine/bounded-failure-cache.test.ts",
+      "name": "createBoundedFailureCache should reject a non-positive size",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/seo/serialize-json-ld.test.ts",
+      "name": "serializeJsonLd should escape markup that would close the script tag",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/seo/serialize-json-ld.test.ts",
+      "name": "serializeJsonLd should escape sequences that open an HTML comment",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/seo/serialize-json-ld.test.ts",
+      "name": "serializeJsonLd should keep the payload parseable and unchanged",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/seo/serialize-json-ld.test.ts",
+      "name": "serializeJsonLd should leave payloads without HTML significant characters untouched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/EmailsVisual/components/ThreadRow.test.tsx",
+      "name": "ThreadRow renders the subject, preview, participants, count and date",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/pages/workflow/workflow-geometry.test.ts",
+      "name": "workflow-geometry should throw for unknown workflow nodes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/pages/workflow/workflow-geometry.test.ts",
+      "name": "workflow-geometry should create vertical edge paths from bottom-center to top-center",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/pages/workflow/workflow-geometry.test.ts",
+      "name": "workflow-geometry should create curved edge paths for non-vertical edges",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/home-stepper/utils/lottie-frame-map.test.ts",
+      "name": "LOTTIE_FRAME_MAP.toFrame should pin the timeline ends",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/home-stepper/utils/lottie-frame-map.test.ts",
+      "name": "LOTTIE_FRAME_MAP.toFrame should clamp out-of-range progress",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/home-stepper/utils/lottie-frame-map.test.ts",
+      "name": "LOTTIE_FRAME_MAP.toFrame should land each chapter boundary on its authored frame",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/home-stepper/utils/lottie-frame-map.test.ts",
+      "name": "LOTTIE_FRAME_MAP.toFrame should interpolate linearly inside a chapter",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/motion/compute-scroll-progress.test.ts",
+      "name": "computeScrollProgress should return null when the container cannot scroll",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/motion/compute-scroll-progress.test.ts",
+      "name": "computeScrollProgress should report 0 before the container top passes the viewport top",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/motion/compute-scroll-progress.test.ts",
+      "name": "computeScrollProgress should report progress through the scrollable distance",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/platform/motion/compute-scroll-progress.test.ts",
+      "name": "computeScrollProgress should clamp at 1 when the container bottom reaches the viewport bottom",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/resolve-partner-scope-cards.test.ts",
+      "name": "resolvePartnerScopeCards returns only selected scopes in priority order",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/resolve-partner-scope-cards.test.ts",
+      "name": "resolvePartnerScopeCards returns an empty list when nothing is selected",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/resolve-partner-scope-cards.test.ts",
+      "name": "resolvePartnerScopeCards has a scope-card option for every PartnerScope value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/normalize-partner-slug.test.ts",
+      "name": "normalizePartnerSlug returns a well-formed slug unchanged",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/normalize-partner-slug.test.ts",
+      "name": "normalizePartnerSlug returns undefined when the param is absent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/normalize-partner-slug.test.ts",
+      "name": "normalizePartnerSlug returns undefined for an empty string",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/normalize-partner-slug.test.ts",
+      "name": "normalizePartnerSlug drops a slug with unsupported characters instead of forwarding it",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/normalize-partner-slug.test.ts",
+      "name": "normalizePartnerSlug drops an over-long slug",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/normalize-partner-slug.test.ts",
+      "name": "normalizePartnerSlug takes the first value when the param is repeated",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/utils/toggle-task-done.test.ts",
+      "name": "toggleTaskDone should mark a not-done task as done",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/utils/toggle-task-done.test.ts",
+      "name": "toggleTaskDone should mark a done task as not done",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/utils/toggle-task-done.test.ts",
+      "name": "toggleTaskDone should leave the other tasks untouched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/utils/toggle-task-done.test.ts",
+      "name": "toggleTaskDone should not mutate the input tasks",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/case-studies/case-study-stories.test.ts",
+      "name": "CASE_STUDY_STORIES has a story for every catalog entry and vice versa",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/case-studies/case-study-stories.test.ts",
+      "name": "CASE_STUDY_STORIES gives each section one table-of-contents label",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/case-studies/case-study-stories.test.ts",
+      "name": "CASE_STUDY_STORIES gives each section at least one paragraph",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/ImportVisual/components/MappingRow.test.tsx",
+      "name": "MappingRow renders the imported column, its example and the mapped field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rich-text-excerpt.test.ts",
+      "name": "strips markdown syntax to plain text",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rich-text-excerpt.test.ts",
+      "name": "truncates with an ellipsis",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rich-text-excerpt.test.ts",
+      "name": "preserves markdown-marker characters used inline, not as syntax",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rich-text-excerpt.test.ts",
+      "name": "strips a blockquote marker only at the start of a line",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/case-studies/case-study-catalog.test.ts",
+      "name": "case-study catalog data has unique slugs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/case-studies/case-study-catalog.test.ts",
+      "name": "case-study catalog data points every entry at a defined client logo",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/case-studies/case-study-catalog.test.ts",
+      "name": "case-study catalog data cycles four accents by catalog position",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/add-tag.test.ts",
+      "name": "addTag appends a trimmed tag",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/add-tag.test.ts",
+      "name": "addTag ignores a blank or whitespace-only tag",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/add-tag.test.ts",
+      "name": "addTag ignores an exact duplicate",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/ui/add-tag.test.ts",
+      "name": "addTag returns a new array (does not mutate the input)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/build-client-brief-request-body.test.ts",
+      "name": "buildClientBriefRequestBody puts the referring partner slug on the wire",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/build-client-brief-request-body.test.ts",
+      "name": "buildClientBriefRequestBody omits the key entirely when no slug is given",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/data/partner-skill-suggestions.test.ts",
+      "name": "partner skill suggestions never surfaces a competitor CRM",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/data/partner-skill-suggestions.test.ts",
+      "name": "partner skill suggestions keeps the shown chips and the searchable pool disjoint",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/data/feature-tiles.test.ts",
+      "name": "FEATURE_TILES should use every visual key exactly once",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/data/feature-tiles.test.ts",
+      "name": "FEATURE_TILES should spotlight the dashboard tile first",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-copy.test.ts",
+      "name": "partner application proof hint asks first for a live instance or a YouTube link",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-copy.test.ts",
+      "name": "partner application proof hint still accepts the slower formats and says they are slower",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/ai-hero-tabs.test.ts",
+      "name": "AI_HERO_TABS should map tab N onto scene N+1 (scene 0 is the collaborative intro)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/ai-hero-tabs.test.ts",
+      "name": "AI_HERO_TABS should keep every tab pointing at an AI scene with playable steps",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/format-usd-rate.test.ts",
+      "name": "formatUsdRate returns null when the amount is null",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/format-usd-rate.test.ts",
+      "name": "formatUsdRate returns null when the amount is NaN",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/format-usd-rate.test.ts",
+      "name": "formatUsdRate formats an hourly rate in full",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/format-usd-rate.test.ts",
+      "name": "formatUsdRate formats a project budget with grouping and no decimals",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/is-safe-http-url.test.ts",
+      "name": "isSafeHttpUrl accepts the http(s) URL https://cal.com/partner",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/is-safe-http-url.test.ts",
+      "name": "isSafeHttpUrl accepts the http(s) URL http://example.com",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/is-safe-http-url.test.ts",
+      "name": "isSafeHttpUrl accepts the http(s) URL https://linkedin.com/company/acme",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/is-safe-http-url.test.ts",
+      "name": "isSafeHttpUrl rejects the unsafe or malformed URL ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/is-safe-http-url.test.ts",
+      "name": "isSafeHttpUrl rejects the unsafe or malformed URL not-a-url",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/is-safe-http-url.test.ts",
+      "name": "isSafeHttpUrl rejects the unsafe or malformed URL javascript:alert(1)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/is-safe-http-url.test.ts",
+      "name": "isSafeHttpUrl rejects the unsafe or malformed URL data:text/html,<x>",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/is-safe-http-url.test.ts",
+      "name": "isSafeHttpUrl rejects the unsafe or malformed URL ftp://host/file",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/components/AddTaskButton.test.tsx",
+      "name": "AddTaskButton renders the add-task label",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/partner-scope-priority.test.ts",
+      "name": "keeps the two highest-priority scopes and counts the rest",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/partner-scope-priority.test.ts",
+      "name": "no overflow counter when two or fewer",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/terminal-send-button-hint-position.test.ts",
+      "name": "getTerminalSendButtonHintPosition should overlap the send button bottom-right corner",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-server-binding.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/partner-application/route.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app/api/client-brief/route.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/exporters.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rank-partners.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-reducer.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/engine/create-webgl-context-budget.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-reducer.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-marketplace-partners.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/editor/terminal-editor-state.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/product-hero-scroll-model.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/build-partner-application-request-body.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-request-schema.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/export/footprint.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/fetch-live-partner-profile.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/display-page.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/sign-validity-token.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/fetch-with-timeout.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/community/get-community-stats.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/engine/studio-settings.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/rate-limit.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/read-json-body.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/routing/locale-rewrite-patterns.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/build-logic-function-payload.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/community/community-stats-store.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/TasksVisual.test.tsx",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/pages/record/record-tabs.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-partners.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/three-cards/card-reveal-frame.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/filter-query.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/prompt-easter-egg-state.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/resolve-subscription-license-state.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/client-brief-request-schema.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/pricing-plan-table/plan-table-visible-rows.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/halftone-studio/engine/interaction-state.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/streamed-markdown.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/validate-partner-application-step.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/product-visual/cursor-tour-phases.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/window-geometry.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/traffic-light-physics.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/stage/timeout-registry.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/conversation-scroll.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/find-next-payment-attempt.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/ui/heading-notation.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/pricing-salesfarce/calculate-price-amounts.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/partner-link-entries.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/ui/TagInput.test.tsx",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/assistant-response-stage.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/verify-organization-key.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/get-licensee-from-stripe-customer.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/changes-summary-card-state.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/EmailsVisual/EmailsVisual.test.tsx",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/menu-style/find-active-surface-scheme.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/i18n/localize-href.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/PipelineVisual/utils/pipeline-move-card.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/http/client-ip-key.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/routing/organization-activation-redirects.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/ImportVisual/ImportVisual.test.tsx",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/split-full-name.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/enterprise/subscription-current-period.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/visuals/engine/bounded-failure-cache.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/seo/serialize-json-ld.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/EmailsVisual/components/ThreadRow.test.tsx",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/pages/workflow/workflow-geometry.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/home-stepper/utils/lottie-frame-map.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/platform/motion/compute-scroll-progress.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/resolve-partner-scope-cards.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/normalize-partner-slug.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/utils/toggle-task-done.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/case-studies/case-study-stories.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/ImportVisual/components/MappingRow.test.tsx",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/rich-text-excerpt.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/case-studies/case-study-catalog.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/ui/add-tag.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/client-brief/build-client-brief-request-body.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/data/partner-skill-suggestions.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/data/feature-tiles.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partner-application/partner-application-copy.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-hero/ai-hero-tabs.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/format-usd-rate.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/is-safe-http-url.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/sections/product-feature/TasksVisual/components/AddTaskButton.test.tsx",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/partners-marketplace/partner-scope-priority.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-website/src/app-preview/terminal/terminal-send-button-hint-position.test.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

@@ -1,0 +1,544 @@
+[
+  {
+    "path": "packages/twenty-ui/package.json",
+    "name": "twenty-ui",
+    "scripts": {
+      "test:ci": "bunx vite-plus run twenty-ui#test -- --coverage",
+      "test:coverage": "bunx vite-plus run twenty-ui#test -- --coverage",
+      "build:command": "bunx vite build",
+      "check:ownership:command": "cd ../.. && bunx tsx packages/twenty-ui/scripts/checkModuleOwnership.ts",
+      "generate:check": "cd ../.. && bunx tsx packages/twenty-ui/scripts/generateThemeTokens.ts --check",
+      "checkIconDictionary": "cd ../.. && bunx tsx packages/twenty-ui/scripts/generateIconDictionary.ts --check",
+      "build:individual:command": "bunx vite build -c vite.config.individual.ts",
+      "test:package:command": "tsx scripts/checkOptionalDependencies.ts && tsx scripts/checkThemeExports.ts",
+      "test:command": "bunx vitest run --project unit",
+      "test:watch:command": "bunx vitest --project unit",
+      "typecheck:command": "tsgo -p tsconfig.json",
+      "storybook:build:command": "NODE_OPTIONS='--max-old-space-size=10240' storybook build --test",
+      "storybook:build:test": "NODE_OPTIONS='--max-old-space-size=10240' storybook build --test",
+      "storybook:build:docs": "STORYBOOK_DOCS=true NODE_OPTIONS='--max-old-space-size=10240' storybook build --disable-telemetry",
+      "storybook:serve:static:test:command": "bunx http-server storybook-static -a=localhost --port=6008 --silent",
+      "storybook:test": "vitest run --coverage --project storybook",
+      "storybook:test:no-coverage": "vitest run --project storybook",
+      "typecheck:watch": "bunx tsgo -p tsconfig.json --watch"
+    }
+  },
+  {
+    "path": "packages/twenty-website/package.json",
+    "name": "twenty-website",
+    "scripts": {
+      "test:ci": "bunx vite-plus run twenty-website#test -- --ci --maxWorkers=1 --coverage",
+      "test:coverage": "bunx vite-plus run twenty-website#test -- --coverage --coverageReporters=lcov --coverageReporters=text",
+      "test:watch": "bunx vite-plus run --no-cache twenty-website#test -- --watch",
+      "build:command": "bunx next build",
+      "typecheck:command": "bunx tsc -p tsconfig.json --noEmit",
+      "test:command": "bunx jest --config=jest.config.mjs",
+      "typecheck:watch": "bunx tsc -p tsconfig.json --noEmit --watch"
+    }
+  },
+  {
+    "path": "packages/twenty-docs/package.json",
+    "name": "twenty-docs",
+    "scripts": {
+      "test:ci": "bunx vite-plus run twenty-docs#test -- --coverage",
+      "test:coverage": "bunx vite-plus run twenty-docs#test -- --coverage",
+      "test:watch": "bunx vite-plus run --no-cache twenty-docs#test -- --watch",
+      "test:command": "cd ../.. && bunx vitest run --config packages/twenty-docs/vitest.config.mts",
+      "check:ui": "cd ../.. && bunx tsx packages/twenty-ui/scripts/generateDocsData.ts --check && bunx tsx packages/twenty-docs/scripts/generate-ui-reference.ts --check && bunx tsx packages/twenty-ui/scripts/checkDocsExamples.ts",
+      "check:ui-stories:command": "cd ../.. && bunx tsx packages/twenty-docs/scripts/check-ui-story-embeds.mts .cache/ui-docs/storybook-index.json"
+    }
+  },
+  {
+    "path": "packages/twenty-oxlint-rules/package.json",
+    "name": "twenty-oxlint-rules",
+    "scripts": {
+      "test:ci": "bunx vite-plus run twenty-oxlint-rules#test -- --coverage",
+      "test:coverage": "bunx vite-plus run twenty-oxlint-rules#test -- --coverage",
+      "test:watch": "bunx vite-plus run --no-cache twenty-oxlint-rules#test -- --watch",
+      "build:command": "bunx esbuild oxlint-plugin.ts --bundle --format=esm --platform=node --outfile=dist/oxlint-plugin.mjs \"--define:__filename='\"[plugin]\"'\" \"--define:__dirname='\"[plugin]\"'\" \"--banner:js=import { createRequire } from 'module'; const require = createRequire(import.meta.url);\"",
+      "typecheck:command": "tsgo -p tsconfig.json",
+      "test:command": "cd ../.. && bunx vitest run --config packages/twenty-oxlint-rules/vitest.config.mts",
+      "typecheck:watch": "bunx tsgo -p tsconfig.json --watch"
+    }
+  },
+  {
+    "path": "packages/twenty-server/package.json",
+    "name": "twenty-server",
+    "scripts": {
+      "test:coverage": "bunx vite-plus run twenty-server#test -- --coverage --coverageReporters=lcov --coverageReporters=text",
+      "test:watch": "bunx vite-plus run --no-cache twenty-server#test -- --watch",
+      "build:command": "rimraf dist && nest build --path ./tsconfig.build.json && mkdir -p dist/assets/twenty-client-sdk && cp ../twenty-client-sdk/package.json dist/assets/twenty-client-sdk/ && cp -r ../twenty-client-sdk/dist dist/assets/twenty-client-sdk/dist",
+      "test:integration:secure": "NODE_ENV=test NODE_OPTIONS=\"--max-old-space-size=6144\" bunx jest --config ./jest-integration-secure.config.ts --logHeapUsage",
+      "test:integration": "NODE_ENV=test NODE_OPTIONS=\"--max-old-space-size=6144\" bunx jest --config ./jest-integration.config.ts --logHeapUsage",
+      "test:integration:with-db-reset": "NODE_ENV=test NODE_OPTIONS=\"--max-old-space-size=12288\" bunx vite-plus run twenty-server#database:reset > reset-logs.log && NODE_ENV=test NODE_OPTIONS=\"--max-old-space-size=6144\" bunx jest --config ./jest-integration.config.ts --logHeapUsage",
+      "test:ci:command": "bunx jest --config ./jest.config.mjs --ci --runInBand",
+      "build:packageJson": "bunx tsgo -p tsconfig.json --outDir dist && cp package.json dist/package.json",
+      "typecheck:command": "tsgo -p tsconfig.json",
+      "reset:env:e2e-testing-server": "cp .env.e2e-testing-server .env",
+      "test:command": "bunx jest --config jest.config.mjs --silent",
+      "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register ../../node_modules/.bin/jest --runInBand",
+      "generate:integration-test": "bun run ts-node-no-deps -- ./test/integration/graphql/codegen/index.ts",
+      "typecheck:watch": "bunx tsgo -p tsconfig.json --watch"
+    }
+  },
+  {
+    "path": "packages/twenty-server/.local-storage/20202020-1c25-4d02-bf25-6aeccf7ea419/977ffa23-f9da-4d81-af03-9ca8b689179b/dependencies/package.json",
+    "scripts": {}
+  },
+  {
+    "path": "packages/twenty-server/.local-storage/20202020-1c25-4d02-bf25-6aeccf7ea419/20202020-64aa-4b6f-b003-9c74b97cee20/dependencies/package.json",
+    "scripts": {}
+  },
+  {
+    "path": "packages/twenty-server/.local-storage/3b8e6458-5fc1-4e63-8563-008ccddaa6db/68b65a0e-8b4a-4593-9382-9be1fad181cb/dependencies/package.json",
+    "scripts": {}
+  },
+  {
+    "path": "packages/twenty-server/.local-storage/3b8e6458-5fc1-4e63-8563-008ccddaa6db/20202020-64aa-4b6f-b003-9c74b97cee20/dependencies/package.json",
+    "scripts": {}
+  },
+  {
+    "path": "packages/twenty-server/src/engine/core-modules/logic-function/logic-function-drivers/constants/common-layer-dependencies/package.json",
+    "scripts": {}
+  },
+  {
+    "path": "packages/twenty-server/src/engine/core-modules/application/application-package/constants/seed-dependencies/package.json",
+    "scripts": {}
+  },
+  {
+    "path": "packages/twenty-sdk/package.json",
+    "name": "twenty-sdk",
+    "scripts": {
+      "test:coverage": "bunx vite-plus run twenty-sdk#test -- --coverage",
+      "test:watch": "bunx vite-plus run --no-cache twenty-sdk#test -- --watch",
+      "build:command": "bunx rimraf dist && bunx vite build -c vite.config.node.ts && bunx vite build -c vite.config.define.ts && bunx vite build -c vite.config.billing.ts && bunx vite build -c vite.config.front-component.ts && bunx vite build -c vite.config.logic-function.ts && bunx vite build -c vite.config.utils.ts && bunx vite build -c vite.config.browser.ts && tsgo -p tsconfig.lib.json --declaration --emitDeclarationOnly --noEmit false --outDir dist --rootDir src && bunx tsc-alias -p tsconfig.lib.json --outDir dist && bunx rimraf 'dist/sdk' 'dist/define/**/*.d.ts' 'dist/define/**/*.d.ts.map' 'dist/billing/**/*.d.ts' 'dist/billing/**/*.d.ts.map' 'dist/front-component/**/*.d.ts' 'dist/front-component/**/*.d.ts.map' 'dist/logic-function/**/*.d.ts' 'dist/logic-function/**/*.d.ts.map' 'dist/utils/**/*.d.ts' 'dist/utils/**/*.d.ts.map' && bunx rollup -c rollup.config.sdk-dts.mjs",
+      "typecheck:command": "tsgo -p tsconfig.json",
+      "test:command": "bunx vitest run --config vitest.config.ts",
+      "test:ci:command": "bunx vitest run --config vitest.config.ts --coverage",
+      "test:unit": "bunx vitest run --config vitest.unit.config.ts",
+      "test:integration": "bunx vitest run --config vitest.integration.config.ts",
+      "test:e2e:command": "bunx wait-on http://localhost:3000/healthz --timeout 600000 --interval 1000 --log && NODE_ENV=test bunx vitest run --config ./vitest.e2e.config.ts",
+      "build:sdk:command": "bunx vite build -c vite.config.define.ts && bunx vite build -c vite.config.billing.ts && bunx vite build -c vite.config.front-component.ts && bunx vite build -c vite.config.logic-function.ts && bunx vite build -c vite.config.utils.ts && bunx rollup -c rollup.config.sdk-dts.mjs",
+      "typecheck:watch": "bunx tsgo -p tsconfig.json --watch"
+    }
+  },
+  {
+    "path": "packages/twenty-shared/package.json",
+    "name": "twenty-shared",
+    "scripts": {
+      "test:ci": "bunx vite-plus run twenty-shared#test -- --ci --maxWorkers=1 --coverage",
+      "test:coverage": "bunx vite-plus run twenty-shared#test -- --coverage --coverageReporters=lcov --coverageReporters=text",
+      "test:watch": "bunx vite-plus run --no-cache twenty-shared#test -- --watch",
+      "build:command": "bunx vite build && node node_modules/typescript/bin/tsc -p tsconfig.lib.json --moduleResolution bundler --declaration --emitDeclarationOnly --noEmit false --outDir dist --rootDir src && bunx tsc-alias -p tsconfig.lib.json --outDir dist --outputcheck d.ts",
+      "build:individual:command": "bunx vite build -c vite.config.individual.ts",
+      "typecheck:command": "node node_modules/typescript/bin/tsc -p tsconfig.json --moduleResolution bundler",
+      "test:command": "bunx jest --config jest.config.mjs --silent",
+      "typecheck:watch": "node node_modules/typescript/bin/tsc -p tsconfig.json --moduleResolution bundler --watch"
+    }
+  },
+  {
+    "path": "packages/twenty-claude-skills/package.json",
+    "name": "twenty-claude-skills",
+    "scripts": {}
+  },
+  {
+    "path": "packages/twenty-front-component-renderer/package.json",
+    "name": "twenty-front-component-renderer",
+    "scripts": {
+      "test:ci": "bunx vite-plus run twenty-front-component-renderer#test -- --ci --maxWorkers=1 --coverage",
+      "test:coverage": "bunx vite-plus run twenty-front-component-renderer#test -- --coverage --coverageReporters=lcov --coverageReporters=text",
+      "test:watch": "bunx vite-plus run --no-cache twenty-front-component-renderer#test -- --watch",
+      "build:command": "bunx rimraf dist && bunx vite build -c vite.config.ts && node node_modules/typescript/bin/tsc -p tsconfig.lib.json --declaration --emitDeclarationOnly --noEmit false --outDir dist --rootDir src && bunx tsc-alias -p tsconfig.lib.json --outDir dist --outputcheck d.ts",
+      "typecheck:command": "tsgo -p tsconfig.json",
+      "test:command": "bunx jest --config jest.config.mjs --silent",
+      "sandbox:prebuild:command": "tsx -r tsconfig-paths/register scripts/front-component-sandbox/build-sandbox-document.ts",
+      "storybook:prebuild:command": "cd ../.. && bunx tsx packages/twenty-front-component-renderer/scripts/front-component-stories/build-source-examples.ts",
+      "storybook:build:command": "NODE_OPTIONS='--max-old-space-size=10240' storybook build --test",
+      "storybook:build:test:command": "NODE_OPTIONS='--max-old-space-size=10240' storybook build --test",
+      "storybook:serve:static:test:command": "bunx http-server storybook-static -a=localhost --port=6006 --silent=true",
+      "storybook:test:command": "vitest run --coverage --config vitest.storybook.config.ts",
+      "storybook:test:no-coverage:command": "vitest run --config vitest.storybook.config.ts",
+      "typecheck:watch": "bunx tsgo -p tsconfig.json --watch"
+    }
+  },
+  {
+    "path": "packages/twenty-zapier/package.json",
+    "name": "twenty-zapier",
+    "scripts": {
+      "test:ci": "bunx vite-plus run twenty-zapier#test -- --ci --maxWorkers=1 --coverage",
+      "test:coverage": "bunx vite-plus run twenty-zapier#test -- --coverage --coverageReporters=lcov --coverageReporters=text",
+      "test:watch": "bunx vite-plus run --no-cache twenty-zapier#test -- --watch",
+      "build:command": "bunx vite build",
+      "format:check": "bunx oxfmt --check .",
+      "test:command": "NODE_ENV=test jest --testTimeout 10000",
+      "typecheck:command": "tsgo -p tsconfig.json",
+      "typecheck:watch": "bunx tsgo -p tsconfig.json --watch"
+    }
+  },
+  {
+    "path": "packages/twenty-utils/package.json",
+    "name": "twenty-utils",
+    "scripts": {
+      "test:ci": "bunx vite-plus run twenty-utils#test -- --ci --maxWorkers=1 --coverage",
+      "test:coverage": "bunx vite-plus run twenty-utils#test -- --coverage --coverageReporters=lcov --coverageReporters=text",
+      "test:watch": "bunx vite-plus run --no-cache twenty-utils#test -- --watch",
+      "test:command": "bunx jest --config jest.config.mjs --silent"
+    }
+  },
+  {
+    "path": "packages/twenty-emails/package.json",
+    "name": "twenty-emails",
+    "scripts": {
+      "build:command": "bunx vite-plus build && node node_modules/typescript/bin/tsc -p tsconfig.lib.json --declaration --emitDeclarationOnly --outDir dist --rootDir src --composite false && bunx tsc-alias -p tsconfig.lib.json --outDir dist",
+      "typecheck:command": "node node_modules/typescript/bin/tsc -p tsconfig.json",
+      "typecheck:watch": "node node_modules/typescript/bin/tsc -p tsconfig.json --watch"
+    }
+  },
+  {
+    "path": "packages/twenty-cli/package.json",
+    "name": "twenty",
+    "scripts": {}
+  },
+  {
+    "path": "packages/twenty-companion/package.json",
+    "name": "@twentyhq/companion",
+    "scripts": {
+      "test:ci": "bunx vite-plus run twenty-companion#test -- --coverage",
+      "test:coverage": "bunx vite-plus run twenty-companion#test -- --coverage",
+      "test:watch": "bunx vite-plus run --no-cache twenty-companion#test -- --watch",
+      "build:command": "bun run lingui:compile && node scripts/build.mjs",
+      "typecheck:command": "tsc --noEmit",
+      "test:command": "vitest run --passWithNoTests",
+      "typecheck:watch": "tsc --noEmit --watch"
+    }
+  },
+  {
+    "path": "packages/twenty-client-sdk/package.json",
+    "name": "twenty-client-sdk",
+    "scripts": {
+      "test:coverage": "bunx vite-plus run twenty-client-sdk#test -- --coverage",
+      "test:watch": "bunx vite-plus run --no-cache twenty-client-sdk#test -- --watch",
+      "build:command": "bunx rimraf dist && bunx vite build && bunx vite build -c vite.metadata.config.ts && node node_modules/typescript/bin/tsc -p tsconfig.lib.json --declaration --emitDeclarationOnly --noEmit false --outDir dist --rootDir src && bunx tsc-alias -p tsconfig.lib.json --outDir dist",
+      "test:command": "bunx vitest run --config vitest.config.ts",
+      "test:ci:command": "bunx vitest run --config vitest.config.ts",
+      "typecheck:command": "tsgo -p tsconfig.json",
+      "typecheck:watch": "bunx tsgo -p tsconfig.json --watch"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/internal/real-estate/package.json",
+    "name": "real-estate",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {}
+  },
+  {
+    "path": "packages/twenty-apps/public/granola/package.json",
+    "name": "@twentyhq/granola",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:unit": "vitest run --config vitest.unit.config.ts"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/public/discord/package.json",
+    "name": "@twentyhq/discord",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:unit": "vitest run --config vitest.unit.config.ts"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/public/last-contact/package.json",
+    "name": "@twentyhq/last-contact",
+    "packageManager": "yarn@4.9.2",
+    "scripts": {
+      "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:unit": "vitest run --config vitest.unit.config.ts"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/public/linear/package.json",
+    "name": "@twentyhq/linear",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:unit": "vitest run --config vitest.unit.config.ts"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/public/exa/package.json",
+    "name": "@twentyhq/exa",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:unit": "vitest run --config vitest.unit.config.ts"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/public/fireflies/package.json",
+    "name": "@twentyhq/fireflies",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:unit": "vitest run --config vitest.unit.config.ts"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/public/people-data-labs/package.json",
+    "name": "@twentyhq/people-data-labs",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:unit": "vitest run --config vitest.unit.config.ts"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/public/fathom/package.json",
+    "name": "@twentyhq/fathom",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:unit": "vitest run --config vitest.unit.config.ts"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/public/teams/package.json",
+    "name": "@twentyhq/teams",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
+      "test": "vitest run",
+      "test:unit": "vitest run --config vitest.unit.config.ts",
+      "test:watch": "vitest --config vitest.unit.config.ts"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/public/call-recorder/package.json",
+    "name": "@twentyhq/call-recorder",
+    "packageManager": "yarn@4.9.2",
+    "scripts": {
+      "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
+      "test": "vitest run",
+      "test:unit": "vitest run --config vitest.unit.config.ts",
+      "test:unit:watch": "vitest --config vitest.unit.config.ts",
+      "test:watch": "vitest"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/public/slack/package.json",
+    "name": "@twentyhq/slack",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:unit": "vitest run --config vitest.unit.config.ts"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/public/companion/package.json",
+    "name": "@twentyhq/companion-app",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:unit": "vitest run --config vitest.unit.config.ts"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/examples/postcard/package.json",
+    "name": "postcard",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:e2e": "playwright test",
+      "test:e2e:ui": "playwright test --ui"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/examples/media-notes/package.json",
+    "name": "media-notes",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "test:e2e": "playwright test",
+      "test:e2e:ui": "playwright test --ui"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/examples/hello-world/package.json",
+    "name": "hello-world",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "test": "vitest run",
+      "test:watch": "vitest"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/examples/document-generator/package.json",
+    "name": "@twentyhq/document-generator",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:unit": "vitest run --config vitest.unit.config.ts"
+    }
+  },
+  {
+    "path": "packages/twenty-apps/fixtures/invalid-app/package.json",
+    "name": "invalid-app",
+    "packageManager": "yarn@4.9.2",
+    "scripts": {}
+  },
+  {
+    "path": "packages/twenty-apps/fixtures/minimal-app/package.json",
+    "name": "minimal-app",
+    "packageManager": "yarn@4.9.2",
+    "scripts": {}
+  },
+  {
+    "path": "packages/twenty-apps/fixtures/shared-dependencies-app/package.json",
+    "name": "shared-dependencies-app",
+    "packageManager": "yarn@4.9.2",
+    "scripts": {}
+  },
+  {
+    "path": "packages/twenty-apps/fixtures/function-execute-app/package.json",
+    "name": "function-execute-app",
+    "packageManager": "yarn@4.9.2",
+    "scripts": {}
+  },
+  {
+    "path": "packages/twenty-apps/fixtures/rich-app/package.json",
+    "name": "rich-app",
+    "packageManager": "yarn@4.9.2",
+    "scripts": {}
+  },
+  {
+    "path": "packages/create-twenty-app/package.json",
+    "name": "create-twenty-app",
+    "scripts": {
+      "build:command": "bunx vite build",
+      "typecheck:command": "tsgo -p tsconfig.json",
+      "test:command": "bunx jest --config jest.config.mjs --silent",
+      "test:ci:command": "bunx jest --config jest.config.mjs --ci --coverage --watchAll=false",
+      "typecheck:watch": "bunx tsgo -p tsconfig.json --watch",
+      "test:watch": "bunx jest --config jest.config.mjs --silent --watch",
+      "test:coverage": "bunx jest --config jest.config.mjs --silent --coverage --coverageReporters=lcov --coverageReporters=text"
+    }
+  },
+  {
+    "path": "packages/create-twenty-app/src/constants/template/package.json",
+    "name": "TO-BE-GENERATED",
+    "packageManager": "yarn@4.13.0",
+    "scripts": {
+      "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:unit": "vitest run --config vitest.unit.config.ts"
+    }
+  },
+  {
+    "path": "packages/twenty-agent-skills/package.json",
+    "name": "twenty-agent-skills",
+    "scripts": {
+      "test:ci": "bunx vite-plus run twenty-agent-skills#test",
+      "test:coverage": "bunx vite-plus run twenty-agent-skills#test",
+      "test:watch": "bunx vite-plus run --no-cache twenty-agent-skills#test",
+      "build:command": "node ./scripts/build.js",
+      "test:command": "node --test ./scripts/__tests__/*.spec.js"
+    }
+  },
+  {
+    "path": "packages/twenty-front/package.json",
+    "name": "twenty-front",
+    "scripts": {
+      "test:ci": "bunx vite-plus run twenty-front#test -- --ci --maxWorkers=1 --coverage",
+      "test:coverage": "bunx vite-plus run twenty-front#test -- --coverage --coverageReporters=lcov --coverageReporters=text",
+      "test:watch": "bunx vite-plus run --no-cache twenty-front#test -- --watch",
+      "build:command": "NODE_ENV=production NODE_OPTIONS=--max-old-space-size=8192 vp build",
+      "build:sourcemaps:command": "NODE_ENV=production VITE_BUILD_SOURCEMAP=true NODE_OPTIONS=--max-old-space-size=8192 vp build",
+      "typecheck:command": "tsgo -p tsconfig.json",
+      "test:command": "bunx jest --config jest.config.mjs --silent",
+      "storybook:build:command": "NODE_OPTIONS='--max-old-space-size=10240' storybook build --test",
+      "storybook:build:docs:command": "STORYBOOK_SCOPE=ui-docs NODE_OPTIONS='--max-old-space-size=10240' storybook build --test",
+      "storybook:build:modules:command": "STORYBOOK_SCOPE=modules NODE_OPTIONS='--max-old-space-size=10240' storybook build --test",
+      "storybook:build:pages:command": "STORYBOOK_SCOPE=pages NODE_OPTIONS='--max-old-space-size=10240' storybook build --test",
+      "storybook:build:performance:command": "STORYBOOK_SCOPE=performance NODE_OPTIONS='--max-old-space-size=10240' storybook build --test",
+      "storybook:test": "vitest run --coverage",
+      "storybook:test:docs": "STORYBOOK_SCOPE=ui-docs vitest run --coverage",
+      "storybook:test:modules": "STORYBOOK_SCOPE=modules vitest run --coverage",
+      "storybook:test:pages": "STORYBOOK_SCOPE=pages vitest run --coverage",
+      "storybook:test:performance": "STORYBOOK_SCOPE=performance vitest run --coverage",
+      "storybook:test:no-coverage": "vitest run",
+      "storybook:test:no-coverage:docs": "STORYBOOK_SCOPE=ui-docs vitest run",
+      "storybook:test:no-coverage:modules": "STORYBOOK_SCOPE=modules vitest run",
+      "storybook:test:no-coverage:pages": "STORYBOOK_SCOPE=pages vitest run",
+      "storybook:test:no-coverage:performance": "STORYBOOK_SCOPE=performance vitest run",
+      "typecheck:watch": "bunx tsgo -p tsconfig.json --watch"
+    }
+  },
+  {
+    "path": "packages/twenty-e2e-testing/package.json",
+    "name": "twenty-e2e-testing",
+    "scripts": {
+      "test:ci": "bunx vite-plus run twenty-e2e-testing#test",
+      "test:coverage": "bunx vite-plus run twenty-e2e-testing#test",
+      "test:watch": "bunx vite-plus run --no-cache twenty-e2e-testing#test",
+      "test:command": "bunx playwright test",
+      "test:ui": "bunx playwright test --ui",
+      "test:debug": "bunx playwright test --debug",
+      "test:report": "bunx playwright show-report"
+    }
+  },
+  {
+    "path": "deployments/cloudflare-front/package.json",
+    "name": "fenforce-cloudflare-front",
+    "packageManager": "bun@1.4.3",
+    "scripts": {
+      "build": "varlock run -- bun scripts/build.mjs",
+      "env:check": "varlock load --agent",
+      "check": "tsc --noEmit && bun test && vp lint src scripts alchemy.run.ts --deny-warnings && vp fmt src scripts alchemy.run.ts --check && varlock load --agent && varlock scan"
+    }
+  },
+  {
+    "path": "deployments/convex/package.json",
+    "name": "fenforce-convex",
+    "packageManager": "bun@1.4.3",
+    "scripts": {
+      "typecheck": "tsc --noEmit",
+      "test": "vitest run",
+      "check": "bun run typecheck && bun run test"
+    }
+  },
+  {
+    "path": "experiments/cloudflare-workflows/package.json",
+    "name": "fenforce-cloudflare-workflow-spike",
+    "packageManager": "bun@1.4.3",
+    "scripts": {
+      "effect:check": "effect-tsgo diagnostics --project tsconfig.json --strict",
+      "env:check": "varlock load --agent",
+      "check": "bun run env:check && tsc --noEmit && tsc --noEmit -p scripts/tsconfig.json && bun run effect:check && bun run effect:verify && bun run lint && oxfmt --check . && bun run analyze && bun run env:scan"
+    }
+  }
+]

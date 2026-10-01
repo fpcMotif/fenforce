@@ -1,0 +1,753 @@
+{
+  "numTotalTests": 101,
+  "numPassedTests": 101,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 46,
+  "numPassedTestSuites": 46,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-batch.test.ts",
+      "name": "firefliesBackfillBatchLogicFunction is configured as an enqueue-only batch importer",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-batch.test.ts",
+      "name": "firefliesBackfillBatchLogicFunction imports the calls listed in the raw job payload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-batch.test.ts",
+      "name": "firefliesBackfillBatchLogicFunction skips already synced calls without calling Fireflies",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-batch.test.ts",
+      "name": "firefliesBackfillBatchLogicFunction throws on a Fireflies rate limit so the queue retries the job",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-batch.test.ts",
+      "name": "firefliesBackfillBatchLogicFunction throws on an invalid job payload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-batch.test.ts",
+      "name": "firefliesBackfillBatchLogicFunction throws when a job payload exceeds the configured batch size",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-batch.test.ts",
+      "name": "firefliesBackfillBatchLogicFunction throws when the Fireflies api key is missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-worker.test.ts",
+      "name": "firefliesBackfillWorkerLogicFunction is configured as an enqueue-only discovery worker",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-worker.test.ts",
+      "name": "firefliesBackfillWorkerLogicFunction rejects an invalid worker payload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-worker.test.ts",
+      "name": "firefliesBackfillWorkerLogicFunction lists the requested window and enqueues every transcript batch",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-worker.test.ts",
+      "name": "firefliesBackfillWorkerLogicFunction fails discovery with partial enqueue progress so the queue retries it",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-worker.test.ts",
+      "name": "firefliesBackfillWorkerLogicFunction fails discovery when Fireflies listing fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-worker.test.ts",
+      "name": "firefliesBackfillWorkerLogicFunction skips discovery when the Fireflies api key is missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill.test.ts",
+      "name": "firefliesBackfillLogicFunction is configured as an authenticated backfill route",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill.test.ts",
+      "name": "firefliesBackfillLogicFunction rejects an empty route body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill.test.ts",
+      "name": "firefliesBackfillLogicFunction returns not-configured without enqueueing when the API key is missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill.test.ts",
+      "name": "firefliesBackfillLogicFunction enqueues discovery instead of listing transcripts in the route",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-daily-healer.test.ts",
+      "name": "firefliesDailyHealerLogicFunction is configured as the daily healing trigger",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-daily-healer.test.ts",
+      "name": "firefliesDailyHealerLogicFunction lists a fixed seven-day healing window",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/utils/__tests__/chunk-into-batches.test.ts",
+      "name": "chunkIntoBatches splits items into batches of the requested size",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/utils/__tests__/chunk-into-batches.test.ts",
+      "name": "chunkIntoBatches returns no batches for an empty list",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/utils/__tests__/chunk-into-batches.test.ts",
+      "name": "chunkIntoBatches returns a single batch when the list fits the batch size",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/utils/__tests__/chunk-into-batches.test.ts",
+      "name": "chunkIntoBatches rejects an invalid batch size of 0",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/utils/__tests__/chunk-into-batches.test.ts",
+      "name": "chunkIntoBatches rejects an invalid batch size of -1",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/utils/__tests__/chunk-into-batches.test.ts",
+      "name": "chunkIntoBatches rejects an invalid batch size of 1.5",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/get-fireflies-backfill-feedback.test.ts",
+      "name": "getFirefliesBackfillFeedback maps the started outcome to a success feedback",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/get-fireflies-backfill-feedback.test.ts",
+      "name": "getFirefliesBackfillFeedback maps the invalid-request outcome to a error feedback",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/get-fireflies-backfill-feedback.test.ts",
+      "name": "getFirefliesBackfillFeedback maps the not-configured outcome to a error feedback",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/get-fireflies-backfill-feedback.test.ts",
+      "name": "getFirefliesBackfillFeedback maps an unknown outcome to an error feedback",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/get-fireflies-backfill-feedback.test.ts",
+      "name": "getFirefliesBackfillFeedback maps a missing outcome to an error feedback",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/get-is-application-variable-configured.test.ts",
+      "name": "getIsApplicationVariableConfigured is configured when untouched and a value is stored",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/get-is-application-variable-configured.test.ts",
+      "name": "getIsApplicationVariableConfigured is not configured when untouched and nothing is stored",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/get-is-application-variable-configured.test.ts",
+      "name": "getIsApplicationVariableConfigured is configured as soon as a value is typed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/get-is-application-variable-configured.test.ts",
+      "name": "getIsApplicationVariableConfigured is not configured once a stored value is cleared, even while the stored value is still present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/parse-backfill-days.test.ts",
+      "name": "parseBackfillDays parses a positive integer",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/parse-backfill-days.test.ts",
+      "name": "parseBackfillDays parses a padded value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/parse-backfill-days.test.ts",
+      "name": "parseBackfillDays accepts the maximum window",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/parse-backfill-days.test.ts",
+      "name": "parseBackfillDays rejects 0",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/parse-backfill-days.test.ts",
+      "name": "parseBackfillDays rejects -5",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/parse-backfill-days.test.ts",
+      "name": "parseBackfillDays rejects 1.5",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/parse-backfill-days.test.ts",
+      "name": "parseBackfillDays rejects abc",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/parse-backfill-days.test.ts",
+      "name": "parseBackfillDays rejects ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/parse-backfill-days.test.ts",
+      "name": "parseBackfillDays rejects 3651",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/should-display-application-variable.test.ts",
+      "name": "shouldDisplayApplicationVariable displays a supported variable without a value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/should-display-application-variable.test.ts",
+      "name": "shouldDisplayApplicationVariable hides a deprecated variable without a value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/should-display-application-variable.test.ts",
+      "name": "shouldDisplayApplicationVariable displays a deprecated variable that still holds a value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/flows/__tests__/import-missing-fireflies-calls-retry.test.ts",
+      "name": "importMissingFirefliesCalls retries aborts the batch on a Fireflies rate limit",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/flows/__tests__/import-missing-fireflies-calls-retry.test.ts",
+      "name": "importMissingFirefliesCalls retries keeps the counts of calls synced before a rate limit aborts the batch",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/flows/__tests__/import-missing-fireflies-calls-retry.test.ts",
+      "name": "importMissingFirefliesCalls retries aborts the batch on a persistent Fireflies server error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/flows/__tests__/import-missing-fireflies-calls.test.ts",
+      "name": "importMissingFirefliesCalls synchronization imports every call in the batch",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/flows/__tests__/import-missing-fireflies-calls.test.ts",
+      "name": "importMissingFirefliesCalls synchronization imports duplicate transcript ids only once",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/flows/__tests__/import-missing-fireflies-calls.test.ts",
+      "name": "importMissingFirefliesCalls synchronization keeps a call recording processing while its Fireflies summary is pending",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/flows/__tests__/import-missing-fireflies-calls.test.ts",
+      "name": "importMissingFirefliesCalls synchronization skips complete calls without calling Fireflies",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/flows/__tests__/import-missing-fireflies-calls.test.ts",
+      "name": "importMissingFirefliesCalls synchronization syncs only the missing field of a partial call recording",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/flows/__tests__/import-missing-fireflies-calls.test.ts",
+      "name": "importMissingFirefliesCalls synchronization moves a completed legacy recording back to processing while its summary is unavailable",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/flows/__tests__/import-missing-fireflies-calls.test.ts",
+      "name": "importMissingFirefliesCalls synchronization keeps a transcript processing when its summary remains unavailable",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/data/__tests__/enqueue-fireflies-backfill-batches.test.ts",
+      "name": "enqueueFirefliesBackfillBatches enqueues one staggered job per batch",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/data/__tests__/enqueue-fireflies-backfill-batches.test.ts",
+      "name": "enqueueFirefliesBackfillBatches throws partial progress without enqueueing later batches",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/handlers/__tests__/fireflies-webhook-handler.test.ts",
+      "name": "firefliesWebhookHandler keeps a summary-only webhook recording processing until its transcript arrives",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/schemas/__tests__/call-recording-field-state-query-result.schema.test.ts",
+      "name": "callRecordingFieldStateQueryResultSchema accepts the queried call recording field state",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/schemas/__tests__/call-recording-field-state-query-result.schema.test.ts",
+      "name": "callRecordingFieldStateQueryResultSchema rejects a call recording without an id",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/schemas/__tests__/fireflies-backfill-request-body.schema.test.ts",
+      "name": "firefliesBackfillRequestBodySchema accepts a days window",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/schemas/__tests__/fireflies-backfill-request-body.schema.test.ts",
+      "name": "firefliesBackfillRequestBodySchema rejects an empty request body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/schemas/__tests__/fireflies-backfill-request-body.schema.test.ts",
+      "name": "firefliesBackfillRequestBodySchema rejects a non-positive days window",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/schemas/__tests__/fireflies-backfill-request-body.schema.test.ts",
+      "name": "firefliesBackfillRequestBodySchema rejects a fractional days window",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/schemas/__tests__/fireflies-backfill-request-body.schema.test.ts",
+      "name": "firefliesBackfillRequestBodySchema rejects a days window beyond the supported maximum",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/build-fireflies-backfill-window.test.ts",
+      "name": "buildFirefliesBackfillWindow creates a date window ending now for the requested days",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/compute-call-recording-id-for-fireflies-meeting.test.ts",
+      "name": "computeCallRecordingIdForFirefliesMeeting should produce a valid v4-shaped UUID",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/compute-call-recording-id-for-fireflies-meeting.test.ts",
+      "name": "computeCallRecordingIdForFirefliesMeeting should be deterministic for the same meeting id",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/compute-call-recording-id-for-fireflies-meeting.test.ts",
+      "name": "computeCallRecordingIdForFirefliesMeeting should differ for different meeting ids",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/fireflies-api-request.test.ts",
+      "name": "firefliesApiRequest maps Fireflies 'request_timeout' errors returned over HTTP 200 to status 408",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/fireflies-api-request.test.ts",
+      "name": "firefliesApiRequest maps Fireflies 'too_many_requests' errors returned over HTTP 200 to status 429",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/fireflies-api-request.test.ts",
+      "name": "firefliesApiRequest maps Fireflies 'invariant_violation' errors returned over HTTP 200 to status 500",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/fireflies-api-request.test.ts",
+      "name": "firefliesApiRequest retries a transient server error and returns the eventual success",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/fireflies-api-request.test.ts",
+      "name": "firefliesApiRequest gives up after the bounded attempts on a persistent server error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/fireflies-api-request.test.ts",
+      "name": "firefliesApiRequest retries rate limiting using the shared retry policy",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/format-summary-as-markdown.test.ts",
+      "name": "formatSummaryAsMarkdown returns a placeholder when summary is undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/format-summary-as-markdown.test.ts",
+      "name": "formatSummaryAsMarkdown returns a placeholder when summary is null",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/format-summary-as-markdown.test.ts",
+      "name": "formatSummaryAsMarkdown returns a placeholder when every summary section is empty",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/format-summary-as-markdown.test.ts",
+      "name": "formatSummaryAsMarkdown renders overview, action items, topics and keywords in order with headers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/format-summary-as-markdown.test.ts",
+      "name": "formatSummaryAsMarkdown omits sections that are empty",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/format-summary-as-markdown.test.ts",
+      "name": "formatSummaryAsMarkdown trims overview and action_items whitespace",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/list-fireflies-transcript-ids.test.ts",
+      "name": "listFirefliesTranscriptIds collects every transcript id across pages",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/list-fireflies-transcript-ids.test.ts",
+      "name": "listFirefliesTranscriptIds stops at an empty first page",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/list-fireflies-transcript-ids.test.ts",
+      "name": "listFirefliesTranscriptIds propagates a Fireflies listing failure",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/list-fireflies-transcript-ids.test.ts",
+      "name": "listFirefliesTranscriptIds fails after the bounded number of full pages",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/map-fireflies-sentences-to-transcript-entries.test.ts",
+      "name": "mapFirefliesSentencesToTranscriptEntries should map sentences to diarized entries with relative timestamps",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/map-fireflies-sentences-to-transcript-entries.test.ts",
+      "name": "mapFirefliesSentencesToTranscriptEntries should omit end_timestamp when end_time is missing so players span to the next entry",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/map-fireflies-sentences-to-transcript-entries.test.ts",
+      "name": "mapFirefliesSentencesToTranscriptEntries should omit timestamps when start_time is null",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/map-fireflies-sentences-to-transcript-entries.test.ts",
+      "name": "mapFirefliesSentencesToTranscriptEntries should label missing speakers and skip empty sentences",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/map-fireflies-sentences-to-transcript-entries.test.ts",
+      "name": "mapFirefliesSentencesToTranscriptEntries should return an empty array for null or undefined sentences",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/sync-fireflies-call-to-call-recording.test.ts",
+      "name": "syncFirefliesCallToCallRecording preserves an existing summary without fetching it again",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/sync-fireflies-call-to-call-recording.test.ts",
+      "name": "syncFirefliesCallToCallRecording does not complete a recording without a Fireflies summary",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/sync-fireflies-call-to-call-recording.test.ts",
+      "name": "syncFirefliesCallToCallRecording completes the recording when the opposite field arrives after its state snapshot",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/verify-fireflies-webhook-signature.test.ts",
+      "name": "verifyFirefliesWebhookSignature accepts a valid bare-hex signature",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/verify-fireflies-webhook-signature.test.ts",
+      "name": "verifyFirefliesWebhookSignature accepts a valid signature with sha256= prefix",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/verify-fireflies-webhook-signature.test.ts",
+      "name": "verifyFirefliesWebhookSignature rejects when signature header is missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/verify-fireflies-webhook-signature.test.ts",
+      "name": "verifyFirefliesWebhookSignature rejects when signature header is empty",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/verify-fireflies-webhook-signature.test.ts",
+      "name": "verifyFirefliesWebhookSignature rejects when the signature was computed from a different body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/verify-fireflies-webhook-signature.test.ts",
+      "name": "verifyFirefliesWebhookSignature rejects when the signature was computed with a different secret",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/verify-fireflies-webhook-signature.test.ts",
+      "name": "verifyFirefliesWebhookSignature rejects malformed signature strings",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-batch.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill-worker.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-backfill.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/__tests__/fireflies-daily-healer.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/utils/__tests__/chunk-into-batches.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/get-fireflies-backfill-feedback.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/get-is-application-variable-configured.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/parse-backfill-days.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/front-components/utils/__tests__/should-display-application-variable.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/flows/__tests__/import-missing-fireflies-calls-retry.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/flows/__tests__/import-missing-fireflies-calls.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/data/__tests__/enqueue-fireflies-backfill-batches.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/handlers/__tests__/fireflies-webhook-handler.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/schemas/__tests__/call-recording-field-state-query-result.schema.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/schemas/__tests__/fireflies-backfill-request-body.schema.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/build-fireflies-backfill-window.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/compute-call-recording-id-for-fireflies-meeting.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/fireflies-api-request.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/format-summary-as-markdown.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/list-fireflies-transcript-ids.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/map-fireflies-sentences-to-transcript-entries.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/sync-fireflies-call-to-call-recording.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/fireflies/src/logic-functions/utils/__tests__/verify-fireflies-webhook-signature.test.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

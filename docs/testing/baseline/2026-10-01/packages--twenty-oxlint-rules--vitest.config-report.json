@@ -1,0 +1,2166 @@
+{
+  "numTotalTests": 334,
+  "numPassedTests": 334,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 102,
+  "numPassedTestSuites": 102,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-oxlint-rules/rules/component-props-naming.spec.ts",
+      "name": "component-props-naming valid export const MyComponent= (props: MyComponentProps) => <div>{props.message}</div>;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/component-props-naming.spec.ts",
+      "name": "component-props-naming valid export const MyComponent = ({ message }: MyComponentProps) => <div>{message}</div>;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/component-props-naming.spec.ts",
+      "name": "component-props-naming invalid export const MyComponent = (props: OwnProps) => <div>{props.message}</div>;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/component-props-naming.spec.ts",
+      "name": "component-props-naming invalid export const MyComponent = ({ message }: OwnProps) => <div>{message}</div>;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/effect-components.spec.ts",
+      "name": "effect-components valid const TestComponentEffect = () => <></>;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/effect-components.spec.ts",
+      "name": "effect-components valid const TestComponent = () => <div></div>;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/effect-components.spec.ts",
+      "name": "effect-components valid export const useUpdateEffect = () => null;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/effect-components.spec.ts",
+      "name": "effect-components valid export const useUpdateEffect = () => <></>;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/effect-components.spec.ts",
+      "name": "effect-components valid const TestComponent = () => <><div></div></>;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/effect-components.spec.ts",
+      "name": "effect-components valid const TestComponentEffect = () => null;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/effect-components.spec.ts",
+      "name": "effect-components valid const TestComponentEffect = () => { \n        useEffect(() => {}, []);\n\n        return null; \n      }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/effect-components.spec.ts",
+      "name": "effect-components valid const TestComponentEffect = () => { \n        useEffect(() => {}, []);\n        \n        return <></>; \n      }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/effect-components.spec.ts",
+      "name": "effect-components invalid const TestComponent = () => <></>;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/effect-components.spec.ts",
+      "name": "effect-components invalid const TestComponentEffect = () => <><div></div></>;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/enforce-module-boundaries.spec.ts",
+      "name": "enforce-module-boundaries valid import { isDefined } from 'twenty-shared';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/enforce-module-boundaries.spec.ts",
+      "name": "enforce-module-boundaries valid import { Button } from 'twenty-ui';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/enforce-module-boundaries.spec.ts",
+      "name": "enforce-module-boundaries valid import { isDefined } from 'twenty-shared';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/enforce-module-boundaries.spec.ts",
+      "name": "enforce-module-boundaries valid import { helper } from './local';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/enforce-module-boundaries.spec.ts",
+      "name": "enforce-module-boundaries valid import lodash from 'lodash';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/enforce-module-boundaries.spec.ts",
+      "name": "enforce-module-boundaries valid import { isDefined } from 'twenty-shared';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/enforce-module-boundaries.spec.ts",
+      "name": "enforce-module-boundaries invalid import { ServerService } from 'twenty-server';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/enforce-module-boundaries.spec.ts",
+      "name": "enforce-module-boundaries invalid import { Component } from 'twenty-front';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/enforce-module-boundaries.spec.ts",
+      "name": "enforce-module-boundaries invalid import { Component } from 'twenty-front';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/enforce-module-boundaries.spec.ts",
+      "name": "enforce-module-boundaries invalid import { ServerThing } from 'twenty-server';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "name": "folder-structure invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded valid \n        class TestResolver {\n          @Query()\n          @UseGuards(UserAuthGuard, NoPermissionGuard)\n          testQuery() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded valid \n        class TestResolver {\n          @Query()\n          @UseGuards(WorkspaceAuthGuard, CustomPermissionGuard)\n          testQuery() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded valid \n        class TestResolver {\n          @Query()\n          @UseGuards(PublicEndpointGuard, NoPermissionGuard)\n          testQuery() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded valid \n        @UseGuards(UserAuthGuard, NoPermissionGuard)\n        class TestResolver {\n          @Query()\n          testQuery() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded valid \n        @UseGuards(WorkspaceAuthGuard, CustomPermissionGuard)\n        class TestResolver {\n          @Query()\n          testQuery() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded valid \n        @UseGuards(PublicEndpointGuard, NoPermissionGuard)\n        class TestResolver {\n          @Query()\n          testQuery() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded valid \n        class TestResolver {\n          @Subscription()\n          @UseGuards(WorkspaceAuthGuard, NoPermissionGuard)\n          testSubscription() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded valid \n        @UseGuards(WorkspaceAuthGuard, NoPermissionGuard)\n        class TestResolver {\n          @Subscription()\n          testSubscription() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded valid \n        class TestResolver {\n          regularMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded valid \n        class TestResolver {\n          @ResolveField()\n          testField() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded valid \n        @UseGuards(WorkspaceAuthGuard, SettingsPermissionGuard(PermissionFlagType.WORKSPACE))\n        class TestResolver {\n          @Mutation(() => String)\n          async createSomething() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded valid \n        class TestResolver {\n          @Mutation(() => String)\n          @UseGuards(WorkspaceAuthGuard, SettingsPermissionGuard(PermissionFlagType.WORKSPACE))\n          async createSomething() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded valid \n        class TestResolver {\n          @Mutation(() => String)\n          @UseGuards(WorkspaceAuthGuard, CustomPermissionGuard)\n          async createSomething() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded valid \n        @UseGuards(WorkspaceAuthGuard, CustomPermissionGuard)\n        class TestResolver {\n          @Mutation(() => String)\n          async createSomething() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded invalid \n        class TestResolver {\n          @Query()\n          testQuery() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded invalid \n        class TestResolver {\n          @Mutation()\n          testMutation() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded invalid \n        class TestResolver {\n          @Subscription()\n          testSubscription() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded invalid \n        class TestResolver {\n          @Query()\n          @UseGuards(UserAuthGuard)\n          testQuery() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded invalid \n        class TestResolver {\n          @Query()\n          @UseGuards(CaptchaGuard)\n          testQuery() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded invalid \n        @UseGuards(CaptchaGuard)\n        class TestResolver {\n          @Query()\n          testQuery() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded invalid \n        class TestResolver {\n          @Subscription()\n          @UseGuards(WorkspaceAuthGuard)\n          testSubscription() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded invalid \n        @UseGuards(WorkspaceAuthGuard)\n        class TestResolver {\n          @Subscription()\n          testSubscription() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded invalid \n        class TestResolver {\n          @Mutation(() => String)\n          @UseGuards(WorkspaceAuthGuard)\n          async createSomething() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "name": "graphql-resolvers-should-be-guarded invalid \n        @UseGuards(WorkspaceAuthGuard)\n        class TestResolver {\n          @Mutation(() => String)\n          async createSomething() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/inject-workspace-repository.spec.ts",
+      "name": "inject-workspace-repository valid \n        class MyWorkspaceService {\n          constructor(@InjectWorkspaceRepository() private repository) {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/inject-workspace-repository.spec.ts",
+      "name": "inject-workspace-repository valid \n        class AnotherWorkspaceService {\n          constructor(private myWorkspaceService: MyWorkspaceService) {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/inject-workspace-repository.spec.ts",
+      "name": "inject-workspace-repository invalid \n        class MyService {\n          constructor(@InjectWorkspaceRepository() private repository) {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/inject-workspace-repository.spec.ts",
+      "name": "inject-workspace-repository invalid \n        class MyWorkspaceService {\n          constructor(@InjectWorkspaceRepository() private repository) {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/inject-workspace-repository.spec.ts",
+      "name": "inject-workspace-repository invalid \n        class MyService {\n          constructor(@InjectWorkspaceRepository() private repository) {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/inject-workspace-repository.spec.ts",
+      "name": "inject-workspace-repository invalid \n        class AnotherWorkspaceService {\n          constructor(private myWorkspaceService: MyWorkspaceService) {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/inject-workspace-repository.spec.ts",
+      "name": "inject-workspace-repository invalid \n        class AnotherService {\n          constructor(private myWorkspaceService: MyWorkspaceService) {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const variable = useAtomStateValue(variableState);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const [variable, setVariable] = useAtomState(variableState);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const variable = useAtomComponentStateValue(variableComponentState);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const [variable, setVariable] = useAtomComponentState(variableComponentState);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const variable = useAtomFamilyStateValue(variableFamilyState, key);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const variable = useAtomComponentFamilyStateValue(variableComponentFamilyState, key);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const [variable, setVariable] = useAtomComponentFamilyState(variableComponentFamilyState, key);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const variableViews = useAtomFamilyStateValue(variableFamilyState, 'views');",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const variableViewFields = useAtomFamilyStateValue(variableFamilyState, 'viewFields');",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const [variableViews, setVariableViews] = useAtomComponentFamilyState(variableComponentFamilyState, 'views');",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const setVariableViews = useSetAtomFamilyState(variableFamilyState, 'views');",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const setVariable = useSetAtomState(variableState);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const setVariable = useSetAtomComponentState(variableComponentState);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const setVariable = useSetAtomFamilyState(variableFamilyState, key);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable valid const setVariable = useSetAtomComponentFamilyState(variableComponentFamilyState, key);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable invalid const myValue = useAtomStateValue(variableState);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable invalid const [myValue, setMyValue] = useAtomState(variableState);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable invalid const [myValue] = useAtomState(variableState);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable invalid const [, setMyValue] = useAtomState(variableState);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable invalid const myValue = useAtomComponentStateValue(variableComponentState);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable invalid const [myValue, setMyValue] = useAtomComponentState(variableComponentState);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable invalid const myValue = useAtomFamilyStateValue(variableFamilyState, key);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable invalid const myValue = useAtomComponentFamilyStateValue(variableComponentFamilyState, key);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable invalid const [myValue, setMyValue] = useAtomComponentFamilyState(variableComponentFamilyState, key);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable invalid const myValue = useSetAtomState(variableState);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable invalid const myValue = useSetAtomComponentState(variableComponentState);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable invalid const myValue = useSetAtomFamilyState(variableFamilyState, key);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable invalid const myValue = useSetAtomComponentFamilyState(variableComponentFamilyState, key);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "name": "matching-state-variable invalid const variableSorts = useAtomFamilyStateValue(variableFamilyState, 'views');",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/max-consts-per-file.spec.ts",
+      "name": "max-consts-per-file valid const A = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/max-consts-per-file.spec.ts",
+      "name": "max-consts-per-file invalid const NAME_A = 1;\nconst NAME_B = 2;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command valid class C { async up(q) { await q.query('ALTER TABLE \"core\".\"x\" ADD COLUMN IF NOT EXISTS \"y\" boolean NOT NULL DEFAULT true'); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command valid class C { async up(q) { await q.query('ALTER TABLE \"core\".\"a\" ADD CONSTRAINT \"fk\" FOREIGN KEY (\"bId\") REFERENCES \"core\".\"b\"(\"id\") ON DELETE CASCADE ON UPDATE NO ACTION'); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command valid class C { async up(q) { await q.query('ALTER TABLE \"core\".\"x\" ADD COLUMN \"updatedAt\" timestamptz'); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command valid class C { async up(q) { await q.query(`WITH recent AS (SELECT \"id\" FROM \"core\".\"x\") SELECT count(*) FROM recent`); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command valid class C { async up(q) { await q.query(`WITH note AS (SELECT 'needs update later' AS msg) SELECT msg FROM note`); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command valid class C { async up(q) { await q.query(`WITH note AS (SELECT 'reminder: (UPDATE later)' AS msg) SELECT msg FROM note`); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command valid class C { async down(q) { await q.query(`UPDATE \"core\".\"x\" SET \"y\" = false WHERE \"z\" = true`); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command valid class C { async down(q) { await q.query(`WITH ids AS (SELECT \"id\" FROM \"core\".\"x\") UPDATE \"core\".\"x\" SET \"y\" = true`); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command valid class C { down = async (q) => { await q.query('DELETE FROM \"core\".\"x\" WHERE 1 = 1'); }; }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command valid class C { async runDataMigration(ds) { await ds.query(`UPDATE \"core\".\"x\" SET \"y\" = false`); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command valid class C { async up(q) { await q.query(`UPDATE \"x\" SET \"y\" = 1`); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command invalid class C { async up(q) { await q.query(`UPDATE \"core\".\"fieldMetadata\" SET \"isUIEditable\" = false WHERE \"isUIReadOnly\" = true`); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command invalid class C { async up(q) { await q.query('INSERT INTO \"core\".\"x\" (\"id\") VALUES (1)'); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command invalid class C { async up(q) { await q.query('DELETE FROM \"core\".\"x\" WHERE \"t\" = 1'); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command invalid class C { async backfill(q) { await q.query('DELETE FROM \"core\".\"x\" WHERE 1 = 1'); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "name": "no-data-mutation-in-fast-instance-command invalid class C { async up(q) { await q.query(`WITH ids AS (SELECT \"id\" FROM \"core\".\"x\") UPDATE \"core\".\"x\" SET \"y\" = false`); } }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-direct-atom-family-in-selector.spec.ts",
+      "name": "no-direct-atom-family-in-selector valid \n        const mySelector = createAtomComponentSelector({\n          key: 'mySelector',\n          get: ({ instanceId }) => ({ get }) => {\n            const value = get(someComponentState, { instanceId });\n            return value;\n          },\n          componentInstanceContext: MyContext,\n        });\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-direct-atom-family-in-selector.spec.ts",
+      "name": "no-direct-atom-family-in-selector valid \n        const mySelector = createAtomComponentFamilySelector({\n          key: 'mySelector',\n          get: ({ instanceId, familyKey }) => ({ get }) => {\n            const record = get(recordStoreFamilyState, familyKey.recordId);\n            return record;\n          },\n          componentInstanceContext: MyContext,\n        });\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-direct-atom-family-in-selector.spec.ts",
+      "name": "no-direct-atom-family-in-selector valid \n        const atom = someState.atomFamily({ instanceId: 'test' });\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-direct-atom-family-in-selector.spec.ts",
+      "name": "no-direct-atom-family-in-selector invalid \n        const mySelector = createAtomComponentSelector({\n          key: 'mySelector',\n          get: ({ instanceId }) => ({ get }) => {\n            const atom = someState.atomFamily({ instanceId });\n            return get(atom);\n          },\n          componentInstanceContext: MyContext,\n        });\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-direct-atom-family-in-selector.spec.ts",
+      "name": "no-direct-atom-family-in-selector invalid \n        const mySelector = createAtomComponentFamilySelector({\n          key: 'mySelector',\n          get: ({ instanceId, familyKey }) => ({ get }) => {\n            const selector = someSelector.selectorFamily({ instanceId });\n            return get(selector);\n          },\n          componentInstanceContext: MyContext,\n        });\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-direct-atom-family-in-selector.spec.ts",
+      "name": "no-direct-atom-family-in-selector invalid \n        const mySelector = createAtomComponentFamilySelector({\n          key: 'mySelector',\n          get: ({ instanceId, familyKey }) => ({ get }) => {\n            const a = someState.atomFamily({ instanceId });\n            const b = otherState.selectorFamily({ instanceId });\n            return get(a) + get(b);\n          },\n          componentInstanceContext: MyContext,\n        });\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-hardcoded-colors.spec.ts",
+      "name": "no-hardcoded-colors valid const color = theme.background.secondary;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-hardcoded-colors.spec.ts",
+      "name": "no-hardcoded-colors invalid const color = \"rgb(154,205,50)\";",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-hardcoded-colors.spec.ts",
+      "name": "no-hardcoded-colors invalid const color = { test: \"rgb(154,205,50)\", test2: \"#ADFF2F\" }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-hardcoded-colors.spec.ts",
+      "name": "no-hardcoded-colors invalid const color = { test: `rgb(${r},${g},${b})`, test2: `#ADFF${test}` }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-hardcoded-colors.spec.ts",
+      "name": "no-hardcoded-colors invalid const color = \"#ADFF2F\";",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-hardcoded-colors.spec.ts",
+      "name": "no-hardcoded-colors invalid const myCss = css`color: #123; background-color: ${theme.background.secondary};`",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-hardcoded-colors.spec.ts",
+      "name": "no-hardcoded-colors invalid const myCss = styled.div`color: ${({ theme }) => theme.font.color.primary};flex-shrink: 0;background-color: #123;text-overflow: ellipsis;white-space: nowrap;max-width: 100%;`",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-icu-escaping-apostrophe.spec.ts",
+      "name": "no-icu-escaping-apostrophe valid const message = msg`Cron pattern \"${pattern}\" is invalid`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-icu-escaping-apostrophe.spec.ts",
+      "name": "no-icu-escaping-apostrophe valid const message = t`It's a nice ${thing}`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-icu-escaping-apostrophe.spec.ts",
+      "name": "no-icu-escaping-apostrophe valid const message = t`a ''${value}'' b`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-icu-escaping-apostrophe.spec.ts",
+      "name": "no-icu-escaping-apostrophe valid const message = t`quoted at the end ${value}'`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-icu-escaping-apostrophe.spec.ts",
+      "name": "no-icu-escaping-apostrophe valid const query = sql`select '${column}' from t`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-icu-escaping-apostrophe.spec.ts",
+      "name": "no-icu-escaping-apostrophe valid const message = t`no placeholder here '{}'`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-icu-escaping-apostrophe.spec.ts",
+      "name": "no-icu-escaping-apostrophe invalid const message = msg`Cron pattern '${pattern}' is invalid`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-icu-escaping-apostrophe.spec.ts",
+      "name": "no-icu-escaping-apostrophe invalid const message = t`domain '${domainName}'. Expect 1`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-icu-escaping-apostrophe.spec.ts",
+      "name": "no-icu-escaping-apostrophe invalid const message = i18n.t`domain '${domainName}' is taken`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-icu-escaping-apostrophe.spec.ts",
+      "name": "no-icu-escaping-apostrophe invalid const message = defineMessage`from '${before}' to '${after}'`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-icu-escaping-apostrophe.spec.ts",
+      "name": "no-icu-escaping-apostrophe invalid const message = t`a '''${value}''' b`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-jotai-store-in-selector.spec.ts",
+      "name": "no-jotai-store-in-selector valid \n        const mySelector = createAtomComponentSelector({\n          key: 'mySelector',\n          get: ({ instanceId }) => ({ get }) => {\n            const value = get(someComponentState, { instanceId });\n            return value;\n          },\n          componentInstanceContext: MyContext,\n        });\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-jotai-store-in-selector.spec.ts",
+      "name": "no-jotai-store-in-selector valid \n        const mySelector = createAtomComponentFamilySelector({\n          key: 'mySelector',\n          get: ({ instanceId, familyKey }) => ({ get }) => {\n            const messages = get(messagesComponentState, { instanceId });\n            return messages.find((m) => m.id === familyKey.messageId);\n          },\n          componentInstanceContext: MyContext,\n        });\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-jotai-store-in-selector.spec.ts",
+      "name": "no-jotai-store-in-selector valid \n        const value = jotaiStore.get(someState.atom);\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-jotai-store-in-selector.spec.ts",
+      "name": "no-jotai-store-in-selector invalid \n        const mySelector = createAtomComponentSelector({\n          key: 'mySelector',\n          get: ({ instanceId }) => ({ get }) => {\n            const value = jotaiStore.get(someState.atom);\n            return value;\n          },\n          componentInstanceContext: MyContext,\n        });\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-jotai-store-in-selector.spec.ts",
+      "name": "no-jotai-store-in-selector invalid \n        const mySelector = createAtomComponentFamilySelector({\n          key: 'mySelector',\n          get: ({ instanceId, familyKey }) => ({ get }) => {\n            const value = jotaiStore.get(someState.atom);\n            return value;\n          },\n          componentInstanceContext: MyContext,\n        });\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-jotai-store-in-selector.spec.ts",
+      "name": "no-jotai-store-in-selector invalid \n        const mySelector = createAtomComponentSelector({\n          key: 'mySelector',\n          get: ({ instanceId }) => ({ get }) => {\n            jotaiStore.set(someState.atom, 'value');\n            return 'value';\n          },\n          componentInstanceContext: MyContext,\n        });\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-jotai-store-in-selector.spec.ts",
+      "name": "no-jotai-store-in-selector invalid \n        const mySelector = createAtomComponentFamilySelector({\n          key: 'mySelector',\n          get: ({ instanceId, familyKey }) => ({ get }) => {\n            const a = jotaiStore.get(stateA.atom);\n            const b = jotaiStore.get(stateB.atom);\n            return a + b;\n          },\n          componentInstanceContext: MyContext,\n        });\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier valid export const makeGraphqlApiRequest = () => {};",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier valid export type SsoIdentityProvider = { issuer: string };",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier valid export const SSO_URL_PARAM = 'sso';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier valid export class HTMLSanitizerService {}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier valid import { URLSearchParams } from 'node:url';\nconst params = new URLSearchParams();",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier valid const options = { baseURL: url };",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier valid class SsoIdentityProvider { @Column() ssoURL: string; }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier valid export const RECALL_API_MAX_ATTEMPTS = 3;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier valid export const GET_AUTHORIZATION_URL_FOR_SSO = gql``;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier valid class SsoResolver { @Mutation(() => SetupSsoDTO) async createOIDCIdentityProvider() {} }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier valid class SsoResolver { @Query(() => [FindAvailableSsoIdpDTO]) async getSSOIdentityProviders() {} }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier invalid export const makeGraphqlAPIRequest = () => {};",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier invalid export function openAPIReference() {}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier invalid export class SSOIdentityProviderService {}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier invalid export type URLDisplayProps = { value: string };",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier invalid export interface SAMLIdentityProvider { issuer: string }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier invalid export enum OIDCScopeValues { Email }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier invalid class SsoService { getSSOIdentityProviders() {} }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier invalid export const openApiReference = {};",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier invalid export const SettingsSsoForm = () => null;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "name": "no-miscased-acronym-in-identifier invalid export type SAMLSSOInput = { issuer: string };",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message valid const label = msg`Avatar URL`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message valid const label = t`ACS URL copied to clipboard`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message valid const label = msg({ message: `ID`, context: 'fieldMetadata.label' });",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message valid const message = msg`${fieldName} and ${fieldName}Id cannot be both provided.`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message valid const label = t`Identity provider`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message valid const label = t`Urlaub buchen`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message valid const query = sql`select Id from t`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message valid const heading = <div>Avatar Url</div>;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message invalid const label = msg`Avatar Url`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message invalid const label = t`ACS Url`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message invalid const label = i18n.t`Redirect Url copied to clipboard`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message invalid const label = msg({ message: `Message Channel Id`, context: 'fieldMetadata.label' });",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message invalid const label = msg({ message: 'Json object to provide steps' });",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message invalid const label = i18n.t({ message: `Avatar Url` });",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message invalid const label = msg`Json value for event Id`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message invalid const heading = <Trans>Avatar Url</Trans>;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "name": "no-miscased-acronym-in-message invalid const label = defineMessage`Last published Version Id`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-navigate-prefer-link.spec.ts",
+      "name": "no-navigate-prefer-link valid if(someVar) { navigate(\"/\"); }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-navigate-prefer-link.spec.ts",
+      "name": "no-navigate-prefer-link valid <Link to=\"/\"><Button>Click me</Button></Link>",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-navigate-prefer-link.spec.ts",
+      "name": "no-navigate-prefer-link valid <Button onClick={() =>{ navigate(\"/\"); doSomething(); }} />",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-navigate-prefer-link.spec.ts",
+      "name": "no-navigate-prefer-link invalid <Button onClick={() => navigate(\"/\")} />",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-navigate-prefer-link.spec.ts",
+      "name": "no-navigate-prefer-link invalid <Button onClick={() => { navigate(\"/\");} } />",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-runtime-import-from-upgrade-command.spec.ts",
+      "name": "no-runtime-import-from-upgrade-command valid import { NAME } from 'src/database/commands/upgrade-version-command/2-42/2-42-upgrade-command-name.constant';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-runtime-import-from-upgrade-command.spec.ts",
+      "name": "no-runtime-import-from-upgrade-command valid import { NAMES } from 'src/database/commands/upgrade-version-command/2-42/2-42-upgrade-command-name.constants';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-runtime-import-from-upgrade-command.spec.ts",
+      "name": "no-runtime-import-from-upgrade-command valid import { FooService } from 'src/engine/core-modules/foo/foo.service';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-runtime-import-from-upgrade-command.spec.ts",
+      "name": "no-runtime-import-from-upgrade-command valid import { run } from 'src/database/commands/upgrade-version-command/2-42/utils/run.util';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-runtime-import-from-upgrade-command.spec.ts",
+      "name": "no-runtime-import-from-upgrade-command valid import { run } from 'src/database/commands/upgrade-version-command/2-42/utils/run.util';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-runtime-import-from-upgrade-command.spec.ts",
+      "name": "no-runtime-import-from-upgrade-command valid import { run } from 'src/database/commands/upgrade-version-command/2-42/utils/run.util';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-runtime-import-from-upgrade-command.spec.ts",
+      "name": "no-runtime-import-from-upgrade-command valid import { run } from 'src/database/commands/upgrade-version-command/2-42/utils/run.util';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-runtime-import-from-upgrade-command.spec.ts",
+      "name": "no-runtime-import-from-upgrade-command valid import { run } from 'src/database/commands/upgrade-version-command/2-42/utils/run.util';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-runtime-import-from-upgrade-command.spec.ts",
+      "name": "no-runtime-import-from-upgrade-command invalid import { run } from 'src/database/commands/upgrade-version-command/2-42/utils/run.util';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-runtime-import-from-upgrade-command.spec.ts",
+      "name": "no-runtime-import-from-upgrade-command invalid export { run } from 'src/database/commands/upgrade-version-command/2-42/utils/run.util';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-runtime-import-from-upgrade-command.spec.ts",
+      "name": "no-runtime-import-from-upgrade-command invalid const load = () => import('src/database/commands/upgrade-version-command/2-42/utils/run.util');",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-state-useref.spec.ts",
+      "name": "no-state-useref valid const scrollableRef = useRef<HTMLDivElement>(null);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-state-useref.spec.ts",
+      "name": "no-state-useref valid const ref = useRef<HTMLInputElement>(null);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-state-useref.spec.ts",
+      "name": "no-state-useref invalid const ref = useRef(null);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-state-useref.spec.ts",
+      "name": "no-state-useref invalid const ref = useRef<Boolean>(null);",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-state-useref.spec.ts",
+      "name": "no-state-useref invalid const ref = useRef<string>('');",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-storybook-a11y-disable.spec.ts",
+      "name": "no-storybook-a11y-disable valid const meta = { parameters: { a11y: { test: 'error' } } };",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-storybook-a11y-disable.spec.ts",
+      "name": "no-storybook-a11y-disable valid const meta = { parameters: { a11y: A11Y_DEFER_COLOR_CONTRAST } };",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-storybook-a11y-disable.spec.ts",
+      "name": "no-storybook-a11y-disable valid const config = { test: 'todo' };",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-storybook-a11y-disable.spec.ts",
+      "name": "no-storybook-a11y-disable valid const meta = { args: { a11y: { test: 'off' } } };",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-storybook-a11y-disable.spec.ts",
+      "name": "no-storybook-a11y-disable invalid const meta = { parameters: { a11y: { test: 'todo' } } };",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-storybook-a11y-disable.spec.ts",
+      "name": "no-storybook-a11y-disable invalid const meta = { parameters: { a11y: { test: 'off' } } };",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-storybook-a11y-disable.spec.ts",
+      "name": "no-storybook-a11y-disable invalid export const Default = { parameters: { a11y: { test: 'off' } } };",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/plugin-registry.spec.ts",
+      "name": "oxlint plugin registry registers every rule module",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/prefer-workspace-scoped-repository.spec.ts",
+      "name": "prefer-workspace-scoped-repository valid \n        class WorkspaceService {\n          constructor(\n            @InjectRepository(WorkspaceEntity)\n            private readonly workspaceRepository: Repository<WorkspaceEntity>,\n          ) {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/prefer-workspace-scoped-repository.spec.ts",
+      "name": "prefer-workspace-scoped-repository valid \n        class AgentTurnGraderService {\n          constructor(\n            @InjectWorkspaceScopedRepository(AgentTurnEntity)\n            private readonly turnRepository: WorkspaceScopedRepository<AgentTurnEntity>,\n          ) {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/prefer-workspace-scoped-repository.spec.ts",
+      "name": "prefer-workspace-scoped-repository valid \n        class Service {\n          @SomeDecorator()\n          doStuff() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/prefer-workspace-scoped-repository.spec.ts",
+      "name": "prefer-workspace-scoped-repository invalid \n        class AgentChatService {\n          constructor(\n            @InjectRepository(AgentChatThreadEntity)\n            private readonly threadRepository: Repository<AgentChatThreadEntity>,\n          ) {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/prefer-workspace-scoped-repository.spec.ts",
+      "name": "prefer-workspace-scoped-repository invalid \n        class AgentChatService {\n          constructor(\n            @InjectRepository(AgentTurnEntity)\n            private readonly turnRepository: Repository<AgentTurnEntity>,\n            @InjectRepository(AgentMessageEntity)\n            private readonly messageRepository: Repository<AgentMessageEntity>,\n          ) {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/prefer-workspace-scoped-repository.spec.ts",
+      "name": "prefer-workspace-scoped-repository invalid \n        class ApplicationVariableEntityService {\n          constructor(\n            @InjectRepository(ApplicationVariableEntity)\n            private readonly applicationVariableRepository: Repository<ApplicationVariableEntity>,\n          ) {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/prefer-workspace-scoped-repository.spec.ts",
+      "name": "prefer-workspace-scoped-repository invalid \n        class AgentChatService {\n          private readonly threadRepository: Repository<AgentChatThreadEntity>;\n          constructor(\n            @InjectRepository(AgentChatThreadEntity)\n            threadRepository: Repository<AgentChatThreadEntity>,\n          ) {\n            this.threadRepository = threadRepository;\n          }\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded valid \n        class TestController {\n          @Get()\n          @UseGuards(UserAuthGuard, NoPermissionGuard)\n          testMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded valid \n        class TestController {\n          @Get()\n          @UseGuards(WorkspaceAuthGuard, CustomPermissionGuard)\n          testMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded valid \n        class TestController {\n          @Get()\n          @UseGuards(PublicEndpointGuard, NoPermissionGuard)\n          testMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded valid \n        class TestController {\n          @Get()\n          @UseGuards(CaptchaGuard, PublicEndpointGuard, NoPermissionGuard)\n          testMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded valid \n        @UseGuards(UserAuthGuard, NoPermissionGuard)\n        class TestController {\n          @Get()\n          testMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded valid \n        @UseGuards(WorkspaceAuthGuard, CustomPermissionGuard)\n        class TestController {\n          @Get()\n          testMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded valid \n        @UseGuards(PublicEndpointGuard, NoPermissionGuard)\n        class TestController {\n          @Get()\n          testMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded valid \n        class TestController {\n          @Post()\n          @UseGuards(WorkspaceAuthGuard, CustomPermissionGuard)\n          createMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded valid \n        class TestController {\n          @Put()\n          @UseGuards(WorkspaceAuthGuard, UpdatePermissionGuard)\n          updateMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded valid \n        class TestController {\n          @Patch()\n          @UseGuards(WorkspaceAuthGuard, NoPermissionGuard)\n          patchMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded valid \n        class TestController {\n          @Delete()\n          @UseGuards(WorkspaceAuthGuard, DeletePermissionGuard)\n          deleteMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded valid \n        @UseGuards(WorkspaceAuthGuard, CustomPermissionGuard)\n        class TestController {\n          @Post()\n          createMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded valid \n        @UseGuards(WorkspaceAuthGuard, SettingsPermissionGuard(PermissionFlagType.WORKSPACE))\n        class TestController {\n          @Delete()\n          deleteMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded valid \n        class TestController {\n          regularMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded invalid \n        class TestController {\n          @Get()\n          testMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded invalid \n        class TestController {\n          @Post()\n          testMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded invalid \n        class TestController {\n          @Get()\n          @UseGuards(WorkspaceAuthGuard)\n          testMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded invalid \n        class TestController {\n          @Get()\n          @UseGuards(CaptchaGuard)\n          testMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded invalid \n        @UseGuards(CaptchaGuard)\n        class TestController {\n          @Get()\n          testMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded invalid \n        @UseGuards(WorkspaceAuthGuard)\n        class TestController {\n          @Get()\n          testMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded invalid \n        class TestController {\n          @Post()\n          @UseGuards(WorkspaceAuthGuard)\n          createMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded invalid \n        class TestController {\n          @Put()\n          @UseGuards(WorkspaceAuthGuard)\n          updateMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded invalid \n        class TestController {\n          @Patch()\n          @UseGuards(WorkspaceAuthGuard)\n          patchMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded invalid \n        class TestController {\n          @Delete()\n          @UseGuards(WorkspaceAuthGuard)\n          deleteMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded invalid \n        @UseGuards(WorkspaceAuthGuard)\n        class TestController {\n          @Post()\n          createMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "name": "rest-api-methods-should-be-guarded invalid \n        @UseGuards(WorkspaceAuthGuard)\n        class TestController {\n          @Delete()\n          deleteMethod() {}\n        }\n      ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/sort-css-properties-alphabetically.spec.ts",
+      "name": "sort-css-properties-alphabetically valid const style = css`color: red;`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/sort-css-properties-alphabetically.spec.ts",
+      "name": "sort-css-properties-alphabetically valid const style = css`background-color: $bgColor;color: red;`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/sort-css-properties-alphabetically.spec.ts",
+      "name": "sort-css-properties-alphabetically valid const StyledComponent = styled.div`color: red;`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/sort-css-properties-alphabetically.spec.ts",
+      "name": "sort-css-properties-alphabetically valid const StyledComponent = styled.div`background-color: $bgColor;color: red;`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/sort-css-properties-alphabetically.spec.ts",
+      "name": "sort-css-properties-alphabetically invalid const style = css`color: #FF0000;background-color: $bgColor`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/sort-css-properties-alphabetically.spec.ts",
+      "name": "sort-css-properties-alphabetically invalid const StyledComponent = styled.div`color: #FF0000;background-color: $bgColor`;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/styled-components-prefixed-with-styled.spec.ts",
+      "name": "styled-components-prefixed-with-styled valid const StyledButton = styled.button``;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/styled-components-prefixed-with-styled.spec.ts",
+      "name": "styled-components-prefixed-with-styled valid const StyledComponent = styled.div``;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/styled-components-prefixed-with-styled.spec.ts",
+      "name": "styled-components-prefixed-with-styled invalid const Button = styled.button``;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/styled-components-prefixed-with-styled.spec.ts",
+      "name": "styled-components-prefixed-with-styled invalid const Component = styled.div``;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "name": "types-folder-filename invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/upgrade-command-filename.spec.ts",
+      "name": "upgrade-command-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/upgrade-command-filename.spec.ts",
+      "name": "upgrade-command-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/upgrade-command-filename.spec.ts",
+      "name": "upgrade-command-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/upgrade-command-filename.spec.ts",
+      "name": "upgrade-command-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/upgrade-command-filename.spec.ts",
+      "name": "upgrade-command-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/upgrade-command-filename.spec.ts",
+      "name": "upgrade-command-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/upgrade-command-filename.spec.ts",
+      "name": "upgrade-command-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/upgrade-command-filename.spec.ts",
+      "name": "upgrade-command-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/upgrade-command-filename.spec.ts",
+      "name": "upgrade-command-filename valid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/upgrade-command-filename.spec.ts",
+      "name": "upgrade-command-filename invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/upgrade-command-filename.spec.ts",
+      "name": "upgrade-command-filename invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/upgrade-command-filename.spec.ts",
+      "name": "upgrade-command-filename invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/upgrade-command-filename.spec.ts",
+      "name": "upgrade-command-filename invalid const x = 1;",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-oxlint-rules/rules/component-props-naming.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/effect-components.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/enforce-module-boundaries.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/folder-structure.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/graphql-resolvers-should-be-guarded.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/inject-workspace-repository.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/matching-state-variable.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/max-consts-per-file.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-data-mutation-in-fast-instance-command.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-direct-atom-family-in-selector.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-hardcoded-colors.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-icu-escaping-apostrophe.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-jotai-store-in-selector.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-identifier.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-miscased-acronym-in-message.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-navigate-prefer-link.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-runtime-import-from-upgrade-command.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-state-useref.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/no-storybook-a11y-disable.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/plugin-registry.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/prefer-workspace-scoped-repository.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/rest-api-methods-should-be-guarded.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/sort-css-properties-alphabetically.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/styled-components-prefixed-with-styled.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/types-folder-filename.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-oxlint-rules/rules/upgrade-command-filename.spec.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

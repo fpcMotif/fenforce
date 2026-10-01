@@ -1,0 +1,437 @@
+{
+  "numTotalTests": 60,
+  "numPassedTests": 60,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 18,
+  "numPassedTestSuites": 18,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-apps/public/teams/src/front-components/components/__tests__/TeamsSettings.test.tsx",
+      "name": "TeamsSettings keeps unfinished features inactive even when workspace settings are enabled",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/front-components/components/__tests__/TeamsSettings.test.tsx",
+      "name": "TeamsSettings supports independent chat (false) and transcript (false) releases",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/front-components/components/__tests__/TeamsSettings.test.tsx",
+      "name": "TeamsSettings supports independent chat (true) and transcript (false) releases",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/front-components/components/__tests__/TeamsSettings.test.tsx",
+      "name": "TeamsSettings supports independent chat (false) and transcript (true) releases",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/front-components/components/__tests__/TeamsSettings.test.tsx",
+      "name": "TeamsSettings supports independent chat (true) and transcript (true) releases",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/front-components/components/__tests__/TeamsSettings.test.tsx",
+      "name": "TeamsSettings keeps available features off for workspace value undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/front-components/components/__tests__/TeamsSettings.test.tsx",
+      "name": "TeamsSettings keeps available features off for workspace value ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/front-components/components/__tests__/TeamsSettings.test.tsx",
+      "name": "TeamsSettings keeps available features off for workspace value false",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/front-components/components/__tests__/TeamsSettings.test.tsx",
+      "name": "TeamsSettings keeps available features off for workspace value TRUE",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/front-components/components/__tests__/TeamsSettings.test.tsx",
+      "name": "TeamsSettings saves the selected feature without changing the other preference",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/front-components/components/__tests__/TeamsSettings.test.tsx",
+      "name": "TeamsSettings keeps the saved preference after a failed update and allows retry",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/front-components/components/__tests__/TeamsSettings.test.tsx",
+      "name": "TeamsSettings does not write settings if the Teams application cannot be found",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/front-components/components/__tests__/TeamsSettings.test.tsx",
+      "name": "TeamsSettings disables the selected setting while saving and prevents duplicate writes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/fetch-teams-bot-connector-keys.test.ts",
+      "name": "fetchTeamsBotConnectorKeys should keep only the verification fields of keys endorsed for Teams",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/fetch-teams-bot-connector-keys.test.ts",
+      "name": "fetchTeamsBotConnectorKeys should drop keys that cannot verify an RS256 signature",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/fetch-teams-bot-connector-keys.test.ts",
+      "name": "fetchTeamsBotConnectorKeys should reject a response with no key endorsed for Teams rather than cache an empty set",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/get-teams-bot-connector-keys.test.ts",
+      "name": "getTeamsBotConnectorKeys should reuse a key set fetched within the last day",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/get-teams-bot-connector-keys.test.ts",
+      "name": "getTeamsBotConnectorKeys should fetch and cache when nothing is stored",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/get-teams-bot-connector-keys.test.ts",
+      "name": "getTeamsBotConnectorKeys should stamp the refresh attempt before fetching once the cached key set is a day old",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/get-teams-bot-connector-keys.test.ts",
+      "name": "getTeamsBotConnectorKeys should rate limit forced refreshes on the last attempt, not on the last successful fetch",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/get-teams-bot-connector-keys.test.ts",
+      "name": "getTeamsBotConnectorKeys should keep serving the last good key set when the fetch fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/get-teams-connector-token.test.ts",
+      "name": "getTeamsConnectorToken should reuse a cached token that is still comfortably valid",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/get-teams-connector-token.test.ts",
+      "name": "getTeamsConnectorToken should mint and cache at workspace scope when nothing is stored",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/get-teams-connector-token.test.ts",
+      "name": "getTeamsConnectorToken should refresh a token that expires inside the refresh margin",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/is-teams-connector-service-url.test.ts",
+      "name": "isTeamsConnectorServiceUrl should accept the regional Bot Connector host",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/is-teams-connector-service-url.test.ts",
+      "name": "isTeamsConnectorServiceUrl should accept the Bot Framework and government cloud hosts",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/is-teams-connector-service-url.test.ts",
+      "name": "isTeamsConnectorServiceUrl should refuse another profile on the shared trafficmanager namespace",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/is-teams-connector-service-url.test.ts",
+      "name": "isTeamsConnectorServiceUrl should refuse a host that only ends with the Bot Connector domain",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/is-teams-connector-service-url.test.ts",
+      "name": "isTeamsConnectorServiceUrl should refuse an unrelated host",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/is-teams-connector-service-url.test.ts",
+      "name": "isTeamsConnectorServiceUrl should refuse a plain http Bot Connector host",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/is-teams-connector-service-url.test.ts",
+      "name": "isTeamsConnectorServiceUrl should refuse a value that is not a url",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/mint-teams-connector-token.test.ts",
+      "name": "mintTeamsConnectorToken should post client credentials to the tenant scoped token endpoint",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/mint-teams-connector-token.test.ts",
+      "name": "mintTeamsConnectorToken should throw without leaking the client secret when Entra rejects the request",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/mint-teams-connector-token.test.ts",
+      "name": "mintTeamsConnectorToken should throw when the response carries no access token",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/mint-teams-connector-token.test.ts",
+      "name": "mintTeamsConnectorToken should throw rather than guess a lifetime when expires_in is missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/parse-teams-connector-response-or-throw.test.ts",
+      "name": "parseTeamsConnectorResponseOrThrow should parse a JSON payload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/parse-teams-connector-response-or-throw.test.ts",
+      "name": "parseTeamsConnectorResponseOrThrow should throw on an empty body rather than hand back undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/parse-teams-connector-response-or-throw.test.ts",
+      "name": "parseTeamsConnectorResponseOrThrow should throw on a body that is not valid JSON",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/request-teams-connector.test.ts",
+      "name": "requestTeamsConnector should call the normalized service url with the bearer token",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/request-teams-connector.test.ts",
+      "name": "requestTeamsConnector should send a JSON body and content type when an activity is given",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/request-teams-connector.test.ts",
+      "name": "requestTeamsConnector should refuse to send the bot credentials to a host outside the Bot Connector",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/request-teams-connector.test.ts",
+      "name": "requestTeamsConnector should refuse a look-alike host that only ends with the Bot Connector domain",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/request-teams-connector.test.ts",
+      "name": "requestTeamsConnector should surface the Bot Connector error body on a failed request",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should return the verified service url for a well-formed Bot Connector token",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should accept the documented serviceUrl spelling as well as the wire one",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should ignore a trailing slash difference between claim and activity",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should ignore host casing between claim and activity",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should refetch the key set once when the token names a rotated key",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should reject a token naming no signing key without reaching for the key set",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should reject a missing Authorization header",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should reject a non-Bearer scheme",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should reject an Authorization header carrying more than a scheme and a token",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should reject a token signed with a key the Bot Connector does not publish",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should reject a validly signed token whose key is endorsed for another channel",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should reject a token from another issuer",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should reject a token minted for another bot",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should reject an expired token beyond the clock tolerance",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should reject a token whose serviceUrl claim points elsewhere",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should reject a token carrying no serviceUrl claim",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "name": "verifyTeamsActivityTokenOrThrow should reject a symmetrically signed token naming a published key, so alg cannot be downgraded",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-apps/public/teams/src/front-components/components/__tests__/TeamsSettings.test.tsx",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/fetch-teams-bot-connector-keys.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/get-teams-bot-connector-keys.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/get-teams-connector-token.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/is-teams-connector-service-url.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/mint-teams-connector-token.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/parse-teams-connector-response-or-throw.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/request-teams-connector.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/teams/src/features/chat/logic-functions/utils/__tests__/verify-teams-activity-token.test.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

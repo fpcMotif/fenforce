@@ -1,0 +1,734 @@
+{
+  "numTotalTests": 107,
+  "numPassedTests": 107,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 12,
+  "numPassedTestSuites": 12,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "didUpdate": false,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE restores a code identifier translated inside backticks",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE stands down on more than one span, where order cannot be trusted",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE keeps a translated UI label: Go to `Settings` in the left sidebar.",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE keeps a translated UI label: Go to `Data Model`, then select the object.",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE keeps a translated UI label: Select `Deactivate` from the dropdown.",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE restores an identifier-shaped span: Caused by `useEffect`.",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE restores an identifier-shaped span: Fields of type `SELECT`.",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE restores an identifier-shaped span: Set `is_auth_required`.",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE restores an identifier-shaped span: Call `client.run()`.",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE restores an identifier-shaped span: Build the `twenty-emails` package first.",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE restores an identifier-shaped span: Send the `x-slack-signature` header.",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE stands down when the counts do not line up",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE leaves a translation whose identifiers already match",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE leaves link targets alone, including locale-prefixed ones",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE stands down when the source is unknown",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "name": "TRANSLATED_IDENTIFIER_RULE runs against MDX catalogs only",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/corrupted-model-output.rule.spec.ts",
+      "name": "CORRUPTED_MODEL_OUTPUT_RULE cuts a leaked response envelope off a plain translation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/corrupted-model-output.rule.spec.ts",
+      "name": "CORRUPTED_MODEL_OUTPUT_RULE cuts a trailing JSON array separator",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/corrupted-model-output.rule.spec.ts",
+      "name": "CORRUPTED_MODEL_OUTPUT_RULE keeps a plural block intact while dropping the envelope after it",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/corrupted-model-output.rule.spec.ts",
+      "name": "CORRUPTED_MODEL_OUTPUT_RULE keeps a closing quote the source also ends with",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/corrupted-model-output.rule.spec.ts",
+      "name": "CORRUPTED_MODEL_OUTPUT_RULE drops a trailing apostrophe the source does not carry",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/corrupted-model-output.rule.spec.ts",
+      "name": "CORRUPTED_MODEL_OUTPUT_RULE deletes a translation whose salvageable prefix is still envelope",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/corrupted-model-output.rule.spec.ts",
+      "name": "CORRUPTED_MODEL_OUTPUT_RULE deletes a translation with an unclosed brace and no clean cut",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/corrupted-model-output.rule.spec.ts",
+      "name": "CORRUPTED_MODEL_OUTPUT_RULE keeps markdown links when the source carries them too",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/corrupted-model-output.rule.spec.ts",
+      "name": "CORRUPTED_MODEL_OUTPUT_RULE does not flag a healthy translation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/corrupted-model-output.rule.spec.ts",
+      "name": "CORRUPTED_MODEL_OUTPUT_RULE does not flag when the source is unavailable",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/corrupted-model-output.rule.spec.ts",
+      "name": "CORRUPTED_MODEL_OUTPUT_RULE does not flag when the source is itself unbalanced",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/corrupted-model-output.rule.spec.ts",
+      "name": "CORRUPTED_MODEL_OUTPUT_RULE is idempotent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE drops a translation that is a lone backslash",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE drops a translation that is an escaped quote pair",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE drops punctuation and whitespace debris",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE keeps 他們的值必須是唯一的 (Chinese)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE keeps הערכים חייבים להיות ייחודיים (Hebrew)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE keeps القيم يجب أن تكون فريدة (Arabic)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE keeps Значения должны быть уникальными (Cyrillic)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE keeps Արժեքներըպետք է եզակի լինեն (Armenian)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE keeps 値は一意である必要があります (Japanese)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE keeps a translation that is only digits, which are words enough",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE keeps a wordless translation when the source has no words either",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE keeps a translation that is only a placeholder, as its source is",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE keeps a translation that renders a connector word as a symbol",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE stands down when the source is unknown, rather than deleting blind",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE leaves a translation already dropped by an earlier rule alone",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE scans every string rather than filtering by source",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "name": "WORDLESS_TRANSLATION_RULE runs against PO catalogs only",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-argument.rule.spec.ts",
+      "name": "INVENTED_ARGUMENT_RULE restores the source spelling of a recased argument",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-argument.rule.spec.ts",
+      "name": "INVENTED_ARGUMENT_RULE deletes a translation that pluralises an argument-less source",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-argument.rule.spec.ts",
+      "name": "INVENTED_ARGUMENT_RULE deletes a translation that adds an argument nothing will supply",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-argument.rule.spec.ts",
+      "name": "INVENTED_ARGUMENT_RULE allows a translation to add plural cases its locale needs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-argument.rule.spec.ts",
+      "name": "INVENTED_ARGUMENT_RULE does not read plural case bodies as arguments",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-argument.rule.spec.ts",
+      "name": "INVENTED_ARGUMENT_RULE does not flag a matching translation or a missing source",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-argument.rule.spec.ts",
+      "name": "INVENTED_ARGUMENT_RULE ignores a dropped argument, which it cannot repair",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-argument.rule.spec.ts",
+      "name": "INVENTED_ARGUMENT_RULE is idempotent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-inline-code-tags.rule.spec.ts",
+      "name": "ESCAPED_INLINE_CODE_TAGS_RULE repairs an escaped tag inside an inline-code span",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-inline-code-tags.rule.spec.ts",
+      "name": "ESCAPED_INLINE_CODE_TAGS_RULE repairs numeric and hexadecimal entities",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-inline-code-tags.rule.spec.ts",
+      "name": "ESCAPED_INLINE_CODE_TAGS_RULE leaves escaped angle brackets outside inline code untouched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-inline-code-tags.rule.spec.ts",
+      "name": "ESCAPED_INLINE_CODE_TAGS_RULE does not flag a translation whose inline code is already correct",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-inline-code-tags.rule.spec.ts",
+      "name": "ESCAPED_INLINE_CODE_TAGS_RULE only selects sources that carry a tag inside inline code",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-inline-code-tags.rule.spec.ts",
+      "name": "ESCAPED_INLINE_CODE_TAGS_RULE repairs a backslash-escaped tag inside an inline-code span",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-inline-code-tags.rule.spec.ts",
+      "name": "ESCAPED_INLINE_CODE_TAGS_RULE repairs several backslash-escaped tags in one span",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-inline-code-tags.rule.spec.ts",
+      "name": "ESCAPED_INLINE_CODE_TAGS_RULE leaves backslash-escaped angle brackets outside inline code untouched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-inline-code-tags.rule.spec.ts",
+      "name": "ESCAPED_INLINE_CODE_TAGS_RULE is idempotent for backslash escapes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-inline-code-tags.rule.spec.ts",
+      "name": "ESCAPED_INLINE_CODE_TAGS_RULE is idempotent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-markup.rule.spec.ts",
+      "name": "INVENTED_MARKUP_RULE strips a highlight span the source never had",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-markup.rule.spec.ts",
+      "name": "INVENTED_MARKUP_RULE strips nested direction spans",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-markup.rule.spec.ts",
+      "name": "INVENTED_MARKUP_RULE strips bold added around numbers and punctuation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-markup.rule.spec.ts",
+      "name": "INVENTED_MARKUP_RULE leaves a translation alone when the source carries markup of its own",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-markup.rule.spec.ts",
+      "name": "INVENTED_MARKUP_RULE leaves a Lingui-tagged source alone even when the translation uses html",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-markup.rule.spec.ts",
+      "name": "INVENTED_MARKUP_RULE does not flag a plain translation, a comparison, or a missing source",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-markup.rule.spec.ts",
+      "name": "INVENTED_MARKUP_RULE is idempotent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/is-translation-already-present-error.util.spec.ts",
+      "name": "isTranslationAlreadyPresentError recognises the identical-translation error code",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/is-translation-already-present-error.util.spec.ts",
+      "name": "isTranslationAlreadyPresentError recognises the duplicate-translation validation error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/is-translation-already-present-error.util.spec.ts",
+      "name": "isTranslationAlreadyPresentError does not swallow an unrelated validation error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/is-translation-already-present-error.util.spec.ts",
+      "name": "isTranslationAlreadyPresentError does not treat another failure as present because of its wording",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/is-translation-already-present-error.util.spec.ts",
+      "name": "isTranslationAlreadyPresentError rejects a non-JSON body and any non-Crowdin error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-unicode.rule.spec.ts",
+      "name": "ESCAPED_UNICODE_RULE restores characters that leaked as literal \\uXXXX sequences",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-unicode.rule.spec.ts",
+      "name": "ESCAPED_UNICODE_RULE restores surrogate pairs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-unicode.rule.spec.ts",
+      "name": "ESCAPED_UNICODE_RULE keeps an escape the source writes itself, such as a code sample",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-unicode.rule.spec.ts",
+      "name": "ESCAPED_UNICODE_RULE decodes only the escapes the source does not carry",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-unicode.rule.spec.ts",
+      "name": "ESCAPED_UNICODE_RULE stands down when the source is unknown, rather than decoding blind",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-unicode.rule.spec.ts",
+      "name": "ESCAPED_UNICODE_RULE scans every string rather than filtering by source",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-unicode.rule.spec.ts",
+      "name": "ESCAPED_UNICODE_RULE leaves text without escaped sequences untouched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-unicode.rule.spec.ts",
+      "name": "ESCAPED_UNICODE_RULE is idempotent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/evaluate-rules.util.spec.ts",
+      "name": "evaluateRules reports every rule that fired and applies them in sequence",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/evaluate-rules.util.spec.ts",
+      "name": "evaluateRules skips source-filtered rules when the source string is unknown",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/evaluate-rules.util.spec.ts",
+      "name": "evaluateRules skips source-filtered rules when the source does not match",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/evaluate-rules.util.spec.ts",
+      "name": "evaluateRules returns the translation untouched when no rule fires",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-every-character.rule.spec.ts",
+      "name": "ESCAPED_EVERY_CHARACTER_RULE unescapes a message escaped character by character: \\ا\\ل\\إ\\ع\\د\\ا\\د\\ا\\ت",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-every-character.rule.spec.ts",
+      "name": "ESCAPED_EVERY_CHARACTER_RULE unescapes a message escaped character by character: \\ダ\\ー\\ク",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-every-character.rule.spec.ts",
+      "name": "ESCAPED_EVERY_CHARACTER_RULE unescapes a message escaped character by character: \\明\\る\\い",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-every-character.rule.spec.ts",
+      "name": "ESCAPED_EVERY_CHARACTER_RULE unescapes a message escaped character by character: \\S\\e\\t\\t\\i\\n\\g\\s",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-every-character.rule.spec.ts",
+      "name": "ESCAPED_EVERY_CHARACTER_RULE leaves a message whose backslashes are its content: C:\\Users\\name\\file",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-every-character.rule.spec.ts",
+      "name": "ESCAPED_EVERY_CHARACTER_RULE leaves a message whose backslashes are its content: Escape it as \\n to break the line",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-every-character.rule.spec.ts",
+      "name": "ESCAPED_EVERY_CHARACTER_RULE leaves a message whose backslashes are its content: Matches \\d followed by \\w in the pattern",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-every-character.rule.spec.ts",
+      "name": "ESCAPED_EVERY_CHARACTER_RULE leaves a message whose backslashes are its content: Réglages",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-every-character.rule.spec.ts",
+      "name": "ESCAPED_EVERY_CHARACTER_RULE leaves a message whose backslashes are its content: ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-every-character.rule.spec.ts",
+      "name": "ESCAPED_EVERY_CHARACTER_RULE leaves a message whose backslashes are its content: \\",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-every-character.rule.spec.ts",
+      "name": "ESCAPED_EVERY_CHARACTER_RULE needs more than a couple of escapes before it acts",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-every-character.rule.spec.ts",
+      "name": "ESCAPED_EVERY_CHARACTER_RULE runs against both catalog formats and needs no source text",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/map-with-concurrency.util.spec.ts",
+      "name": "mapWithConcurrency keeps results in input order regardless of completion order",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/map-with-concurrency.util.spec.ts",
+      "name": "mapWithConcurrency never runs more than `limit` handlers at once",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/map-with-concurrency.util.spec.ts",
+      "name": "mapWithConcurrency rejects a limit that would leave every item unhandled",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/map-with-concurrency.util.spec.ts",
+      "name": "mapWithConcurrency returns an empty array without spawning workers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/constants/__tests__/normalization-rules.constant.spec.ts",
+      "name": "NORMALIZATION_RULES gives every rule at least one format to run against",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/constants/__tests__/normalization-rules.constant.spec.ts",
+      "name": "NORMALIZATION_RULES names every rule uniquely",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/constants/__tests__/normalization-rules.constant.spec.ts",
+      "name": "NORMALIZATION_RULES keeps the ICU rules away from MDX, where braces are JSX",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/constants/__tests__/normalization-rules.constant.spec.ts",
+      "name": "NORMALIZATION_RULES runs every rule but the MDX-specific one against PO catalogs",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/translated-identifier.rule.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/corrupted-model-output.rule.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/wordless-translation.rule.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-argument.rule.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-inline-code-tags.rule.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/invented-markup.rule.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/is-translation-already-present-error.util.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-unicode.rule.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/evaluate-rules.util.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/rules/__tests__/escaped-every-character.rule.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/utils/__tests__/map-with-concurrency.util.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-utils/crowdin-normalizer/constants/__tests__/normalization-rules.constant.spec.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

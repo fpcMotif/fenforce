@@ -1,0 +1,189 @@
+{
+  "capturedAt": "2026-10-01T03:58:36.163Z",
+  "cwd": "packages/twenty-utils",
+  "versions": {
+    "launcher": "bun",
+    "bun": "1.4.3",
+    "node": "v26.10.0",
+    "jest": "29.7.0"
+  },
+  "checkout": {
+    "revision": "1790e94c7f5313b4ce4d71b4c00e176f8b56fe59",
+    "trackedDiffSha256": "71e04106709952cf77885fca9b42b4ecc7e5378e5b3bd5e1827c119085e0571b",
+    "lockfileSha256": "f272458ed03ad5e716e8ed4d14e7b71a1ac3a46a37bb7f9fb3271e1376933688"
+  },
+  "meaning": "Fresh test processes. Cold disables Jest transform caching; warm enables caching after one priming run. OS caches remain uncontrolled.",
+  "scope": "Representative utilities only; this does not estimate full-suite migration performance.",
+  "samples": [
+    {
+      "mode": "cold",
+      "command": [
+        "bunx",
+        "--no-install",
+        "jest",
+        "--config",
+        "jest.config.mjs",
+        "--runInBand",
+        "--no-cache",
+        "--ci",
+        "--updateSnapshot=false",
+        "--json",
+        "--outputFile",
+        "<temporary-report-directory>/report.json"
+      ],
+      "durationMs": 677,
+      "exitCode": 0,
+      "tests": 107,
+      "passed": 107,
+      "failed": 0,
+      "pending": 0,
+      "identitySha256": "96603cc70e9a5228dbee01ce9ba2a7177f636b890c0f63724fc0d2ae1f30e45d"
+    },
+    {
+      "mode": "cold",
+      "command": [
+        "bunx",
+        "--no-install",
+        "jest",
+        "--config",
+        "jest.config.mjs",
+        "--runInBand",
+        "--no-cache",
+        "--ci",
+        "--updateSnapshot=false",
+        "--json",
+        "--outputFile",
+        "<temporary-report-directory>/report.json"
+      ],
+      "durationMs": 494,
+      "exitCode": 0,
+      "tests": 107,
+      "passed": 107,
+      "failed": 0,
+      "pending": 0,
+      "identitySha256": "96603cc70e9a5228dbee01ce9ba2a7177f636b890c0f63724fc0d2ae1f30e45d"
+    },
+    {
+      "mode": "cold",
+      "command": [
+        "bunx",
+        "--no-install",
+        "jest",
+        "--config",
+        "jest.config.mjs",
+        "--runInBand",
+        "--no-cache",
+        "--ci",
+        "--updateSnapshot=false",
+        "--json",
+        "--outputFile",
+        "<temporary-report-directory>/report.json"
+      ],
+      "durationMs": 653,
+      "exitCode": 0,
+      "tests": 107,
+      "passed": 107,
+      "failed": 0,
+      "pending": 0,
+      "identitySha256": "96603cc70e9a5228dbee01ce9ba2a7177f636b890c0f63724fc0d2ae1f30e45d"
+    },
+    {
+      "mode": "prime",
+      "command": [
+        "bunx",
+        "--no-install",
+        "jest",
+        "--config",
+        "jest.config.mjs",
+        "--runInBand",
+        "--cache",
+        "--ci",
+        "--updateSnapshot=false",
+        "--json",
+        "--outputFile",
+        "<temporary-report-directory>/report.json"
+      ],
+      "durationMs": 855,
+      "exitCode": 0,
+      "tests": 107,
+      "passed": 107,
+      "failed": 0,
+      "pending": 0,
+      "identitySha256": "96603cc70e9a5228dbee01ce9ba2a7177f636b890c0f63724fc0d2ae1f30e45d"
+    },
+    {
+      "mode": "warm",
+      "command": [
+        "bunx",
+        "--no-install",
+        "jest",
+        "--config",
+        "jest.config.mjs",
+        "--runInBand",
+        "--cache",
+        "--ci",
+        "--updateSnapshot=false",
+        "--json",
+        "--outputFile",
+        "<temporary-report-directory>/report.json"
+      ],
+      "durationMs": 1263,
+      "exitCode": 0,
+      "tests": 107,
+      "passed": 107,
+      "failed": 0,
+      "pending": 0,
+      "identitySha256": "96603cc70e9a5228dbee01ce9ba2a7177f636b890c0f63724fc0d2ae1f30e45d"
+    },
+    {
+      "mode": "warm",
+      "command": [
+        "bunx",
+        "--no-install",
+        "jest",
+        "--config",
+        "jest.config.mjs",
+        "--runInBand",
+        "--cache",
+        "--ci",
+        "--updateSnapshot=false",
+        "--json",
+        "--outputFile",
+        "<temporary-report-directory>/report.json"
+      ],
+      "durationMs": 579,
+      "exitCode": 0,
+      "tests": 107,
+      "passed": 107,
+      "failed": 0,
+      "pending": 0,
+      "identitySha256": "96603cc70e9a5228dbee01ce9ba2a7177f636b890c0f63724fc0d2ae1f30e45d"
+    },
+    {
+      "mode": "warm",
+      "command": [
+        "bunx",
+        "--no-install",
+        "jest",
+        "--config",
+        "jest.config.mjs",
+        "--runInBand",
+        "--cache",
+        "--ci",
+        "--updateSnapshot=false",
+        "--json",
+        "--outputFile",
+        "<temporary-report-directory>/report.json"
+      ],
+      "durationMs": 567,
+      "exitCode": 0,
+      "tests": 107,
+      "passed": 107,
+      "failed": 0,
+      "pending": 0,
+      "identitySha256": "96603cc70e9a5228dbee01ce9ba2a7177f636b890c0f63724fc0d2ae1f30e45d"
+    }
+  ],
+  "coldMedianMs": 653,
+  "warmMedianMs": 579
+}

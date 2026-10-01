@@ -1,0 +1,2080 @@
+{
+  "numTotalTests": 298,
+  "numPassedTests": 298,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 89,
+  "numPassedTestSuites": 89,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-apps/public/companion/src/__tests__/applicationConfig.test.ts",
+      "name": "application identifiers should expose the application metadata constants",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/__tests__/desktopRecordingImport.test.ts",
+      "name": "desktop import compatibility completes audio-only desktop recordings while still requiring bot video",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/__tests__/desktopRecordingImport.test.ts",
+      "name": "desktop import compatibility routes desktop completion using upload metadata when recording metadata is empty",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/__tests__/failedTranscriptAudioRecovery.test.ts",
+      "name": "terminates a failed transcript after audio recovery (oversized: false)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/__tests__/failedTranscriptAudioRecovery.test.ts",
+      "name": "terminates a failed transcript after audio recovery (oversized: true)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/__tests__/importTranscriptRecovery.test.ts",
+      "name": "uses the pending artifact rather than another listed transcript",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/__tests__/importTranscriptRecovery.test.ts",
+      "name": "does not repeat a paid request whose response was lost",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/__tests__/importTranscriptRecovery.test.ts",
+      "name": "clears a confirmed deleted artifact so a later import can replace it",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/__tests__/importTranscriptRecovery.test.ts",
+      "name": "retries transcript creation after HTTP 429 without suppressing future attempts",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/__tests__/importTranscriptRecovery.test.ts",
+      "name": "retries transcript creation after HTTP 500 without suppressing future attempts",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/__tests__/importTranscriptRecovery.test.ts",
+      "name": "retries transcript creation after HTTP 503 without suppressing future attempts",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/desktopCompanionHandler.test.ts",
+      "name": "rejects unauthenticated and application-only requests before reading calendars",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/desktopCompanionHandler.test.ts",
+      "name": "uses the authenticated user context for their personal agenda",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/formatSecondsAsClockTimestamp.test.ts",
+      "name": "formatSecondsAsClockTimestamp formats sub-hour durations as minutes and padded seconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/formatSecondsAsClockTimestamp.test.ts",
+      "name": "formatSecondsAsClockTimestamp adds an hour part with padded minutes past one hour",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/formatSecondsAsClockTimestamp.test.ts",
+      "name": "formatSecondsAsClockTimestamp floors fractional seconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/formatSecondsAsClockTimestamp.test.ts",
+      "name": "formatSecondsAsClockTimestamp clamps negative and non-finite input to zero",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBatches.test.ts",
+      "name": "getBatches returns no batches for an empty list",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBatches.test.ts",
+      "name": "getBatches splits items into batches of the given size with a shorter tail",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBatches.test.ts",
+      "name": "getBatches keeps a list at or under the batch size as a single batch",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBooleanApplicationVariableValue.test.ts",
+      "name": "getBooleanApplicationVariableValue returns the default when unset",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBooleanApplicationVariableValue.test.ts",
+      "name": "getBooleanApplicationVariableValue returns the default for an empty value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBooleanApplicationVariableValue.test.ts",
+      "name": "getBooleanApplicationVariableValue returns the default for an empty value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBooleanApplicationVariableValue.test.ts",
+      "name": "getBooleanApplicationVariableValue returns true for   TrUe  ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBooleanApplicationVariableValue.test.ts",
+      "name": "getBooleanApplicationVariableValue returns true for 1",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBooleanApplicationVariableValue.test.ts",
+      "name": "getBooleanApplicationVariableValue returns true for yes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBooleanApplicationVariableValue.test.ts",
+      "name": "getBooleanApplicationVariableValue returns true for on",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBooleanApplicationVariableValue.test.ts",
+      "name": "getBooleanApplicationVariableValue returns false for   FaLsE  ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBooleanApplicationVariableValue.test.ts",
+      "name": "getBooleanApplicationVariableValue returns false for 0",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBooleanApplicationVariableValue.test.ts",
+      "name": "getBooleanApplicationVariableValue returns false for no",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBooleanApplicationVariableValue.test.ts",
+      "name": "getBooleanApplicationVariableValue returns false for off",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBooleanApplicationVariableValue.test.ts",
+      "name": "getBooleanApplicationVariableValue returns the true default for an unrecognized value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBooleanApplicationVariableValue.test.ts",
+      "name": "getBooleanApplicationVariableValue returns the false default for an unrecognized value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getCompanionAdditionalSummaryPrompt.test.ts",
+      "name": "getCompanionAdditionalSummaryPrompt returns undefined when unset",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getCompanionAdditionalSummaryPrompt.test.ts",
+      "name": "getCompanionAdditionalSummaryPrompt returns the markdown from a rich text value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getCompanionAdditionalSummaryPrompt.test.ts",
+      "name": "getCompanionAdditionalSummaryPrompt returns undefined when the rich text markdown is empty",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getCompanionAdditionalSummaryPrompt.test.ts",
+      "name": "getCompanionAdditionalSummaryPrompt falls back to raw plaintext stored before the variable became rich text",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getCompanionAdditionalSummaryPrompt.test.ts",
+      "name": "getCompanionAdditionalSummaryPrompt returns undefined for whitespace-only values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getRecallAsyncTranscriptProvider.test.ts",
+      "name": "getRecallAsyncTranscriptProvider defaults to Recall.ai transcription when unset",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getRecallAsyncTranscriptProvider.test.ts",
+      "name": "getRecallAsyncTranscriptProvider falls back to the default for an unsupported provider",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/importCallRecordingArtifactsHandler.test.ts",
+      "name": "import-call-recording-artifacts is configured as an enqueue-only import worker",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/importCallRecordingArtifactsHandler.test.ts",
+      "name": "import-call-recording-artifacts forwards a valid import payload to the worker flow",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/importCallRecordingArtifactsHandler.test.ts",
+      "name": "import-call-recording-artifacts ignores payload-supplied provider ids instead of forwarding them",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/importCallRecordingArtifactsHandler.test.ts",
+      "name": "import-call-recording-artifacts skips invalid import payloads without touching the worker flow",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/importCallRecordingArtifactsHandler.test.ts",
+      "name": "import-call-recording-artifacts preserves the import failure cause for reconciliation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/isCallRecordingSummaryEnabled.test.ts",
+      "name": "isCallRecordingSummaryEnabled defaults to enabled when unset",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/isCallRecordingSummaryEnabled.test.ts",
+      "name": "isCallRecordingSummaryEnabled is disabled for false",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/isCallRecordingSummaryEnabled.test.ts",
+      "name": "isCallRecordingSummaryEnabled is disabled for 0",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/isCallRecordingSummaryEnabled.test.ts",
+      "name": "isCallRecordingSummaryEnabled is disabled for no",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/isCallRecordingSummaryEnabled.test.ts",
+      "name": "isCallRecordingSummaryEnabled is disabled for off",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/isCallRecordingSummaryEnabled.test.ts",
+      "name": "isCallRecordingSummaryEnabled is disabled for   False  ",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/isCallRecordingSummaryEnabled.test.ts",
+      "name": "isCallRecordingSummaryEnabled is enabled for true",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/isCallRecordingSummaryEnabled.test.ts",
+      "name": "isCallRecordingSummaryEnabled is enabled for 1",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/isCallRecordingSummaryEnabled.test.ts",
+      "name": "isCallRecordingSummaryEnabled is enabled for yes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/isCallRecordingSummaryEnabled.test.ts",
+      "name": "isCallRecordingSummaryEnabled is enabled for on",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/isCallRecordingSummaryEnabled.test.ts",
+      "name": "isCallRecordingSummaryEnabled falls back to the default for unrecognized values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/processRecallWebhookHandler.test.ts",
+      "name": "process-recall-webhook declares no external trigger so it only runs when dispatched by the resolver",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/processRecallWebhookHandler.test.ts",
+      "name": "process-recall-webhook forwards the resolved payload to handleRecallWebhook with a workspace-scoped client",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/processRecallWebhookHandler.test.ts",
+      "name": "process-recall-webhook preserves processing errors without inventing a retry classification",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/processRecallWebhookHandler.test.ts",
+      "name": "does not enqueue an import when a status update loses a race with completion",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/processRecallWebhookHandler.test.ts",
+      "name": "rejects direct unsigned worker invocation before querying or mutating a record",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/processRecallWebhookHandler.test.ts",
+      "name": "rejects tampering with the queued signed bytes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/processRecallWebhookHandler.test.ts",
+      "name": "rejects a valid signature targeted at another workspace",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/recallWebhookRouteHandler.test.ts",
+      "name": "routes and dispatches only the signed bytes even when the parsed body is forged",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/reconcileDesktopRecordingsHandler.test.ts",
+      "name": "still attempts summary persistence during a media recovery outage",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/reconcileDesktopRecordingsHandler.test.ts",
+      "name": "reports a summary recovery failure after media recovery has also run",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/reconcileDesktopRecordingsHandler.test.ts",
+      "name": "queues recovery with a stable workspace-specific delay instead of calling Recall in the cron",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/summarizeCallRecordingHandler.test.ts",
+      "name": "queues duplicate transcript events with the same job ID instead of generating inline",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/summarizeCallRecordingHandler.test.ts",
+      "name": "generates in the worker without enqueueing itself again",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/summarizeCallRecordingHandler.test.ts",
+      "name": "propagates enqueue failures so event delivery can retry",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/CallRecordingCharge.test.ts",
+      "name": "computeCallRecordingCharge charges one credit for a one-hour recording",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/CallRecordingCharge.test.ts",
+      "name": "computeCallRecordingCharge prorates partial hours by duration",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/CallRecordingCharge.test.ts",
+      "name": "computeCallRecordingCharge reports at least one minute for very short recordings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/CallRecordingCharge.test.ts",
+      "name": "computeCallRecordingCharge returns undefined when either timestamp is missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/CallRecordingCharge.test.ts",
+      "name": "computeCallRecordingCharge returns undefined for non-positive or unparseable durations",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/ConnectionPage.test.ts",
+      "name": "fetchAllNodes collects nodes across pages until hasNextPage is false",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/ConnectionPage.test.ts",
+      "name": "fetchAllNodes throws when hasNextPage is true without an endCursor",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/ConnectionPage.test.ts",
+      "name": "fetchAllNodes throws when the query returns no connection",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/ConnectionPage.test.ts",
+      "name": "fetchAllNodes stops starting page requests when the request policy closes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/ConnectionPage.test.ts",
+      "name": "rejects repeated cursors before issuing an unbounded sequence",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/ConnectionPage.test.ts",
+      "name": "bounds even a consistently advancing cursor",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/DownloadTranscriptResult.test.ts",
+      "name": "downloadTranscript downloads transcript content with a timeout",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/DownloadTranscriptResult.test.ts",
+      "name": "downloadTranscript logs raw download failures but returns a generic error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/DownloadTranscriptResult.test.ts",
+      "name": "downloadTranscript rejects malformed transcript content ({})",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/DownloadTranscriptResult.test.ts",
+      "name": "downloadTranscript rejects malformed transcript content (\"not a transcript\")",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/DownloadTranscriptResult.test.ts",
+      "name": "downloadTranscript rejects malformed transcript content (null)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/DownloadTranscriptResult.test.ts",
+      "name": "downloadTranscript rejects malformed transcript content ({\"words\":[\"invalid\"]})",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/DownloadTranscriptResult.test.ts",
+      "name": "downloadTranscript recognizes deletion even if the provider still returns an old download URL",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/ImportCallRecordingArtifactsResult.test.ts",
+      "name": "does not import a Call Recorder record even when a job supplies its ID",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/ImportCallRecordingArtifactsResult.test.ts",
+      "name": "imports the persisted Companion recording under an exclusive lease",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/ImportCallRecordingArtifactsResult.test.ts",
+      "name": "does no provider work when another worker holds the lease",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/ImportCallRecordingArtifactsResult.test.ts",
+      "name": "releases the lease after a retryable import failure",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/ImportCallRecordingArtifactsResult.test.ts",
+      "name": "never imports a provider recording unrelated to the verified upload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/ImportCallRecordingArtifactsResult.test.ts",
+      "name": "rereads artifacts after claiming so a delayed worker does not reimport stale data",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/MediaFileTooLargeMarkers.test.ts",
+      "name": "parseMediaFileTooLargeMarkers parses single-artifact markers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/MediaFileTooLargeMarkers.test.ts",
+      "name": "parseMediaFileTooLargeMarkers parses comma-joined markers for both artifacts",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/MediaFileTooLargeMarkers.test.ts",
+      "name": "parseMediaFileTooLargeMarkers reports no markers for unset or unrelated reasons",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/RecallMediaUrls.test.ts",
+      "name": "extractRecallMediaUrls reads both download urls flat from the v1.11 media shortcuts",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/RecallMediaUrls.test.ts",
+      "name": "extractRecallMediaUrls falls back to the nested data.download_url shape",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/RecallMediaUrls.test.ts",
+      "name": "extractRecallMediaUrls returns undefined urls when artifacts are absent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/RecallMediaUrls.test.ts",
+      "name": "extractRecallMediaUrls tolerates malformed recording payloads",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/RecordingParticipant.test.ts",
+      "name": "uses CRM name and photo, excludes self, aliases and declined attendees, and deduplicates contacts",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/RecordingParticipant.test.ts",
+      "name": "paginates attendees and keeps each recording associated with its own people",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/RecordingParticipant.test.ts",
+      "name": "uses detected speakers for unscheduled calls, removing self and repeated or anonymous speakers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/RecordingParticipant.test.ts",
+      "name": "returns no participant instead of substituting the signed-in user or guessing from the title",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/RecordingParticipant.test.ts",
+      "name": "does not attach a photo from a partial email match",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/RecordingParticipant.test.ts",
+      "name": "reuses a linked workspace member photo without a CRM contact",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/claimCallRecordingArtifactsImport.test.ts",
+      "name": "claimCallRecordingArtifactsImport claims when no fresh lease is held and stamps the lease timestamp",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/claimCallRecordingArtifactsImport.test.ts",
+      "name": "claimCallRecordingArtifactsImport does not claim when a fresh lease already blocks the update",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/claimCallRecordingArtifactsImport.test.ts",
+      "name": "claimCallRecordingArtifactsImport reclaims a lease older than the TTL",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/claimCallRecordingArtifactsImport.test.ts",
+      "name": "claimCallRecordingArtifactsImport does not reclaim a lease still within the TTL",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/claimCallRecordingArtifactsImport.test.ts",
+      "name": "claimCallRecordingArtifactsImport releases only the lease acquired by this worker",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/completeCallRecordingImport.test.ts",
+      "name": "completeCallRecordingImport guards the flip with non-terminal statuses and returns true when the row is claimed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/completeCallRecordingImport.test.ts",
+      "name": "completeCallRecordingImport returns false when the row was already COMPLETED",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/completeCallRecordingImport.test.ts",
+      "name": "completeCallRecordingImport returns false when the API omits the result list",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/enqueueCallRecordingArtifactsImport.test.ts",
+      "name": "enqueueCallRecordingArtifactsImport enqueues one import job with a fresh request timestamp",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/enqueueCallRecordingArtifactsImport.test.ts",
+      "name": "enqueueCallRecordingArtifactsImport propagates enqueue failures to the caller",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/enqueueLogicFunctionJobs.test.ts",
+      "name": "enqueueLogicFunctionJobs enqueues a small payload list in a single call",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/enqueueLogicFunctionJobs.test.ts",
+      "name": "enqueueLogicFunctionJobs splits payload lists above the mutation cap into multiple calls",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/enqueueLogicFunctionJobs.test.ts",
+      "name": "enqueueLogicFunctionJobs stops at the first failed chunk",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/findCallRecordingForSummary.test.ts",
+      "name": "findCallRecordingForSummary treats blank summary markdown as missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/getCurrentWorkspaceId.test.ts",
+      "name": "getCurrentWorkspaceId reads the workspace id from the app access token payload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/stripRestrictedFieldValue.test.ts",
+      "name": "stripRestrictedFieldValue drops the calendar visibility restriction placeholder",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/stripRestrictedFieldValue.test.ts",
+      "name": "stripRestrictedFieldValue keeps regular values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/stripRestrictedFieldValue.test.ts",
+      "name": "stripRestrictedFieldValue keeps undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/getOwnedDesktopUpload.test.ts",
+      "name": "accepts only the upload bound by Recall to this workspace, record and owner",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/getOwnedDesktopUpload.test.ts",
+      "name": "rejects a foreign twentyWorkspaceId even when the editable session points to its upload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/getOwnedDesktopUpload.test.ts",
+      "name": "rejects a foreign twentyCallRecordingId even when the editable session points to its upload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/getOwnedDesktopUpload.test.ts",
+      "name": "rejects a foreign twentyUserWorkspaceId even when the editable session points to its upload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/getOwnedDesktopUpload.test.ts",
+      "name": "rejects missing provider metadata and mismatched upload IDs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/getOwnedDesktopUpload.test.ts",
+      "name": "does not treat provider unavailability as a verified upload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/getOwnedDesktopUpload.test.ts",
+      "name": "requires authenticated workspace context and an owning desktop session",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/getOwnedDesktopUpload.test.ts",
+      "name": "encodes an editable upload ID as one path segment",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/parseRecallRetryAfterMs.test.ts",
+      "name": "parseRecallRetryAfterMs parses delay-seconds into milliseconds",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/parseRecallRetryAfterMs.test.ts",
+      "name": "parseRecallRetryAfterMs caps delay-seconds at the retry-after ceiling",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/parseRecallRetryAfterMs.test.ts",
+      "name": "parseRecallRetryAfterMs parses an HTTP-date into a delay from now",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/parseRecallRetryAfterMs.test.ts",
+      "name": "parseRecallRetryAfterMs clamps an HTTP-date in the past to zero",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/parseRecallRetryAfterMs.test.ts",
+      "name": "parseRecallRetryAfterMs rejects the malformed delay-seconds form 0x10",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/parseRecallRetryAfterMs.test.ts",
+      "name": "parseRecallRetryAfterMs rejects the malformed delay-seconds form 1e2",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/parseRecallRetryAfterMs.test.ts",
+      "name": "parseRecallRetryAfterMs rejects the malformed delay-seconds form 1.5",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/parseRecallRetryAfterMs.test.ts",
+      "name": "parseRecallRetryAfterMs rejects the malformed delay-seconds form -5",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/parseRecallRetryAfterMs.test.ts",
+      "name": "parseRecallRetryAfterMs rejects the malformed delay-seconds form +9",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/parseRecallRetryAfterMs.test.ts",
+      "name": "parseRecallRetryAfterMs rejects the malformed delay-seconds form Infinity",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/parseRecallRetryAfterMs.test.ts",
+      "name": "parseRecallRetryAfterMs rejects values that are neither delay-seconds nor a date",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/verifyRecallWebhookSignature.test.ts",
+      "name": "verifyRecallWebhookSignature accepts valid Recall webhook-* signature headers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/verifyRecallWebhookSignature.test.ts",
+      "name": "verifyRecallWebhookSignature accepts valid svix-* signature headers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/verifyRecallWebhookSignature.test.ts",
+      "name": "verifyRecallWebhookSignature rejects deliveries whose timestamp is outside of the tolerance",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/verifyRecallWebhookSignature.test.ts",
+      "name": "verifyRecallWebhookSignature rejects non-numeric timestamps",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/verifyRecallWebhookSignature.test.ts",
+      "name": "verifyRecallWebhookSignature allows a delayed durable retry only when its original signature still verifies",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/verifyRecallWebhookSignature.test.ts",
+      "name": "verifyRecallWebhookSignature rejects missing signature headers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/verifyRecallWebhookSignature.test.ts",
+      "name": "verifyRecallWebhookSignature rejects signatures computed from a different body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/buildCallRecordingSummaryPrompt.test.ts",
+      "name": "buildCallRecordingSummaryPrompt flattens entries into speaker-labelled lines",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/buildCallRecordingSummaryPrompt.test.ts",
+      "name": "buildCallRecordingSummaryPrompt appends the workspace admin instructions when provided",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/buildCallRecordingSummaryPrompt.test.ts",
+      "name": "buildCallRecordingSummaryPrompt prefixes a [mm:ss] (or h:mm:ss) timestamp when the entry carries one",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/buildCallRecordingSummaryPrompt.test.ts",
+      "name": "buildCallRecordingSummaryPrompt includes the meeting title when provided",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/buildCallRecordingSummaryPrompt.test.ts",
+      "name": "buildCallRecordingSummaryPrompt falls back to a placeholder speaker name",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/buildCallRecordingSummaryPrompt.test.ts",
+      "name": "buildCallRecordingSummaryPrompt skips entries without usable words",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/buildCallRecordingSummaryPrompt.test.ts",
+      "name": "buildCallRecordingSummaryPrompt returns undefined when there is no usable dialogue",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/computeRealMeetingKey.test.ts",
+      "name": "computeRealMeetingKey strips protocol, query, and fragment",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/computeRealMeetingKey.test.ts",
+      "name": "computeRealMeetingKey strips www and lowercases",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/computeRealMeetingKey.test.ts",
+      "name": "computeRealMeetingKey strips trailing slashes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/computeRealMeetingKey.test.ts",
+      "name": "computeRealMeetingKey supports plain http links",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/computeRealMeetingKey.test.ts",
+      "name": "computeRealMeetingKey produces the same key for the same meeting synced from two calendars",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/computeRealMeetingKey.test.ts",
+      "name": "computeRealMeetingKey falls back to the iCal uid when the link is blank",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/computeRealMeetingKey.test.ts",
+      "name": "computeRealMeetingKey falls back to the iCal uid when the link is not a string",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/computeRealMeetingKey.test.ts",
+      "name": "computeRealMeetingKey falls back to the calendar event id when link and iCal uid are missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/computeRealMeetingKey.test.ts",
+      "name": "computeRealMeetingKey keeps link keys distinct across start times",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText extracts a Zoom link from a plain text invitation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText extracts a bare Zoom link (location field)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText extracts a Zoom personal room link",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText extracts a Zoom Government link",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText extracts a Zoom link from an HTML body and decodes &amp;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText strips trailing sentence punctuation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText extracts a Google Meet link",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText extracts a Microsoft Teams link",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText extracts a Webex link",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText extracts a GoTo Meeting link",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText prefers a Zoom link over a Google Meet link when both are present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText returns undefined for a non-conferencing URL",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText returns undefined for a Zoom marketing page URL",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText returns undefined for plain text without links",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText returns undefined for an empty string",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText returns undefined for a blank string",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "name": "extractConferenceLinkUrlFromText returns undefined for null and undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingMediaImportComplete.test.ts",
+      "name": "isCallRecordingImportComplete is complete when transcript content and both media files are present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingMediaImportComplete.test.ts",
+      "name": "isCallRecordingImportComplete is incomplete while the transcript holds a marker",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingMediaImportComplete.test.ts",
+      "name": "isCallRecordingImportComplete is incomplete when the transcript is unset",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingMediaImportComplete.test.ts",
+      "name": "isCallRecordingImportComplete is incomplete while any media field is empty",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingMediaImportComplete.test.ts",
+      "name": "isCallRecordingImportComplete treats a media file skipped for size as resolved",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingMediaImportComplete.test.ts",
+      "name": "isCallRecordingImportComplete does not let a size marker excuse the other missing artifact",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingMediaImportComplete.test.ts",
+      "name": "isCallRecordingImportComplete ignores unrelated failure reasons",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade from SCHEDULED to JOINING -> false",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade from JOINING to RECORDING -> false",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade from RECORDING to PROCESSING -> false",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade from PROCESSING to FAILED -> false",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade from PROCESSING to COMPLETED -> false",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade from RECORDING to RECORDING -> false",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade from COMPLETED to RECORDING -> true",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade from PROCESSING to JOINING -> true",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade from FAILED to RECORDING -> true",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade from JOINING to SCHEDULED -> true",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade from PROCESSING to NOT_RECORDED -> false",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade from NOT_RECORDED to PROCESSING -> true",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade from NOT_RECORDED to FAILED -> true",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade from FAILED to NOT_RECORDED -> true",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "name": "isCallRecordingStatusDowngrade never treats transitions from unknown statuses as downgrades",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isRealTranscript.test.ts",
+      "name": "isRealTranscript is true for a non-empty diarized array",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isRealTranscript.test.ts",
+      "name": "isRealTranscript is false for an empty array",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isRealTranscript.test.ts",
+      "name": "isRealTranscript is false for PENDING/FAILED markers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isRealTranscript.test.ts",
+      "name": "isRealTranscript is false when unset",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/parseCallRecordingSummaryAgentResponse.test.ts",
+      "name": "parseCallRecordingSummaryAgentResponse returns the trimmed response markdown on success",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/parseCallRecordingSummaryAgentResponse.test.ts",
+      "name": "parseCallRecordingSummaryAgentResponse returns undefined when the run failed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/parseCallRecordingSummaryAgentResponse.test.ts",
+      "name": "parseCallRecordingSummaryAgentResponse returns undefined when the response is empty or missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/parseCallRecordingSummaryAgentResponse.test.ts",
+      "name": "parseCallRecordingSummaryAgentResponse extracts a grounded reason when the transcript cannot be summarized",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/parseCallRecordingSummaryAgentResponse.test.ts",
+      "name": "parseCallRecordingSummaryAgentResponse rejects an unavailable marker without a reason",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/resolveConferenceLinkUrl.test.ts",
+      "name": "resolveConferenceLinkUrl returns the structured conference link when present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/resolveConferenceLinkUrl.test.ts",
+      "name": "resolveConferenceLinkUrl parses the location when the structured link is empty",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/resolveConferenceLinkUrl.test.ts",
+      "name": "resolveConferenceLinkUrl parses the description when the structured link and location have none",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/resolveConferenceLinkUrl.test.ts",
+      "name": "resolveConferenceLinkUrl prefers the location link over the description link",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/resolveConferenceLinkUrl.test.ts",
+      "name": "resolveConferenceLinkUrl returns undefined when no conference link exists anywhere",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/shouldCompleteCallRecordingImport.test.ts",
+      "name": "shouldCompleteCallRecordingImport requires complete artifacts and billable timestamps before completion",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/shouldCompleteCallRecordingImport.test.ts",
+      "name": "shouldCompleteCallRecordingImport completes when a missing media file is marked too large",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/shouldCompleteCallRecordingImport.test.ts",
+      "name": "shouldCompleteCallRecordingImport does not complete a persisted failed recording",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/shouldCompleteCallRecordingImport.test.ts",
+      "name": "shouldCompleteCallRecordingImport does not complete when the incoming update marks the recording as failed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/shouldCompleteCallRecordingImport.test.ts",
+      "name": "shouldCompleteCallRecordingImport does not complete a recording classified as NOT_RECORDED",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/completeAndChargeCallRecording.test.ts",
+      "name": "charges only the worker that completes the recording",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/completeAndChargeCallRecording.test.ts",
+      "name": "does not replay a charge after an ambiguous failure",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/completeAndChargeCallRecording.test.ts",
+      "name": "leaves the completion fence untouched when provider validation fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/createDesktopRecordingUpload.test.ts",
+      "name": "desktop upload provisioning reserves the shared CallRecording before creating an audio-only upload and returns no server secret",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/createDesktopRecordingUpload.test.ts",
+      "name": "desktop upload provisioning routes transcript completion using the recording metadata provisioned with the upload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/createDesktopRecordingUpload.test.ts",
+      "name": "desktop upload provisioning resumes an owned pending upload without creating another",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/createDesktopRecordingUpload.test.ts",
+      "name": "desktop upload provisioning never reveals or cancels another user’s session",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/createDesktopRecordingUpload.test.ts",
+      "name": "desktop upload provisioning blocks duplicate calendar capture even when the desktop omits a calendar event ID",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/createDesktopRecordingUpload.test.ts",
+      "name": "desktop upload provisioning allows an unscheduled audio call while an unrelated calendar bot is scheduled",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/createDesktopRecordingUpload.test.ts",
+      "name": "desktop upload provisioning marks failed setup without retrying an ambiguous provider create",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/createDesktopRecordingUpload.test.ts",
+      "name": "does not return an upload token after a concurrent capture failure",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary skips when summaries are disabled",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary skips when there is no real transcript",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary skips when a summary already exists",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary regenerates an existing summary when explicitly requested",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary skips recordings without Companion ownership",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary generates for Companion-owned recordings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary automatically summarizes desktop captures attributed to the signed-in user",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary retries a failed record save from the durable result without paying for another agent run",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary reports an interrupted request without automatically charging again",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary preserves a summary changed while generation was running",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary reports persistent storage failure without repeating a paid generation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary retries persisting the paid output after a temporary key-value write failure",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary generates for recordings another actor created when explicitly requested",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary runs the agent and stores the summary markdown on the happy path",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary appends the workspace admin instructions to the agent prompt",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary stores a grounded unavailable placeholder so the run is terminal",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary reports an unsuccessful agent run without caching empty success",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "name": "generateCallRecordingSummary propagates agent errors without writing a summary",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/getCallRecordingCharge.test.ts",
+      "name": "prepares the existing SDK charge using provider duration without charging",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/getCallRecordingCharge.test.ts",
+      "name": "does not bill an unknown provider duration",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/getCallRecordingCharge.test.ts",
+      "name": "does not bill forged provider IDs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/getDesktopCompanionAgenda.test.ts",
+      "name": "reads a personal agenda without another app schema and only returns recordings owned by the user",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/getDesktopCompanionAgenda.test.ts",
+      "name": "keeps recordings available when no calendar is connected",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/handleRecallWebhook.test.ts",
+      "name": "ignores another app before looking up or changing its records",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/handleRecallWebhook.test.ts",
+      "name": "rejects metadata pointing at a record not owned by Companion",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/handleRecallWebhook.test.ts",
+      "name": "handles sdk_upload.recording_started on a Companion session",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/handleRecallWebhook.test.ts",
+      "name": "handles sdk_upload.recording_ended on a Companion session",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/handleRecallWebhook.test.ts",
+      "name": "handles sdk_upload.complete on a Companion session",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/handleRecallWebhook.test.ts",
+      "name": "handles sdk_upload.failed on a Companion session",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/handleRecallWebhook.test.ts",
+      "name": "queues transcript.done through the durable importer",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/handleRecallWebhook.test.ts",
+      "name": "queues transcript.failed through the durable importer",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/handleRecallWebhook.test.ts",
+      "name": "does not enqueue an import after losing a race with completion",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/handleRecallWebhook.test.ts",
+      "name": "rejects a webhook recording ID that differs from the provider upload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/hydrateDesktopRecordingTimestamps.test.ts",
+      "name": "recovers a missed desktop completion webhook into the shared durable import queue",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/hydrateDesktopRecordingTimestamps.test.ts",
+      "name": "recovers timestamps from Recall after out-of-order lifecycle events",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/hydrateDesktopRecordingTimestamps.test.ts",
+      "name": "does not enqueue incomplete uploads or retry failures blindly",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/hydrateDesktopRecordingTimestamps.test.ts",
+      "name": "does not recover a recording changed after the recovery batch was read",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/hydrateDesktopRecordingTimestamps.test.ts",
+      "name": "does not reopen a recording completed while Recall was being queried",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/hydrateDesktopRecordingTimestamps.test.ts",
+      "name": "does not reopen terminal transcript failures",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/hydrateDesktopRecordingTimestamps.test.ts",
+      "name": "does not revive other failed calls whose transcript merely contains the word FAILED",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/importCallRecordingMedia.test.ts",
+      "name": "importCallRecordingMedia streams and uploads every missing artifact",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/importCallRecordingMedia.test.ts",
+      "name": "importCallRecordingMedia declares the presigned upload with the download size, folder and field identifier",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/importCallRecordingMedia.test.ts",
+      "name": "importCallRecordingMedia skips artifacts already on the record",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/importCallRecordingMedia.test.ts",
+      "name": "importCallRecordingMedia does not fetch the recording when both artifacts are present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/importCallRecordingMedia.test.ts",
+      "name": "importCallRecordingMedia cancels the opened download body when creating its upload target fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/importCallRecordingMedia.test.ts",
+      "name": "importCallRecordingMedia omits an artifact and warns when the download has no content length",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/importCallRecordingMedia.test.ts",
+      "name": "importCallRecordingMedia returns nothing when the recording exposes no media urls",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/importCallRecordingMedia.test.ts",
+      "name": "importCallRecordingMedia warns and returns nothing when the recording fetch fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/importCallRecordingMedia.test.ts",
+      "name": "importCallRecordingMedia skips an oversized file without reading its body and records the reason",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/importCallRecordingMedia.test.ts",
+      "name": "importCallRecordingMedia records both markers when video and audio exceed the cap",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/importCallRecordingMedia.test.ts",
+      "name": "importCallRecordingMedia accepts a file at the 500 MB cap",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/putMediaDownloadBodyToUploadTarget.test.ts",
+      "name": "putMediaDownloadBodyToUploadTarget streams the media download body to the upload target with declared headers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/putMediaDownloadBodyToUploadTarget.test.ts",
+      "name": "putMediaDownloadBodyToUploadTarget uses the http client for http upload targets",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/putMediaDownloadBodyToUploadTarget.test.ts",
+      "name": "putMediaDownloadBodyToUploadTarget destroys the media download readable when storage returns a failed status",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/putMediaDownloadBodyToUploadTarget.test.ts",
+      "name": "putMediaDownloadBodyToUploadTarget destroys the media download readable when the upload request fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/recoverRecordingSummaries.test.ts",
+      "name": "saves an already-paid result without starting another generation or overwriting an existing summary",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/recoverRecordingSummaries.test.ts",
+      "name": "does not generate for a missing or incomplete paid result: null",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/recoverRecordingSummaries.test.ts",
+      "name": "does not generate for a missing or incomplete paid result: {\"status\":\"RUNNING\"}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/recoverRecordingSummaries.test.ts",
+      "name": "does not generate for a missing or incomplete paid result: {\"status\":\"EMPTY\"}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/recoverRecordingSummaries.test.ts",
+      "name": "continues after one recording cannot be saved",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/recoverRecordingSummaries.test.ts",
+      "name": "advances past legacy rows without modifying the timestamp used by billing recovery",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/recoverRecordingSummaries.test.ts",
+      "name": "returns to the first page after reaching the end, allowing failed saves to retry",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-apps/public/companion/src/__tests__/applicationConfig.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/__tests__/desktopRecordingImport.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/__tests__/failedTranscriptAudioRecovery.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/__tests__/importTranscriptRecovery.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/desktopCompanionHandler.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/formatSecondsAsClockTimestamp.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBatches.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getBooleanApplicationVariableValue.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getCompanionAdditionalSummaryPrompt.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/getRecallAsyncTranscriptProvider.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/importCallRecordingArtifactsHandler.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/isCallRecordingSummaryEnabled.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/processRecallWebhookHandler.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/recallWebhookRouteHandler.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/reconcileDesktopRecordingsHandler.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/utils/__tests__/summarizeCallRecordingHandler.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/CallRecordingCharge.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/ConnectionPage.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/DownloadTranscriptResult.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/ImportCallRecordingArtifactsResult.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/MediaFileTooLargeMarkers.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/RecallMediaUrls.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/types/__tests__/RecordingParticipant.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/claimCallRecordingArtifactsImport.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/completeCallRecordingImport.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/enqueueCallRecordingArtifactsImport.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/enqueueLogicFunctionJobs.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/findCallRecordingForSummary.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/getCurrentWorkspaceId.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/data/utils/__tests__/stripRestrictedFieldValue.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/getOwnedDesktopUpload.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/parseRecallRetryAfterMs.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/recall-api/utils/__tests__/verifyRecallWebhookSignature.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/buildCallRecordingSummaryPrompt.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/computeRealMeetingKey.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/extractConferenceLinkUrlFromText.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingMediaImportComplete.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isCallRecordingStatusDowngrade.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/isRealTranscript.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/parseCallRecordingSummaryAgentResponse.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/resolveConferenceLinkUrl.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/domain/utils/__tests__/shouldCompleteCallRecordingImport.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/completeAndChargeCallRecording.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/createDesktopRecordingUpload.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/generateCallRecordingSummary.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/getCallRecordingCharge.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/getDesktopCompanionAgenda.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/handleRecallWebhook.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/hydrateDesktopRecordingTimestamps.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/importCallRecordingMedia.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/putMediaDownloadBodyToUploadTarget.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/companion/src/logic-functions/flows/utils/__tests__/recoverRecordingSummaries.test.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

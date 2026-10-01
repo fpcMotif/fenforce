@@ -1,0 +1,531 @@
+{
+  "numTotalTests": 74,
+  "numPassedTests": 74,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 24,
+  "numPassedTestSuites": 24,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/fix-translated-links.spec.ts",
+      "name": "localizeLinks points markdown, href and absolute docs links at the page language",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/fix-translated-links.spec.ts",
+      "name": "localizeLinks leaves already localized links untouched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/fix-translated-links.spec.ts",
+      "name": "localizeLinks leaves images and external links untouched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders flags a placeholder in prose",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders reports the line and column of a placeholder further down the page",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders allows HTML elements",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders allows closing tags",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders ignores placeholders inside a fenced code block",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders ignores placeholders inside inline code",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders still flags a placeholder after a closed inline code span",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders flags an HTML element name used as a host placeholder",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders flags a placeholder inside a path segment",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders does not flag single letter or capitalised tags",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders reports every placeholder on a line",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders is not blinded by an unpaired backtick earlier in the file",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders pairs backtick runs by length",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders does not treat a backtick on a previous line as opening a span",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders keeps a four-backtick block that shows a triple-backtick example as code",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "name": "findAngleBracketPlaceholders closes a block on a longer fence than the one that opened it",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/check-story-embeds.spec.ts",
+      "name": "checkStoryEmbeds accepts an existing story inside a nested preview",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/check-story-embeds.spec.ts",
+      "name": "checkStoryEmbeds reports a renamed or deleted story with its line number",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/check-story-embeds.spec.ts",
+      "name": "checkStoryEmbeds rejects an unverifiable story ID in <StoryEmbed />",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/check-story-embeds.spec.ts",
+      "name": "checkStoryEmbeds rejects an unverifiable story ID in <StoryEmbed storyId={selectedStory} />",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/check-story-embeds.spec.ts",
+      "name": "checkStoryEmbeds rejects an unverifiable story ID in <StoryEmbed storyId=\"\" />",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/check-story-embeds.spec.ts",
+      "name": "checkStoryEmbeds rejects an unverifiable story ID in <StoryEmbed storyId=\"ui-input-input--default\" {...props} />",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/check-story-embeds.spec.ts",
+      "name": "checkStoryEmbeds checks a renamed snippet import",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/check-story-embeds.spec.ts",
+      "name": "checkStoryEmbeds ignores examples and comments while parsing page metadata",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/check-ui-reference-imports.spec.ts",
+      "name": "UI reference imports passes when every generated reference is imported by a page",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/check-ui-reference-imports.spec.ts",
+      "name": "UI reference imports reports pages importing missing references and references no page imports",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-defaults.spec.ts",
+      "name": "documentation defaults documents render-dependent native button defaults on dropdown parts",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-defaults.spec.ts",
+      "name": "documentation defaults normalizes \"'onSubmit'\" to \"onSubmit\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-defaults.spec.ts",
+      "name": "documentation defaults normalizes \"\\\"horizontal\\\"\" to \"horizontal\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-defaults.spec.ts",
+      "name": "documentation defaults normalizes \"'it\\\\'s ready'\" to \"it's ready\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-defaults.spec.ts",
+      "name": "documentation defaults normalizes \"\\\"undefined\\\"\" to \"undefined\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-defaults.spec.ts",
+      "name": "documentation defaults normalizes \"''\" to \"\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-defaults.spec.ts",
+      "name": "documentation defaults normalizes \"accent\" to \"accent\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-defaults.spec.ts",
+      "name": "documentation defaults normalizes false to \"false\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-defaults.spec.ts",
+      "name": "documentation defaults normalizes 0 to \"0\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-defaults.spec.ts",
+      "name": "documentation defaults normalizes null to \"null\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-defaults.spec.ts",
+      "name": "documentation defaults normalizes undefined to null",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-defaults.spec.ts",
+      "name": "documentation defaults normalizes \"undefined\" to null",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-defaults.spec.ts",
+      "name": "documentation defaults omits absent defaults and renders string defaults without display quotes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-examples.spec.ts",
+      "name": "documentation examples extracts fences with info strings, indentation, and other fence markers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-examples.spec.ts",
+      "name": "documentation examples handles CRLF line endings and ignores an unterminated fence",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-imports.spec.ts",
+      "name": "documentation imports allows public entry points, exported CSS, and peer dependencies",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-imports.spec.ts",
+      "name": "documentation imports rejects an unpublished subpath in import { Internal } from 'twenty-ui/internal';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-imports.spec.ts",
+      "name": "documentation imports rejects an unpublished subpath in import 'twenty-ui/private.css';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-imports.spec.ts",
+      "name": "documentation imports rejects an unpublished subpath in export { Internal } from 'twenty-ui/internal';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-imports.spec.ts",
+      "name": "documentation imports rejects an unpublished subpath in const component = import('twenty-ui/internal');",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-imports.spec.ts",
+      "name": "documentation imports rejects an unpublished subpath in type Internal = import('twenty-ui/internal').Internal;",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-imports.spec.ts",
+      "name": "documentation imports rejects an unpublished subpath in const component = require('twenty-ui/internal');",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-imports.spec.ts",
+      "name": "documentation imports rejects a module outside the public surface in import { Checkbox } from '@ui/primitives/input/Checkbox/Checkbox';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-imports.spec.ts",
+      "name": "documentation imports rejects a module outside the public surface in import { Input } from '../../twenty-ui/src/input';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-imports.spec.ts",
+      "name": "documentation imports rejects a module outside the public surface in import { vi } from 'vitest';",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-prop-types.spec.ts",
+      "name": "documentation prop types normalizes {\"type\":{\"name\":\"string | ((state: State) => string | undefined) | undefined\"},\"required\":false} to \"string | ((state: State) => string | undefined)\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-prop-types.spec.ts",
+      "name": "documentation prop types normalizes {\"type\":{\"name\":\"((details: { trigger: Element | undefined; }) => void) | undefined\"},\"required\":false} to \"((details: { trigger: Element | undefined; }) => void)\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-prop-types.spec.ts",
+      "name": "documentation prop types normalizes {\"type\":{\"name\":\"Element | undefined\"},\"required\":true} to \"Element | undefined\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-prop-types.spec.ts",
+      "name": "documentation prop types normalizes {\"type\":{\"name\":\"boolean\"},\"required\":false} to \"boolean\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-prop-types.spec.ts",
+      "name": "documentation prop types normalizes {\"type\":{\"name\":\"enum\",\"value\":[{\"value\":\"\\\"sm\\\"\"},{\"value\":\"\\\"md\\\"\"},{\"value\":\"undefined\"}]},\"required\":false} to \"\\\"md\\\" | \\\"sm\\\"\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-prop-types.spec.ts",
+      "name": "documentation prop types normalizes {\"type\":{\"name\":\"enum\",\"value\":[{\"value\":\"\\\"sm\\\"\"},{\"value\":\"undefined\"}]},\"required\":true} to \"\\\"sm\\\" | undefined\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-prop-types.spec.ts",
+      "name": "documentation prop types normalizes {\"type\":{\"name\":\"enum\",\"value\":[{\"value\":\"1\"},{\"value\":\"5\"},{\"value\":\"2\"},{\"value\":\"3\"},{\"value\":\"4\"},{\"value\":\"6\"},{\"value\":\"undefined\"}]},\"required\":false} to \"1 | 2 | 3 | 4 | 5 | 6\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-prop-types.spec.ts",
+      "name": "documentation prop types normalizes {\"type\":{\"name\":\"enum\",\"value\":[{\"value\":\"10\"},{\"value\":\"2\"},{\"value\":\"-1\"},{\"value\":\"1.5\"}]},\"required\":true} to \"-1 | 1.5 | 2 | 10\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-prop-types.spec.ts",
+      "name": "documentation prop types normalizes {\"type\":{\"name\":\"enum\",\"value\":[{\"value\":\"2\"},{\"value\":\"\\\"auto\\\"\"},{\"value\":\"1\"}]},\"required\":true} to \"\\\"auto\\\" | 1 | 2\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-token-values.spec.ts",
+      "name": "documentation token values formats url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIYAAABQCA), url(data:image/jpeg;base64,/9j/4AAQ) as url(data:image/png;base64,...), url(data:image/jpeg;base64,...)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-token-values.spec.ts",
+      "name": "documentation token values formats color(display-p3 0.992 0.992 0.996) as color(display-p3 0.992 0.992 0.996)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-token-values.spec.ts",
+      "name": "documentation token values formats url(/noise.png) as url(/noise.png)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-token-values.spec.ts",
+      "name": "documentation token values formats 16 as 16",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/render-ui-reference.spec.ts",
+      "name": "renderComponentReference escapes attributes and prose while keeping markdown and code intact",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/render-ui-reference.spec.ts",
+      "name": "compound component references includes convenience props before compound parts",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/render-ui-reference.spec.ts",
+      "name": "compound component references distinguishes identically named props on different parts and retains defaults",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/render-ui-reference.spec.ts",
+      "name": "renderTokenReference keeps token expressions inside one table cell and distinguishes numeric values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/sync-ui-reference-files.spec.ts",
+      "name": "generated UI reference files rejects obsolete and missing references without changing files in check mode",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/sync-ui-reference-files.spec.ts",
+      "name": "generated UI reference files removes obsolete snippets, writes current outputs, and passes a subsequent check",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/sync-ui-reference-files.spec.ts",
+      "name": "generated UI reference files reports changed content without overwriting it in check mode",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/fix-translated-links.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-docs/scripts/__tests__/lint-mdx.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/check-story-embeds.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/check-ui-reference-imports.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-defaults.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-examples.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-imports.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-prop-types.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/documentation-token-values.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/render-ui-reference.spec.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-docs/scripts/ui/__tests__/sync-ui-reference-files.spec.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

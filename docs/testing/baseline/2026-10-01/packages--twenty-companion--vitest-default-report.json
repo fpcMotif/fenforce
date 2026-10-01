@@ -1,0 +1,989 @@
+{
+  "numTotalTests": 147,
+  "numPassedTests": 147,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 23,
+  "numPassedTestSuites": 23,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-companion/src/main/__tests__/dev-runner.test.mjs",
+      "name": "starts Electron only after a successful build and keeps it alive after errors",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/__tests__/dev-runner.test.mjs",
+      "name": "requests restarts without killing the child, then waits for its acknowledged exit",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/__tests__/dev-runner.test.mjs",
+      "name": "waits for an ongoing build before relaunching an exiting child",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/__tests__/dev-runner.test.mjs",
+      "name": "closes Vite and the watcher when Electron quits normally",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/components/__tests__/Onboarding.test.tsx",
+      "name": "shows connection before permissions and waits for the workspace to load",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/components/__tests__/Onboarding.test.tsx",
+      "name": "opens the app immediately after first-time setup without starting a recording",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/components/__tests__/Onboarding.test.tsx",
+      "name": "returns from settings permission review without showing first-time setup",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/components/__tests__/Onboarding.test.tsx",
+      "name": "keeps required permissions enforced and preserves an explicit recording intent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/components/__tests__/RecordingTimer.test.tsx",
+      "name": "updates elapsed time without rerendering navigation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/components/__tests__/RecordingTimer.test.tsx",
+      "name": "freezes while paused and resumes without counting the pause",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/components/__tests__/sharedControls.test.tsx",
+      "name": "keeps a native accessible name on composed icon buttons",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/components/__tests__/sharedControls.test.tsx",
+      "name": "places the disclosure state on the actual button",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/hooks/__tests__/useCompanion.test.tsx",
+      "name": "keeps recording controls and dismissal available during a settings save",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/hooks/__tests__/useCompanion.test.tsx",
+      "name": "delivers cancellation while sign-in is still pending",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/hooks/__tests__/useCompanion.test.tsx",
+      "name": "releases a failed action so it can be retried",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle opens the recording library on the workspace frontend",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle brings Companion forward after authorization while the workspace finishes connecting",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle cancels a pending sign-in and allows another workspace attempt",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle ignores credentials returned after cancellation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle registers saved shortcuts and persists a replacement",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle keeps the previous shortcut when registration fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle restores the shortcut if saving fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle applies saved appearance at startup and changes it without changing launch at login",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle retains the current settings when saving a preference fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle mutes call detection prompts without disabling detection or recording interruption alerts",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle restores meeting detection without requesting permissions at startup",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle does not obtain an upload until all capture permissions are granted",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle opens macOS settings for a previously denied permission without prompting again",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle guides the user to the next missing permission and retains the selected call",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle does not start recording when permissions change, and lets the user dismiss setup",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle recognizes approval in System Settings without prompting or restarting capture",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle updates the open setup guide after approval even with auto-join disabled",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle does not let a delayed SDK denial overwrite current macOS approval",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle recognizes revoked native permissions and blocks a new recording",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle opens Settings for denied microphone even when SDK initialization fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle opens Settings for denied system-audio even when SDK initialization fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle opens Settings for denied accessibility even when SDK initialization fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle requests the native microphone prompt before offering Settings after a denial",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle requests the native system-audio prompt before offering Settings after a denial",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle requests the native accessibility prompt before offering Settings after a denial",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle records system audio with a server upload token and keeps that token out of renderer state",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle records a detected zoom call with its own capture window",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle records a detected microsoft_teams call with its own capture window",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle records a detected google_meet call with its own capture window",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle records a detected slack call with its own capture window",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle blocks a matching bot call but allows one manual recording during an unrelated calendar event",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle stops an uncertain start before reporting capture failure",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle shows network interruption without claiming the recording has uploaded",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle cannot complete setup until all permissions are enabled and never records just by continuing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle opens permission review without prompting or creating a recording",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle pauses and resumes the same recording and excludes paused time",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle does not report a successful pause when Recall rejects it",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle can finish a paused recording and retains the pause if stopping fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle does not restore a recording that ended while its pause request was in flight",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle ignores expected audio interruption events during a pause",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "desktop capture lifecycle keeps a finished recording visible while its webhook catches up, then accepts completion",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "merges simultaneous preference changes and does not reset omitted values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "keeps controls when stopping after a network failure fails and allows retry",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "clears workspace data and stops detecting calls after disconnect",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "waits for a pending setup before shutting down and never starts capture after quitting",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "waits for pause to settle before stopping and retains a usable state if stop fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "keeps controls usable if quitting fails to stop a recording",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "does not switch workspaces while recording setup is pending",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "keeps the existing workspace usable when a new login is canceled",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "does not save a new login that finishes after quitting",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "initializes with recovered settings and reports the recovery after loading the workspace",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "keeps the installation recovery action with the failure",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "disconnects consistently if resetting the SDK fails after credentials were saved",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "retries a failed browser launch on the next auto-join tick",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "name": "allows a later detection update to retry after capture fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/SecureStore.test.ts",
+      "name": "saved preferences adds new defaults to existing installations without resetting their choices",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/SecureStore.test.ts",
+      "name": "saved preferences restores custom appearance and notification preferences from disk",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/SecureStore.test.ts",
+      "name": "returns isolated defaults for separate instances",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/SecureStore.test.ts",
+      "name": "keeps valid preferences and a backup when an individual setting is invalid",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/SecureStore.test.ts",
+      "name": "does not enable automation when the saved file is malformed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/SecureStore.test.ts",
+      "name": "reports read failures instead of treating them as a new installation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/SecureStore.test.ts",
+      "name": "does not forget skipped meetings when their file is corrupted",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/SecureStore.test.ts",
+      "name": "preserves the newest skipped-meeting snapshot across concurrent writes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "cloud custom-domain connection does not save a new account when the recording backend is unavailable",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "cloud custom-domain connection resolves the workspace logo using Twenty image URLs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "cloud custom-domain connection ignores image URLs that cannot be loaded safely",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "cloud custom-domain connection uses the workspace function domain and distinguishes a missing backend from failed login",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "cloud custom-domain connection does not misdiagnose a missing metadata endpoint as an uninstalled companion",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "cloud custom-domain connection handles GraphQL errors returned with HTTP 200",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "cloud custom-domain connection returns the personal agenda once the backend is available",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "does not restore a signed-out session when a token refresh finishes late",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "clears credentials after an in-flight refresh write, preserving disk sign-out",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "accepts null timestamps while a recording is being prepared",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "does not suggest reinstalling after HTTP 401",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "does not suggest reinstalling after HTTP 403",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "does not suggest reinstalling after HTTP 500",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "does not suggest reinstalling after HTTP 503",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "preserves connection failures: TypeError: Failed to fetch",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "preserves connection failures: TimeoutError: Request timed out",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "does not suggest reinstalling for an invalid configuration response",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "offers installation after sign-in when the backend route is missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "reuses validated workspace discovery after saving a connection",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "preserves the current workspace when saving a replacement connection fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "aborts the configuration probe without saving credentials",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "name": "restores the previous account when canceled during the credential write",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/connectOAuth.test.ts",
+      "name": "Twenty OAuth links to the integration installation page on the discovered frontend",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/connectOAuth.test.ts",
+      "name": "Twenty OAuth does not open the browser or register an app when CLI discovery is missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/connectOAuth.test.ts",
+      "name": "Twenty OAuth opens setup on the discovered frontend when the input is an API host",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/connectOAuth.test.ts",
+      "name": "Twenty OAuth uses the existing CLI client with state validation and PKCE through real HTTP boundaries",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/connectOAuth.test.ts",
+      "name": "Twenty OAuth only accepts HTTPS origins and explicit loopback development origins",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/connectOAuth.test.ts",
+      "name": "cancels a stalled OAuth discovery request",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/connectOAuth.test.ts",
+      "name": "cancels a stalled OAuth token request",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/connectOAuth.test.ts",
+      "name": "keeps a request deadline when a caller supplies its own signal",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createDevelopmentRestart.test.ts",
+      "name": "restarts immediately while idle and coalesces repeated requests",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createDevelopmentRestart.test.ts",
+      "name": "waits through capture startup, recording, pause, and finishing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createDevelopmentRestart.test.ts",
+      "name": "cancels a pending restart on disposal",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createTrayMenuTemplate.test.ts",
+      "name": "native tray menu actions can hide the meeting countdown without hiding the active recording indicator",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createTrayMenuTemplate.test.ts",
+      "name": "native tray menu actions shows the next meeting countdown when it is more than one hour away",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createTrayMenuTemplate.test.ts",
+      "name": "native tray menu actions opens setup without starting capture when permissions have not been set up",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createTrayMenuTemplate.test.ts",
+      "name": "native tray menu actions offers connection before workspace actions when disconnected",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createTrayMenuTemplate.test.ts",
+      "name": "native tray menu actions routes recording and settings to the existing app commands",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createTrayMenuTemplate.test.ts",
+      "name": "native tray menu actions allows resume and finish while paused, and locks controls during transitions",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createTrayMenuTemplate.test.ts",
+      "name": "native tray menu actions keeps join and skip tied to the selected meeting and excludes past meetings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createTrayMenuTemplate.test.ts",
+      "name": "native tray menu actions updates individual preferences without overwriting the rest of the settings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createTrayMenuTemplate.test.ts",
+      "name": "native tray menu actions groups the next three events by local day with titles above their times",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createTrayMenuTemplate.test.ts",
+      "name": "native tray menu actions offers a direct join action for one imminent meeting without starting capture",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createTrayMenuTemplate.test.ts",
+      "name": "native tray menu actions does not promote one event when several meetings overlap or a call is active",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createTrayMenuTemplate.test.ts",
+      "name": "native tray menu actions retains event times on platforms without native sublabels and marks missing links",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createTrayMenuTemplate.test.ts",
+      "name": "native tray menu actions shows an ongoing event as Now and preserves the full title for accessibility",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/format.test.ts",
+      "name": "recording duration freezes the elapsed time during a pause",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/format.test.ts",
+      "name": "recording duration excludes completed pauses when recording resumes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/format.test.ts",
+      "name": "recording duration never shows a negative duration after a clock adjustment",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/noticeMessage.test.ts",
+      "name": "translates recording notifications without relying on their English wording",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/noticeMessage.test.ts",
+      "name": "interpolates a meeting title using the compiled source catalog",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/shortcut.test.ts",
+      "name": "shortcut capture creates an Electron accelerator from { key: 'a', code: 'KeyA', repeat: false, metaKey: true, ctrlKey: false, altKey: false, shiftKey: true }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/shortcut.test.ts",
+      "name": "shortcut capture creates an Electron accelerator from { key: '4', code: 'Digit4', repeat: false, metaKey: false, ctrlKey: true, altKey: true, shiftKey: false }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/shortcut.test.ts",
+      "name": "shortcut capture creates an Electron accelerator from { key: ' ', code: 'Space', repeat: false, metaKey: false, ctrlKey: false, altKey: true, shiftKey: false }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/shortcut.test.ts",
+      "name": "shortcut capture creates an Electron accelerator from { key: 'F12', code: 'F12', repeat: false, metaKey: false, ctrlKey: true, altKey: false, shiftKey: false }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/shortcut.test.ts",
+      "name": "shortcut capture creates an Electron accelerator from { key: 'Unidentified', code: 'F12', repeat: false, metaKey: false, ctrlKey: true, altKey: false, shiftKey: false }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/shortcut.test.ts",
+      "name": "shortcut capture creates an Electron accelerator from { key: 'q', code: 'KeyA', repeat: false, metaKey: true, ctrlKey: false, altKey: false, shiftKey: false }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/shortcut.test.ts",
+      "name": "shortcut capture ignores unsupported or incomplete combinations: { key: 'a', code: 'KeyA', repeat: false, metaKey: false, ctrlKey: false, altKey: false, shiftKey: false }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/shortcut.test.ts",
+      "name": "shortcut capture ignores unsupported or incomplete combinations: { key: 'a', code: 'KeyA', repeat: false, metaKey: false, ctrlKey: false, altKey: false, shiftKey: true }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/shortcut.test.ts",
+      "name": "shortcut capture ignores unsupported or incomplete combinations: { key: 'a', code: 'KeyA', repeat: true, metaKey: true, ctrlKey: false, altKey: false, shiftKey: false }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/shortcut.test.ts",
+      "name": "shortcut capture ignores unsupported or incomplete combinations: { key: 'Escape', code: 'Escape', repeat: false, metaKey: true, ctrlKey: false, altKey: false, shiftKey: false }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/shortcut.test.ts",
+      "name": "shortcut capture ignores unsupported or incomplete combinations: { key: 'Meta', code: 'MetaLeft', repeat: false, metaKey: true, ctrlKey: false, altKey: false, shiftKey: false }",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/shortcut.test.ts",
+      "name": "formats the shared default for macOS and other platforms",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/shared/utils/__tests__/meetings.test.ts",
+      "name": "meeting scheduling opens a due meeting once and respects skip across restarts",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/shared/utils/__tests__/meetings.test.ts",
+      "name": "meeting scheduling does not open old meetings after wake or a stale calendar",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/shared/utils/__tests__/meetings.test.ts",
+      "name": "meeting scheduling matches participant-specific join links and duplicate calendar copies",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/shared/utils/__tests__/meetings.test.ts",
+      "name": "meeting scheduling rejects executable, local and credential-bearing meeting links",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/shared/utils/__tests__/meetings.test.ts",
+      "name": "does not repeatedly auto-join meetings with unsupported links",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-companion/src/shared/utils/__tests__/meetings.test.ts",
+      "name": "matches Zoom host aliases but keeps distinct ports separate",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-companion/src/main/__tests__/dev-runner.test.mjs",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/components/__tests__/Onboarding.test.tsx",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/components/__tests__/RecordingTimer.test.tsx",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/components/__tests__/sharedControls.test.tsx",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/hooks/__tests__/useCompanion.test.tsx",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/Companion.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/SecureStore.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-companion/src/main/services/__tests__/TwentyClient.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/connectOAuth.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createDevelopmentRestart.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-companion/src/main/utils/__tests__/createTrayMenuTemplate.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/format.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/noticeMessage.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-companion/src/renderer/utils/__tests__/shortcut.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-companion/src/shared/utils/__tests__/meetings.test.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

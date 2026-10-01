@@ -1,0 +1,3125 @@
+{
+  "numTotalTests": 443,
+  "numPassedTests": 443,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 195,
+  "numPassedTestSuites": 195,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlSeniority' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlSeniority' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlSeniority' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlSeniority' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlJobRole' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlJobRole' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlJobRole' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlJobRole' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlJobTitleClass' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlJobTitleClass' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlJobTitleClass' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlJobTitleClass' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlJobTitleSubRole' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlJobTitleSubRole' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlJobTitleSubRole' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlJobTitleSubRole' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlSex' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlSex' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlSex' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlSex' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlInferredSalary' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlInferredSalary' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlInferredSalary' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlInferredSalary' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlIndustry' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlIndustry' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlIndustry' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlIndustry' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlLocationMetro' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlLocationMetro' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlLocationMetro' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlLocationMetro' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlEnrichmentStatus' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlEnrichmentStatus' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlEnrichmentStatus' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'person.pdlEnrichmentStatus' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlCompanyType' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlCompanyType' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlCompanyType' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlCompanyType' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlLocationContinent' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlLocationContinent' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlLocationContinent' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlLocationContinent' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlMicExchange' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlMicExchange' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlMicExchange' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlMicExchange' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlIndustry' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlIndustry' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlIndustry' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlIndustry' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlLocationMetro' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlLocationMetro' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlLocationMetro' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlLocationMetro' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlSizeRange' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlSizeRange' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlSizeRange' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlSizeRange' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlLatestFundingStage' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlLatestFundingStage' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlLatestFundingStage' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlLatestFundingStage' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlFundingStages' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlFundingStages' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlFundingStages' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlFundingStages' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlEnrichmentStatus' options resolves a universalIdentifier for every option",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlEnrichmentStatus' options exposes exactly the values from its source constant",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlEnrichmentStatus' options uses option values that are normalizeEnumValue fixed points",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "'company.pdlEnrichmentStatus' options has option ids that are unique within the field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "select fields collectively never reuses an option id across two different fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "universal-identifier registry contains only valid v4 UUIDs",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "name": "universal-identifier registry contains no duplicate UUIDs across the whole registry",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/build-select-options.test.ts",
+      "name": "buildSelectOptions attaches the universalIdentifier to each option by key",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/is-defined.test.ts",
+      "name": "isDefined is true for defined values, including falsy ones",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/is-defined.test.ts",
+      "name": "isDefined is false for null and undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/is-unique-violation-error.test.ts",
+      "name": "isUniqueViolationError detects common unique-violation phrasings (case-insensitive)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/is-unique-violation-error.test.ts",
+      "name": "isUniqueViolationError returns false for unrelated errors and non-error values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/is-unique-violation-error.test.ts",
+      "name": "isUniqueViolationError detects Twenty's user-friendly duplicate phrasing in graphQLErrors",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/is-unique-violation-error.test.ts",
+      "name": "isUniqueViolationError detects the structured DUPLICATE_ENTRY_DETECTED extensions code",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/is-unique-violation-error.test.ts",
+      "name": "isUniqueViolationError does not throw on a circular error object",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/is-unique-violation-error.test.ts",
+      "name": "isUniqueViolationError finds the duplicate signal even on a circular error object",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/normalize-enum-value.test.ts",
+      "name": "normalizeEnumValue uppercases a simple value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/normalize-enum-value.test.ts",
+      "name": "normalizeEnumValue collapses spaces into a single underscore",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/normalize-enum-value.test.ts",
+      "name": "normalizeEnumValue collapses punctuation runs into a single underscore",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/normalize-enum-value.test.ts",
+      "name": "normalizeEnumValue strips diacritics",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/normalize-enum-value.test.ts",
+      "name": "normalizeEnumValue prefixes a leading digit with an underscore",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/prune-undefined.test.ts",
+      "name": "pruneUndefined removes keys whose value is undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/prune-undefined.test.ts",
+      "name": "pruneUndefined keeps falsy values that are not undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/prune-undefined.test.ts",
+      "name": "pruneUndefined returns an empty object when every value is undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/strip-separators.test.ts",
+      "name": "stripSeparators removes spaces and commas",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/strip-separators.test.ts",
+      "name": "stripSeparators leaves a value without separators unchanged",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/to-error-message.test.ts",
+      "name": "toErrorMessage returns the message of an Error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/to-error-message.test.ts",
+      "name": "toErrorMessage stringifies a non-Error value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/errors/__tests__/pdl-config-error.test.ts",
+      "name": "PdlConfigError is a PdlError with a dedicated name, code, and the given message",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/errors/__tests__/pdl-invalid-input-error.test.ts",
+      "name": "PdlInvalidInputError is a PdlError with a dedicated name, code, and the given message",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/errors/__tests__/pdl-operation-error.test.ts",
+      "name": "PdlOperationError is a PdlError with a dedicated name, code, and the given message",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/errors/__tests__/pdl-record-not-found-error.test.ts",
+      "name": "PdlRecordNotFoundError exposes the object type and record id alongside a built message",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-companies.test.ts",
+      "name": "enrichCompaniesCore fills empty standard fields and writes pdl metadata via updateCompany on a match",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-companies.test.ts",
+      "name": "enrichCompaniesCore records NOT_FOUND and writes the status via a batched updateCompanies",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-companies.test.ts",
+      "name": "enrichCompaniesCore records ERROR and reports failure on a PDL error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-companies.test.ts",
+      "name": "enrichCompaniesCore skips when there is no usable identifier",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-companies.test.ts",
+      "name": "enrichCompaniesCore marks a missing record as ERROR",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-companies.test.ts",
+      "name": "enrichCompaniesCore batches the PDL request and the not-found status write across records",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-company.test.ts",
+      "name": "enrichCompanyCore fills empty standard fields and writes pdl metadata via updateCompany on a match",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-company.test.ts",
+      "name": "enrichCompanyCore records NOT_FOUND and writes the status via updateCompanies",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-company.test.ts",
+      "name": "enrichCompanyCore records ERROR and reports failure on a PDL error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-company.test.ts",
+      "name": "enrichCompanyCore skips when there is no usable identifier",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-company.test.ts",
+      "name": "enrichCompanyCore marks a missing record as ERROR",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-company.test.ts",
+      "name": "enrichCompanyCore returns an ERROR without touching PDL when no record id is provided",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-people.test.ts",
+      "name": "enrichPeopleCore rejects invalid likelihood input { minLikelihood: 11 } before calling PDL or writing records",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-people.test.ts",
+      "name": "enrichPeopleCore rejects invalid likelihood input { weakIdentifierMinLikelihood: 11 } before calling PDL or writing records",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-people.test.ts",
+      "name": "enrichPeopleCore fills empty standard fields and writes pdl metadata via updatePerson on a match",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-people.test.ts",
+      "name": "enrichPeopleCore links a found-or-created company when the person has none",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-people.test.ts",
+      "name": "enrichPeopleCore does not touch company when the person already has one",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-people.test.ts",
+      "name": "enrichPeopleCore does not overwrite a populated standard field",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-people.test.ts",
+      "name": "enrichPeopleCore records NOT_FOUND and writes the status via a batched updatePeople",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-people.test.ts",
+      "name": "enrichPeopleCore records ERROR and reports failure on a PDL error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-people.test.ts",
+      "name": "enrichPeopleCore overwrites a populated standard field when updateFields is \"Yes and overwrite\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-people.test.ts",
+      "name": "enrichPeopleCore returns enriched data without writing when updateFields is \"No\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-people.test.ts",
+      "name": "enrichPeopleCore skips when there is no usable identifier",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-people.test.ts",
+      "name": "enrichPeopleCore marks a missing record as ERROR",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-people.test.ts",
+      "name": "enrichPeopleCore batches the PDL request and the not-found status write across records",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-person.test.ts",
+      "name": "enrichPersonCore fills empty standard fields and writes pdl metadata via updatePerson on a match",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-person.test.ts",
+      "name": "enrichPersonCore records NOT_FOUND and writes the status via updatePeople",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-person.test.ts",
+      "name": "enrichPersonCore records ERROR and reports failure on a PDL error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-person.test.ts",
+      "name": "enrichPersonCore overwrites a populated standard field when updateFields is \"Yes and overwrite\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-person.test.ts",
+      "name": "enrichPersonCore returns enriched data without writing when updateFields is \"No\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-person.test.ts",
+      "name": "enrichPersonCore skips when there is no usable identifier",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-person.test.ts",
+      "name": "enrichPersonCore marks a missing record as ERROR",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-person.test.ts",
+      "name": "enrichPersonCore returns an ERROR without touching PDL when no record id is provided",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/aggregate-bulk-enrich-result.test.ts",
+      "name": "aggregateBulkEnrichResult counts each status and flags failure when something errored",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/aggregate-bulk-enrich-result.test.ts",
+      "name": "aggregateBulkEnrichResult reports success when there are no errors",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/aggregate-bulk-enrich-result.test.ts",
+      "name": "aggregateBulkEnrichResult returns an empty summary for no results",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-address.test.ts",
+      "name": "buildAddress maps parts to the address composite using addressPostcode",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-address.test.ts",
+      "name": "buildAddress returns undefined when no part has a value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-allowed-values.test.ts",
+      "name": "buildAllowedValues builds a set of the option values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-company-create-data.test.ts",
+      "name": "buildCompanyCreateData maps job_company_* onto Company standard and pdl fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-company-create-data.test.ts",
+      "name": "buildCompanyCreateData omits fields PDL did not return and drops unknown select values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-company-match-keys.test.ts",
+      "name": "buildCompanyMatchKeys extracts and trims the company identifiers from PDL data",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-company-match-keys.test.ts",
+      "name": "buildCompanyMatchKeys omits identifiers PDL did not return or that are blank",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-company-match-keys.test.ts",
+      "name": "buildCompanyMatchKeys returns an empty object when no company identifiers are present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-company-matched-data.test.ts",
+      "name": "buildCompanyMatchedData fills empty standard fields and always writes pdl metadata",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-company-matched-data.test.ts",
+      "name": "buildCompanyMatchedData overwrites a populated standard field when overrideExistingValues is set",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-company-matched-data.test.ts",
+      "name": "buildCompanyMatchedData returns mapped data with no persist data when not persisting",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-currency-from-usd.test.ts",
+      "name": "buildCurrencyFromUsd converts a USD amount to micros",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-currency-from-usd.test.ts",
+      "name": "buildCurrencyFromUsd returns undefined for non-finite or non-number input",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-emails.test.ts",
+      "name": "buildEmails keeps the first email as primary and the rest as additional",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-emails.test.ts",
+      "name": "buildEmails dedupes case-insensitively and skips blanks",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-emails.test.ts",
+      "name": "buildEmails returns undefined when there are no emails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-error-result.test.ts",
+      "name": "buildErrorResult builds an ERROR result carrying the error detail",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-full-name.test.ts",
+      "name": "buildFullName uses explicit first and last name when present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-full-name.test.ts",
+      "name": "buildFullName fills only the part that is present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-full-name.test.ts",
+      "name": "buildFullName splits a full name on the first whitespace run",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-full-name.test.ts",
+      "name": "buildFullName capitalizes lowercase names returned by PDL",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-full-name.test.ts",
+      "name": "buildFullName capitalizes a lowercase full name when split",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-full-name.test.ts",
+      "name": "buildFullName returns undefined when there is no name",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-links.test.ts",
+      "name": "buildLinks builds a links value with a blank label by default",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-links.test.ts",
+      "name": "buildLinks uses the provided label",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-links.test.ts",
+      "name": "buildLinks returns undefined when the url is empty",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-matched-result.test.ts",
+      "name": "buildMatchedResult builds a MATCHED result summarizing the written fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-matched-result.test.ts",
+      "name": "buildMatchedResult carries the enriched data when provided",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-not-found-result.test.ts",
+      "name": "buildNotFoundResult builds a NOT_FOUND result",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-person-matched-data.test.ts",
+      "name": "buildPersonMatchedData fills empty fields, writes pdl metadata, and skips company lookup when there is none",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-person-matched-data.test.ts",
+      "name": "buildPersonMatchedData overwrites a populated standard field when overrideExistingValues is set",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-person-matched-data.test.ts",
+      "name": "buildPersonMatchedData links a found-or-created company when the person has none",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-person-matched-data.test.ts",
+      "name": "buildPersonMatchedData returns mapped data with no persist data or company lookup when not persisting",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-person-name-param.test.ts",
+      "name": "buildPersonNameParam joins a full first and last name",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-person-name-param.test.ts",
+      "name": "buildPersonNameParam returns undefined unless both name parts are present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-phones.test.ts",
+      "name": "buildPhones uses the first present number as the primary phone",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-phones.test.ts",
+      "name": "buildPhones keeps additional numbers and dedupes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-phones.test.ts",
+      "name": "buildPhones returns undefined when there is no number",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-skipped-result.test.ts",
+      "name": "buildSkippedResult builds a successful skipped result with no updated fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/capitalize-name.test.ts",
+      "name": "capitalizeName capitalizes a lowercase single token",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/capitalize-name.test.ts",
+      "name": "capitalizeName capitalizes every whitespace-separated token",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/capitalize-name.test.ts",
+      "name": "capitalizeName capitalizes after hyphens and apostrophes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/capitalize-name.test.ts",
+      "name": "capitalizeName leaves already-capitalized names untouched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/capitalize-name.test.ts",
+      "name": "capitalizeName returns an empty string unchanged",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/charge-matched-enrichments.test.ts",
+      "name": "chargeMatchedEnrichments charges person matches at PDL list price plus margin",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/charge-matched-enrichments.test.ts",
+      "name": "chargeMatchedEnrichments charges company matches at PDL list price plus margin",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/charge-matched-enrichments.test.ts",
+      "name": "chargeMatchedEnrichments does not charge when nothing matched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/chunk.test.ts",
+      "name": "chunk splits an array into chunks of the given size",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/chunk.test.ts",
+      "name": "chunk returns a single chunk when the array is smaller than the size",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/chunk.test.ts",
+      "name": "chunk returns an empty array for empty input",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/chunk.test.ts",
+      "name": "chunk returns the whole array as one chunk for a non-positive size",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/enrich-companies.test.ts",
+      "name": "enrichCompanies posts every record to the company bulk endpoint with only the provided params",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/enrich-company.test.ts",
+      "name": "enrichCompany posts each record to the single company enrich endpoint with only the provided params",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/enrich-company.test.ts",
+      "name": "enrichCompany forwards min_likelihood when provided",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/enrich-company.test.ts",
+      "name": "enrichCompany returns one outcome per request, preserving order",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/enrich-people.test.ts",
+      "name": "enrichPeople posts every record to the person bulk endpoint with only the provided params",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/enrich-person.test.ts",
+      "name": "enrichPerson posts each record to the single person enrich endpoint with only the provided params",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/enrich-person.test.ts",
+      "name": "enrichPerson forwards min_likelihood when provided",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/enrich-person.test.ts",
+      "name": "enrichPerson returns one outcome per request, preserving order",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-company-match-params.test.ts",
+      "name": "extractCompanyMatchParams prefers an existing pdlId with the strong-identifier likelihood",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-company-match-params.test.ts",
+      "name": "extractCompanyMatchParams uses the domain and name with the strong-identifier likelihood",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-company-match-params.test.ts",
+      "name": "extractCompanyMatchParams uses the linkedin profile as a strong identifier, stripped to the PDL path format",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-company-match-params.test.ts",
+      "name": "extractCompanyMatchParams strips the scheme and www from the website before matching",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-company-match-params.test.ts",
+      "name": "extractCompanyMatchParams uses the weak-identifier likelihood when only a name is available",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-company-match-params.test.ts",
+      "name": "extractCompanyMatchParams returns undefined when there is no usable identifier",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-pdl-error-message.test.ts",
+      "name": "extractPdlErrorMessage reads the nested PDL error message",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-pdl-error-message.test.ts",
+      "name": "extractPdlErrorMessage falls back to a generic message when none is present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-person-match-params.test.ts",
+      "name": "extractPersonMatchParams prefers an existing pdlId and uses the strong-identifier likelihood",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-person-match-params.test.ts",
+      "name": "extractPersonMatchParams uses the linkedin profile with the strong-identifier likelihood",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-person-match-params.test.ts",
+      "name": "extractPersonMatchParams pairs a name with the person company and uses the weak-identifier likelihood",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-person-match-params.test.ts",
+      "name": "extractPersonMatchParams returns undefined for a name with no anchoring identifier or company",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-person-match-params.test.ts",
+      "name": "extractPersonMatchParams returns undefined when there is no usable identifier",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-record-ids.test.ts",
+      "name": "extractRecordIds extracts ids from record objects",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-record-ids.test.ts",
+      "name": "extractRecordIds accepts plain id strings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-record-ids.test.ts",
+      "name": "extractRecordIds drops entries without a usable id",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-record-ids.test.ts",
+      "name": "extractRecordIds accepts a single record object (not wrapped in an array)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-record-ids.test.ts",
+      "name": "extractRecordIds accepts a single id string (not wrapped in an array)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-record-ids.test.ts",
+      "name": "extractRecordIds returns an empty array for nullish input",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-company-id-by-filter.test.ts",
+      "name": "findCompanyIdByFilter returns the first matching company id and forwards the filter",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-company-id-by-filter.test.ts",
+      "name": "findCompanyIdByFilter returns undefined when there are no matches",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-company-id-by-filter.test.ts",
+      "name": "findCompanyIdByFilter returns undefined when the companies connection is absent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-company-id.test.ts",
+      "name": "findCompanyId matches by pdlId first and does not query the lower-priority keys",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-company-id.test.ts",
+      "name": "findCompanyId falls through to lower-priority keys in order until one matches",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-company-id.test.ts",
+      "name": "findCompanyId skips filters whose match key is absent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-company-id.test.ts",
+      "name": "findCompanyId returns undefined when no key matches",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-company-id.test.ts",
+      "name": "findCompanyId returns undefined and issues no query when no keys are provided",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-company-id.test.ts",
+      "name": "findCompanyId does not link a name match when it is ambiguous",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-company-id.test.ts",
+      "name": "findCompanyId links a unique name match",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-or-create-current-company.test.ts",
+      "name": "findOrCreateCurrentCompany returns undefined and issues no calls when PDL gives no identifiers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-or-create-current-company.test.ts",
+      "name": "findOrCreateCurrentCompany links an existing company matched by pdlId alone",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-or-create-current-company.test.ts",
+      "name": "findOrCreateCurrentCompany attempts a pdlId match but does not create without a name or website",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-or-create-current-company.test.ts",
+      "name": "findOrCreateCurrentCompany returns an existing company id without creating one",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-or-create-current-company.test.ts",
+      "name": "findOrCreateCurrentCompany creates a company from the PDL data when none matches",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-or-create-current-company.test.ts",
+      "name": "findOrCreateCurrentCompany throws when the create mutation returns no company id",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-or-create-current-company.test.ts",
+      "name": "findOrCreateCurrentCompany re-finds the winner when a concurrent create hits a unique violation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-or-create-current-company.test.ts",
+      "name": "findOrCreateCurrentCompany rethrows a non-unique-violation create error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-or-create-current-company.test.ts",
+      "name": "findOrCreateCurrentCompany reuses a cached company id for an identical company without re-querying",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/get-pdl-api-key.test.ts",
+      "name": "getPdlApiKey returns the configured key",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/get-pdl-api-key.test.ts",
+      "name": "getPdlApiKey throws a PdlConfigError when the key is missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/get-pdl-api-key.test.ts",
+      "name": "getPdlApiKey throws a PdlConfigError when the key is blank",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-address.test.ts",
+      "name": "isEmptyAddress is true when every address text field is empty or missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-address.test.ts",
+      "name": "isEmptyAddress is false when at least one address field is present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-emails.test.ts",
+      "name": "isEmptyEmails is true when there is no primary email",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-emails.test.ts",
+      "name": "isEmptyEmails is false when a primary email is present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-full-name.test.ts",
+      "name": "isEmptyFullName is true when both first and last name are empty or missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-full-name.test.ts",
+      "name": "isEmptyFullName is false when at least one name part is present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-links.test.ts",
+      "name": "isEmptyLinks is true when there is no primary link url",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-links.test.ts",
+      "name": "isEmptyLinks is false when a primary link url is present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-phones.test.ts",
+      "name": "isEmptyPhones is true when there is no primary phone number",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-phones.test.ts",
+      "name": "isEmptyPhones is false when a primary phone number is present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-text.test.ts",
+      "name": "isEmptyText is true for empty, whitespace and non-string values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-text.test.ts",
+      "name": "isEmptyText is false for a non-empty string",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-pdl-account-error-outcome.test.ts",
+      "name": "isPdlAccountErrorOutcome flags an HTTP 401 error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-pdl-account-error-outcome.test.ts",
+      "name": "isPdlAccountErrorOutcome flags an HTTP 402 error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-pdl-account-error-outcome.test.ts",
+      "name": "isPdlAccountErrorOutcome does not flag an HTTP 429 error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-pdl-account-error-outcome.test.ts",
+      "name": "isPdlAccountErrorOutcome does not flag an HTTP 500 error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-pdl-account-error-outcome.test.ts",
+      "name": "isPdlAccountErrorOutcome does not flag a matched outcome",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-pdl-account-error-outcome.test.ts",
+      "name": "isPdlAccountErrorOutcome does not flag a missing outcome",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/map-company.test.ts",
+      "name": "mapCompany maps standard fields including the address composite",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/map-company.test.ts",
+      "name": "mapCompany converts USD funding to currency micros",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/map-company.test.ts",
+      "name": "mapCompany maps select and multi-select funding fields, dropping unknowns",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/map-company.test.ts",
+      "name": "mapCompany maps numbers, dates, arrays and raw json",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/map-person.test.ts",
+      "name": "mapPerson maps standard fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/map-person.test.ts",
+      "name": "mapPerson maps pdl scalar, select and number fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/map-person.test.ts",
+      "name": "mapPerson does not map company attributes onto the person",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/map-person.test.ts",
+      "name": "mapPerson drops unknown multi-select values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/map-person.test.ts",
+      "name": "mapPerson dedupes array fields and passes raw json through",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/map-person.test.ts",
+      "name": "mapPerson expands partial dates and builds the address with addressPostcode",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/map-person.test.ts",
+      "name": "mapPerson omits fields PDL did not return",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/map-person.test.ts",
+      "name": "mapPerson tolerates PDL returning presence-flag booleans for email and phone fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/normalize-domain.test.ts",
+      "name": "normalizeDomain reduces variants to the same bare host",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/normalize-domain.test.ts",
+      "name": "normalizeDomain returns undefined for blank or missing values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/normalize-linkedin-url.test.ts",
+      "name": "normalizeLinkedinUrl canonicalizes scheme/www/trailing slash while keeping the path",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/normalize-linkedin-url.test.ts",
+      "name": "normalizeLinkedinUrl returns undefined for blank or missing values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/now-iso.test.ts",
+      "name": "nowIso returns an ISO-8601 timestamp string",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-geo.test.ts",
+      "name": "parseGeo parses a \"lat,lng\" string",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-geo.test.ts",
+      "name": "parseGeo returns nulls for missing or malformed input",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-geo.test.ts",
+      "name": "parseGeo rejects a single value, extra components, or out-of-range coordinates",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-partial-date.test.ts",
+      "name": "parsePartialDate expands a year to a full date",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-partial-date.test.ts",
+      "name": "parsePartialDate expands a year-month to a full date",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-partial-date.test.ts",
+      "name": "parsePartialDate keeps a full date",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-partial-date.test.ts",
+      "name": "parsePartialDate returns undefined for an unparseable value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-partial-date.test.ts",
+      "name": "parsePartialDate rejects out-of-range or non-existent calendar dates",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-pdl-item.test.ts",
+      "name": "parsePdlItem maps a 200 item to a matched outcome with data and likelihood",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-pdl-item.test.ts",
+      "name": "parsePdlItem defaults a missing status to 200 and matches when data is present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-pdl-item.test.ts",
+      "name": "parsePdlItem matches a 200 item whose record fields are at the top level (company bulk shape)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-pdl-item.test.ts",
+      "name": "parsePdlItem treats a 200 item carrying only the envelope as not_found",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-pdl-item.test.ts",
+      "name": "parsePdlItem rejects a match whose likelihood is below the requested threshold",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-pdl-item.test.ts",
+      "name": "parsePdlItem keeps a match whose likelihood meets the requested threshold",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-pdl-item.test.ts",
+      "name": "parsePdlItem maps a 404 item to not_found",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-pdl-item.test.ts",
+      "name": "parsePdlItem maps a non-2xx item to an error with the PDL message",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-pdl-item.test.ts",
+      "name": "parsePdlItem treats a non-object item as a malformed error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/pick-multi-select.test.ts",
+      "name": "pickMultiSelect keeps allowed values and drops unknown ones",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/pick-multi-select.test.ts",
+      "name": "pickMultiSelect dedupes repeated values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/pick-multi-select.test.ts",
+      "name": "pickMultiSelect returns undefined for a non-array or when nothing is valid",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/pick-select.test.ts",
+      "name": "pickSelect normalizes and returns an allowed value",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/pick-select.test.ts",
+      "name": "pickSelect returns undefined for a value outside the option set",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/pick-select.test.ts",
+      "name": "pickSelect returns undefined for empty or non-string input",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/pick-select.test.ts",
+      "name": "pickSelect applies a custom transform before checking the option set",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/pick-writable-standard.test.ts",
+      "name": "pickWritableStandard keeps a mapped field only when the current value is empty",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/pick-writable-standard.test.ts",
+      "name": "pickWritableStandard skips fields without a registered check rather than overwriting them",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/pick-writable-standard.test.ts",
+      "name": "pickWritableStandard overwrites a non-empty value when overrideExistingValues is set, still skipping unregistered fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-enrich.test.ts",
+      "name": "postPdlBulkEnrich sends one request wrapping every record under requests[].params",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-enrich.test.ts",
+      "name": "postPdlBulkEnrich maps each response item to its aligned outcome",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-enrich.test.ts",
+      "name": "postPdlBulkEnrich matches a 200 company item whose fields are at the top level (no data envelope)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-enrich.test.ts",
+      "name": "postPdlBulkEnrich reads the responses envelope when the body is not a bare array",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-enrich.test.ts",
+      "name": "postPdlBulkEnrich fails the whole batch when the result count does not match the request count",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-enrich.test.ts",
+      "name": "postPdlBulkEnrich fails every record when the whole call is a non-2xx response",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-enrich.test.ts",
+      "name": "postPdlBulkEnrich fails every record when fetch throws",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-enrich.test.ts",
+      "name": "postPdlBulkEnrich fails every record on a non-JSON response",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-enrich.test.ts",
+      "name": "postPdlBulkEnrich returns an empty array without calling fetch for no records",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-single-enrich.test.ts",
+      "name": "postPdlSingleEnrich posts the params directly in the body (not wrapped under requests)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-single-enrich.test.ts",
+      "name": "postPdlSingleEnrich maps a 200 person match with a data envelope",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-single-enrich.test.ts",
+      "name": "postPdlSingleEnrich maps a 200 company match whose fields are at the top level",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-single-enrich.test.ts",
+      "name": "postPdlSingleEnrich treats a 404 no-match as not_found from the body status",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-single-enrich.test.ts",
+      "name": "postPdlSingleEnrich falls back to the HTTP status when the body omits status",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-single-enrich.test.ts",
+      "name": "postPdlSingleEnrich reports an error on a non-2xx response with an error body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-single-enrich.test.ts",
+      "name": "postPdlSingleEnrich reports an error when fetch throws",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-single-enrich.test.ts",
+      "name": "postPdlSingleEnrich reports an error on a non-JSON response",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-single-enrich.test.ts",
+      "name": "postPdlSingleEnrich drops a match below the requested min_likelihood",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/read-companies.test.ts",
+      "name": "readCompanies queries companies by an id-in filter and returns the matching nodes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/read-companies.test.ts",
+      "name": "readCompanies returns an empty array without querying when there are no ids",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/read-people.test.ts",
+      "name": "readPeople queries people by an id-in filter and returns the matching nodes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/read-people.test.ts",
+      "name": "readPeople returns an empty array without querying when there are no ids",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' uses the default likelihoods when the settings are undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' uses the default likelihoods when the settings are \"\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' uses the default likelihoods when the settings are \"   \"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' uses a configured minimum of '1' with the name-based setting as a floor",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' uses a configured minimum of '7' with the name-based setting as a floor",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' uses a configured minimum of '10' with the name-based setting as a floor",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' uses a configured minimum of ' 7 ' with the name-based setting as a floor",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' rejects a configured minimum of \"-1\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' rejects a configured minimum of \"0\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' rejects a configured minimum of \"11\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' rejects a configured minimum of \"1.5\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' rejects a configured minimum of \"NaN\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' rejects a configured minimum of \"Infinity\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' rejects a configured minimum of \"7invalid\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' rejects a configured name-based minimum of \"-1\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' rejects a configured name-based minimum of \"0\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' rejects a configured name-based minimum of \"11\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' rejects a configured name-based minimum of \"1.5\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' rejects a configured name-based minimum of \"NaN\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' rejects a configured name-based minimum of \"Infinity\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'people' rejects a configured name-based minimum of \"7invalid\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' uses the default likelihoods when the settings are undefined",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' uses the default likelihoods when the settings are \"\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' uses the default likelihoods when the settings are \"   \"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' uses a configured minimum of '1' with the name-based setting as a floor",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' uses a configured minimum of '7' with the name-based setting as a floor",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' uses a configured minimum of '10' with the name-based setting as a floor",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' uses a configured minimum of ' 7 ' with the name-based setting as a floor",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' rejects a configured minimum of \"-1\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' rejects a configured minimum of \"0\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' rejects a configured minimum of \"11\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' rejects a configured minimum of \"1.5\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' rejects a configured minimum of \"NaN\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' rejects a configured minimum of \"Infinity\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' rejects a configured minimum of \"7invalid\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' rejects a configured name-based minimum of \"-1\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' rejects a configured name-based minimum of \"0\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' rejects a configured name-based minimum of \"11\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' rejects a configured name-based minimum of \"1.5\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' rejects a configured name-based minimum of \"NaN\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' rejects a configured name-based minimum of \"Infinity\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods settings for 'companies' rejects a configured name-based minimum of \"7invalid\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods uses 3 for name-based matches with settings '2' and '3'",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods uses 9 for name-based matches with settings '2' and '9'",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods uses 8 for name-based matches with settings '8' and '3'",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods reads only the settings it is given",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods gives explicit workflow inputs { minLikelihood: 3 } precedence over the settings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods gives explicit workflow inputs { weakIdentifierMinLikelihood: 4 } precedence over the settings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods gives explicit workflow inputs { minLikelihood: 3, …(1) } precedence over the settings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods gives explicit workflow inputs { minLikelihood: 9, …(1) } precedence over the settings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods gives explicit workflow inputs { minLikelihood: null, …(1) } precedence over the settings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods uses an explicit minimum of 1 without reading invalid settings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods uses an explicit minimum of 6 without reading invalid settings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods uses an explicit minimum of 10 without reading invalid settings",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods rejects an input minimum of -1",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods rejects an input minimum of 0",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods rejects an input minimum of 11",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods rejects an input minimum of 1.5",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods rejects an input minimum of NaN",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods rejects an input minimum of Infinity",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods rejects an input name-based minimum of -1",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods rejects an input name-based minimum of 0",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods rejects an input name-based minimum of 11",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods rejects an input name-based minimum of 1.5",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods rejects an input name-based minimum of NaN",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "name": "resolveMinLikelihoods rejects an input name-based minimum of Infinity",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-update-fields-mode.test.ts",
+      "name": "resolveUpdateFieldsMode persists and overwrites for \"Yes and overwrite\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-update-fields-mode.test.ts",
+      "name": "resolveUpdateFieldsMode persists without overwriting for \"Yes and don't overwrite\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-update-fields-mode.test.ts",
+      "name": "resolveUpdateFieldsMode does not persist for \"No\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-update-fields-mode.test.ts",
+      "name": "resolveUpdateFieldsMode defaults to fill-empty persisting when omitted",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment resolves the likelihoods once and passes them to every chunk",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment rejects an invalid setting before reading records or calling PDL",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment reads every id in one call and enriches the set in one batch",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment writes NOT_FOUND and ERROR statuses with batched status updates",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment skips no-identifier records before the PDL call",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment maps \"Yes and overwrite\" to overrideExistingValues and persisting",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment defaults to fill-empty persisting when updateFields is omitted",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment returns mapped data without writing anything when updateFields is \"No\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment marks missing records as ERROR without enriching them",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment isolates a per-record matched update failure",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment marks all attempted records as ERROR and writes the status when the batch PDL call rejects",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment isolates a record whose matched-data build throws",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment produces exactly one result per record with counts summing to the total",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment deduplicates record ids",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment chunks large id sets into separate read and PDL calls",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment stops enriching the remaining chunks when PDL rejects the API key",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment stops enriching the remaining chunks when the API key is not configured",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment keeps enriching the remaining chunks after a chunk fails for another reason",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment bills only matched outcomes after the PDL call",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment does not bill when no record matches",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment still bills a match whose record write fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment bills each chunk separately",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "name": "runBatchEnrichment returns an empty summary when there are no records",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-single-enrichment.test.ts",
+      "name": "runSingleEnrichment uses both workflow overrides for a single name-based match",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/salary-transform.test.ts",
+      "name": "salaryTransform maps PDL salary ranges to option values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/salary-transform.test.ts",
+      "name": "salaryTransform returns undefined for an unknown range",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/size-transform.test.ts",
+      "name": "sizeTransform maps PDL size ranges to option values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/size-transform.test.ts",
+      "name": "sizeTransform tolerates spacing variants",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/size-transform.test.ts",
+      "name": "sizeTransform returns undefined for an unknown range",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-json-array.test.ts",
+      "name": "toJsonArray returns a non-empty array unchanged",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-json-array.test.ts",
+      "name": "toJsonArray returns undefined for empty arrays and non-arrays",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-json-object.test.ts",
+      "name": "toJsonObject returns a non-empty plain object unchanged",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-json-object.test.ts",
+      "name": "toJsonObject returns undefined for empty objects, arrays and non-objects",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-number.test.ts",
+      "name": "toNumber returns finite numbers including zero",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-number.test.ts",
+      "name": "toNumber returns undefined for non-finite numbers and non-numbers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-pdl-outcome-error-message.test.ts",
+      "name": "toPdlOutcomeErrorMessage hides the People Data Labs message behind the access message on an HTTP 401 error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-pdl-outcome-error-message.test.ts",
+      "name": "toPdlOutcomeErrorMessage hides the People Data Labs message behind the access message on an HTTP 402 error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-pdl-outcome-error-message.test.ts",
+      "name": "toPdlOutcomeErrorMessage keeps the People Data Labs message for any other error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-pdl-outcome-error-message.test.ts",
+      "name": "toPdlOutcomeErrorMessage reports a missing outcome",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-string-array.test.ts",
+      "name": "toStringArray cleans, trims and dedupes string entries",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-string-array.test.ts",
+      "name": "toStringArray returns undefined for a non-array",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-string-array.test.ts",
+      "name": "toStringArray returns undefined when nothing usable remains",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-text.test.ts",
+      "name": "toText trims and returns a non-empty string",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-text.test.ts",
+      "name": "toText returns undefined for an empty or whitespace string",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-text.test.ts",
+      "name": "toText returns undefined for non-string values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/update-companies-status.test.ts",
+      "name": "updateCompaniesStatus updates many companies via an id-in filter",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/update-company-record.test.ts",
+      "name": "updateCompanyRecord updates a single company by id",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/update-people-status.test.ts",
+      "name": "updatePeopleStatus updates many people via an id-in filter",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/update-person-record.test.ts",
+      "name": "updatePersonRecord updates a single person by id",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/front-components/utils/__tests__/build-enrichment-snackbar-params.test.ts",
+      "name": "buildEnrichmentSnackbarParams reports a success when no record failed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/front-components/utils/__tests__/build-enrichment-snackbar-params.test.ts",
+      "name": "buildEnrichmentSnackbarParams uses the singular form when a single record was enriched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/front-components/utils/__tests__/build-enrichment-snackbar-params.test.ts",
+      "name": "buildEnrichmentSnackbarParams reports an error with the first record error when every record failed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/front-components/utils/__tests__/build-enrichment-snackbar-params.test.ts",
+      "name": "buildEnrichmentSnackbarParams reports a warning with the first record error when some records failed",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/constants/__tests__/select-option-constants.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/build-select-options.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/is-defined.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/is-unique-violation-error.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/normalize-enum-value.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/prune-undefined.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/strip-separators.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/utils/__tests__/to-error-message.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/errors/__tests__/pdl-config-error.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/errors/__tests__/pdl-invalid-input-error.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/errors/__tests__/pdl-operation-error.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/errors/__tests__/pdl-record-not-found-error.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-companies.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-company.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-people.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/handlers/__tests__/enrich-person.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/aggregate-bulk-enrich-result.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-address.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-allowed-values.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-company-create-data.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-company-match-keys.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-company-matched-data.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-currency-from-usd.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-emails.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-error-result.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-full-name.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-links.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-matched-result.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-not-found-result.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-person-matched-data.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-person-name-param.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-phones.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/build-skipped-result.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/capitalize-name.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/charge-matched-enrichments.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/chunk.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/enrich-companies.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/enrich-company.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/enrich-people.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/enrich-person.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-company-match-params.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-pdl-error-message.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-person-match-params.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/extract-record-ids.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-company-id-by-filter.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-company-id.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/find-or-create-current-company.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/get-pdl-api-key.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-address.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-emails.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-full-name.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-links.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-phones.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-empty-text.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/is-pdl-account-error-outcome.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/map-company.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/map-person.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/normalize-domain.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/normalize-linkedin-url.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/now-iso.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-geo.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-partial-date.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/parse-pdl-item.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/pick-multi-select.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/pick-select.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/pick-writable-standard.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-enrich.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/post-pdl-single-enrich.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/read-companies.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/read-people.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-min-likelihoods.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/resolve-update-fields-mode.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-batch-enrichment.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/run-single-enrichment.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/salary-transform.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/size-transform.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-json-array.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-json-object.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-number.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-pdl-outcome-error-message.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-string-array.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/to-text.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/update-companies-status.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/update-company-record.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/update-people-status.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/logic-functions/utils/__tests__/update-person-record.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/people-data-labs/src/front-components/utils/__tests__/build-enrichment-snackbar-params.test.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

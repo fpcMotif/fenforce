@@ -1,0 +1,833 @@
+{
+  "numTotalTests": 121,
+  "numPassedTests": 121,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 34,
+  "numPassedTestSuites": 34,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 9,
+    "total": 9,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-client-sdk/src/__tests__/isExternal.test.ts",
+      "name": "isExternal externalizes the Node builtin \"crypto\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/__tests__/isExternal.test.ts",
+      "name": "isExternal externalizes the Node builtin \"node:crypto\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/__tests__/isExternal.test.ts",
+      "name": "isExternal externalizes the Node builtin \"zlib\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/__tests__/isExternal.test.ts",
+      "name": "isExternal externalizes the Node builtin \"node:zlib\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/__tests__/isExternal.test.ts",
+      "name": "isExternal externalizes the Node builtin \"stream\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/__tests__/isExternal.test.ts",
+      "name": "isExternal externalizes the Node builtin \"node:stream\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/__tests__/isExternal.test.ts",
+      "name": "isExternal externalizes the Node builtin \"child_process\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/__tests__/isExternal.test.ts",
+      "name": "isExternal externalizes the Node builtin \"node:child_process\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/__tests__/isExternal.test.ts",
+      "name": "isExternal externalizes the Node builtin \"node:fs\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/__tests__/isExternal.test.ts",
+      "name": "isExternal externalizes the Node builtin \"node:fs/promises\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/__tests__/isExternal.test.ts",
+      "name": "isExternal externalizes the Node builtin \"node:path\"",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/__tests__/isExternal.test.ts",
+      "name": "isExternal externalizes declared dependencies and their subpaths",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/__tests__/isExternal.test.ts",
+      "name": "isExternal does not externalize twenty-shared or app source",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "name": "Generated client wrapper auth behavior should act as the triggering person by default",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "name": "Generated client wrapper auth behavior should act as the application when asked to",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "name": "Generated client wrapper auth behavior should act as the application when nobody triggered the run",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "name": "Generated client wrapper auth behavior should still serve a run nobody triggered when asked for the application",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "name": "Generated client wrapper auth behavior should build outside a logic function run",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "name": "Generated client wrapper auth behavior uses TWENTY_APP_ACCESS_TOKEN before TWENTY_API_KEY",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "name": "Generated client wrapper auth behavior falls back to TWENTY_API_KEY when TWENTY_APP_ACCESS_TOKEN is absent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "name": "Generated client wrapper auth behavior refreshes and retries once after auth error when refresh callback is available",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "name": "Generated client wrapper auth behavior deduplicates concurrent token refresh requests",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "name": "Generated client wrapper auth behavior retries uploadFile once after 401 when refresh callback is available",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "name": "Generated client wrapper auth behavior bubbles auth error when refresh callback throws",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "name": "Generated client wrapper auth behavior bubbles auth error when refresh callback returns an empty token",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "name": "Generated client wrapper auth behavior bubbles auth error without retry when refresh callback is unavailable",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "name": "Generated client wrapper auth behavior calls global fetch with globalThis binding when no custom fetch is provided",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-upload-file.test.ts",
+      "name": "Generated client wrapper uploadFile creates an upload target, sends the bytes to it, then completes the upload",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-upload-file.test.ts",
+      "name": "Generated client wrapper uploadFile sends nothing to storage when the upload target is refused",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-upload-file.test.ts",
+      "name": "Generated client wrapper uploadFile does not complete the upload when storage refuses the bytes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-upload-file.test.ts",
+      "name": "Generated client wrapper uploadFile surfaces the completion error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/generated-client-query.test.ts",
+      "name": "Generated client queries the API (vendored genql runtime) builds a GraphQL query from a selection and returns parsed data",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/generated-client-query.test.ts",
+      "name": "Generated client queries the API (vendored genql runtime) builds a mutation operation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/generated-client-query.test.ts",
+      "name": "Generated client queries the API (vendored genql runtime) throws when the API responds with GraphQL errors",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/generated-client-query.test.ts",
+      "name": "Generated client queries the API (vendored genql runtime) rejects (does not hang) when a batched request fails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/stub-generated-client-drift.test.ts",
+      "name": "CoreApiClient stub accepts the full generated option set and still refuses to run",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient should call the resolved url with a bearer token and parse the JSON response",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient should serialize a JSON body and set the content type on post",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient should append query parameters while skipping nullish values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient should throw a RestApiClientError when the api url is missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient should act as the application when asked to",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient should act as the triggering person by default",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient should name the application token when it is the one missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient should throw a RestApiClientError when the access token is missing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient should surface non-2xx responses as a RestApiClientError carrying the parsed body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient app route paths should strip the /s prefix and send app route paths to an isolated-domain functions url at the root",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient app route paths should join a same-site functions url that already contains /s without doubling slashes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient app route paths should fall back to the api url /s route when the functions url is not injected",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient app route paths should treat an empty functions url as not injected",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient app route paths should keep rest paths on the api url when a functions url is injected",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient app route paths should keep unprefixed paths on the api url when a functions url is injected",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient app route paths should prefer an explicit baseUrl over the functions url and keep the path untouched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient app route paths should resolve an app route url without sending a request",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient app route paths should resolve a rest url on the api base without sending a request",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "name": "RestApiClient should refresh the access token once on a 401 and retry the request",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/comment.test.ts",
+      "name": "deprecated",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/comment.test.ts",
+      "name": "deprecated multiline",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/comment.test.ts",
+      "name": "single line",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/comment.test.ts",
+      "name": "single line deprecated",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/comment.test.ts",
+      "name": "multiline",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/comment.test.ts",
+      "name": "multiline deprecated",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries first query",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries simple",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries __typename is not optional",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries scalar value with argument",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries falsy values are not fetched",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries required field and nested fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries union types only 1 on_ normal syntax",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries ability to query interfaces that a union implements",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries interface types normal syntax",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries multiple interfaces types normal syntax",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries errors",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries errors are thrown with batching",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries 1 error and 1 result with batching",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries batches requests",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries headers function gets called every time",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "name": "execute queries async headers function gets called every time",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/generate-queries.test.ts",
+      "name": "generate queries enum string is present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/generate-queries.test.ts",
+      "name": "generate queries query",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/generate-queries.test.ts",
+      "name": "generate queries optional arg",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/generate-queries.test.ts",
+      "name": "generate queries recursive type",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/generate-queries.test.ts",
+      "name": "generate queries recursive type with args",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/generate-queries.test.ts",
+      "name": "generate queries use __name operation name",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/generate-queries.test.ts",
+      "name": "generate queries subscriptions",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/generate-queries.test.ts",
+      "name": "generate queries many",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/generate-queries.test.ts",
+      "name": "generate queries do not fetch falsy fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/generate-queries.test.ts",
+      "name": "generate queries do not fetch falsy fields with __scalar",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/generated-fixture-drift.test.ts",
+      "name": "upstream fixture client matches the engine output produces the same file list",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/generated-fixture-drift.test.ts",
+      "name": "upstream fixture client matches the engine output produces byte-identical file contents",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/render-context.test.ts",
+      "name": "RenderContext prettify",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/render-context.test.ts",
+      "name": "RenderContext raw",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/render-schema.test.ts",
+      "name": "renderSchema",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/render-typing.test.ts",
+      "name": "renderTyping nullable",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/render-typing.test.ts",
+      "name": "renderTyping undefinable values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/render-typing.test.ts",
+      "name": "renderTyping undefinable fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/render-typing.test.ts",
+      "name": "renderTyping undefinable fields and values",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-map.test.ts",
+      "name": "scalarType",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-map.test.ts",
+      "name": "objectType",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-map.test.ts",
+      "name": "unionType",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "pick response type picks from request type",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "pick response type does not have additional properties",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "pick argument syntax",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "__scalar response type picks from request type",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "__scalar response type does not have additional properties",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "__scalar __scalar is not present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "__scalar __name is not present",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "__scalar argument syntax",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "__scalar argument syntax on scalar",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "optional fields optional fields are preserved",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "optional fields optional fields are preserved in __scalar",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "optional fields argument syntax",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "unions pick union fields",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "unions does not have __isUnion",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "unions argument syntax",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "arrays list",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "arrays nested",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "arrays maintain optionals",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "arrays args syntax",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "literals unions literals",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "nullable fields accessible",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "name": "complex optional type with array",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-client-sdk/src/__tests__/isExternal.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-auth.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/client-wrapper-upload-file.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/generated-client-query.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/stub-generated-client-drift.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/rest/__tests__/RestApiClient.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/comment.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/execute-queries.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/generate-queries.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/generated-fixture-drift.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/render-context.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/render-schema.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/render-typing.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-map.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-client-sdk/src/generate/__tests__/upstream-3.0.5/type-selection.test.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

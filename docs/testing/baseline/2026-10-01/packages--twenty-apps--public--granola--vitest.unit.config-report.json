@@ -1,0 +1,958 @@
+{
+  "numTotalTests": 131,
+  "numPassedTests": 131,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 54,
+  "numPassedTestSuites": 54,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "success": true,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "assertions": [
+    {
+      "file": "packages/twenty-apps/public/granola/src/__tests__/application-config.test.ts",
+      "name": "application identifiers uses distinct UUID v4 identifiers for every manifest entity",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-connection-state.test.ts",
+      "name": "computeGranolaConnectionState shows connected for an accepted key with an active registration",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-connection-state.test.ts",
+      "name": "computeGranolaConnectionState shows connecting while the connection is being set up",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-connection-state.test.ts",
+      "name": "computeGranolaConnectionState tells 'UNREACHABLE' apart from the status",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-connection-state.test.ts",
+      "name": "computeGranolaConnectionState tells 'INVALID_KEY' apart from the status",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-connection-state.test.ts",
+      "name": "computeGranolaConnectionState tells 'PAUSED' apart from the status",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-connection-state.test.ts",
+      "name": "computeGranolaConnectionState tells 'SETUP_INCOMPLETE' apart from the status",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-connection-state.test.ts",
+      "name": "computeGranolaConnectionState tells 'SETUP_INCOMPLETE' apart from the status",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-connection-state.test.ts",
+      "name": "computeGranolaConnectionState shows an incomplete setup when the setup request failed",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-folder-ancestor-ids.test.ts",
+      "name": "computeGranolaFolderAncestorIds lists ancestors nearest first and stays finite on missing parents and cycles",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-folder-selection.test.ts",
+      "name": "computeGranolaFolderSelection syncs everything when no folder is stored",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-folder-selection.test.ts",
+      "name": "computeGranolaFolderSelection restores the stored folders",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-folder-selection.test.ts",
+      "name": "computeGranolaFolderSelection prefers a selection that is not applied in Granola yet",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-folder-selection.test.ts",
+      "name": "computeGranolaFolderSelection marks a pending switch back to everything",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-folder-tree.test.ts",
+      "name": "computeGranolaFolderTree nests children under their parent sorted by name at every level",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-folder-tree.test.ts",
+      "name": "computeGranolaFolderTree lifts folders with an inaccessible parent or cyclic ancestry to the top level",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/create-save-queue.test.ts",
+      "name": "createSaveQueue serializes saves and replaces pending values with the latest selection",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/create-save-queue.test.ts",
+      "name": "createSaveQueue starts saving again after the queue has drained, including an empty selection",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/create-save-queue.test.ts",
+      "name": "createSaveQueue drains values enqueued from within a save without overlapping saves",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/drop-inaccessible-granola-folders.test.ts",
+      "name": "dropInaccessibleGranolaFolders keeps the stored folders that are still accessible",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/drop-inaccessible-granola-folders.test.ts",
+      "name": "dropInaccessibleGranolaFolders flags a stored selection whose folders are all gone",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/drop-inaccessible-granola-folders.test.ts",
+      "name": "dropInaccessibleGranolaFolders leaves an empty selection alone",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/is-granola-connection-ready.test.ts",
+      "name": "isGranolaConnectionReady requires an accepted key and an active registration",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/is-granola-connection-ready.test.ts",
+      "name": "isGranolaConnectionReady does not show connected for an incomplete or failed connection: {}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/is-granola-connection-ready.test.ts",
+      "name": "isGranolaConnectionReady does not show connected for an incomplete or failed connection: {\"registration\":{\"scopes\":[\"workspace\"],\"isActive\":false}}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/is-granola-connection-ready.test.ts",
+      "name": "isGranolaConnectionReady does not show connected for an incomplete or failed connection: {\"needsRegistration\":true}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/is-granola-connection-ready.test.ts",
+      "name": "isGranolaConnectionReady does not show connected for an incomplete or failed connection: {\"isConnected\":false}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/is-granola-connection-ready.test.ts",
+      "name": "isGranolaConnectionReady does not show connected for an incomplete or failed connection: {\"isGranolaReachable\":false}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/is-granola-connection-ready.test.ts",
+      "name": "isGranolaConnectionReady does not show connected for an incomplete or failed connection: {\"error\":\"Connection failed\"}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/parse-history-import-days.test.ts",
+      "name": "parseHistoryImportDays accepts '1' as 1 days",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/parse-history-import-days.test.ts",
+      "name": "parseHistoryImportDays accepts '3650' as 3650 days",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/parse-history-import-days.test.ts",
+      "name": "parseHistoryImportDays accepts ' 31 ' as 31 days",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/parse-history-import-days.test.ts",
+      "name": "parseHistoryImportDays rejects \"\" instead of silently importing another date range",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/parse-history-import-days.test.ts",
+      "name": "parseHistoryImportDays rejects \" \" instead of silently importing another date range",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/parse-history-import-days.test.ts",
+      "name": "parseHistoryImportDays rejects \"0\" instead of silently importing another date range",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/parse-history-import-days.test.ts",
+      "name": "parseHistoryImportDays rejects \"-1\" instead of silently importing another date range",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/parse-history-import-days.test.ts",
+      "name": "parseHistoryImportDays rejects \"3651\" instead of silently importing another date range",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/parse-history-import-days.test.ts",
+      "name": "parseHistoryImportDays rejects \"1.5\" instead of silently importing another date range",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/parse-history-import-days.test.ts",
+      "name": "parseHistoryImportDays rejects \"31days\" instead of silently importing another date range",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/parse-history-import-days.test.ts",
+      "name": "parseHistoryImportDays rejects \"1e2\" instead of silently importing another date range",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/parse-history-import-days.test.ts",
+      "name": "parseHistoryImportDays rejects \"0x1f\" instead of silently importing another date range",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/parse-history-import-days.test.ts",
+      "name": "parseHistoryImportDays rejects \"Infinity\" instead of silently importing another date range",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/compute-call-recording-id-for-granola-note.test.ts",
+      "name": "derives stable UUID v4 identities from the Granola namespace",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "name": "createGranolaClientOrThrow sends authenticated list filters and opaque cursors without mangling them",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "name": "createGranolaClientOrThrow discards private notes at the API boundary",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "name": "createGranolaClientOrThrow preserves nonretryable HTTP 400 without disclosing the body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "name": "createGranolaClientOrThrow preserves nonretryable HTTP 401 without disclosing the body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "name": "createGranolaClientOrThrow preserves nonretryable HTTP 403 without disclosing the body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "name": "createGranolaClientOrThrow preserves nonretryable HTTP 404 without disclosing the body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "name": "createGranolaClientOrThrow preserves nonretryable HTTP 413 without disclosing the body",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "name": "createGranolaClientOrThrow makes HTTP 429 retryable",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "name": "createGranolaClientOrThrow makes HTTP 500 retryable",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "name": "createGranolaClientOrThrow makes HTTP 502 retryable",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "name": "createGranolaClientOrThrow makes HTTP 503 retryable",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "name": "createGranolaClientOrThrow makes network failure retryable without leaking the underlying error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "name": "createGranolaClientOrThrow rejects malformed API data without exposing it",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "name": "createGranolaClientOrThrow rejects blank keys before making a request",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-webhook-endpoint-or-throw.test.ts",
+      "name": "createGranolaWebhookEndpointOrThrow registers a workspace key with workspace scope on the first attempt",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-webhook-endpoint-or-throw.test.ts",
+      "name": "createGranolaWebhookEndpointOrThrow falls back to personal scopes when Granola rejects workspace scope for a personal key",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-webhook-endpoint-or-throw.test.ts",
+      "name": "createGranolaWebhookEndpointOrThrow tries the previously registered scopes first",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-webhook-endpoint-or-throw.test.ts",
+      "name": "createGranolaWebhookEndpointOrThrow rethrows errors that are not a scope mismatch",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/fetch-granola-note-with-transcript-or-throw.test.ts",
+      "name": "fetchGranolaNoteWithTranscriptOrThrow stops a slow transcript before the worker exhausts its execution budget",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/fetch-granola-note-with-transcript-or-throw.test.ts",
+      "name": "fetchGranolaNoteWithTranscriptOrThrow retrieves a large transcript whose pacing exceeds one minute",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/fetch-granola-note-with-transcript-or-throw.test.ts",
+      "name": "fetchGranolaNoteWithTranscriptOrThrow paces transcript pages below the sustained provider request limit",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/fetch-granola-note-with-transcript-or-throw.test.ts",
+      "name": "fetchGranolaNoteWithTranscriptOrThrow recovers a 413 through paginated transcript retrieval",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/fetch-granola-note-with-transcript-or-throw.test.ts",
+      "name": "fetchGranolaNoteWithTranscriptOrThrow rejects a non-advancing cursor (loop) with a typed error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/fetch-granola-note-with-transcript-or-throw.test.ts",
+      "name": "fetchGranolaNoteWithTranscriptOrThrow rejects a non-advancing cursor (null) with a typed error",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/fetch-granola-note-with-transcript-or-throw.test.ts",
+      "name": "fetchGranolaNoteWithTranscriptOrThrow stops at the page limit when the transcript never reports completion",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/find-matching-calendar-event-or-throw.test.ts",
+      "name": "findMatchingCalendarEventOrThrow links by the provider event id without touching participants",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/find-matching-calendar-event-or-throw.test.ts",
+      "name": "findMatchingCalendarEventOrThrow refuses a ambiguous provider id match without falling back",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/find-matching-calendar-event-or-throw.test.ts",
+      "name": "findMatchingCalendarEventOrThrow refuses a paged-out provider id match without falling back",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/find-matching-calendar-event-or-throw.test.ts",
+      "name": "findMatchingCalendarEventOrThrow falls back to invitee emails at the scheduled start when no provider id matches",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/find-matching-calendar-event-or-throw.test.ts",
+      "name": "findMatchingCalendarEventOrThrow escapes ilike wildcards in invitee emails",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/find-matching-calendar-event-or-throw.test.ts",
+      "name": "findMatchingCalendarEventOrThrow does not query without a scheduled start or invitees",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/format-granola-summary.test.ts",
+      "name": "prefers shared markdown and falls back when it is absent or blank",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-job-id.test.ts",
+      "name": "getGranolaJobId derives the same queue-safe identifier for the same job identity",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-job-id.test.ts",
+      "name": "getGranolaJobId separates jobs that import different notes",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-next-page.test.ts",
+      "name": "getGranolaNextPage does not follow a cursor after the final page",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-next-page.test.ts",
+      "name": "getGranolaNextPage reports a stalled import for a repeated, missing, or bounded cursor",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-next-page.test.ts",
+      "name": "getGranolaNextPage reports a stalled import for a repeated, missing, or bounded cursor",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-next-page.test.ts",
+      "name": "getGranolaNextPage reports a stalled import for a repeated, missing, or bounded cursor",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-next-page.test.ts",
+      "name": "getGranolaNextPage continues a valid next page",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-note-import-schedule.test.ts",
+      "name": "getGranolaNoteImportSchedule spaces note jobs by four seconds after the existing reservation",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-note-import-schedule.test.ts",
+      "name": "getGranolaNoteImportSchedule does not schedule in the past and paces empty pages",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-note-time-range.test.ts",
+      "name": "getGranolaNoteTimeRange does not end a scheduled note without a transcript before its start",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-note-time-range.test.ts",
+      "name": "getGranolaNoteTimeRange uses creation time for a note with no scheduled times or transcript",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-note-time-range.test.ts",
+      "name": "getGranolaNoteTimeRange prefers transcript boundaries over scheduled times so offsets start at zero",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-note-title.test.ts",
+      "name": "getGranolaNoteTitle chooses 'Note title' for note title ' Note title ' and calendar title 'Calendar title'",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-note-title.test.ts",
+      "name": "getGranolaNoteTitle chooses 'Calendar title' for note title ' ' and calendar title ' Calendar title '",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-note-title.test.ts",
+      "name": "getGranolaNoteTitle chooses 'Calendar title' for note title null and calendar title 'Calendar title'",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-note-title.test.ts",
+      "name": "getGranolaNoteTitle chooses undefined for note title ' ' and calendar title ' '",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-note-title.test.ts",
+      "name": "getGranolaNoteTitle leaves an untitled note without a calendar event untitled",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-selected-parent-folders.test.ts",
+      "name": "getGranolaSelectedParentFolders removes duplicates and descendants already covered by a selected parent",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-selected-parent-folders.test.ts",
+      "name": "getGranolaSelectedParentFolders preserves selected children when their parent was not selected",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-selected-parent-folders.test.ts",
+      "name": "getGranolaSelectedParentFolders keeps an empty selection empty to clear the filter",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-selected-parent-folders.test.ts",
+      "name": "getGranolaSelectedParentFolders preserves explicit selections when cyclic ancestry would clear the filter",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-selected-parent-folders.test.ts",
+      "name": "getGranolaSelectedParentFolders prunes a folder whose selected ancestor sits before a cycle in its chain",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-webhook-destination-url-or-throw.test.ts",
+      "name": "getGranolaWebhookDestinationUrlOrThrow builds the server route under the API URL with the registration id",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-webhook-destination-url-or-throw.test.ts",
+      "name": "getGranolaWebhookDestinationUrlOrThrow drops an existing query string and hash from the API URL",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-webhook-destination-url-or-throw.test.ts",
+      "name": "getGranolaWebhookDestinationUrlOrThrow rejects a non-HTTPS API URL",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-single-distinct-calendar-event-id.test.ts",
+      "name": "getSingleDistinctCalendarEventId accepts multiple synchronized calendar associations for the same event",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-single-distinct-calendar-event-id.test.ts",
+      "name": "getSingleDistinctCalendarEventId leaves competing event matches unlinked",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-single-distinct-calendar-event-id.test.ts",
+      "name": "getSingleDistinctCalendarEventId leaves absent matches unlinked",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/is-granola-job-in-registration-scope.test.ts",
+      "name": "isGranolaJobInRegistrationScope skips a job without a matching registration",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/is-granola-job-in-registration-scope.test.ts",
+      "name": "isGranolaJobInRegistrationScope accepts any folder while the registration syncs every folder",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/is-granola-job-in-registration-scope.test.ts",
+      "name": "isGranolaJobInRegistrationScope requires the job folder to be one of the selected folders",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/map-granola-transcript-to-entries.test.ts",
+      "name": "mapGranolaTranscriptToEntries anchors early speech at zero instead of the scheduled meeting start",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/map-granola-transcript-to-entries.test.ts",
+      "name": "mapGranolaTranscriptToEntries resolves identified speakers, owner attribution, anonymous iOS labels and unknown speakers",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/map-granola-transcript-to-entries.test.ts",
+      "name": "mapGranolaTranscriptToEntries preserves fractional offsets and skips whitespace-only speech",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/rethrow-known-or-wrap-granola-error.test.ts",
+      "name": "rethrowKnownOrWrapGranolaError rethrows known errors unchanged",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/rethrow-known-or-wrap-granola-error.test.ts",
+      "name": "rethrowKnownOrWrapGranolaError rethrows known errors unchanged",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/rethrow-known-or-wrap-granola-error.test.ts",
+      "name": "rethrowKnownOrWrapGranolaError rethrows known errors unchanged",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/rethrow-known-or-wrap-granola-error.test.ts",
+      "name": "rethrowKnownOrWrapGranolaError wraps unknown errors as retryable errors",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/upsert-call-recording-or-throw.test.ts",
+      "name": "upsertCallRecordingOrThrow recovers a newly visible record after 'Duplicate recording'",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/upsert-call-recording-or-throw.test.ts",
+      "name": "upsertCallRecordingOrThrow recovers a newly visible record after 'Response lost after the server commit…'",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/upsert-call-recording-or-throw.test.ts",
+      "name": "upsertCallRecordingOrThrow propagates a failed create when no record exists",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/upsert-call-recording-or-throw.test.ts",
+      "name": "upsertCallRecordingOrThrow propagates a failed recovery update instead of reporting success",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/upsert-call-recording-or-throw.test.ts",
+      "name": "upsertCallRecordingOrThrow preserves transcript arrays on writes (existing: false)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/upsert-call-recording-or-throw.test.ts",
+      "name": "upsertCallRecordingOrThrow preserves transcript arrays on writes (existing: true)",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/upsert-call-recording-or-throw.test.ts",
+      "name": "upsertCallRecordingOrThrow skips a soft-deleted recording without writing",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/verify-standard-webhook-signature.test.ts",
+      "name": "verifyStandardWebhookSignature verifies an independently computed HMAC vector",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/verify-standard-webhook-signature.test.ts",
+      "name": "verifyStandardWebhookSignature accepts one matching signature among rotated signatures",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/verify-standard-webhook-signature.test.ts",
+      "name": "verifyStandardWebhookSignature rejects tampering or invalid freshness: {\"rawBody\":\"{\\\"note_id\\\":\\\"not_00000000000000\\\"}\"}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/verify-standard-webhook-signature.test.ts",
+      "name": "verifyStandardWebhookSignature rejects tampering or invalid freshness: {\"webhookId\":\"evt_other\"}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/verify-standard-webhook-signature.test.ts",
+      "name": "verifyStandardWebhookSignature rejects tampering or invalid freshness: {\"signingSecret\":\"<redacted>\"}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/verify-standard-webhook-signature.test.ts",
+      "name": "verifyStandardWebhookSignature rejects tampering or invalid freshness: {\"signature\":\"v2,I69TZ8seQwYgHkoZm8BOY6Y4t1ndllzqrjq8ARHdk8I=\"}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/verify-standard-webhook-signature.test.ts",
+      "name": "verifyStandardWebhookSignature rejects tampering or invalid freshness: {\"timestamp\":\"1788566400.0\"}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/verify-standard-webhook-signature.test.ts",
+      "name": "verifyStandardWebhookSignature rejects tampering or invalid freshness: {\"receivedAt\":1788566701000}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/verify-standard-webhook-signature.test.ts",
+      "name": "verifyStandardWebhookSignature rejects tampering or invalid freshness: {\"receivedAt\":1788566099000}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/verify-standard-webhook-signature.test.ts",
+      "name": "verifyStandardWebhookSignature rejects tampering or invalid freshness: {\"receivedAt\":null}",
+      "status": "passed",
+      "failureMessages": []
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/verify-standard-webhook-signature.test.ts",
+      "name": "verifyStandardWebhookSignature measures freshness at server receipt, independent of worker execution time",
+      "status": "passed",
+      "failureMessages": []
+    }
+  ],
+  "suites": [
+    {
+      "file": "packages/twenty-apps/public/granola/src/__tests__/application-config.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-connection-state.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-folder-ancestor-ids.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-folder-selection.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/compute-granola-folder-tree.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/create-save-queue.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/drop-inaccessible-granola-folders.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/is-granola-connection-ready.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/front-components/utils/__tests__/parse-history-import-days.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/compute-call-recording-id-for-granola-note.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-client-or-throw.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/create-granola-webhook-endpoint-or-throw.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/fetch-granola-note-with-transcript-or-throw.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/find-matching-calendar-event-or-throw.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/format-granola-summary.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-job-id.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-next-page.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-note-import-schedule.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-note-time-range.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-note-title.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-selected-parent-folders.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-granola-webhook-destination-url-or-throw.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/get-single-distinct-calendar-event-id.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/is-granola-job-in-registration-scope.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/map-granola-transcript-to-entries.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/rethrow-known-or-wrap-granola-error.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/upsert-call-recording-or-throw.test.ts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "file": "packages/twenty-apps/public/granola/src/logic-functions/utils/__tests__/verify-standard-webhook-signature.test.ts",
+      "status": "passed",
+      "message": ""
+    }
+  ]
+}

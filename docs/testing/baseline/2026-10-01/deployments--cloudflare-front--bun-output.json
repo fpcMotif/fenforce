@@ -1,0 +1,4 @@
+{
+  "stdout": "bun test v1.4.3-canary.1 (9f70da074)\n",
+  "stderr": "\nsrc/index.test.ts:\n(pass) frontend preview routing > every declared API prefix fails explicitly without serving the SPA [1.67ms]\n(pass) frontend preview routing > frontend deep links and similar names reach the static asset binding [0.68ms]\n\n 2 pass\n 0 fail\n 222 expect() calls\nRan 2 tests across 1 file. [8.00ms]\n"
+}
