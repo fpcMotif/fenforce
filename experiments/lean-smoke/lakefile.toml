@@ -1,0 +1,7 @@
+name = "lean-smoke"
+version = "0.1.0"
+defaultTargets = ["Smoke"]
+moreLeanArgs = ["-DwarningAsError=true"]
+
+[[lean_lib]]
+name = "Smoke"

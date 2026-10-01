@@ -1,0 +1,9 @@
+{
+  "name": "fenforce-lean-smoke",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bootstrap": "bun bootstrap.mjs",
+    "test": "bun smoke.mjs"
+  }
+}

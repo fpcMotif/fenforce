@@ -1,0 +1,43 @@
+name: CI Lean Smoke
+
+on:
+  pull_request:
+    paths:
+      - experiments/lean-smoke/**
+      - .github/workflows/ci-lean-smoke.yaml
+  push:
+    branches: [main]
+    paths:
+      - experiments/lean-smoke/**
+      - .github/workflows/ci-lean-smoke.yaml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: experiments/lean-smoke
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: '1.4.3'
+      - name: Bootstrap pinned Lean and Lake
+        run: bun run bootstrap 2>&1 | tee bootstrap.log
+        shell: bash --noprofile --norc -eo pipefail {0}
+      - name: Check proof and negative controls
+        run: bun run test
+      - name: Upload smoke evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: lean-smoke
+          path: |
+            experiments/lean-smoke/bootstrap.log
+            experiments/lean-smoke/artifacts/
+          if-no-files-found: error
