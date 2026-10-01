@@ -1,0 +1,740 @@
+{
+  "baseline": {
+    "suites": {
+      "failed": 119,
+      "passed": 1216
+    },
+    "tests": {
+      "failed": 44,
+      "passed": 7178
+    }
+  },
+  "candidate": {
+    "suites": {
+      "failed": 3,
+      "passed": 1333
+    },
+    "tests": {
+      "failed": 5,
+      "passed": 7900
+    }
+  },
+  "suitesOnlyInBaseline": [],
+  "suitesOnlyInCandidate": [
+    "packages/twenty-front/src/pages/convex-preview/__tests__/PreviewMessages.test.ts"
+  ],
+  "testsOnlyInBaselineByFile": {
+    "packages/twenty-front/src/modules/command-menu-item/engine-command/record/no-selection/utils/getRecordCreationCommandType.util.spec.ts": 12,
+    "packages/twenty-front/src/modules/onboarding/states/__tests__/companyEnrichmentState.test.ts": 2,
+    "packages/twenty-front/src/modules/ui/theme/hooks/__tests__/useColorScheme.test.tsx": 2
+  },
+  "testsOnlyInCandidateByFile": {
+    "packages/twenty-front/src/hooks/__tests__/useNavigateSettings.test.tsx": {
+      "count": 8,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/components/__tests__/AgentChatThreadInitializationEffect.test.tsx": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/components/__tests__/AiChatAssistantMessageRenderer.test.tsx": {
+      "count": 18,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/components/__tests__/AiChatEditorSection.sharing.test.tsx": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/components/__tests__/AiChatPageCloseAskAiPanelEffect.test.tsx": {
+      "count": 4,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/components/__tests__/AiChatPageHeader.test.tsx": {
+      "count": 23,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/components/__tests__/AiChatPageThreadUrlSyncEffect.test.tsx": {
+      "count": 9,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/components/__tests__/AiChatTabMessageList.test.tsx": {
+      "count": 4,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/components/__tests__/AiChatThreadItemMenu.test.tsx": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/components/__tests__/AiChatToolWidget.test.tsx": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/components/__tests__/AiModelTierBars.test.tsx": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/components/__tests__/AiModelTierInformationButton.test.tsx": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/components/__tests__/ChatReferenceChip.test.tsx": {
+      "count": 32,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/components/__tests__/ThinkingStepsDisplay.test.tsx": {
+      "count": 10,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/hooks/__tests__/useAgentChatModelId.test.tsx": {
+      "count": 4,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/hooks/__tests__/useAgentChatSubscription.test.tsx": {
+      "count": 9,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/hooks/__tests__/useAiModelTiers.test.tsx": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/hooks/__tests__/useNavigateToAiChatPage.test.tsx": {
+      "count": 6,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/hooks/__tests__/useProcessWorkspaceSetupCompletion.test.tsx": {
+      "count": 7,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/hooks/__tests__/useProjectAiChatThreadToUrl.test.tsx": {
+      "count": 5,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/hooks/__tests__/useReturnFromExpandedAiChat.test.tsx": {
+      "count": 4,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/utils/__tests__/extractCompletedWorkspaceSetupToolParts.test.ts": {
+      "count": 5,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/utils/__tests__/formatRecordReference.test.ts": {
+      "count": 1,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/utils/__tests__/getEffectiveToolName.test.ts": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/utils/__tests__/getMarkdownBlocksIncrementally.test.ts": {
+      "count": 27,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/utils/__tests__/markQuestionAnswered.test.ts": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/utils/__tests__/protectChatReferencesForMarkdown.test.ts": {
+      "count": 15,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/utils/__tests__/thinkingStepsDisplayState.test.ts": {
+      "count": 6,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/utils/tool-display/__tests__/build-crud-tool-status-message.util.test.ts": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/utils/tool-display/__tests__/get-tool-display-message.util.test.ts": {
+      "count": 36,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ai/utils/tool-display/__tests__/parse-crud-tool-name.util.test.ts": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/apollo/hooks/__tests__/useApolloFactory.test.tsx": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/apollo/services/__tests__/apollo.factory.test.ts": {
+      "count": 12,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/app/components/__tests__/DomainShell.test.tsx": {
+      "count": 5,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/auth/components/__tests__/VerifyEmail.test.tsx": {
+      "count": 4,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/auth/components/__tests__/VerifyLoginTokenEffect.test.tsx": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/auth/hooks/__tests__/useAuth.test.tsx": {
+      "count": 8,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/auth/hooks/__tests__/useVerifyLogin.test.ts": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/auth/sign-in-up/components/__tests__/SignInUpGlobalScopeForm.test.tsx": {
+      "count": 1,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/auth/sign-in-up/components/internal/__tests__/SignInUpSsoExchangeTokenEffect.test.tsx": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/auth/sign-in-up/components/internal/__tests__/SignInUpWorkspaceCreationForm.test.tsx": {
+      "count": 5,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/client-config/components/__tests__/ClientConfigProviderEffect.test.tsx": {
+      "count": 1,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/command-menu-item/engine-command/hooks/__tests__/useMountCommand.test.tsx": {
+      "count": 4,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/command-menu-item/engine-command/record/no-selection/utils/getRecordCreationCommandType.util.spec.ts": {
+      "count": 12,
+      "baselineSuiteStatus": "passed"
+    },
+    "packages/twenty-front/src/modules/command-menu/hooks/__tests__/useWorkflowCommandMenu.test.tsx": {
+      "count": 5,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/front-components/hooks/__tests__/useFrontComponentExecutionContext.test.tsx": {
+      "count": 62,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/front-components/media-session/hooks/__tests__/useFrontComponentMediaSession.test.tsx": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/mention/extensions/__tests__/MentionSuggestion.test.ts": {
+      "count": 5,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/mention/extensions/__tests__/MentionTag.test.ts": {
+      "count": 7,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/navigation-menu-item/display/hooks/__tests__/useReadableNavigationMenuItems.test.ts": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/object-metadata/hooks/__tests__/useFieldMetadataItem.test.tsx": {
+      "count": 5,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/object-record/object-options-dropdown/hooks/__tests__/useExportProcessRecordsForCSV.test.ts": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/object-record/record-calendar/components/__tests__/RecordCalendar.test.tsx": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/object-record/record-calendar/hooks/__tests__/useRecordCalendarQueryDateRangeFilter.test.tsx": {
+      "count": 4,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/object-record/record-group/hooks/__tests__/useRecordGroupVisibility.test.tsx": {
+      "count": 7,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/object-record/record-list/components/__tests__/RecordListUpsertRecordsInStoreEffect.test.tsx": {
+      "count": 1,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/object-record/record-sharing/components/__tests__/RecordSharingDropdownContent.test.tsx": {
+      "count": 20,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/object-record/utils/__tests__/getAvailableFieldsIdsForAggregationFromObjectFields.test.ts": {
+      "count": 4,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/onboarding/states/__tests__/companyEnrichmentState.test.ts": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/page-layout/components/__tests__/PageLayoutContent.test.tsx": {
+      "count": 32,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/page-layout/components/__tests__/PageLayoutLeftPanel.test.tsx": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/page-layout/components/__tests__/PageLayoutSingleTabRenderer.test.tsx": {
+      "count": 1,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/page-layout/components/__tests__/PageLayoutTabSettingsNavigation.test.tsx": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/page-layout/components/__tests__/PageLayoutTabsRenderer.test.tsx": {
+      "count": 8,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/page-layout/components/__tests__/PageLayoutVerticalList.test.tsx": {
+      "count": 18,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/page-layout/hooks/__tests__/usePageLayoutRenderableTabs.test.tsx": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/page-layout/widgets/call-recording/hooks/__tests__/useCallRecordingForWidget.test.tsx": {
+      "count": 6,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/page-layout/widgets/call-recording/hooks/__tests__/useCallRecordingWidgetUnavailableReason.test.tsx": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/page-layout/widgets/record-table/hooks/__tests__/useInitializeRecordTableWidgetViewDrafts.test.tsx": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/settings/admin-panel/utils/__tests__/parseAdminAskQuestionsResult.test.ts": {
+      "count": 15,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/settings/ai/utils/__tests__/getAiModelModeDescription.test.ts": {
+      "count": 12,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/settings/components/__tests__/SettingsProtectedRouteWrapper.test.tsx": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/settings/security/components/__tests__/SettingsSecurityIframeOrigins.test.tsx": {
+      "count": 7,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/settings/security/hooks/__tests__/useCreateSsoIdentityProvider.test.tsx": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/settings/security/hooks/__tests__/useDeleteSsoIdentityProvider.test.tsx": {
+      "count": 1,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/settings/security/hooks/__tests__/useEditSsoIdentityProvider.test.tsx": {
+      "count": 1,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/side-panel/components/__tests__/SidePanelAskAiHandoffEffect.test.tsx": {
+      "count": 8,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/side-panel/components/__tests__/SidePanelForDesktop.test.tsx": {
+      "count": 6,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/side-panel/components/__tests__/SidePanelTopBar.test.tsx": {
+      "count": 12,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/side-panel/components/hooks/__tests__/usePageLayoutHeaderInfo.test.tsx": {
+      "count": 7,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/side-panel/hooks/__tests__/useOpenAskAiPageInSidePanel.test.tsx": {
+      "count": 4,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/side-panel/hooks/__tests__/useSearchableObjectNameSingulars.test.tsx": {
+      "count": 4,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/side-panel/pages/page-layout/components/__tests__/SidePanelPageLayoutRecordPageWidgetTypeSelect.test.tsx": {
+      "count": 1,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/side-panel/pages/page-layout/components/dashboard/__tests__/SidePanelDashboardRecordTableSettings.test.tsx": {
+      "count": 1,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/side-panel/pages/page-layout/utils/__tests__/getBarChartSettings.test.ts": {
+      "count": 8,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/side-panel/pages/record-page/hooks/__tests__/useNavigateToRecordPageFromSidePanel.test.tsx": {
+      "count": 7,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/side-panel/routing/components/__tests__/SidePanelRouteNavigatorProvider.test.tsx": {
+      "count": 8,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/skill-suggestion/extensions/__tests__/SkillSuggestion.test.ts": {
+      "count": 8,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/skill-suggestion/extensions/__tests__/SkillTag.test.ts": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/sse-db-event/components/__tests__/SSEClientEffect.test.tsx": {
+      "count": 1,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ui/layout/page/components/__tests__/MainAppLayoutWithSidePanel.test.tsx": {
+      "count": 1,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ui/suggestion/components/__tests__/createSuggestionRenderLifecycle.test.ts": {
+      "count": 10,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ui/theme/hooks/__tests__/useColorScheme.test.tsx": {
+      "count": 2,
+      "baselineSuiteStatus": "passed"
+    },
+    "packages/twenty-front/src/modules/ui/utilities/drag-and-drop/components/__tests__/DragDropItemSortableCell.test.tsx": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ui/utilities/drag-and-drop/sensors/__tests__/PointerSensorWithSourceGuard.test.ts": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ui/utilities/drag-and-drop/utils/__tests__/getDragActivationConstraints.test.ts": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ui/utilities/drag-and-drop/utils/__tests__/resolveDropFromPointer.test.ts": {
+      "count": 7,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/ui/utilities/drag-select/components/__tests__/DragSelect.test.tsx": {
+      "count": 5,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/workflow/hooks/__tests__/useCreateDraftFromWorkflowVersion.test.ts": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/workspace-invitation/hooks/__tests__/useCreateWorkspaceInvitation.test.tsx": {
+      "count": 2,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/workspace-invitation/hooks/__tests__/useDeleteWorkspaceInvitation.test.tsx": {
+      "count": 1,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/modules/workspace-invitation/hooks/__tests__/useResendWorkspaceInvitation.test.tsx": {
+      "count": 1,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/pages/convex-preview/__tests__/PreviewMessages.test.ts": {
+      "count": 1,
+      "baselineSuiteStatus": "absent"
+    },
+    "packages/twenty-front/src/pages/onboarding/__tests__/BookCall.test.tsx": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    },
+    "packages/twenty-front/src/pages/settings/ai/utils/__tests__/getSettingsAgentInitialFormValues.test.ts": {
+      "count": 3,
+      "baselineSuiteStatus": "failed"
+    }
+  },
+  "statusChanges": [
+    {
+      "test": "packages/twenty-front/src/modules/onboarding/hooks/__tests__/useInviteTeam.test.ts::useInviteTeam should not wait for an enrichment that will never run",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/auth/sign-in-up/hooks/__tests__/useWorkspaceSubdomainField.test.tsx::useWorkspaceSubdomainField auto-fills an available address as the workspace name is typed",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/auth/sign-in-up/hooks/__tests__/useHandleResetPassword.test.ts::useHandleResetPassword should show error message if email is invalid",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/onboarding/components/__tests__/BookCallOnboardingStepActions.test.tsx::BookCallOnboardingStepActions should complete the step when a booking succeeds",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/error-handler/components/__tests__/AppErrorBoundary.test.tsx::AppErrorBoundary should capture with Sentry then reload on a stale chunk error when no reload happened recently",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/error-handler/components/__tests__/AppErrorBoundary.test.tsx::AppErrorBoundary should still reload after the flush timeout when the Sentry flush hangs",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/error-handler/components/__tests__/AppErrorBoundary.test.tsx::AppErrorBoundary should not reload on a stale chunk error within the reload cooldown",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/error-handler/components/__tests__/AppErrorBoundary.test.tsx::AppErrorBoundary should not reload on a stale chunk error when the reload timestamp cannot be stored",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/error-handler/components/__tests__/AppErrorBoundary.test.tsx::AppErrorBoundary should not reload on other errors and still capture them",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/apollo/utils/__tests__/encodeCursor.test.ts::encodeCursor should only use encodings the browser Buffer polyfill implements",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/activities/timeline-activities/rows/components/__tests__/EventRowDynamicComponent.test.tsx::EventRowDynamicComponent mounts the front component for the main object only after the row is expanded",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/page-layout/widgets/front-component/components/__tests__/FrontComponentWidgetRenderer.test.tsx::FrontComponentWidgetRenderer hands the component the record page record and its object",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/page-layout/widgets/front-component/components/__tests__/FrontComponentWidgetRenderer.test.tsx::FrontComponentWidgetRenderer hands the component no object on a dashboard",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/side-panel/pages/front-component/components/__tests__/SidePanelFrontComponentPage.test.tsx::SidePanelFrontComponentPage hands the component the record and its object",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/side-panel/pages/front-component/components/__tests__/SidePanelFrontComponentPage.test.tsx::SidePanelFrontComponentPage hands the component the object when no single record is selected",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/side-panel/pages/front-component/components/__tests__/SidePanelFrontComponentPage.test.tsx::SidePanelFrontComponentPage hands the component no object without a record context",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/command-menu-item/engine-command/components/__tests__/HeadlessFrontComponentRendererEngineCommand.test.tsx::HeadlessFrontComponentRendererEngineCommand hands the component every selected record and their object",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/command-menu-item/engine-command/components/__tests__/HeadlessFrontComponentRendererEngineCommand.test.tsx::HeadlessFrontComponentRendererEngineCommand hands the component no object when the command has none",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/object-metadata/hooks/__tests__/useCreateOneObjectMetadataItem.test.tsx::useCreateOneObjectMetadataItem should work as expected",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/error-handler/components/__tests__/PromiseRejectionEffect.test.tsx::PromiseRejectionEffect should not toast a stale chunk error",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/error-handler/components/__tests__/PromiseRejectionEffect.test.tsx::PromiseRejectionEffect should still toast an unrelated error",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/error-handler/components/__tests__/PromiseRejectionEffect.test.tsx::PromiseRejectionEffect should not toast an abort error",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/error-handler/components/__tests__/PromiseRejectionEffect.test.tsx::PromiseRejectionEffect should toast a generic message when the reason is not an Error",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/ui/field/display/utils/__tests__/getDateFnsLocale.test.ts::getDateFnsLocale should load the default en-US locale",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/ui/field/display/utils/__tests__/getDateFnsLocale.test.ts::getDateFnsLocale should load a non-default locale (fr-FR)",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/ui/field/display/utils/__tests__/getDateFnsLocale.test.ts::getDateFnsLocale should load hy-AM from date-fns",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/ui/field/display/utils/__tests__/getDateFnsLocale.test.ts::getDateFnsLocale should load sr-Latn from date-fns",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/ui/field/display/utils/__tests__/getDateFnsLocale.test.ts::getDateFnsLocale should load uz-UZ from date-fns",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/ui/field/display/utils/__tests__/getDateFnsLocale.test.ts::getDateFnsLocale should fall back to en-US for an unknown locale",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/ui/field/display/utils/__tests__/getDateFnsLocale.test.ts::getDateFnsLocale should fall back to en-US for nullish input",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/onboarding/states/__tests__/companyEnrichmentState.test.ts::companyEnrichmentState localStorage hydration hydrates a stored enrichment with a domain",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/onboarding/states/__tests__/companyEnrichmentState.test.ts::companyEnrichmentState localStorage hydration falls back to null for the invalid payload {}",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/onboarding/states/__tests__/companyEnrichmentState.test.ts::companyEnrichmentState localStorage hydration falls back to null for the invalid payload 42",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/modules/onboarding/states/__tests__/companyEnrichmentState.test.ts::companyEnrichmentState localStorage hydration falls back to null for the invalid payload \"acme.com\"",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/utils/i18n/__tests__/dynamicActivate.test.ts::dynamicActivate lays the document out right to left for a right-to-left locale",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/utils/i18n/__tests__/dynamicActivate.test.ts::dynamicActivate lays it back out left to right when the locale changes",
+      "from": "failed",
+      "to": "passed"
+    },
+    {
+      "test": "packages/twenty-front/src/utils/i18n/__tests__/dynamicActivate.test.ts::dynamicActivate falls back to the source locale for an unknown one",
+      "from": "failed",
+      "to": "passed"
+    }
+  ],
+  "duplicateIdentities": {
+    "baseline": [
+      "packages/twenty-front/src/hooks/__tests__/usePageChangeEffectNavigateLocation.test.ts::usePageChangeEffectNavigateLocation with location /verify-email and onboardingStatus undefined and isWorkspaceSuspended false should return undefined`",
+      "packages/twenty-front/src/hooks/__tests__/usePageChangeEffectNavigateLocation.test.ts::usePageChangeEffectNavigateLocation with location /objects/:objectNamePlural and onboardingStatus COMPLETED and isWorkspaceSuspended false should return undefined`",
+      "packages/twenty-front/src/hooks/__tests__/usePageChangeEffectNavigateLocation.test.ts::usePageChangeEffectNavigateLocation with location /objects/:objectNamePlural and onboardingStatus COMPLETED and isWorkspaceSuspended false should return undefined`",
+      "packages/twenty-front/src/hooks/__tests__/usePageChangeEffectNavigateLocation.test.ts::usePageChangeEffectNavigateLocation with location /page/:pageLayoutId and onboardingStatus COMPLETED and isWorkspaceSuspended false should return undefined`",
+      "packages/twenty-front/src/hooks/__tests__/usePageChangeEffectNavigateLocation.test.ts::usePageChangeEffectNavigateLocation with location /page/:pageLayoutId and onboardingStatus COMPLETED and isWorkspaceSuspended false should return /not-found`",
+      "packages/twenty-front/src/hooks/__tests__/usePageChangeEffectNavigateLocation.test.ts::usePageChangeEffectNavigateLocation with location /page/:pageLayoutId and onboardingStatus COMPLETED and isWorkspaceSuspended false should return undefined`",
+      "packages/twenty-front/src/hooks/__tests__/usePageChangeEffectNavigateLocation.test.ts::usePageChangeEffectNavigateLocation with location /verify and onboardingStatus COMPLETED and isWorkspaceSuspended false should return /objects/companies`",
+      "packages/twenty-front/src/modules/object-record/record-index/export/hooks/__tests__/useRecordIndexExportRecords.test.ts::displayedExportProgress displays the export progress",
+      "packages/twenty-front/src/modules/object-record/record-index/export/hooks/__tests__/useRecordIndexExportRecords.test.ts::displayedExportProgress displays the export progress",
+      "packages/twenty-front/src/modules/object-record/record-index/export/hooks/__tests__/useRecordIndexExportRecords.test.ts::displayedExportProgress displays the export progress",
+      "packages/twenty-front/src/modules/object-record/record-index/export/hooks/__tests__/useRecordIndexExportRecords.test.ts::displayedExportProgress displays the export progress",
+      "packages/twenty-front/src/modules/object-record/record-index/export/hooks/__tests__/useRecordIndexExportRecords.test.ts::displayedExportProgress displays the export progress",
+      "packages/twenty-front/src/utils/__tests__/date-utils.test.ts::beautifyDateDiff should return the correct date diff for large diff",
+      "packages/twenty-front/src/modules/object-record/record-drag/hooks/__tests__/useStartRecordDrag.test.tsx::useStartRecordDrag should set single drag state when dragged record is not in selection",
+      "packages/twenty-front/src/modules/object-record/record-drag/hooks/__tests__/useStartRecordDrag.test.tsx::useStartRecordDrag should set multi drag state when multiple records are selected",
+      "packages/twenty-front/src/modules/ui/feedback/toast/components/__tests__/AppToaster.test.tsx::AppToaster should display An error occurred. for a caught error",
+      "packages/twenty-front/src/modules/object-record/record-field/ui/form-types/components/__tests__/FormCurrencyFieldInput.test.tsx::displays stored micros 3210000 as amount 3.21",
+      "packages/twenty-front/src/modules/object-record/object-filter-dropdown/utils/__tests__/getOperandsForFilterType.test.ts::getOperandsForFilterType should return correct operands for FilterType.LINKS",
+      "packages/twenty-front/src/modules/object-record/object-filter-dropdown/utils/__tests__/getOperandsForFilterType.test.ts::getOperandsForFilterType should return correct operands for FilterType.LINKS",
+      "packages/twenty-front/src/modules/object-record/object-filter-dropdown/utils/__tests__/getOperandsForFilterType.test.ts::getOperandsForFilterType should return correct operands for FilterType.LINKS",
+      "packages/twenty-front/src/modules/object-record/object-filter-dropdown/utils/__tests__/getOperandsForFilterType.test.ts::getOperandsForFilterType should return correct operands for FilterType.ACTOR",
+      "packages/twenty-front/src/modules/object-record/object-filter-dropdown/utils/__tests__/getOperandsForFilterType.test.ts::getOperandsForFilterType should return correct operands for FilterType.ACTOR",
+      "packages/twenty-front/src/modules/object-record/object-filter-dropdown/utils/__tests__/getOperandsForFilterType.test.ts::getOperandsForFilterType should return correct operands for FilterType.CURRENCY",
+      "packages/twenty-front/src/modules/object-metadata/hooks/__tests__/useFilteredObjectMetadataItems.test.tsx::useFilteredObjectMetadataItems should findObjectMetadataItemByNamePlural",
+      "packages/twenty-front/src/modules/activities/utils/__tests__/getActivityPreview.test.ts::getActivityPreview should work for empty body",
+      "packages/twenty-front/src/modules/command-menu/utils/__tests__/getCommandMenuButtonLabel.test.ts::getCommandMenuButtonLabel shows Preparing… while loading even when the label is hidden",
+      "packages/twenty-front/src/modules/workflow/workflow-trigger/utils/__tests__/getTriggerIcon.test.ts::getTriggerIcon should return proper Icon for CRON"
+    ],
+    "candidate": [
+      "packages/twenty-front/src/hooks/__tests__/usePageChangeEffectNavigateLocation.test.ts::usePageChangeEffectNavigateLocation with location /objects/:objectNamePlural and onboardingStatus COMPLETED and isWorkspaceSuspended false should return undefined`",
+      "packages/twenty-front/src/hooks/__tests__/usePageChangeEffectNavigateLocation.test.ts::usePageChangeEffectNavigateLocation with location /objects/:objectNamePlural and onboardingStatus COMPLETED and isWorkspaceSuspended false should return undefined`",
+      "packages/twenty-front/src/hooks/__tests__/usePageChangeEffectNavigateLocation.test.ts::usePageChangeEffectNavigateLocation with location /page/:pageLayoutId and onboardingStatus COMPLETED and isWorkspaceSuspended false should return /not-found`",
+      "packages/twenty-front/src/hooks/__tests__/usePageChangeEffectNavigateLocation.test.ts::usePageChangeEffectNavigateLocation with location /page/:pageLayoutId and onboardingStatus COMPLETED and isWorkspaceSuspended false should return undefined`",
+      "packages/twenty-front/src/hooks/__tests__/usePageChangeEffectNavigateLocation.test.ts::usePageChangeEffectNavigateLocation with location /page/:pageLayoutId and onboardingStatus COMPLETED and isWorkspaceSuspended false should return undefined`",
+      "packages/twenty-front/src/hooks/__tests__/usePageChangeEffectNavigateLocation.test.ts::usePageChangeEffectNavigateLocation with location /verify and onboardingStatus COMPLETED and isWorkspaceSuspended false should return /objects/companies`",
+      "packages/twenty-front/src/hooks/__tests__/usePageChangeEffectNavigateLocation.test.ts::usePageChangeEffectNavigateLocation with location /verify-email and onboardingStatus undefined and isWorkspaceSuspended false should return undefined`",
+      "packages/twenty-front/src/modules/activities/utils/__tests__/getActivityPreview.test.ts::getActivityPreview should work for empty body",
+      "packages/twenty-front/src/modules/command-menu/utils/__tests__/getCommandMenuButtonLabel.test.ts::getCommandMenuButtonLabel shows Preparing… while loading even when the label is hidden",
+      "packages/twenty-front/src/modules/object-metadata/hooks/__tests__/useFilteredObjectMetadataItems.test.tsx::useFilteredObjectMetadataItems should findObjectMetadataItemByNamePlural",
+      "packages/twenty-front/src/modules/object-record/object-filter-dropdown/utils/__tests__/getOperandsForFilterType.test.ts::getOperandsForFilterType should return correct operands for FilterType.ACTOR",
+      "packages/twenty-front/src/modules/object-record/object-filter-dropdown/utils/__tests__/getOperandsForFilterType.test.ts::getOperandsForFilterType should return correct operands for FilterType.ACTOR",
+      "packages/twenty-front/src/modules/object-record/object-filter-dropdown/utils/__tests__/getOperandsForFilterType.test.ts::getOperandsForFilterType should return correct operands for FilterType.CURRENCY",
+      "packages/twenty-front/src/modules/object-record/object-filter-dropdown/utils/__tests__/getOperandsForFilterType.test.ts::getOperandsForFilterType should return correct operands for FilterType.LINKS",
+      "packages/twenty-front/src/modules/object-record/object-filter-dropdown/utils/__tests__/getOperandsForFilterType.test.ts::getOperandsForFilterType should return correct operands for FilterType.LINKS",
+      "packages/twenty-front/src/modules/object-record/object-filter-dropdown/utils/__tests__/getOperandsForFilterType.test.ts::getOperandsForFilterType should return correct operands for FilterType.LINKS",
+      "packages/twenty-front/src/modules/object-record/record-drag/hooks/__tests__/useStartRecordDrag.test.tsx::useStartRecordDrag should set multi drag state when multiple records are selected",
+      "packages/twenty-front/src/modules/object-record/record-drag/hooks/__tests__/useStartRecordDrag.test.tsx::useStartRecordDrag should set single drag state when dragged record is not in selection",
+      "packages/twenty-front/src/modules/object-record/record-field/ui/form-types/components/__tests__/FormCurrencyFieldInput.test.tsx::displays stored micros 3210000 as amount 3.21",
+      "packages/twenty-front/src/modules/object-record/record-index/export/hooks/__tests__/useRecordIndexExportRecords.test.ts::displayedExportProgress displays the export progress",
+      "packages/twenty-front/src/modules/object-record/record-index/export/hooks/__tests__/useRecordIndexExportRecords.test.ts::displayedExportProgress displays the export progress",
+      "packages/twenty-front/src/modules/object-record/record-index/export/hooks/__tests__/useRecordIndexExportRecords.test.ts::displayedExportProgress displays the export progress",
+      "packages/twenty-front/src/modules/object-record/record-index/export/hooks/__tests__/useRecordIndexExportRecords.test.ts::displayedExportProgress displays the export progress",
+      "packages/twenty-front/src/modules/object-record/record-index/export/hooks/__tests__/useRecordIndexExportRecords.test.ts::displayedExportProgress displays the export progress",
+      "packages/twenty-front/src/modules/ui/feedback/toast/components/__tests__/AppToaster.test.tsx::AppToaster should display An error occurred. for a caught error",
+      "packages/twenty-front/src/modules/workflow/workflow-trigger/utils/__tests__/getTriggerIcon.test.ts::getTriggerIcon should return proper Icon for CRON",
+      "packages/twenty-front/src/utils/__tests__/date-utils.test.ts::beautifyDateDiff should return the correct date diff for large diff"
+    ]
+  },
+  "failingCandidateSuites": [
+    {
+      "file": "packages/twenty-front/src/modules/object-metadata/validation-schemas/__tests__/objectMetadataItemSchema.test.ts",
+      "baselineSuiteStatus": "failed",
+      "failedTests": [
+        {
+          "name": "objectMetadataItemSchema validates a valid object metadata item",
+          "failedInBaseline": true
+        }
+      ]
+    },
+    {
+      "file": "packages/twenty-front/src/modules/settings/developers/hooks/__tests__/useWebhookForm.test.tsx",
+      "baselineSuiteStatus": "failed",
+      "failedTests": [
+        {
+          "name": "useWebhookForm Create Mode should clean and format operations correctly",
+          "failedInBaseline": true
+        },
+        {
+          "name": "useWebhookForm Create Mode should handle webhook creation successfully",
+          "failedInBaseline": true
+        },
+        {
+          "name": "useWebhookForm Edit Mode should handle webhook update successfully",
+          "failedInBaseline": true
+        }
+      ]
+    },
+    {
+      "file": "packages/twenty-front/src/pages/object-record/__tests__/RecordIndexPage.surface.test.tsx",
+      "baselineSuiteStatus": "failed",
+      "failedTests": [
+        {
+          "name": "RecordIndexPage workspace surface composition hosts the same specialized workflow index on a secondary surface",
+          "failedInBaseline": true
+        }
+      ]
+    }
+  ]
+}
