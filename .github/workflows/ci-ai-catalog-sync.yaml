@@ -79,7 +79,7 @@ jobs:
 
       - name: Mint twenty-infra dispatch token
         id: app-token
-        if: steps.changes.outputs.changed == 'true'
+        if: github.repository == 'twentyhq/twenty' && (steps.changes.outputs.changed == 'true')
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
           client-id: ${{ vars.TWENTY_WORKFLOW_DISPATCHER_CLIENT_ID }}
@@ -89,7 +89,7 @@ jobs:
           permission-actions: write
 
       - name: Trigger automerge
-        if: steps.changes.outputs.changed == 'true'
+        if: github.repository == 'twentyhq/twenty' && (steps.changes.outputs.changed == 'true')
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
