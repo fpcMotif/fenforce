@@ -36,7 +36,7 @@ describe('companyEnrichmentState localStorage hydration', () => {
       fetchedAt: '2026-07-21T10:00:00.000Z',
       enrichment: { domain: 'acme.com' },
     },
-  ])('falls back to null for the invalid payload %p', async (payload) => {
+  ])('falls back to null for the invalid payload %j', async (payload) => {
     localStorage.setItem('companyEnrichmentState', JSON.stringify(payload));
 
     await expect(loadCompanyEnrichmentState()).resolves.toBeNull();

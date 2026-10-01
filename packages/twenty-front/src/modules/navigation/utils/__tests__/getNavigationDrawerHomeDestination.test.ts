@@ -31,7 +31,7 @@ describe('getNavigationDrawerHomeDestination', () => {
   });
 
   it.each([null, undefined, ''])(
-    'falls back to the default home page when the memorized url is %p',
+    'falls back to the default home page when the memorized url is %j',
     (memorizedUrl) => {
       expect(
         getNavigationDrawerHomeDestination({

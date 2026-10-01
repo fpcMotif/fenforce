@@ -6,7 +6,7 @@ describe('getDictationLanguage', () => {
   });
 
   it.each([undefined, null, ''])(
-    'falls back to the source locale for %p',
+    'falls back to the source locale for %j',
     (locale) => {
       expect(getDictationLanguage(locale)).toBe('en');
     },
