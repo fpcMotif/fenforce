@@ -118,7 +118,7 @@ jobs:
           fi
 
   claude-cross-repo:
-    if: github.event_name == 'repository_dispatch'
+    if: github.repository == 'twentyhq/twenty' && github.event_name == 'repository_dispatch'
     concurrency:
       group: claude-cross-repo-${{ github.event.client_payload.repo_full_name }}-${{ github.event.client_payload.issue_number }}
       cancel-in-progress: false

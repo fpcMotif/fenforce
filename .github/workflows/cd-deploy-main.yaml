@@ -16,6 +16,7 @@ jobs:
 
   deploy-main:
     needs: website-changed-files
+    if: github.repository == 'twentyhq/twenty'
     timeout-minutes: 3
     runs-on: ubuntu-latest
     steps:
