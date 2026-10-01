@@ -457,6 +457,7 @@
         "@vitest/coverage-v8": "^4.1.0",
         "esbuild": "^0.28.1",
         "oxlint": "^1.51.0",
+        "postcss": "^8.5.28",
         "twenty-shared": "workspace:*",
         "vitest": "^4.1.0",
       },
