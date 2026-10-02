@@ -54,20 +54,15 @@
         "lingui.config.ts",
         "lingui.convex.config.ts",
         "nyc.config.cjs",
-        "setupVitest.ts",
-        "vite.convex.config.ts",
-        "vite.unit.config.ts"
+        "vite.convex.config.ts"
       ],
+      "vitest": ["vitest.config.ts", "vite.unit.config.ts"],
       "graphql-codegen": [
         "codegen.cjs",
         "codegen-admin.cjs",
         "codegen-metadata.cjs"
       ],
-      "ignore": [
-        "src/locales/generated/**",
-        ".eloqnt/config.ts",
-        "src/modules/page-layout/widgets/record-table/utils/__tests__/sortFieldsByRelevanceForRecordTableWidget.ts"
-      ],
+      "ignore": ["src/locales/generated/**", ".eloqnt/config.ts"],
       "ignoreDependencies": [
         "@babel/plugin-transform-export-namespace-from",
         "@babel/preset-react",
