@@ -52,14 +52,15 @@
     },
     "packages/twenty-front": {
       "entry": [
-        "src/index.tsx",
         "src/**/graphql/**/*.{ts,tsx}",
         "src/modules/geo-map/graphql-query/*.{ts,tsx}",
-        "vitest.config.ts",
+        "src/convex.tsx",
+        "vite.convex.config.ts",
         "lingui.config.ts",
-        "nyc.config.cjs",
-        "jest-failures-only-reporter.cjs"
+        "lingui.convex.config.ts",
+        "nyc.config.cjs"
       ],
+      "vitest": ["vitest.config.ts", "vite.unit.config.ts"],
       "graphql-codegen": [
         "codegen.cjs",
         "codegen-admin.cjs",
@@ -67,10 +68,10 @@
       ],
       "ignore": ["src/locales/generated/**", ".eloqnt/config.ts"],
       "ignoreDependencies": [
+        "@babel/plugin-transform-export-namespace-from",
+        "@babel/preset-react",
         "@babel/preset-typescript",
-        "buffer",
-        "esbuild",
-        "playwright",
+        "react-router",
         "rollup-plugin-node-polyfills"
       ]
     },
