@@ -33,7 +33,9 @@ export default defineConfig(({ command }) => {
 
   const checkersConfig: Checkers = {
     typescript: {
-      tsconfigPath: tsConfigPath,
+      tsconfigPath: isBuildCommand
+        ? tsConfigPath
+        : path.resolve(__dirname, './tsconfig.checker.json'),
     },
   };
 

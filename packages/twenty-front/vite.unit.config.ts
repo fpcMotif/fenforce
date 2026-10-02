@@ -84,6 +84,8 @@ const config: ViteUserConfig = {
     setupFiles: ['./setupVitest.ts'],
     maxWorkers: 3,
     testTimeout: 30000,
+    // Keep $title-generated names whole so test and snapshot identities match the Jest baseline.
+    taskTitleValueFormatTruncate: Number.MAX_SAFE_INTEGER,
     reporters: ['default'],
     coverage: {
       provider: 'istanbul',

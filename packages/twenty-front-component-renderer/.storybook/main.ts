@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-vite';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -6,6 +7,11 @@ const dirname =
   typeof __dirname !== 'undefined'
     ? __dirname
     : path.dirname(fileURLToPath(import.meta.url));
+
+const require = createRequire(import.meta.url);
+
+const resolvePackageDirectory = (packageName: string) =>
+  path.dirname(require.resolve(`${packageName}/package.json`));
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -38,18 +44,17 @@ const config: StorybookConfig = {
         alias: {
           ...viteConfig.resolve?.alias,
           '@': path.resolve(dirname, '../src'),
-          // twenty-sdk has React 19 locally (for Ink 6 CLI), but
-          // twenty-ui's dist uses React 18 internals. Force React 18
-          // from the workspace root for storybook builds.
-          react: path.resolve(dirname, '../../../node_modules/react'),
-          'react-dom': path.resolve(dirname, '../../../node_modules/react-dom'),
-          'react/jsx-runtime': path.resolve(
-            dirname,
-            '../../../node_modules/react/jsx-runtime',
+          // Pin every importer, twenty-ui's dist included, to this package's
+          // React so the story build bundles a single copy.
+          react: resolvePackageDirectory('react'),
+          'react-dom': resolvePackageDirectory('react-dom'),
+          'react/jsx-runtime': path.join(
+            resolvePackageDirectory('react'),
+            'jsx-runtime',
           ),
-          'react/jsx-dev-runtime': path.resolve(
-            dirname,
-            '../../../node_modules/react/jsx-dev-runtime',
+          'react/jsx-dev-runtime': path.join(
+            resolvePackageDirectory('react'),
+            'jsx-dev-runtime',
           ),
         },
       },

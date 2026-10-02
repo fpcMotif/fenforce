@@ -205,7 +205,11 @@ describe('Record sharing', () => {
     await user.type(input, 'sales');
     await user.keyboard('{ArrowDown}');
     await user.keyboard('{ArrowDown}');
-    expect(screen.getByRole('button', { name: 'Sales Role' })).toHaveFocus();
+    // jsdom skips the stylesheet that makes the label and description blocks,
+    // so the computed name loses the space a browser would insert.
+    expect(
+      screen.getByRole('button', { name: /^Sales\s*Role$/ }),
+    ).toHaveFocus();
     await user.keyboard('{Enter}');
     expect(setShare).toHaveBeenCalledWith({
       principal: { roleId: 'sales-role' },
@@ -310,7 +314,7 @@ describe('Record sharing', () => {
     ],
     ['Sales', { roleId: 'sales-role' }, 'Full access', 'FULL'],
   ])(
-    'can invite %s as %s',
+    'can invite %s as %s with %s',
     async (label, principal, accessLabel, accessLevel) => {
       const user = userEvent.setup();
       renderSharing();

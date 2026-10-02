@@ -28,9 +28,6 @@
         "scripts/**/*.ts",
         "**/*.spec.ts",
         "**/*.integration-spec.ts",
-        "test/integration/graphql/codegen/index.ts",
-        "test/integration/utils/setup-test.ts",
-        "test/integration/utils/teardown-test.ts",
         "src/database/typeorm/core/legacy-typeorm-migrations-do-not-add/**/*.ts"
       ],
       "project": ["src/**/*.ts", "test/**/*.ts", "scripts/**/*.ts"],
@@ -41,7 +38,6 @@
       ],
       "ignore": [
         "src/**/constants/seed-project/**",
-        "src/database/typeorm/core/migrations/**",
         "**/*.workspace-entity.ts",
         "src/engine/core-modules/logic-function/logic-function-resource/constants/**",
         "src/database/commands/upgrade-version-command/**",
@@ -52,25 +48,31 @@
     },
     "packages/twenty-front": {
       "entry": [
-        "src/index.tsx",
+        "src/convex.tsx",
         "src/**/graphql/**/*.{ts,tsx}",
         "src/modules/geo-map/graphql-query/*.{ts,tsx}",
-        "vitest.config.ts",
         "lingui.config.ts",
+        "lingui.convex.config.ts",
         "nyc.config.cjs",
-        "jest-failures-only-reporter.cjs"
+        "setupVitest.ts",
+        "vite.convex.config.ts",
+        "vite.unit.config.ts"
       ],
       "graphql-codegen": [
         "codegen.cjs",
         "codegen-admin.cjs",
         "codegen-metadata.cjs"
       ],
-      "ignore": ["src/locales/generated/**", ".eloqnt/config.ts"],
+      "ignore": [
+        "src/locales/generated/**",
+        ".eloqnt/config.ts",
+        "src/modules/page-layout/widgets/record-table/utils/__tests__/sortFieldsByRelevanceForRecordTableWidget.ts"
+      ],
       "ignoreDependencies": [
+        "@babel/plugin-transform-export-namespace-from",
+        "@babel/preset-react",
         "@babel/preset-typescript",
-        "buffer",
-        "esbuild",
-        "playwright",
+        "react-router",
         "rollup-plugin-node-polyfills"
       ]
     },
