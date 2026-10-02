@@ -230,7 +230,6 @@
     "@smithy/util-stream": "4.5.16",
     "@swc/cli": "^0.8.1",
     "@swc/core": "1.15.11",
-    "@swc/jest": "^0.2.39",
     "babel-jest": "29.7.0",
     "babel-plugin-transform-typescript-metadata": "0.3.2",
     "@types/addressparser": "^1.0.3",
