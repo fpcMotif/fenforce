@@ -3,8 +3,8 @@
   "compilerOptions": {
     "lib": ["ES2020", "DOM", "ES2021.WeakRef"],
     "allowJs": false,
-    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
+    "noUncheckedSideEffectImports": false,
     "jsx": "react-jsx",
     "moduleResolution": "bundler",
     "strictNullChecks": true,
