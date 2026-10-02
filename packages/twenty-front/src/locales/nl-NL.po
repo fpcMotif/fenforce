@@ -268,6 +268,12 @@ msgstr "{0} lay-out"
 msgid "{0} layout edition"
 msgstr "{0}-indeling bewerken"
 
+#. js-lingui-id: zYukxS
+#. placeholder {0}: companies.results.length
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "{0} loaded"
+msgstr ""
+
 #. js-lingui-id: uLS8YU
 #. placeholder {0}: provider.displayName
 #: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
@@ -1144,6 +1150,13 @@ msgstr "Account succesvol toegevoegd. Synchronisatie gestart."
 #: src/modules/settings/profile/components/DeleteAccount.tsx
 msgid "Account Deletion"
 msgstr "Accountverwijdering"
+
+#. js-lingui-id: pd81Qb
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompanyForm.tsx
+msgid "Account Owner"
+msgstr ""
 
 #. js-lingui-id: bPwFdf
 #: src/modules/settings/accounts/components/SettingsAccountsEditImapSmtpCaldavConnection.tsx
@@ -2266,6 +2279,11 @@ msgstr "Alle applicatieregistraties op het hele platform, inclusief verweesde Ma
 msgid "All applications"
 msgstr "Alle applicaties"
 
+#. js-lingui-id: 3CpU6J
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "All companies"
+msgstr ""
+
 #. js-lingui-id: 1kLn6M
 #: src/modules/activities/calendar/components/CalendarEventComposerFields.tsx
 #: src/modules/activities/calendar/components/CalendarEventComposerFields.tsx
@@ -2513,6 +2531,11 @@ msgstr "Toegestane redirect-URI's voor OAuth-flows"
 #: src/modules/side-panel/pages/page-layout/utils/getSortLabelSuffixForFieldType.ts
 msgid "alphabetical"
 msgstr "alfabetisch"
+
+#. js-lingui-id: itDEco
+#: src/pages/convex-preview/PreviewSignIn.tsx
+msgid "Already have an account? Sign in"
+msgstr ""
 
 #. js-lingui-id: evXcqr
 #: src/modules/navigation-menu-item/edit/components/NavigationMenuItemSelectableItem.tsx
@@ -3453,6 +3476,11 @@ msgstr "Terug"
 msgid "Back to {text}"
 msgstr "Terug naar {text}"
 
+#. js-lingui-id: TGG0Yk
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Back to companies"
+msgstr ""
+
 #. js-lingui-id: Dht9W3
 #: src/pages/not-found/NotFound.tsx
 msgid "Back to content"
@@ -4074,6 +4102,7 @@ msgstr "Kan je niet scannen? Kopieer de"
 #: src/modules/ui/feedback/toast/components/__tests__/AppToaster.test.tsx
 #: src/modules/ui/feedback/toast/utils/getLocalizedToastProps.ts
 #: src/modules/ui/layout/dialog/components/ConfirmationDialog.tsx
+#: src/pages/convex-preview/CompanyForm.tsx
 #: src/pages/settings/admin-panel/SettingsAdminApplicationRegistrationDangerZone.tsx
 msgid "Cancel"
 msgstr "Annuleren"
@@ -4377,6 +4406,12 @@ msgstr "Controleer de recente uitvoeringen van deze workflow en vertel me of er 
 #: src/modules/settings/emailing-domains/components/SettingsEmailingDomainVerifyButton.tsx
 msgid "Check verification"
 msgstr "Controleer verificatie"
+
+#. js-lingui-id: mjuIQ9
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/PreviewError.tsx
+msgid "Check your connection and try again."
+msgstr ""
 
 #. js-lingui-id: AwAGI4
 #: src/modules/auth/sign-in-up/components/EmailVerificationSent.tsx
@@ -4971,8 +5006,24 @@ msgstr "Compacte weergave"
 #. js-lingui-id: s2QZS6
 #: src/modules/onboarding/components/import-contacts/OnboardingImportPreviewCompanies.tsx
 #: src/modules/sign-in-background-mock/components/BackgroundMockPage.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
 msgid "Companies"
 msgstr "Bedrijven"
+
+#. js-lingui-id: D6nVvu
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Company details"
+msgstr ""
+
+#. js-lingui-id: PJ5A55
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Company not found"
+msgstr ""
 
 #. js-lingui-id: awM9hH
 #: src/modules/settings/billing/components/internal/SettingsBillingPlanComparisonTable.tsx
@@ -5305,12 +5356,22 @@ msgstr "Verbonden"
 msgid "Connected accounts"
 msgstr "Verbonden accounts"
 
+#. js-lingui-id: 04+PL3
+#: src/pages/convex-preview/ConvexCompaniesPreview.tsx
+msgid "Connecting to Fenforce…"
+msgstr ""
+
 #. js-lingui-id: exyUec
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
 #: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
 msgid "Connection"
 msgstr "Verbinding"
+
+#. js-lingui-id: T2pG5D
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Connection interrupted. Your changes will resume when you reconnect."
+msgstr ""
 
 #. js-lingui-id: XYeKcu
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
@@ -5918,6 +5979,11 @@ msgstr "{objectLabelSingular} maken"
 msgid "Create a {0} to automate your work."
 msgstr "Maak een {0} om je werk te automatiseren."
 
+#. js-lingui-id: KJ1DBU
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Create a company to start building your records."
+msgstr ""
+
 #. js-lingui-id: fQFALn
 #: src/modules/ai/components/suggested-prompts/default-suggested-prompts.ts
 msgid "Create a new contact and link them to a company. Details: "
@@ -5970,6 +6036,11 @@ msgstr "Maak een workflow en kom terug om de versies te bekijken"
 msgid "Create a workspace"
 msgstr "Werkruimte aanmaken"
 
+#. js-lingui-id: 1hMWR6
+#: src/pages/convex-preview/PreviewSignIn.tsx
+msgid "Create account"
+msgstr ""
+
 #. js-lingui-id: dpwEnu
 #: src/modules/activities/calendar/components/CalendarEventComposerFields.tsx
 msgid "Create an all-day event"
@@ -6005,6 +6076,11 @@ msgstr "Kalenderevenement maken"
 msgid "Create calendar events via connected accounts"
 msgstr "Kalenderevenementen maken via gekoppelde accounts"
 
+#. js-lingui-id: 8ya/62
+#: src/pages/convex-preview/CompanyForm.tsx
+msgid "Create company"
+msgstr ""
+
 #. js-lingui-id: 4+EmHM
 #: src/modules/object-record/object-options-dropdown/components/ObjectOptionsDropdownDefaultView.tsx
 msgid "Create custom view"
@@ -6029,6 +6105,12 @@ msgstr "Nieuwe weergave maken"
 #: src/modules/activities/hooks/useCreateActivityRelatedRecordAction.ts
 msgid "Create note"
 msgstr "Notitie aanmaken"
+
+#. js-lingui-id: bWkI16
+#: src/pages/convex-preview/__tests__/PreviewMessages.test.ts
+#: src/pages/convex-preview/PreviewSignIn.tsx
+msgid "Create preview account"
+msgstr ""
 
 #. js-lingui-id: gSyzEV
 #: src/pages/onboarding/CreateProfile.tsx
@@ -6091,6 +6173,7 @@ msgstr "Webhook aanmaken"
 
 #. js-lingui-id: FdtSNC
 #: src/modules/auth/sign-in-up/components/internal/SignInUpWorkspaceCreationForm.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
 msgid "Create workspace"
 msgstr "Werkruimte maken"
 
@@ -6103,6 +6186,7 @@ msgstr "Maak werkruimte"
 #. js-lingui-id: 9chYz/
 #: src/modules/auth/sign-in-up/components/internal/SignInUpWorkspaceCreationForm.tsx
 #: src/pages/auth/SignInUp.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
 msgid "Create your workspace"
 msgstr "Maak je werkruimte"
 
@@ -6133,6 +6217,12 @@ msgstr ""
 msgid "Created {objectLabel}"
 msgstr "{objectLabel} gemaakt"
 
+#. js-lingui-id: NCIYDF
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Created by"
+msgstr ""
+
 #. js-lingui-id: t3sqJR
 #. placeholder {0}: beautifyExactDateTime(signingKey.createdAt)
 #: src/modules/settings/admin-panel/signing-keys/components/SettingsAdminSigningKeysTable.tsx
@@ -6154,6 +6244,12 @@ msgstr "Uw <0>datamodel</0> maken..."
 #: src/modules/auth/sign-in-up/constants/WorkspaceActivationMessages.tsx
 msgid "Creating your <0>workspace</0>..."
 msgstr "Uw <0>werkruimte</0> maken..."
+
+#. js-lingui-id: wPvFAD
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Creation date"
+msgstr ""
 
 #. js-lingui-id: HAzhV7
 #: src/pages/settings/admin-panel/SettingsAdminAiProviderDetail.tsx
@@ -7436,6 +7532,7 @@ msgstr "Details per werkruimte"
 #. js-lingui-id: URmyfc
 #: src/modules/ai/components/RoutingDebugDisplay.tsx
 #: src/modules/settings/event-logs/utils/getColumnsForEventLogTable.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
 #: src/pages/settings/applications/tabs/SettingsApplicationCommandMenuItemSettingsTab.tsx
 #: src/pages/settings/applications/tabs/SettingsApplicationFrontComponentSettingsTab.tsx
@@ -7680,6 +7777,13 @@ msgstr "Domein is reeds in gebruik"
 #: src/modules/settings/emailing-domains/utils/getVerificationRecordGroupContent.ts
 msgid "Domain authentication"
 msgstr "Domeinauthenticatie"
+
+#. js-lingui-id: wMncXq
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompanyForm.tsx
+msgid "Domain Name"
+msgstr ""
 
 #. js-lingui-id: XoBD/+
 #: src/modules/settings/domains/components/SettingsDomainRecords.tsx
@@ -7994,6 +8098,13 @@ msgstr "Account bewerken"
 msgid "Edit actions"
 msgstr "Acties bewerken"
 
+#. js-lingui-id: EjxtPT
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Edit company"
+msgstr ""
+
 #. js-lingui-id: DMIYL8
 #: src/modules/settings/roles/role-permissions/permission-flags/hooks/useSettingsRolePermissionFlagConfig.ts
 msgid "Edit data structure and fields"
@@ -8172,6 +8283,8 @@ msgstr "anders als"
 #: src/modules/settings/workspace/components/SettingsWorkspaceEmailGroupSection.tsx
 #: src/modules/workflow/workflow-steps/workflow-actions/components/WorkflowEditActionEmailBase.tsx
 #: src/pages/auth/PasswordReset.tsx
+#: src/pages/convex-preview/__tests__/PreviewMessages.test.ts
+#: src/pages/convex-preview/PreviewSignIn.tsx
 #: src/pages/settings/admin-panel/SettingsAdminUserDetail.tsx
 #: src/pages/settings/admin-panel/SettingsAdminWorkspaceDetail.tsx
 #: src/pages/settings/members/tabs/SettingsWorkspaceMembersInviteTab.tsx
@@ -9850,6 +9963,11 @@ msgstr "Functies"
 msgid "Features active until"
 msgstr "Functies actief tot"
 
+#. js-lingui-id: 9NA8k+
+#: src/pages/convex-preview/PreviewSignIn.tsx
+msgid "Fenforce sign in"
+msgstr ""
+
 #. js-lingui-id: 2lOBKV
 #: src/modules/metadata-error-handler/hooks/useMetadataErrorHandler.ts
 msgid "field"
@@ -10897,6 +11015,11 @@ msgstr "Handle"
 #: src/modules/settings/admin-panel/chats/components/SettingsAdminChatsFilterDropdown.tsx
 msgid "Has error"
 msgstr "Bevat een fout"
+
+#. js-lingui-id: AH5jhT
+#: src/pages/convex-preview/PreviewSignIn.tsx
+msgid "Have an invitation code? Create an account"
+msgstr ""
 
 #. js-lingui-id: Gpb1xF
 #: src/pages/settings/legal/SettingsLegalDpaNew.tsx
@@ -11951,6 +12074,11 @@ msgstr "Ongeldige verificatiecode. Probeer het opnieuw."
 msgid "Invitation access"
 msgstr "Toegang via uitnodiging"
 
+#. js-lingui-id: RPXn8S
+#: src/pages/convex-preview/PreviewSignIn.tsx
+msgid "Invitation code"
+msgstr ""
+
 #. js-lingui-id: ZR1dJ4
 #: src/modules/activities/calendar/components/CalendarEventComposerFields.tsx
 #: src/modules/ui/navigation/navigation-drawer/components/MultiWorkspaceDropdown/internal/components/WorkspacesForSignUp.tsx
@@ -12960,8 +13088,19 @@ msgstr "Laadlimiet"
 
 #. js-lingui-id: yQ2kGp
 #: src/modules/object-record/record-table/record-table-section/components/RecordTableRecordGroupSectionLoadMore.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
 msgid "Load more"
 msgstr "Meer laden"
+
+#. js-lingui-id: 5rQyWL
+#: src/pages/convex-preview/CompanyForm.tsx
+msgid "Load more members"
+msgstr ""
+
+#. js-lingui-id: 7trMbF
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Load more workspaces"
+msgstr ""
 
 #. js-lingui-id: CZGQgK
 #: src/modules/ai/utils/tool-display/get-tool-display-message.ts
@@ -12992,6 +13131,16 @@ msgstr "Apps laden..."
 #: src/modules/settings/admin-panel/chats/components/SettingsAdminChatsContent.tsx
 msgid "Loading chats..."
 msgstr "Chats laden..."
+
+#. js-lingui-id: YFX9TE
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Loading companies…"
+msgstr ""
+
+#. js-lingui-id: S7vTH0
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Loading company…"
+msgstr ""
 
 #. js-lingui-id: w81Nov
 #: src/modules/ai/components/AiChatEditorSection.tsx
@@ -13048,6 +13197,11 @@ msgstr "Vaardigheden laden..."
 msgid "Loading thread"
 msgstr "Conversatie laden"
 
+#. js-lingui-id: 9lMgcj
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Loading your workspaces…"
+msgstr ""
+
 #. js-lingui-id: Z3FXyt
 #: src/modules/activities/timeline-activities/rows/calendar/components/EventCardCalendarEvent.tsx
 #: src/modules/activities/timeline-activities/rows/message/components/EventCardMessage.tsx
@@ -13063,6 +13217,8 @@ msgstr "Laden..."
 #: src/modules/ai/utils/getAiChatUsageLabel.ts
 #: src/modules/object-record/record-sharing/components/RecordSharingDropdownContent.tsx
 #: src/modules/settings/billing/components/SettingsBillingLimitSpenderSelect.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
 msgid "Loading…"
 msgstr "Laden…"
 
@@ -13290,6 +13446,11 @@ msgstr "Beheer beveiligingsbeleid"
 #: src/modules/settings/security/components/SettingsSecuritySettings.tsx
 msgid "Manage support access settings"
 msgstr "Beheer instellingen voor supporttoegang"
+
+#. js-lingui-id: Yq/KPH
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Manage the companies in your workspace."
+msgstr ""
 
 #. js-lingui-id: WJEtVC
 #: src/modules/settings/admin-panel/apps/components/SettingsAdminApps.tsx
@@ -14045,6 +14206,9 @@ msgstr "n.v.t."
 #: src/modules/settings/usage/components/UsageByUserTableSection.tsx
 #: src/modules/settings/workspace/components/NameField.tsx
 #: src/modules/workflow/workflow-steps/workflow-actions/classify-action/components/WorkflowEditActionClassify.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompanyForm.tsx
 #: src/pages/settings/admin-panel/SettingsAdminAiProviderDetail.tsx
 #: src/pages/settings/admin-panel/SettingsAdminUserDetail.tsx
 #: src/pages/settings/admin-panel/SettingsAdminWorkspaceDetail.tsx
@@ -14222,6 +14386,13 @@ msgstr "Nieuw kalenderevenement"
 #: src/modules/ai/components/NavigationDrawerAiChatThreadItem.tsx
 msgid "New chat"
 msgstr "Nieuw gesprek"
+
+#. js-lingui-id: GlBOUV
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "New company"
+msgstr ""
 
 #. js-lingui-id: TsXckK
 #: src/modules/sign-in-background-mock/components/BackgroundMockPage.tsx
@@ -14635,6 +14806,11 @@ msgstr "Geen chats gevonden"
 msgid "No comment"
 msgstr ""
 
+#. js-lingui-id: FLowru
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "No companies yet"
+msgstr ""
+
 #. js-lingui-id: qTxPPY
 #: src/modules/settings/roles/role-permissions/object-level-permissions/record-level-permissions/components/SettingsRolePermissionsObjectLevelRecordLevelPermissionMeValueSelect.tsx
 msgid "No compatible fields"
@@ -14956,6 +15132,11 @@ msgstr "Geen uitvoer"
 #: src/modules/workflow/workflow-steps/components/WorkflowRunStepOutputDetail.tsx
 msgid "No output available"
 msgstr "Geen uitvoer beschikbaar"
+
+#. js-lingui-id: ERBBcP
+#: src/pages/convex-preview/CompanyForm.tsx
+msgid "No owner"
+msgstr ""
 
 #. js-lingui-id: 20ONq7
 #: src/pages/settings/ai/components/SettingsToolParameterTable.tsx
@@ -15629,6 +15810,7 @@ msgstr "Objectniveau"
 #: src/modules/navigation-menu-item/edit/components/NavigationMenuItemAddDropdownContent.tsx
 #: src/modules/settings/roles/role-permissions/objects-permissions/components/SettingsRolePermissionsObjectsSection.tsx
 #: src/modules/workflow/workflow-steps/workflow-actions/ai-agent-action/components/WorkflowAiAgentPermissionsObjectsList.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
 #: src/pages/settings/applications/tabs/SettingsApplicationDetailContentTab.tsx
 #: src/pages/settings/data-model/new-field/SettingsObjectNewFieldConfigure.tsx
 #: src/pages/settings/data-model/new-field/SettingsObjectNewFieldSelect.tsx
@@ -16375,6 +16557,8 @@ msgstr "Partners"
 #: src/modules/auth/sign-in-up/components/internal/SignInUpPasswordField.tsx
 #: src/modules/settings/security/components/SettingsSecurityAuthBypassOptionsList.tsx
 #: src/modules/settings/security/components/SettingsSecurityAuthProvidersOptionsList.tsx
+#: src/pages/convex-preview/__tests__/PreviewMessages.test.ts
+#: src/pages/convex-preview/PreviewSignIn.tsx
 msgid "Password"
 msgstr "Wachtwoord"
 
@@ -16905,6 +17089,11 @@ msgstr "Voorkom dat dezelfde waarde aan verschillende records wordt toegewezen"
 #: src/pages/settings/legal/SettingsLegalDpaNew.tsx
 msgid "Preview"
 msgstr "Voorbeeld"
+
+#. js-lingui-id: DmYVlI
+#: src/pages/convex-preview/PreviewSignIn.tsx
+msgid "Preview access requires an invitation code."
+msgstr ""
 
 #. js-lingui-id: Fe5cbB
 #: src/modules/activities/files/components/UnavailableFilePreview.tsx
@@ -17661,6 +17850,7 @@ msgstr "Vrijgeven en overdragen naar deze server"
 #: src/modules/error-handler/components/internal/AppErrorDisplay.tsx
 #: src/modules/settings/domains/components/SettingPublicDomain.tsx
 #: src/modules/settings/domains/components/SettingsCustomDomain.tsx
+#: src/pages/convex-preview/PreviewError.tsx
 msgid "Reload"
 msgstr "Herladen"
 
@@ -17901,7 +18091,6 @@ msgstr "Naam wijzigen"
 
 #. js-lingui-id: 6PsaMr
 #: src/modules/ai/components/AiChatPageThreadHeader.tsx
-#: src/modules/ai/components/AiChatThreadListItem.tsx
 msgid "Rename chat"
 msgstr "Chat hernoemen"
 
@@ -18531,6 +18720,11 @@ msgstr "Bespaar 25% bij jaarlijkse facturatie"
 #: src/modules/views/components/UpdateViewButtonGroup.tsx
 msgid "Save as new view"
 msgstr "Opslaan als nieuwe weergave"
+
+#. js-lingui-id: y3aU20
+#: src/pages/convex-preview/CompanyForm.tsx
+msgid "Save changes"
+msgstr ""
 
 #. js-lingui-id: VenpPu
 #: src/modules/object-record/record-field/ui/meta-types/input/components/MultiItemFieldInput.tsx
@@ -19869,13 +20063,38 @@ msgstr "Zijbalkitems"
 
 #. js-lingui-id: 5lWFkC
 #: src/modules/auth/sign-in-up/components/internal/SignInUpWithCredentials.tsx
+#: src/pages/convex-preview/__tests__/PreviewMessages.test.ts
+#: src/pages/convex-preview/PreviewSignIn.tsx
+#: src/pages/convex-preview/PreviewSignIn.tsx
 msgid "Sign in"
 msgstr "Inloggen"
+
+#. js-lingui-id: pa0Bbi
+#: src/pages/convex-preview/__tests__/PreviewMessages.test.ts
+#: src/pages/convex-preview/PreviewError.tsx
+msgid "Sign in again"
+msgstr ""
+
+#. js-lingui-id: yWup0j
+#: src/pages/convex-preview/PreviewError.tsx
+msgid "Sign in again to continue."
+msgstr ""
 
 #. js-lingui-id: Vt3mQ2
 #: src/utils/title-utils.ts
 msgid "Sign in or Create an account"
 msgstr "Inloggen of een account aanmaken"
+
+#. js-lingui-id: ZalzZ1
+#: src/pages/convex-preview/PreviewSignIn.tsx
+msgid "Sign in to your workspace."
+msgstr ""
+
+#. js-lingui-id: fcWrnU
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+#: src/pages/convex-preview/PreviewError.tsx
+msgid "Sign out"
+msgstr ""
 
 #. js-lingui-id: e+RpCP
 #: src/modules/auth/sign-in-up/components/internal/SignInUpWithCredentials.tsx
@@ -22470,6 +22689,16 @@ msgstr "Oekraïens"
 msgid "ul"
 msgstr ""
 
+#. js-lingui-id: aPhFDn
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Unable to create a workspace. Try again."
+msgstr ""
+
+#. js-lingui-id: BppMCu
+#: src/pages/convex-preview/PreviewSignIn.tsx
+msgid "Unable to create an account. Check your invitation details and try again."
+msgstr ""
+
 #. js-lingui-id: N/XI5S
 #: src/pages/settings/members/SettingsWorkspaceMember.tsx
 msgid "Unable to delete member right now"
@@ -22480,15 +22709,35 @@ msgstr ""
 msgid "Unable to load application details. Please try again later."
 msgstr "Kan de applicatiedetails niet laden. Probeer het later opnieuw."
 
+#. js-lingui-id: AJo9RC
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Unable to load company"
+msgstr ""
+
 #. js-lingui-id: QtqGu9
 #: src/modules/settings/security/components/SettingsSecurityIframeOrigins.tsx
 msgid "Unable to load embedding settings."
 msgstr "Kan instellingen voor embeddings niet laden."
 
+#. js-lingui-id: iEi/yd
+#: src/pages/convex-preview/PreviewError.tsx
+msgid "Unable to load Fenforce"
+msgstr ""
+
 #. js-lingui-id: l+ALBd
 #: src/modules/client-config/components/ClientConfigProvider.tsx
 msgid "Unable to Reach Back-end"
 msgstr "Kan de back-end niet bereiken"
+
+#. js-lingui-id: GvQoeE
+#: src/pages/convex-preview/CompanyForm.tsx
+msgid "Unable to save this company. Check the details and try again."
+msgstr ""
+
+#. js-lingui-id: BrAzx8
+#: src/pages/convex-preview/PreviewSignIn.tsx
+msgid "Unable to sign in. Check your email and password, then try again."
+msgstr ""
 
 #. js-lingui-id: 2lF8Zj
 #: src/modules/settings/admin-panel/components/SettingsAdminChatAskQuestionsPart.tsx
@@ -22809,7 +23058,6 @@ msgid "Unsupported image format"
 msgstr "Niet-ondersteund afbeeldingsformaat"
 
 #. js-lingui-id: wja8aL
-#: src/modules/ai/components/AiChatThreadListItem.tsx
 #: src/modules/ai/components/ChatReferenceChip.tsx
 #: src/modules/ai/components/ChatReferenceChip.tsx
 #: src/modules/ai/components/internal/AgentChatFilePreview.tsx
@@ -24421,6 +24669,7 @@ msgstr "Workstrooms"
 #: src/modules/settings/roles/role-permissions/permission-flags/hooks/useSettingsRolePermissionFlagConfig.ts
 #: src/modules/settings/roles/role/components/SettingsRole.tsx
 #: src/modules/views/view-picker/components/ViewPickerListContent.tsx
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
 #: src/pages/settings/admin-panel/SettingsAdminApplicationRegistrationClaims.tsx
 #: src/pages/settings/admin-panel/SettingsAdminWorkspaceChatThread.tsx
 #: src/pages/settings/ai/SettingsAgentTurnDetail.tsx
@@ -24548,6 +24797,16 @@ msgstr "Werkruimtelid"
 #: src/pages/settings/members/SettingsWorkspaceMembers.tsx
 msgid "Workspace members"
 msgstr "Werkruimteleden"
+
+#. js-lingui-id: CozWO1
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Workspace name"
+msgstr ""
+
+#. js-lingui-id: V6AIOn
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Workspace navigation"
+msgstr ""
 
 #. js-lingui-id: PHF7zj
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
@@ -24857,6 +25116,11 @@ msgstr "Je facturatie wordt op {0}, aan het einde van je huidige factureringsper
 msgid "Your card was saved, but the payment still needs attention."
 msgstr "Uw kaart is opgeslagen, maar de betaling vereist nog steeds aandacht."
 
+#. js-lingui-id: 6E1UTH
+#: src/pages/convex-preview/CompaniesWorkspace.tsx
+msgid "Your companies belong to a workspace."
+msgstr ""
+
 #. js-lingui-id: mmGBWT
 #: src/pages/settings/legal/SettingsLegalDpaNew.tsx
 msgid "Your details"
@@ -24955,6 +25219,12 @@ msgstr "Je geplande wijziging naar {upcomingIntervalAdjective} facturatie op {0}
 #: src/modules/settings/billing/hooks/useBillingSubscriptionChangeWording.ts
 msgid "Your scheduled switch to {upcomingPlanLabel} on {0} is kept."
 msgstr "Je geplande wijziging naar {upcomingPlanLabel} op {0} blijft behouden."
+
+#. js-lingui-id: XiMM+x
+#: src/pages/convex-preview/__tests__/PreviewMessages.test.ts
+#: src/pages/convex-preview/PreviewError.tsx
+msgid "Your session has ended"
+msgstr ""
 
 #. js-lingui-id: 319YPG
 #: src/pages/settings/enterprise/SettingsEnterprise.tsx
