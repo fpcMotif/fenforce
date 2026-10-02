@@ -1,5 +1,6 @@
 import * as esbuild from 'esbuild';
 import * as fs from 'node:fs';
+import { createRequire } from 'node:module';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -26,7 +27,10 @@ const SOURCE_SCAN_ROOTS = [
   'twenty-ui-gallery',
 ];
 
-const rootNodeModules = path.resolve(dirname, '../../../../node_modules');
+const require = createRequire(import.meta.url);
+
+const resolvePackageDirectory = (packageName: string) =>
+  path.dirname(require.resolve(`${packageName}/package.json`));
 
 const twentyUiIndividualDir = path.resolve(
   dirname,
@@ -90,8 +94,8 @@ const twentyUiAliases = {
 };
 
 const storyAlias = {
-  react: path.join(rootNodeModules, 'react'),
-  'react-dom': path.join(rootNodeModules, 'react-dom'),
+  react: resolvePackageDirectory('react'),
+  'react-dom': resolvePackageDirectory('react-dom'),
   'twenty-sdk/define': sdkDefineIndex,
   'twenty-sdk/front-component': sdkFrontComponentIndex,
   ...twentyUiAliases,

@@ -89,6 +89,21 @@ describe('sortFieldsByRelevanceForRecordTableWidget', () => {
     expect(sorter(reverseA, reverseB)).toBe(0);
   });
 
+  it('should return 0 for two MANY_TO_ONE relation fields', () => {
+    const relationA = createField({
+      id: 'rel-a',
+      type: FieldMetadataType.RELATION,
+      settings: { relationType: RelationType.MANY_TO_ONE },
+    });
+    const relationB = createField({
+      id: 'rel-b',
+      type: FieldMetadataType.RELATION,
+      settings: { relationType: RelationType.MANY_TO_ONE },
+    });
+
+    expect(sorter(relationA, relationB)).toBe(0);
+  });
+
   it('should produce a correct full sort order', () => {
     const labelField = createField({ id: labelIdentifierId });
     const textField = createField({ id: 'text-1' });
