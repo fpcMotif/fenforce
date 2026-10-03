@@ -2,6 +2,8 @@
 
 ## At a glance
 
+For M1, use the [Salesforce pilot contract](m1-contract.md) to select required journeys and applicable gates. This document retains the broader Twenty preservation scope; source presence does not establish company usage. Unselected items remain unverified, not implemented or implicitly excluded.
+
 Frontend migration risks losing behavior because Twenty spreads capabilities across routes, settings, commands, and shared record components.
 This map defines checks for Cloudflare hosting, TanStack Router, TanStack Query, and Convex.
 Existing capabilities remain the baseline until each replacement passes the shared gates and its positive and negative checks.

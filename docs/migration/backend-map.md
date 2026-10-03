@@ -2,6 +2,8 @@
 
 ## At a glance
 
+For M1, use the [Salesforce pilot contract](m1-contract.md) to select required journeys and applicable gates. This document retains the broader Twenty preservation scope; source presence does not establish company usage. Unselected items remain unverified, not implemented or implicitly excluded.
+
 Twenty's backend contains intertwined capabilities that a database replacement alone cannot preserve.
 This map assigns proposed target responsibilities and acceptance checks to 25 capability groups.
 Existing Twenty behavior remains the baseline, and all migration parity remains unverified.

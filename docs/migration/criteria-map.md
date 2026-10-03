@@ -2,6 +2,8 @@
 
 ## At a glance
 
+For M1, use the [Salesforce pilot contract](m1-contract.md) to select required journeys and applicable gates. This document retains the broader Twenty preservation scope; source presence does not establish company usage. Unselected items remain unverified, not implemented or implicitly excluded.
+
 The replacement must preserve accepted Twenty behavior, data, permissions, integrations, and recovery before taking ownership.
 These criteria are proposed and unrun; source inspection establishes neither passing tests nor runtime parity.
 The inspected baseline is `1bf3ec682fcc7b768d1ea895d1a39ec917299b5c`; every release needs evidence from its actual candidate revision.
@@ -16,7 +18,7 @@ An unknown requirement remains open; a missing test does not establish absence o
 | Field | Required content |
 | --- | --- |
 | Identity | Feature ID, acceptance ID, owner, source paths, and contract version. |
-| Baseline | Twenty revision, deployment, executable scenario, raw outputs, persisted state, screenshots where relevant, and timing samples. |
+| Baseline | For M1: sanitized Salesforce usage/configuration evidence and owner-approved expected behavior; Twenty revision and executable reuse/regression scenarios where relevant. For full parity: Twenty deployment, outputs, persisted state, screenshots and timing samples. Keep customer data in approved private storage. |
 | Candidate | Replacement revision, dependency versions, deployment, identical scenario, outputs, state, screenshots, and timing samples. |
 | Fixture | Workspace, actor, records, schema, flags, entitlements, locale, provider mode, and fixture checksum. |
 | Comparison | Expected result, actual difference, allowed normalization, side-effect counts, and pass/fail reason. |

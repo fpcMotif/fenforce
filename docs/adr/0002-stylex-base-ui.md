@@ -1,9 +1,9 @@
-# Propose StyleX with Base UI for the modern CRM experience
+# Retain existing styling and Base UI for M1
 
-Status: proposed migration direction; StyleX integration and UI redesign are unimplemented.
+Status: M1 direction aligned with [#45](https://github.com/fpcMotif/fenforce/issues/45); StyleX adoption is deferred.
 
-Use StyleX as the candidate styling system and extend existing Base UI primitives for migrated CRM surfaces.
-The intended benefit is consistent themes and interaction behavior across a refreshed interface.
+Retain existing Linaria styling and reuse Twenty UI and Base UI primitives for M1.
+StyleX is not a pilot prerequisite. Any later adoption needs a separately scoped proof and the checks below; no styling migration is implemented by this decision.
 Keep Lingui under [ADR 0001](0001-retain-lingui.md).
 
 ## Why the build log does not require migration

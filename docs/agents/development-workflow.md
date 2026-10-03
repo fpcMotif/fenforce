@@ -64,7 +64,7 @@ These are migration targets, not claims about the existing Twenty application.
 | Server data in the UI | TanStack Query with `@convex-dev/react-query` |
 | Persistent application data and authorization | Convex |
 | Typed domain operations and external service composition | Effect v4 |
-| First durable workflow engine | Cloudflare Workflows |
+| Durable execution experiment | Cloudflare Workflows; no automatic M1 adoption |
 | Later comparison experiments | Temporal and Convex Workflow |
 
 The official Convex adapter provides reactive subscriptions and remains documented as beta.
@@ -87,8 +87,9 @@ Use the [feature, criteria, and critical-path maps](../migration/README.md) when
 Every assignment names its feature IDs and applicable acceptance gates.
 The source coverage checker detects catalog drift; it does not establish runtime parity.
 
-The proposed first vertical slice is an authenticated approval request, matching the existing workflow experiment.
-Confirm its business fields and approver policy before treating the slice as a production requirement.
+M1 starts with the [Salesforce pilot contract](../migration/m1-contract.md) and [roadmap #1](https://github.com/fpcMotif/fenforce/issues/1). Company identity and Account contracts precede dependent CRM slices; native Feishu owns the selected human approval.
+The existing workflow experiment supplies technology evidence only. Its fields, approver policy and engine do not establish production requirements.
+The table below is a broader migration reference, not the M1 execution order.
 
 | Unit | Deliverable | Acceptance check |
 | --- | --- | --- |

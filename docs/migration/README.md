@@ -4,7 +4,9 @@
 
 Replacing Twenty's stack risks losing behavior hidden behind metadata, permissions, providers, and external clients.
 These maps connect existing capabilities to replacement responsibilities and acceptance checks.
-Twenty remains the baseline; no feature receives a parity pass from source inspection alone.
+For M1, actual Salesforce usage defines requirements; Twenty supplies reusable behavior and implementation references.
+The [M1 contract](m1-contract.md) records company evidence gaps; its [mock contract](m1-mock-contract.md) supplies user-authorized synthetic expectations for local implementation.
+The maps below retain the broader full-platform preservation scope; they do not make every Twenty capability an M1 requirement. No feature receives a parity pass from source inspection alone.
 
 ## Read the maps
 
@@ -43,12 +45,12 @@ Their replacement status is also **unverified**.
 | Layer | Intended owner | Required proof |
 | --- | --- | --- |
 | Hosting and navigation | Cloudflare and TanStack Router | Deep links, redirects, history, and both UI surfaces |
-| Styling and interaction primitives | Proposed StyleX migration with existing Base UI | [ADR 0002](../adr/0002-stylex-base-ui.md); build integration, visual review, keyboard behavior, themes, and RTL |
+| Styling and interaction primitives | Existing Linaria, Twenty UI and Base UI for M1 | [ADR 0002](../adr/0002-stylex-base-ui.md); build integration, visual review, keyboard behavior, themes, and RTL |
 | Interface language | Retain Lingui through React and TanStack migration | [ADR 0001](../adr/0001-retain-lingui.md); catalogs, activation, fallback, translated errors, and AC-10 |
 | Client server-state | TanStack Query with the Convex adapter | Reactive updates, optimistic rollback, pagination, revocation, and reconnect |
-| Data and authorization | Convex | Dynamic metadata, transactions, relations, tenant isolation, and complete permission matrix |
+| Data and authorization | Convex | Shared code-defined field contracts, transactions, relations, tenant isolation, and the accepted permission matrix; runtime customization only if M1 evidence requires it |
 | Domain operations | Effect v4 | Typed failures, bounded resources, cancellation, and serializable framework boundaries |
-| Durable execution | Cloudflare Workflows first | Versioned user graphs, every action, durable suspension, retries, and side-effect reconciliation |
+| Durable execution | Feishu for selected native human approval; other engines require a scoped decision | Fenforce authorization, immutable snapshots, verified approval state and replay-safe application; full workflow graph parity remains separate |
 | Later experiments | Temporal and Convex Workflow | The same workload and failure fixtures before comparison |
 
 This table records the agreed direction, not a verified compatibility assessment.
@@ -57,7 +59,7 @@ Cloudflare Workflows does not supply Twenty's workflow editor, permission model,
 Arbitrary user code and provider protocols need isolated-runtime decisions before implementation.
 Do not remove legacy consumers merely because the replacement frontend uses Convex.
 
-## Critical path
+## Full-platform critical path
 
 ```mermaid
 flowchart TD
@@ -73,6 +75,8 @@ flowchart TD
   H --> I[Independent release review]
 ```
 
+For M1 execution order and dependencies use [roadmap #1](https://github.com/fpcMotif/fenforce/issues/1) and the [blocked contract](m1-contract.md). The path below describes broader platform preservation, not pilot entry requirements.
+
 1. Freeze fixtures, deployment flags, entitlements, supported clients, and measurable budgets before implementing each slice.
 2. Prove identity and dynamic metadata before committing the rest of the application to a Convex schema design.
 3. Migrate one complete route and its backend contract; retain the old path until paired checks pass.
@@ -81,7 +85,7 @@ flowchart TD
 6. Cut over only when every in-scope contract has accepted evidence and no unexplained difference remains.
 
 The synthetic approval experiment is a technology probe, not a replacement for Twenty's complete workflow catalog.
-Its proposed production slice still needs business fields and approver policy.
+It does not select the production human approval engine. The M1 native Feishu operation still needs business fields and approver policy.
 
 ## Working with agents
 

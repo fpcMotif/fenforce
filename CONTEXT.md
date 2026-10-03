@@ -1,6 +1,8 @@
 # Fenforce
 
-Fenforce is a CRM derived from Twenty, with feature preservation guiding its stack migration.
+Fenforce is a CRM derived from Twenty. The first Salesforce replacement pilot (M1) is defined by actual company workflows; Twenty supplies reusable implementation and behavior references. Full-platform Twenty parity is a separate scope.
+
+The [M1 contract](docs/migration/m1-contract.md) records current decisions and unresolved evidence. Company discovery remains blocked; a [synthetic sales contract](docs/migration/m1-mock-contract.md) supplies user-authorized assumptions for local implementation, not approved pilot scope.
 
 ## Language
 
@@ -27,6 +29,6 @@ _Avoid_: Treating a styling-library replacement as proof of improved usability.
 ## Related decisions
 
 - [Retain Lingui through the React and TanStack migration](docs/adr/0001-retain-lingui.md).
-- [Proposed StyleX and Base UI direction](docs/adr/0002-stylex-base-ui.md).
+- [Retain existing styling and Base UI for M1](docs/adr/0002-stylex-base-ui.md).
 
 The [migration maps](docs/migration/README.md) track preservation contracts and verification requirements.
