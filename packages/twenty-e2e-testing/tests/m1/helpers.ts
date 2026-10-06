@@ -38,10 +38,15 @@ export const prepareReplay = async () => {
   ) {
     throw new Error('A local anonymous Convex deployment is required');
   }
+  const adminKey = configuration.adminKey;
   const client = new ConvexHttpClient('http://127.0.0.1:3210', {
     logger: false,
+    fetch: (input, options) => {
+      const headers = new Headers(options?.headers);
+      headers.set('Authorization', `Convex ${adminKey}`);
+      return fetch(input, { ...options, headers });
+    },
   });
-  client.setAdminAuth(configuration.adminKey);
   return client.mutation(
     makeFunctionReference<
       'mutation',
