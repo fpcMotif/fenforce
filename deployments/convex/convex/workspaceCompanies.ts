@@ -25,6 +25,8 @@ import {
 import { appendAccountAudit } from './accountAudit';
 import { transitionAccount } from './accountLifecycleCommands';
 import { isSalesRole } from './membershipRole';
+import { accountListArgs } from './accountQueryContract';
+import { listAccountDocuments } from './accountQueries';
 
 export const companyValidator = v.object({
   _id: v.id('workspaceCompanies'),
@@ -128,33 +130,13 @@ export const projectCompany = async (
 };
 
 export const list = query({
-  args: {
-    workspaceId: v.id('workspaces'),
-    paginationOpts: paginationOptsValidator,
-  },
-  returns: paginationResultValidator(companyValidator),
+  args: accountListArgs,
+  returns: v.object({
+    ...paginationResultValidator(companyValidator).fields,
+    scannedCount: v.number(),
+  }),
   handler: async (context, args) => {
-    const member = await requireSalesMember(context, args.workspaceId);
-
-    validatePageSize(args.paginationOpts.numItems);
-
-    const companies = context.db.query('workspaceCompanies');
-    const accessible =
-      member.role === 'manager'
-        ? companies.withIndex(
-            'by_workspaceId_and_deletedAt_and_name',
-            (index) =>
-              index.eq('workspaceId', args.workspaceId).eq('deletedAt', null),
-          )
-        : companies.withIndex(
-            'by_workspaceId_and_accountOwnerId_and_deletedAt_and_name',
-            (index) =>
-              index
-                .eq('workspaceId', args.workspaceId)
-                .eq('accountOwnerId', member._id)
-                .eq('deletedAt', null),
-          );
-    const companiesPage = await accessible.paginate(args.paginationOpts);
+    const { member, companiesPage } = await listAccountDocuments(context, args);
 
     return {
       ...companiesPage,
@@ -205,11 +187,13 @@ export const create = mutation({
     assertOwnerAssignment(member, accountOwnerId);
     await validateAccountOwner(context, args.workspaceId, accountOwnerId);
     const now = Date.now();
+    const name = normalizeAccountName(args.name);
 
     const companyId = await context.db.insert('workspaceCompanies', {
       workspaceId: args.workspaceId,
       revision: 1,
-      name: normalizeAccountName(args.name),
+      name,
+      nameSortKey: name.toLowerCase(),
       industry: normalizeIndustry(args.industry),
       domainName: normalizeDomainName(args.domainName ?? ''),
       accountOwnerId,
@@ -260,12 +244,12 @@ export const update = mutation({
       );
     }
 
+    const name =
+      args.name === undefined ? company.name : normalizeAccountName(args.name);
     await context.db.patch(company._id, {
       revision: company.revision + 1,
-      name:
-        args.name === undefined
-          ? company.name
-          : normalizeAccountName(args.name),
+      name,
+      nameSortKey: name.toLowerCase(),
       industry: normalizeIndustry(
         args.industry === undefined ? company.industry : args.industry,
       ),
