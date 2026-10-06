@@ -1,19 +1,30 @@
 import { useAuthActions } from '@convex-dev/auth/react';
 import { useLingui } from '@lingui/react/macro';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MainButton } from 'twenty-ui/components';
 import { IconBuildingSkyscraper } from 'twenty-ui/icon';
+import { EMPLOYEE_SIGN_IN_ATTEMPT_KEY } from './signInAttempt';
 
 export const PreviewSignIn = () => {
   const { t } = useLingui();
   const { signIn } = useAuthActions();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [hasError, setHasError] = useState(() => {
+    const startedAt = Number(
+      sessionStorage.getItem(EMPLOYEE_SIGN_IN_ATTEMPT_KEY),
+    );
+    const age = Date.now() - startedAt;
+    return startedAt > 0 && age >= 0 && age < 300_000;
+  });
+  useEffect(() => {
+    sessionStorage.removeItem(EMPLOYEE_SIGN_IN_ATTEMPT_KEY);
+  }, []);
 
   const submit = async () => {
     setHasError(false);
     setIsSubmitting(true);
     try {
+      sessionStorage.setItem(EMPLOYEE_SIGN_IN_ATTEMPT_KEY, String(Date.now()));
       await signIn('employee-oidc', {
         redirectTo:
           window.location.pathname +
@@ -21,6 +32,7 @@ export const PreviewSignIn = () => {
           window.location.hash,
       });
     } catch {
+      sessionStorage.removeItem(EMPLOYEE_SIGN_IN_ATTEMPT_KEY);
       setHasError(true);
     } finally {
       setIsSubmitting(false);

@@ -41,3 +41,26 @@ it('starts employee sign-in with the protected URL and allows retry after failur
   );
   expect(signIn).toHaveBeenCalledTimes(2);
 });
+
+it('explains an unsuccessful provider return once and keeps the sign-in button usable', async () => {
+  signIn.mockReset().mockResolvedValue({ signingIn: false });
+  const user = userEvent.setup();
+  const view = () => (
+    <I18nProvider i18n={setupI18n({ locale: 'en', messages: { en: {} } })}>
+      <PreviewSignIn />
+    </I18nProvider>
+  );
+  const initial = render(view());
+  await user.click(
+    screen.getByRole('button', { name: 'Continue with employee identity' }),
+  );
+  initial.unmount();
+  const returned = render(view());
+  expect(screen.getByRole('alert')).toHaveTextContent('Unable to sign in');
+  expect(
+    screen.getByRole('button', { name: 'Continue with employee identity' }),
+  ).toBeEnabled();
+  returned.unmount();
+  render(view());
+  expect(screen.queryByRole('alert')).toBeNull();
+});

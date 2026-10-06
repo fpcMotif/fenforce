@@ -6,6 +6,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 
 import { api } from '../../../../../deployments/convex/convex/_generated/api';
 import { PreviewError } from './PreviewError';
+import { EMPLOYEE_SIGN_IN_ATTEMPT_KEY } from './signInAttempt';
 
 export const SessionGate = ({ children }: { children: ReactNode }) => {
   const { t } = useLingui();
@@ -40,6 +41,7 @@ export const SessionGate = ({ children }: { children: ReactNode }) => {
           Math.min(4000, session.expiresAt - Date.now()),
         );
         setStatus('active');
+        sessionStorage.removeItem(EMPLOYEE_SIGN_IN_ATTEMPT_KEY);
       } catch {
         if (!closed) endSession();
       } finally {
