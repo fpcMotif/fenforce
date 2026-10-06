@@ -51,6 +51,20 @@ vi.mock('@convex-dev/react-query', () => ({
   }),
 }));
 
+it('selects the first assigned workspace after sign-in without a workspace parameter', async () => {
+  window.history.replaceState({}, '', '/objects/companies');
+  render(
+    <I18nProvider i18n={setupI18n({ locale: 'en', messages: { en: {} } })}>
+      <QueryClientProvider client={new QueryClient()}>
+        <PreviewRouter />
+      </QueryClientProvider>
+    </I18nProvider>,
+  );
+  expect(await screen.findByText('workspace-a company')).toBeVisible();
+  expect(window.location.pathname).toBe('/objects/companies');
+  expect(window.location.search).toBe('?workspace=workspace-a');
+});
+
 it('restores the workspace from a deep link, switches safely, follows history and hides data immediately on logout', async () => {
   window.history.replaceState(
     {},

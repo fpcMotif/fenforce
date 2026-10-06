@@ -4,7 +4,6 @@ import { useLingui } from '@lingui/react/macro';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   Link,
-  Navigate,
   useLocation,
   useNavigate,
   useParams,
@@ -12,7 +11,7 @@ import {
   useSearch,
 } from '@tanstack/react-router';
 import { useConvexConnectionState, useMutation } from 'convex/react';
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { MainButton } from 'twenty-ui/components';
 import {
   IconBuildingSkyscraper,
@@ -37,6 +36,20 @@ type WorkspaceContextValue = {
 };
 
 const WorkspaceContext = createContext<WorkspaceContextValue | null>(null);
+
+const WorkspaceRedirectEffect = ({
+  workspaceId,
+  to,
+}: {
+  workspaceId: Id<'workspaces'>;
+  to: '.' | '/settings/members';
+}) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    void navigate({ to, search: { workspace: workspaceId }, replace: true });
+  }, [navigate, to, workspaceId]);
+  return null;
+};
 
 const useWorkspace = () => {
   const workspace = useContext(WorkspaceContext);
@@ -109,10 +122,9 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
   const firstWorkspace = workspaces.results[0];
   if (requestedWorkspace === undefined && firstWorkspace !== undefined) {
     return (
-      <Navigate
+      <WorkspaceRedirectEffect
         to="."
-        search={{ workspace: firstWorkspace.workspaceId }}
-        replace
+        workspaceId={firstWorkspace.workspaceId}
       />
     );
   }
@@ -153,10 +165,9 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
   const isAdministrator = selected.role === 'admin';
   if (isAdministrator && location.pathname !== '/settings/members') {
     return (
-      <Navigate
+      <WorkspaceRedirectEffect
         to="/settings/members"
-        search={{ workspace: workspaceId }}
-        replace
+        workspaceId={workspaceId}
       />
     );
   }
