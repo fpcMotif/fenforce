@@ -36,6 +36,7 @@ vi.mock('@tanstack/react-query', () => ({
     data: {
       _id: 'company',
       name: 'Original',
+      industry: 'services',
       revision: mockRevision,
       domainName: { primaryLinkLabel: '', primaryLinkUrl: '' },
       accountOwnerId: null,
@@ -86,6 +87,7 @@ it('submits the revision at edit start even after a subscription updates', async
     </I18nProvider>
   );
   const { rerender } = render(view());
+  expect(screen.getByText('Services')).toBeVisible();
   await user.click(screen.getByRole('button', { name: 'Edit company' }));
   await user.clear(screen.getByRole('textbox', { name: 'Name' }));
   await user.type(screen.getByRole('textbox', { name: 'Name' }), 'My edit');
@@ -97,7 +99,6 @@ it('submits the revision at edit start even after a subscription updates', async
     companyId: 'company',
     expectedRevision: 1,
     name: 'My edit',
-    domainName: '',
-    accountOwnerId: null,
+    industry: 'services',
   });
 });
