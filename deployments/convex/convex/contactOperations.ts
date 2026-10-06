@@ -3,26 +3,27 @@ import { ConvexError, v } from 'convex/values';
 import type { Doc, Id } from './_generated/dataModel';
 import type { MutationCtx, QueryCtx } from './_generated/server';
 import { query } from './_generated/server';
+import { requireSalesMember } from './accountPolicy';
 import {
-  type AccountOperation,
-  operationReceiptValidator,
-} from './accountOperationContract';
-import { canAccessAccount, requireSalesMember } from './accountPolicy';
+  contactOperationValidator,
+  type ContactOperation,
+} from './contactContract';
+import { requireAccessibleContact } from './contactPolicy';
 import { operationPayload, validateOperationId } from './operationReceipt';
 
-type OperationArguments = {
+type ContactOperationArguments = {
   workspaceId: Id<'workspaces'>;
-  operationId?: string;
+  operationId: string;
 } & Record<string, unknown>;
 
-const findReceipt = (
+export const findContactReceipt = (
   context: QueryCtx,
   member: Doc<'workspaceMembers'>,
   operationId: string,
 ) => {
   validateOperationId(operationId);
   return context.db
-    .query('accountOperationReceipts')
+    .query('contactOperationReceipts')
     .withIndex('by_workspaceId_and_actorId_and_operationId', (index) =>
       index
         .eq('workspaceId', member.workspaceId)
@@ -32,28 +33,15 @@ const findReceipt = (
     .unique();
 };
 
-const requireReceiptAccess = async (
+export const readContactReceipt = async (
   context: QueryCtx,
   member: Doc<'workspaceMembers'>,
-  receipt: Doc<'accountOperationReceipts'>,
+  operation: ContactOperation,
+  args: ContactOperationArguments,
 ) => {
-  const company = await context.db.get(receipt.companyId);
-  if (company === null || !canAccessAccount(member, company))
-    throw new ConvexError('COMPANY_NOT_FOUND');
-  if (receipt.requiresManager && member.role !== 'manager')
-    throw new ConvexError('FORBIDDEN');
-};
-
-export const readAccountReceipt = async (
-  context: QueryCtx,
-  member: Doc<'workspaceMembers'>,
-  operation: AccountOperation,
-  args: OperationArguments,
-) => {
-  if (args.operationId === undefined) return null;
-  const receipt = await findReceipt(context, member, args.operationId);
+  const receipt = await findContactReceipt(context, member, args.operationId);
   if (receipt === null) return null;
-  await requireReceiptAccess(context, member, receipt);
+  await requireAccessibleContact(context, member, receipt.contactId);
   if (
     receipt.operation !== operation ||
     receipt.payload !== operationPayload(args)
@@ -62,41 +50,45 @@ export const readAccountReceipt = async (
   return receipt;
 };
 
-export const saveAccountReceipt = async (
+export const saveContactReceipt = async (
   context: MutationCtx,
   member: Doc<'workspaceMembers'>,
-  operation: AccountOperation,
-  args: OperationArguments,
-  result: {
-    companyId: Id<'workspaceCompanies'>;
-    revision: number;
-    changed: boolean;
-    requiresManager: boolean;
-  },
+  operation: ContactOperation,
+  args: ContactOperationArguments,
+  result: { contactId: Id<'workspaceContacts'>; revision: number },
 ) => {
-  if (args.operationId === undefined) return;
-  await context.db.insert('accountOperationReceipts', {
+  await context.db.insert('contactOperationReceipts', {
     workspaceId: member.workspaceId,
     actorId: member._id,
     operationId: args.operationId,
     operation,
     payload: operationPayload(args),
     ...result,
+    changed: true,
     acceptedAt: Date.now(),
   });
 };
 
 export const getReceipt = query({
   args: { workspaceId: v.id('workspaces'), operationId: v.string() },
-  returns: v.union(operationReceiptValidator, v.null()),
+  returns: v.union(
+    v.object({
+      operation: contactOperationValidator,
+      contactId: v.id('workspaceContacts'),
+      revision: v.number(),
+      changed: v.boolean(),
+      acceptedAt: v.number(),
+    }),
+    v.null(),
+  ),
   handler: async (context, args) => {
     const member = await requireSalesMember(context, args.workspaceId);
-    const receipt = await findReceipt(context, member, args.operationId);
+    const receipt = await findContactReceipt(context, member, args.operationId);
     if (receipt === null) return null;
-    await requireReceiptAccess(context, member, receipt);
+    await requireAccessibleContact(context, member, receipt.contactId);
     return {
       operation: receipt.operation,
-      companyId: receipt.companyId,
+      contactId: receipt.contactId,
       revision: receipt.revision,
       changed: receipt.changed,
       acceptedAt: receipt.acceptedAt,

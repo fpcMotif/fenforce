@@ -177,6 +177,40 @@ it('keeps duplicate normalized names stable across pages and treats Unicode and 
   );
 });
 
+it('rejects a forged seller cursor positioned in another seller account range', async () => {
+  const { test, seller, workspaceId } = await createFixture();
+  const other = await salesActor(test, workspaceId, 'seller', 'Seller B');
+  await other.session.mutation(api.workspaceCompanies.create, {
+    workspaceId,
+    name: 'account-b',
+  });
+  const forgedCursor = JSON.stringify({
+    fingerprint: JSON.stringify([
+      1,
+      workspaceId,
+      seller.memberId,
+      'seller',
+      '',
+      '*',
+      seller.memberId,
+      'asc',
+    ]),
+    position: JSON.stringify([workspaceId, other.memberId, null, '']),
+  });
+  await expect(
+    seller.session.query(api.workspaceCompanies.list, {
+      workspaceId,
+      paginationOpts: { numItems: 1, cursor: forgedCursor },
+    }),
+  ).rejects.toThrow('INVALID_ACCOUNT_CURSOR');
+  await expect(
+    seller.session.query(api.workspaceCompanies.list, {
+      workspaceId,
+      paginationOpts: { numItems: 1, cursor: null, endCursor: forgedCursor },
+    }),
+  ).rejects.toThrow('INVALID_ACCOUNT_CURSOR');
+});
+
 it('rejects seller replay of manager cursors and rechecks disabled membership on continuation', async () => {
   const { test, manager, seller, workspaceId } = await createFixture();
   await manager.session.mutation(api.workspaceCompanies.create, {
