@@ -152,6 +152,7 @@ it('switches explicit workspace scope without reusing another workspace record o
   ).rejects.toThrow('COMPANY_NOT_FOUND');
   await expect(
     actor.mutation(api.workspaceCompanies.softDelete, {
+      expectedRevision: 1,
       workspaceId: secondWorkspaceId,
       companyId: firstCompanyId,
     }),

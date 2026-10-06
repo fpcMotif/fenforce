@@ -30,3 +30,19 @@ export const assertOwnerAssignment = (
   if (member.role !== 'manager' && ownerId !== member._id)
     throw new ConvexError('FORBIDDEN');
 };
+
+export const validateAccountOwner = async (
+  context: QueryCtx,
+  workspaceId: Id<'workspaces'>,
+  ownerId: Id<'workspaceMembers'> | null,
+) => {
+  if (ownerId === null) throw new ConvexError('INVALID_ACCOUNT_OWNER');
+  const owner = await context.db.get(ownerId);
+  if (
+    owner === null ||
+    owner.workspaceId !== workspaceId ||
+    owner.active === false ||
+    !isSalesRole(owner.role)
+  )
+    throw new ConvexError('INVALID_ACCOUNT_OWNER');
+};

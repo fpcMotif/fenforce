@@ -117,6 +117,7 @@ it('rejects forged writes and seller reassignment, while manager reassignment tr
   ).rejects.toThrow('COMPANY_NOT_FOUND');
   await expect(
     other.session.mutation(api.workspaceCompanies.softDelete, {
+      expectedRevision: 1,
       workspaceId,
       companyId,
     }),
@@ -137,6 +138,7 @@ it('rejects forged writes and seller reassignment, while manager reassignment tr
   ).rejects.toThrow('FORBIDDEN');
   await expect(
     admin.mutation(api.workspaceCompanies.softDelete, {
+      expectedRevision: 1,
       workspaceId,
       companyId,
     }),
@@ -194,6 +196,7 @@ it('rejects forged writes and seller reassignment, while manager reassignment tr
     name: 'New owner edit',
   });
   await other.session.mutation(api.workspaceCompanies.softDelete, {
+    expectedRevision: 3,
     workspaceId,
     companyId,
   });

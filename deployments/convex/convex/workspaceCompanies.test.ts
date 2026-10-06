@@ -69,6 +69,7 @@ describe('workspace companies authorization', () => {
     ).rejects.toThrow('FORBIDDEN');
     await expect(
       bob.mutation(api.workspaceCompanies.softDelete, {
+        expectedRevision: 1,
         workspaceId: aliceWorkspaceId,
         companyId,
       }),
@@ -211,6 +212,7 @@ describe('workspace companies authorization', () => {
 
     await expect(
       bob.mutation(api.workspaceCompanies.softDelete, {
+        expectedRevision: 1,
         workspaceId,
         companyId,
       }),
@@ -235,6 +237,7 @@ describe('workspace companies authorization', () => {
     ).toMatchObject({ name: 'Updated by manager' });
 
     await alice.mutation(api.workspaceCompanies.softDelete, {
+      expectedRevision: 2,
       workspaceId,
       companyId,
     });

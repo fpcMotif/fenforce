@@ -176,6 +176,7 @@ describe('anonymous callers', () => {
     expect(
       await outcomeOf(
         test.mutation(api.workspaceCompanies.softDelete, {
+          expectedRevision: 1,
           workspaceId,
           companyId,
         }),

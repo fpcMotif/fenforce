@@ -5,12 +5,13 @@ import {
 import { ConvexError, v } from 'convex/values';
 
 import type { Doc, Id } from './_generated/dataModel';
-import type { MutationCtx, QueryCtx } from './_generated/server';
+import type { QueryCtx } from './_generated/server';
 import { mutation, query } from './_generated/server';
 import {
   assertOwnerAssignment,
   canAccessAccount,
   requireSalesMember,
+  validateAccountOwner,
 } from './accountPolicy';
 import { normalizeCompanyDomain } from './companyDomain';
 import {
@@ -22,9 +23,10 @@ import {
   normalizeIndustry,
 } from './accountContract';
 import { appendAccountAudit } from './accountAudit';
+import { transitionAccount } from './accountLifecycleCommands';
 import { isSalesRole } from './membershipRole';
 
-const companyValidator = v.object({
+export const companyValidator = v.object({
   _id: v.id('workspaceCompanies'),
   _creationTime: v.number(),
   workspaceId: v.id('workspaces'),
@@ -66,27 +68,6 @@ const normalizeDomainName = (value: string) => {
   };
 };
 
-const validateOwner = async (
-  context: MutationCtx,
-  workspaceId: Id<'workspaces'>,
-  ownerId: Id<'workspaceMembers'> | null,
-) => {
-  if (ownerId === null) {
-    throw new ConvexError('INVALID_ACCOUNT_OWNER');
-  }
-
-  const owner = await context.db.get(ownerId);
-
-  if (
-    owner === null ||
-    owner.workspaceId !== workspaceId ||
-    owner.active === false ||
-    !isSalesRole(owner.role)
-  ) {
-    throw new ConvexError('INVALID_ACCOUNT_OWNER');
-  }
-};
-
 const memberDisplayName = async (
   context: QueryCtx,
   workspaceId: Id<'workspaces'>,
@@ -95,13 +76,13 @@ const memberDisplayName = async (
   const member = await context.db.get(memberId);
 
   if (member === null || member.workspaceId !== workspaceId) {
-    throw new ConvexError('INVALID_COMPANY_MEMBER');
+    return memberId;
   }
 
   return member.displayName;
 };
 
-const projectCompany = async (
+export const projectCompany = async (
   context: QueryCtx,
   company: Doc<'workspaceCompanies'>,
   member: Doc<'workspaceMembers'>,
@@ -139,9 +120,9 @@ const projectCompany = async (
     accountOwnerName,
     createdByName,
     permissions: {
-      canUpdate: true,
+      canUpdate: company.deletedAt === null,
       canReassign: member.role === 'manager',
-      canTrash: true,
+      canTrash: company.deletedAt === null,
     },
   };
 };
@@ -222,7 +203,7 @@ export const create = mutation({
     const accountOwnerId =
       args.accountOwnerId === undefined ? member._id : args.accountOwnerId;
     assertOwnerAssignment(member, accountOwnerId);
-    await validateOwner(context, args.workspaceId, accountOwnerId);
+    await validateAccountOwner(context, args.workspaceId, accountOwnerId);
     const now = Date.now();
 
     const companyId = await context.db.insert('workspaceCompanies', {
@@ -272,7 +253,11 @@ export const update = mutation({
 
     if (args.accountOwnerId !== undefined) {
       assertOwnerAssignment(member, args.accountOwnerId);
-      await validateOwner(context, args.workspaceId, args.accountOwnerId);
+      await validateAccountOwner(
+        context,
+        args.workspaceId,
+        args.accountOwnerId,
+      );
     }
 
     await context.db.patch(company._id, {
@@ -308,29 +293,11 @@ export const softDelete = mutation({
   args: {
     workspaceId: v.id('workspaces'),
     companyId: v.id('workspaceCompanies'),
+    expectedRevision: v.number(),
   },
   returns: v.null(),
   handler: async (context, args) => {
-    const member = await requireSalesMember(context, args.workspaceId);
-    const company = await context.db.get(args.companyId);
-
-    if (
-      company === null ||
-      !canAccessAccount(member, company) ||
-      company.deletedAt !== null
-    ) {
-      throw new ConvexError('COMPANY_NOT_FOUND');
-    }
-
-    const now = Date.now();
-    await context.db.patch(company._id, {
-      revision: company.revision + 1,
-      deletedAt: now,
-      updatedAt: now,
-      updatedBy: member._id,
-    });
-    await appendAccountAudit(context, company._id, company);
-
+    await transitionAccount(context, args, true);
     return null;
   },
 });
