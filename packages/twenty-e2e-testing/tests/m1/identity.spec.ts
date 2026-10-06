@@ -1,18 +1,6 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
-const chooseEmployee = async (page: Page, subject: string) => {
-  await page
-    .getByRole('button', {
-      name: 'Continue with employee identity',
-      exact: true,
-    })
-    .click();
-  await expect(
-    page.getByRole('heading', { name: 'Simulated employee identity' }),
-  ).toBeVisible();
-  await page.getByRole('combobox').selectOption(subject);
-  await page.getByRole('button', { name: 'Continue', exact: true }).click();
-};
+import { chooseEmployee } from './helpers';
 
 test('invited employee signs in, refreshes a protected route, and signs out', async ({
   page,

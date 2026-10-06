@@ -4,7 +4,6 @@ import { useLingui } from '@lingui/react/macro';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   Link,
-  Navigate,
   useLocation,
   useNavigate,
   useParams,
@@ -12,7 +11,7 @@ import {
   useSearch,
 } from '@tanstack/react-router';
 import { useConvexConnectionState, useMutation } from 'convex/react';
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { MainButton } from 'twenty-ui/components';
 import {
   IconBuildingSkyscraper,
@@ -28,6 +27,7 @@ import type {
 } from '../../../../../deployments/convex/convex/_generated/dataModel';
 import { CompanyForm, type CompanyFormValues } from './CompanyForm';
 import { MemberAdministration } from './MemberAdministration';
+import { isSalesRole } from '../../../../../deployments/convex/convex/membershipRole';
 
 type WorkspaceContextValue = {
   workspaceId: Id<'workspaces'>;
@@ -36,6 +36,20 @@ type WorkspaceContextValue = {
 };
 
 const WorkspaceContext = createContext<WorkspaceContextValue | null>(null);
+
+const WorkspaceRedirectEffect = ({
+  workspaceId,
+  to,
+}: {
+  workspaceId: Id<'workspaces'>;
+  to: '.' | '/settings/members';
+}) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    void navigate({ to, search: { workspace: workspaceId }, replace: true });
+  }, [navigate, to, workspaceId]);
+  return null;
+};
 
 const useWorkspace = () => {
   const workspace = useContext(WorkspaceContext);
@@ -108,10 +122,9 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
   const firstWorkspace = workspaces.results[0];
   if (requestedWorkspace === undefined && firstWorkspace !== undefined) {
     return (
-      <Navigate
+      <WorkspaceRedirectEffect
         to="."
-        search={{ workspace: firstWorkspace.workspaceId }}
-        replace
+        workspaceId={firstWorkspace.workspaceId}
       />
     );
   }
@@ -152,10 +165,9 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
   const isAdministrator = selected.role === 'admin';
   if (isAdministrator && location.pathname !== '/settings/members') {
     return (
-      <Navigate
+      <WorkspaceRedirectEffect
         to="/settings/members"
-        search={{ workspace: workspaceId }}
-        replace
+        workspaceId={workspaceId}
       />
     );
   }
@@ -257,7 +269,20 @@ export const WorkspaceAdministrationPage = () => {
 
 export const CompaniesPage = () => {
   const { t } = useLingui();
-  const { workspaceId, workspaceName } = useWorkspace();
+  const { role } = useWorkspace();
+  if (!isSalesRole(role))
+    return (
+      <div
+        className="fenforce-page"
+        role="alert"
+      >{t`Sales access is required.`}</div>
+    );
+  return <CompanyRecords />;
+};
+
+const CompanyRecords = () => {
+  const { t } = useLingui();
+  const { workspaceId, workspaceName, role } = useWorkspace();
   const navigate = useNavigate();
   const router = useRouter();
   const createCompany = useMutation(api.workspaceCompanies.create);
@@ -303,6 +328,7 @@ export const CompaniesPage = () => {
           <h2>{t`New company`}</h2>
           <CompanyForm
             workspaceId={workspaceId}
+            canReassignOwner={role === 'manager'}
             onSave={saveCompany}
             onCancel={() => setIsCreating(false)}
           />
@@ -411,6 +437,19 @@ export const CompaniesPage = () => {
 
 export const CompanyDetailPage = () => {
   const { t } = useLingui();
+  const { role } = useWorkspace();
+  if (!isSalesRole(role))
+    return (
+      <div
+        className="fenforce-page"
+        role="alert"
+      >{t`Sales access is required.`}</div>
+    );
+  return <CompanyRecordDetail />;
+};
+
+const CompanyRecordDetail = () => {
+  const { t } = useLingui();
   const { workspaceId, workspaceName } = useWorkspace();
   const { companyId } = useParams({ from: '/object/company/$companyId' });
   const updateCompany = useMutation(api.workspaceCompanies.update);
@@ -485,7 +524,7 @@ export const CompanyDetailPage = () => {
           </Link>
           <h1>{record.name}</h1>
         </div>
-        {editingRevision === null && (
+        {editingRevision === null && record.permissions.canUpdate && (
           <MainButton
             type="button"
             onClick={() => setEditingRevision(record.revision)}
@@ -494,12 +533,14 @@ export const CompanyDetailPage = () => {
           </MainButton>
         )}
       </header>
-      {editingRevision !== null ? (
+      {editingRevision !== null && record.permissions.canUpdate ? (
         <section className="fenforce-editor" aria-label={t`Edit company`}>
           <h2>{t`Edit company`}</h2>
           <CompanyForm
             key={record._id}
             workspaceId={workspaceId}
+            canReassignOwner={record.permissions.canReassign}
+            ownerName={record.accountOwnerName}
             initialValues={{
               name: record.name,
               industry: record.industry,
