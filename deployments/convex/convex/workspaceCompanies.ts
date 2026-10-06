@@ -346,6 +346,9 @@ export const history = query({
       workspaceId: v.id('workspaces'),
       companyId: v.id('workspaceCompanies'),
       actorId: v.id('workspaceMembers'),
+      actorName: v.string(),
+      beforeOwnerName: v.union(v.string(), v.null()),
+      afterOwnerName: v.union(v.string(), v.null()),
       timestamp: v.number(),
       before: v.union(accountValuesValidator, v.null()),
       after: accountValuesValidator,
@@ -357,10 +360,37 @@ export const history = query({
     if (company === null || !canAccessAccount(member, company))
       throw new ConvexError('COMPANY_NOT_FOUND');
     validatePageSize(args.paginationOpts.numItems);
-    return context.db
+    const result = await context.db
       .query('accountAudit')
       .withIndex('by_companyId', (index) => index.eq('companyId', company._id))
       .paginate(args.paginationOpts);
+    return {
+      ...result,
+      page: await Promise.all(
+        result.page.map(async (entry) => ({
+          ...entry,
+          actorName: await memberDisplayName(
+            context,
+            args.workspaceId,
+            entry.actorId,
+          ),
+          beforeOwnerName: entry.before?.accountOwnerId
+            ? await memberDisplayName(
+                context,
+                args.workspaceId,
+                entry.before.accountOwnerId,
+              )
+            : null,
+          afterOwnerName: entry.after.accountOwnerId
+            ? await memberDisplayName(
+                context,
+                args.workspaceId,
+                entry.after.accountOwnerId,
+              )
+            : null,
+        })),
+      ),
+    };
   },
 });
 
