@@ -7,6 +7,24 @@ import { decisionValidator, lifecycleValidator } from './approvalContract';
 
 export default defineSchema({
   ...authTables,
+  employeeIdentities: defineTable({
+    issuer: v.string(),
+    tenant: v.string(),
+    subject: v.string(),
+    userId: v.id('users'),
+  })
+    .index('by_issuer_and_tenant_and_subject', ['issuer', 'tenant', 'subject'])
+    .index('by_userId', ['userId']),
+  employeeInvitations: defineTable({
+    issuer: v.string(),
+    tenant: v.string(),
+    subject: v.string(),
+    workspaceId: v.id('workspaces'),
+    displayName: v.string(),
+    role: v.union(v.literal('admin'), v.literal('member')),
+    expiresAt: v.number(),
+    acceptedUserId: v.optional(v.id('users')),
+  }).index('by_issuer_and_tenant_and_subject', ['issuer', 'tenant', 'subject']),
   syntheticApprovalRuns: defineTable({
     instanceId: v.string(),
     workflowId: v.optional(vWorkflowId),
@@ -36,6 +54,7 @@ export default defineSchema({
     createdAt: v.number(),
   }),
   workspaceMembers: defineTable({
+    active: v.optional(v.boolean()),
     workspaceId: v.id('workspaces'),
     userId: v.id('users'),
     displayName: v.string(),
@@ -43,7 +62,8 @@ export default defineSchema({
     createdAt: v.number(),
   })
     .index('by_workspaceId_and_userId', ['workspaceId', 'userId'])
-    .index('by_userId', ['userId']),
+    .index('by_userId', ['userId'])
+    .index('by_userId_and_active', ['userId', 'active']),
   workspaceCompanies: defineTable({
     workspaceId: v.id('workspaces'),
     revision: v.number(),

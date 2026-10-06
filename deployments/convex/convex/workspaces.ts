@@ -18,6 +18,11 @@ export const create = mutation({
   returns: v.id('workspaces'),
   handler: async (context, args) => {
     const { identity, userId } = await requireSession(context);
+    const employee = await context.db
+      .query('employeeIdentities')
+      .withIndex('by_userId', (index) => index.eq('userId', userId))
+      .unique();
+    if (employee) throw new ConvexError('FORBIDDEN');
     const name = args.name.trim();
 
     if (name.length === 0 || name.length > 120) {
@@ -61,19 +66,21 @@ export const listMine = query({
       .paginate(args.paginationOpts);
 
     const workspaces = await Promise.all(
-      membershipsPage.page.map(async (membership) => {
-        const workspace = await context.db.get(membership.workspaceId);
+      membershipsPage.page
+        .filter((membership) => membership.active !== false)
+        .map(async (membership) => {
+          const workspace = await context.db.get(membership.workspaceId);
 
-        if (workspace === null) {
-          throw new Error('Workspace membership has no workspace');
-        }
+          if (workspace === null) {
+            throw new Error('Workspace membership has no workspace');
+          }
 
-        return {
-          workspaceId: workspace._id,
-          name: workspace.name,
-          role: membership.role,
-        };
-      }),
+          return {
+            workspaceId: workspace._id,
+            name: workspace.name,
+            role: membership.role,
+          };
+        }),
     );
 
     return { ...membershipsPage, page: workspaces };

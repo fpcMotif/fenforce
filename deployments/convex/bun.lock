@@ -12,6 +12,7 @@
         "convex": "^1.46.0",
         "convex-helpers": "0.1.124",
         "effect": "4.0.0-rc.117",
+        "jose": "6.2.12",
       },
       "devDependencies": {
         "@effect/tsgo": "0.46.1",

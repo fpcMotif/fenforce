@@ -33,6 +33,7 @@
     "@convex-dev/workpool": "0.4.12",
     "convex": "^1.46.0",
     "convex-helpers": "0.1.124",
-    "effect": "4.0.0-rc.117"
+    "effect": "4.0.0-rc.117",
+    "jose": "6.2.12"
   }
 }

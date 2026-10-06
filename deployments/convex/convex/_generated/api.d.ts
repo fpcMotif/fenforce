@@ -17,6 +17,8 @@ import type * as authorization from "../authorization.js";
 import type * as companies from "../companies.js";
 import type * as companyDomain from "../companyDomain.js";
 import type * as http from "../http.js";
+import type * as employeeIdentity from "../employeeIdentity.js";
+import type * as employeeEnrollment from "../employeeEnrollment.js";
 import type * as workflowRuntime from "../workflowRuntime.js";
 import type * as workspaceCompanies from "../workspaceCompanies.js";
 import type * as workspaces from "../workspaces.js";
@@ -37,6 +39,8 @@ declare const fullApi: ApiFromModules<{
   companies: typeof companies;
   companyDomain: typeof companyDomain;
   http: typeof http;
+  employeeIdentity: typeof employeeIdentity;
+  employeeEnrollment: typeof employeeEnrollment;
   workflowRuntime: typeof workflowRuntime;
   workspaceCompanies: typeof workspaceCompanies;
   workspaces: typeof workspaces;
