@@ -2,7 +2,7 @@ import {
   paginationOptsValidator,
   paginationResultValidator,
 } from 'convex/server';
-import { ConvexError, v } from 'convex/values';
+import { ConvexError, v, type Infer } from 'convex/values';
 
 import type { Doc, Id } from './_generated/dataModel';
 import type { QueryCtx } from './_generated/server';
@@ -27,6 +27,7 @@ import { transitionAccount } from './accountLifecycleCommands';
 import { isSalesRole } from './membershipRole';
 import { accountListArgs } from './accountQueryContract';
 import { listAccountDocuments } from './accountQueries';
+import { readAccountReceipt, saveAccountReceipt } from './accountOperations';
 
 export const companyValidator = v.object({
   _id: v.id('workspaceCompanies'),
@@ -67,6 +68,39 @@ const normalizeDomainName = (value: string) => {
     primaryLinkUrl: domain === '' ? '' : `https://${domain}`,
     primaryLinkLabel: domain,
     secondaryLinks: [],
+  };
+};
+
+type AccountEdits = {
+  name?: string;
+  industry?: Infer<typeof industryInputValidator>;
+  domainName?: string;
+  accountOwnerId?: Id<'workspaceMembers'> | null;
+};
+
+const accountChanges = (
+  company: Doc<'workspaceCompanies'>,
+  args: AccountEdits,
+) => {
+  const name =
+    args.name === undefined ? company.name : normalizeAccountName(args.name);
+  return {
+    name,
+    nameSortKey: name.toLowerCase(),
+    industry: normalizeIndustry(
+      args.industry === undefined ? company.industry : args.industry,
+    ),
+    domainName:
+      args.domainName === undefined
+        ? company.domainName
+        : {
+            ...normalizeDomainName(args.domainName),
+            secondaryLinks: company.domainName.secondaryLinks,
+          },
+    accountOwnerId:
+      args.accountOwnerId === undefined
+        ? company.accountOwnerId
+        : args.accountOwnerId,
   };
 };
 
@@ -173,6 +207,7 @@ export const get = query({
 
 export const create = mutation({
   args: {
+    operationId: v.optional(v.string()),
     workspaceId: v.id('workspaces'),
     name: v.string(),
     industry: v.optional(industryInputValidator),
@@ -185,6 +220,8 @@ export const create = mutation({
     const accountOwnerId =
       args.accountOwnerId === undefined ? member._id : args.accountOwnerId;
     assertOwnerAssignment(member, accountOwnerId);
+    const receipt = await readAccountReceipt(context, member, 'create', args);
+    if (receipt !== null) return receipt.companyId;
     await validateAccountOwner(context, args.workspaceId, accountOwnerId);
     const now = Date.now();
     const name = normalizeAccountName(args.name);
@@ -204,12 +241,19 @@ export const create = mutation({
       deletedAt: null,
     });
     await appendAccountAudit(context, companyId, null);
+    await saveAccountReceipt(context, member, 'create', args, {
+      companyId,
+      revision: 1,
+      changed: true,
+      requiresManager: accountOwnerId !== member._id,
+    });
     return companyId;
   },
 });
 
 export const update = mutation({
   args: {
+    operationId: v.optional(v.string()),
     workspaceId: v.id('workspaces'),
     companyId: v.id('workspaceCompanies'),
     expectedRevision: v.number(),
@@ -223,20 +267,19 @@ export const update = mutation({
     const member = await requireSalesMember(context, args.workspaceId);
     const company = await context.db.get(args.companyId);
 
-    if (
-      company === null ||
-      !canAccessAccount(member, company) ||
-      company.deletedAt !== null
-    ) {
+    if (company === null || !canAccessAccount(member, company)) {
       throw new ConvexError('COMPANY_NOT_FOUND');
     }
-
+    if (args.accountOwnerId !== undefined)
+      assertOwnerAssignment(member, args.accountOwnerId);
+    const receipt = await readAccountReceipt(context, member, 'update', args);
+    if (receipt !== null) return null;
+    if (company.deletedAt !== null) throw new ConvexError('COMPANY_NOT_FOUND');
     if (company.revision !== args.expectedRevision) {
       throw new ConvexError('COMPANY_CHANGED');
     }
 
     if (args.accountOwnerId !== undefined) {
-      assertOwnerAssignment(member, args.accountOwnerId);
       await validateAccountOwner(
         context,
         args.workspaceId,
@@ -244,30 +287,21 @@ export const update = mutation({
       );
     }
 
-    const name =
-      args.name === undefined ? company.name : normalizeAccountName(args.name);
     await context.db.patch(company._id, {
       revision: company.revision + 1,
-      name,
-      nameSortKey: name.toLowerCase(),
-      industry: normalizeIndustry(
-        args.industry === undefined ? company.industry : args.industry,
-      ),
-      domainName:
-        args.domainName === undefined
-          ? company.domainName
-          : {
-              ...normalizeDomainName(args.domainName),
-              secondaryLinks: company.domainName.secondaryLinks,
-            },
-      accountOwnerId:
-        args.accountOwnerId === undefined
-          ? company.accountOwnerId
-          : args.accountOwnerId,
+      ...accountChanges(company, args),
       updatedBy: member._id,
       updatedAt: Date.now(),
     });
     await appendAccountAudit(context, company._id, company);
+    await saveAccountReceipt(context, member, 'update', args, {
+      companyId: company._id,
+      revision: company.revision + 1,
+      changed: true,
+      requiresManager:
+        args.accountOwnerId !== undefined &&
+        args.accountOwnerId !== company.accountOwnerId,
+    });
 
     return null;
   },
@@ -275,6 +309,7 @@ export const update = mutation({
 
 export const softDelete = mutation({
   args: {
+    operationId: v.optional(v.string()),
     workspaceId: v.id('workspaces'),
     companyId: v.id('workspaceCompanies'),
     expectedRevision: v.number(),
@@ -299,6 +334,9 @@ export const history = query({
       workspaceId: v.id('workspaces'),
       companyId: v.id('workspaceCompanies'),
       actorId: v.id('workspaceMembers'),
+      actorName: v.string(),
+      beforeOwnerName: v.union(v.string(), v.null()),
+      afterOwnerName: v.union(v.string(), v.null()),
       timestamp: v.number(),
       before: v.union(accountValuesValidator, v.null()),
       after: accountValuesValidator,
@@ -310,10 +348,37 @@ export const history = query({
     if (company === null || !canAccessAccount(member, company))
       throw new ConvexError('COMPANY_NOT_FOUND');
     validatePageSize(args.paginationOpts.numItems);
-    return context.db
+    const result = await context.db
       .query('accountAudit')
       .withIndex('by_companyId', (index) => index.eq('companyId', company._id))
       .paginate(args.paginationOpts);
+    return {
+      ...result,
+      page: await Promise.all(
+        result.page.map(async (entry) => ({
+          ...entry,
+          actorName: await memberDisplayName(
+            context,
+            args.workspaceId,
+            entry.actorId,
+          ),
+          beforeOwnerName: entry.before?.accountOwnerId
+            ? await memberDisplayName(
+                context,
+                args.workspaceId,
+                entry.before.accountOwnerId,
+              )
+            : null,
+          afterOwnerName: entry.after.accountOwnerId
+            ? await memberDisplayName(
+                context,
+                args.workspaceId,
+                entry.after.accountOwnerId,
+              )
+            : null,
+        })),
+      ),
+    };
   },
 });
 

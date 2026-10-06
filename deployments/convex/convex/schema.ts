@@ -10,6 +10,7 @@ import {
   accountViewConfigurationValidator,
   accountViewScopeValidator,
 } from './accountViewContract';
+import { accountOperationValidator } from './accountOperationContract';
 
 export default defineSchema({
   ...authTables,
@@ -148,4 +149,20 @@ export default defineSchema({
       'scope',
       'createdByMemberId',
     ]),
+  accountOperationReceipts: defineTable({
+    workspaceId: v.id('workspaces'),
+    actorId: v.id('workspaceMembers'),
+    operationId: v.string(),
+    operation: accountOperationValidator,
+    payload: v.string(),
+    companyId: v.id('workspaceCompanies'),
+    revision: v.number(),
+    changed: v.boolean(),
+    requiresManager: v.boolean(),
+    acceptedAt: v.number(),
+  }).index('by_workspaceId_and_actorId_and_operationId', [
+    'workspaceId',
+    'actorId',
+    'operationId',
+  ]),
 });
