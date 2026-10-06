@@ -2,6 +2,7 @@ import { convexTest } from 'convex-test';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 
 import { FIXTURE_SITE_URL } from '../testing/sessionFixtures';
+import { setCreatorSalesRole } from '../testing/accountFixtures';
 import { api } from './_generated/api';
 import schema from './schema';
 
@@ -100,6 +101,7 @@ const createFixture = async () => {
   const workspaceId = await firstSession.mutation(api.workspaces.create, {
     name: 'Session Workspace',
   });
+  await setCreatorSalesRole(test, workspaceId);
   const companyId = await firstSession.mutation(api.workspaceCompanies.create, {
     workspaceId,
     name: 'Session Fixture Co',

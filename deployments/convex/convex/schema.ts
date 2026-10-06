@@ -4,6 +4,7 @@ import { defineSchema, defineTable } from 'convex/server';
 import { v } from 'convex/values';
 
 import { decisionValidator, lifecycleValidator } from './approvalContract';
+import { accountValuesValidator, industryValidator } from './accountContract';
 import { membershipRoleValidator } from './membershipRole';
 
 export default defineSchema({
@@ -77,6 +78,7 @@ export default defineSchema({
   workspaceCompanies: defineTable({
     workspaceId: v.id('workspaces'),
     revision: v.number(),
+    industry: v.optional(industryValidator),
     name: v.string(),
     domainName: v.object({
       primaryLinkUrl: v.string(),
@@ -94,9 +96,24 @@ export default defineSchema({
     createdAt: v.number(),
     updatedAt: v.number(),
     deletedAt: v.union(v.number(), v.null()),
-  }).index('by_workspaceId_and_deletedAt_and_name', [
-    'workspaceId',
-    'deletedAt',
-    'name',
-  ]),
+  })
+    .index('by_workspaceId_and_deletedAt_and_name', [
+      'workspaceId',
+      'deletedAt',
+      'name',
+    ])
+    .index('by_workspaceId_and_accountOwnerId_and_deletedAt_and_name', [
+      'workspaceId',
+      'accountOwnerId',
+      'deletedAt',
+      'name',
+    ]),
+  accountAudit: defineTable({
+    workspaceId: v.id('workspaces'),
+    companyId: v.id('workspaceCompanies'),
+    actorId: v.id('workspaceMembers'),
+    timestamp: v.number(),
+    before: v.union(accountValuesValidator, v.null()),
+    after: accountValuesValidator,
+  }).index('by_companyId', ['companyId']),
 });

@@ -322,6 +322,7 @@ export const CompaniesPage = () => {
             <thead>
               <tr>
                 <th scope="col">{t`Name`}</th>
+                <th scope="col">{t`Industry`}</th>
                 <th scope="col">{t`Domain Name`}</th>
                 <th scope="col">{t`Account Owner`}</th>
                 <th scope="col">{t`Created by`}</th>
@@ -343,6 +344,13 @@ export const CompaniesPage = () => {
                       </span>
                       {company.name}
                     </Link>
+                  </td>
+                  <td>
+                    {company.industry === 'services'
+                      ? t`Services`
+                      : company.industry === 'manufacturing'
+                        ? t`Manufacturing`
+                        : '—'}
                   </td>
                   <td>
                     {company.domainName.primaryLinkUrl ? (
@@ -494,8 +502,9 @@ export const CompanyDetailPage = () => {
             workspaceId={workspaceId}
             initialValues={{
               name: record.name,
+              industry: record.industry,
               domainName: record.domainName.primaryLinkLabel,
-              accountOwnerId: record.accountOwnerId,
+              accountOwnerId: record.accountOwnerId ?? undefined,
             }}
             onSave={saveCompany}
             onCancel={() => setEditingRevision(null)}
@@ -508,6 +517,16 @@ export const CompanyDetailPage = () => {
             <div>
               <dt>{t`Name`}</dt>
               <dd>{record.name}</dd>
+            </div>
+            <div>
+              <dt>{t`Industry`}</dt>
+              <dd>
+                {record.industry === 'services'
+                  ? t`Services`
+                  : record.industry === 'manufacturing'
+                    ? t`Manufacturing`
+                    : '—'}
+              </dd>
             </div>
             <div>
               <dt>{t`Domain Name`}</dt>

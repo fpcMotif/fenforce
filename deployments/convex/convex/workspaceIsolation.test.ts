@@ -108,7 +108,6 @@ it('omits disabled employees from the owner picker while retaining historical ow
 
 it('switches explicit workspace scope without reusing another workspace record or owner', async () => {
   const {
-    admin,
     actor,
     firstWorkspaceId,
     secondWorkspaceId,
@@ -152,7 +151,7 @@ it('switches explicit workspace scope without reusing another workspace record o
     }),
   ).rejects.toThrow('COMPANY_NOT_FOUND');
   await expect(
-    admin.mutation(api.workspaceCompanies.softDelete, {
+    actor.mutation(api.workspaceCompanies.softDelete, {
       workspaceId: secondWorkspaceId,
       companyId: firstCompanyId,
     }),
