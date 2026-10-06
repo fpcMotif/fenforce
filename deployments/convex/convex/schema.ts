@@ -6,6 +6,10 @@ import { v } from 'convex/values';
 import { decisionValidator, lifecycleValidator } from './approvalContract';
 import { accountValuesValidator, industryValidator } from './accountContract';
 import { membershipRoleValidator } from './membershipRole';
+import {
+  accountViewConfigurationValidator,
+  accountViewScopeValidator,
+} from './accountViewContract';
 
 export default defineSchema({
   ...authTables,
@@ -80,6 +84,7 @@ export default defineSchema({
     revision: v.number(),
     industry: v.optional(industryValidator),
     name: v.string(),
+    nameSortKey: v.optional(v.string()),
     domainName: v.object({
       primaryLinkUrl: v.string(),
       primaryLinkLabel: v.string(),
@@ -97,6 +102,18 @@ export default defineSchema({
     updatedAt: v.number(),
     deletedAt: v.union(v.number(), v.null()),
   })
+    .index('by_nameSortKey', ['nameSortKey'])
+    .index('by_workspaceId_and_deletedAt_and_nameSortKey', [
+      'workspaceId',
+      'deletedAt',
+      'nameSortKey',
+    ])
+    .index('by_workspaceId_and_accountOwnerId_and_deletedAt_and_nameSortKey', [
+      'workspaceId',
+      'accountOwnerId',
+      'deletedAt',
+      'nameSortKey',
+    ])
     .index('by_workspaceId_and_deletedAt_and_name', [
       'workspaceId',
       'deletedAt',
@@ -116,4 +133,19 @@ export default defineSchema({
     before: v.union(accountValuesValidator, v.null()),
     after: accountValuesValidator,
   }).index('by_companyId', ['companyId']),
+  accountViews: defineTable({
+    workspaceId: v.id('workspaces'),
+    createdByMemberId: v.id('workspaceMembers'),
+    name: v.string(),
+    scope: accountViewScopeValidator,
+    configuration: accountViewConfigurationValidator,
+    revision: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_workspaceId_and_scope', ['workspaceId', 'scope'])
+    .index('by_workspaceId_and_scope_and_createdByMemberId', [
+      'workspaceId',
+      'scope',
+      'createdByMemberId',
+    ]),
 });
