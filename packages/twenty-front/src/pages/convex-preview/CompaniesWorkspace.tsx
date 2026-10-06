@@ -5,6 +5,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   Link,
   Navigate,
+  useLocation,
   useNavigate,
   useParams,
   useRouter,
@@ -17,15 +18,21 @@ import {
   IconBuildingSkyscraper,
   IconChevronLeft,
   IconPlus,
+  IconUsers,
 } from 'twenty-ui/icon';
 
 import { api } from '../../../../../deployments/convex/convex/_generated/api';
-import type { Id } from '../../../../../deployments/convex/convex/_generated/dataModel';
+import type {
+  Doc,
+  Id,
+} from '../../../../../deployments/convex/convex/_generated/dataModel';
 import { CompanyForm, type CompanyFormValues } from './CompanyForm';
+import { MemberAdministration } from './MemberAdministration';
 
 type WorkspaceContextValue = {
   workspaceId: Id<'workspaces'>;
   workspaceName: string;
+  role: Doc<'workspaceMembers'>['role'];
 };
 
 const WorkspaceContext = createContext<WorkspaceContextValue | null>(null);
@@ -45,6 +52,7 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
   const { signOut } = useAuthActions();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const location = useLocation();
   const { workspace: requestedWorkspace } = useSearch({ strict: false });
   const connection = useConvexConnectionState();
   const workspaces = useConvexPaginatedQuery(
@@ -141,10 +149,20 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
 
   const workspaceId = selected.workspaceId;
   const workspaceName = selected.name;
+  const isAdministrator = selected.role === 'admin';
+  if (isAdministrator && location.pathname !== '/settings/members') {
+    return (
+      <Navigate
+        to="/settings/members"
+        search={{ workspace: workspaceId }}
+        replace
+      />
+    );
+  }
   return (
     <WorkspaceContext.Provider
       key={workspaceId}
-      value={{ workspaceId, workspaceName }}
+      value={{ workspaceId, workspaceName, role: selected.role }}
     >
       <div className="fenforce-app">
         <aside className="fenforce-sidebar">
@@ -177,18 +195,24 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
               onClick={() => workspaces.loadMore(50)}
             >{t`Load more workspaces`}</button>
           )}
-          <div className="fenforce-sidebar-section">{t`Objects`}</div>
+          <div className="fenforce-sidebar-section">
+            {isAdministrator ? t`Administration` : t`Objects`}
+          </div>
           <nav aria-label={t`Workspace navigation`}>
             <Link
-              to="/objects/companies"
+              to={isAdministrator ? '/settings/members' : '/objects/companies'}
               search={{ workspace: workspaceId }}
               className="fenforce-sidebar-link"
               activeProps={{
                 className: 'fenforce-sidebar-link fenforce-sidebar-link-active',
               }}
             >
-              <IconBuildingSkyscraper size={16} />
-              <span>{t`Companies`}</span>
+              {isAdministrator ? (
+                <IconUsers size={16} />
+              ) : (
+                <IconBuildingSkyscraper size={16} />
+              )}
+              <span>{isAdministrator ? t`Members` : t`Companies`}</span>
             </Link>
           </nav>
           <button
@@ -217,6 +241,19 @@ const formatDate = (timestamp: number) =>
     day: 'numeric',
     year: 'numeric',
   }).format(new Date(timestamp));
+
+export const WorkspaceAdministrationPage = () => {
+  const { t } = useLingui();
+  const { workspaceId, role } = useWorkspace();
+  if (role !== 'admin')
+    return (
+      <div
+        className="fenforce-page"
+        role="alert"
+      >{t`Administrator access is required.`}</div>
+    );
+  return <MemberAdministration workspaceId={workspaceId} />;
+};
 
 export const CompaniesPage = () => {
   const { t } = useLingui();
