@@ -10,6 +10,7 @@ import { useState } from 'react';
 
 import {
   CompanyDetailPage,
+  CompanyTrashPage,
   CompaniesPage,
   WorkspaceGate,
   WorkspaceAdministrationPage,
@@ -51,6 +52,11 @@ const membersRoute = createRoute({
   path: '/settings/members',
   component: WorkspaceAdministrationPage,
 });
+const trashRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/objects/companies/trash',
+  component: CompanyTrashPage,
+});
 const createPreviewRouter = () =>
   createRouter({
     defaultErrorComponent: PreviewError,
@@ -59,6 +65,7 @@ const createPreviewRouter = () =>
       companiesRoute,
       companyDetailRoute,
       membersRoute,
+      trashRoute,
     ]),
   });
 

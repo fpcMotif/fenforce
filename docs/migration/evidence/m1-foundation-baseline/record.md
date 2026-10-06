@@ -58,8 +58,15 @@ The browser separately exercises deployed token validation and persisted records
 
 The previous Twenty browser baseline is retained under `../s0-company-journey/`.
 Its source and session comparison is recorded in `../s2-sign-in-journey/record.md`.
-This run did not start a second PostgreSQL/Redis-backed Twenty deployment.
-It therefore establishes fresh Convex behavior, not a fresh paired legacy replay.
+The fresh legacy attempt used isolated Compose project `fenforce-m1-baseline` on 2026-10-06.
+PostgreSQL 16 and Redis 7 started and passed their health checks.
+The uncached `twenty-server#build` and `database:init:command` completed successfully.
+The synthetic development seed then failed before browser enrollment.
+It requires `dist/assets/engine/core-modules/application/application-package/constants/seed-dependencies/yarn.lock`, which the build did not provide.
+`workspace:seed:dev` logged `ENOENT` despite exiting zero; that exit code is not a passing seed.
+Legacy source matches the baseline revision; later integration changed only the isolated Convex surface and its evidence.
+No legacy application fix was made during this verification-only baseline.
+This establishes fresh Convex behavior and a reproducible legacy startup defect, not a fresh paired legacy journey.
 The synthetic M1 contract governs intended identity, ownership, lifecycle, and field changes.
 
 ## Review and boundaries

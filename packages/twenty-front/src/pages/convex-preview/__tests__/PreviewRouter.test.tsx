@@ -20,6 +20,7 @@ vi.mock('../CompaniesWorkspace', () => ({
     throw mockSessionError;
   },
   CompanyDetailPage: () => null,
+  CompanyTrashPage: () => null,
   WorkspaceAdministrationPage: () => null,
 }));
 
