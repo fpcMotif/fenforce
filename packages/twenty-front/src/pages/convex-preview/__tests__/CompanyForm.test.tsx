@@ -1,5 +1,6 @@
 import { vi } from 'vite-plus/test';
 import { setupI18n } from '@lingui/core';
+import { msg } from '@lingui/core/macro';
 import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -123,4 +124,22 @@ it('omits unchanged compound domain and owner values on an ordinary edit', async
     name: 'Acme revised',
     industry: 'manufacturing',
   });
+});
+
+it.each([
+  { locale: 'zh', name: '公司名称', industry: '行业', create: '创建公司' },
+  { locale: 'en', name: '[Ñååmëë — expanded]', industry: '[Ïñdüstrÿ — expanded]', create: '[Çrëåtë çømpåñÿ — expanded]' },
+])('keeps stable values with $locale translated labels in an RTL container', async ({ locale, name, industry, create }) => {
+  const onSave = vi.fn().mockResolvedValue(undefined);
+  const user = userEvent.setup();
+  const messages = {
+    [msg`Name`.id]: name,
+    [msg`Industry`.id]: industry,
+    [msg`Create company`.id]: create,
+  };
+  render(<div dir="rtl"><I18nProvider i18n={setupI18n({ locale, messages: { [locale]: messages } })}><CompanyForm workspaceId={'workspace' as Id<'workspaces'>} onSave={onSave} onCancel={vi.fn()} /></I18nProvider></div>);
+  await user.type(screen.getByRole('textbox', { name }), '上海 شركة');
+  await user.selectOptions(screen.getByRole('combobox', { name: industry }), 'manufacturing');
+  await user.click(screen.getByRole('button', { name: create }));
+  expect(onSave).toHaveBeenCalledWith({ name: '上海 شركة', industry: 'manufacturing', domainName: '' });
 });
