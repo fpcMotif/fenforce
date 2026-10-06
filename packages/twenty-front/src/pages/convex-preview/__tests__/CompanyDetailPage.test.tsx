@@ -31,6 +31,7 @@ vi.mock('@convex-dev/react-query', () => ({
   }),
 }));
 vi.mock('@tanstack/react-query', () => ({
+  useQueryClient: () => ({ clear: vi.fn() }),
   useQuery: () => ({
     data: {
       _id: 'company',
@@ -48,6 +49,7 @@ vi.mock('@tanstack/react-router', () => ({
   ),
   useParams: () => ({ companyId: 'company' }),
   useNavigate: () => vi.fn(),
+  useSearch: () => ({ workspace: 'workspace' }),
 }));
 vi.mock('convex/react', () => ({
   useMutation: () => mockUpdateCompany,
