@@ -19,6 +19,7 @@ import {
   type ReactNode,
 } from 'react';
 import { MainButton } from 'twenty-ui/components';
+import { ErrorBoundary } from 'react-error-boundary';
 import {
   IconBuildingSkyscraper,
   IconChevronLeft,
@@ -36,6 +37,11 @@ import { CompanyForm, type CompanyFormValues } from './CompanyForm';
 import { MemberAdministration } from './MemberAdministration';
 import { CompanyTrash, CompanyTrashAction } from './CompanyLifecycle';
 import { CompanyHistory } from './CompanyHistory';
+import { CompanyViewControls } from './CompanyViewControls';
+import {
+  companyViewFromSearch,
+  companyViewToSearch,
+} from './companyViewConfiguration';
 import { isSalesRole } from '../../../../../deployments/convex/convex/membershipRole';
 
 type WorkspaceContextValue = {
@@ -296,7 +302,22 @@ export const CompaniesPage = () => {
         role="alert"
       >{t`Sales access is required.`}</div>
     );
-  return <CompanyRecords />;
+  return (
+    <ErrorBoundary
+      fallbackRender={({ resetErrorBoundary }) => (
+        <div className="fenforce-page" role="alert">
+          <h1>{t`Unable to load companies`}</h1>
+          <p>{t`Your filters are preserved. Retry to reload the results.`}</p>
+          <button
+            type="button"
+            onClick={resetErrorBoundary}
+          >{t`Retry results`}</button>
+        </div>
+      )}
+    >
+      <CompanyRecords />
+    </ErrorBoundary>
+  );
 };
 
 export const CompanyTrashPage = () => {
@@ -317,10 +338,18 @@ const CompanyRecords = () => {
   const { workspaceId, workspaceName, role } = useWorkspace();
   const navigate = useNavigate();
   const router = useRouter();
+  const search = useSearch({ strict: false });
+  const currentLocation = useLocation();
+  const configuration = companyViewFromSearch(search);
   const createCompany = useMutation(api.workspaceCompanies.create);
   const companies = useConvexPaginatedQuery(
     api.workspaceCompanies.list,
-    { workspaceId },
+    {
+      workspaceId,
+      search: configuration.search,
+      filters: configuration.filters,
+      sortDirection: configuration.sort.direction,
+    },
     { initialNumItems: 25 },
   );
   const [isCreating, setIsCreating] = useState(false);
@@ -355,6 +384,23 @@ const CompanyRecords = () => {
           {t`New company`}
         </MainButton>
       </header>
+      <CompanyViewControls
+        workspaceId={workspaceId}
+        manager={role === 'manager'}
+        configuration={configuration}
+        selectedViewId={search.view}
+        onChange={(nextConfiguration, viewId) => {
+          if (router.state.location !== currentLocation) return;
+          void navigate({
+            to: '/objects/companies',
+            search: {
+              workspace: workspaceId,
+              ...companyViewToSearch(nextConfiguration),
+              view: viewId,
+            },
+          });
+        }}
+      />
       {isCreating && (
         <section className="fenforce-editor" aria-label={t`New company`}>
           <h2>{t`New company`}</h2>
@@ -379,58 +425,59 @@ const CompanyRecords = () => {
           <table>
             <thead>
               <tr>
-                <th scope="col">{t`Name`}</th>
-                <th scope="col">{t`Industry`}</th>
-                <th scope="col">{t`Domain Name`}</th>
-                <th scope="col">{t`Account Owner`}</th>
-                <th scope="col">{t`Created by`}</th>
-                <th scope="col">{t`Creation date`}</th>
+                {configuration.columns.map((column) => (
+                  <th key={column} scope="col">
+                    {column === 'account.name'
+                      ? t`Name`
+                      : column === 'account.owner'
+                        ? t`Account Owner`
+                        : t`Industry`}
+                  </th>
+                ))}
+                {!configuration.columns.includes('account.name') && (
+                  <th scope="col">{t`Open`}</th>
+                )}
               </tr>
             </thead>
             <tbody>
               {companies.results.map((company) => (
                 <tr key={company._id}>
-                  <td>
-                    <Link
-                      to="/object/company/$companyId"
-                      params={{ companyId: company._id }}
-                      search={{ workspace: workspaceId }}
-                      className="fenforce-record-name"
-                    >
-                      <span className="fenforce-company-icon">
-                        <IconBuildingSkyscraper size={15} />
-                      </span>
-                      {company.name}
-                    </Link>
-                  </td>
-                  <td>
-                    {company.industry === 'services'
-                      ? t`Services`
-                      : company.industry === 'manufacturing'
-                        ? t`Manufacturing`
-                        : '—'}
-                  </td>
-                  <td>
-                    {company.domainName.primaryLinkUrl ? (
-                      <a
-                        className="fenforce-domain-link"
-                        href={company.domainName.primaryLinkUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {company.domainName.primaryLinkLabel}
-                      </a>
-                    ) : (
-                      <span className="fenforce-muted">—</span>
-                    )}
-                  </td>
-                  <td>
-                    {company.accountOwnerName ?? (
-                      <span className="fenforce-muted">—</span>
-                    )}
-                  </td>
-                  <td>{company.createdByName}</td>
-                  <td>{formatDate(company.createdAt)}</td>
+                  {configuration.columns.map((column) => (
+                    <td key={column}>
+                      {column === 'account.name' ? (
+                        <Link
+                          to="/object/company/$companyId"
+                          params={{ companyId: company._id }}
+                          search={{ workspace: workspaceId }}
+                          className="fenforce-record-name"
+                        >
+                          <span className="fenforce-company-icon">
+                            <IconBuildingSkyscraper size={15} />
+                          </span>
+                          {company.name}
+                        </Link>
+                      ) : column === 'account.industry' ? (
+                        company.industry === 'services' ? (
+                          t`Services`
+                        ) : company.industry === 'manufacturing' ? (
+                          t`Manufacturing`
+                        ) : (
+                          '—'
+                        )
+                      ) : (
+                        (company.accountOwnerName ?? '—')
+                      )}
+                    </td>
+                  ))}
+                  {!configuration.columns.includes('account.name') && (
+                    <td>
+                      <Link
+                        to="/object/company/$companyId"
+                        params={{ companyId: company._id }}
+                        search={{ workspace: workspaceId }}
+                      >{t`Open company`}</Link>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>
@@ -441,14 +488,13 @@ const CompanyRecords = () => {
             {t`Loading companies…`}
           </div>
         )}
-        {companies.status !== 'LoadingFirstPage' &&
-          companies.results.length === 0 && (
-            <div className="fenforce-table-message">
-              <IconBuildingSkyscraper size={24} />
-              <strong>{t`No companies yet`}</strong>
-              <span>{t`Create a company to start building your records.`}</span>
-            </div>
-          )}
+        {companies.status === 'Exhausted' && companies.results.length === 0 && (
+          <div className="fenforce-table-message">
+            <IconBuildingSkyscraper size={24} />
+            <strong>{t`No matching companies`}</strong>
+            <span>{t`Change your filters or create a company.`}</span>
+          </div>
+        )}
         {(companies.status === 'CanLoadMore' ||
           companies.status === 'LoadingMore') && (
           <div className="fenforce-load-more">
@@ -458,7 +504,11 @@ const CompanyRecords = () => {
               disabled={companies.status === 'LoadingMore'}
               onClick={() => companies.loadMore(25)}
             >
-              {companies.status === 'LoadingMore' ? t`Loading…` : t`Load more`}
+              {companies.status === 'LoadingMore'
+                ? t`Loading…`
+                : companies.results.length === 0
+                  ? t`Continue searching`
+                  : t`Load more`}
             </button>
           </div>
         )}

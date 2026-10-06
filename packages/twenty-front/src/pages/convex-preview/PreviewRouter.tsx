@@ -16,13 +16,18 @@ import {
   WorkspaceAdministrationPage,
 } from './CompaniesWorkspace';
 import { PreviewError } from './PreviewError';
+import type { CompanyViewSearch } from './companyViewConfiguration';
 
 const rootRoute = createRootRoute({
-  validateSearch: (
-    search: Record<string, unknown>,
-  ): { workspace?: string } => ({
+  validateSearch: (search: Record<string, unknown>): CompanyViewSearch => ({
     workspace:
       typeof search.workspace === 'string' ? search.workspace : undefined,
+    q: typeof search.q === 'string' ? search.q : undefined,
+    industry: typeof search.industry === 'string' ? search.industry : undefined,
+    owner: typeof search.owner === 'string' ? search.owner : undefined,
+    sort: typeof search.sort === 'string' ? search.sort : undefined,
+    columns: typeof search.columns === 'string' ? search.columns : undefined,
+    view: typeof search.view === 'string' ? search.view : undefined,
   }),
   component: () => (
     <WorkspaceGate>

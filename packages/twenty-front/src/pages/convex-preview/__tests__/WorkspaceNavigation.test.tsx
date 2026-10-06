@@ -10,6 +10,9 @@ import { PreviewRouter } from '~/pages/convex-preview/PreviewRouter';
 const signOut = vi.fn(() => new Promise<void>(() => undefined));
 const mutation = vi.fn();
 let workspaceRole = 'seller';
+let emptyPage = false;
+let failedPage = false;
+const loadMore = vi.fn();
 vi.mock('@convex-dev/auth/react', () => ({
   useAuthActions: () => ({ signOut }),
 }));
@@ -22,34 +25,126 @@ vi.mock('@convex-dev/react-query', () => ({
   useConvexPaginatedQuery: (
     _reference: unknown,
     args: { workspaceId?: string },
-  ) => ({
-    status: 'Exhausted',
-    results: args.workspaceId
-      ? [
-          {
-            _id: `${args.workspaceId}-company`,
-            memberId: 'seller',
-            displayName: 'Seller',
-            name: `${args.workspaceId} company`,
-            domainName: {},
-            createdByName: 'Seller',
-            createdAt: 0,
-          },
-        ]
-      : [
-          {
-            workspaceId: 'workspace-a',
-            name: 'Workspace A',
-            role: workspaceRole,
-          },
-          {
-            workspaceId: 'workspace-b',
-            name: 'Workspace B',
-            role: workspaceRole,
-          },
-        ],
-  }),
+  ) => {
+    if (failedPage && args.workspaceId) throw new Error('Page unavailable');
+    return {
+      status: emptyPage && args.workspaceId ? 'CanLoadMore' : 'Exhausted',
+      loadMore,
+      results:
+        emptyPage && args.workspaceId
+          ? []
+          : args.workspaceId
+            ? [
+                {
+                  _id: `${args.workspaceId}-company`,
+                  memberId: 'seller',
+                  displayName: 'Seller',
+                  name: `${args.workspaceId} company`,
+                  domainName: {},
+                  createdByName: 'Seller',
+                  createdAt: 0,
+                },
+              ]
+            : [
+                {
+                  workspaceId: 'workspace-a',
+                  name: 'Workspace A',
+                  role: workspaceRole,
+                },
+                {
+                  workspaceId: 'workspace-b',
+                  name: 'Workspace B',
+                  role: workspaceRole,
+                },
+              ],
+    };
+  },
 }));
+
+it('preserves filters in the URL and offers continuation for an empty nonterminal page', async () => {
+  emptyPage = true;
+  loadMore.mockClear();
+  window.history.replaceState(
+    {},
+    '',
+    '/objects/companies?workspace=workspace-a&q=acme&industry=services&sort=desc',
+  );
+  const user = userEvent.setup();
+  try {
+    render(
+      <I18nProvider i18n={setupI18n({ locale: 'en', messages: { en: {} } })}>
+        <QueryClientProvider client={new QueryClient()}>
+          <PreviewRouter />
+        </QueryClientProvider>
+      </I18nProvider>,
+    );
+    expect(
+      await screen.findByRole('searchbox', { name: 'Search companies' }),
+    ).toHaveValue('acme');
+    expect(
+      screen.getByRole('combobox', { name: 'Filter industry' }),
+    ).toHaveValue('services');
+    expect(screen.getByRole('combobox', { name: 'Sort by name' })).toHaveValue(
+      'desc',
+    );
+    expect(screen.queryByText('No matching companies')).toBeNull();
+    await user.click(
+      screen.getByRole('button', { name: 'Continue searching' }),
+    );
+    expect(loadMore).toHaveBeenCalledWith(25);
+    await user.selectOptions(
+      screen.getByRole('combobox', { name: 'Sort by name' }),
+      'asc',
+    );
+    await waitFor(() =>
+      expect(new URLSearchParams(window.location.search).get('sort')).toBe(
+        'asc',
+      ),
+    );
+    await act(async () => window.history.back());
+    await waitFor(() =>
+      expect(
+        screen.getByRole('combobox', { name: 'Sort by name' }),
+      ).toHaveValue('desc'),
+    );
+  } finally {
+    emptyPage = false;
+  }
+});
+
+it('lets a failed results page retry without discarding its search', async () => {
+  failedPage = true;
+  window.history.replaceState(
+    {},
+    '',
+    '/objects/companies?workspace=workspace-a&q=acme',
+  );
+  const user = userEvent.setup();
+  const errorLog = vi
+    .spyOn(console, 'error')
+    .mockImplementation(() => undefined);
+  try {
+    render(
+      <I18nProvider i18n={setupI18n({ locale: 'en', messages: { en: {} } })}>
+        <QueryClientProvider client={new QueryClient()}>
+          <PreviewRouter />
+        </QueryClientProvider>
+      </I18nProvider>,
+    );
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      'Your filters are preserved',
+    );
+    failedPage = false;
+    await user.click(screen.getByRole('button', { name: 'Retry results' }));
+    expect(
+      await screen.findByRole('searchbox', { name: 'Search companies' }),
+    ).toHaveValue('acme');
+    expect(screen.getByText('workspace-a company')).toBeVisible();
+  } finally {
+    failedPage = false;
+    errorLog.mockRestore();
+  }
+});
 
 it('selects the first assigned workspace after sign-in without a workspace parameter', async () => {
   window.history.replaceState({}, '', '/objects/companies');
