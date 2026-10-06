@@ -14,26 +14,26 @@
     "check": "bun run typecheck && bun run effect:check && bun run lint && bun run format:check && bun run test"
   },
   "devDependencies": {
-    "@effect/tsgo": "0.46.1",
-    "@types/node": "^24.0.0",
+    "@effect/tsgo": "0.51.1",
+    "@types/node": "^26.6.4",
     "convex-test": "^0.0.60",
-    "oxfmt": "0.70.0",
-    "oxlint": "1.85.0",
-    "oxlint-plugin-complexity": "3.0.0",
+    "oxfmt": "0.72.0",
+    "oxlint": "1.87.0",
+    "oxlint-plugin-complexity": "3.0.1",
     "oxlint-tsgolint": "7.0.2003",
-    "typescript": "7.0.2",
-    "varlock": "1.21.0",
-    "vitest": "^5.0.2"
+    "typescript": "next",
+    "varlock": "1.21.1",
+    "vitest": "^5.0.3"
   },
   "packageManager": "bun@1.4.3",
   "dependencies": {
-    "@auth/core": "0.41.1",
-    "@convex-dev/auth": "^0.0.95",
-    "@convex-dev/workflow": "0.4.8",
-    "@convex-dev/workpool": "0.4.12",
+    "@auth/core": "0.41.3",
+    "@convex-dev/auth": "^0.0.96",
+    "@convex-dev/workflow": "0.4.9",
+    "@convex-dev/workpool": "0.4.13",
     "convex": "^1.46.0",
-    "convex-helpers": "0.1.124",
-    "effect": "4.0.0-rc.117",
+    "convex-helpers": "0.1.128",
+    "effect": "4.0.2",
     "jose": "6.2.12"
   }
 }

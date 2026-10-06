@@ -24,6 +24,31 @@ export const list = query({
     workspaceId: v.id('workspaces'),
     paginationOpts: paginationOptsValidator,
   },
+  returns: v.object({
+    page: v.array(
+      v.object({
+        _id: v.id('accountViews'),
+        _creationTime: v.number(),
+        workspaceId: v.id('workspaces'),
+        createdByMemberId: v.id('workspaceMembers'),
+        name: v.string(),
+        scope: accountViewScopeValidator,
+        configuration: accountViewConfigurationValidator,
+        revision: v.number(),
+        updatedAt: v.number(),
+      }),
+    ),
+    continueCursor: v.string(),
+    isDone: v.boolean(),
+    splitCursor: v.union(v.string(), v.null()),
+    pageStatus: v.optional(
+      v.union(
+        v.literal('SplitRecommended'),
+        v.literal('SplitRequired'),
+        v.null(),
+      ),
+    ),
+  }),
   handler: async (context, args) => {
     const member = await requireSalesMember(context, args.workspaceId);
     validateAccountPageSize(args.paginationOpts.numItems);
@@ -97,6 +122,7 @@ export const save = mutation({
     scope: accountViewScopeValidator,
     configuration: accountViewConfigurationValidator,
   },
+  returns: v.id('accountViews'),
   handler: async (context, args) => {
     const member = await requireSalesMember(context, args.workspaceId);
     const name = validateAccountView(args.name, args.configuration);
@@ -145,6 +171,7 @@ export const remove = mutation({
     viewId: v.id('accountViews'),
     expectedRevision: v.number(),
   },
+  returns: v.null(),
   handler: async (context, args) => {
     const member = await requireSalesMember(context, args.workspaceId);
     const view = await writableView(

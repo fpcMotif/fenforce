@@ -17,21 +17,21 @@
   },
   "dependencies": {
     "@sniptt/guards": "0.2.0",
-    "effect": "4.0.0-rc.117"
+    "effect": "4.0.2"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "5.20260928.1",
-    "@effect/tsgo": "0.46.1",
+    "@cloudflare/workers-types": "5.20261009.1",
+    "@effect/tsgo": "0.51.1",
     "@types/bun": "1.4.2",
-    "fallow": "3.30.0",
-    "oxfmt": "0.70.0",
-    "oxlint": "1.85.0",
-    "oxlint-plugin-complexity": "3.0.0",
+    "fallow": "3.32.0",
+    "oxfmt": "0.72.0",
+    "oxlint": "1.87.0",
+    "oxlint-plugin-complexity": "3.0.1",
     "oxlint-tsgolint": "7.0.2003",
-    "typescript": "7.0.2",
-    "ultracite": "7.12.1",
-    "varlock": "1.21.0",
-    "wrangler": "4.142.0"
+    "typescript": "next",
+    "ultracite": "7.12.4",
+    "varlock": "1.21.1",
+    "wrangler": "4.149.0"
   },
   "packageManager": "bun@1.4.3"
 }
