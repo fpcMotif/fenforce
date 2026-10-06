@@ -20,6 +20,8 @@ export type CompanyFormValues = {
 type CompanyFormProps = {
   workspaceId: Id<'workspaces'>;
   initialValues?: CompanyFormValues;
+  canReassignOwner?: boolean;
+  ownerName?: string | null;
   onSave: (values: CompanyFormValues) => Promise<void>;
   onCancel: () => void;
 };
@@ -27,6 +29,8 @@ type CompanyFormProps = {
 export const CompanyForm = ({
   workspaceId,
   initialValues,
+  canReassignOwner = false,
+  ownerName,
   onSave,
   onCancel,
 }: CompanyFormProps) => {
@@ -43,7 +47,7 @@ export const CompanyForm = ({
   const [error, setError] = useState('');
   const members = useConvexPaginatedQuery(
     api.workspaceCompanies.listEligibleOwners,
-    { workspaceId },
+    canReassignOwner ? { workspaceId } : 'skip',
     { initialNumItems: 50 },
   );
 
@@ -59,7 +63,8 @@ export const CompanyForm = ({
         ...(domainName === initialValues?.domainName
           ? {}
           : { domainName: domainName.trim() }),
-        ...(accountOwnerId === undefined ||
+        ...(!canReassignOwner ||
+        accountOwnerId === undefined ||
         accountOwnerId === initialValues?.accountOwnerId
           ? {}
           : { accountOwnerId }),
@@ -121,37 +126,47 @@ export const CompanyForm = ({
       </label>
       <label>
         <span>{t`Account Owner`}</span>
-        <select
-          name={ACCOUNT_FIELDS.owner.name}
-          value={accountOwnerId ?? ''}
-          onChange={(event) =>
-            setAccountOwnerId(
-              event.target.value === ''
-                ? undefined
-                : (event.target.value as Id<'workspaceMembers'>),
-            )
-          }
-          disabled={members.status === 'LoadingFirstPage'}
-        >
-          <option value="">
-            {initialValues ? t`Keep current owner` : t`You (default owner)`}
-          </option>
-          {initialValues?.accountOwnerId !== undefined &&
-            !members.results.some(
-              (member) => member.memberId === initialValues.accountOwnerId,
-            ) && (
-              <option
-                value={initialValues.accountOwnerId}
-              >{t`Current owner`}</option>
-            )}
-          {members.results.map((member) => (
-            <option key={member.memberId} value={member.memberId}>
-              {member.displayName}
+        {canReassignOwner ? (
+          <select
+            name={ACCOUNT_FIELDS.owner.name}
+            value={accountOwnerId ?? ''}
+            onChange={(event) =>
+              setAccountOwnerId(
+                event.target.value === ''
+                  ? undefined
+                  : (event.target.value as Id<'workspaceMembers'>),
+              )
+            }
+            disabled={members.status === 'LoadingFirstPage'}
+          >
+            <option value="">
+              {initialValues ? t`Keep current owner` : t`You (default owner)`}
             </option>
-          ))}
-        </select>
+            {initialValues?.accountOwnerId !== undefined &&
+              !members.results.some(
+                (member) => member.memberId === initialValues.accountOwnerId,
+              ) && (
+                <option
+                  value={initialValues.accountOwnerId}
+                >{t`Current owner`}</option>
+              )}
+            {members.results.map((member) => (
+              <option key={member.memberId} value={member.memberId}>
+                {member.displayName}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <input
+            readOnly
+            value={
+              ownerName ??
+              (initialValues ? t`Current owner` : t`You (default owner)`)
+            }
+          />
+        )}
       </label>
-      {members.status === 'CanLoadMore' && (
+      {canReassignOwner && members.status === 'CanLoadMore' && (
         <button
           type="button"
           className="fenforce-text-button fenforce-left-link"

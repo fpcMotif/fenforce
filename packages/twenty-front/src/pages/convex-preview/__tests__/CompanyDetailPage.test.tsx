@@ -12,6 +12,7 @@ import {
 
 const mockUpdateCompany = vi.fn();
 let mockRevision = 1;
+let mockCanReassign = false;
 
 vi.mock('@convex-dev/auth/react', () => ({
   useAuthActions: () => ({ signOut: vi.fn() }),
@@ -26,6 +27,7 @@ vi.mock('@convex-dev/react-query', () => ({
         name: 'Workspace',
         memberId: 'member',
         displayName: 'Member',
+        role: 'seller',
       },
     ],
   }),
@@ -39,7 +41,13 @@ vi.mock('@tanstack/react-query', () => ({
       industry: 'services',
       revision: mockRevision,
       domainName: { primaryLinkLabel: '', primaryLinkUrl: '' },
-      accountOwnerId: null,
+      accountOwnerId: 'original-member',
+      accountOwnerName: 'Original owner',
+      permissions: {
+        canUpdate: true,
+        canReassign: mockCanReassign,
+        canTrash: true,
+      },
       createdAt: 0,
     },
   }),
@@ -101,4 +109,30 @@ it('submits the revision at edit start even after a subscription updates', async
     name: 'My edit',
     industry: 'services',
   });
+});
+
+it('uses server permission to let a manager reassign the owner', async () => {
+  mockCanReassign = true;
+  mockUpdateCompany.mockClear();
+  const user = userEvent.setup();
+  try {
+    render(
+      <I18nProvider i18n={setupI18n({ locale: 'en', messages: { en: {} } })}>
+        <WorkspaceGate>
+          <CompanyDetailPage />
+        </WorkspaceGate>
+      </I18nProvider>,
+    );
+    await user.click(screen.getByRole('button', { name: 'Edit company' }));
+    await user.selectOptions(
+      screen.getByRole('combobox', { name: 'Account Owner' }),
+      'member',
+    );
+    await user.click(screen.getByRole('button', { name: 'Save changes' }));
+    expect(mockUpdateCompany).toHaveBeenCalledWith(
+      expect.objectContaining({ accountOwnerId: 'member' }),
+    );
+  } finally {
+    mockCanReassign = false;
+  }
 });

@@ -28,6 +28,7 @@ import type {
 } from '../../../../../deployments/convex/convex/_generated/dataModel';
 import { CompanyForm, type CompanyFormValues } from './CompanyForm';
 import { MemberAdministration } from './MemberAdministration';
+import { isSalesRole } from '../../../../../deployments/convex/convex/membershipRole';
 
 type WorkspaceContextValue = {
   workspaceId: Id<'workspaces'>;
@@ -257,7 +258,20 @@ export const WorkspaceAdministrationPage = () => {
 
 export const CompaniesPage = () => {
   const { t } = useLingui();
-  const { workspaceId, workspaceName } = useWorkspace();
+  const { role } = useWorkspace();
+  if (!isSalesRole(role))
+    return (
+      <div
+        className="fenforce-page"
+        role="alert"
+      >{t`Sales access is required.`}</div>
+    );
+  return <CompanyRecords />;
+};
+
+const CompanyRecords = () => {
+  const { t } = useLingui();
+  const { workspaceId, workspaceName, role } = useWorkspace();
   const navigate = useNavigate();
   const router = useRouter();
   const createCompany = useMutation(api.workspaceCompanies.create);
@@ -303,6 +317,7 @@ export const CompaniesPage = () => {
           <h2>{t`New company`}</h2>
           <CompanyForm
             workspaceId={workspaceId}
+            canReassignOwner={role === 'manager'}
             onSave={saveCompany}
             onCancel={() => setIsCreating(false)}
           />
@@ -411,6 +426,19 @@ export const CompaniesPage = () => {
 
 export const CompanyDetailPage = () => {
   const { t } = useLingui();
+  const { role } = useWorkspace();
+  if (!isSalesRole(role))
+    return (
+      <div
+        className="fenforce-page"
+        role="alert"
+      >{t`Sales access is required.`}</div>
+    );
+  return <CompanyRecordDetail />;
+};
+
+const CompanyRecordDetail = () => {
+  const { t } = useLingui();
   const { workspaceId, workspaceName } = useWorkspace();
   const { companyId } = useParams({ from: '/object/company/$companyId' });
   const updateCompany = useMutation(api.workspaceCompanies.update);
@@ -485,7 +513,7 @@ export const CompanyDetailPage = () => {
           </Link>
           <h1>{record.name}</h1>
         </div>
-        {editingRevision === null && (
+        {editingRevision === null && record.permissions.canUpdate && (
           <MainButton
             type="button"
             onClick={() => setEditingRevision(record.revision)}
@@ -494,12 +522,14 @@ export const CompanyDetailPage = () => {
           </MainButton>
         )}
       </header>
-      {editingRevision !== null ? (
+      {editingRevision !== null && record.permissions.canUpdate ? (
         <section className="fenforce-editor" aria-label={t`Edit company`}>
           <h2>{t`Edit company`}</h2>
           <CompanyForm
             key={record._id}
             workspaceId={workspaceId}
+            canReassignOwner={record.permissions.canReassign}
+            ownerName={record.accountOwnerName}
             initialValues={{
               name: record.name,
               industry: record.industry,

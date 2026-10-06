@@ -44,6 +44,32 @@ it('creates an account with a code-defined industry and the default actor owner'
   );
 });
 
+it('keeps ownership read-only when the server denies reassignment', () => {
+  render(
+    <I18nProvider i18n={setupI18n({ locale: 'en', messages: { en: {} } })}>
+      <CompanyForm
+        workspaceId={'workspace' as Id<'workspaces'>}
+        canReassignOwner={false}
+        ownerName="Seller A"
+        initialValues={{
+          name: 'Acme',
+          industry: null,
+          accountOwnerId: 'seller-a' as Id<'workspaceMembers'>,
+        }}
+        onSave={vi.fn()}
+        onCancel={vi.fn()}
+      />
+    </I18nProvider>,
+  );
+  expect(screen.queryByRole('combobox', { name: 'Account Owner' })).toBeNull();
+  expect(screen.getByRole('textbox', { name: 'Account Owner' })).toHaveValue(
+    'Seller A',
+  );
+  expect(
+    screen.getByRole('textbox', { name: 'Account Owner' }),
+  ).toHaveAttribute('readonly');
+});
+
 it('keeps entered values and explains a rejected stale edit without reporting success', async () => {
   const onSave = vi.fn().mockRejectedValue(new ConvexError('COMPANY_CHANGED'));
   const onCancel = vi.fn();

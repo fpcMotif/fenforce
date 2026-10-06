@@ -111,6 +111,31 @@ it('shows administration instead of sales records for an administrator', async (
   }
 });
 
+it('does not show sales records or creation controls without a sales role', async () => {
+  workspaceRole = 'member';
+  window.history.replaceState(
+    {},
+    '',
+    '/objects/companies?workspace=workspace-a',
+  );
+  try {
+    render(
+      <I18nProvider i18n={setupI18n({ locale: 'en', messages: { en: {} } })}>
+        <QueryClientProvider client={new QueryClient()}>
+          <PreviewRouter />
+        </QueryClientProvider>
+      </I18nProvider>,
+    );
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      'Sales access is required',
+    );
+    expect(screen.queryByText('workspace-a company')).toBeNull();
+    expect(screen.queryByRole('button', { name: 'New company' })).toBeNull();
+  } finally {
+    workspaceRole = 'seller';
+  }
+});
+
 it('does not silently select another workspace for an unauthorized deep link', async () => {
   window.history.replaceState(
     {},
