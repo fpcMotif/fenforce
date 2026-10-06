@@ -111,11 +111,13 @@ export const listMembers = query({
 
     return {
       ...membersPage,
-      page: membersPage.page.map((member) => ({
-        memberId: member._id,
-        displayName: member.displayName,
-        role: member.role,
-      })),
+      page: membersPage.page
+        .filter((member) => member.active !== false)
+        .map((member) => ({
+          memberId: member._id,
+          displayName: member.displayName,
+          role: member.role,
+        })),
     };
   },
 });
