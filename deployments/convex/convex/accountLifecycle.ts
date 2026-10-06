@@ -16,9 +16,11 @@ import {
   validateAccountOwner,
 } from './accountPolicy';
 import { appendAccountAudit } from './accountAudit';
+import { readAccountReceipt, saveAccountReceipt } from './accountOperations';
 import { companyValidator, projectCompany } from './workspaceCompanies';
 
 const lifecycleArguments = {
+  operationId: v.optional(v.string()),
   workspaceId: v.id('workspaces'),
   companyId: v.id('workspaceCompanies'),
   expectedRevision: v.number(),
@@ -45,12 +47,22 @@ export const reassignTrashed = mutation({
   returns: lifecycleResult,
   handler: async (context, args) => {
     const { member, company } = await accessibleAccount(context, args);
-    if (company.deletedAt === null) throw new ConvexError('COMPANY_NOT_FOUND');
     if (member.role !== 'manager') throw new ConvexError('FORBIDDEN');
+    const receipt = await readAccountReceipt(context, member, 'reassign', args);
+    if (receipt !== null)
+      return { revision: receipt.revision, changed: receipt.changed };
+    if (company.deletedAt === null) throw new ConvexError('COMPANY_NOT_FOUND');
     assertAccountRevision(company, args.expectedRevision);
     await validateAccountOwner(context, args.workspaceId, args.accountOwnerId);
-    if (company.accountOwnerId === args.accountOwnerId)
+    if (company.accountOwnerId === args.accountOwnerId) {
+      await saveAccountReceipt(context, member, 'reassign', args, {
+        companyId: company._id,
+        revision: company.revision,
+        changed: false,
+        requiresManager: true,
+      });
       return { revision: company.revision, changed: false };
+    }
     await context.db.patch(company._id, {
       accountOwnerId: args.accountOwnerId,
       revision: company.revision + 1,
@@ -58,6 +70,12 @@ export const reassignTrashed = mutation({
       updatedBy: member._id,
     });
     await appendAccountAudit(context, company._id, company);
+    await saveAccountReceipt(context, member, 'reassign', args, {
+      companyId: company._id,
+      revision: company.revision + 1,
+      changed: true,
+      requiresManager: true,
+    });
     return { revision: company.revision + 1, changed: true };
   },
 });

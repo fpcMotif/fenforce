@@ -3,6 +3,7 @@ import { ConvexError } from 'convex/values';
 import type { Doc, Id } from './_generated/dataModel';
 import type { MutationCtx } from './_generated/server';
 import { appendAccountAudit } from './accountAudit';
+import { readAccountReceipt, saveAccountReceipt } from './accountOperations';
 import {
   canAccessAccount,
   requireSalesMember,
@@ -10,6 +11,7 @@ import {
 } from './accountPolicy';
 
 export type LifecycleArguments = {
+  operationId?: string;
   workspaceId: Id<'workspaces'>;
   companyId: Id<'workspaceCompanies'>;
   expectedRevision: number;
@@ -64,6 +66,10 @@ export const transitionAccount = async (
   trashed: boolean,
 ) => {
   const { member, company } = await accessibleAccount(context, args);
+  const operation = trashed ? 'trash' : 'restore';
+  const receipt = await readAccountReceipt(context, member, operation, args);
+  if (receipt !== null)
+    return { revision: receipt.revision, changed: receipt.changed };
   if ((company.deletedAt !== null) === trashed) {
     await verifyRepeatedTransition(
       context,
@@ -72,6 +78,12 @@ export const transitionAccount = async (
       args.expectedRevision,
       trashed,
     );
+    await saveAccountReceipt(context, member, operation, args, {
+      companyId: company._id,
+      revision: company.revision,
+      changed: false,
+      requiresManager: false,
+    });
     return { revision: company.revision, changed: false };
   }
   assertAccountRevision(company, args.expectedRevision);
@@ -89,5 +101,11 @@ export const transitionAccount = async (
     updatedBy: member._id,
   });
   await appendAccountAudit(context, company._id, company);
+  await saveAccountReceipt(context, member, operation, args, {
+    companyId: company._id,
+    revision: company.revision + 1,
+    changed: true,
+    requiresManager: false,
+  });
   return { revision: company.revision + 1, changed: true };
 };

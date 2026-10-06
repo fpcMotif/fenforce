@@ -10,6 +10,7 @@
 
 import type * as approvalContract from "../approvalContract.js";
 import type * as accountLifecycle from "../accountLifecycle.js";
+import type * as accountOperations from "../accountOperations.js";
 import type * as approvalEffects from "../approvalEffects.js";
 import type * as approvalLedger from "../approvalLedger.js";
 import type * as approvalWorkflow from "../approvalWorkflow.js";
@@ -32,6 +33,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   accountLifecycle: typeof accountLifecycle;
+  accountOperations: typeof accountOperations;
   approvalContract: typeof approvalContract;
   approvalEffects: typeof approvalEffects;
   approvalLedger: typeof approvalLedger;

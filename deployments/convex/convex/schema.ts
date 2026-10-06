@@ -6,6 +6,7 @@ import { v } from 'convex/values';
 import { decisionValidator, lifecycleValidator } from './approvalContract';
 import { accountValuesValidator, industryValidator } from './accountContract';
 import { membershipRoleValidator } from './membershipRole';
+import { accountOperationValidator } from './accountOperationContract';
 
 export default defineSchema({
   ...authTables,
@@ -116,4 +117,20 @@ export default defineSchema({
     before: v.union(accountValuesValidator, v.null()),
     after: accountValuesValidator,
   }).index('by_companyId', ['companyId']),
+  accountOperationReceipts: defineTable({
+    workspaceId: v.id('workspaces'),
+    actorId: v.id('workspaceMembers'),
+    operationId: v.string(),
+    operation: accountOperationValidator,
+    payload: v.string(),
+    companyId: v.id('workspaceCompanies'),
+    revision: v.number(),
+    changed: v.boolean(),
+    requiresManager: v.boolean(),
+    acceptedAt: v.number(),
+  }).index('by_workspaceId_and_actorId_and_operationId', [
+    'workspaceId',
+    'actorId',
+    'operationId',
+  ]),
 });
