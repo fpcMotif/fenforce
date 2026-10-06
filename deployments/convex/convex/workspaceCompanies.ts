@@ -9,6 +9,7 @@ import type { MutationCtx, QueryCtx } from './_generated/server';
 import { mutation, query } from './_generated/server';
 import { requireWorkspaceAdmin, requireWorkspaceMember } from './authorization';
 import { normalizeCompanyDomain } from './companyDomain';
+import { isSalesRole } from './membershipRole';
 
 const domainNameValidator = v.object({
   primaryLinkUrl: v.string(),
@@ -68,7 +69,12 @@ const validateOwner = async (
 
   const owner = await context.db.get(ownerId);
 
-  if (owner === null || owner.workspaceId !== workspaceId) {
+  if (
+    owner === null ||
+    owner.workspaceId !== workspaceId ||
+    owner.active === false ||
+    !isSalesRole(owner.role)
+  ) {
     throw new ConvexError('INVALID_ACCOUNT_OWNER');
   }
 };

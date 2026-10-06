@@ -6,6 +6,7 @@ import { ConvexError, v } from 'convex/values';
 
 import { mutation, query } from './_generated/server';
 import { requireSession, requireWorkspaceMember } from './authorization';
+import { membershipRoleValidator } from './membershipRole';
 
 const validatePageSize = (numItems: number) => {
   if (!Number.isInteger(numItems) || numItems < 1 || numItems > 100) {
@@ -54,7 +55,7 @@ export const listMine = query({
     v.object({
       workspaceId: v.id('workspaces'),
       name: v.string(),
-      role: v.union(v.literal('admin'), v.literal('member')),
+      role: membershipRoleValidator,
     }),
   ),
   handler: async (context, args) => {
@@ -96,7 +97,7 @@ export const listMembers = query({
     v.object({
       memberId: v.id('workspaceMembers'),
       displayName: v.string(),
-      role: v.union(v.literal('admin'), v.literal('member')),
+      role: membershipRoleValidator,
     }),
   ),
   handler: async (context, args) => {

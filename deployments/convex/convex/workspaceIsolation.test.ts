@@ -10,25 +10,37 @@ const paginationOpts = { numItems: 20, cursor: null };
 
 const createFixture = async () => {
   const test = convexTest(schema, modules);
-  const { session: actor } = await signedInAs(test, 'Workspace operator');
-  const firstWorkspaceId = await actor.mutation(api.workspaces.create, {
+  const { session: admin } = await signedInAs(test, 'Administrator');
+  const firstWorkspaceId = await admin.mutation(api.workspaces.create, {
     name: 'First workspace',
   });
-  const secondWorkspaceId = await actor.mutation(api.workspaces.create, {
+  const secondWorkspaceId = await admin.mutation(api.workspaces.create, {
     name: 'Second workspace',
   });
-  const firstMembers = await actor.query(api.workspaces.listMembers, {
-    workspaceId: firstWorkspaceId,
-    paginationOpts,
-  });
-  const secondMembers = await actor.query(api.workspaces.listMembers, {
-    workspaceId: secondWorkspaceId,
-    paginationOpts,
-  });
-  const firstOwnerId = firstMembers.page[0]?.memberId;
-  const secondOwnerId = secondMembers.page[0]?.memberId;
-  if (!firstOwnerId || !secondOwnerId)
-    throw new Error('Fixture membership missing');
+  const { session: actor, userId } = await signedInAs(
+    test,
+    'Workspace operator',
+  );
+  const firstOwnerId = await test.run((context) =>
+    context.db.insert('workspaceMembers', {
+      userId,
+      workspaceId: firstWorkspaceId,
+      displayName: 'Workspace operator',
+      role: 'manager',
+      active: true,
+      createdAt: Date.now(),
+    }),
+  );
+  const secondOwnerId = await test.run((context) =>
+    context.db.insert('workspaceMembers', {
+      userId,
+      workspaceId: secondWorkspaceId,
+      displayName: 'Workspace operator',
+      role: 'manager',
+      active: true,
+      createdAt: Date.now(),
+    }),
+  );
   const firstCompanyId = await actor.mutation(api.workspaceCompanies.create, {
     workspaceId: firstWorkspaceId,
     name: 'First account',
@@ -41,6 +53,7 @@ const createFixture = async () => {
   });
   return {
     test,
+    admin,
     actor,
     firstWorkspaceId,
     secondWorkspaceId,
@@ -52,7 +65,7 @@ const createFixture = async () => {
 };
 
 it('omits disabled employees from the owner picker while retaining historical owner labels', async () => {
-  const { test, actor, firstWorkspaceId, firstCompanyId } =
+  const { test, admin, actor, firstWorkspaceId, firstCompanyId } =
     await createFixture();
   const { userId } = await signedInAs(test, 'Former employee');
   const memberId = await test.run((context) =>
@@ -60,7 +73,7 @@ it('omits disabled employees from the owner picker while retaining historical ow
       workspaceId: firstWorkspaceId,
       userId,
       displayName: 'Former employee',
-      role: 'member',
+      role: 'seller',
       active: true,
       createdAt: Date.now(),
     }),
@@ -71,7 +84,7 @@ it('omits disabled employees from the owner picker while retaining historical ow
     expectedRevision: 1,
     accountOwnerId: memberId,
   });
-  await actor.mutation(api.employeeIdentity.disableMember, {
+  await admin.mutation(api.employeeIdentity.disableMember, {
     workspaceId: firstWorkspaceId,
     memberId,
   });
@@ -79,7 +92,8 @@ it('omits disabled employees from the owner picker while retaining historical ow
     workspaceId: firstWorkspaceId,
     paginationOpts,
   });
-  expect(members.page.map((member) => member.displayName)).toEqual([
+  expect(members.page.map((member) => member.displayName).sort()).toEqual([
+    'Administrator',
     'Workspace operator',
   ]);
   expect(
@@ -94,6 +108,7 @@ it('omits disabled employees from the owner picker while retaining historical ow
 
 it('switches explicit workspace scope without reusing another workspace record or owner', async () => {
   const {
+    admin,
     actor,
     firstWorkspaceId,
     secondWorkspaceId,
@@ -118,7 +133,9 @@ it('switches explicit workspace scope without reusing another workspace record o
         workspaceId: secondWorkspaceId,
         paginationOpts,
       })
-    ).page.map((row) => row.memberId),
+    ).page
+      .filter((row) => row.role === 'manager')
+      .map((row) => row.memberId),
   ).toEqual([secondOwnerId]);
   expect(
     await actor.query(api.workspaceCompanies.get, {
@@ -135,7 +152,7 @@ it('switches explicit workspace scope without reusing another workspace record o
     }),
   ).rejects.toThrow('COMPANY_NOT_FOUND');
   await expect(
-    actor.mutation(api.workspaceCompanies.softDelete, {
+    admin.mutation(api.workspaceCompanies.softDelete, {
       workspaceId: secondWorkspaceId,
       companyId: firstCompanyId,
     }),
