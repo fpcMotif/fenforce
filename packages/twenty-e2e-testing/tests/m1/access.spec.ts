@@ -61,9 +61,7 @@ test('administrator revocation clears an open employee record and rejects its re
   await expect(
     client.query(getCompany, { workspaceId: fixture.workspaceId, companyId }),
   ).resolves.toMatchObject({ name });
-  const administrator = await browser.newContext({
-    baseURL: 'http://127.0.0.1:3017',
-  });
+  const administrator = await browser.newContext();
   try {
     const adminPage = await administrator.newPage();
     await adminPage.goto(`/settings/members?workspace=${fixture.workspaceId}`);

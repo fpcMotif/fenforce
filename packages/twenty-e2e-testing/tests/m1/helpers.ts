@@ -18,7 +18,7 @@ export const chooseEmployee = async (page: Page, subject: string) => {
   await page.getByRole('button', { name: 'Continue', exact: true }).click();
 };
 
-export const prepareReplay = async () => {
+export const localFixtureClient = async () => {
   const configuration: unknown = JSON.parse(
     await readFile(
       resolve(
@@ -39,7 +39,7 @@ export const prepareReplay = async () => {
     throw new Error('A local anonymous Convex deployment is required');
   }
   const adminKey = configuration.adminKey;
-  const client = new ConvexHttpClient('http://127.0.0.1:3210', {
+  return new ConvexHttpClient('http://127.0.0.1:3210', {
     logger: false,
     fetch: (input, options) => {
       const headers = new Headers(options?.headers);
@@ -47,13 +47,17 @@ export const prepareReplay = async () => {
       return fetch(input, { ...options, headers });
     },
   });
+};
+
+export const prepareReplay = async () => {
+  const client = await localFixtureClient();
   return client.mutation(
     makeFunctionReference<
       'mutation',
-      { resetMemberships: boolean },
+      Record<string, never>,
       { workspaceId: string; otherWorkspaceId: string }
     >('mockBrowserReplay:prepare'),
-    { resetMemberships: true },
+    {},
   );
 };
 

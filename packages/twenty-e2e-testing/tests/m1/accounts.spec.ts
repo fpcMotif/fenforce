@@ -25,9 +25,7 @@ test('two employees preserve acknowledged values and reject an obsolete form', a
     .getByRole('button', { name: 'Create company', exact: true })
     .click();
   await expect(page.getByRole('heading', { name, exact: true })).toBeVisible();
-  const manager = await browser.newContext({
-    baseURL: 'http://127.0.0.1:3017',
-  });
+  const manager = await browser.newContext();
   try {
     const managerPage = await manager.newPage();
     await managerPage.goto(page.url());
