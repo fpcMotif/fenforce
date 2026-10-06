@@ -9,13 +9,16 @@ import type { MutationCtx, QueryCtx } from './_generated/server';
 import { mutation, query } from './_generated/server';
 import { requireWorkspaceAdmin, requireWorkspaceMember } from './authorization';
 import { normalizeCompanyDomain } from './companyDomain';
+import {
+  accountValuesValidator,
+  domainNameValidator,
+  industryValidator,
+  industryInputValidator,
+  normalizeAccountName,
+  normalizeIndustry,
+} from './accountContract';
+import { appendAccountAudit } from './accountAudit';
 import { isSalesRole } from './membershipRole';
-
-const domainNameValidator = v.object({
-  primaryLinkUrl: v.string(),
-  primaryLinkLabel: v.string(),
-  secondaryLinks: v.array(v.object({ url: v.string(), label: v.string() })),
-});
 
 const companyValidator = v.object({
   _id: v.id('workspaceCompanies'),
@@ -23,6 +26,7 @@ const companyValidator = v.object({
   workspaceId: v.id('workspaces'),
   revision: v.number(),
   name: v.string(),
+  industry: industryValidator,
   domainName: domainNameValidator,
   accountOwnerId: v.union(v.id('workspaceMembers'), v.null()),
   accountOwnerName: v.union(v.string(), v.null()),
@@ -34,14 +38,9 @@ const companyValidator = v.object({
   deletedAt: v.union(v.number(), v.null()),
 });
 
-const normalizeName = (value: string) => {
-  const name = value.trim();
-
-  if (name.length === 0 || name.length > 255) {
-    throw new ConvexError('INVALID_COMPANY_NAME');
-  }
-
-  return name;
+const validatePageSize = (numItems: number) => {
+  if (!Number.isInteger(numItems) || numItems < 1 || numItems > 100)
+    throw new ConvexError('INVALID_PAGE_SIZE');
 };
 
 const normalizeDomainName = (value: string) => {
@@ -64,7 +63,7 @@ const validateOwner = async (
   ownerId: Id<'workspaceMembers'> | null,
 ) => {
   if (ownerId === null) {
-    return;
+    throw new ConvexError('INVALID_ACCOUNT_OWNER');
   }
 
   const owner = await context.db.get(ownerId);
@@ -113,7 +112,12 @@ const projectCompany = async (
             company.accountOwnerId,
           );
 
-  return { ...company, accountOwnerName, createdByName };
+  return {
+    ...company,
+    industry: company.industry ?? null,
+    accountOwnerName,
+    createdByName,
+  };
 };
 
 export const list = query({
@@ -125,13 +129,7 @@ export const list = query({
   handler: async (context, args) => {
     await requireWorkspaceMember(context, args.workspaceId);
 
-    if (
-      !Number.isInteger(args.paginationOpts.numItems) ||
-      args.paginationOpts.numItems < 1 ||
-      args.paginationOpts.numItems > 100
-    ) {
-      throw new ConvexError('INVALID_PAGE_SIZE');
-    }
+    validatePageSize(args.paginationOpts.numItems);
 
     const companiesPage = await context.db
       .query('workspaceCompanies')
@@ -175,20 +173,23 @@ export const create = mutation({
   args: {
     workspaceId: v.id('workspaces'),
     name: v.string(),
+    industry: v.optional(industryInputValidator),
     domainName: v.optional(v.string()),
     accountOwnerId: v.optional(v.union(v.id('workspaceMembers'), v.null())),
   },
   returns: v.id('workspaceCompanies'),
   handler: async (context, args) => {
     const member = await requireWorkspaceMember(context, args.workspaceId);
-    const accountOwnerId = args.accountOwnerId ?? null;
+    const accountOwnerId =
+      args.accountOwnerId === undefined ? member._id : args.accountOwnerId;
     await validateOwner(context, args.workspaceId, accountOwnerId);
     const now = Date.now();
 
-    return context.db.insert('workspaceCompanies', {
+    const companyId = await context.db.insert('workspaceCompanies', {
       workspaceId: args.workspaceId,
       revision: 1,
-      name: normalizeName(args.name),
+      name: normalizeAccountName(args.name),
+      industry: normalizeIndustry(args.industry),
       domainName: normalizeDomainName(args.domainName ?? ''),
       accountOwnerId,
       createdBy: member._id,
@@ -197,6 +198,8 @@ export const create = mutation({
       updatedAt: now,
       deletedAt: null,
     });
+    await appendAccountAudit(context, companyId, null);
+    return companyId;
   },
 });
 
@@ -206,6 +209,7 @@ export const update = mutation({
     companyId: v.id('workspaceCompanies'),
     expectedRevision: v.number(),
     name: v.optional(v.string()),
+    industry: v.optional(industryInputValidator),
     domainName: v.optional(v.string()),
     accountOwnerId: v.optional(v.union(v.id('workspaceMembers'), v.null())),
   },
@@ -232,11 +236,20 @@ export const update = mutation({
 
     await context.db.patch(company._id, {
       revision: company.revision + 1,
-      name: args.name === undefined ? company.name : normalizeName(args.name),
+      name:
+        args.name === undefined
+          ? company.name
+          : normalizeAccountName(args.name),
+      industry: normalizeIndustry(
+        args.industry === undefined ? company.industry : args.industry,
+      ),
       domainName:
         args.domainName === undefined
           ? company.domainName
-          : normalizeDomainName(args.domainName),
+          : {
+              ...normalizeDomainName(args.domainName),
+              secondaryLinks: company.domainName.secondaryLinks,
+            },
       accountOwnerId:
         args.accountOwnerId === undefined
           ? company.accountOwnerId
@@ -244,6 +257,7 @@ export const update = mutation({
       updatedBy: member._id,
       updatedAt: Date.now(),
     });
+    await appendAccountAudit(context, company._id, company);
 
     return null;
   },
@@ -274,7 +288,68 @@ export const softDelete = mutation({
       updatedAt: now,
       updatedBy: member._id,
     });
+    await appendAccountAudit(context, company._id, company);
 
     return null;
+  },
+});
+
+export const history = query({
+  args: {
+    workspaceId: v.id('workspaces'),
+    companyId: v.id('workspaceCompanies'),
+    paginationOpts: paginationOptsValidator,
+  },
+  returns: paginationResultValidator(
+    v.object({
+      _id: v.id('accountAudit'),
+      _creationTime: v.number(),
+      workspaceId: v.id('workspaces'),
+      companyId: v.id('workspaceCompanies'),
+      actorId: v.id('workspaceMembers'),
+      timestamp: v.number(),
+      before: v.union(accountValuesValidator, v.null()),
+      after: accountValuesValidator,
+    }),
+  ),
+  handler: async (context, args) => {
+    await requireWorkspaceMember(context, args.workspaceId);
+    const company = await context.db.get(args.companyId);
+    if (company === null || company.workspaceId !== args.workspaceId)
+      throw new ConvexError('COMPANY_NOT_FOUND');
+    validatePageSize(args.paginationOpts.numItems);
+    return context.db
+      .query('accountAudit')
+      .withIndex('by_companyId', (index) => index.eq('companyId', company._id))
+      .paginate(args.paginationOpts);
+  },
+});
+
+export const listEligibleOwners = query({
+  args: {
+    workspaceId: v.id('workspaces'),
+    paginationOpts: paginationOptsValidator,
+  },
+  returns: paginationResultValidator(
+    v.object({ memberId: v.id('workspaceMembers'), displayName: v.string() }),
+  ),
+  handler: async (context, args) => {
+    await requireWorkspaceMember(context, args.workspaceId);
+    validatePageSize(args.paginationOpts.numItems);
+    const members = await context.db
+      .query('workspaceMembers')
+      .withIndex('by_workspaceId_and_userId', (index) =>
+        index.eq('workspaceId', args.workspaceId),
+      )
+      .paginate(args.paginationOpts);
+    return {
+      ...members,
+      page: members.page
+        .filter((member) => member.active !== false && isSalesRole(member.role))
+        .map((member) => ({
+          memberId: member._id,
+          displayName: member.displayName,
+        })),
+    };
   },
 });
