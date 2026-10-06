@@ -3,6 +3,7 @@ import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 
 import { api } from './_generated/api';
 import schema from './schema';
+import { setCreatorSalesRole } from '../testing/accountFixtures';
 
 const modules = import.meta.glob('./**/*.ts');
 const paginationOpts = { numItems: 20, cursor: null };
@@ -167,6 +168,7 @@ describe('company journey on the Convex candidate', () => {
     expect(workspaces.page).toMatchObject([
       { workspaceId, name: 'Journey Workspace', role: 'admin' },
     ]);
+    const ownerMemberId = await setCreatorSalesRole(test, workspaceId);
 
     const beforeCreate = await owner.query(api.workspaceCompanies.list, {
       workspaceId,
@@ -205,7 +207,7 @@ describe('company journey on the Convex candidate', () => {
         primaryLinkLabel: COMPANY_DOMAIN,
         secondaryLinks: [],
       },
-      accountOwnerId: null,
+      accountOwnerId: ownerMemberId,
       deletedAt: null,
     });
     expect(afterCreate.page.map(({ name }) => name)).toEqual([COMPANY_NAME]);
@@ -258,6 +260,7 @@ describe('company journey on the Convex candidate', () => {
     const outsiderWorkspaceId = await outsider.mutation(api.workspaces.create, {
       name: 'Outsider Workspace',
     });
+    await setCreatorSalesRole(test, outsiderWorkspaceId);
     const outsiderOwnList = await outsider.query(api.workspaceCompanies.list, {
       workspaceId: outsiderWorkspaceId,
       paginationOpts,

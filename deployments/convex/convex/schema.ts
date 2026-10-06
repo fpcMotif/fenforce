@@ -96,11 +96,18 @@ export default defineSchema({
     createdAt: v.number(),
     updatedAt: v.number(),
     deletedAt: v.union(v.number(), v.null()),
-  }).index('by_workspaceId_and_deletedAt_and_name', [
-    'workspaceId',
-    'deletedAt',
-    'name',
-  ]),
+  })
+    .index('by_workspaceId_and_deletedAt_and_name', [
+      'workspaceId',
+      'deletedAt',
+      'name',
+    ])
+    .index('by_workspaceId_and_accountOwnerId_and_deletedAt_and_name', [
+      'workspaceId',
+      'accountOwnerId',
+      'deletedAt',
+      'name',
+    ]),
   accountAudit: defineTable({
     workspaceId: v.id('workspaces'),
     companyId: v.id('workspaceCompanies'),

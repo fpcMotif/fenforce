@@ -2,6 +2,7 @@ import { convexTest } from 'convex-test';
 import { describe, expect, it } from 'vitest';
 
 import { insertUser, signedInAs } from '../testing/sessionFixtures';
+import { setCreatorSalesRole } from '../testing/accountFixtures';
 import { api } from './_generated/api';
 import schema from './schema';
 
@@ -27,6 +28,7 @@ describe('workspace companies authorization', () => {
     const aliceWorkspaceId = await alice.mutation(api.workspaces.create, {
       name: 'Alice workspace',
     });
+    await setCreatorSalesRole(test, aliceWorkspaceId);
     const bobWorkspaceId = await bob.mutation(api.workspaces.create, {
       name: 'Bob workspace',
     });
@@ -87,6 +89,7 @@ describe('workspace companies authorization', () => {
     const workspaceId = await alice.mutation(api.workspaces.create, {
       name: 'Acme',
     });
+    const creatorId = await setCreatorSalesRole(test, workspaceId);
     const ownerId = await test.run((context) =>
       context.db.insert('workspaceMembers', {
         workspaceId,
@@ -103,7 +106,7 @@ describe('workspace companies authorization', () => {
         await alice.mutation(api.workspaceCompanies.create, {
           workspaceId,
           name,
-          accountOwnerId: name === 'Acme' ? ownerId : null,
+          accountOwnerId: name === 'Acme' ? ownerId : creatorId,
         }),
       );
     }
@@ -130,8 +133,8 @@ describe('workspace companies authorization', () => {
       createdByName: 'Alice Creator',
     });
     expect(firstPage.page[1]).toMatchObject({
-      accountOwnerId: null,
-      accountOwnerName: null,
+      accountOwnerId: creatorId,
+      accountOwnerName: 'Alice Creator',
       createdByName: 'Alice Creator',
     });
     expect(
@@ -157,7 +160,7 @@ describe('workspace companies authorization', () => {
     ).rejects.toThrow('FORBIDDEN');
   });
 
-  it('rejects owners from another workspace and reserves deletion for admins', async () => {
+  it('rejects foreign owners and denies sales edits to ordinary members', async () => {
     const test = convexTest(schema, modules);
     const { session: alice } = await signedInAs(test, 'Alice');
     const { session: bob, userId: bobUserId } = await signedInAs(test, 'Bob');
@@ -167,6 +170,7 @@ describe('workspace companies authorization', () => {
     const bobWorkspaceId = await bob.mutation(api.workspaces.create, {
       name: 'Other',
     });
+    await setCreatorSalesRole(test, workspaceId);
     const bobMemberId = await test.run(async (context) => {
       const member = await context.db
         .query('workspaceMembers')
@@ -211,16 +215,24 @@ describe('workspace companies authorization', () => {
         companyId,
       }),
     ).rejects.toThrow('FORBIDDEN');
-    await bob.mutation(api.workspaceCompanies.update, {
+    await expect(
+      bob.mutation(api.workspaceCompanies.update, {
+        workspaceId,
+        companyId,
+        expectedRevision: 1,
+        name: 'Updated by member',
+      }),
+    ).rejects.toThrow('FORBIDDEN');
+    await alice.mutation(api.workspaceCompanies.update, {
       workspaceId,
       companyId,
       expectedRevision: 1,
-      name: 'Updated by member',
+      name: 'Updated by manager',
     });
 
     expect(
       await alice.query(api.workspaceCompanies.get, { workspaceId, companyId }),
-    ).toMatchObject({ name: 'Updated by member' });
+    ).toMatchObject({ name: 'Updated by manager' });
 
     await alice.mutation(api.workspaceCompanies.softDelete, {
       workspaceId,
@@ -252,12 +264,13 @@ describe('workspace companies authorization', () => {
     const workspaceId = await alice.mutation(api.workspaces.create, {
       name: 'Acme',
     });
+    await setCreatorSalesRole(test, workspaceId);
     await test.run((context) =>
       context.db.insert('workspaceMembers', {
         workspaceId,
         userId: bobUserId,
         displayName: 'Bob',
-        role: 'member',
+        role: 'manager',
         createdAt: Date.now(),
       }),
     );

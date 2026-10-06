@@ -3,8 +3,8 @@ import { ConvexError, v, type Infer } from 'convex/values';
 import { ACCOUNT_FIELDS } from './accountFields';
 
 export const industryValidator = v.union(
-  v.literal('services'),
-  v.literal('manufacturing'),
+  v.literal(ACCOUNT_FIELDS.industry.options[0]),
+  v.literal(ACCOUNT_FIELDS.industry.options[1]),
   v.null(),
 );
 export const industryInputValidator = v.union(industryValidator, v.literal(''));

@@ -7,7 +7,11 @@ import { ConvexError, v } from 'convex/values';
 import type { Doc, Id } from './_generated/dataModel';
 import type { MutationCtx, QueryCtx } from './_generated/server';
 import { mutation, query } from './_generated/server';
-import { requireWorkspaceAdmin, requireWorkspaceMember } from './authorization';
+import {
+  assertOwnerAssignment,
+  canAccessAccount,
+  requireSalesMember,
+} from './accountPolicy';
 import { normalizeCompanyDomain } from './companyDomain';
 import {
   accountValuesValidator,
@@ -36,6 +40,11 @@ const companyValidator = v.object({
   createdAt: v.number(),
   updatedAt: v.number(),
   deletedAt: v.union(v.number(), v.null()),
+  permissions: v.object({
+    canUpdate: v.boolean(),
+    canReassign: v.boolean(),
+    canTrash: v.boolean(),
+  }),
 });
 
 const validatePageSize = (numItems: number) => {
@@ -95,6 +104,7 @@ const memberDisplayName = async (
 const projectCompany = async (
   context: QueryCtx,
   company: Doc<'workspaceCompanies'>,
+  member: Doc<'workspaceMembers'>,
 ) => {
   const createdByName = await memberDisplayName(
     context,
@@ -113,10 +123,26 @@ const projectCompany = async (
           );
 
   return {
-    ...company,
+    _id: company._id,
+    _creationTime: company._creationTime,
+    workspaceId: company.workspaceId,
+    revision: company.revision,
+    name: company.name,
+    domainName: company.domainName,
+    accountOwnerId: company.accountOwnerId,
+    createdBy: company.createdBy,
+    updatedBy: company.updatedBy,
+    createdAt: company.createdAt,
+    updatedAt: company.updatedAt,
+    deletedAt: company.deletedAt,
     industry: company.industry ?? null,
     accountOwnerName,
     createdByName,
+    permissions: {
+      canUpdate: true,
+      canReassign: member.role === 'manager',
+      canTrash: true,
+    },
   };
 };
 
@@ -127,21 +153,34 @@ export const list = query({
   },
   returns: paginationResultValidator(companyValidator),
   handler: async (context, args) => {
-    await requireWorkspaceMember(context, args.workspaceId);
+    const member = await requireSalesMember(context, args.workspaceId);
 
     validatePageSize(args.paginationOpts.numItems);
 
-    const companiesPage = await context.db
-      .query('workspaceCompanies')
-      .withIndex('by_workspaceId_and_deletedAt_and_name', (index) =>
-        index.eq('workspaceId', args.workspaceId).eq('deletedAt', null),
-      )
-      .paginate(args.paginationOpts);
+    const companies = context.db.query('workspaceCompanies');
+    const accessible =
+      member.role === 'manager'
+        ? companies.withIndex(
+            'by_workspaceId_and_deletedAt_and_name',
+            (index) =>
+              index.eq('workspaceId', args.workspaceId).eq('deletedAt', null),
+          )
+        : companies.withIndex(
+            'by_workspaceId_and_accountOwnerId_and_deletedAt_and_name',
+            (index) =>
+              index
+                .eq('workspaceId', args.workspaceId)
+                .eq('accountOwnerId', member._id)
+                .eq('deletedAt', null),
+          );
+    const companiesPage = await accessible.paginate(args.paginationOpts);
 
     return {
       ...companiesPage,
       page: await Promise.all(
-        companiesPage.page.map((company) => projectCompany(context, company)),
+        companiesPage.page.map((company) =>
+          projectCompany(context, company, member),
+        ),
       ),
     };
   },
@@ -154,18 +193,18 @@ export const get = query({
   },
   returns: v.union(companyValidator, v.null()),
   handler: async (context, args) => {
-    await requireWorkspaceMember(context, args.workspaceId);
+    const member = await requireSalesMember(context, args.workspaceId);
     const company = await context.db.get(args.companyId);
 
     if (
       company === null ||
-      company.workspaceId !== args.workspaceId ||
+      !canAccessAccount(member, company) ||
       company.deletedAt !== null
     ) {
       return null;
     }
 
-    return projectCompany(context, company);
+    return projectCompany(context, company, member);
   },
 });
 
@@ -179,9 +218,10 @@ export const create = mutation({
   },
   returns: v.id('workspaceCompanies'),
   handler: async (context, args) => {
-    const member = await requireWorkspaceMember(context, args.workspaceId);
+    const member = await requireSalesMember(context, args.workspaceId);
     const accountOwnerId =
       args.accountOwnerId === undefined ? member._id : args.accountOwnerId;
+    assertOwnerAssignment(member, accountOwnerId);
     await validateOwner(context, args.workspaceId, accountOwnerId);
     const now = Date.now();
 
@@ -215,12 +255,12 @@ export const update = mutation({
   },
   returns: v.null(),
   handler: async (context, args) => {
-    const member = await requireWorkspaceMember(context, args.workspaceId);
+    const member = await requireSalesMember(context, args.workspaceId);
     const company = await context.db.get(args.companyId);
 
     if (
       company === null ||
-      company.workspaceId !== args.workspaceId ||
+      !canAccessAccount(member, company) ||
       company.deletedAt !== null
     ) {
       throw new ConvexError('COMPANY_NOT_FOUND');
@@ -231,6 +271,7 @@ export const update = mutation({
     }
 
     if (args.accountOwnerId !== undefined) {
+      assertOwnerAssignment(member, args.accountOwnerId);
       await validateOwner(context, args.workspaceId, args.accountOwnerId);
     }
 
@@ -270,12 +311,12 @@ export const softDelete = mutation({
   },
   returns: v.null(),
   handler: async (context, args) => {
-    const member = await requireWorkspaceAdmin(context, args.workspaceId);
+    const member = await requireSalesMember(context, args.workspaceId);
     const company = await context.db.get(args.companyId);
 
     if (
       company === null ||
-      company.workspaceId !== args.workspaceId ||
+      !canAccessAccount(member, company) ||
       company.deletedAt !== null
     ) {
       throw new ConvexError('COMPANY_NOT_FOUND');
@@ -313,9 +354,9 @@ export const history = query({
     }),
   ),
   handler: async (context, args) => {
-    await requireWorkspaceMember(context, args.workspaceId);
+    const member = await requireSalesMember(context, args.workspaceId);
     const company = await context.db.get(args.companyId);
-    if (company === null || company.workspaceId !== args.workspaceId)
+    if (company === null || !canAccessAccount(member, company))
       throw new ConvexError('COMPANY_NOT_FOUND');
     validatePageSize(args.paginationOpts.numItems);
     return context.db
@@ -334,12 +375,16 @@ export const listEligibleOwners = query({
     v.object({ memberId: v.id('workspaceMembers'), displayName: v.string() }),
   ),
   handler: async (context, args) => {
-    await requireWorkspaceMember(context, args.workspaceId);
+    const member = await requireSalesMember(context, args.workspaceId);
     validatePageSize(args.paginationOpts.numItems);
     const members = await context.db
       .query('workspaceMembers')
       .withIndex('by_workspaceId_and_userId', (index) =>
-        index.eq('workspaceId', args.workspaceId),
+        member.role === 'manager'
+          ? index.eq('workspaceId', args.workspaceId)
+          : index
+              .eq('workspaceId', args.workspaceId)
+              .eq('userId', member.userId),
       )
       .paginate(args.paginationOpts);
     return {
