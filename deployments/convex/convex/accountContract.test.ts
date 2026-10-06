@@ -1,13 +1,45 @@
-import { convexTest } from 'convex-test';
+import { convexTest, type TestConvex } from 'convex-test';
 import { expect, it } from 'vitest';
 
 import { salesActor } from '../testing/accountFixtures';
 import { signedInAs } from '../testing/sessionFixtures';
 import { api } from './_generated/api';
+import type { Id } from './_generated/dataModel';
 import schema from './schema';
 import { ACCOUNT_FIELDS, ACCOUNT_SOURCE_MAPPING } from './accountFields';
 
 const modules = import.meta.glob('./**/*.ts');
+
+const CURRENT_FIELDS = Object.values(ACCOUNT_FIELDS);
+const RELABELED_FIELDS = CURRENT_FIELDS.map((field) => ({
+  ...field,
+  label: `Account ${field.label}`,
+}));
+
+const fieldIdentity = ({
+  id,
+  name,
+  sourceField,
+}: (typeof RELABELED_FIELDS)[number]) => ({ id, name, sourceField });
+
+const findRelabeledField = (fieldId: string) => {
+  const field = RELABELED_FIELDS.find(({ id }) => id === fieldId);
+  if (field === undefined) throw new Error(`Unknown field ${fieldId}`);
+  return field;
+};
+
+const readStoredRecords = async (
+  test: TestConvex<typeof schema>,
+  companyId: Id<'workspaceCompanies'>,
+  viewId: Id<'accountViews'>,
+) => {
+  const [storedCompany, storedView] = await test.run((context) =>
+    Promise.all([context.db.get(companyId), context.db.get(viewId)]),
+  );
+  if (storedCompany === null || storedView === null)
+    throw new Error('Saved records are missing');
+  return { storedCompany, storedView };
+};
 
 it('defaults ownership to the employee and persists nullable industry through edits', async () => {
   const test = convexTest(schema, modules);
@@ -121,14 +153,73 @@ it('rejects invalid names and null owners atomically and keeps omitted compound 
     expectedRevision: 3,
     industry: '',
   });
-  const renamedDefinition = { ...ACCOUNT_FIELDS.name, label: 'Customer name' };
-  expect(ACCOUNT_SOURCE_MAPPING.fields.Name).toBe(renamedDefinition.id);
   expect(
-    (
-      await session.query(api.workspaceCompanies.get, {
-        workspaceId,
-        companyId,
-      })
-    )?.[renamedDefinition.name],
-  ).toBe('Renamed');
+    await session.query(api.workspaceCompanies.get, { workspaceId, companyId }),
+  ).toMatchObject({ name: 'Renamed', industry: null });
+});
+
+it('keeps field ids, storage keys, source mapping, and saved views when display labels change', async () => {
+  const test = convexTest(schema, modules);
+  const { session: admin } = await signedInAs(test, 'Administrator');
+  const workspaceId = await admin.mutation(api.workspaces.create, {
+    name: 'Sales',
+  });
+  const { session, memberId } = await salesActor(test, workspaceId);
+  const companyId = await session.mutation(api.workspaceCompanies.create, {
+    workspaceId,
+    name: 'Acme',
+    industry: 'services',
+  });
+  const viewId = await session.mutation(api.accountViews.save, {
+    workspaceId,
+    name: 'Services accounts',
+    scope: 'private',
+    configuration: {
+      columns: [
+        ACCOUNT_FIELDS.name.id,
+        ACCOUNT_FIELDS.industry.id,
+        ACCOUNT_FIELDS.owner.id,
+      ],
+      search: '',
+      filters: { industry: 'services' },
+      sort: { field: ACCOUNT_FIELDS.name.id, direction: 'asc' },
+    },
+  });
+
+  expect(RELABELED_FIELDS.map(fieldIdentity)).toEqual(
+    CURRENT_FIELDS.map(fieldIdentity),
+  );
+  expect(
+    Object.fromEntries(
+      RELABELED_FIELDS.map((field) => [field.sourceField, field.id]),
+    ),
+  ).toEqual(ACCOUNT_SOURCE_MAPPING.fields);
+
+  const { storedCompany, storedView } = await readStoredRecords(
+    test,
+    companyId,
+    viewId,
+  );
+  const storedText = JSON.stringify([storedCompany, storedView]);
+  expect(
+    CURRENT_FIELDS.filter(({ label }) => storedText.includes(`"${label}"`)),
+  ).toEqual([]);
+
+  const resolvedColumns = storedView.configuration.columns.map((columnId) => {
+    const field = findRelabeledField(columnId);
+    return { label: field.label, value: storedCompany[field.name] };
+  });
+  expect(resolvedColumns).toEqual([
+    { label: 'Account Name', value: 'Acme' },
+    { label: 'Account Industry', value: 'services' },
+    { label: 'Account Owner', value: memberId },
+  ]);
+  const viewResults = await session.query(api.workspaceCompanies.list, {
+    workspaceId,
+    paginationOpts: { numItems: 10, cursor: null },
+    search: storedView.configuration.search,
+    filters: storedView.configuration.filters,
+    sortDirection: storedView.configuration.sort.direction,
+  });
+  expect(viewResults.page.map((company) => company._id)).toEqual([companyId]);
 });

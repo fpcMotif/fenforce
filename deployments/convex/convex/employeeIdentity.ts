@@ -7,13 +7,16 @@ import {
 import { internal } from './_generated/api';
 import { internalMutation, mutation, query } from './_generated/server';
 import type { MutationCtx } from './_generated/server';
-import type { Doc } from './_generated/dataModel';
+import type { Doc, Id } from './_generated/dataModel';
+import { validateAccountPageSize } from './accountQueryContract';
 import {
   requireSession,
   requireWorkspaceAdmin,
   requireWorkspaceMember,
 } from './authorization';
 import { membershipRoleValidator, type MembershipRole } from './membershipRole';
+
+const INVITATION_DURATION_MS = 7 * 24 * 3_600_000;
 
 export const session = query({
   args: { workspaceId: v.optional(v.id('workspaces')) },
@@ -59,12 +62,7 @@ export const listMembers = query({
   ),
   handler: async (context, args) => {
     await requireWorkspaceAdmin(context, args.workspaceId);
-    if (
-      !Number.isInteger(args.paginationOpts.numItems) ||
-      args.paginationOpts.numItems < 1 ||
-      args.paginationOpts.numItems > 100
-    )
-      throw new ConvexError('INVALID_PAGE_SIZE');
+    validateAccountPageSize(args.paginationOpts.numItems);
     const memberships = await context.db
       .query('workspaceMembers')
       .withIndex('by_workspaceId_and_userId', (index) =>
@@ -117,7 +115,7 @@ export const invite = mutation({
       await context.db.patch(existing._id, {
         displayName: args.displayName,
         role: args.role,
-        expiresAt: Date.now() + 7 * 24 * 3_600_000,
+        expiresAt: Date.now() + INVITATION_DURATION_MS,
       });
       return existing._id;
     }
@@ -125,7 +123,7 @@ export const invite = mutation({
       ...args,
       issuer,
       tenant,
-      expiresAt: Date.now() + 7 * 24 * 3_600_000,
+      expiresAt: Date.now() + INVITATION_DURATION_MS,
     });
   },
 });
@@ -134,9 +132,13 @@ export const disableMember = mutation({
   args: { workspaceId: v.id('workspaces'), memberId: v.id('workspaceMembers') },
   returns: v.null(),
   handler: async (context, args) => {
-    await requireWorkspaceAdmin(context, args.workspaceId);
+    const caller = await requireWorkspaceAdmin(context, args.workspaceId);
     const membership = await context.db.get(args.memberId);
-    if (!membership || membership.workspaceId !== args.workspaceId)
+    if (
+      !membership ||
+      membership.workspaceId !== args.workspaceId ||
+      membership._id === caller._id
+    )
       throw new ConvexError('FORBIDDEN');
     await context.db.patch(membership._id, { active: false });
     const sessions = await context.db
@@ -146,17 +148,22 @@ export const disableMember = mutation({
       )
       .take(101);
     if (sessions.length > 100) throw new ConvexError('SESSION_LIMIT_EXCEEDED');
-    for (const session of sessions) {
-      await context.db.delete(session._id);
-      await context.scheduler.runAfter(
-        0,
-        internal.employeeIdentity.cleanRefreshTokens,
-        { sessionId: session._id },
-      );
-    }
+    for (const session of sessions) await revokeSession(context, session._id);
     return null;
   },
 });
+
+export const revokeSession = async (
+  context: MutationCtx,
+  sessionId: Id<'authSessions'>,
+) => {
+  await context.db.delete(sessionId);
+  await context.scheduler.runAfter(
+    0,
+    internal.employeeIdentity.cleanRefreshTokens,
+    { sessionId },
+  );
+};
 
 export const cleanRefreshTokens = internalMutation({
   args: { sessionId: v.id('authSessions') },
@@ -218,7 +225,7 @@ export const prepareMockWorkspace = internalMutation({
         displayName: subject,
         workspaceId,
         role,
-        expiresAt: Date.now() + 7 * 24 * 3_600_000,
+        expiresAt: Date.now() + INVITATION_DURATION_MS,
       });
     }
     return workspaceId;
@@ -263,4 +270,11 @@ const reconcileMockRole = async (
     )
     .unique();
   if (membership) await context.db.patch(membership._id, { role });
+  const sessions = await context.db
+    .query('authSessions')
+    .withIndex('by_userId_and_expirationTime', (index) =>
+      index.eq('userId', userId).gt('expirationTime', Date.now()),
+    )
+    .take(100);
+  for (const session of sessions) await revokeSession(context, session._id);
 };

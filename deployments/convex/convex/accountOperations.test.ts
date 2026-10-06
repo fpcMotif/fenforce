@@ -1,25 +1,11 @@
-import { convexTest } from 'convex-test';
 import { expect, it } from 'vitest';
 
-import { salesActor } from '../testing/accountFixtures';
-import { signedInAs } from '../testing/sessionFixtures';
+import { salesWorkspace } from '../testing/accountFixtures';
 import { api } from './_generated/api';
-import schema from './schema';
 
-const modules = import.meta.glob('./**/*.ts');
 const paginationOpts = { numItems: 20, cursor: null };
 
-const fixture = async () => {
-  const test = convexTest(schema, modules);
-  const { session: admin } = await signedInAs(test, 'Administrator');
-  const workspaceId = await admin.mutation(api.workspaces.create, {
-    name: 'Sales',
-  });
-  const seller = await salesActor(test, workspaceId, 'seller', 'Seller A');
-  const other = await salesActor(test, workspaceId, 'seller', 'Seller B');
-  const manager = await salesActor(test, workspaceId, 'manager', 'Manager');
-  return { test, admin, workspaceId, seller, other, manager };
-};
+const fixture = salesWorkspace;
 
 it('recovers a lost create acknowledgement without creating a second account or audit', async () => {
   const { workspaceId, seller } = await fixture();

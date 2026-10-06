@@ -1,6 +1,7 @@
 import { convexTest } from 'convex-test';
 import { afterEach, expect, it, vi } from 'vitest';
 
+import { salesActor } from '../testing/accountFixtures';
 import { signedInAs } from '../testing/sessionFixtures';
 import { api, internal } from './_generated/api';
 import schema from './schema';
@@ -40,16 +41,11 @@ it('lets only the workspace administrator inspect disabled membership history', 
   const workspaceId = await admin.mutation(api.workspaces.create, {
     name: 'Demo',
   });
-  const { session: seller, userId } = await signedInAs(test, 'Seller');
-  const memberId = await test.run((context) =>
-    context.db.insert('workspaceMembers', {
-      workspaceId,
-      userId,
-      displayName: 'Seller',
-      role: 'seller',
-      active: true,
-      createdAt: Date.now(),
-    }),
+  const { session: seller, memberId } = await salesActor(
+    test,
+    workspaceId,
+    'seller',
+    'Seller',
   );
   await expect(
     seller.query(api.employeeIdentity.listMembers, {
@@ -79,25 +75,45 @@ it('lets only the workspace administrator inspect disabled membership history', 
   });
 });
 
+it('prevents administrators from revoking their own access', async () => {
+  const test = convexTest(schema, modules);
+  const { session: admin } = await signedInAs(test, 'Administrator');
+  const workspaceId = await admin.mutation(api.workspaces.create, {
+    name: 'Demo',
+  });
+  const [ownMembership] = (
+    await admin.query(api.employeeIdentity.listMembers, {
+      workspaceId,
+      paginationOpts,
+    })
+  ).page;
+  if (!ownMembership) throw new Error('Missing administrator membership');
+  await expect(
+    admin.mutation(api.employeeIdentity.disableMember, {
+      workspaceId,
+      memberId: ownMembership.memberId,
+    }),
+  ).rejects.toThrow('FORBIDDEN');
+  const members = await admin.query(api.employeeIdentity.listMembers, {
+    workspaceId,
+    paginationOpts,
+  });
+  expect(
+    members.page.find((row) => row.memberId === ownMembership.memberId)?.active,
+  ).toBe(true);
+});
+
 it('rejects new ownership by inactive employees and non-sales roles', async () => {
   const test = convexTest(schema, modules);
   const { session: admin } = await signedInAs(test, 'Administrator');
   const workspaceId = await admin.mutation(api.workspaces.create, {
     name: 'Demo',
   });
-  const { session: manager, userId: managerUserId } = await signedInAs(
+  const { session: manager } = await salesActor(
     test,
+    workspaceId,
+    'manager',
     'Manager',
-  );
-  await test.run((context) =>
-    context.db.insert('workspaceMembers', {
-      workspaceId,
-      userId: managerUserId,
-      displayName: 'Manager',
-      role: 'manager',
-      active: true,
-      createdAt: Date.now(),
-    }),
   );
   for (const role of ['admin', 'member', 'seller', 'manager'] as const) {
     const { userId } = await signedInAs(test, `Owner ${role}`);
@@ -127,33 +143,17 @@ it('keeps historical actors readable after revocation while rejecting queued wri
   const workspaceId = await admin.mutation(api.workspaces.create, {
     name: 'Demo',
   });
-  const { session: seller, userId } = await signedInAs(
+  const { session: seller, memberId: sellerId } = await salesActor(
     test,
+    workspaceId,
+    'seller',
     'Departing seller',
   );
-  const sellerId = await test.run((context) =>
-    context.db.insert('workspaceMembers', {
-      workspaceId,
-      userId,
-      displayName: 'Departing seller',
-      role: 'seller',
-      active: true,
-      createdAt: Date.now(),
-    }),
-  );
-  const { session: manager, userId: managerUserId } = await signedInAs(
+  const { session: manager } = await salesActor(
     test,
+    workspaceId,
+    'manager',
     'Manager',
-  );
-  await test.run((context) =>
-    context.db.insert('workspaceMembers', {
-      workspaceId,
-      userId: managerUserId,
-      displayName: 'Manager',
-      role: 'manager',
-      active: true,
-      createdAt: Date.now(),
-    }),
   );
   const companyId = await seller.mutation(api.workspaceCompanies.create, {
     workspaceId,

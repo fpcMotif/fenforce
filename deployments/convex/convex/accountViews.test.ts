@@ -95,3 +95,39 @@ it('paginates only shared and own private views and protects mutations with role
     }),
   ).rejects.toThrow('INVALID_VIEW_COLUMNS');
 });
+
+it('hides the owner filter of shared views from sellers', async () => {
+  const test = convexTest(schema, modules);
+  const { session } = await signedInAs(test, 'Admin');
+  const workspaceId = await session.mutation(api.workspaces.create, {
+    name: 'Views',
+  });
+  const manager = await salesActor(test, workspaceId, 'manager', 'Manager');
+  const seller = await salesActor(test, workspaceId, 'seller', 'Seller');
+  const other = await salesActor(test, workspaceId, 'seller', 'Other');
+  await manager.session.mutation(api.accountViews.save, {
+    workspaceId,
+    name: 'Other pipeline',
+    scope: 'workspace',
+    configuration: {
+      ...configuration,
+      filters: { industry: 'services' as const, ownerId: other.memberId },
+    },
+  });
+  const listAs = (actor: typeof seller) =>
+    actor.session.query(api.accountViews.list, {
+      workspaceId,
+      paginationOpts: { numItems: 10, cursor: null },
+    });
+
+  const sellerViews = await listAs(seller);
+  const managerViews = await listAs(manager);
+
+  expect(sellerViews.page.map((view) => view.configuration.filters)).toEqual([
+    { industry: 'services' },
+  ]);
+  expect(JSON.stringify(sellerViews.page)).not.toContain(other.memberId);
+  expect(managerViews.page.map((view) => view.configuration.filters)).toEqual([
+    { industry: 'services', ownerId: other.memberId },
+  ]);
+});

@@ -95,6 +95,62 @@ it('bounds sparse searches over 1000 audited accounts and limits seller results 
   expect(audits).toHaveLength(1000);
 });
 
+it('keeps only the newest benchmark workspace in the synthetic employees memberships', async () => {
+  vi.stubEnv('FENFORCE_MOCK_IDENTITY_ENABLED', 'true');
+  vi.stubEnv('FENFORCE_OIDC_ISSUER', 'http://localhost:4011');
+  vi.stubEnv('FENFORCE_OIDC_TENANT', 'tenant-demo');
+  const test = convexTest(schema, modules);
+  const manager = await signedInAs(test, 'Manager');
+  const seller = await signedInAs(test, 'Seller');
+  await test.run(async (context) => {
+    for (const [subject, userId] of [
+      ['manager-a', manager.userId],
+      ['seller-a', seller.userId],
+    ] as const)
+      await context.db.insert('employeeIdentities', {
+        issuer: 'http://localhost:4011',
+        tenant: 'tenant-demo',
+        subject,
+        userId,
+      });
+    for (let index = 0; index < 3; index++) {
+      const workspaceId = await context.db.insert('workspaces', {
+        name: 'account-query-benchmark',
+        createdByUserId: manager.userId,
+        createdAt: Date.now(),
+      });
+      for (const [userId, role] of [
+        [manager.userId, 'manager'],
+        [seller.userId, 'seller'],
+      ] as const)
+        await context.db.insert('workspaceMembers', {
+          workspaceId,
+          userId,
+          displayName: role,
+          role,
+          active: true,
+          createdAt: Date.now(),
+        });
+    }
+  });
+
+  await test.mutation(internal.mockAccountBenchmark.prepare, {});
+  const { workspaceId } = await test.mutation(
+    internal.mockAccountBenchmark.prepare,
+    {},
+  );
+
+  const paginationOpts = { numItems: 50, cursor: null };
+  for (const employee of [manager, seller])
+    expect(
+      (
+        await employee.session.query(api.workspaces.listMine, {
+          paginationOpts,
+        })
+      ).page.map((workspace) => workspace.workspaceId),
+    ).toEqual([workspaceId]);
+});
+
 it('keeps benchmark creation disabled without strict simulator configuration', async () => {
   vi.stubEnv('FENFORCE_MOCK_IDENTITY_ENABLED', 'false');
   const test = convexTest(schema, modules);

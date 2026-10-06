@@ -11,7 +11,7 @@ const benchmarkEmployees = async (context: MutationCtx) => {
     process.env.FENFORCE_OIDC_TENANT !== 'tenant-demo'
   )
     throw new ConvexError('MOCK_IDENTITY_DISABLED');
-  const employees = await Promise.all(
+  const [manager, seller] = await Promise.all(
     ['manager-a', 'seller-a'].map((subject) =>
       context.db
         .query('employeeIdentities')
@@ -24,11 +24,53 @@ const benchmarkEmployees = async (context: MutationCtx) => {
         .unique(),
     ),
   );
-  const manager = employees[0];
-  const seller = employees[1];
   if (!manager || !seller)
     throw new ConvexError('SIGN_IN_AS_SYNTHETIC_EMPLOYEES_FIRST');
   return { manager, seller };
+};
+
+const BENCHMARK_WORKSPACE_NAME = 'account-query-benchmark';
+const MANAGER_MEMBERSHIP_SCAN_LIMIT = 200;
+
+const findMembership = (
+  context: MutationCtx,
+  workspaceId: Id<'workspaces'>,
+  userId: Id<'users'>,
+) =>
+  context.db
+    .query('workspaceMembers')
+    .withIndex('by_workspaceId_and_userId', (index) =>
+      index.eq('workspaceId', workspaceId).eq('userId', userId),
+    )
+    .unique();
+
+const removeEarlierBenchmarkMemberships = async (
+  context: MutationCtx,
+  managerUserId: Id<'users'>,
+  sellerUserId: Id<'users'>,
+) => {
+  const managerMemberships = await context.db
+    .query('workspaceMembers')
+    .withIndex('by_userId', (index) => index.eq('userId', managerUserId))
+    .take(MANAGER_MEMBERSHIP_SCAN_LIMIT);
+  if (managerMemberships.length === MANAGER_MEMBERSHIP_SCAN_LIMIT)
+    throw new ConvexError('MOCK_MEMBERSHIP_LIMIT');
+  for (const managerMembership of managerMemberships) {
+    const workspace = await context.db.get(managerMembership.workspaceId);
+    if (
+      workspace?.name !== BENCHMARK_WORKSPACE_NAME ||
+      workspace.createdByUserId !== managerUserId
+    )
+      continue;
+    const sellerMembership = await findMembership(
+      context,
+      workspace._id,
+      sellerUserId,
+    );
+    await context.db.delete(managerMembership._id);
+    if (sellerMembership !== null)
+      await context.db.delete(sellerMembership._id);
+  }
 };
 
 export const prepare = internalMutation({
@@ -36,17 +78,25 @@ export const prepare = internalMutation({
   returns: v.object({ workspaceId: v.id('workspaces') }),
   handler: async (context) => {
     const { manager, seller } = await benchmarkEmployees(context);
+    await removeEarlierBenchmarkMemberships(
+      context,
+      manager.userId,
+      seller.userId,
+    );
     const workspaceId = await context.db.insert('workspaces', {
-      name: 'account-query-benchmark',
+      name: BENCHMARK_WORKSPACE_NAME,
       createdByUserId: manager.userId,
       createdAt: Date.now(),
     });
-    for (const employee of [manager, seller])
+    for (const [employee, role] of [
+      [manager, 'manager'],
+      [seller, 'seller'],
+    ] as const)
       await context.db.insert('workspaceMembers', {
         workspaceId,
         userId: employee.userId,
         displayName: employee.subject,
-        role: employee.subject === 'manager-a' ? 'manager' : 'seller',
+        role,
         active: true,
         createdAt: Date.now(),
       });
@@ -61,22 +111,15 @@ const benchmarkMembers = async (
   const { manager, seller } = await benchmarkEmployees(context);
   const workspace = await context.db.get(workspaceId);
   if (
-    workspace?.name !== 'account-query-benchmark' ||
+    workspace?.name !== BENCHMARK_WORKSPACE_NAME ||
     workspace.createdByUserId !== manager.userId
   )
     throw new ConvexError('INVALID_BENCHMARK_WORKSPACE');
-  const members = await Promise.all(
+  const [managerMember, sellerMember] = await Promise.all(
     [manager, seller].map((employee) =>
-      context.db
-        .query('workspaceMembers')
-        .withIndex('by_workspaceId_and_userId', (index) =>
-          index.eq('workspaceId', workspaceId).eq('userId', employee.userId),
-        )
-        .unique(),
+      findMembership(context, workspaceId, employee.userId),
     ),
   );
-  const managerMember = members[0];
-  const sellerMember = members[1];
   if (!managerMember || !sellerMember)
     throw new ConvexError('INVALID_BENCHMARK_MEMBERS');
   return { managerMember, sellerMember };
@@ -107,11 +150,7 @@ export const seedBatch = internalMutation({
     start: v.number(),
     count: v.number(),
   },
-  returns: v.object({
-    inserted: v.number(),
-    next: v.number(),
-    done: v.boolean(),
-  }),
+  returns: v.object({ inserted: v.number() }),
   handler: async (context, args) => {
     const { managerMember, sellerMember } = await benchmarkMembers(
       context,
@@ -153,10 +192,6 @@ export const seedBatch = internalMutation({
       await appendAccountAudit(context, companyId, null);
       inserted++;
     }
-    return {
-      inserted,
-      next: args.start + args.count,
-      done: args.start + args.count === 1000,
-    };
+    return { inserted };
   },
 });

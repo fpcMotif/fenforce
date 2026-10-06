@@ -1,8 +1,11 @@
-import type { TestConvex } from 'convex-test';
+import { convexTest, type TestConvex } from 'convex-test';
 
+import { api } from '../convex/_generated/api';
 import type { Id } from '../convex/_generated/dataModel';
-import type schema from '../convex/schema';
+import schema from '../convex/schema';
 import { signedInAs } from './sessionFixtures';
+
+const modules = import.meta.glob('../convex/**/*.ts');
 
 export const salesActor = async (
   test: TestConvex<typeof schema>,
@@ -22,6 +25,18 @@ export const salesActor = async (
     }),
   );
   return { ...actor, memberId };
+};
+
+export const salesWorkspace = async () => {
+  const test = convexTest(schema, modules);
+  const { session: admin } = await signedInAs(test, 'Administrator');
+  const workspaceId = await admin.mutation(api.workspaces.create, {
+    name: 'Sales',
+  });
+  const seller = await salesActor(test, workspaceId, 'seller', 'Seller A');
+  const other = await salesActor(test, workspaceId, 'seller', 'Seller B');
+  const manager = await salesActor(test, workspaceId, 'manager', 'Manager');
+  return { test, admin, workspaceId, seller, other, manager };
 };
 
 export const setCreatorSalesRole = async (

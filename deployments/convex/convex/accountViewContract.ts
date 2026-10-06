@@ -26,12 +26,14 @@ export const accountViewConfigurationValidator = v.object({
   }),
 });
 
+export const ACCOUNT_VIEW_NAME_MAX_LENGTH = 100;
+
 export const validateAccountView = (
   name: string,
   configuration: Infer<typeof accountViewConfigurationValidator>,
 ) => {
   const normalizedName = name.trim();
-  if (!normalizedName || normalizedName.length > 100)
+  if (!normalizedName || normalizedName.length > ACCOUNT_VIEW_NAME_MAX_LENGTH)
     throw new ConvexError('INVALID_VIEW_NAME');
   if (
     configuration.columns.length === 0 ||

@@ -17,6 +17,7 @@ import {
 } from './accountPolicy';
 import { appendAccountAudit } from './accountAudit';
 import { readAccountReceipt, saveAccountReceipt } from './accountOperations';
+import { validateAccountPageSize } from './accountQueryContract';
 import { companyValidator, projectCompany } from './workspaceCompanies';
 
 const lifecycleArguments = {
@@ -88,22 +89,17 @@ export const listTrash = query({
   returns: paginationResultValidator(companyValidator),
   handler: async (context, args) => {
     const member = await requireSalesMember(context, args.workspaceId);
-    if (
-      !Number.isInteger(args.paginationOpts.numItems) ||
-      args.paginationOpts.numItems < 1 ||
-      args.paginationOpts.numItems > 100
-    )
-      throw new ConvexError('INVALID_PAGE_SIZE');
+    validateAccountPageSize(args.paginationOpts.numItems);
     const companies = context.db.query('workspaceCompanies');
     const accessible =
       member.role === 'manager'
         ? companies.withIndex(
-            'by_workspaceId_and_deletedAt_and_name',
+            'by_workspaceId_and_deletedAt_and_nameSortKey',
             (index) =>
               index.eq('workspaceId', args.workspaceId).gt('deletedAt', null),
           )
         : companies.withIndex(
-            'by_workspaceId_and_accountOwnerId_and_deletedAt_and_name',
+            'by_workspaceId_and_accountOwnerId_and_deletedAt_and_nameSortKey',
             (index) =>
               index
                 .eq('workspaceId', args.workspaceId)

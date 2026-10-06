@@ -1,4 +1,6 @@
+import type { PaginationOptions } from 'convex/server';
 import { ConvexError } from 'convex/values';
+import type { QueryStream } from 'convex-helpers/server/stream';
 import type { Doc, Id } from './_generated/dataModel';
 import type { AccountListArgs } from './accountQueryContract';
 
@@ -19,10 +21,10 @@ export const accountQueryFingerprint = (
     args.sortDirection ?? 'asc',
   ]);
 
-export const encodeAccountCursor = (position: string, fingerprint: string) =>
+const encodeAccountCursor = (position: string, fingerprint: string) =>
   JSON.stringify({ fingerprint, position });
 
-export const encodeOptionalAccountCursor = (
+const encodeOptionalAccountCursor = (
   position: string | null | undefined,
   fingerprint: string,
 ) => (position ? encodeAccountCursor(position, fingerprint) : null);
@@ -41,7 +43,7 @@ const parseCursorEnvelope = (cursor: string, fingerprint: string) => {
   return parsed.position;
 };
 
-export const decodeAccountCursor = (
+const decodeAccountCursor = (
   cursor: string | null | undefined,
   fingerprint: string,
 ) => {
@@ -55,4 +57,25 @@ export const decodeAccountCursor = (
   } catch {
     throw new ConvexError('INVALID_ACCOUNT_CURSOR');
   }
+};
+
+export const paginateWithAccountCursor = async <
+  TItem extends NonNullable<unknown>,
+>(
+  query: QueryStream<TItem>,
+  paginationOpts: PaginationOptions,
+  fingerprint: string,
+) => {
+  const page = await query.paginate({
+    ...paginationOpts,
+    cursor: decodeAccountCursor(paginationOpts.cursor, fingerprint) ?? null,
+    endCursor: decodeAccountCursor(paginationOpts.endCursor, fingerprint),
+    maximumRowsRead: 100,
+    maximumBytesRead: 16_000,
+  });
+  return {
+    ...page,
+    continueCursor: encodeAccountCursor(page.continueCursor, fingerprint),
+    splitCursor: encodeOptionalAccountCursor(page.splitCursor, fingerprint),
+  };
 };

@@ -5,7 +5,7 @@ import { exportPKCS8, generateKeyPair } from 'jose';
 import { startMockIdentityProvider } from '../testing/mockIdentityProvider';
 import { signedInAs } from '../testing/sessionFixtures';
 
-import { api } from './_generated/api';
+import { api, internal } from './_generated/api';
 import schema from './schema';
 
 const modules = import.meta.glob('./**/*.ts');
@@ -337,6 +337,30 @@ it('ignores abandoned expired sessions when enforcing the active session limit',
     }
   });
   expect((await login(test)).tokens).toBeTruthy();
+});
+
+it('revokes live mock employee sessions when the mock workspace is prepared again', async () => {
+  vi.stubEnv('FENFORCE_MOCK_IDENTITY_ENABLED', 'true');
+  try {
+    const test = convexTest(schema, modules);
+    await test.mutation(internal.employeeIdentity.prepareMockWorkspace, {});
+    const { caller } = await login(test);
+    const session = await caller.query(api.employeeIdentity.session, {});
+    if (!session) throw new Error('Missing session');
+    await test.run(async (context) => {
+      for (let index = 0; index < 99; index++) {
+        await context.db.insert('authSessions', {
+          userId: session.userId,
+          expirationTime: Date.now() + 3_600_000,
+        });
+      }
+    });
+    await test.mutation(internal.employeeIdentity.prepareMockWorkspace, {});
+    expect(await caller.query(api.employeeIdentity.session, {})).toBeNull();
+    expect((await login(test)).tokens).toBeTruthy();
+  } finally {
+    vi.stubEnv('FENFORCE_MOCK_IDENTITY_ENABLED', '');
+  }
 });
 
 it('still rejects sign-in at one hundred active sessions', async () => {

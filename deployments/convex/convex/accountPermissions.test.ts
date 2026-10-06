@@ -1,41 +1,21 @@
-import { convexTest } from 'convex-test';
 import { expect, it } from 'vitest';
 
-import { salesActor } from '../testing/accountFixtures';
-import { signedInAs } from '../testing/sessionFixtures';
+import { salesWorkspace } from '../testing/accountFixtures';
 import { api } from './_generated/api';
-import schema from './schema';
 
-const modules = import.meta.glob('./**/*.ts');
 const paginationOpts = { numItems: 20, cursor: null };
 
 const fixture = async () => {
-  const test = convexTest(schema, modules);
-  const { session: admin } = await signedInAs(test, 'Administrator');
-  const workspaceId = await admin.mutation(api.workspaces.create, {
-    name: 'Sales',
-  });
-  const seller = await salesActor(test, workspaceId, 'seller', 'Seller A');
-  const other = await salesActor(test, workspaceId, 'seller', 'Seller B');
-  const manager = await salesActor(test, workspaceId, 'manager', 'Manager');
-  const companyId = await seller.session.mutation(
+  const sales = await salesWorkspace();
+  const companyId = await sales.seller.session.mutation(
     api.workspaceCompanies.create,
-    { workspaceId, name: 'Account A' },
+    { workspaceId: sales.workspaceId, name: 'Account A' },
   );
-  const otherCompanyId = await other.session.mutation(
+  const otherCompanyId = await sales.other.session.mutation(
     api.workspaceCompanies.create,
-    { workspaceId, name: 'Account B' },
+    { workspaceId: sales.workspaceId, name: 'Account B' },
   );
-  return {
-    test,
-    admin,
-    workspaceId,
-    seller,
-    other,
-    manager,
-    companyId,
-    otherCompanyId,
-  };
+  return { ...sales, companyId, otherCompanyId };
 };
 
 it('limits seller lists, detail and history to owned records and denies administrative sales access', async () => {

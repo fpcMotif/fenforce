@@ -4,9 +4,9 @@ import type { Value } from 'convex/values';
 import { createRemoteJWKSet, jwtVerify } from 'jose';
 
 import type { DataModel } from './_generated/dataModel';
-import { internal } from './_generated/api';
 import type { MutationCtx } from './_generated/server';
 import { enrollEmployee, requireActiveEmployee } from './employeeEnrollment';
+import { revokeSession } from './employeeIdentity';
 
 export const validatePreviewPassword = (password: string) => {
   if (password.length < 12) {
@@ -82,14 +82,8 @@ export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
           index.eq('userId', userId).lte('expirationTime', Date.now()),
         )
         .take(100);
-      for (const session of expiredSessions) {
-        await typedContext.db.delete(session._id);
-        await typedContext.scheduler.runAfter(
-          0,
-          internal.employeeIdentity.cleanRefreshTokens,
-          { sessionId: session._id },
-        );
-      }
+      for (const session of expiredSessions)
+        await revokeSession(typedContext, session._id);
       const sessions = await typedContext.db
         .query('authSessions')
         .withIndex('by_userId_and_expirationTime', (index) =>

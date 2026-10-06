@@ -7,11 +7,7 @@ import type { Doc, Id } from './_generated/dataModel';
 import { requireSalesMember } from './accountPolicy';
 import { resolveAccountOwnerFilter } from './accountQueries';
 import { validateAccountPageSize } from './accountQueryContract';
-import {
-  decodeAccountCursor,
-  encodeAccountCursor,
-  encodeOptionalAccountCursor,
-} from './accountQueryCursor';
+import { paginateWithAccountCursor } from './accountQueryCursor';
 import {
   accountViewConfigurationValidator,
   accountViewScopeValidator,
@@ -34,39 +30,41 @@ export const list = query({
       member.role,
     ]);
     const views = stream(context.db, schema).query('accountViews');
-    const page = await mergedStream(
-      [
-        views.withIndex('by_workspaceId_and_scope', (index) =>
-          index.eq('workspaceId', args.workspaceId).eq('scope', 'workspace'),
-        ),
-        views.withIndex(
-          'by_workspaceId_and_scope_and_createdByMemberId',
-          (index) =>
-            index
-              .eq('workspaceId', args.workspaceId)
-              .eq('scope', 'private')
-              .eq('createdByMemberId', member._id),
-        ),
-      ],
-      ['_creationTime', '_id'],
-    ).paginate({
-      ...args.paginationOpts,
-      cursor:
-        decodeAccountCursor(args.paginationOpts.cursor, fingerprint) ?? null,
-      endCursor: decodeAccountCursor(
-        args.paginationOpts.endCursor,
-        fingerprint,
+    const viewsPage = await paginateWithAccountCursor(
+      mergedStream(
+        [
+          views.withIndex('by_workspaceId_and_scope', (index) =>
+            index.eq('workspaceId', args.workspaceId).eq('scope', 'workspace'),
+          ),
+          views.withIndex(
+            'by_workspaceId_and_scope_and_createdByMemberId',
+            (index) =>
+              index
+                .eq('workspaceId', args.workspaceId)
+                .eq('scope', 'private')
+                .eq('createdByMemberId', member._id),
+          ),
+        ],
+        ['_creationTime', '_id'],
       ),
-      maximumRowsRead: 100,
-      maximumBytesRead: 16_000,
-    });
+      args.paginationOpts,
+      fingerprint,
+    );
     return {
-      ...page,
-      continueCursor: encodeAccountCursor(page.continueCursor, fingerprint),
-      splitCursor: encodeOptionalAccountCursor(page.splitCursor, fingerprint),
+      ...viewsPage,
+      page: viewsPage.page.map((view) => visibleAccountView(view, member)),
     };
   },
 });
+
+const visibleAccountView = (
+  view: Doc<'accountViews'>,
+  member: Doc<'workspaceMembers'>,
+) => {
+  const { ownerId, ...filters } = view.configuration.filters;
+  if (member.role !== 'seller' || ownerId === member._id) return view;
+  return { ...view, configuration: { ...view.configuration, filters } };
+};
 
 const writableView = async (
   context: MutationCtx,

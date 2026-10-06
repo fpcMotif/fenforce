@@ -40,12 +40,12 @@ const findOtherWorkspace = async (
 };
 
 export const prepare = internalMutation({
-  args: { resetMemberships: v.boolean() },
+  args: {},
   returns: v.object({
     workspaceId: v.id('workspaces'),
     otherWorkspaceId: v.id('workspaces'),
   }),
-  handler: async (context, args) => {
+  handler: async (context) => {
     const issuer = process.env.FENFORCE_OIDC_ISSUER;
     if (
       process.env.FENFORCE_MOCK_IDENTITY_ENABLED !== 'true' ||
@@ -71,9 +71,7 @@ export const prepare = internalMutation({
     if (!seller?.acceptedUserId) {
       throw new ConvexError('SIGN_IN_AS_SYNTHETIC_SELLER_FIRST');
     }
-    if (args.resetMemberships) {
-      await restoreMemberships(context, invitations);
-    }
+    await restoreMemberships(context, invitations);
     const existing = await findOtherWorkspace(context, seller.acceptedUserId);
     if (existing) {
       return { workspaceId: seller.workspaceId, otherWorkspaceId: existing };

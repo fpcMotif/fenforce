@@ -74,11 +74,6 @@ export default defineSchema({
   })
     .index('by_workspaceId_and_userId', ['workspaceId', 'userId'])
     .index('by_userId', ['userId'])
-    .index('by_workspaceId_and_active_and_role', [
-      'workspaceId',
-      'active',
-      'role',
-    ])
     .index('by_userId_and_active', ['userId', 'active']),
   workspaceCompanies: defineTable({
     workspaceId: v.id('workspaces'),
@@ -114,17 +109,6 @@ export default defineSchema({
       'accountOwnerId',
       'deletedAt',
       'nameSortKey',
-    ])
-    .index('by_workspaceId_and_deletedAt_and_name', [
-      'workspaceId',
-      'deletedAt',
-      'name',
-    ])
-    .index('by_workspaceId_and_accountOwnerId_and_deletedAt_and_name', [
-      'workspaceId',
-      'accountOwnerId',
-      'deletedAt',
-      'name',
     ]),
   accountAudit: defineTable({
     workspaceId: v.id('workspaces'),

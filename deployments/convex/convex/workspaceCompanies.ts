@@ -23,9 +23,16 @@ import {
   normalizeIndustry,
 } from './accountContract';
 import { appendAccountAudit } from './accountAudit';
-import { transitionAccount } from './accountLifecycleCommands';
+import {
+  accessibleAccount,
+  assertAccountRevision,
+  transitionAccount,
+} from './accountLifecycleCommands';
 import { isSalesRole } from './membershipRole';
-import { accountListArgs } from './accountQueryContract';
+import {
+  accountListArgs,
+  validateAccountPageSize,
+} from './accountQueryContract';
 import { listAccountDocuments } from './accountQueries';
 import { readAccountReceipt, saveAccountReceipt } from './accountOperations';
 
@@ -51,11 +58,6 @@ export const companyValidator = v.object({
     canTrash: v.boolean(),
   }),
 });
-
-const validatePageSize = (numItems: number) => {
-  if (!Number.isInteger(numItems) || numItems < 1 || numItems > 100)
-    throw new ConvexError('INVALID_PAGE_SIZE');
-};
 
 const normalizeDomainName = (value: string) => {
   const domain = normalizeCompanyDomain(value);
@@ -264,20 +266,13 @@ export const update = mutation({
   },
   returns: v.null(),
   handler: async (context, args) => {
-    const member = await requireSalesMember(context, args.workspaceId);
-    const company = await context.db.get(args.companyId);
-
-    if (company === null || !canAccessAccount(member, company)) {
-      throw new ConvexError('COMPANY_NOT_FOUND');
-    }
+    const { member, company } = await accessibleAccount(context, args);
     if (args.accountOwnerId !== undefined)
       assertOwnerAssignment(member, args.accountOwnerId);
     const receipt = await readAccountReceipt(context, member, 'update', args);
     if (receipt !== null) return null;
     if (company.deletedAt !== null) throw new ConvexError('COMPANY_NOT_FOUND');
-    if (company.revision !== args.expectedRevision) {
-      throw new ConvexError('COMPANY_CHANGED');
-    }
+    assertAccountRevision(company, args.expectedRevision);
 
     if (args.accountOwnerId !== undefined) {
       await validateAccountOwner(
@@ -347,7 +342,7 @@ export const history = query({
     const company = await context.db.get(args.companyId);
     if (company === null || !canAccessAccount(member, company))
       throw new ConvexError('COMPANY_NOT_FOUND');
-    validatePageSize(args.paginationOpts.numItems);
+    validateAccountPageSize(args.paginationOpts.numItems);
     const result = await context.db
       .query('accountAudit')
       .withIndex('by_companyId', (index) => index.eq('companyId', company._id))
@@ -392,7 +387,7 @@ export const listEligibleOwners = query({
   ),
   handler: async (context, args) => {
     const member = await requireSalesMember(context, args.workspaceId);
-    validatePageSize(args.paginationOpts.numItems);
+    validateAccountPageSize(args.paginationOpts.numItems);
     const members = await context.db
       .query('workspaceMembers')
       .withIndex('by_workspaceId_and_userId', (index) =>

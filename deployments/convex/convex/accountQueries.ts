@@ -12,9 +12,7 @@ import {
 import schema from './schema';
 import {
   accountQueryFingerprint,
-  decodeAccountCursor,
-  encodeAccountCursor,
-  encodeOptionalAccountCursor,
+  paginateWithAccountCursor,
 } from './accountQueryCursor';
 
 export const listAccountDocuments = async (
@@ -29,7 +27,13 @@ export const listAccountDocuments = async (
     args.filters?.ownerId,
   );
   const fingerprint = accountQueryFingerprint(args, member, search, ownerId);
-  await assertQueryIndexReady(context, args.workspaceId, ownerId);
+  const firstAccount = await authorizedAccountStream(
+    context,
+    args.workspaceId,
+    ownerId,
+  ).first();
+  if (firstAccount !== null && firstAccount.nameSortKey === undefined)
+    throw new ConvexError('ACCOUNT_QUERY_INDEX_NOT_READY');
   validateAccountPageSize(args.paginationOpts.numItems);
   const accessible = authorizedAccountStream(
     context,
@@ -37,42 +41,21 @@ export const listAccountDocuments = async (
     ownerId,
   );
   let scannedCount = 0;
-  const companiesPage = await accessible
-    .order(args.sortDirection ?? 'asc')
-    .filterWith(async (company) => {
-      scannedCount++;
-      return (
-        company.name.toLowerCase().includes(search) &&
-        (args.filters?.industry === undefined ||
-          (company.industry ?? null) === args.filters.industry)
-      );
-    })
-    .paginate({
-      ...args.paginationOpts,
-      cursor:
-        decodeAccountCursor(args.paginationOpts.cursor, fingerprint) ?? null,
-      endCursor: decodeAccountCursor(
-        args.paginationOpts.endCursor,
-        fingerprint,
-      ),
-      maximumRowsRead: 100,
-      maximumBytesRead: 16_000,
-    });
-  return {
-    member,
-    companiesPage: {
-      ...companiesPage,
-      continueCursor: encodeAccountCursor(
-        companiesPage.continueCursor,
-        fingerprint,
-      ),
-      splitCursor: encodeOptionalAccountCursor(
-        companiesPage.splitCursor,
-        fingerprint,
-      ),
-      scannedCount,
-    },
-  };
+  const companiesPage = await paginateWithAccountCursor(
+    accessible
+      .order(args.sortDirection ?? 'asc')
+      .filterWith(async (company) => {
+        scannedCount++;
+        return (
+          company.name.toLowerCase().includes(search) &&
+          (args.filters?.industry === undefined ||
+            (company.industry ?? null) === args.filters.industry)
+        );
+      }),
+    args.paginationOpts,
+    fingerprint,
+  );
+  return { member, companiesPage: { ...companiesPage, scannedCount } };
 };
 
 const authorizedAccountStream = (
@@ -94,36 +77,6 @@ const authorizedAccountStream = (
             .eq('accountOwnerId', ownerId)
             .eq('deletedAt', null),
       );
-};
-
-const assertQueryIndexReady = async (
-  context: QueryCtx,
-  workspaceId: Id<'workspaces'>,
-  ownerId: Id<'workspaceMembers'> | undefined,
-) => {
-  const companies = context.db.query('workspaceCompanies');
-  const missing =
-    ownerId === undefined
-      ? await companies
-          .withIndex('by_workspaceId_and_deletedAt_and_nameSortKey', (index) =>
-            index
-              .eq('workspaceId', workspaceId)
-              .eq('deletedAt', null)
-              .eq('nameSortKey', undefined),
-          )
-          .first()
-      : await companies
-          .withIndex(
-            'by_workspaceId_and_accountOwnerId_and_deletedAt_and_nameSortKey',
-            (index) =>
-              index
-                .eq('workspaceId', workspaceId)
-                .eq('accountOwnerId', ownerId)
-                .eq('deletedAt', null)
-                .eq('nameSortKey', undefined),
-          )
-          .first();
-  if (missing) throw new ConvexError('ACCOUNT_QUERY_INDEX_NOT_READY');
 };
 
 export const resolveAccountOwnerFilter = async (
