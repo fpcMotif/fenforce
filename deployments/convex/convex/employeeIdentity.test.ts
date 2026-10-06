@@ -232,3 +232,104 @@ it('rejects access and renewal after the one-hour session deadline', async () =>
     now.mockRestore();
   }
 });
+
+it('lets the original workspace administrator renew an expired unused invitation', async () => {
+  const test = convexTest(schema, modules);
+  const { session: admin } = await signedInAs(test, 'Administrator');
+  const workspaceId = await admin.mutation(api.workspaces.create, {
+    name: 'Invited workspace',
+  });
+  const invitation = {
+    workspaceId,
+    subject: 'seller-a',
+    displayName: 'Seller A',
+    role: 'member' as const,
+  };
+  const originalId = await admin.mutation(
+    api.employeeIdentity.invite,
+    invitation,
+  );
+  const now = vi
+    .spyOn(Date, 'now')
+    .mockReturnValue(Date.now() + 8 * 24 * 3_600_000);
+  try {
+    const { session: renewedAdmin, userId } = await signedInAs(
+      test,
+      'Administrator',
+    );
+    const foreignWorkspaceId = await renewedAdmin.mutation(
+      api.workspaces.create,
+      { name: 'Foreign workspace' },
+    );
+    await expect(
+      renewedAdmin.mutation(api.employeeIdentity.invite, {
+        ...invitation,
+        workspaceId: foreignWorkspaceId,
+      }),
+    ).rejects.toThrow('INVITATION_ALREADY_EXISTS');
+    await test.run((context) =>
+      context.db.insert('workspaceMembers', {
+        userId,
+        workspaceId,
+        displayName: 'Administrator',
+        role: 'admin',
+        active: true,
+        createdAt: Date.now(),
+      }),
+    );
+    expect(
+      await renewedAdmin.mutation(api.employeeIdentity.invite, invitation),
+    ).toBe(originalId);
+  } finally {
+    now.mockRestore();
+  }
+  const { caller } = await login(test);
+  expect(
+    (
+      await caller.query(api.workspaces.listMine, {
+        paginationOpts: { numItems: 10, cursor: null },
+      })
+    ).page.map((row) => row.workspaceId),
+  ).toEqual([workspaceId]);
+  await test.run((context) =>
+    context.db.patch(originalId, { expiresAt: Date.now() - 1 }),
+  );
+  await expect(
+    admin.mutation(api.employeeIdentity.invite, invitation),
+  ).rejects.toThrow('INVITATION_ALREADY_EXISTS');
+});
+
+it('ignores abandoned expired sessions when enforcing the active session limit', async () => {
+  const { test } = await invitedFixture();
+  const { caller } = await login(test);
+  const session = await caller.query(api.employeeIdentity.session, {});
+  if (!session) throw new Error('Missing session');
+  await test.run(async (context) => {
+    for (let index = 0; index < 100; index++) {
+      await context.db.insert('authSessions', {
+        userId: session.userId,
+        expirationTime: Date.now() - 1,
+      });
+    }
+  });
+  expect((await login(test)).tokens).toBeTruthy();
+});
+
+it('still rejects sign-in at one hundred active sessions', async () => {
+  const { test } = await invitedFixture();
+  const { caller } = await login(test);
+  const session = await caller.query(api.employeeIdentity.session, {});
+  if (!session) throw new Error('Missing session');
+  await test.run(async (context) => {
+    for (let index = 0; index < 99; index++) {
+      await context.db.insert('authSessions', {
+        userId: session.userId,
+        expirationTime: Date.now() + 3_600_000,
+      });
+    }
+  });
+  const { code, verifier } = await authorize(test);
+  await expect(
+    test.action(api.auth.signIn, { params: { code: code ?? '' }, verifier }),
+  ).rejects.toThrow('SESSION_LIMIT_EXCEEDED');
+});

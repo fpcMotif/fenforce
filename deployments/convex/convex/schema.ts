@@ -7,6 +7,10 @@ import { decisionValidator, lifecycleValidator } from './approvalContract';
 
 export default defineSchema({
   ...authTables,
+  authSessions: authTables.authSessions.index('by_userId_and_expirationTime', [
+    'userId',
+    'expirationTime',
+  ]),
   employeeIdentities: defineTable({
     issuer: v.string(),
     tenant: v.string(),

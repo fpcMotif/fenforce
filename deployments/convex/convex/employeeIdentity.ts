@@ -26,6 +26,17 @@ export const session = query({
   },
 });
 
+const validateInvitationText = (subject: string, displayName: string) => {
+  if (
+    !subject.trim() ||
+    subject.length > 200 ||
+    !displayName.trim() ||
+    displayName.length > 200
+  ) {
+    throw new ConvexError('INVALID_INVITATION');
+  }
+};
+
 export const invite = mutation({
   args: {
     workspaceId: v.id('workspaces'),
@@ -39,13 +50,7 @@ export const invite = mutation({
     const issuer = process.env.FENFORCE_OIDC_ISSUER;
     const tenant = process.env.FENFORCE_OIDC_TENANT;
     if (!issuer || !tenant) throw new ConvexError('IDENTITY_NOT_CONFIGURED');
-    if (
-      !args.subject.trim() ||
-      args.subject.length > 200 ||
-      !args.displayName.trim() ||
-      args.displayName.length > 200
-    )
-      throw new ConvexError('INVALID_INVITATION');
+    validateInvitationText(args.subject, args.displayName);
     const existing = await context.db
       .query('employeeInvitations')
       .withIndex('by_issuer_and_tenant_and_subject', (index) =>
@@ -55,7 +60,21 @@ export const invite = mutation({
           .eq('subject', args.subject),
       )
       .unique();
-    if (existing) throw new ConvexError('INVITATION_ALREADY_EXISTS');
+    if (existing) {
+      if (
+        existing.workspaceId !== args.workspaceId ||
+        existing.acceptedUserId ||
+        existing.expiresAt > Date.now()
+      ) {
+        throw new ConvexError('INVITATION_ALREADY_EXISTS');
+      }
+      await context.db.patch(existing._id, {
+        displayName: args.displayName,
+        role: args.role,
+        expiresAt: Date.now() + 7 * 24 * 3_600_000,
+      });
+      return existing._id;
+    }
     return context.db.insert('employeeInvitations', {
       ...args,
       issuer,
@@ -76,7 +95,9 @@ export const disableMember = mutation({
     await context.db.patch(membership._id, { active: false });
     const sessions = await context.db
       .query('authSessions')
-      .withIndex('userId', (index) => index.eq('userId', membership.userId))
+      .withIndex('by_userId_and_expirationTime', (index) =>
+        index.eq('userId', membership.userId).gt('expirationTime', Date.now()),
+      )
       .take(101);
     if (sessions.length > 100) throw new ConvexError('SESSION_LIMIT_EXCEEDED');
     for (const session of sessions) {

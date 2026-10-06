@@ -4,6 +4,7 @@ import type { Value } from 'convex/values';
 import { createRemoteJWKSet, jwtVerify } from 'jose';
 
 import type { DataModel } from './_generated/dataModel';
+import { internal } from './_generated/api';
 import type { MutationCtx } from './_generated/server';
 import { enrollEmployee, requireActiveEmployee } from './employeeEnrollment';
 
@@ -75,9 +76,25 @@ export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
     },
     beforeSessionCreation: async (context, { userId }) => {
       const typedContext = context as MutationCtx;
+      const expiredSessions = await typedContext.db
+        .query('authSessions')
+        .withIndex('by_userId_and_expirationTime', (index) =>
+          index.eq('userId', userId).lte('expirationTime', Date.now()),
+        )
+        .take(100);
+      for (const session of expiredSessions) {
+        await typedContext.db.delete(session._id);
+        await typedContext.scheduler.runAfter(
+          0,
+          internal.employeeIdentity.cleanRefreshTokens,
+          { sessionId: session._id },
+        );
+      }
       const sessions = await typedContext.db
         .query('authSessions')
-        .withIndex('userId', (index) => index.eq('userId', userId))
+        .withIndex('by_userId_and_expirationTime', (index) =>
+          index.eq('userId', userId).gt('expirationTime', Date.now()),
+        )
         .take(100);
       if (sessions.length >= 100) throw new Error('SESSION_LIMIT_EXCEEDED');
       const identity = await typedContext.db
