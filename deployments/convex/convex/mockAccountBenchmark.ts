@@ -33,6 +33,7 @@ const benchmarkEmployees = async (context: MutationCtx) => {
 
 export const prepare = internalMutation({
   args: {},
+  returns: v.object({ workspaceId: v.id('workspaces') }),
   handler: async (context) => {
     const { manager, seller } = await benchmarkEmployees(context);
     const workspaceId = await context.db.insert('workspaces', {
@@ -106,6 +107,11 @@ export const seedBatch = internalMutation({
     start: v.number(),
     count: v.number(),
   },
+  returns: v.object({
+    inserted: v.number(),
+    next: v.number(),
+    done: v.boolean(),
+  }),
   handler: async (context, args) => {
     const { managerMember, sellerMember } = await benchmarkMembers(
       context,
