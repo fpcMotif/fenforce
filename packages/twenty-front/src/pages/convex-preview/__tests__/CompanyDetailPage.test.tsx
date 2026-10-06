@@ -58,6 +58,7 @@ vi.mock('@tanstack/react-router', () => ({
   ),
   useParams: () => ({ companyId: 'company' }),
   useNavigate: () => vi.fn(),
+  useRouter: () => ({ state: { location: {} } }),
   useSearch: () => ({ workspace: 'workspace' }),
   useLocation: () => ({ pathname: '/objects/companies' }),
 }));
@@ -82,6 +83,7 @@ vi.mock('twenty-ui/icon', () => ({
   IconChevronLeft: () => null,
   IconPlus: () => null,
   IconUsers: () => null,
+  IconTrash: () => null,
 }));
 
 it('submits the revision at edit start even after a subscription updates', async () => {
