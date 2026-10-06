@@ -40,9 +40,7 @@ export const startMockIdentityProvider = async (port = 4011) => {
     const redirectUri = params.get('redirect_uri') ?? '';
     if (
       params.get('client_id') !== clientId ||
-      !/^http:\/\/localhost:\d+\/api\/auth\/callback\/employee-oidc$/.test(
-        redirectUri,
-      ) ||
+      !isLoopbackCallback(redirectUri) ||
       params.get('code_challenge_method') !== 'S256'
     ) {
       response.writeHead(400).end('Invalid authorization request');
@@ -205,3 +203,21 @@ const validGrant = (
   challenge === authorization.challenge &&
   params.get('redirect_uri') === authorization.redirectUri &&
   params.get('grant_type') === 'authorization_code';
+
+const isLoopbackCallback = (value: string) => {
+  try {
+    const url = new URL(value);
+    return (
+      url.protocol === 'http:' &&
+      ['localhost', '127.0.0.1'].includes(url.hostname) &&
+      url.port !== '' &&
+      url.pathname === '/api/auth/callback/employee-oidc' &&
+      url.username === '' &&
+      url.password === '' &&
+      url.search === '' &&
+      url.hash === ''
+    );
+  } catch {
+    return false;
+  }
+};

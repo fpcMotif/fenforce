@@ -38,6 +38,30 @@ it('starts the employee OIDC authorization flow through Convex Auth', async () =
   expect(result.tokens).toBeUndefined();
 });
 
+it.each(['localhost', '127.0.0.1'])(
+  'accepts a literal %s Convex callback in the local provider',
+  async (host) => {
+    const url = new URL(`${provider.issuer}/authorize`);
+    url.search = new URLSearchParams({
+      client_id: 'fenforce-local',
+      redirect_uri: `http://${host}:3211/api/auth/callback/employee-oidc`,
+      code_challenge_method: 'S256',
+    }).toString();
+    expect((await fetch(url)).status).toBe(200);
+  },
+);
+
+it('rejects non-loopback callbacks in the local provider', async () => {
+  const url = new URL(`${provider.issuer}/authorize`);
+  url.search = new URLSearchParams({
+    client_id: 'fenforce-local',
+    redirect_uri:
+      'http://localhost.evil.test:3211/api/auth/callback/employee-oidc',
+    code_challenge_method: 'S256',
+  }).toString();
+  expect((await fetch(url)).status).toBe(400);
+});
+
 const authorize = async (
   test: TestConvex<typeof schema>,
   subject = 'seller-a',
