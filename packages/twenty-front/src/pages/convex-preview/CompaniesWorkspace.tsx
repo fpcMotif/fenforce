@@ -11,12 +11,19 @@ import {
   useSearch,
 } from '@tanstack/react-router';
 import { useConvexConnectionState, useMutation } from 'convex/react';
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from 'react';
 import { MainButton } from 'twenty-ui/components';
 import {
   IconBuildingSkyscraper,
   IconChevronLeft,
   IconPlus,
+  IconTrash,
   IconUsers,
 } from 'twenty-ui/icon';
 
@@ -27,6 +34,8 @@ import type {
 } from '../../../../../deployments/convex/convex/_generated/dataModel';
 import { CompanyForm, type CompanyFormValues } from './CompanyForm';
 import { MemberAdministration } from './MemberAdministration';
+import { CompanyTrash, CompanyTrashAction } from './CompanyLifecycle';
+import { CompanyHistory } from './CompanyHistory';
 import { isSalesRole } from '../../../../../deployments/convex/convex/membershipRole';
 
 type WorkspaceContextValue = {
@@ -226,6 +235,16 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
               )}
               <span>{isAdministrator ? t`Members` : t`Companies`}</span>
             </Link>
+            {isSalesRole(selected.role) && (
+              <Link
+                to="/objects/companies/trash"
+                search={{ workspace: workspaceId }}
+                className="fenforce-sidebar-link"
+              >
+                <IconTrash size={16} />
+                <span>{t`Trash`}</span>
+              </Link>
+            )}
           </nav>
           <button
             className="fenforce-signout"
@@ -278,6 +297,19 @@ export const CompaniesPage = () => {
       >{t`Sales access is required.`}</div>
     );
   return <CompanyRecords />;
+};
+
+export const CompanyTrashPage = () => {
+  const { t } = useLingui();
+  const { workspaceId, role } = useWorkspace();
+  if (!isSalesRole(role))
+    return (
+      <div
+        className="fenforce-page"
+        role="alert"
+      >{t`Sales access is required.`}</div>
+    );
+  return <CompanyTrash workspaceId={workspaceId} />;
 };
 
 const CompanyRecords = () => {
@@ -451,6 +483,9 @@ export const CompanyDetailPage = () => {
 const CompanyRecordDetail = () => {
   const { t } = useLingui();
   const { workspaceId, workspaceName } = useWorkspace();
+  const navigate = useNavigate();
+  const router = useRouter();
+  const location = useLocation();
   const { companyId } = useParams({ from: '/object/company/$companyId' });
   const updateCompany = useMutation(api.workspaceCompanies.update);
   const company = useQuery(
@@ -533,6 +568,21 @@ const CompanyRecordDetail = () => {
           </MainButton>
         )}
       </header>
+      {editingRevision === null && record.permissions.canTrash && (
+        <CompanyTrashAction
+          workspaceId={workspaceId}
+          companyId={record._id}
+          revision={record.revision}
+          onComplete={() => {
+            if (router.state.location !== location) return;
+            void navigate({
+              to: '/objects/companies/trash',
+              search: { workspace: workspaceId },
+            });
+          }}
+        />
+      )}
+      <CompanyHistory workspaceId={workspaceId} companyId={record._id} />
       {editingRevision !== null && record.permissions.canUpdate ? (
         <section className="fenforce-editor" aria-label={t`Edit company`}>
           <h2>{t`Edit company`}</h2>
