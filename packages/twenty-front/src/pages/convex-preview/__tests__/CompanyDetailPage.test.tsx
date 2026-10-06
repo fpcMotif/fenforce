@@ -2,8 +2,10 @@ import { vi } from 'vite-plus/test';
 
 import { setupI18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { getFunctionName, type FunctionReference } from 'convex/server';
+import { useSyncExternalStore } from 'react';
 
 import {
   CompanyDetailPage,
@@ -18,7 +20,8 @@ vi.mock('@convex-dev/auth/react', () => ({
   useAuthActions: () => ({ signOut: vi.fn() }),
 }));
 vi.mock('@convex-dev/react-query', () => ({
-  convexQuery: vi.fn(),
+  convexQuery: (reference: FunctionReference<'query'>) =>
+    getFunctionName(reference),
   useConvexPaginatedQuery: () => ({
     status: 'Exhausted',
     results: [
@@ -34,22 +37,25 @@ vi.mock('@convex-dev/react-query', () => ({
 }));
 vi.mock('@tanstack/react-query', () => ({
   useQueryClient: () => ({ clear: vi.fn() }),
-  useQuery: () => ({
-    data: {
-      _id: 'company',
-      name: 'Original',
-      industry: 'services',
-      revision: mockRevision,
-      domainName: { primaryLinkLabel: '', primaryLinkUrl: '' },
-      accountOwnerId: 'original-member',
-      accountOwnerName: 'Original owner',
-      permissions: {
-        canUpdate: true,
-        canReassign: mockCanReassign,
-        canTrash: true,
-      },
-      createdAt: 0,
-    },
+  useQuery: (functionName: string) => ({
+    data:
+      functionName === 'workspaces:getMine'
+        ? { workspaceId: 'workspace', name: 'Workspace', role: 'seller' }
+        : {
+            _id: 'company',
+            name: 'Original',
+            industry: 'services',
+            revision: mockRevision,
+            domainName: { primaryLinkLabel: '', primaryLinkUrl: '' },
+            accountOwnerId: 'original-member',
+            accountOwnerName: 'Original owner',
+            permissions: {
+              canUpdate: true,
+              canReassign: mockCanReassign,
+              canTrash: true,
+            },
+            createdAt: 0,
+          },
   }),
 }));
 vi.mock('@tanstack/react-router', () => ({
@@ -62,9 +68,24 @@ vi.mock('@tanstack/react-router', () => ({
   useSearch: () => ({ workspace: 'workspace' }),
   useLocation: () => ({ pathname: '/objects/companies' }),
 }));
+let isWebSocketConnected = true;
+const connectionListeners = new Set<() => void>();
+const setWebSocketConnected = (connected: boolean) => {
+  isWebSocketConnected = connected;
+  connectionListeners.forEach((listener) => listener());
+};
 vi.mock('convex/react', () => ({
   useMutation: () => mockUpdateCompany,
-  useConvexConnectionState: () => ({ isWebSocketConnected: true }),
+  useConvexConnectionState: () => {
+    const connected = useSyncExternalStore(
+      (listener) => {
+        connectionListeners.add(listener);
+        return () => connectionListeners.delete(listener);
+      },
+      () => isWebSocketConnected,
+    );
+    return { isWebSocketConnected: connected, hasEverConnected: true };
+  },
 }));
 vi.mock('twenty-ui/components', () => ({
   MainButton: ({
@@ -110,7 +131,52 @@ it('submits the revision at edit start even after a subscription updates', async
     expectedRevision: 1,
     name: 'My edit',
     industry: 'services',
+    operationId: expect.any(String),
   });
+});
+
+it('keeps an edit pending through an outage and confirms it once after reconnect', async () => {
+  mockRevision = 1;
+  let acknowledge: (value: unknown) => void = () => {};
+  mockUpdateCompany.mockReset().mockImplementation(
+    () =>
+      new Promise((resolve) => {
+        acknowledge = resolve;
+      }),
+  );
+  const user = userEvent.setup();
+  render(
+    <I18nProvider i18n={setupI18n({ locale: 'en', messages: { en: {} } })}>
+      <WorkspaceGate>
+        <CompanyDetailPage />
+      </WorkspaceGate>
+    </I18nProvider>,
+  );
+  await user.click(screen.getByRole('button', { name: 'Edit company' }));
+  await user.clear(screen.getByRole('textbox', { name: 'Name' }));
+  await user.type(screen.getByRole('textbox', { name: 'Name' }), 'My edit');
+  await user.click(screen.getByRole('button', { name: 'Save changes' }));
+  act(() => setWebSocketConnected(false));
+  try {
+    expect(
+      await screen.findByText(
+        'Reconnecting… Your change will be confirmed when the connection returns.',
+      ),
+    ).toBeVisible();
+    expect(screen.queryByRole('alert')).toBeNull();
+    await act(async () => {
+      setWebSocketConnected(true);
+      acknowledge(null);
+    });
+    expect(
+      await screen.findByRole('button', { name: 'Edit company' }),
+    ).toBeVisible();
+    expect(screen.queryByRole('alert')).toBeNull();
+    expect(mockUpdateCompany).toHaveBeenCalledTimes(1);
+  } finally {
+    setWebSocketConnected(true);
+    mockUpdateCompany.mockReset();
+  }
 });
 
 it('uses server permission to let a manager reassign the owner', async () => {

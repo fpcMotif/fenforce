@@ -14,6 +14,9 @@ vi.mock('@convex-dev/react-query', () => ({
       {
         _id: 'audit',
         actorId: 'employee-1',
+        actorName: 'Jane Seller',
+        beforeOwnerName: null,
+        afterOwnerName: 'Jane Seller',
         timestamp: 0,
         before: null,
         after: {
@@ -46,9 +49,11 @@ it('reveals actor, revision and before/after values on demand', async () => {
   expect(screen.queryByText('Revision 1')).toBeNull();
   await user.click(screen.getByRole('button', { name: 'Show history' }));
   expect(screen.getByRole('heading', { name: 'Revision 1' })).toBeVisible();
-  expect(screen.getByText(/Actor ID: employee-1/)).toBeVisible();
+  expect(screen.getByText(/Changed by: Jane Seller/)).toBeVisible();
   await user.click(screen.getByText('Before', { selector: 'summary' }));
   expect(screen.getByText('Not created yet')).toBeVisible();
   await user.click(screen.getByText('After', { selector: 'summary' }));
   expect(screen.getByText('Acme')).toBeVisible();
+  expect(screen.getByText('Jane Seller', { selector: 'dd' })).toBeVisible();
+  expect(screen.queryByText('employee-1')).toBeNull();
 });

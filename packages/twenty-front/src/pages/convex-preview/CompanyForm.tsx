@@ -7,8 +7,20 @@ import { MainButton } from 'twenty-ui/components';
 import { api } from '../../../../../deployments/convex/convex/_generated/api';
 import type { Id } from '../../../../../deployments/convex/convex/_generated/dataModel';
 import { ACCOUNT_FIELDS } from '../../../../../deployments/convex/convex/accountFields';
+import type { AccountIndustry } from './companyListQuery';
 
-type AccountIndustry = (typeof ACCOUNT_FIELDS.industry.options)[number];
+export const IndustryLabel = ({
+  industry,
+}: {
+  industry: AccountIndustry | null | undefined;
+}) => {
+  const { t } = useLingui();
+  return industry === 'services'
+    ? t`Services`
+    : industry === 'manufacturing'
+      ? t`Manufacturing`
+      : '—';
+};
 
 export type CompanyFormValues = {
   name: string;
@@ -22,6 +34,7 @@ type CompanyFormProps = {
   initialValues?: CompanyFormValues;
   canReassignOwner?: boolean;
   ownerName?: string | null;
+  isReconnecting?: boolean;
   onSave: (values: CompanyFormValues) => Promise<void>;
   onCancel: () => void;
 };
@@ -31,6 +44,7 @@ export const CompanyForm = ({
   initialValues,
   canReassignOwner = false,
   ownerName,
+  isReconnecting = false,
   onSave,
   onCancel,
 }: CompanyFormProps) => {
@@ -110,7 +124,7 @@ export const CompanyForm = ({
           <option value="">{t`No industry`}</option>
           {ACCOUNT_FIELDS.industry.options.map((option) => (
             <option key={option} value={option}>
-              {option === 'services' ? t`Services` : t`Manufacturing`}
+              <IndustryLabel industry={option} />
             </option>
           ))}
         </select>
@@ -174,6 +188,9 @@ export const CompanyForm = ({
         >
           {t`Load more members`}
         </button>
+      )}
+      {isSaving && isReconnecting && (
+        <p role="status">{t`Reconnecting… Your change will be confirmed when the connection returns.`}</p>
       )}
       {error && (
         <p className="fenforce-form-error" role="alert">

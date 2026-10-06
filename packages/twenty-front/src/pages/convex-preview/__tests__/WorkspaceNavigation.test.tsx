@@ -4,6 +4,7 @@ import { I18nProvider } from '@lingui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { getFunctionName, type FunctionReference } from 'convex/server';
 
 import { PreviewRouter } from '~/pages/convex-preview/PreviewRouter';
 
@@ -17,37 +18,50 @@ vi.mock('convex/react', () => ({
   useMutation: () => mutation,
   useConvexConnectionState: () => ({ isWebSocketConnected: true }),
 }));
+const FIRST_PAGE_WORKSPACE_IDS = ['workspace-a', 'workspace-b'];
+const LATER_PAGE_WORKSPACE_ID = 'workspace-c';
+const assignedWorkspace = (workspaceId: string) => ({
+  workspaceId,
+  name: `Workspace ${workspaceId.slice(-1).toUpperCase()}`,
+  role: workspaceRole,
+});
 vi.mock('@convex-dev/react-query', () => ({
-  convexQuery: vi.fn(),
+  convexQuery: (
+    reference: FunctionReference<'query'>,
+    args: { workspaceId: string } | 'skip',
+  ) =>
+    args === 'skip'
+      ? { queryKey: [getFunctionName(reference), 'skip'], enabled: false }
+      : {
+          queryKey: [getFunctionName(reference), args.workspaceId],
+          queryFn: () =>
+            [...FIRST_PAGE_WORKSPACE_IDS, LATER_PAGE_WORKSPACE_ID].includes(
+              args.workspaceId,
+            )
+              ? assignedWorkspace(args.workspaceId)
+              : null,
+        },
   useConvexPaginatedQuery: (
-    _reference: unknown,
+    reference: FunctionReference<'query'>,
     args: { workspaceId?: string },
   ) => ({
     status: 'Exhausted',
-    results: args.workspaceId
-      ? [
-          {
-            _id: `${args.workspaceId}-company`,
-            memberId: 'seller',
-            displayName: 'Seller',
-            name: `${args.workspaceId} company`,
-            domainName: {},
-            createdByName: 'Seller',
-            createdAt: 0,
-          },
-        ]
-      : [
-          {
-            workspaceId: 'workspace-a',
-            name: 'Workspace A',
-            role: workspaceRole,
-          },
-          {
-            workspaceId: 'workspace-b',
-            name: 'Workspace B',
-            role: workspaceRole,
-          },
-        ],
+    results:
+      getFunctionName(reference) === 'accountViews:list'
+        ? []
+        : args.workspaceId
+          ? [
+              {
+                _id: `${args.workspaceId}-company`,
+                memberId: 'seller',
+                displayName: 'Seller',
+                name: `${args.workspaceId} company`,
+                domainName: {},
+                createdByName: 'Seller',
+                createdAt: 0,
+              },
+            ]
+          : FIRST_PAGE_WORKSPACE_IDS.map(assignedWorkspace),
   }),
 }));
 
@@ -96,7 +110,12 @@ it('restores the workspace from a deep link, switches safely, follows history an
   await waitFor(() =>
     expect(screen.queryByText('workspace-b company')).toBeNull(),
   );
-  expect(queryClient.getQueryCache().getAll()).toHaveLength(0);
+  expect(
+    queryClient
+      .getQueryCache()
+      .getAll()
+      .filter((query) => query.state.data !== undefined),
+  ).toHaveLength(0);
 });
 
 it('shows administration instead of sales records for an administrator', async () => {
@@ -169,6 +188,28 @@ it('does not silently select another workspace for an unauthorized deep link', a
   expect(screen.queryByText('workspace-a company')).toBeNull();
   expect(screen.queryByText('workspace-b company')).toBeNull();
   expect(window.location.search).toBe('?workspace=foreign-workspace');
+});
+
+it('opens a requested workspace that is not on the first page of the workspace list', async () => {
+  window.history.replaceState(
+    {},
+    '',
+    `/objects/companies?workspace=${LATER_PAGE_WORKSPACE_ID}`,
+  );
+  render(
+    <I18nProvider i18n={setupI18n({ locale: 'en', messages: { en: {} } })}>
+      <QueryClientProvider client={new QueryClient()}>
+        <PreviewRouter />
+      </QueryClientProvider>
+    </I18nProvider>,
+  );
+  expect(await screen.findByText('workspace-c company')).toBeVisible();
+  expect(screen.getByRole('combobox', { name: 'Workspace' })).toHaveValue(
+    LATER_PAGE_WORKSPACE_ID,
+  );
+  expect(
+    screen.queryByRole('heading', { name: 'Workspace unavailable' }),
+  ).toBeNull();
 });
 
 it('does not return to an old workspace when its pending create completes after switching', async () => {

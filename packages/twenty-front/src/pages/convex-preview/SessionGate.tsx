@@ -8,23 +8,42 @@ import { api } from '../../../../../deployments/convex/convex/_generated/api';
 import { PreviewError } from './PreviewError';
 import { EMPLOYEE_SIGN_IN_ATTEMPT_KEY } from './signInAttempt';
 
+const SESSION_VERIFICATION_TIMEOUT_IN_MILLISECONDS = 4000;
+const SESSION_HEARTBEAT_INTERVAL_IN_MILLISECONDS = 2000;
+
 export const SessionGate = ({ children }: { children: ReactNode }) => {
   const { t } = useLingui();
   const convex = useConvex();
   const queryClient = useQueryClient();
-  const [status, setStatus] = useState<'checking' | 'active' | 'ended'>(
-    'checking',
-  );
+  const [status, setStatus] = useState<
+    'checking' | 'active' | 'ended' | 'unverified'
+  >('checking');
 
   useEffect(() => {
     let closed = false;
     let pending = false;
-    const endSession = () => {
+    let connected = convex.connectionState().isWebSocketConnected;
+    let verificationDeadline: ReturnType<typeof setTimeout> | undefined;
+    let expiryDeadline: ReturnType<typeof setTimeout> | undefined;
+    const clearDeadlines = () => {
+      clearTimeout(verificationDeadline);
+      clearTimeout(expiryDeadline);
+    };
+    const closeGate = (finalStatus: 'ended' | 'unverified') => {
       closed = true;
-      setStatus('ended');
+      clearDeadlines();
+      setStatus(finalStatus);
       queryClient.clear();
     };
-    let deadline = setTimeout(endSession, 4000);
+    const armVerificationDeadline = () => {
+      clearTimeout(verificationDeadline);
+      verificationDeadline = connected
+        ? setTimeout(
+            () => closeGate('unverified'),
+            SESSION_VERIFICATION_TIMEOUT_IN_MILLISECONDS,
+          )
+        : undefined;
+    };
     const checkSession = async () => {
       if (closed || pending) return;
       pending = true;
@@ -32,34 +51,51 @@ export const SessionGate = ({ children }: { children: ReactNode }) => {
         const session = await convex.query(api.employeeIdentity.session, {});
         if (closed) return;
         if (session === null || session.expiresAt <= Date.now()) {
-          endSession();
+          closeGate('ended');
           return;
         }
-        clearTimeout(deadline);
-        deadline = setTimeout(
-          endSession,
-          Math.min(4000, session.expiresAt - Date.now()),
+        clearTimeout(expiryDeadline);
+        expiryDeadline = setTimeout(
+          () => closeGate('ended'),
+          session.expiresAt - Date.now(),
         );
+        armVerificationDeadline();
         setStatus('active');
         sessionStorage.removeItem(EMPLOYEE_SIGN_IN_ATTEMPT_KEY);
       } catch {
-        if (!closed) endSession();
+        if (!closed) closeGate('unverified');
       } finally {
         pending = false;
       }
     };
+    const unsubscribeFromConnectionState = convex.subscribeToConnectionState(
+      (connectionState) => {
+        if (closed || connectionState.isWebSocketConnected === connected)
+          return;
+        connected = connectionState.isWebSocketConnected;
+        armVerificationDeadline();
+        if (connected) void checkSession();
+      },
+    );
+    armVerificationDeadline();
     void checkSession();
-    const heartbeat = setInterval(() => void checkSession(), 2000);
+    const heartbeat = setInterval(
+      () => void checkSession(),
+      SESSION_HEARTBEAT_INTERVAL_IN_MILLISECONDS,
+    );
     return () => {
       closed = true;
-      clearTimeout(deadline);
+      clearDeadlines();
       clearInterval(heartbeat);
+      unsubscribeFromConnectionState();
       queryClient.clear();
     };
   }, [convex, queryClient]);
 
   if (status === 'ended')
     return <PreviewError error={new ConvexError('UNAUTHENTICATED')} />;
+  if (status === 'unverified')
+    return <PreviewError error={new Error('SESSION_UNVERIFIED')} />;
   if (status === 'checking')
     return (
       <div

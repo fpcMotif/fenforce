@@ -15,6 +15,7 @@ import {
   WorkspaceGate,
   WorkspaceAdministrationPage,
 } from './CompaniesWorkspace';
+import { parseCompanyListSearch } from './companyListQuery';
 import { PreviewError } from './PreviewError';
 
 const rootRoute = createRootRoute({
@@ -40,6 +41,7 @@ const indexRoute = createRoute({
 const companiesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/objects/companies',
+  validateSearch: parseCompanyListSearch,
   component: CompaniesPage,
 });
 const companyDetailRoute = createRoute({

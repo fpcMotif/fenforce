@@ -10,7 +10,8 @@ import {
   useRouter,
   useSearch,
 } from '@tanstack/react-router';
-import { useConvexConnectionState, useMutation } from 'convex/react';
+import { useConvexConnectionState } from 'convex/react';
+import { ConvexError } from 'convex/values';
 import {
   createContext,
   useContext,
@@ -18,6 +19,8 @@ import {
   useState,
   type ReactNode,
 } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import { isDefined } from 'twenty-shared/utils';
 import { MainButton } from 'twenty-ui/components';
 import {
   IconBuildingSkyscraper,
@@ -32,11 +35,25 @@ import type {
   Doc,
   Id,
 } from '../../../../../deployments/convex/convex/_generated/dataModel';
-import { CompanyForm, type CompanyFormValues } from './CompanyForm';
+import {
+  CompanyForm,
+  IndustryLabel,
+  type CompanyFormValues,
+} from './CompanyForm';
 import { MemberAdministration } from './MemberAdministration';
 import { CompanyTrash, CompanyTrashAction } from './CompanyLifecycle';
 import { CompanyHistory } from './CompanyHistory';
 import { isSalesRole } from '../../../../../deployments/convex/convex/membershipRole';
+import { CompanyListControls } from './CompanyListControls';
+import { CompanySavedViews } from './CompanySavedViews';
+import { useAccountOperation } from './useAccountOperation';
+import {
+  isFilteredCompanyListQuery,
+  readCompanyListQuery,
+  toCompanyListArgs,
+  toCompanyListSearch,
+  type CompanyListQuery,
+} from './companyListQuery';
 
 type WorkspaceContextValue = {
   workspaceId: Id<'workspaces'>;
@@ -86,6 +103,14 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
   const [logoutStatus, setLogoutStatus] = useState<
     'idle' | 'pending' | 'failed'
   >('idle');
+  const requestedMembership = useQuery(
+    convexQuery(
+      api.workspaces.getMine,
+      isDefined(requestedWorkspace) && logoutStatus === 'idle'
+        ? { workspaceId: requestedWorkspace }
+        : 'skip',
+    ),
+  );
   const logout = async () => {
     setLogoutStatus('pending');
     queryClient.clear();
@@ -117,7 +142,14 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
     );
   }
 
-  if (workspaces.status === 'LoadingFirstPage') {
+  if (requestedMembership.isError) {
+    throw requestedMembership.error;
+  }
+
+  if (
+    workspaces.status === 'LoadingFirstPage' ||
+    (isDefined(requestedWorkspace) && requestedMembership.isPending)
+  ) {
     return (
       <div className="fenforce-gate" role="status">
         <div className="fenforce-gate-card">{t`Loading your workspaces…`}</div>
@@ -125,9 +157,7 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
     );
   }
 
-  const selected = workspaces.results.find(
-    (workspace) => workspace.workspaceId === requestedWorkspace,
-  );
+  const selected = requestedMembership.data ?? undefined;
   const firstWorkspace = workspaces.results[0];
   if (requestedWorkspace === undefined && firstWorkspace !== undefined) {
     return (
@@ -199,6 +229,9 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
                 });
               }}
             >
+              {!workspaces.results.some(
+                (workspace) => workspace.workspaceId === workspaceId,
+              ) && <option value={workspaceId}>{workspaceName}</option>}
               {workspaces.results.map((workspace) => (
                 <option
                   key={workspace.workspaceId}
@@ -286,7 +319,7 @@ export const WorkspaceAdministrationPage = () => {
   return <MemberAdministration workspaceId={workspaceId} />;
 };
 
-export const CompaniesPage = () => {
+const SalesAccessGate = ({ children }: { children: ReactNode }) => {
   const { t } = useLingui();
   const { role } = useWorkspace();
   if (!isSalesRole(role))
@@ -296,38 +329,122 @@ export const CompaniesPage = () => {
         role="alert"
       >{t`Sales access is required.`}</div>
     );
-  return <CompanyRecords />;
+  return children;
+};
+
+export const CompaniesPage = () => (
+  <SalesAccessGate>
+    <CompanyRecordsWithOwnerFilterFallback />
+  </SalesAccessGate>
+);
+
+const OwnerFilterResetEffect = ({
+  owner,
+  onReset,
+}: {
+  owner: string;
+  onReset: (owner: string) => void;
+}) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    onReset(owner);
+    void navigate({
+      to: '/objects/companies',
+      search: (search) => ({ ...search, owner: undefined }),
+      replace: true,
+    });
+  }, [navigate, onReset, owner]);
+  return null;
+};
+
+const isOwnerFilterError = (error: unknown) =>
+  error instanceof ConvexError
+    ? error.data === 'FORBIDDEN'
+    : error instanceof Error &&
+      error.message.includes('ArgumentValidationError') &&
+      error.message.includes('ownerId');
+
+const CompanyRecordsWithOwnerFilterFallback = () => {
+  const { role } = useWorkspace();
+  const { owner } = useSearch({ from: '/objects/companies' });
+  const [unavailableOwner, setUnavailableOwner] = useState<string>();
+  return (
+    <ErrorBoundary
+      key={unavailableOwner}
+      fallbackRender={({ error }) => {
+        if (
+          role !== 'manager' ||
+          !isDefined(owner) ||
+          owner === unavailableOwner ||
+          !isOwnerFilterError(error)
+        )
+          throw error;
+        return (
+          <OwnerFilterResetEffect owner={owner} onReset={setUnavailableOwner} />
+        );
+      }}
+    >
+      <CompanyRecords unavailableOwner={unavailableOwner} />
+    </ErrorBoundary>
+  );
 };
 
 export const CompanyTrashPage = () => {
-  const { t } = useLingui();
-  const { workspaceId, role } = useWorkspace();
-  if (!isSalesRole(role))
-    return (
-      <div
-        className="fenforce-page"
-        role="alert"
-      >{t`Sales access is required.`}</div>
-    );
-  return <CompanyTrash workspaceId={workspaceId} />;
+  const { workspaceId } = useWorkspace();
+  return (
+    <SalesAccessGate>
+      <CompanyTrash workspaceId={workspaceId} />
+    </SalesAccessGate>
+  );
 };
 
-const CompanyRecords = () => {
+const CompanyRecords = ({
+  unavailableOwner,
+}: {
+  unavailableOwner: string | undefined;
+}) => {
   const { t } = useLingui();
   const { workspaceId, workspaceName, role } = useWorkspace();
   const navigate = useNavigate();
   const router = useRouter();
-  const createCompany = useMutation(api.workspaceCompanies.create);
+  const listSearch = useSearch({ from: '/objects/companies' });
+  const canFilterOwner = role === 'manager';
+  const isOwnerFilterReset =
+    isDefined(unavailableOwner) &&
+    (!isDefined(listSearch.owner) || listSearch.owner === unavailableOwner);
+  const query = readCompanyListQuery(
+    listSearch.owner === unavailableOwner
+      ? { ...listSearch, owner: undefined }
+      : listSearch,
+    canFilterOwner,
+  );
+  const activeViewId = listSearch.view as Id<'accountViews'> | undefined;
+  const isFiltered = isFilteredCompanyListQuery(query);
+  const createCompany = useAccountOperation(api.workspaceCompanies.create);
   const companies = useConvexPaginatedQuery(
     api.workspaceCompanies.list,
-    { workspaceId },
+    { workspaceId, ...toCompanyListArgs(query) },
     { initialNumItems: 25 },
   );
   const [isCreating, setIsCreating] = useState(false);
 
+  const showQuery = (
+    nextQuery: CompanyListQuery | undefined,
+    viewId?: Id<'accountViews'>,
+  ) =>
+    void navigate({
+      to: '/objects/companies',
+      search: {
+        workspace: workspaceId,
+        ...(nextQuery === undefined
+          ? {}
+          : toCompanyListSearch(nextQuery, viewId)),
+      },
+    });
+
   const saveCompany = async (values: CompanyFormValues) => {
     const location = router.state.location;
-    const companyId = await createCompany({ workspaceId, ...values });
+    const companyId = await createCompany.submit({ workspaceId, ...values });
     if (router.state.location !== location) return;
     setIsCreating(false);
     await navigate({
@@ -361,14 +478,36 @@ const CompanyRecords = () => {
           <CompanyForm
             workspaceId={workspaceId}
             canReassignOwner={role === 'manager'}
+            isReconnecting={createCompany.isReconnecting}
             onSave={saveCompany}
             onCancel={() => setIsCreating(false)}
           />
         </section>
       )}
       <section className="fenforce-records" aria-label={t`Companies`}>
+        {isOwnerFilterReset && (
+          <p role="status">{t`That owner filter is unavailable, so all companies are shown.`}</p>
+        )}
+        <CompanySavedViews
+          workspaceId={workspaceId}
+          query={query}
+          activeViewId={activeViewId}
+          isDefaultQuery={!isFiltered && query.sortDirection === 'asc'}
+          canShareViews={role === 'manager'}
+          canFilterOwner={canFilterOwner}
+          onSelect={showQuery}
+          onDeleted={(viewId) => {
+            if (viewId === activeViewId) showQuery(query);
+          }}
+        />
+        <CompanyListControls
+          workspaceId={workspaceId}
+          query={query}
+          canFilterOwner={canFilterOwner}
+          onChange={(nextQuery) => showQuery(nextQuery)}
+        />
         <div className="fenforce-records-toolbar">
-          <span>{t`All companies`}</span>
+          <span>{isFiltered ? t`Filtered companies` : t`All companies`}</span>
           <span className="fenforce-muted">
             {companies.status === 'LoadingFirstPage'
               ? t`Loading…`
@@ -404,11 +543,7 @@ const CompanyRecords = () => {
                     </Link>
                   </td>
                   <td>
-                    {company.industry === 'services'
-                      ? t`Services`
-                      : company.industry === 'manufacturing'
-                        ? t`Manufacturing`
-                        : '—'}
+                    <IndustryLabel industry={company.industry} />
                   </td>
                   <td>
                     {company.domainName.primaryLinkUrl ? (
@@ -442,7 +577,16 @@ const CompanyRecords = () => {
           </div>
         )}
         {companies.status !== 'LoadingFirstPage' &&
-          companies.results.length === 0 && (
+          companies.results.length === 0 &&
+          isFiltered && (
+            <div className="fenforce-table-message" role="status">
+              <strong>{t`No companies match`}</strong>
+              <span>{t`Change the search or filters to see more companies.`}</span>
+            </div>
+          )}
+        {companies.status !== 'LoadingFirstPage' &&
+          companies.results.length === 0 &&
+          !isFiltered && (
             <div className="fenforce-table-message">
               <IconBuildingSkyscraper size={24} />
               <strong>{t`No companies yet`}</strong>
@@ -467,18 +611,11 @@ const CompanyRecords = () => {
   );
 };
 
-export const CompanyDetailPage = () => {
-  const { t } = useLingui();
-  const { role } = useWorkspace();
-  if (!isSalesRole(role))
-    return (
-      <div
-        className="fenforce-page"
-        role="alert"
-      >{t`Sales access is required.`}</div>
-    );
-  return <CompanyRecordDetail />;
-};
+export const CompanyDetailPage = () => (
+  <SalesAccessGate>
+    <CompanyRecordDetail />
+  </SalesAccessGate>
+);
 
 const CompanyRecordDetail = () => {
   const { t } = useLingui();
@@ -487,7 +624,7 @@ const CompanyRecordDetail = () => {
   const router = useRouter();
   const location = useLocation();
   const { companyId } = useParams({ from: '/object/company/$companyId' });
-  const updateCompany = useMutation(api.workspaceCompanies.update);
+  const updateCompany = useAccountOperation(api.workspaceCompanies.update);
   const company = useQuery(
     convexQuery(api.workspaceCompanies.get, {
       workspaceId,
@@ -529,7 +666,7 @@ const CompanyRecordDetail = () => {
       return;
     }
 
-    await updateCompany({
+    await updateCompany.submit({
       workspaceId,
       companyId: record._id,
       expectedRevision: editingRevision,
@@ -591,6 +728,7 @@ const CompanyRecordDetail = () => {
             workspaceId={workspaceId}
             canReassignOwner={record.permissions.canReassign}
             ownerName={record.accountOwnerName}
+            isReconnecting={updateCompany.isReconnecting}
             initialValues={{
               name: record.name,
               industry: record.industry,
@@ -612,11 +750,7 @@ const CompanyRecordDetail = () => {
             <div>
               <dt>{t`Industry`}</dt>
               <dd>
-                {record.industry === 'services'
-                  ? t`Services`
-                  : record.industry === 'manufacturing'
-                    ? t`Manufacturing`
-                    : '—'}
+                <IndustryLabel industry={record.industry} />
               </dd>
             </div>
             <div>

@@ -1,12 +1,12 @@
 import { useConvexPaginatedQuery } from '@convex-dev/react-query';
 import { useLingui } from '@lingui/react/macro';
-import { useMutation } from 'convex/react';
 import { ConvexError } from 'convex/values';
 import { useRef, useState } from 'react';
 
 import { api } from '../../../../../deployments/convex/convex/_generated/api';
 import type { Id } from '../../../../../deployments/convex/convex/_generated/dataModel';
 import { CompanyHistory } from './CompanyHistory';
+import { useAccountOperation } from './useAccountOperation';
 
 type CompanyLifecycleProps = {
   workspaceId: Id<'workspaces'>;
@@ -23,19 +23,18 @@ export const CompanyTrashAction = ({
   onComplete,
 }: CompanyTrashActionProps) => {
   const { t } = useLingui();
-  const trash = useMutation(api.accountLifecycle.trash);
+  const trash = useAccountOperation(api.accountLifecycle.trash);
   const [confirmationRevision, setConfirmationRevision] = useState<
     number | null
   >(null);
-  const [pending, setPending] = useState(false);
   const [error, setError] = useState('');
   const trigger = useRef<HTMLButtonElement>(null);
+  const pending = trash.isPending;
   const submit = async () => {
     if (confirmationRevision === null) return;
-    setPending(true);
     setError('');
     try {
-      await trash({
+      await trash.submit({
         workspaceId,
         companyId,
         expectedRevision: confirmationRevision,
@@ -47,8 +46,6 @@ export const CompanyTrashAction = ({
           ? t`This company changed. Cancel and try again with the latest version.`
           : t`Unable to move this company to trash. Try again.`,
       );
-    } finally {
-      setPending(false);
     }
   };
   return (
@@ -66,6 +63,9 @@ export const CompanyTrashAction = ({
           aria-label={t`Confirm move to trash`}
         >
           <p>{t`Move this company to trash? You can restore it later.`}</p>
+          {trash.isReconnecting && (
+            <p role="status">{t`Reconnecting… Your change will be confirmed when the connection returns.`}</p>
+          )}
           {error && <p role="alert">{error}</p>}
           <button
             autoFocus
@@ -104,25 +104,28 @@ const TrashedCompany = ({
   canReassign: boolean;
 }) => {
   const { t } = useLingui();
-  const restore = useMutation(api.accountLifecycle.restore);
-  const reassign = useMutation(api.accountLifecycle.reassignTrashed);
+  const restore = useAccountOperation(api.accountLifecycle.restore);
+  const reassign = useAccountOperation(api.accountLifecycle.reassignTrashed);
   const members = useConvexPaginatedQuery(
     api.workspaceCompanies.listEligibleOwners,
     canReassign ? { workspaceId } : 'skip',
     { initialNumItems: 50 },
   );
   const [ownerId, setOwnerId] = useState('');
-  const [pending, setPending] = useState(false);
   const [error, setError] = useState('');
+  const pending = restore.isPending || reassign.isPending;
   const submit = async (action: 'restore' | 'reassign') => {
-    setPending(true);
     setError('');
     try {
       if (action === 'restore') {
-        await restore({ workspaceId, companyId, expectedRevision: revision });
+        await restore.submit({
+          workspaceId,
+          companyId,
+          expectedRevision: revision,
+        });
         onComplete();
       } else {
-        await reassign({
+        await reassign.submit({
           workspaceId,
           companyId,
           expectedRevision: revision,
@@ -139,8 +142,6 @@ const TrashedCompany = ({
             ? t`This company changed. Review the latest details and try again.`
             : t`Unable to update this company. Try again.`,
       );
-    } finally {
-      setPending(false);
     }
   };
   return (
@@ -185,6 +186,9 @@ const TrashedCompany = ({
         </div>
       )}
       <CompanyHistory workspaceId={workspaceId} companyId={companyId} />
+      {(restore.isReconnecting || reassign.isReconnecting) && (
+        <p role="status">{t`Reconnecting… Your change will be confirmed when the connection returns.`}</p>
+      )}
       {error && <p role="alert">{error}</p>}
     </section>
   );
