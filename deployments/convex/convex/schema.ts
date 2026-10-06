@@ -4,6 +4,7 @@ import { defineSchema, defineTable } from 'convex/server';
 import { v } from 'convex/values';
 
 import { decisionValidator, lifecycleValidator } from './approvalContract';
+import { membershipRoleValidator } from './membershipRole';
 
 export default defineSchema({
   ...authTables,
@@ -25,7 +26,7 @@ export default defineSchema({
     subject: v.string(),
     workspaceId: v.id('workspaces'),
     displayName: v.string(),
-    role: v.union(v.literal('admin'), v.literal('member')),
+    role: membershipRoleValidator,
     expiresAt: v.number(),
     acceptedUserId: v.optional(v.id('users')),
   }).index('by_issuer_and_tenant_and_subject', ['issuer', 'tenant', 'subject']),
@@ -62,11 +63,16 @@ export default defineSchema({
     workspaceId: v.id('workspaces'),
     userId: v.id('users'),
     displayName: v.string(),
-    role: v.union(v.literal('admin'), v.literal('member')),
+    role: membershipRoleValidator,
     createdAt: v.number(),
   })
     .index('by_workspaceId_and_userId', ['workspaceId', 'userId'])
     .index('by_userId', ['userId'])
+    .index('by_workspaceId_and_active_and_role', [
+      'workspaceId',
+      'active',
+      'role',
+    ])
     .index('by_userId_and_active', ['userId', 'active']),
   workspaceCompanies: defineTable({
     workspaceId: v.id('workspaces'),

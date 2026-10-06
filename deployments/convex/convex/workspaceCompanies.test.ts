@@ -92,7 +92,7 @@ describe('workspace companies authorization', () => {
         workspaceId,
         userId: bobUserId,
         displayName: 'Bob Owner',
-        role: 'member',
+        role: 'seller',
         createdAt: Date.now(),
       }),
     );

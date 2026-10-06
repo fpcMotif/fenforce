@@ -9,6 +9,7 @@ import { PreviewRouter } from '~/pages/convex-preview/PreviewRouter';
 
 const signOut = vi.fn(() => new Promise<void>(() => undefined));
 const mutation = vi.fn();
+let workspaceRole = 'seller';
 vi.mock('@convex-dev/auth/react', () => ({
   useAuthActions: () => ({ signOut }),
 }));
@@ -36,8 +37,16 @@ vi.mock('@convex-dev/react-query', () => ({
           },
         ]
       : [
-          { workspaceId: 'workspace-a', name: 'Workspace A' },
-          { workspaceId: 'workspace-b', name: 'Workspace B' },
+          {
+            workspaceId: 'workspace-a',
+            name: 'Workspace A',
+            role: workspaceRole,
+          },
+          {
+            workspaceId: 'workspace-b',
+            name: 'Workspace B',
+            role: workspaceRole,
+          },
         ],
   }),
 }));
@@ -74,6 +83,32 @@ it('restores the workspace from a deep link, switches safely, follows history an
     expect(screen.queryByText('workspace-b company')).toBeNull(),
   );
   expect(queryClient.getQueryCache().getAll()).toHaveLength(0);
+});
+
+it('shows administration instead of sales records for an administrator', async () => {
+  workspaceRole = 'admin';
+  window.history.replaceState(
+    {},
+    '',
+    '/objects/companies?workspace=workspace-a',
+  );
+  try {
+    render(
+      <I18nProvider i18n={setupI18n({ locale: 'en', messages: { en: {} } })}>
+        <QueryClientProvider client={new QueryClient()}>
+          <PreviewRouter />
+        </QueryClientProvider>
+      </I18nProvider>,
+    );
+    expect(
+      await screen.findByRole('heading', { name: 'Members' }),
+    ).toBeVisible();
+    expect(window.location.pathname).toBe('/settings/members');
+    expect(screen.queryByText('workspace-a company')).toBeNull();
+    expect(screen.queryByRole('button', { name: 'New company' })).toBeNull();
+  } finally {
+    workspaceRole = 'seller';
+  }
 });
 
 it('does not silently select another workspace for an unauthorized deep link', async () => {

@@ -12,6 +12,7 @@ import {
   CompanyDetailPage,
   CompaniesPage,
   WorkspaceGate,
+  WorkspaceAdministrationPage,
 } from './CompaniesWorkspace';
 import { PreviewError } from './PreviewError';
 
@@ -45,6 +46,11 @@ const companyDetailRoute = createRoute({
   path: '/object/company/$companyId',
   component: CompanyDetailPage,
 });
+const membersRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/settings/members',
+  component: WorkspaceAdministrationPage,
+});
 const createPreviewRouter = () =>
   createRouter({
     defaultErrorComponent: PreviewError,
@@ -52,6 +58,7 @@ const createPreviewRouter = () =>
       indexRoute,
       companiesRoute,
       companyDetailRoute,
+      membersRoute,
     ]),
   });
 
