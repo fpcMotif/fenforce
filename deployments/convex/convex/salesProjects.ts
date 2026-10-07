@@ -26,18 +26,11 @@ import {
 } from './salesOperations';
 import {
   salesAccessibleProject,
-  salesCheckOwner,
   salesCurrentBlockers,
-  salesRequirePrimaryContact,
   salesRequireProject,
 } from './salesPolicy';
-import {
-  salesDate,
-  salesQuantity,
-  salesRequire,
-  salesText,
-  salesValidateCommand,
-} from './salesValidation';
+import { salesInsertProject } from './salesSource';
+import { salesRequire, salesValidateCommand } from './salesValidation';
 
 export const create = mutation({
   args: {
@@ -66,68 +59,14 @@ export const create = mutation({
       payload,
     );
     if (receipt !== null) return receipt.projectId;
-    const ownerCheckedId = await salesCheckOwner(context, account);
-    const primaryContactId = await salesRequirePrimaryContact(
+    const { operationId, ...input } = args;
+    const projectId = await salesInsertProject(
       context,
       account,
-      args.primaryContactId ?? null,
+      member._id,
+      input,
+      null,
     );
-    const { operationId, ...input } = args;
-    for (const value of [
-      args.title,
-      args.materialCode,
-      args.productName,
-      args.specification,
-      args.application,
-      args.nextAction,
-    ])
-      salesText(value);
-    salesQuantity(args.quantityMilli, args.unit);
-    salesDate(args.nextActionDate);
-    const closeDate =
-      args.closeDate === undefined || args.closeDate === null
-        ? null
-        : salesDate(args.closeDate);
-    const now = Date.now();
-    const projectId = await context.db.insert('salesProjects', {
-      ...input,
-      primaryContactId,
-      closeDate,
-      mode: 'demo',
-      simulation: true,
-      revision: 1,
-      quoteVersion: 0,
-      ownerCheckedId,
-      ownerCheckedAt: now,
-      stage: 'qualified',
-      outcome: 'open',
-      sample: null,
-      quote: null,
-      purchaseOrder: null,
-      pricingReview: null,
-      orderReview: null,
-      confirmation: null,
-      releases: [],
-      lostReason: null,
-      createdBy: member._id,
-      updatedBy: member._id,
-      createdAt: now,
-      updatedAt: now,
-    });
-    await context.db.insert('salesProjectEvents', {
-      mode: 'demo',
-      simulation: true,
-      workspaceId: args.workspaceId,
-      projectId,
-      actorId: member._id,
-      timestamp: now,
-      revision: 1,
-      fromStage: null,
-      toStage: 'qualified',
-      command: { type: 'create' },
-      previousQuote: null,
-      snapshotId: null,
-    });
     await salesSaveReceipt(context, member, operationId, payload, projectId, 1);
     return projectId;
   },

@@ -111,6 +111,7 @@ export const salesProductFields = {
   unit: salesUnitValidator,
   currency: salesCurrencyValidator,
 };
+export const salesProductValidator = v.object(salesProductFields);
 export const salesStageValidator = v.union(
   v.literal('qualified'),
   v.literal('quoted'),
@@ -125,6 +126,7 @@ export const salesProjectFields = {
   workspaceId: v.id('workspaces'),
   accountId: v.id('workspaceCompanies'),
   primaryContactId: v.union(v.id('workspaceContacts'), v.null()),
+  sourceId: v.union(v.string(), v.null()),
   ...salesProductFields,
   revision: v.number(),
   quoteVersion: v.number(),

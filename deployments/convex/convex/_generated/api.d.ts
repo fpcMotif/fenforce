@@ -57,6 +57,7 @@ import type * as salesPipeline from "../salesPipeline.js";
 import type * as salesPolicy from "../salesPolicy.js";
 import type * as salesProjects from "../salesProjects.js";
 import type * as salesReviews from "../salesReviews.js";
+import type * as salesSource from "../salesSource.js";
 import type * as salesValidation from "../salesValidation.js";
 import type * as singleAccountStream from "../singleAccountStream.js";
 import type * as workflowRuntime from "../workflowRuntime.js";
@@ -120,6 +121,7 @@ declare const fullApi: ApiFromModules<{
   salesPolicy: typeof salesPolicy;
   salesProjects: typeof salesProjects;
   salesReviews: typeof salesReviews;
+  salesSource: typeof salesSource;
   salesValidation: typeof salesValidation;
   singleAccountStream: typeof singleAccountStream;
   workflowRuntime: typeof workflowRuntime;
