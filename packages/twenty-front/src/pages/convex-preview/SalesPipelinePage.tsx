@@ -6,13 +6,13 @@ import { useState } from 'react';
 import { IconTargetArrow } from 'twenty-ui/icon';
 
 import { api } from '../../../../../deployments/convex/convex/_generated/api';
+import { SALES_OPEN_STAGES } from '../../../../../deployments/convex/convex/salesContract';
 import { SalesAccessGate, useWorkspace } from './CompaniesWorkspace';
 import { useSalesLabels } from './SalesLabels';
 import { formatSalesMinor, SalesPipelineTotals } from './SalesPipelineTotals';
 import './SalesProjects.css';
 
-const OPEN_STAGES = ['qualified', 'quoted', 'po-received', 'review'] as const;
-type OpenStage = (typeof OPEN_STAGES)[number];
+type OpenStage = (typeof SALES_OPEN_STAGES)[number];
 
 export const SalesPipelinePage = () => (
   <SalesAccessGate>
@@ -60,12 +60,12 @@ const SalesPipeline = () => {
             value={stage ?? ''}
             onChange={(event) =>
               setStage(
-                OPEN_STAGES.find((value) => value === event.target.value),
+                SALES_OPEN_STAGES.find((value) => value === event.target.value),
               )
             }
           >
             <option value="">{t`All open stages`}</option>
-            {OPEN_STAGES.map((value) => (
+            {SALES_OPEN_STAGES.map((value) => (
               <option key={value} value={value}>
                 {stageLabel(value)}
               </option>

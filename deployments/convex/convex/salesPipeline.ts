@@ -3,7 +3,7 @@ import {
   paginationOptsValidator,
   paginationResultValidator,
 } from 'convex/server';
-import { v } from 'convex/values';
+import { v, type Infer } from 'convex/values';
 
 import type { Doc, Id } from './_generated/dataModel';
 import { query, type QueryCtx } from './_generated/server';
@@ -16,7 +16,9 @@ import { requireSalesMember } from './accountPolicy';
 import { validateAccountPageSize } from './accountQueryContract';
 import { paginateWithFingerprintCursor } from './fingerprintCursor';
 import {
+  SALES_OPEN_STAGES,
   salesCurrencyValidator,
+  salesOpenStageValidator,
   salesStageValidator,
   type SalesProject,
 } from './salesContract';
@@ -30,20 +32,16 @@ const SALES_PIPELINE_INDEX_FIELDS = [
   '_creationTime',
   '_id',
 ];
-const SALES_PIPELINE_TOTALS_LIMIT = 500;
-const SALES_OPEN_STAGES: SalesProject['stage'][] = [
-  'qualified',
-  'quoted',
-  'po-received',
-  'review',
+const SALES_PIPELINE_STAGE_INDEX_FIELDS = [
+  'accountId',
+  'outcome',
+  'stage',
+  '_creationTime',
+  '_id',
 ];
+const SALES_PIPELINE_TOTALS_LIMIT = 500;
 
-const openStageValidator = v.union(
-  v.literal('qualified'),
-  v.literal('quoted'),
-  v.literal('po-received'),
-  v.literal('review'),
-);
+type SalesOpenStage = Infer<typeof salesOpenStageValidator>;
 
 const salesPipelineItemValidator = v.object({
   _id: v.id('salesProjects'),
@@ -71,25 +69,36 @@ const salesPipelineGroupValidator = v.object({
 const openAccountProjectStream = (
   context: QueryCtx,
   accountId: Id<'workspaceCompanies'>,
-) =>
-  new SingleAccountStream(
-    stream(context.db, schema)
-      .query('salesProjects')
-      .withIndex('by_accountId_and_outcome', (index) =>
-        index.eq('accountId', accountId).eq('outcome', 'open'),
-      ),
+  stage: SalesOpenStage | undefined,
+) => {
+  const projects = stream(context.db, schema).query('salesProjects');
+  return new SingleAccountStream(
+    stage === undefined
+      ? projects.withIndex('by_accountId_and_outcome', (index) =>
+          index.eq('accountId', accountId).eq('outcome', 'open'),
+        )
+      : projects.withIndex('by_accountId_and_outcome_and_stage', (index) =>
+          index
+            .eq('accountId', accountId)
+            .eq('outcome', 'open')
+            .eq('stage', stage),
+        ),
     accountId,
   );
+};
 
 const authorizedOpenProjects = async (
   context: QueryCtx,
   member: Doc<'workspaceMembers'>,
+  stage?: SalesOpenStage,
 ) => {
   const ownerId = await resolveAccountOwnerFilter(context, member, undefined);
   await assertAccountQueryIndexReady(context, member.workspaceId, ownerId);
   return authorizedAccountStream(context, member.workspaceId, ownerId).flatMap(
-    async (account) => openAccountProjectStream(context, account._id),
-    SALES_PIPELINE_INDEX_FIELDS,
+    async (account) => openAccountProjectStream(context, account._id, stage),
+    stage === undefined
+      ? SALES_PIPELINE_INDEX_FIELDS
+      : SALES_PIPELINE_STAGE_INDEX_FIELDS,
   );
 };
 
@@ -111,19 +120,16 @@ const pipelineItem = (project: SalesProject, accountName: string) => ({
 export const list = query({
   args: {
     workspaceId: v.id('workspaces'),
-    stage: v.optional(openStageValidator),
+    stage: v.optional(salesOpenStageValidator),
     paginationOpts: paginationOptsValidator,
   },
   returns: paginationResultValidator(salesPipelineItemValidator),
   handler: async (context, args) => {
     const member = await requireSalesMember(context, args.workspaceId);
     validateAccountPageSize(args.paginationOpts.numItems);
-    const projects = await authorizedOpenProjects(context, member);
+    const projects = await authorizedOpenProjects(context, member, args.stage);
     const result = await paginateWithFingerprintCursor(
-      projects.filterWith(
-        async (project) =>
-          args.stage === undefined || project.stage === args.stage,
-      ),
+      projects,
       args.paginationOpts,
       JSON.stringify([1, member._id, member.role, args.stage ?? null]),
       'INVALID_SALES_PIPELINE_CURSOR',
@@ -182,8 +188,8 @@ export const totals = query({
     }
     const ordered = [...groups.values()].sort(
       (first, second) =>
-        SALES_OPEN_STAGES.indexOf(first.stage) -
-          SALES_OPEN_STAGES.indexOf(second.stage) ||
+        SALES_OPEN_STAGES.findIndex((stage) => stage === first.stage) -
+          SALES_OPEN_STAGES.findIndex((stage) => stage === second.stage) ||
         first.currency.localeCompare(second.currency),
     );
     return {

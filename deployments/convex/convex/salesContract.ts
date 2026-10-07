@@ -113,11 +113,17 @@ export const salesProductFields = {
   currency: salesCurrencyValidator,
 };
 export const salesProductValidator = v.object(salesProductFields);
+export const SALES_OPEN_STAGES = [
+  'qualified',
+  'quoted',
+  'po-received',
+  'review',
+] as const;
+export const salesOpenStageValidator = v.union(
+  ...SALES_OPEN_STAGES.map((stage) => v.literal(stage)),
+);
 export const salesStageValidator = v.union(
-  v.literal('qualified'),
-  v.literal('quoted'),
-  v.literal('po-received'),
-  v.literal('review'),
+  salesOpenStageValidator,
   v.literal('confirmed'),
   v.literal('lost'),
 );

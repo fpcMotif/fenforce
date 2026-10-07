@@ -25,6 +25,11 @@ export default defineSchema({
   ...authTables,
   salesProjects: defineTable(salesProjectFields)
     .index('by_accountId_and_outcome', ['accountId', 'outcome'])
+    .index('by_accountId_and_outcome_and_stage', [
+      'accountId',
+      'outcome',
+      'stage',
+    ])
     .index('by_workspaceId_and_sourceId', ['workspaceId', 'sourceId']),
   salesReviewSnapshots: defineTable(salesSnapshotFields).index('by_projectId', [
     'projectId',

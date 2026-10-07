@@ -1,7 +1,12 @@
 import { expect, it } from 'vitest';
 
-import { salesFixture, SALES_QUOTE } from '../testing/salesFixtures';
+import {
+  salesFixture,
+  SALES_PRODUCT,
+  SALES_QUOTE,
+} from '../testing/salesFixtures';
 import { api } from './_generated/api';
+import { insertImportedSalesProject } from './salesSource';
 import type { Id } from './_generated/dataModel';
 import type { SalesCommand } from './salesContract';
 
@@ -64,7 +69,18 @@ const pipelineFixture = async () => {
     });
   const totals = (actor: typeof seller) =>
     actor.session.query(api.salesPipeline.totals, { workspaceId });
-  return { ...fixture, quoted, yuan, foreign, pipeline, totals, manager };
+  const createQuoted = (title: string) =>
+    createProject(seller, accountA, title, 'USD', 1000, [SALES_QUOTE, sent]);
+  return {
+    ...fixture,
+    quoted,
+    yuan,
+    foreign,
+    pipeline,
+    totals,
+    manager,
+    createQuoted,
+  };
 };
 
 it('returns only open opportunities on accessible Accounts with a permission-safe projection', async () => {
@@ -157,6 +173,31 @@ it('totals open amounts per stage and currency without mixing currencies', async
       totalMinor: 999,
     },
   ]);
+});
+
+it('fills a stage-filtered page from the stage index instead of scanning other stages', async () => {
+  const fixture = await pipelineFixture();
+  await fixture.test.run(async (context) => {
+    for (let index = 0; index < 150; index++)
+      await insertImportedSalesProject(context, {
+        ...SALES_PRODUCT,
+        workspaceId: fixture.workspaceId,
+        accountId: fixture.accountA,
+        actorId: fixture.seller.memberId,
+        sourceId: `bulk-${index}`,
+      });
+  });
+  const later = await fixture.createQuoted('later');
+  const first = await fixture.pipeline(fixture.seller, 1, null, 'quoted');
+  const second = await fixture.pipeline(
+    fixture.seller,
+    1,
+    first.continueCursor,
+    'quoted',
+  );
+  expect([...first.page, ...second.page].map((project) => project._id)).toEqual(
+    [fixture.quoted, later],
+  );
 });
 
 it('denies the pipeline to administrators, inactive members and other workspaces', async () => {
