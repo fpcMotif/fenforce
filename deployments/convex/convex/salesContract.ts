@@ -281,6 +281,30 @@ export const salesEventValidator = v.object({
   _id: v.id('salesProjectEvents'),
   _creationTime: v.number(),
 });
+export const SALES_SIMULATION_LABEL =
+  'Demo simulation: no Feishu, email or SAP calls' as const;
+export const salesProjectCardFields = {
+  _id: v.id('salesProjects'),
+  accountId: v.id('workspaceCompanies'),
+  title: v.string(),
+  stage: salesStageValidator,
+  closeDate: v.union(v.string(), v.null()),
+  nextAction: v.string(),
+  nextActionDate: v.string(),
+  revision: v.number(),
+  updatedAt: v.number(),
+};
+export const salesProjectCard = (project: SalesProject) => ({
+  _id: project._id,
+  accountId: project.accountId,
+  title: project.title,
+  stage: project.stage,
+  closeDate: project.closeDate,
+  nextAction: project.nextAction,
+  nextActionDate: project.nextActionDate,
+  revision: project.revision,
+  updatedAt: project.updatedAt,
+});
 export type SalesCommand = Infer<typeof salesCommandValidator>;
 export type SalesProject = Infer<typeof salesProjectValidator>;
 export type SalesQuote = Infer<typeof salesQuoteValidator>;

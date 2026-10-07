@@ -19,6 +19,8 @@ import {
   SALES_OPEN_STAGES,
   salesCurrencyValidator,
   salesOpenStageValidator,
+  salesProjectCard,
+  salesProjectCardFields,
   salesStageValidator,
   type SalesProject,
 } from './salesContract';
@@ -44,18 +46,10 @@ const SALES_PIPELINE_TOTALS_LIMIT = 500;
 type SalesOpenStage = Infer<typeof salesOpenStageValidator>;
 
 const salesPipelineItemValidator = v.object({
-  _id: v.id('salesProjects'),
-  accountId: v.id('workspaceCompanies'),
+  ...salesProjectCardFields,
   accountName: v.string(),
-  title: v.string(),
-  stage: salesStageValidator,
   currency: salesCurrencyValidator,
   amountMinor: v.union(v.number(), v.null()),
-  closeDate: v.union(v.string(), v.null()),
-  nextAction: v.string(),
-  nextActionDate: v.string(),
-  revision: v.number(),
-  updatedAt: v.number(),
 });
 
 const salesPipelineGroupValidator = v.object({
@@ -103,18 +97,10 @@ const authorizedOpenProjects = async (
 };
 
 const pipelineItem = (project: SalesProject, accountName: string) => ({
-  _id: project._id,
-  accountId: project.accountId,
+  ...salesProjectCard(project),
   accountName,
-  title: project.title,
-  stage: project.stage,
   currency: project.currency,
   amountMinor: project.quote?.totalMinor ?? null,
-  closeDate: project.closeDate,
-  nextAction: project.nextAction,
-  nextActionDate: project.nextActionDate,
-  revision: project.revision,
-  updatedAt: project.updatedAt,
 });
 
 export const list = query({

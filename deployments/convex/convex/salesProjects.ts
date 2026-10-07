@@ -12,9 +12,12 @@ import { requireAccessibleAccount } from './contactPolicy';
 import { operationPayload } from './operationReceipt';
 import { salesApplyCommand } from './salesCommands';
 import {
+  SALES_SIMULATION_LABEL,
   salesCommandValidator,
   salesEventValidator,
   salesProductFields,
+  salesProjectCard,
+  salesProjectCardFields,
   salesProjectValidator,
   salesSnapshotValidator,
   type SalesCommand,
@@ -74,41 +77,25 @@ export const create = mutation({
 });
 
 const salesSummaryValidator = v.object({
-  _id: v.id('salesProjects'),
+  ...salesProjectCardFields,
   mode: v.literal('demo'),
   simulation: v.literal(true),
-  title: v.string(),
   materialCode: v.string(),
   productName: v.string(),
   quantityMilli: v.number(),
   unit: salesProjectValidator.fields.unit,
-  closeDate: v.union(v.string(), v.null()),
-  accountId: v.id('workspaceCompanies'),
-  revision: v.number(),
-  stage: salesProjectValidator.fields.stage,
   outcome: salesProjectValidator.fields.outcome,
-  nextAction: v.string(),
-  nextActionDate: v.string(),
-  updatedAt: v.number(),
 });
 
 const salesSummary = (project: SalesProject) => ({
-  _id: project._id,
+  ...salesProjectCard(project),
   mode: project.mode,
   simulation: project.simulation,
-  title: project.title,
   materialCode: project.materialCode,
   productName: project.productName,
   quantityMilli: project.quantityMilli,
   unit: project.unit,
-  closeDate: project.closeDate,
-  accountId: project.accountId,
-  revision: project.revision,
-  stage: project.stage,
   outcome: project.outcome,
-  nextAction: project.nextAction,
-  nextActionDate: project.nextActionDate,
-  updatedAt: project.updatedAt,
 });
 
 export const list = query({
@@ -140,9 +127,7 @@ export const get = query({
       ...salesProjectValidator.fields,
       currentReview: v.union(salesSnapshotValidator, v.null()),
       blockers: v.array(v.string()),
-      simulationLabel: v.literal(
-        'Demo simulation: no Feishu, email or SAP calls',
-      ),
+      simulationLabel: v.literal(SALES_SIMULATION_LABEL),
     }),
     v.null(),
   ),
@@ -163,8 +148,7 @@ export const get = query({
       ...project,
       currentReview,
       blockers,
-      simulationLabel:
-        'Demo simulation: no Feishu, email or SAP calls' as const,
+      simulationLabel: SALES_SIMULATION_LABEL,
     };
   },
 });
