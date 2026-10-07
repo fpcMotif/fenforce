@@ -16,6 +16,12 @@ import {
   WorkspaceAdministrationPage,
 } from './CompaniesWorkspace';
 import { parseCompanyListSearch } from './companyListQuery';
+import {
+  PeoplePage,
+  PeopleTrashPage,
+  PersonDetailPage,
+} from './ContactsWorkspace';
+import { parseContactListSearch } from './contactListQuery';
 import { PreviewError } from './PreviewError';
 
 const rootRoute = createRootRoute({
@@ -59,6 +65,22 @@ const trashRoute = createRoute({
   path: '/objects/companies/trash',
   component: CompanyTrashPage,
 });
+const peopleRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/objects/people',
+  validateSearch: parseContactListSearch,
+  component: PeoplePage,
+});
+const personDetailRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/object/person/$personId',
+  component: PersonDetailPage,
+});
+const peopleTrashRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/objects/people/trash',
+  component: PeopleTrashPage,
+});
 const createPreviewRouter = () =>
   createRouter({
     defaultErrorComponent: PreviewError,
@@ -68,6 +90,9 @@ const createPreviewRouter = () =>
       companyDetailRoute,
       membersRoute,
       trashRoute,
+      peopleRoute,
+      personDetailRoute,
+      peopleTrashRoute,
     ]),
   });
 

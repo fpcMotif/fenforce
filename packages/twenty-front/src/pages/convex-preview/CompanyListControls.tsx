@@ -1,16 +1,12 @@
 import { useConvexPaginatedQuery } from '@convex-dev/react-query';
 import { useLingui } from '@lingui/react/macro';
-import { useState, type FormEvent } from 'react';
-import {
-  IconSearch,
-  IconSortAscending,
-  IconSortDescending,
-} from 'twenty-ui/icon';
+import { IconSortAscending, IconSortDescending } from 'twenty-ui/icon';
 
 import { api } from '../../../../../deployments/convex/convex/_generated/api';
 import type { Id } from '../../../../../deployments/convex/convex/_generated/dataModel';
 import { ACCOUNT_FIELDS } from '../../../../../deployments/convex/convex/accountFields';
 import { IndustryLabel } from './CompanyForm';
+import { ListSearchForm } from './ListSearchForm';
 import {
   NO_INDUSTRY_SEARCH_VALUE,
   type CompanyListQuery,
@@ -24,53 +20,6 @@ type CompanyListControlsProps = {
 };
 
 const ANY_VALUE = '';
-
-const CompanySearchForm = ({
-  search,
-  onSearch,
-}: {
-  search: string;
-  onSearch: (search: string) => void;
-}) => {
-  const { t } = useLingui();
-  const [draft, setDraft] = useState(search);
-  const [appliedSearch, setAppliedSearch] = useState(search);
-  if (appliedSearch !== search) {
-    setAppliedSearch(search);
-    setDraft(search);
-  }
-  const submit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    onSearch(draft.trim());
-  };
-  return (
-    <form role="search" className="fenforce-list-search" onSubmit={submit}>
-      <label className="fenforce-list-search-field">
-        <span className="fenforce-sr-only">{t`Search companies`}</span>
-        <IconSearch size={15} aria-hidden="true" />
-        <input
-          type="search"
-          value={draft}
-          maxLength={ACCOUNT_FIELDS.name.maxLength}
-          placeholder={t`Search by name`}
-          onChange={(event) => setDraft(event.target.value)}
-        />
-      </label>
-      <button type="submit" className="fenforce-secondary-button">
-        {t`Search`}
-      </button>
-      {search !== '' && (
-        <button
-          type="button"
-          className="fenforce-text-button"
-          onClick={() => onSearch('')}
-        >
-          {t`Clear search`}
-        </button>
-      )}
-    </form>
-  );
-};
 
 export const CompanyListControls = ({
   workspaceId,
@@ -94,8 +43,10 @@ export const CompanyListControls = ({
 
   return (
     <div className="fenforce-list-controls">
-      <CompanySearchForm
+      <ListSearchForm
         search={query.search}
+        label={t`Search companies`}
+        maxLength={ACCOUNT_FIELDS.name.maxLength}
         onSearch={(search) => onChange({ ...query, search })}
       />
       <label className="fenforce-list-filter">

@@ -27,6 +27,7 @@ import {
   IconChevronLeft,
   IconPlus,
   IconTrash,
+  IconUser,
   IconUsers,
 } from 'twenty-ui/icon';
 
@@ -43,6 +44,7 @@ import {
 import { MemberAdministration } from './MemberAdministration';
 import { CompanyTrash, CompanyTrashAction } from './CompanyLifecycle';
 import { CompanyHistory } from './CompanyHistory';
+import { CompanyContacts } from './CompanyContacts';
 import { isSalesRole } from '../../../../../deployments/convex/convex/membershipRole';
 import { CompanyListControls } from './CompanyListControls';
 import { CompanySavedViews } from './CompanySavedViews';
@@ -77,7 +79,7 @@ const WorkspaceRedirectEffect = ({
   return null;
 };
 
-const useWorkspace = () => {
+export const useWorkspace = () => {
   const workspace = useContext(WorkspaceContext);
 
   if (workspace === null) {
@@ -270,6 +272,20 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
             </Link>
             {isSalesRole(selected.role) && (
               <Link
+                to="/objects/people"
+                search={{ workspace: workspaceId }}
+                className="fenforce-sidebar-link"
+                activeProps={{
+                  className:
+                    'fenforce-sidebar-link fenforce-sidebar-link-active',
+                }}
+              >
+                <IconUser size={16} />
+                <span>{t`People`}</span>
+              </Link>
+            )}
+            {isSalesRole(selected.role) && (
+              <Link
                 to="/objects/companies/trash"
                 search={{ workspace: workspaceId }}
                 className="fenforce-sidebar-link"
@@ -299,7 +315,7 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const formatDate = (timestamp: number) =>
+export const formatDate = (timestamp: number) =>
   new Intl.DateTimeFormat('en', {
     month: 'short',
     day: 'numeric',
@@ -319,7 +335,7 @@ export const WorkspaceAdministrationPage = () => {
   return <MemberAdministration workspaceId={workspaceId} />;
 };
 
-const SalesAccessGate = ({ children }: { children: ReactNode }) => {
+export const SalesAccessGate = ({ children }: { children: ReactNode }) => {
   const { t } = useLingui();
   const { role } = useWorkspace();
   if (!isSalesRole(role))
@@ -787,6 +803,11 @@ const CompanyRecordDetail = () => {
           </dl>
         </section>
       )}
+      <CompanyContacts
+        workspaceId={workspaceId}
+        companyId={record._id}
+        companyName={record.name}
+      />
     </div>
   );
 };

@@ -22,18 +22,37 @@ vi.mock('@convex-dev/auth/react', () => ({
 vi.mock('@convex-dev/react-query', () => ({
   convexQuery: (reference: FunctionReference<'query'>) =>
     getFunctionName(reference),
-  useConvexPaginatedQuery: () => ({
-    status: 'Exhausted',
-    results: [
-      {
-        workspaceId: 'workspace',
-        name: 'Workspace',
-        memberId: 'member',
-        displayName: 'Member',
-        role: 'seller',
-      },
-    ],
-  }),
+  useConvexPaginatedQuery: (
+    reference: FunctionReference<'query'>,
+    args: { accountId?: string } | 'skip',
+  ) =>
+    getFunctionName(reference) === 'workspaceContacts:list'
+      ? {
+          status: 'Exhausted',
+          results:
+            args !== 'skip' && args.accountId === 'company'
+              ? [
+                  {
+                    _id: 'contact',
+                    accountId: 'company',
+                    lastName: 'Synthetic',
+                    email: null,
+                  },
+                ]
+              : [],
+        }
+      : {
+          status: 'Exhausted',
+          results: [
+            {
+              workspaceId: 'workspace',
+              name: 'Workspace',
+              memberId: 'member',
+              displayName: 'Member',
+              role: 'seller',
+            },
+          ],
+        },
 }));
 vi.mock('@tanstack/react-query', () => ({
   useQueryClient: () => ({ clear: vi.fn() }),
@@ -103,9 +122,23 @@ vi.mock('twenty-ui/icon', () => ({
   IconBuildingSkyscraper: () => null,
   IconChevronLeft: () => null,
   IconPlus: () => null,
+  IconUser: () => null,
   IconUsers: () => null,
   IconTrash: () => null,
 }));
+
+it('lists the people linked to the company on its detail page', () => {
+  render(
+    <I18nProvider i18n={setupI18n({ locale: 'en', messages: { en: {} } })}>
+      <WorkspaceGate>
+        <CompanyDetailPage />
+      </WorkspaceGate>
+    </I18nProvider>,
+  );
+  const people = screen.getByRole('region', { name: 'People' });
+  expect(people).toHaveTextContent('Synthetic');
+  expect(screen.getByRole('button', { name: 'Add person' })).toBeVisible();
+});
 
 it('submits the revision at edit start even after a subscription updates', async () => {
   const user = userEvent.setup();
