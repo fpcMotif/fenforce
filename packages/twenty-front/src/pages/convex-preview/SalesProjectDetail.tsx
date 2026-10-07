@@ -9,15 +9,20 @@ import { api } from '../../../../../deployments/convex/convex/_generated/api';
 import type { Id } from '../../../../../deployments/convex/convex/_generated/dataModel';
 import { SalesAccessGate, useWorkspace } from './CompaniesWorkspace';
 import { SalesProjectActions } from './SalesProjectActions';
+import { SalesProjectSummary } from './SalesProjectSummary';
+import { useSalesLabels } from './SalesLabels';
 import { SalesDemoNotice } from './SalesProjectsPage';
 import { useAccountOperation } from './useAccountOperation';
 import './SalesProjects.css';
 
-export const SalesProjectDetailPage = () => (
-  <SalesAccessGate>
-    <SalesProjectDetail />
-  </SalesAccessGate>
-);
+export const SalesProjectDetailPage = () => {
+  const { projectId } = useParams({ from: '/object/sales-project/$projectId' });
+  return (
+    <SalesAccessGate>
+      <SalesProjectDetail key={projectId} />
+    </SalesAccessGate>
+  );
+};
 
 export const SalesFacts = ({
   rows,
@@ -37,6 +42,7 @@ export const SalesFacts = ({
 const SalesProjectDetail = () => {
   const { t } = useLingui();
   const { workspaceId, role } = useWorkspace();
+  const { label, problem } = useSalesLabels();
   const { projectId } = useParams({ from: '/object/sales-project/$projectId' });
   const query = useQuery(
     convexQuery(api.salesProjects.get, {
@@ -63,7 +69,8 @@ const SalesProjectDetail = () => {
         >{t`Back to sales projects`}</Link>
       </div>
     );
-  const { project, currentReview, blockers } = query.data;
+  const project = query.data;
+  const { currentReview, blockers } = project;
   return (
     <div className="fenforce-page">
       <Link
@@ -78,7 +85,7 @@ const SalesProjectDetail = () => {
             {project.materialCode} · {project.productName}
           </p>
         </div>
-        <span className="fenforce-sales-status">{project.stage}</span>
+        <span className="fenforce-sales-status">{label(project.stage)}</span>
       </header>
       <SalesDemoNotice />
       <div className="fenforce-sales-grid">
@@ -90,6 +97,16 @@ const SalesProjectDetail = () => {
             <h2>{t`Product project`}</h2>
             <SalesFacts
               rows={[
+                {
+                  label: t`Company`,
+                  value: (
+                    <Link
+                      to="/object/company/$companyId"
+                      params={{ companyId: project.accountId }}
+                      search={{ workspace: workspaceId }}
+                    >{t`Open company`}</Link>
+                  ),
+                },
                 { label: t`Specification`, value: project.specification },
                 { label: t`Application`, value: project.application },
                 {
@@ -98,11 +115,12 @@ const SalesProjectDetail = () => {
                 },
                 { label: t`Currency`, value: project.currency },
                 { label: t`Revision`, value: project.revision },
-                { label: t`Next action`, value: project.nextAction.text },
-                { label: t`Follow-up date`, value: project.nextAction.dueDate },
+                { label: t`Next action`, value: project.nextAction },
+                { label: t`Follow-up date`, value: project.nextActionDate },
               ]}
             />
           </section>
+          <SalesProjectSummary project={project} />
           <section className="fenforce-sales-card" aria-label={t`Order review`}>
             <h2>{t`Order review`}</h2>
             <p>
@@ -113,7 +131,7 @@ const SalesProjectDetail = () => {
             {blockers.length > 0 ? (
               <ul>
                 {blockers.map((blocker) => (
-                  <li key={blocker}>{blocker}</li>
+                  <li key={blocker}>{problem(blocker)}</li>
                 ))}
               </ul>
             ) : (
@@ -136,17 +154,17 @@ const SalesProjectDetail = () => {
                   {release.deliveryDate}
                 </p>
                 <p>
-                  {release.handoff?.outcome === 'accepted'
+                  {release.erpState === 'accepted'
                     ? t`Demo: accepted`
-                    : t`Awaiting simulated SAP acceptance`}
+                    : label(release.erpState)}
                 </p>
               </div>
             ))}
           </section>
-          <SalesProjectHistory projectId={project._id} />
         </div>
         <SalesProjectActions
           revision={project.revision}
+          stage={project.stage}
           isManager={role === 'manager'}
           onExecute={async (command, expectedRevision) => {
             try {
@@ -161,14 +179,13 @@ const SalesProjectDetail = () => {
                 failure instanceof ConvexError &&
                 typeof failure.data === 'string'
               )
-                throw new Error(
-                  t`Unable to complete this action: ${failure.data}. Review the current project and its prerequisites. Close and reopen the action to use the latest revision.`,
-                );
+                throw new Error(problem(failure.data));
               throw failure;
             }
           }}
         />
       </div>
+      <SalesProjectHistory projectId={project._id} />
     </div>
   );
 };
@@ -180,6 +197,7 @@ const SalesProjectHistory = ({
 }) => {
   const { t } = useLingui();
   const { workspaceId } = useWorkspace();
+  const { label } = useSalesLabels();
   const history = useConvexPaginatedQuery(
     api.salesProjects.history,
     { workspaceId, projectId },
@@ -191,7 +209,26 @@ const SalesProjectHistory = ({
       <ol className="fenforce-sales-history">
         {history.results.map((event) => (
           <li key={event._id}>
-            <strong>{event.command.type}</strong>
+            <strong>{label(event.command.type)}</strong>
+            <p>{event.actorName}</p>
+            {event.command.type === 'logActivity' && (
+              <p>{event.command.text}</p>
+            )}
+            {event.command.type === 'recordSample' && (
+              <p>
+                {label(event.command.status)} · {event.command.notes}
+              </p>
+            )}
+            {'evidenceReference' in event.command && (
+              <p>{event.command.evidenceReference}</p>
+            )}
+            {event.previousQuote && (
+              <p>
+                {t`Previous quote version`}: {event.previousQuote.version} ·{' '}
+                {event.previousQuote.unitPriceMinor / 100} ·{' '}
+                {event.previousQuote.incoterm} {event.previousQuote.namedPlace}
+              </p>
+            )}
             <time dateTime={new Date(event._creationTime).toISOString()}>
               {new Date(event._creationTime).toLocaleString()}
             </time>

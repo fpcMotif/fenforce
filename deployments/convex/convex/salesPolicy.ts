@@ -69,6 +69,33 @@ export const salesRequireRequester = async (
   );
 };
 
+const salesApproversValid = async (
+  context: QueryCtx,
+  account: Doc<'workspaceCompanies'>,
+  review: SalesReviewState,
+) => {
+  for (const actorId of new Set(
+    review.decisions.map((decision) => decision.actorId),
+  )) {
+    const actor = await context.db.get(actorId);
+    if (actor === null || actor.active === false || actor.role !== 'manager')
+      return false;
+    if (!canAccessAccount(actor, account)) return false;
+  }
+  return true;
+};
+
+export const salesRequireApprovers = async (
+  context: QueryCtx,
+  account: Doc<'workspaceCompanies'>,
+  review: SalesReviewState,
+) => {
+  salesRequire(
+    await salesApproversValid(context, account, review),
+    'SALES_APPROVER_ACCESS_CHANGED',
+  );
+};
+
 export const salesRequireSnapshot = async (
   context: QueryCtx,
   project: SalesProject,
@@ -102,6 +129,8 @@ export const salesCurrentBlockers = async (
     if (review === null) continue;
     if (!(await salesRequesterValid(context, account, review)))
       blockers.push('SALES_REQUESTER_ACCESS_CHANGED');
+    if (!(await salesApproversValid(context, account, review)))
+      blockers.push('SALES_APPROVER_ACCESS_CHANGED');
     const snapshot = await context.db.get(review.snapshotId);
     if (snapshot?.ownerId !== account.accountOwnerId)
       blockers.push('SALES_OWNER_CHANGED');

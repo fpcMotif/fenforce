@@ -23,14 +23,13 @@ type SalesFormProps = {
 };
 
 const SalesInput = ({ field }: { field: SalesField }) => {
-  const properties = {
-    name: field.name,
-    required: field.required !== false,
-    defaultValue: field.value,
-  };
   if (field.options)
     return (
-      <select {...properties}>
+      <select
+        name={field.name}
+        required={field.required !== false}
+        defaultValue={field.value}
+      >
         {field.options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
@@ -40,11 +39,19 @@ const SalesInput = ({ field }: { field: SalesField }) => {
     );
   if (field.type === 'textarea')
     return (
-      <textarea {...properties} rows={3} maxLength={field.maxLength ?? 2000} />
+      <textarea
+        name={field.name}
+        required={field.required !== false}
+        defaultValue={field.value}
+        rows={3}
+        maxLength={field.maxLength ?? 1000}
+      />
     );
   return (
     <input
-      {...properties}
+      name={field.name}
+      required={field.required !== false}
+      defaultValue={field.value}
       type={field.type ?? 'text'}
       step={field.step}
       min={field.min}

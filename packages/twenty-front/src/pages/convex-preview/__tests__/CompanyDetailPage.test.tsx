@@ -120,6 +120,7 @@ vi.mock('twenty-ui/components', () => ({
 }));
 vi.mock('twenty-ui/icon', () => ({
   IconBuildingSkyscraper: () => null,
+  IconTargetArrow: () => null,
   IconChevronLeft: () => null,
   IconPlus: () => null,
   IconUser: () => null,

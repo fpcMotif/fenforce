@@ -6,6 +6,7 @@ import { v } from 'convex/values';
 
 import { mutation, query } from './_generated/server';
 import { requireSalesMember } from './accountPolicy';
+import { memberDisplayName } from './memberDisplayName';
 import { requireAccessibleAccount } from './contactPolicy';
 import { operationPayload } from './operationReceipt';
 import { salesApplyCommand } from './salesCommands';
@@ -214,18 +215,31 @@ export const history = query({
     projectId: v.id('salesProjects'),
     paginationOpts: paginationOptsValidator,
   },
-  returns: paginationResultValidator(salesEventValidator),
+  returns: paginationResultValidator(
+    v.object({ ...salesEventValidator.fields, actorName: v.string() }),
+  ),
   handler: async (context, args) => {
     const member = await requireSalesMember(context, args.workspaceId);
     await salesRequireProject(context, member, args.projectId);
     salesPageSize(args.paginationOpts.numItems);
-    return context.db
+    const result = await context.db
       .query('salesProjectEvents')
       .withIndex('by_projectId', (index) =>
         index.eq('projectId', args.projectId),
       )
       .order('desc')
       .paginate(args.paginationOpts);
+    const page = await Promise.all(
+      result.page.map(async (event) => ({
+        ...event,
+        actorName: await memberDisplayName(
+          context,
+          args.workspaceId,
+          event.actorId,
+        ),
+      })),
+    );
+    return { ...result, page };
   },
 });
 

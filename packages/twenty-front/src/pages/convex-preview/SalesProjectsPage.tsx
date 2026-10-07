@@ -9,6 +9,7 @@ import { api } from '../../../../../deployments/convex/convex/_generated/api';
 import { SalesAccessGate, useWorkspace } from './CompaniesWorkspace';
 import { CompanyPicker, type SelectedCompany } from './CompanyPicker';
 import { SalesProjectCreate } from './SalesProjectCreate';
+import { useSalesLabels } from './SalesLabels';
 import { useAccountOperation } from './useAccountOperation';
 import './SalesProjects.css';
 
@@ -103,6 +104,7 @@ const SalesProjectsWorkspace = () => {
 
 const SalesProjectList = ({ company }: { company: SelectedCompany }) => {
   const { t } = useLingui();
+  const { label } = useSalesLabels();
   const { workspaceId } = useWorkspace();
   const projects = useConvexPaginatedQuery(
     api.salesProjects.list,
@@ -118,7 +120,7 @@ const SalesProjectList = ({ company }: { company: SelectedCompany }) => {
             <tr>
               <th scope="col">{t`Project`}</th>
               <th scope="col">{t`Product`}</th>
-              <th scope="col">{t`Quantity`}</th>
+              <th scope="col">{t`Next action`}</th>
               <th scope="col">{t`Status`}</th>
             </tr>
           </thead>
@@ -138,9 +140,9 @@ const SalesProjectList = ({ company }: { company: SelectedCompany }) => {
                 </td>
                 <td>{project.productName}</td>
                 <td>
-                  {project.quantityMilli / 1000} {project.unit}
+                  {project.nextAction} · {project.nextActionDate}
                 </td>
-                <td>{project.stage}</td>
+                <td>{label(project.stage)}</td>
               </tr>
             ))}
           </tbody>

@@ -9,7 +9,11 @@ import type {
   SalesProject,
   SalesReviewState,
 } from './salesContract';
-import { salesCheckOwner, salesRequireSnapshot } from './salesPolicy';
+import {
+  salesCheckOwner,
+  salesRequireApprovers,
+  salesRequireSnapshot,
+} from './salesPolicy';
 import {
   salesAssertEditable,
   salesBlockers,
@@ -160,6 +164,7 @@ const salesCheckPricing = async ({
   if (review === null || review.status !== 'approved')
     throw new ConvexError('SALES_PRICING_REVIEW_REQUIRED');
   await salesRequireSnapshot(context, project, review, account);
+  await salesRequireApprovers(context, account, review);
 };
 
 export const salesMarkQuoteSent = async (
@@ -191,6 +196,7 @@ export const salesSimulateConfirmation = async (
   const review = project.orderReview;
   if (review === null) throw new ConvexError('SALES_ORDER_REVIEW_REQUIRED');
   await salesRequireSnapshot(context, project, review, account);
+  await salesRequireApprovers(context, account, review);
   await salesCheckPricing(environment);
   salesRequire(
     project.purchaseOrder?.quoteVersion === project.quoteVersion,

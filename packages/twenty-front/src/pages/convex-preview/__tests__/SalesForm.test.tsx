@@ -5,15 +5,15 @@ import userEvent from '@testing-library/user-event';
 import type { ComponentProps } from 'react';
 import { vi } from 'vite-plus/test';
 
-import { SalesForm, salesDecimal } from '../SalesForm';
+import { SalesForm, salesDecimal } from '~/pages/convex-preview/SalesForm';
 
 vi.mock('twenty-ui/components', () => ({
   MainButton: ({
     children,
     loading,
-    ...props
+    type,
   }: ComponentProps<'button'> & { loading?: boolean }) => (
-    <button {...props} disabled={loading}>
+    <button type={type} disabled={loading}>
       {children}
     </button>
   ),
