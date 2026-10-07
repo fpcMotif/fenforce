@@ -180,7 +180,7 @@ export const list = query({
     salesPageSize(args.paginationOpts.numItems);
     const result = await context.db
       .query('salesProjects')
-      .withIndex('by_accountId', (index) =>
+      .withIndex('by_accountId_and_outcome', (index) =>
         index.eq('accountId', args.accountId),
       )
       .order('desc')

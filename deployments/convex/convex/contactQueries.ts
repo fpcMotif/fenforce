@@ -1,8 +1,4 @@
-import {
-  QueryStream,
-  stream,
-  type IndexBounds,
-} from 'convex-helpers/server/stream';
+import { type QueryStream, stream } from 'convex-helpers/server/stream';
 import { v } from 'convex/values';
 
 import type { Doc, Id } from './_generated/dataModel';
@@ -22,6 +18,7 @@ import {
 import { paginateWithFingerprintCursor } from './fingerprintCursor';
 import { memberDisplayName } from './memberDisplayName';
 import schema from './schema';
+import { SingleAccountStream } from './singleAccountStream';
 
 export const contactValidator = v.object({
   _id: v.id('workspaceContacts'),
@@ -75,64 +72,12 @@ const indexedAccountContactStream = (
       );
 };
 
-class SingleAccountContactStream extends QueryStream<Doc<'workspaceContacts'>> {
-  private readonly contacts: QueryStream<Doc<'workspaceContacts'>>;
-  private readonly accountId: Id<'workspaceCompanies'>;
-
-  constructor(
-    contacts: QueryStream<Doc<'workspaceContacts'>>,
-    accountId: Id<'workspaceCompanies'>,
-  ) {
-    super();
-    this.contacts = contacts;
-    this.accountId = accountId;
-  }
-
-  iterWithKeys(trackBandwidth?: boolean) {
-    return this.contacts.iterWithKeys(trackBandwidth);
-  }
-
-  getOrder() {
-    return this.contacts.getOrder();
-  }
-
-  getIndexFields() {
-    return this.contacts.getIndexFields();
-  }
-
-  getEqualityIndexFilter() {
-    return this.contacts.getEqualityIndexFilter();
-  }
-
-  narrow(indexBounds: IndexBounds) {
-    return new SingleAccountContactStream(
-      this.contacts.narrow(this.boundsReadFromThisAccount(indexBounds)),
-      this.accountId,
-    );
-  }
-
-  private boundsReadFromThisAccount(indexBounds: IndexBounds): IndexBounds {
-    const ownsLowerBound = indexBounds.lowerBound[0] === this.accountId;
-    const ownsUpperBound = indexBounds.upperBound[0] === this.accountId;
-    return {
-      lowerBound: ownsLowerBound ? indexBounds.lowerBound : [],
-      lowerBoundInclusive: ownsLowerBound
-        ? indexBounds.lowerBoundInclusive
-        : true,
-      upperBound: ownsUpperBound ? indexBounds.upperBound : [],
-      upperBoundInclusive: ownsUpperBound
-        ? indexBounds.upperBoundInclusive
-        : true,
-    };
-  }
-}
-
 const accountContactStream = (
   context: QueryCtx,
   accountId: Id<'workspaceCompanies'>,
   trashed: boolean,
 ) =>
-  new SingleAccountContactStream(
+  new SingleAccountStream(
     indexedAccountContactStream(context, accountId, trashed),
     accountId,
   );
