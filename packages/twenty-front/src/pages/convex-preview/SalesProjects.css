@@ -1,0 +1,141 @@
+.fenforce-sales-notice {
+  padding: 12px 16px;
+  margin-block-end: 20px;
+  border: 1px solid var(--t-border-color-light, #d8d8dc);
+  border-radius: 7px;
+  background: var(--t-background-secondary);
+  line-height: 1.6;
+}
+
+.fenforce-sales-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.fenforce-sales-card {
+  padding: 20px;
+  margin-block-end: 16px;
+  border: 1px solid var(--t-border-color-light, #e5e5e8);
+  border-radius: 7px;
+  min-width: 0;
+}
+
+.fenforce-sales-card h2 {
+  margin: 0 0 16px;
+  font-size: 16px;
+}
+
+.fenforce-sales-card h3 {
+  font-size: 14px;
+}
+
+.fenforce-sales-card p {
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.fenforce-sales-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.fenforce-sales-form fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.fenforce-sales-form textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--t-border-color-light, #d8d8dc);
+  border-radius: 5px;
+  background: var(--t-background-primary);
+  color: var(--t-font-color-primary);
+  font: inherit;
+  font-weight: 400;
+  resize: vertical;
+}
+
+.fenforce-sales-form textarea:focus-visible,
+.fenforce-sales-card summary:focus-visible {
+  outline: 2px solid #9caef7;
+  outline-offset: 2px;
+}
+
+.fenforce-sales-facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(100px, 0.6fr) minmax(0, 1fr);
+  gap: 12px;
+}
+
+.fenforce-sales-facts dt {
+  color: var(--t-font-color-secondary);
+}
+
+.fenforce-sales-facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.fenforce-sales-card details {
+  border-top: 1px solid var(--t-border-color-light, #e5e5e8);
+  padding-block: 12px;
+}
+
+.fenforce-sales-card summary {
+  padding-block: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.fenforce-sales-card details[open] summary {
+  margin-block-end: 12px;
+}
+
+.fenforce-sales-history {
+  padding-inline-start: 20px;
+}
+
+.fenforce-sales-history li {
+  padding-block: 8px;
+  overflow-wrap: anywhere;
+}
+
+.fenforce-sales-history time {
+  display: block;
+  color: var(--t-font-color-secondary);
+  font-size: 12px;
+  margin-block-start: 4px;
+}
+
+.fenforce-sales-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background: var(--t-background-tertiary);
+  font-size: 12px;
+}
+
+@media (max-width: 960px) {
+  .fenforce-sales-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .fenforce-sales-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fenforce-sales-form input,
+  .fenforce-sales-form select,
+  .fenforce-sales-form textarea {
+    font-size: 16px;
+  }
+}

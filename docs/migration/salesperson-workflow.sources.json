@@ -1,0 +1,92 @@
+{
+  "status": "SOP-grounded demo design; implementation and verification reported separately",
+  "reviewedOn": "2026-10-07",
+  "sourceRoot": "~/Desktop/others/管理文件汇总",
+  "scope": "Product-led project through sample, quotation, PO review, confirmation and release handoff",
+  "designDecision": {
+    "selected": "Bounded single-material project aggregate, immutable review snapshots, append-only history and idempotent operation receipts",
+    "alternative": "Separate tables for every sample, quotation, purchase order, review, release and handoff",
+    "reason": "Keep this demo's consistency rules in transactional commands while preserving distinct commercial, review and handoff state",
+    "independentReview": "Read-only design comparison favored the aggregate for bounded implementation; required versioned commercial evidence and stable release identities",
+    "grafts": ["Exact commercial versions", "Ordered review gates", "Explicit release quantities", "Inherited Account authorization"]
+  },
+  "sources": [
+    {
+      "file": "FUS/FUS-SD-006 FUS Sales SOP v1.1.pdf",
+      "pages": "7, 9-21",
+      "supports": [
+        "Check existing customer ownership before outreach",
+        "Opportunities contain quotations, samples, files and communication history",
+        "Sample availability, batch quality, COA and tracking matter",
+        "Indicative quotation is not a binding order",
+        "PO needs management review and credit clearance before formal customer email confirmation",
+        "Standard orders create one release; blanket orders need explicit customer-confirmed releases",
+        "SAP handles downstream order execution"
+      ]
+    },
+    {
+      "file": "FCN/业务/食品部/FCN-SD-012 直接出口业务标准作业程序SOP.pdf",
+      "pages": "1-2",
+      "supports": [
+        "Start with supported product projects and customer applications",
+        "Quote contains specification, quantity, packaging, price, delivery, payment terms and validity",
+        "Samples record supplier, batch, specification, material code and customer testing progress",
+        "Salesforce order includes detailed quality requirements",
+        "Payment terms require risk assessment; prepayment and credit have different handling"
+      ]
+    },
+    {
+      "file": "FCN/业务/饲料部/FCN-SD-011 Co-worker对接工作标准作业程序SOP.pdf",
+      "pages": "1-4",
+      "supports": [
+        "Support requests have an owner, priority and deadline",
+        "Pricing support checks procurement cost, freight, duties, margin and market context",
+        "Order review proceeds through co-worker, branch manager, OSBO and procurement management",
+        "Sample testing feedback and delivery exceptions need follow-up"
+      ]
+    },
+    {
+      "file": "FCN/业务/中国市场部/FCN-SD-013 中国市场部标准作业程序SOP.pdf",
+      "pages": "1-5",
+      "supports": [
+        "Product-led selling and manager approval before order number",
+        "Production, dispatch, invoicing and after-sales have distinct responsibilities"
+      ],
+      "limitation": "Embedded process diagrams were not extracted in this review; only page text supports these claims"
+    },
+    {
+      "file": "FBR/FBR-SD-007 FBR Sales Support SOP.pdf",
+      "pages": "2-4",
+      "supports": [
+        "Direct imports require PO/PI confirmation, shipping-document checks and customer updates",
+        "Regional execution differs; a single global shipping workflow would lose requirements"
+      ]
+    },
+    {
+      "file": "FCZ/FCZ-SD-002 FCZ Sales SOP.pdf",
+      "pages": "1-3",
+      "supports": [
+        "Customer development, demand confirmation, quotation, order review and after-sales"
+      ],
+      "limitation": "Document identifies itself as a reference template"
+    }
+  ],
+  "demoDefaults": [
+    "One material project per opportunity; no inventory or product-master synchronization",
+    "Existing manager role simulates named departmental reviewers; these are not production role assignments",
+    "Pricing exception reason triggers supervisor review; no invented discount threshold",
+    "Feishu is the requested future approval channel, not an observed current SOP integration",
+    "USD, CNY and EUR use integer cents; quantity uses thousandths; line totals round half up",
+    "Record Won after simulated formal confirmation; company Salesforce stage names remain unmapped",
+    "Document references are recorded, not uploaded or verified",
+    "SAP responses and confirmation email are simulated; no messages or orders are sent"
+  ],
+  "remainingCompanyEvidence": [
+    "Current regional SOP applicability and versions",
+    "Actual Salesforce metadata, stage names and report definitions",
+    "Named approvers, delegation, visibility and production identity",
+    "Feishu approval definition, callbacks and employee mapping",
+    "SAP interface, order mapping and reconciliation contract",
+    "Regional legal/credit, pricing precision and booking rules"
+  ]
+}

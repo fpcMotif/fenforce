@@ -1,0 +1,37 @@
+flowchart TD
+    A["Product project and target customer"] --> B["Check ownership; link Company and Contacts"]
+    B --> C["Material, specification, application, volume and next action"]
+    C --> D{"Sample needed?"}
+    D -->|Yes| E["Local or HQ sample: batch, COA and tracking"]
+    E --> F["Customer receipt and test feedback"]
+    F -->|Revise or retest| C
+    F -->|Accepted| G["Support pricing: cost, freight, duties and market"]
+    D -->|No: record reason| G
+    G --> H["Versioned indicative quote: price, quantity, packaging, terms and validity"]
+    H --> I{"Pricing exception?"}
+    I -->|Yes| J["Commercial review: supervisor routing is a demo default"]
+    J -->|Rejected| H
+    J -->|Approved current version| K["Record quote communication"]
+    I -->|No| K
+    K --> L["Customer feedback and dated follow-up"]
+    L -->|Negotiate| H
+    L -->|Lost| LOST["Close Lost with reason"]
+    L -->|PO received| M["Capture PO, exact quote version and quality requirements"]
+    M --> N["Co-worker review → branch manager → OSBO"]
+    N -->|Correct and resubmit| M
+    N -->|Approved| O{"Finance and supply cleared?"}
+    O -->|No| HOLD["Resolve credit, prepayment, stock or supply blocker"]
+    HOLD --> O
+    O -->|Yes| P["Formal customer confirmation; record Won"]
+    P --> Q{"Order type?"}
+    Q -->|Standard| R["Single full-quantity release"]
+    Q -->|Blanket| S["Customer-confirmed dated releases within remaining quantity"]
+    S --> R
+    R --> T["SAP handoff by stable release reference"]
+    T -->|Failed or uncertain| U["Reconcile same release"]
+    U --> T
+    T -->|Acknowledged| V["Delivery and customer follow-up"]
+    MODE["Demo implementation: approvals, confirmation email and SAP responses are simulated. Target human approval channel: Feishu."] -.-> J
+    MODE -.-> N
+    MODE -.-> P
+    MODE -.-> T

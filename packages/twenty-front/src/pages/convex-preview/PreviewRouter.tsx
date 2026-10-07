@@ -23,6 +23,8 @@ import {
 } from './ContactsWorkspace';
 import { parseContactListSearch } from './contactListQuery';
 import { PreviewError } from './PreviewError';
+import { SalesProjectsPage } from './SalesProjectsPage';
+import { SalesProjectDetailPage } from './SalesProjectDetail';
 
 const rootRoute = createRootRoute({
   validateSearch: (
@@ -81,6 +83,16 @@ const peopleTrashRoute = createRoute({
   path: '/objects/people/trash',
   component: PeopleTrashPage,
 });
+const salesProjectsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/objects/sales-projects',
+  component: SalesProjectsPage,
+});
+const salesProjectDetailRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/object/sales-project/$projectId',
+  component: SalesProjectDetailPage,
+});
 const createPreviewRouter = () =>
   createRouter({
     defaultErrorComponent: PreviewError,
@@ -93,6 +105,8 @@ const createPreviewRouter = () =>
       peopleRoute,
       personDetailRoute,
       peopleTrashRoute,
+      salesProjectsRoute,
+      salesProjectDetailRoute,
     ]),
   });
 

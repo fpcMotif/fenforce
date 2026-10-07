@@ -26,6 +26,7 @@ import {
   IconBuildingSkyscraper,
   IconChevronLeft,
   IconPlus,
+  IconTargetArrow,
   IconTrash,
   IconUser,
   IconUsers,
@@ -282,6 +283,20 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
               >
                 <IconUser size={16} />
                 <span>{t`People`}</span>
+              </Link>
+            )}
+            {isSalesRole(selected.role) && (
+              <Link
+                to="/objects/sales-projects"
+                search={{ workspace: workspaceId }}
+                className="fenforce-sidebar-link"
+                activeProps={{
+                  className:
+                    'fenforce-sidebar-link fenforce-sidebar-link-active',
+                }}
+              >
+                <IconTargetArrow size={16} />
+                <span>{t`Sales projects`}</span>
               </Link>
             )}
             {isSalesRole(selected.role) && (

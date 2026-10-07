@@ -2,6 +2,11 @@ import { authTables } from '@convex-dev/auth/server';
 import { vWorkflowId } from '@convex-dev/workflow';
 import { defineSchema, defineTable } from 'convex/server';
 import { v } from 'convex/values';
+import {
+  salesProjectFields,
+  salesSnapshotFields,
+  salesEventFields,
+} from './salesContract';
 
 import { decisionValidator, lifecycleValidator } from './approvalContract';
 import { accountValuesValidator, industryValidator } from './accountContract';
@@ -18,6 +23,29 @@ import {
 
 export default defineSchema({
   ...authTables,
+  salesProjects: defineTable(salesProjectFields).index('by_accountId', [
+    'accountId',
+  ]),
+  salesReviewSnapshots: defineTable(salesSnapshotFields).index('by_projectId', [
+    'projectId',
+  ]),
+  salesProjectEvents: defineTable(salesEventFields).index('by_projectId', [
+    'projectId',
+  ]),
+  salesOperationReceipts: defineTable({
+    mode: v.literal('demo'),
+    simulation: v.literal(true),
+    workspaceId: v.id('workspaces'),
+    actorId: v.id('workspaceMembers'),
+    operationId: v.string(),
+    payload: v.string(),
+    projectId: v.id('salesProjects'),
+    revision: v.number(),
+  }).index('by_workspaceId_and_actorId_and_operationId', [
+    'workspaceId',
+    'actorId',
+    'operationId',
+  ]),
   authSessions: authTables.authSessions.index('by_userId_and_expirationTime', [
     'userId',
     'expirationTime',
