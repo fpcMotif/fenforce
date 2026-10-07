@@ -4,9 +4,38 @@ import { defineSchema, defineTable } from 'convex/server';
 import { v } from 'convex/values';
 
 import { decisionValidator, lifecycleValidator } from './approvalContract';
+import { accountValuesValidator, industryValidator } from './accountContract';
+import { membershipRoleValidator } from './membershipRole';
+import {
+  accountViewConfigurationValidator,
+  accountViewScopeValidator,
+} from './accountViewContract';
+import { accountOperationValidator } from './accountOperationContract';
 
 export default defineSchema({
   ...authTables,
+  authSessions: authTables.authSessions.index('by_userId_and_expirationTime', [
+    'userId',
+    'expirationTime',
+  ]),
+  employeeIdentities: defineTable({
+    issuer: v.string(),
+    tenant: v.string(),
+    subject: v.string(),
+    userId: v.id('users'),
+  })
+    .index('by_issuer_and_tenant_and_subject', ['issuer', 'tenant', 'subject'])
+    .index('by_userId', ['userId']),
+  employeeInvitations: defineTable({
+    issuer: v.string(),
+    tenant: v.string(),
+    subject: v.string(),
+    workspaceId: v.id('workspaces'),
+    displayName: v.string(),
+    role: membershipRoleValidator,
+    expiresAt: v.number(),
+    acceptedUserId: v.optional(v.id('users')),
+  }).index('by_issuer_and_tenant_and_subject', ['issuer', 'tenant', 'subject']),
   syntheticApprovalRuns: defineTable({
     instanceId: v.string(),
     workflowId: v.optional(vWorkflowId),
@@ -36,18 +65,22 @@ export default defineSchema({
     createdAt: v.number(),
   }),
   workspaceMembers: defineTable({
+    active: v.optional(v.boolean()),
     workspaceId: v.id('workspaces'),
     userId: v.id('users'),
     displayName: v.string(),
-    role: v.union(v.literal('admin'), v.literal('member')),
+    role: membershipRoleValidator,
     createdAt: v.number(),
   })
     .index('by_workspaceId_and_userId', ['workspaceId', 'userId'])
-    .index('by_userId', ['userId']),
+    .index('by_userId', ['userId'])
+    .index('by_userId_and_active', ['userId', 'active']),
   workspaceCompanies: defineTable({
     workspaceId: v.id('workspaces'),
     revision: v.number(),
+    industry: v.optional(industryValidator),
     name: v.string(),
+    nameSortKey: v.optional(v.string()),
     domainName: v.object({
       primaryLinkUrl: v.string(),
       primaryLinkLabel: v.string(),
@@ -64,9 +97,56 @@ export default defineSchema({
     createdAt: v.number(),
     updatedAt: v.number(),
     deletedAt: v.union(v.number(), v.null()),
-  }).index('by_workspaceId_and_deletedAt_and_name', [
+  })
+    .index('by_nameSortKey', ['nameSortKey'])
+    .index('by_workspaceId_and_deletedAt_and_nameSortKey', [
+      'workspaceId',
+      'deletedAt',
+      'nameSortKey',
+    ])
+    .index('by_workspaceId_and_accountOwnerId_and_deletedAt_and_nameSortKey', [
+      'workspaceId',
+      'accountOwnerId',
+      'deletedAt',
+      'nameSortKey',
+    ]),
+  accountAudit: defineTable({
+    workspaceId: v.id('workspaces'),
+    companyId: v.id('workspaceCompanies'),
+    actorId: v.id('workspaceMembers'),
+    timestamp: v.number(),
+    before: v.union(accountValuesValidator, v.null()),
+    after: accountValuesValidator,
+  }).index('by_companyId', ['companyId']),
+  accountViews: defineTable({
+    workspaceId: v.id('workspaces'),
+    createdByMemberId: v.id('workspaceMembers'),
+    name: v.string(),
+    scope: accountViewScopeValidator,
+    configuration: accountViewConfigurationValidator,
+    revision: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_workspaceId_and_scope', ['workspaceId', 'scope'])
+    .index('by_workspaceId_and_scope_and_createdByMemberId', [
+      'workspaceId',
+      'scope',
+      'createdByMemberId',
+    ]),
+  accountOperationReceipts: defineTable({
+    workspaceId: v.id('workspaces'),
+    actorId: v.id('workspaceMembers'),
+    operationId: v.string(),
+    operation: accountOperationValidator,
+    payload: v.string(),
+    companyId: v.id('workspaceCompanies'),
+    revision: v.number(),
+    changed: v.boolean(),
+    requiresManager: v.boolean(),
+    acceptedAt: v.number(),
+  }).index('by_workspaceId_and_actorId_and_operationId', [
     'workspaceId',
-    'deletedAt',
-    'name',
+    'actorId',
+    'operationId',
   ]),
 });

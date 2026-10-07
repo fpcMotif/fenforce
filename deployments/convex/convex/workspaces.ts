@@ -5,19 +5,20 @@ import {
 import { ConvexError, v } from 'convex/values';
 
 import { mutation, query } from './_generated/server';
+import { validateAccountPageSize } from './accountQueryContract';
 import { requireSession, requireWorkspaceMember } from './authorization';
-
-const validatePageSize = (numItems: number) => {
-  if (!Number.isInteger(numItems) || numItems < 1 || numItems > 100) {
-    throw new ConvexError('INVALID_PAGE_SIZE');
-  }
-};
+import { membershipRoleValidator } from './membershipRole';
 
 export const create = mutation({
   args: { name: v.string() },
   returns: v.id('workspaces'),
   handler: async (context, args) => {
     const { identity, userId } = await requireSession(context);
+    const employee = await context.db
+      .query('employeeIdentities')
+      .withIndex('by_userId', (index) => index.eq('userId', userId))
+      .unique();
+    if (employee) throw new ConvexError('FORBIDDEN');
     const name = args.name.trim();
 
     if (name.length === 0 || name.length > 120) {
@@ -49,34 +50,71 @@ export const listMine = query({
     v.object({
       workspaceId: v.id('workspaces'),
       name: v.string(),
-      role: v.union(v.literal('admin'), v.literal('member')),
+      role: membershipRoleValidator,
     }),
   ),
   handler: async (context, args) => {
     const { userId } = await requireSession(context);
-    validatePageSize(args.paginationOpts.numItems);
+    validateAccountPageSize(args.paginationOpts.numItems);
     const membershipsPage = await context.db
       .query('workspaceMembers')
       .withIndex('by_userId', (index) => index.eq('userId', userId))
       .paginate(args.paginationOpts);
 
     const workspaces = await Promise.all(
-      membershipsPage.page.map(async (membership) => {
-        const workspace = await context.db.get(membership.workspaceId);
+      membershipsPage.page
+        .filter((membership) => membership.active !== false)
+        .map(async (membership) => {
+          const workspace = await context.db.get(membership.workspaceId);
 
-        if (workspace === null) {
-          throw new Error('Workspace membership has no workspace');
-        }
+          if (workspace === null) {
+            throw new Error('Workspace membership has no workspace');
+          }
 
-        return {
-          workspaceId: workspace._id,
-          name: workspace.name,
-          role: membership.role,
-        };
-      }),
+          return {
+            workspaceId: workspace._id,
+            name: workspace.name,
+            role: membership.role,
+          };
+        }),
     );
 
     return { ...membershipsPage, page: workspaces };
+  },
+});
+
+export const getMine = query({
+  args: { workspaceId: v.string() },
+  returns: v.union(
+    v.null(),
+    v.object({
+      workspaceId: v.id('workspaces'),
+      name: v.string(),
+      role: membershipRoleValidator,
+    }),
+  ),
+  handler: async (context, args) => {
+    const { userId } = await requireSession(context);
+    const workspaceId = context.db.normalizeId('workspaces', args.workspaceId);
+    if (workspaceId === null) return null;
+    const membership = await context.db
+      .query('workspaceMembers')
+      .withIndex('by_workspaceId_and_userId', (index) =>
+        index.eq('workspaceId', workspaceId).eq('userId', userId),
+      )
+      .unique();
+    if (membership === null || membership.active === false) return null;
+    const workspace = await context.db.get(workspaceId);
+
+    if (workspace === null) {
+      throw new Error('Workspace membership has no workspace');
+    }
+
+    return {
+      workspaceId: workspace._id,
+      name: workspace.name,
+      role: membership.role,
+    };
   },
 });
 
@@ -89,12 +127,12 @@ export const listMembers = query({
     v.object({
       memberId: v.id('workspaceMembers'),
       displayName: v.string(),
-      role: v.union(v.literal('admin'), v.literal('member')),
+      role: membershipRoleValidator,
     }),
   ),
   handler: async (context, args) => {
     await requireWorkspaceMember(context, args.workspaceId);
-    validatePageSize(args.paginationOpts.numItems);
+    validateAccountPageSize(args.paginationOpts.numItems);
     const membersPage = await context.db
       .query('workspaceMembers')
       .withIndex('by_workspaceId_and_userId', (index) =>
@@ -104,11 +142,13 @@ export const listMembers = query({
 
     return {
       ...membersPage,
-      page: membersPage.page.map((member) => ({
-        memberId: member._id,
-        displayName: member.displayName,
-        role: member.role,
-      })),
+      page: membersPage.page
+        .filter((member) => member.active !== false)
+        .map((member) => ({
+          memberId: member._id,
+          displayName: member.displayName,
+          role: member.role,
+        })),
     };
   },
 });

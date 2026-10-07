@@ -8,6 +8,20 @@
  * @module
  */
 
+import type * as accountAudit from "../accountAudit.js";
+import type * as accountContract from "../accountContract.js";
+import type * as accountFields from "../accountFields.js";
+import type * as accountLifecycle from "../accountLifecycle.js";
+import type * as accountLifecycleCommands from "../accountLifecycleCommands.js";
+import type * as accountOperationContract from "../accountOperationContract.js";
+import type * as accountOperations from "../accountOperations.js";
+import type * as accountPolicy from "../accountPolicy.js";
+import type * as accountQueries from "../accountQueries.js";
+import type * as accountQueryContract from "../accountQueryContract.js";
+import type * as accountQueryCursor from "../accountQueryCursor.js";
+import type * as accountQueryMigration from "../accountQueryMigration.js";
+import type * as accountViewContract from "../accountViewContract.js";
+import type * as accountViews from "../accountViews.js";
 import type * as approvalContract from "../approvalContract.js";
 import type * as approvalEffects from "../approvalEffects.js";
 import type * as approvalLedger from "../approvalLedger.js";
@@ -16,7 +30,12 @@ import type * as auth from "../auth.js";
 import type * as authorization from "../authorization.js";
 import type * as companies from "../companies.js";
 import type * as companyDomain from "../companyDomain.js";
+import type * as employeeEnrollment from "../employeeEnrollment.js";
+import type * as employeeIdentity from "../employeeIdentity.js";
 import type * as http from "../http.js";
+import type * as membershipRole from "../membershipRole.js";
+import type * as mockAccountBenchmark from "../mockAccountBenchmark.js";
+import type * as mockBrowserReplay from "../mockBrowserReplay.js";
 import type * as workflowRuntime from "../workflowRuntime.js";
 import type * as workspaceCompanies from "../workspaceCompanies.js";
 import type * as workspaces from "../workspaces.js";
@@ -28,6 +47,20 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  accountAudit: typeof accountAudit;
+  accountContract: typeof accountContract;
+  accountFields: typeof accountFields;
+  accountLifecycle: typeof accountLifecycle;
+  accountLifecycleCommands: typeof accountLifecycleCommands;
+  accountOperationContract: typeof accountOperationContract;
+  accountOperations: typeof accountOperations;
+  accountPolicy: typeof accountPolicy;
+  accountQueries: typeof accountQueries;
+  accountQueryContract: typeof accountQueryContract;
+  accountQueryCursor: typeof accountQueryCursor;
+  accountQueryMigration: typeof accountQueryMigration;
+  accountViewContract: typeof accountViewContract;
+  accountViews: typeof accountViews;
   approvalContract: typeof approvalContract;
   approvalEffects: typeof approvalEffects;
   approvalLedger: typeof approvalLedger;
@@ -36,7 +69,12 @@ declare const fullApi: ApiFromModules<{
   authorization: typeof authorization;
   companies: typeof companies;
   companyDomain: typeof companyDomain;
+  employeeEnrollment: typeof employeeEnrollment;
+  employeeIdentity: typeof employeeIdentity;
   http: typeof http;
+  membershipRole: typeof membershipRole;
+  mockAccountBenchmark: typeof mockAccountBenchmark;
+  mockBrowserReplay: typeof mockBrowserReplay;
   workflowRuntime: typeof workflowRuntime;
   workspaceCompanies: typeof workspaceCompanies;
   workspaces: typeof workspaces;

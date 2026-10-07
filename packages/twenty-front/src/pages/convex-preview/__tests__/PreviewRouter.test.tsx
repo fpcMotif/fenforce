@@ -20,6 +20,8 @@ vi.mock('../CompaniesWorkspace', () => ({
     throw mockSessionError;
   },
   CompanyDetailPage: () => null,
+  CompanyTrashPage: () => null,
+  WorkspaceAdministrationPage: () => null,
 }));
 
 it('clears protected cache and offers sign-out when the real router catches a session error', async () => {

@@ -1,0 +1,9 @@
+{
+  "base": "b184c0905c21a0f87e8830c42d41a23c7f5c18ca",
+  "enrollment": "passed",
+  "workspace": "passed",
+  "createEditRefresh": "passed",
+  "logoutProtectedLink": "passed",
+  "detailUrl": "http://127.0.0.1:3018/object/company/k974jr6vb61psnp3dhc1976p0d8fssqs",
+  "errors": []
+}
