@@ -4,7 +4,7 @@ import {
   SalesForm,
   salesChoice,
   salesDecimal,
-  salesText,
+  readFormText,
   type SalesField,
 } from './SalesForm';
 
@@ -79,17 +79,17 @@ export const SalesProjectCreate = ({
       );
     }
     await onSave({
-      title: salesText(values, 'title'),
-      materialCode: salesText(values, 'materialCode'),
-      productName: salesText(values, 'productName'),
-      specification: salesText(values, 'specification'),
-      application: salesText(values, 'application'),
+      title: readFormText(values, 'title'),
+      materialCode: readFormText(values, 'materialCode'),
+      productName: readFormText(values, 'productName'),
+      specification: readFormText(values, 'specification'),
+      application: readFormText(values, 'application'),
       quantityMilli,
       unit: salesChoice(values, 'unit', ['kg', 't', 'L', 'piece']),
       currency: salesChoice(values, 'currency', ['USD', 'CNY', 'EUR']),
-      nextAction: salesText(values, 'nextAction'),
-      nextActionDate: salesText(values, 'nextActionDate'),
-      closeDate: salesText(values, 'closeDate') || null,
+      nextAction: readFormText(values, 'nextAction'),
+      nextActionDate: readFormText(values, 'nextActionDate'),
+      closeDate: readFormText(values, 'closeDate') || null,
     });
   };
   return (

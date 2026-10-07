@@ -11,7 +11,7 @@ import {
   SalesForm,
   salesChoice,
   salesDecimal,
-  salesText,
+  readFormText,
   type SalesField,
 } from './SalesForm';
 
@@ -85,8 +85,8 @@ export const SalesProjectActions = ({
           fields={fields.nextAction}
           command={(values) => ({
             type: 'setNextAction',
-            text: salesText(values, 'text'),
-            dueDate: salesText(values, 'dueDate'),
+            text: readFormText(values, 'text'),
+            dueDate: readFormText(values, 'dueDate'),
           })}
         />
       )}
@@ -114,7 +114,7 @@ export const SalesProjectActions = ({
             type: 'setPrimaryContact',
             contactId:
               contacts.find(
-                (contact) => contact.id === salesText(values, 'contactId'),
+                (contact) => contact.id === readFormText(values, 'contactId'),
               )?.id ?? null,
           })}
         />
@@ -129,7 +129,7 @@ export const SalesProjectActions = ({
             description={t`Required before recording the quote as sent and before confirmation. Leave empty to clear it while the project is still qualified.`}
             command={(values) => ({
               type: 'setCloseDate',
-              closeDate: salesText(values, 'closeDate') || null,
+              closeDate: readFormText(values, 'closeDate') || null,
             })}
           />
           <SalesAction
@@ -147,10 +147,10 @@ export const SalesProjectActions = ({
                 'rejected',
                 'not-required',
               ]),
-              batchReference: salesText(values, 'batchReference'),
-              coaReference: salesText(values, 'coaReference'),
-              trackingReference: salesText(values, 'trackingReference'),
-              notes: salesText(values, 'notes'),
+              batchReference: readFormText(values, 'batchReference'),
+              coaReference: readFormText(values, 'coaReference'),
+              trackingReference: readFormText(values, 'trackingReference'),
+              notes: readFormText(values, 'notes'),
             })}
           />
           <SalesAction
@@ -162,17 +162,17 @@ export const SalesProjectActions = ({
             command={(values) => ({
               type: 'reviseQuote',
               unitPriceMinor: salesDecimal(values, 'unitPrice', 2),
-              incoterm: salesText(values, 'incoterm'),
-              namedPlace: salesText(values, 'namedPlace'),
+              incoterm: readFormText(values, 'incoterm'),
+              namedPlace: readFormText(values, 'namedPlace'),
               paymentTerms: salesChoice(values, 'paymentTerms', [
                 'prepayment',
                 'net30',
                 'net60',
               ]),
-              packaging: salesText(values, 'packaging'),
-              validUntil: salesText(values, 'validUntil'),
-              deliveryDate: salesText(values, 'deliveryDate'),
-              exceptionReason: salesText(values, 'exceptionReason'),
+              packaging: readFormText(values, 'packaging'),
+              validUntil: readFormText(values, 'validUntil'),
+              deliveryDate: readFormText(values, 'deliveryDate'),
+              exceptionReason: readFormText(values, 'exceptionReason'),
             })}
           />
           <SalesAction
@@ -191,7 +191,7 @@ export const SalesProjectActions = ({
             description={t`Record a communication reference. Fenforce does not send an email from this demo.`}
             command={(values) => ({
               type: 'markQuoteSent',
-              evidenceReference: salesText(values, 'evidenceReference'),
+              evidenceReference: readFormText(values, 'evidenceReference'),
             })}
           />
           <SalesAction
@@ -202,9 +202,9 @@ export const SalesProjectActions = ({
             description={t`A received PO is under review. It is not an accepted order. Keep the PO and quality requirements in your approved document store.`}
             command={(values) => ({
               type: 'capturePurchaseOrder',
-              reference: salesText(values, 'reference'),
-              documentReference: salesText(values, 'documentReference'),
-              qualityReference: salesText(values, 'qualityReference'),
+              reference: readFormText(values, 'reference'),
+              documentReference: readFormText(values, 'documentReference'),
+              qualityReference: readFormText(values, 'qualityReference'),
               orderType: salesChoice(values, 'orderType', [
                 'standard',
                 'blanket',
@@ -240,7 +240,7 @@ export const SalesProjectActions = ({
                   'approved',
                   'rejected',
                 ]),
-                evidenceReference: salesText(values, 'evidenceReference'),
+                evidenceReference: readFormText(values, 'evidenceReference'),
               })}
             />
           )}
@@ -252,7 +252,7 @@ export const SalesProjectActions = ({
             description={t`Requires the reviewed terms, sample clearance, finance and supply approval. Records a simulated confirmation without sending an email.`}
             command={(values) => ({
               type: 'simulateCustomerConfirmation',
-              evidenceReference: salesText(values, 'evidenceReference'),
+              evidenceReference: readFormText(values, 'evidenceReference'),
             })}
           />
         </>
@@ -267,9 +267,9 @@ export const SalesProjectActions = ({
             description={t`Use a customer-confirmed delivery date and a quantity within the remaining order balance. Standard orders receive one release automatically.`}
             command={(values) => ({
               type: 'createBlanketRelease',
-              reference: salesText(values, 'reference'),
+              reference: readFormText(values, 'reference'),
               quantityMilli: salesDecimal(values, 'quantity', 3),
-              deliveryDate: salesText(values, 'deliveryDate'),
+              deliveryDate: readFormText(values, 'deliveryDate'),
             })}
           />
           <SalesAction
@@ -280,13 +280,13 @@ export const SalesProjectActions = ({
             description={t`No order is sent to SAP. An uncertain result must be reconciled using the same release reference.`}
             command={(values) => ({
               type: 'simulateSapHandoff',
-              releaseReference: salesText(values, 'releaseReference'),
+              releaseReference: readFormText(values, 'releaseReference'),
               outcome: salesChoice(values, 'outcome', [
                 'accepted',
                 'failed',
                 'uncertain',
               ]),
-              evidenceReference: salesText(values, 'evidenceReference'),
+              evidenceReference: readFormText(values, 'evidenceReference'),
             })}
           />
         </>
@@ -304,7 +304,7 @@ export const SalesProjectActions = ({
             'note',
             'delivery-followup',
           ]),
-          text: salesText(values, 'text'),
+          text: readFormText(values, 'text'),
         })}
       />
       {canEditCommercial && (
@@ -315,7 +315,7 @@ export const SalesProjectActions = ({
           fields={fields.lost}
           command={(values) => ({
             type: 'closeLost',
-            reason: salesText(values, 'reason'),
+            reason: readFormText(values, 'reason'),
           })}
         />
       )}

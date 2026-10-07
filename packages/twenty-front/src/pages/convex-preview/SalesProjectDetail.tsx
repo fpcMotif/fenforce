@@ -2,8 +2,10 @@ import { convexQuery, useConvexPaginatedQuery } from '@convex-dev/react-query';
 import { useLingui } from '@lingui/react/macro';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useParams } from '@tanstack/react-router';
+import { isString } from '@sniptt/guards';
 import { ConvexError } from 'convex/values';
 import { Fragment, type ComponentProps, type ReactNode } from 'react';
+import { isDefined } from 'twenty-shared/utils';
 
 import { api } from '../../../../../deployments/convex/convex/_generated/api';
 import type { Id } from '../../../../../deployments/convex/convex/_generated/dataModel';
@@ -123,16 +125,15 @@ const SalesProjectDetail = () => {
                 },
                 {
                   label: t`Primary contact`,
-                  value:
-                    project.primaryContactId === null ? (
-                      t`Not linked`
-                    ) : (
-                      <Link
-                        to="/object/person/$personId"
-                        params={{ personId: project.primaryContactId }}
-                        search={{ workspace: workspaceId }}
-                      >{t`Open contact`}</Link>
-                    ),
+                  value: isDefined(project.primaryContactId) ? (
+                    <Link
+                      to="/object/person/$personId"
+                      params={{ personId: project.primaryContactId }}
+                      search={{ workspace: workspaceId }}
+                    >{t`Open contact`}</Link>
+                  ) : (
+                    t`Not linked`
+                  ),
                 },
               ]}
             />
@@ -193,10 +194,7 @@ const SalesProjectDetail = () => {
                 command,
               });
             } catch (failure) {
-              if (
-                failure instanceof ConvexError &&
-                typeof failure.data === 'string'
-              )
+              if (failure instanceof ConvexError && isString(failure.data))
                 throw new Error(problem(failure.data));
               throw failure;
             }
@@ -258,9 +256,10 @@ const SalesProjectHistory = ({
           <li key={event._id}>
             <strong>{label(event.command.type)}</strong>
             <p>{event.actorName}</p>
-            {event.fromStage !== null && event.fromStage !== event.toStage && (
-              <p>{t`${label(event.fromStage)} to ${label(event.toStage)}`}</p>
-            )}
+            {isDefined(event.fromStage) &&
+              event.fromStage !== event.toStage && (
+                <p>{t`${label(event.fromStage)} to ${label(event.toStage)}`}</p>
+              )}
             {event.command.type === 'logActivity' && (
               <p>{event.command.text}</p>
             )}

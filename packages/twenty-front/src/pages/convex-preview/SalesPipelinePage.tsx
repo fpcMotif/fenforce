@@ -3,6 +3,7 @@ import { useLingui } from '@lingui/react/macro';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
+import { isDefined } from 'twenty-shared/utils';
 import { IconTargetArrow } from 'twenty-ui/icon';
 
 import { api } from '../../../../../deployments/convex/convex/_generated/api';
@@ -118,13 +119,13 @@ const SalesPipelineList = ({ stage }: { stage: OpenStage | undefined }) => {
                 <td>{project.accountName}</td>
                 <td>{stageLabel(project.stage)}</td>
                 <td>
-                  {project.amountMinor === null
-                    ? t`Not quoted`
-                    : formatSalesMinor(
+                  {isDefined(project.amountMinor)
+                    ? formatSalesMinor(
                         project.amountMinor,
                         project.currency,
                         i18n.locale,
-                      )}
+                      )
+                    : t`Not quoted`}
                 </td>
                 <td>{project.closeDate ?? t`Not set`}</td>
                 <td>

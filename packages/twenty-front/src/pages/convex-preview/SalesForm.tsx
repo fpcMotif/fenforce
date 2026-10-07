@@ -1,5 +1,7 @@
 import { useLingui } from '@lingui/react/macro';
+import { isString } from '@sniptt/guards';
 import { useId, useState, type FormEvent, type ReactNode } from 'react';
+import { isDefined } from 'twenty-shared/utils';
 import { MainButton } from 'twenty-ui/components';
 
 export type SalesField = {
@@ -136,9 +138,9 @@ export const SalesForm = ({
   );
 };
 
-export const salesText = (values: FormData, name: string) => {
+export const readFormText = (values: FormData, name: string) => {
   const value = values.get(name);
-  return typeof value === 'string' ? value.trim() : '';
+  return isString(value) ? value.trim() : '';
 };
 
 export const salesDecimal = (
@@ -146,7 +148,7 @@ export const salesDecimal = (
   name: string,
   places: number,
 ) => {
-  const text = salesText(values, name);
+  const text = readFormText(values, name);
   const [whole, fraction = '', ...extra] = text.split('.');
   if (
     !/^\d+$/.test(whole) ||
@@ -168,8 +170,8 @@ export const salesChoice = <TOption extends string>(
   name: string,
   options: readonly TOption[],
 ): TOption => {
-  const value = salesText(values, name);
+  const value = readFormText(values, name);
   const selected = options.find((option) => option === value);
-  if (selected === undefined) throw new Error('INVALID_SELECTION');
+  if (!isDefined(selected)) throw new Error('INVALID_SELECTION');
   return selected;
 };
