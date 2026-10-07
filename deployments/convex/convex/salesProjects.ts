@@ -6,6 +6,7 @@ import { v } from 'convex/values';
 
 import { mutation, query } from './_generated/server';
 import { requireSalesMember } from './accountPolicy';
+import { validateAccountPageSize } from './accountQueryContract';
 import { memberDisplayName } from './memberDisplayName';
 import { requireAccessibleAccount } from './contactPolicy';
 import { operationPayload } from './operationReceipt';
@@ -110,12 +111,6 @@ const salesSummary = (project: SalesProject) => ({
   updatedAt: project.updatedAt,
 });
 
-const salesPageSize = (numItems: number) =>
-  salesRequire(
-    Number.isSafeInteger(numItems) && numItems > 0 && numItems <= 50,
-    'SALES_INVALID_PAGE_SIZE',
-  );
-
 export const list = query({
   args: {
     workspaceId: v.id('workspaces'),
@@ -126,7 +121,7 @@ export const list = query({
   handler: async (context, args) => {
     const member = await requireSalesMember(context, args.workspaceId);
     await requireAccessibleAccount(context, member, args.accountId);
-    salesPageSize(args.paginationOpts.numItems);
+    validateAccountPageSize(args.paginationOpts.numItems);
     const result = await context.db
       .query('salesProjects')
       .withIndex('by_accountId_and_outcome', (index) =>
@@ -186,7 +181,7 @@ export const history = query({
   handler: async (context, args) => {
     const member = await requireSalesMember(context, args.workspaceId);
     await salesRequireProject(context, member, args.projectId);
-    salesPageSize(args.paginationOpts.numItems);
+    validateAccountPageSize(args.paginationOpts.numItems);
     const result = await context.db
       .query('salesProjectEvents')
       .withIndex('by_projectId', (index) =>

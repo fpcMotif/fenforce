@@ -225,9 +225,25 @@ it('rejects fractional pieces, impossible dates, oversized text and oversized pa
     fixture.seller.session.query(api.salesProjects.list, {
       workspaceId: fixture.workspaceId,
       accountId: fixture.accountA,
-      paginationOpts: { numItems: 51, cursor: null },
+      paginationOpts: { numItems: 101, cursor: null },
     }),
-  ).rejects.toThrow('SALES_INVALID_PAGE_SIZE');
+  ).rejects.toThrow('INVALID_PAGE_SIZE');
+  await expect(
+    fixture.seller.session.query(api.salesProjects.history, {
+      workspaceId: fixture.workspaceId,
+      projectId: fixture.projectId,
+      paginationOpts: { numItems: 0, cursor: null },
+    }),
+  ).rejects.toThrow('INVALID_PAGE_SIZE');
+  expect(
+    (
+      await fixture.seller.session.query(api.salesProjects.list, {
+        workspaceId: fixture.workspaceId,
+        accountId: fixture.accountA,
+        paginationOpts: { numItems: 100, cursor: null },
+      })
+    ).page,
+  ).toHaveLength(1);
 });
 
 it('calculates exact half-up money and rejects overflow or fractional minor-unit prices', async () => {
