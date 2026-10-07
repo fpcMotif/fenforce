@@ -118,6 +118,8 @@ export const create = mutation({
       actorId: member._id,
       timestamp: now,
       revision: 1,
+      fromStage: null,
+      toStage: 'qualified',
       command: { type: 'create' },
       previousQuote: null,
       snapshotId: null,
@@ -293,6 +295,7 @@ export const execute = mutation({
     salesValidateCommand(args.command);
     const previousQuote =
       args.command.type === 'reviseQuote' ? project.quote : null;
+    const fromStage = project.stage;
     await salesApplyCommand(
       { context, member, account, project },
       args.command,
@@ -310,6 +313,8 @@ export const execute = mutation({
       actorId: member._id,
       timestamp: project.updatedAt,
       revision: project.revision,
+      fromStage,
+      toStage: project.stage,
       command: args.command,
       previousQuote,
       snapshotId: salesEventSnapshot(project, args.command),

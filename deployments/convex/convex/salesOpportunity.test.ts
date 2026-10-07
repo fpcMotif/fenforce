@@ -49,6 +49,111 @@ it('keeps the close date date-only and requires it before quoting or confirmatio
   ).rejects.toThrow('SALES_CLOSE_DATE_REQUIRED');
 });
 
+it('commits one stage transition and one history entry with the original actor across retries', async () => {
+  const fixture = await salesFixture();
+  const { seller, manager, workspaceId, projectId } = fixture;
+  await fixture.command(SALES_QUOTE);
+  const transition = {
+    workspaceId,
+    projectId,
+    expectedRevision: 2,
+    operationId: 'send-quote',
+    command: {
+      type: 'markQuoteSent' as const,
+      evidenceReference: 'DEMO-quote-email',
+    },
+  };
+  const results = await Promise.all([
+    seller.session.mutation(api.salesProjects.execute, transition),
+    seller.session.mutation(api.salesProjects.execute, transition),
+  ]);
+  expect(results).toEqual([{ revision: 3 }, { revision: 3 }]);
+  await fixture.command({ type: 'closeLost', reason: 'Budget cut' }, manager);
+  expect(
+    await seller.session.mutation(api.salesProjects.execute, transition),
+  ).toEqual({ revision: 3 });
+  const history = await seller.session.query(api.salesProjects.history, {
+    workspaceId,
+    projectId,
+    paginationOpts: { numItems: 25, cursor: null },
+  });
+  const transitions = history.page
+    .filter(
+      (event) => event.fromStage !== null && event.fromStage !== event.toStage,
+    )
+    .map(({ actorId, revision, fromStage, toStage, command }) => ({
+      actorId,
+      revision,
+      fromStage,
+      toStage,
+      type: command.type,
+    }));
+  expect(transitions).toEqual([
+    {
+      actorId: manager.memberId,
+      revision: 4,
+      fromStage: 'quoted',
+      toStage: 'lost',
+      type: 'closeLost',
+    },
+    {
+      actorId: seller.memberId,
+      revision: 3,
+      fromStage: 'qualified',
+      toStage: 'quoted',
+      type: 'markQuoteSent',
+    },
+  ]);
+  expect(history.page).toHaveLength(4);
+});
+
+it('rejects forbidden fields, inactive owners and invalid transitions without a write', async () => {
+  const fixture = await salesFixture();
+  const { test, seller, manager, accountA, workspaceId, projectId } = fixture;
+  await expect(
+    seller.session.mutation(api.salesProjects.create, {
+      ...fixture.createArgs,
+      operationId: 'forbidden-create',
+      stage: 'confirmed',
+    } as never),
+  ).rejects.toThrow('Validator error');
+  await expect(
+    seller.session.mutation(api.salesProjects.execute, {
+      workspaceId,
+      projectId,
+      expectedRevision: 1,
+      operationId: 'forbidden-execute',
+      command: {
+        type: 'setNextAction',
+        text: 'Win it',
+        dueDate: '2099-10-10',
+        outcome: 'won',
+      } as never,
+    }),
+  ).rejects.toThrow('Validator error');
+  await expect(
+    fixture.command({
+      type: 'simulateCustomerConfirmation',
+      evidenceReference: 'DEMO-skip-ahead',
+    }),
+  ).rejects.toThrow('SALES_');
+  await test.run((context) =>
+    context.db.patch(seller.memberId, { active: false }),
+  );
+  await expect(
+    manager.session.mutation(api.salesProjects.create, {
+      ...fixture.createArgs,
+      operationId: 'inactive-owner',
+      accountId: accountA,
+    }),
+  ).rejects.toThrow('INVALID_ACCOUNT_OWNER');
+  expect(await fixture.get()).toMatchObject({
+    revision: 1,
+    stage: 'qualified',
+    outcome: 'open',
+  });
+});
+
 it('links a primary Contact only from the same active Account', async () => {
   const fixture = await salesFixture();
   const { test, workspaceId, accountB, contactA, other, seller, outsider } =

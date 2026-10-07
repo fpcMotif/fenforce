@@ -111,6 +111,14 @@ export const salesProductFields = {
   unit: salesUnitValidator,
   currency: salesCurrencyValidator,
 };
+export const salesStageValidator = v.union(
+  v.literal('qualified'),
+  v.literal('quoted'),
+  v.literal('po-received'),
+  v.literal('review'),
+  v.literal('confirmed'),
+  v.literal('lost'),
+);
 export const salesProjectFields = {
   mode: v.literal('demo'),
   simulation: v.literal(true),
@@ -125,14 +133,7 @@ export const salesProjectFields = {
   closeDate: v.union(v.string(), v.null()),
   ownerCheckedId: v.id('workspaceMembers'),
   ownerCheckedAt: v.number(),
-  stage: v.union(
-    v.literal('qualified'),
-    v.literal('quoted'),
-    v.literal('po-received'),
-    v.literal('review'),
-    v.literal('confirmed'),
-    v.literal('lost'),
-  ),
+  stage: salesStageValidator,
   outcome: v.union(v.literal('open'), v.literal('won'), v.literal('lost')),
   sample: v.union(salesSampleValidator, v.null()),
   quote: v.union(salesQuoteValidator, v.null()),
@@ -251,6 +252,8 @@ export const salesEventFields = {
   actorId: v.id('workspaceMembers'),
   timestamp: v.number(),
   revision: v.number(),
+  fromStage: v.union(salesStageValidator, v.null()),
+  toStage: salesStageValidator,
   command: v.union(
     salesCommandValidator,
     v.object({ type: v.literal('create') }),
