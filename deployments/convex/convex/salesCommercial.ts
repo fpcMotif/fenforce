@@ -164,7 +164,6 @@ export const salesSimulateSap = (
     (candidate) => candidate.reference === command.releaseReference,
   );
   salesRequire(release !== undefined, 'SALES_RELEASE_NOT_FOUND');
-  if (release === undefined) return;
   salesRequire(release.erpState !== 'accepted', 'SALES_SAP_ALREADY_ACCEPTED');
   release.evidenceReference = salesText(command.evidenceReference);
   release.erpState = command.outcome;

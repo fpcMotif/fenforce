@@ -2,7 +2,10 @@ import { ConvexError } from 'convex/values';
 
 import type { SalesCommand, SalesProject, SalesQuote } from './salesContract';
 
-export const salesRequire = (condition: boolean, code: string): void => {
+export const salesRequire: (
+  condition: boolean,
+  code: string,
+) => asserts condition = (condition, code) => {
   if (!condition) throw new ConvexError(code);
 };
 

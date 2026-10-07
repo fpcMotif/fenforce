@@ -56,7 +56,7 @@ export const salesSubmitReview = async (
   if (kind === 'order') {
     salesRequire(project.purchaseOrder !== null, 'SALES_PO_REQUIRED');
     salesRequire(
-      project.purchaseOrder?.quoteVersion === quote.version,
+      project.purchaseOrder.quoteVersion === quote.version,
       'SALES_PO_QUOTE_CHANGED',
     );
   }

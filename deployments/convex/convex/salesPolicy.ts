@@ -140,7 +140,7 @@ export const salesRequireSnapshot = async (
     'SALES_REVIEW_NOT_CURRENT',
   );
   salesRequire(
-    snapshot?.ownerId === account.accountOwnerId,
+    snapshot.ownerId === account.accountOwnerId,
     'SALES_OWNER_CHANGED',
   );
   await salesRequireRequester(context, account, review);
