@@ -172,6 +172,10 @@ export const salesMarkQuoteSent = async (
   evidenceReference: string,
 ) => {
   salesAssertEditable(environment.project);
+  salesRequire(
+    environment.project.closeDate !== null,
+    'SALES_CLOSE_DATE_REQUIRED',
+  );
   await salesCheckPricing(environment);
   const quote = salesUnexpiredQuote(environment.project);
   salesRequire(

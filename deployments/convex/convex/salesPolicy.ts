@@ -34,6 +34,23 @@ export const salesRequireProject = async (
   return accessible;
 };
 
+export const salesRequirePrimaryContact = async (
+  context: QueryCtx,
+  account: Doc<'workspaceCompanies'>,
+  contactId: Id<'workspaceContacts'> | null,
+) => {
+  if (contactId === null) return null;
+  const contact = await context.db.get(contactId);
+  if (
+    contact === null ||
+    contact.workspaceId !== account.workspaceId ||
+    contact.accountId !== account._id ||
+    contact.deletedAt !== null
+  )
+    throw new ConvexError('CONTACT_NOT_FOUND');
+  return contactId;
+};
+
 export const salesCheckOwner = async (
   context: QueryCtx,
   account: Doc<'workspaceCompanies'>,

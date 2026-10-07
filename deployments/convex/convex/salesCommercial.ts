@@ -24,6 +24,17 @@ export const salesSetNextAction = (
   project.nextActionDate = salesDate(command.dueDate);
 };
 
+export const salesSetCloseDate = (
+  project: SalesProject,
+  command: CommercialCommand<'setCloseDate'>,
+) => {
+  salesAssertEditable(project);
+  if (command.closeDate === null)
+    salesRequire(project.stage === 'qualified', 'SALES_CLOSE_DATE_REQUIRED');
+  project.closeDate =
+    command.closeDate === null ? null : salesDate(command.closeDate);
+};
+
 export const salesRecordSample = (
   project: SalesProject,
   command: CommercialCommand<'recordSample'>,

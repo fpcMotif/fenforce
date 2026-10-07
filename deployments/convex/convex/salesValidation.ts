@@ -81,6 +81,7 @@ export const salesValidateCommand = (command: SalesCommand): void => {
 export const salesBlockers = (project: SalesProject): string[] => {
   const blockers: string[] = [];
   if (project.quote === null) blockers.push('SALES_QUOTE_REQUIRED');
+  if (project.closeDate === null) blockers.push('SALES_CLOSE_DATE_REQUIRED');
   if (project.purchaseOrder === null) blockers.push('SALES_PO_REQUIRED');
   if (project.orderReview?.status !== 'approved')
     blockers.push('SALES_ORDER_REVIEW_REQUIRED');

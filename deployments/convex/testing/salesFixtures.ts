@@ -32,6 +32,7 @@ export const salesFixture = async () => {
   const { seller, workspaceId, accountA } = fixture;
   const createArgs = {
     ...SALES_PRODUCT,
+    closeDate: '2099-11-01',
     operationId: 'create-project',
     workspaceId,
     accountId: accountA,

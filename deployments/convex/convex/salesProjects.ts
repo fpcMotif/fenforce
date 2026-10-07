@@ -24,6 +24,7 @@ import {
   salesAccessibleProject,
   salesCheckOwner,
   salesCurrentBlockers,
+  salesRequirePrimaryContact,
   salesRequireProject,
 } from './salesPolicy';
 import {
@@ -39,9 +40,11 @@ export const create = mutation({
     workspaceId: v.id('workspaces'),
     operationId: v.string(),
     accountId: v.id('workspaceCompanies'),
+    primaryContactId: v.optional(v.union(v.id('workspaceContacts'), v.null())),
     ...salesProductFields,
     nextAction: v.string(),
     nextActionDate: v.string(),
+    closeDate: v.optional(v.union(v.string(), v.null())),
   },
   returns: v.id('salesProjects'),
   handler: async (context, args) => {
@@ -60,6 +63,11 @@ export const create = mutation({
     );
     if (receipt !== null) return receipt.projectId;
     const ownerCheckedId = await salesCheckOwner(context, account);
+    const primaryContactId = await salesRequirePrimaryContact(
+      context,
+      account,
+      args.primaryContactId ?? null,
+    );
     const { operationId, ...input } = args;
     for (const value of [
       args.title,
@@ -72,9 +80,15 @@ export const create = mutation({
       salesText(value);
     salesQuantity(args.quantityMilli, args.unit);
     salesDate(args.nextActionDate);
+    const closeDate =
+      args.closeDate === undefined || args.closeDate === null
+        ? null
+        : salesDate(args.closeDate);
     const now = Date.now();
     const projectId = await context.db.insert('salesProjects', {
       ...input,
+      primaryContactId,
+      closeDate,
       mode: 'demo',
       simulation: true,
       revision: 1,

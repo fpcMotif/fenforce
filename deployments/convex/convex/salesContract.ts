@@ -116,11 +116,13 @@ export const salesProjectFields = {
   simulation: v.literal(true),
   workspaceId: v.id('workspaces'),
   accountId: v.id('workspaceCompanies'),
+  primaryContactId: v.union(v.id('workspaceContacts'), v.null()),
   ...salesProductFields,
   revision: v.number(),
   quoteVersion: v.number(),
   nextAction: v.string(),
   nextActionDate: v.string(),
+  closeDate: v.union(v.string(), v.null()),
   ownerCheckedId: v.id('workspaceMembers'),
   ownerCheckedAt: v.number(),
   stage: v.union(
@@ -184,6 +186,14 @@ export const salesCommandValidator = v.union(
     type: v.literal('setNextAction'),
     text: v.string(),
     dueDate: v.string(),
+  }),
+  v.object({
+    type: v.literal('setCloseDate'),
+    closeDate: v.union(v.string(), v.null()),
+  }),
+  v.object({
+    type: v.literal('setPrimaryContact'),
+    contactId: v.union(v.id('workspaceContacts'), v.null()),
   }),
   v.object({ type: v.literal('recordSample'), ...salesSampleValidator.fields }),
   v.object({

@@ -4,10 +4,12 @@ import {
   salesCreateBlanketRelease,
   salesRecordSample,
   salesReviseQuote,
+  salesSetCloseDate,
   salesSetNextAction,
   salesSimulateSap,
 } from './salesCommercial';
 import type { SalesCommand } from './salesContract';
+import { salesRequirePrimaryContact } from './salesPolicy';
 import {
   salesMarkQuoteSent,
   salesSimulateConfirmation,
@@ -26,6 +28,15 @@ type SalesCommandHandlers = {
 
 const SALES_COMMAND_HANDLERS: SalesCommandHandlers = {
   setNextAction: ({ project }, command) => salesSetNextAction(project, command),
+  setCloseDate: ({ project }, command) => salesSetCloseDate(project, command),
+  setPrimaryContact: async ({ context, account, project }, command) => {
+    salesRequire(project.stage !== 'lost', 'SALES_PROJECT_LOST');
+    project.primaryContactId = await salesRequirePrimaryContact(
+      context,
+      account,
+      command.contactId,
+    );
+  },
   recordSample: ({ project }, command) => salesRecordSample(project, command),
   reviseQuote: ({ project }, command) => salesReviseQuote(project, command),
   submitPricingReview: (environment) =>
