@@ -48,6 +48,7 @@ import type * as membershipRole from "../membershipRole.js";
 import type * as mockAccountBenchmark from "../mockAccountBenchmark.js";
 import type * as mockBrowserReplay from "../mockBrowserReplay.js";
 import type * as operationReceipt from "../operationReceipt.js";
+import type * as salesApprovals from "../salesApprovals.js";
 import type * as salesCommands from "../salesCommands.js";
 import type * as salesCommercial from "../salesCommercial.js";
 import type * as salesContract from "../salesContract.js";
@@ -110,6 +111,7 @@ declare const fullApi: ApiFromModules<{
   mockAccountBenchmark: typeof mockAccountBenchmark;
   mockBrowserReplay: typeof mockBrowserReplay;
   operationReceipt: typeof operationReceipt;
+  salesApprovals: typeof salesApprovals;
   salesCommands: typeof salesCommands;
   salesCommercial: typeof salesCommercial;
   salesContract: typeof salesContract;

@@ -1,6 +1,13 @@
+import type { Infer } from 'convex/values';
+
 import type { Doc, Id } from './_generated/dataModel';
 import type { MutationCtx, QueryCtx } from './_generated/server';
 import { validateOperationId } from './operationReceipt';
+import type {
+  SalesProject,
+  SalesQuote,
+  salesEventValidator,
+} from './salesContract';
 import { salesRequire } from './salesValidation';
 
 export const salesReadReceipt = async (
@@ -42,4 +49,48 @@ export const salesSaveReceipt = async (
     projectId,
     revision,
   });
+};
+
+export const salesCommitChange = async (
+  context: MutationCtx,
+  member: Doc<'workspaceMembers'>,
+  change: {
+    project: SalesProject;
+    fromStage: SalesProject['stage'];
+    command: Infer<typeof salesEventValidator>['command'];
+    previousQuote: SalesQuote | null;
+    snapshotId: Id<'salesReviewSnapshots'> | null;
+    operationId: string;
+    payload: string;
+  },
+) => {
+  const { project } = change;
+  project.revision += 1;
+  project.updatedBy = member._id;
+  project.updatedAt = Date.now();
+  const { _id, _creationTime: _creation, ...values } = project;
+  await context.db.replace(_id, values);
+  await context.db.insert('salesProjectEvents', {
+    mode: 'demo',
+    simulation: true,
+    workspaceId: project.workspaceId,
+    projectId: _id,
+    actorId: member._id,
+    timestamp: project.updatedAt,
+    revision: project.revision,
+    fromStage: change.fromStage,
+    toStage: project.stage,
+    command: change.command,
+    previousQuote: change.previousQuote,
+    snapshotId: change.snapshotId,
+  });
+  await salesSaveReceipt(
+    context,
+    member,
+    change.operationId,
+    change.payload,
+    _id,
+    project.revision,
+  );
+  return project.revision;
 };

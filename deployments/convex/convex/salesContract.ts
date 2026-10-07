@@ -73,7 +73,7 @@ export const salesDecisionValidator = v.object({
   ...salesDecisionInputValidator.fields,
   actorId: v.id('workspaceMembers'),
   timestamp: v.number(),
-  simulation: v.literal(true),
+  simulation: v.boolean(),
 });
 export const salesReviewStateValidator = v.object({
   snapshotId: v.id('salesReviewSnapshots'),
@@ -257,6 +257,12 @@ export const salesEventFields = {
   command: v.union(
     salesCommandValidator,
     v.object({ type: v.literal('create') }),
+    v.object({
+      type: v.literal('applyApprovalOutcome'),
+      gate: salesGateValidator,
+      decision: salesDecisionInputValidator.fields.decision,
+      externalDecisionId: v.string(),
+    }),
   ),
   previousQuote: v.union(salesQuoteValidator, v.null()),
   snapshotId: v.union(v.id('salesReviewSnapshots'), v.null()),
@@ -271,4 +277,5 @@ export type SalesProject = Infer<typeof salesProjectValidator>;
 export type SalesQuote = Infer<typeof salesQuoteValidator>;
 export type SalesReviewState = Infer<typeof salesReviewStateValidator>;
 export type SalesGate = Infer<typeof salesGateValidator>;
+export type SalesDecision = Infer<typeof salesDecisionValidator>;
 export type SalesRelease = Infer<typeof salesReleaseValidator>;

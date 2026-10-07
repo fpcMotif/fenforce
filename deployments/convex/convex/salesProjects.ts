@@ -19,7 +19,11 @@ import {
   type SalesCommand,
   type SalesProject,
 } from './salesContract';
-import { salesReadReceipt, salesSaveReceipt } from './salesOperations';
+import {
+  salesCommitChange,
+  salesReadReceipt,
+  salesSaveReceipt,
+} from './salesOperations';
 import {
   salesAccessibleProject,
   salesCheckOwner,
@@ -300,34 +304,16 @@ export const execute = mutation({
       { context, member, account, project },
       args.command,
     );
-    project.revision += 1;
-    project.updatedBy = member._id;
-    project.updatedAt = Date.now();
-    const { _id, _creationTime: _creation, ...values } = project;
-    await context.db.replace(_id, values);
-    await context.db.insert('salesProjectEvents', {
-      mode: 'demo',
-      simulation: true,
-      workspaceId: args.workspaceId,
-      projectId: _id,
-      actorId: member._id,
-      timestamp: project.updatedAt,
-      revision: project.revision,
+    const revision = await salesCommitChange(context, member, {
+      project,
       fromStage,
-      toStage: project.stage,
       command: args.command,
       previousQuote,
       snapshotId: salesEventSnapshot(project, args.command),
-    });
-    await salesSaveReceipt(
-      context,
-      member,
-      args.operationId,
+      operationId: args.operationId,
       payload,
-      _id,
-      project.revision,
-    );
-    return { revision: project.revision };
+    });
+    return { revision };
   },
 });
 

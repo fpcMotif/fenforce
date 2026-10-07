@@ -5,6 +5,7 @@ import type { MutationCtx } from './_generated/server';
 import { salesConfirmStandardRelease } from './salesCommercial';
 import type {
   SalesCommand,
+  SalesDecision,
   SalesGate,
   SalesProject,
   SalesReviewState,
@@ -125,9 +126,24 @@ export const salesSimulateDecision = async (
   environment: SalesCommandContext,
   command: Extract<SalesCommand, { type: 'simulateReviewDecision' }>,
 ) => {
+  salesRequire(
+    environment.member.role === 'manager',
+    'SALES_SIMULATION_MANAGER_REQUIRED',
+  );
+  await salesRecordDecision(environment, {
+    gate: command.gate,
+    decision: command.decision,
+    evidenceReference: command.evidenceReference,
+    simulation: true,
+  });
+};
+
+export const salesRecordDecision = async (
+  environment: SalesCommandContext,
+  command: Omit<SalesDecision, 'actorId' | 'timestamp'>,
+) => {
   const { context, project, account, member } = environment;
   salesAssertEditable(project);
-  salesRequire(member.role === 'manager', 'SALES_SIMULATION_MANAGER_REQUIRED');
   const review = salesReviewForGate(project, command.gate);
   salesRequire(review.requesterId !== member._id, 'SALES_SELF_APPROVAL');
   await salesRequireSnapshot(context, project, review, account);
@@ -143,7 +159,7 @@ export const salesSimulateDecision = async (
     evidenceReference: salesText(command.evidenceReference),
     actorId: member._id,
     timestamp: Date.now(),
-    simulation: true,
+    simulation: command.simulation,
   });
   if (command.decision === 'rejected') review.status = 'rejected';
   else if (
