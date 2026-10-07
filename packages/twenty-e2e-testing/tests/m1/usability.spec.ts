@@ -39,6 +39,8 @@ test('a keyboard-only employee creates, edits, and dismisses trash on a company'
     'select:Workspace',
     'a:Companies',
     'a:People',
+    'a:Sales projects',
+    'a:Sales pipeline',
     'a:Trash',
     'button:Sign out',
     'button:New company',

@@ -84,6 +84,9 @@ test('product sales preserves review gates, confirms a blanket order and reconci
   ])
     await creator.getByLabel(label, { exact: true }).fill(value);
   await creator
+    .getByRole('combobox', { name: 'Currency', exact: true })
+    .selectOption('EUR');
+  await creator
     .getByRole('button', { name: 'Create sales project', exact: true })
     .click();
   await expect(
@@ -134,6 +137,23 @@ test('product sales preserves review gates, confirms a blanket order and reconci
     .getByRole('button', { name: 'Record quote sent', exact: true })
     .click();
   await expect(sent.getByRole('alert')).toHaveText(
+    'Set the expected close date before recording the quote as sent or confirming the order.',
+  );
+  await expect(sent.getByLabel('Evidence reference')).toHaveValue(
+    'DEMO-QUOTE-COMMUNICATION',
+  );
+  const closeDate = await openAction(page, 'Set expected close date');
+  await closeDate
+    .getByLabel('Expected close date', { exact: true })
+    .fill('2099-12-15');
+  await saveAction(closeDate, 'Set expected close date');
+  await sent.locator('summary').click();
+  await openAction(page, 'Record quote sent');
+  await sent.getByLabel('Evidence reference').fill('DEMO-QUOTE-COMMUNICATION');
+  await sent
+    .getByRole('button', { name: 'Record quote sent', exact: true })
+    .click();
+  await expect(sent.getByRole('alert')).toHaveText(
     'The pricing exception needs approval for this quotation version.',
   );
   const pricingManagerContext = await browser.newContext();
@@ -153,6 +173,56 @@ test('product sales preserves review gates, confirms a blanket order and reconci
   await sent.locator('summary').click();
   await openAction(page, 'Record quote sent');
   await saveAction(sent, 'Record quote sent');
+  await expect(
+    page.getByText('Qualified project to Quote sent', { exact: true }),
+  ).toBeVisible();
+
+  await page.getByRole('link', { name: 'Sales pipeline', exact: true }).click();
+  await page
+    .getByRole('combobox', { name: 'Stage', exact: true })
+    .selectOption('quoted');
+  const pipelineRow = page
+    .getByRole('row')
+    .filter({ hasText: 'Demo ingredient supply' })
+    .filter({ hasText: companyName });
+  const moreOpportunities = page.getByRole('button', {
+    name: 'Load more opportunities',
+    exact: true,
+  });
+  for (
+    let scan = 0;
+    scan < 40 && (await pipelineRow.count()) === 0;
+    scan += 1
+  ) {
+    await expect(moreOpportunities).toBeEnabled();
+    await moreOpportunities.click();
+    await expect
+      .poll(
+        async () =>
+          (await pipelineRow.count()) > 0 ||
+          (await moreOpportunities.isEnabled()),
+      )
+      .toBe(true);
+  }
+  await expect(pipelineRow).toContainText('Quote sent');
+  await expect(pipelineRow).toContainText('€12,500.00');
+  await expect(pipelineRow).toContainText('2099-12-15');
+  await expect(
+    page
+      .getByRole('region', { name: 'Pipeline totals by stage', exact: true })
+      .getByRole('row', { name: /Quote sent EUR/ }),
+  ).toBeVisible();
+  await page.screenshot({
+    path: testInfo.outputPath('sales-pipeline.png'),
+    fullPage: true,
+  });
+  await pipelineRow
+    .getByRole('link', { name: 'Demo ingredient supply' })
+    .focus();
+  await page.keyboard.press('Enter');
+  await expect(
+    page.getByRole('heading', { name: 'Demo ingredient supply', exact: true }),
+  ).toBeVisible();
 
   const purchaseOrder = await openAction(page, 'Capture customer PO');
   await purchaseOrder.getByLabel('Customer PO number').fill('DEMO-PO-100');
