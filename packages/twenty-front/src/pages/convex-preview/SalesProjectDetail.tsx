@@ -3,7 +3,7 @@ import { useLingui } from '@lingui/react/macro';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useParams } from '@tanstack/react-router';
 import { ConvexError } from 'convex/values';
-import { Fragment, type ReactNode } from 'react';
+import { Fragment, type ComponentProps, type ReactNode } from 'react';
 
 import { api } from '../../../../../deployments/convex/convex/_generated/api';
 import type { Id } from '../../../../../deployments/convex/convex/_generated/dataModel';
@@ -117,6 +117,23 @@ const SalesProjectDetail = () => {
                 { label: t`Revision`, value: project.revision },
                 { label: t`Next action`, value: project.nextAction },
                 { label: t`Follow-up date`, value: project.nextActionDate },
+                {
+                  label: t`Expected close date`,
+                  value: project.closeDate ?? t`Not set`,
+                },
+                {
+                  label: t`Primary contact`,
+                  value:
+                    project.primaryContactId === null ? (
+                      t`Not linked`
+                    ) : (
+                      <Link
+                        to="/object/person/$personId"
+                        params={{ personId: project.primaryContactId }}
+                        search={{ workspace: workspaceId }}
+                      >{t`Open contact`}</Link>
+                    ),
+                },
               ]}
             />
           </section>
@@ -162,7 +179,8 @@ const SalesProjectDetail = () => {
             ))}
           </section>
         </div>
-        <SalesProjectActions
+        <SalesProjectContactActions
+          accountId={project.accountId}
           revision={project.revision}
           stage={project.stage}
           isManager={role === 'manager'}
@@ -190,6 +208,35 @@ const SalesProjectDetail = () => {
   );
 };
 
+const SalesProjectContactActions = ({
+  accountId,
+  revision,
+  stage,
+  isManager,
+  onExecute,
+}: Omit<ComponentProps<typeof SalesProjectActions>, 'contacts'> & {
+  accountId: Id<'workspaceCompanies'>;
+}) => {
+  const { workspaceId } = useWorkspace();
+  const contacts = useConvexPaginatedQuery(
+    api.workspaceContacts.list,
+    { workspaceId, accountId },
+    { initialNumItems: 100 },
+  );
+  return (
+    <SalesProjectActions
+      revision={revision}
+      stage={stage}
+      isManager={isManager}
+      onExecute={onExecute}
+      contacts={contacts.results.map((contact) => ({
+        id: contact._id,
+        name: contact.lastName,
+      }))}
+    />
+  );
+};
+
 const SalesProjectHistory = ({
   projectId,
 }: {
@@ -211,6 +258,9 @@ const SalesProjectHistory = ({
           <li key={event._id}>
             <strong>{label(event.command.type)}</strong>
             <p>{event.actorName}</p>
+            {event.fromStage !== null && event.fromStage !== event.toStage && (
+              <p>{t`${label(event.fromStage)} to ${label(event.toStage)}`}</p>
+            )}
             {event.command.type === 'logActivity' && (
               <p>{event.command.text}</p>
             )}

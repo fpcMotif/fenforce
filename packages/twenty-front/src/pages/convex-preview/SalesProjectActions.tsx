@@ -1,6 +1,7 @@
 import { useLingui } from '@lingui/react/macro';
 import { useState } from 'react';
 
+import type { Id } from '../../../../../deployments/convex/convex/_generated/dataModel';
 import type {
   SalesCommand,
   SalesProject,
@@ -58,6 +59,7 @@ type SalesProjectActionsProps = {
   revision: number;
   stage: SalesProject['stage'];
   isManager: boolean;
+  contacts: { id: Id<'workspaceContacts'>; name: string }[];
   onExecute: ExecuteSalesCommand;
 };
 
@@ -65,6 +67,7 @@ export const SalesProjectActions = ({
   revision,
   stage,
   isManager,
+  contacts,
   onExecute,
 }: SalesProjectActionsProps) => {
   const { t } = useLingui();
@@ -87,8 +90,48 @@ export const SalesProjectActions = ({
           })}
         />
       )}
+      {stage !== 'lost' && (
+        <SalesAction
+          revision={revision}
+          onExecute={onExecute}
+          title={t`Set primary contact`}
+          fields={[
+            {
+              name: 'contactId',
+              label: t`Primary contact`,
+              required: false,
+              options: [
+                { value: '', label: t`No primary contact` },
+                ...contacts.map((contact) => ({
+                  value: contact.id,
+                  label: contact.name,
+                })),
+              ],
+            },
+          ]}
+          description={t`Only active contacts of this company can be linked.`}
+          command={(values) => ({
+            type: 'setPrimaryContact',
+            contactId:
+              contacts.find(
+                (contact) => contact.id === salesText(values, 'contactId'),
+              )?.id ?? null,
+          })}
+        />
+      )}
       {canEditCommercial && (
         <>
+          <SalesAction
+            revision={revision}
+            onExecute={onExecute}
+            title={t`Set expected close date`}
+            fields={fields.closeDate}
+            description={t`Required before recording the quote as sent and before confirmation. Leave empty to clear it while the project is still qualified.`}
+            command={(values) => ({
+              type: 'setCloseDate',
+              closeDate: salesText(values, 'closeDate') || null,
+            })}
+          />
           <SalesAction
             revision={revision}
             onExecute={onExecute}

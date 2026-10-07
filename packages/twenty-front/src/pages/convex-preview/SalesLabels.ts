@@ -44,6 +44,9 @@ export const useSalesLabels = () => {
     ['simulateSapHandoff', t`SAP handoff simulated`],
     ['logActivity', t`Customer activity recorded`],
     ['closeLost', t`Project lost`],
+    ['setCloseDate', t`Expected close date updated`],
+    ['setPrimaryContact', t`Primary contact updated`],
+    ['applyApprovalOutcome', t`Approval decision applied`],
   ]);
   const problems = new Map([
     ['SALES_QUOTE_REQUIRED', t`Prepare a quotation.`],
@@ -157,6 +160,11 @@ export const useSalesLabels = () => {
     ],
     ['SALES_TEXT_TOO_LONG', t`Keep each field within 1,000 characters.`],
     ['SALES_INVALID_DATE', t`Enter a valid calendar date.`],
+    [
+      'SALES_CLOSE_DATE_REQUIRED',
+      t`Set the expected close date before recording the quote as sent or confirming the order.`,
+    ],
+    ['CONTACT_NOT_FOUND', t`Choose an active contact of this company.`],
     [
       'SALES_INVALID_QUANTITY',
       t`Enter a positive quantity with up to three decimal places.`,

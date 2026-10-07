@@ -23,6 +23,7 @@ import {
 } from './ContactsWorkspace';
 import { parseContactListSearch } from './contactListQuery';
 import { PreviewError } from './PreviewError';
+import { SalesPipelinePage } from './SalesPipelinePage';
 import { SalesProjectsPage } from './SalesProjectsPage';
 import { SalesProjectDetailPage } from './SalesProjectDetail';
 
@@ -88,6 +89,11 @@ const salesProjectsRoute = createRoute({
   path: '/objects/sales-projects',
   component: SalesProjectsPage,
 });
+const salesPipelineRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/objects/sales-pipeline',
+  component: SalesPipelinePage,
+});
 const salesProjectDetailRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/object/sales-project/$projectId',
@@ -106,6 +112,7 @@ const createPreviewRouter = () =>
       personDetailRoute,
       peopleTrashRoute,
       salesProjectsRoute,
+      salesPipelineRoute,
       salesProjectDetailRoute,
     ]),
   });

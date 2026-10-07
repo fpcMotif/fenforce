@@ -19,6 +19,7 @@ type NewSalesProjectValues = {
   currency: 'USD' | 'CNY' | 'EUR';
   nextAction: string;
   nextActionDate: string;
+  closeDate: string | null;
 };
 
 type SalesProjectCreateProps = {
@@ -61,6 +62,12 @@ export const SalesProjectCreate = ({
     },
     { name: 'nextAction', label: t`Next action` },
     { name: 'nextActionDate', label: t`Follow-up date`, type: 'date' },
+    {
+      name: 'closeDate',
+      label: t`Expected close date`,
+      type: 'date',
+      required: false,
+    },
   ];
   const submit = async (values: FormData) => {
     let quantityMilli: number;
@@ -82,6 +89,7 @@ export const SalesProjectCreate = ({
       currency: salesChoice(values, 'currency', ['USD', 'CNY', 'EUR']),
       nextAction: salesText(values, 'nextAction'),
       nextActionDate: salesText(values, 'nextActionDate'),
+      closeDate: salesText(values, 'closeDate') || null,
     });
   };
   return (

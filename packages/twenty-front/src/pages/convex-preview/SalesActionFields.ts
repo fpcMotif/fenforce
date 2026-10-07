@@ -88,6 +88,14 @@ export const useSalesActionFields = () => {
       },
     ],
     evidence: [evidence],
+    closeDate: [
+      {
+        name: 'closeDate',
+        label: t`Expected close date`,
+        type: 'date',
+        required: false,
+      },
+    ],
     purchaseOrder: [
       { name: 'reference', label: t`Customer PO number` },
       {

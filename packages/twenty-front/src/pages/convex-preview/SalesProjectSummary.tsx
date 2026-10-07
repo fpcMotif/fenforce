@@ -3,18 +3,16 @@ import { Fragment } from 'react';
 
 import type { SalesProject } from '../../../../../deployments/convex/convex/salesContract';
 import { useSalesLabels } from './SalesLabels';
+import { formatSalesMinor } from './SalesPipelineTotals';
 
 type SalesProjectSummaryProps = { project: SalesProject };
 
 export const SalesProjectSummary = ({ project }: SalesProjectSummaryProps) => {
-  const { t } = useLingui();
+  const { t, i18n } = useLingui();
   const { label } = useSalesLabels();
   const quote = project.quote;
   const money = (minor: number) =>
-    new Intl.NumberFormat('en', {
-      style: 'currency',
-      currency: project.currency,
-    }).format(minor / 100);
+    formatSalesMinor(minor, project.currency, i18n.locale);
   return (
     <>
       <section
