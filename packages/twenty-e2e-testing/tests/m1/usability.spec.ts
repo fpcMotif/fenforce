@@ -38,6 +38,7 @@ test('a keyboard-only employee creates, edits, and dismisses trash on a company'
   await expect(tabUntilFocused(page, newCompany)).resolves.toEqual([
     'select:Workspace',
     'a:Companies',
+    'a:People',
     'a:Trash',
     'button:Sign out',
     'button:New company',
