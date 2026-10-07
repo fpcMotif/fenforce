@@ -22,6 +22,16 @@ _Avoid_: Treating language as the user's time zone or date format.
 The user's date, time, number, calendar, and time-zone preferences within a workspace.
 These remain distinct from interface language.
 
+**Account**:
+An organization the company sells to, owned by one seller and visible to managers.
+The interface labels it Company to match Twenty.
+_Avoid_: Company (outside interface copy), customer, organization
+
+**Contact**:
+A person at exactly one Account, whose access follows that Account.
+The interface labels it Person to match Twenty.
+_Avoid_: Person (outside interface copy), lead, people
+
 **Modern CRM experience**:
 A planned improvement to navigation, record readability, editing, and keyboard use while preserving CRM capabilities.
 _Avoid_: Treating a styling-library replacement as proof of improved usability.
