@@ -1,3 +1,5 @@
+import { vi } from 'vitest';
+
 import { api } from '../convex/_generated/api';
 import type { SalesCommand, SalesGate } from '../convex/salesContract';
 import { m1Fixture } from './contactFixtures';
@@ -28,6 +30,7 @@ export const SALES_QUOTE: Extract<SalesCommand, { type: 'reviseQuote' }> = {
 };
 
 export const salesFixture = async () => {
+  vi.stubEnv('FENFORCE_SALES_SIMULATION_ENABLED', 'true');
   const fixture = await m1Fixture();
   const { seller, workspaceId, accountA } = fixture;
   const createArgs = {

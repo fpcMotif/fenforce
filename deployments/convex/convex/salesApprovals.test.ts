@@ -1,4 +1,4 @@
-import { expect, it } from 'vitest';
+import { expect, it, vi } from 'vitest';
 
 import { salesActor } from '../testing/accountFixtures';
 import { salesFixture, SALES_QUOTE } from '../testing/salesFixtures';
@@ -163,6 +163,49 @@ it('reports stale snapshots and revoked requesters as not applied without a writ
   });
   expect(await fixture.snapshotCount()).toBe(2);
   expect((await fixture.get())?.pricingReview?.status).toBe('pending');
+});
+
+it('refuses simulated decisions and never lets them unlock an approval-controlled change outside the demo', async () => {
+  const fixture = await pendingPricingReview();
+  const decide = () =>
+    fixture.command(
+      {
+        type: 'simulateReviewDecision',
+        gate: 'pricing',
+        decision: 'approved',
+        evidenceReference: 'DEMO-pricing',
+      },
+      fixture.manager,
+    );
+  vi.stubEnv('FENFORCE_SALES_SIMULATION_ENABLED', '');
+  await expect(decide()).rejects.toThrow('SALES_SIMULATION_DISABLED');
+  vi.stubEnv('FENFORCE_SALES_SIMULATION_ENABLED', 'true');
+  await decide();
+  vi.stubEnv('FENFORCE_SALES_SIMULATION_ENABLED', '');
+  await expect(
+    fixture.command({ type: 'markQuoteSent', evidenceReference: 'DEMO' }),
+  ).rejects.toThrow('SALES_SIMULATED_APPROVAL');
+  expect(await fixture.get()).toMatchObject({
+    stage: 'qualified',
+    blockers: expect.arrayContaining(['SALES_SIMULATED_APPROVAL']),
+  });
+});
+
+it('reports a snapshot whose project revision moved as not applied', async () => {
+  const fixture = await pendingPricingReview();
+  await fixture.command({
+    type: 'setNextAction',
+    text: 'Chase approval',
+    dueDate: '2099-10-11',
+  });
+  expect(await fixture.apply('feishu-moved')).toEqual({
+    status: 'not-applied',
+    reason: 'SALES_REVIEW_NOT_CURRENT',
+  });
+  expect(await fixture.get()).toMatchObject({
+    revision: 4,
+    pricingReview: { status: 'pending', decisions: [] },
+  });
 });
 
 it('refuses manager self-approval through the integration seam', async () => {

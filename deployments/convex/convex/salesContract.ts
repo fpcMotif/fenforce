@@ -85,6 +85,7 @@ export const salesReviewStateValidator = v.object({
     v.literal('rejected'),
   ),
   decisions: v.array(salesDecisionValidator),
+  recordedRevision: v.number(),
   simulation: v.literal(true),
 });
 export const salesReleaseValidator = v.object({

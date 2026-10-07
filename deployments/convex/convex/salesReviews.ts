@@ -14,6 +14,7 @@ import {
   salesCheckOwner,
   salesRequireApprovers,
   salesRequireSnapshot,
+  salesSimulationEnabled,
 } from './salesPolicy';
 import {
   salesAssertEditable,
@@ -89,6 +90,7 @@ export const salesSubmitReview = async (
     quoteVersion: quote.version,
     status: 'pending',
     decisions: [],
+    recordedRevision: project.revision + 1,
     simulation: true,
   };
   project.ownerCheckedId = ownerId;
@@ -126,6 +128,7 @@ export const salesSimulateDecision = async (
   environment: SalesCommandContext,
   command: Extract<SalesCommand, { type: 'simulateReviewDecision' }>,
 ) => {
+  salesRequire(salesSimulationEnabled(), 'SALES_SIMULATION_DISABLED');
   salesRequire(
     environment.member.role === 'manager',
     'SALES_SIMULATION_MANAGER_REQUIRED',
@@ -147,6 +150,10 @@ export const salesRecordDecision = async (
   const review = salesReviewForGate(project, command.gate);
   salesRequire(review.requesterId !== member._id, 'SALES_SELF_APPROVAL');
   await salesRequireSnapshot(context, project, review, account);
+  salesRequire(
+    review.recordedRevision === project.revision,
+    'SALES_REVIEW_NOT_CURRENT',
+  );
   salesRequire(review.status === 'pending', 'SALES_REVIEW_CLOSED');
   salesRequire(
     !review.decisions.some((decision) => decision.gate === command.gate),
@@ -161,6 +168,7 @@ export const salesRecordDecision = async (
     timestamp: Date.now(),
     simulation: command.simulation,
   });
+  review.recordedRevision = project.revision + 1;
   if (command.decision === 'rejected') review.status = 'rejected';
   else if (
     review.decisions.length ===

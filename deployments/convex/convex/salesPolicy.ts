@@ -102,11 +102,22 @@ const salesApproversValid = async (
   return true;
 };
 
+export const salesSimulationEnabled = () =>
+  process.env.FENFORCE_SALES_SIMULATION_ENABLED === 'true';
+
+const salesSimulatedApprovalBlocked = (review: SalesReviewState) =>
+  !salesSimulationEnabled() &&
+  review.decisions.some((decision) => decision.simulation);
+
 export const salesRequireApprovers = async (
   context: QueryCtx,
   account: Doc<'workspaceCompanies'>,
   review: SalesReviewState,
 ) => {
+  salesRequire(
+    !salesSimulatedApprovalBlocked(review),
+    'SALES_SIMULATED_APPROVAL',
+  );
   salesRequire(
     await salesApproversValid(context, account, review),
     'SALES_APPROVER_ACCESS_CHANGED',
@@ -136,22 +147,36 @@ export const salesRequireSnapshot = async (
   await salesCheckOwner(context, account);
 };
 
+const salesReviewBlockers = async (
+  context: QueryCtx,
+  account: Doc<'workspaceCompanies'>,
+  review: SalesReviewState,
+) => {
+  const snapshot = await context.db.get(review.snapshotId);
+  const checks: [boolean, string][] = [
+    [
+      await salesRequesterValid(context, account, review),
+      'SALES_REQUESTER_ACCESS_CHANGED',
+    ],
+    [!salesSimulatedApprovalBlocked(review), 'SALES_SIMULATED_APPROVAL'],
+    [
+      await salesApproversValid(context, account, review),
+      'SALES_APPROVER_ACCESS_CHANGED',
+    ],
+    [snapshot?.ownerId === account.accountOwnerId, 'SALES_OWNER_CHANGED'],
+  ];
+  return checks.filter(([valid]) => !valid).map(([, code]) => code);
+};
+
 export const salesCurrentBlockers = async (
   context: QueryCtx,
   project: SalesProject,
   account: Doc<'workspaceCompanies'>,
 ) => {
   const blockers = salesBlockers(project);
-  for (const review of [project.orderReview, project.pricingReview]) {
-    if (review === null) continue;
-    if (!(await salesRequesterValid(context, account, review)))
-      blockers.push('SALES_REQUESTER_ACCESS_CHANGED');
-    if (!(await salesApproversValid(context, account, review)))
-      blockers.push('SALES_APPROVER_ACCESS_CHANGED');
-    const snapshot = await context.db.get(review.snapshotId);
-    if (snapshot?.ownerId !== account.accountOwnerId)
-      blockers.push('SALES_OWNER_CHANGED');
-  }
+  for (const review of [project.orderReview, project.pricingReview])
+    if (review !== null)
+      blockers.push(...(await salesReviewBlockers(context, account, review)));
   if (project.ownerCheckedId !== account.accountOwnerId)
     blockers.push('SALES_OWNER_CHANGED');
   return [...new Set(blockers)];
