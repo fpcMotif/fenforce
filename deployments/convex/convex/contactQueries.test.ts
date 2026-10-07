@@ -236,8 +236,10 @@ it('continues across accounts whose name order is the reverse of their id order'
         }),
       );
   const managerIds = await traverse(manager.session, { workspaceId }, 2);
-  expect(managerIds.slice(0, expectedIds.length)).toEqual(expectedIds);
-  expect(new Set(managerIds).size).toBe(managerIds.length);
+  expect(managerIds).toEqual([...expectedIds, fixture.contactA]);
+  expect(managerIds).toEqual(
+    await traverse(manager.session, { workspaceId }, 25),
+  );
 });
 
 it('returns short non-final pages for a seller with many accounts and no contacts', async () => {

@@ -67,6 +67,52 @@ it('replays a lost create acknowledgement without a duplicate, even after the co
   });
 });
 
+it('replays a lost create acknowledgement after a manager relinks the contact out of the creator reach', async () => {
+  const fixture = await m1Fixture();
+  const { workspaceId, seller, manager, accountA, accountB } = fixture;
+  const create = {
+    operationId: 'create-then-relinked',
+    workspaceId,
+    accountId: accountA,
+    lastName: 'Relinked',
+  };
+  const contactId = await seller.session.mutation(
+    api.workspaceContacts.create,
+    create,
+  );
+  await manager.session.mutation(api.workspaceContacts.update, {
+    operationId: 'relink-away',
+    workspaceId,
+    contactId,
+    expectedRevision: 1,
+    accountId: accountB,
+  });
+  const afterRelink = await counts(fixture);
+
+  expect(
+    await seller.session.mutation(api.workspaceContacts.create, create),
+  ).toBe(contactId);
+  expect(
+    await seller.session.query(api.contactOperations.getReceipt, {
+      workspaceId,
+      operationId: create.operationId,
+    }),
+  ).toMatchObject({ operation: 'create', contactId, revision: 1 });
+  await expect(
+    seller.session.mutation(api.workspaceContacts.create, {
+      ...create,
+      lastName: 'Different',
+    }),
+  ).rejects.toThrow('OPERATION_ID_REUSED');
+  expect(await counts(fixture)).toEqual(afterRelink);
+  expect(
+    await seller.session.query(api.workspaceContacts.get, {
+      workspaceId,
+      contactId,
+    }),
+  ).toBeNull();
+});
+
 it('replays a lost update acknowledgement and rejects a reused operation ID with a different payload', async () => {
   const fixture = await m1Fixture();
   const { workspaceId, seller, contactA } = fixture;

@@ -158,9 +158,13 @@ test('a seller creates a person, links a company, corrects the email, and both r
     name: 'New person',
     exact: true,
   });
-  await expect(
-    panelCreator.getByRole('combobox', { name: 'Company', exact: true }),
-  ).toHaveValue(fixture.accountAId);
+  await expect(panelCreator.getByRole('combobox')).toHaveCount(0);
+  const fixedCompany = panelCreator.getByRole('textbox', {
+    name: 'Company',
+    exact: true,
+  });
+  await expect(fixedCompany).toHaveValue('account-a');
+  await expect(fixedCompany).not.toBeEditable();
   const panelName = `${lastName} from company`;
   await panelCreator
     .getByRole('textbox', { name: 'Last name', exact: true })
@@ -674,6 +678,13 @@ test('seller search and pagination return only permitted people without protecte
       ...permittedNames,
       'Synthetic',
     ]);
+
+    await page.goto(`${peopleUrl(workspaceId)}&company=garbage`);
+    await expect(peopleRecords(page).getByRole('alert')).toContainText(
+      'That company is unavailable',
+    );
+    await page.goto(personUrl(workspaceId, 'garbage'));
+    await expect(personHeading(page, 'Person not found')).toBeVisible();
   } finally {
     await manager.context.close();
   }

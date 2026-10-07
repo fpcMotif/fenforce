@@ -125,9 +125,7 @@ const TrashedContact = ({
   return (
     <section className="fenforce-editor" aria-label={lastName}>
       <h2>{lastName}</h2>
-      <p>
-        {t`Company`}: {accountName}
-      </p>
+      <p>{t`Company: ${accountName}`}</p>
       <button
         type="button"
         disabled={restore.isPending}

@@ -33,6 +33,17 @@ export const findContactReceipt = (
     .unique();
 };
 
+const requireReceiptAccess = async (
+  context: QueryCtx,
+  member: Doc<'workspaceMembers'>,
+  receipt: Doc<'contactOperationReceipts'>,
+) => {
+  // A create receipt only repeats the ID its creator was already given, so a
+  // later relink out of the creator's reach must not turn a lost ack into a failure.
+  if (receipt.operation === 'create') return;
+  await requireAccessibleContact(context, member, receipt.contactId);
+};
+
 export const readContactReceipt = async (
   context: QueryCtx,
   member: Doc<'workspaceMembers'>,
@@ -41,7 +52,7 @@ export const readContactReceipt = async (
 ) => {
   const receipt = await findContactReceipt(context, member, args.operationId);
   if (receipt === null) return null;
-  await requireAccessibleContact(context, member, receipt.contactId);
+  await requireReceiptAccess(context, member, receipt);
   if (
     receipt.operation !== operation ||
     receipt.payload !== operationPayload(args)
@@ -85,7 +96,7 @@ export const getReceipt = query({
     const member = await requireSalesMember(context, args.workspaceId);
     const receipt = await findContactReceipt(context, member, args.operationId);
     if (receipt === null) return null;
-    await requireAccessibleContact(context, member, receipt.contactId);
+    await requireReceiptAccess(context, member, receipt);
     return {
       operation: receipt.operation,
       contactId: receipt.contactId,

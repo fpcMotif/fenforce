@@ -63,7 +63,7 @@ export const CompanyContacts = ({
           <h3>{t`New person`}</h3>
           <ContactForm
             workspaceId={workspaceId}
-            initialCompany={{ accountId: companyId, accountName: companyName }}
+            fixedCompany={{ accountId: companyId, accountName: companyName }}
             isReconnecting={createContact.isReconnecting}
             onSave={saveContact}
             onCancel={() => setIsAdding(false)}

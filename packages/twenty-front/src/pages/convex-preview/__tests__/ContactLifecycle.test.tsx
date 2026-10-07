@@ -1,5 +1,6 @@
 import { vi } from 'vite-plus/test';
 import { setupI18n } from '@lingui/core';
+import { msg } from '@lingui/core/macro';
 import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -124,4 +125,33 @@ it('does not call trash empty while a short page can load more', () => {
   render(withI18n(<ContactTrash workspaceId={WORKSPACE_ID} />));
   expect(screen.queryByText('Trash is empty')).toBeNull();
   expect(screen.getByRole('button', { name: 'Load more' })).toBeVisible();
+});
+
+it('lets translators reorder the trashed person company label', () => {
+  const accountName = '';
+  const companyLabel = msg`Company: ${accountName}`;
+  mockTrashPage = {
+    status: 'Exhausted',
+    results: [
+      {
+        _id: CONTACT_ID,
+        revision: 2,
+        lastName: 'Synthetic',
+        accountName: 'account-a',
+      },
+    ],
+  };
+  render(
+    <I18nProvider
+      i18n={setupI18n({
+        locale: 'en',
+        messages: { en: { [companyLabel.id]: [['accountName'], ' (Firma)'] } },
+      })}
+    >
+      <ContactTrash workspaceId={WORKSPACE_ID} />
+    </I18nProvider>,
+  );
+  expect(screen.getByRole('region', { name: 'Synthetic' })).toHaveTextContent(
+    'account-a (Firma)',
+  );
 });

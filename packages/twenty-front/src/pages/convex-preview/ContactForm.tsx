@@ -1,6 +1,7 @@
 import { useLingui } from '@lingui/react/macro';
 import { ConvexError } from 'convex/values';
 import { useState, type FormEvent } from 'react';
+import { isDefined } from 'twenty-shared/utils';
 import { MainButton } from 'twenty-ui/components';
 
 import type { Id } from '../../../../../deployments/convex/convex/_generated/dataModel';
@@ -20,7 +21,7 @@ type ContactFormProps = {
     email: string | null;
     company: SelectedCompany;
   };
-  initialCompany?: SelectedCompany;
+  fixedCompany?: SelectedCompany;
   isReconnecting?: boolean;
   onSave: (values: ContactFormValues) => Promise<void>;
   onCancel: () => void;
@@ -34,7 +35,7 @@ const readFailureCode = (failure: unknown) =>
 export const ContactForm = ({
   workspaceId,
   initialValues,
-  initialCompany,
+  fixedCompany,
   isReconnecting = false,
   onSave,
   onCancel,
@@ -42,9 +43,10 @@ export const ContactForm = ({
   const { t } = useLingui();
   const [lastName, setLastName] = useState(initialValues?.lastName ?? '');
   const [email, setEmail] = useState(initialValues?.email ?? '');
-  const [company, setCompany] = useState(
-    initialValues?.company ?? initialCompany,
+  const [selectedCompany, setSelectedCompany] = useState(
+    initialValues?.company,
   );
+  const company = fixedCompany ?? selectedCompany;
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState('');
 
@@ -109,15 +111,22 @@ export const ContactForm = ({
           placeholder="name@example.com"
         />
       </label>
-      <CompanyPicker
-        workspaceId={workspaceId}
-        label={t`Company`}
-        emptyLabel={t`Choose a company`}
-        value={company}
-        required
-        disabled={isSaving}
-        onChange={setCompany}
-      />
+      {isDefined(fixedCompany) ? (
+        <label>
+          <span>{t`Company`}</span>
+          <input value={fixedCompany.accountName ?? ''} readOnly />
+        </label>
+      ) : (
+        <CompanyPicker
+          workspaceId={workspaceId}
+          label={t`Company`}
+          emptyLabel={t`Choose a company`}
+          value={company}
+          required
+          disabled={isSaving}
+          onChange={setSelectedCompany}
+        />
+      )}
       {isSaving && isReconnecting && (
         <p role="status">{t`Reconnecting… Your change will be confirmed when the connection returns.`}</p>
       )}

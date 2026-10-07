@@ -1,3 +1,5 @@
+import { ConvexError } from 'convex/values';
+
 import type { Id } from '../../../../../deployments/convex/convex/_generated/dataModel';
 import { CONTACT_FIELDS } from '../../../../../deployments/convex/convex/contactFields';
 
@@ -39,6 +41,20 @@ export const toContactListArgs = (query: ContactListQuery) => ({
   ...(query.search === '' ? {} : { search: query.search }),
   ...(query.accountId === undefined ? {} : { accountId: query.accountId }),
 });
+
+const isInvalidArgumentError = (error: unknown, argumentName: string) =>
+  !(error instanceof ConvexError) &&
+  error instanceof Error &&
+  error.message.includes('ArgumentValidationError') &&
+  error.message.includes(argumentName);
+
+export const isCompanyFilterError = (error: unknown) =>
+  error instanceof ConvexError
+    ? error.data === 'COMPANY_NOT_FOUND'
+    : isInvalidArgumentError(error, 'accountId');
+
+export const isMalformedPersonIdError = (error: unknown) =>
+  isInvalidArgumentError(error, 'contactId');
 
 export const isFilteredContactListQuery = (query: ContactListQuery) =>
   query.search !== '' || query.accountId !== undefined;

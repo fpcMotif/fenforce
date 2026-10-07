@@ -25,6 +25,12 @@ let mockListSearch: Record<string, string> = {};
 let mockContactPage: PaginatedResult = { status: 'Exhausted', results: [] };
 let mockContactListError: unknown = undefined;
 let mockContact: Record<string, unknown> | null = null;
+let mockContactError: unknown = undefined;
+
+const argumentValidationError = (functionName: string, path: string) =>
+  new Error(
+    `[CONVEX Q(${functionName})] Server Error\nArgumentValidationError: Value does not match validator.\nPath: .${path}\nValue: "garbage"\nValidator: v.id("table")`,
+  );
 
 const contactRow = (overrides: Record<string, unknown> = {}) => ({
   _id: 'contact-a',
@@ -76,7 +82,9 @@ vi.mock('@tanstack/react-query', () => ({
           isPending: false,
           data: { workspaceId: 'workspace', name: 'Workspace', role: 'seller' },
         }
-      : { isPending: false, isError: false, data: mockContact },
+      : mockContactError === undefined
+        ? { isPending: false, isError: false, data: mockContact }
+        : { isPending: false, isError: true, error: mockContactError },
 }));
 vi.mock('@tanstack/react-router', () => ({
   Link: ({ children }: { children: React.ReactNode }) => (
@@ -123,6 +131,7 @@ beforeEach(() => {
   mockContactPage = { status: 'Exhausted', results: [] };
   mockContactListError = undefined;
   mockContact = null;
+  mockContactError = undefined;
   mockMutation.mockReset();
   mockNavigate.mockReset();
   mockLoadMore.mockReset();
@@ -188,6 +197,48 @@ it('recovers from an unavailable company filter without revealing it', async () 
   } finally {
     errorLog.mockRestore();
   }
+});
+
+it('treats a malformed company filter as an unavailable company', () => {
+  mockListSearch = { company: 'garbage' };
+  mockContactListError = argumentValidationError(
+    'workspaceContacts:list',
+    'accountId',
+  );
+  const errorLog = vi
+    .spyOn(console, 'error')
+    .mockImplementation(() => undefined);
+  try {
+    renderPage(<PeoplePage />);
+    expect(screen.getByRole('alert')).toHaveTextContent(
+      'That company is unavailable',
+    );
+    expect(
+      screen.getByRole('button', { name: 'Show all people' }),
+    ).toBeVisible();
+  } finally {
+    errorLog.mockRestore();
+  }
+});
+
+it('shows a malformed person link as not found', () => {
+  mockContactError = argumentValidationError(
+    'workspaceContacts:get',
+    'contactId',
+  );
+  renderPage(<PersonDetailPage />);
+  expect(
+    screen.getByRole('heading', { name: 'Person not found' }),
+  ).toBeVisible();
+  expect(screen.queryByText('Unable to load person')).toBeNull();
+});
+
+it('still reports a person load failure that is not a malformed link', () => {
+  mockContactError = new Error('Network failure');
+  renderPage(<PersonDetailPage />);
+  expect(
+    screen.getByRole('heading', { name: 'Unable to load person' }),
+  ).toBeVisible();
 });
 
 it('creates a person once with an operation ID and opens it', async () => {

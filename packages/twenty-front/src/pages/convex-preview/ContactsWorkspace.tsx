@@ -9,7 +9,6 @@ import {
   useRouter,
   useSearch,
 } from '@tanstack/react-router';
-import { ConvexError } from 'convex/values';
 import { useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { MainButton } from 'twenty-ui/components';
@@ -28,7 +27,9 @@ import { ContactForm, type ContactFormValues } from './ContactForm';
 import { ContactHistory } from './ContactHistory';
 import { ContactTrash, ContactTrashAction } from './ContactLifecycle';
 import {
+  isCompanyFilterError,
   isFilteredContactListQuery,
+  isMalformedPersonIdError,
   readContactListQuery,
   toContactListArgs,
   toContactListSearch,
@@ -59,9 +60,6 @@ export const PersonDetailPage = () => (
     <PersonRecordDetail />
   </SalesAccessGate>
 );
-
-const isCompanyFilterError = (error: unknown) =>
-  error instanceof ConvexError && error.data === 'COMPANY_NOT_FOUND';
 
 const PeopleRecords = () => {
   const { t } = useLingui();
@@ -320,7 +318,7 @@ const PersonRecordDetail = () => {
     );
   }
 
-  if (contact.isError) {
+  if (contact.isError && !isMalformedPersonIdError(contact.error)) {
     return (
       <div className="fenforce-page" role="alert">
         <h1>{t`Unable to load person`}</h1>
@@ -329,7 +327,7 @@ const PersonRecordDetail = () => {
     );
   }
 
-  if (contact.data === null) {
+  if (contact.isError || contact.data === null) {
     return (
       <div className="fenforce-page">
         <h1>{t`Person not found`}</h1>

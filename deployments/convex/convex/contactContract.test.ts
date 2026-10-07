@@ -4,6 +4,25 @@ import {
   normalizeContactEmail,
   normalizeContactLastName,
 } from './contactContract';
+import { CONTACT_FIELDS, CONTACT_SOURCE_MAPPING } from './contactFields';
+
+describe('CONTACT_SOURCE_MAPPING', () => {
+  it('maps each source field to its contact field id', () => {
+    expect(
+      Object.fromEntries(
+        Object.values(CONTACT_FIELDS).map((field) => [
+          field.sourceField,
+          field.id,
+        ]),
+      ),
+    ).toEqual(CONTACT_SOURCE_MAPPING.fields);
+    expect(CONTACT_SOURCE_MAPPING.fields).toEqual({
+      AccountId: 'contact.account',
+      LastName: 'contact.lastName',
+      Email: 'contact.email',
+    });
+  });
+});
 
 describe('normalizeContactLastName', () => {
   it('trims and accepts 1 to 100 characters', () => {
