@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 import { chooseEmployee, prepareReplay } from './helpers';
+import { revealTrashedCompany } from './replay-helpers';
 
 test('two employees preserve acknowledged values and reject an obsolete form', async ({
   browser,
@@ -129,8 +130,7 @@ test('trash and restoration preserve the record identity, fields, and visible au
     page.getByRole('heading', { name: 'Company not found', exact: true }),
   ).toBeVisible();
   await page.getByRole('link', { name: 'Trash', exact: true }).click();
-  const record = page.getByRole('region', { name, exact: true });
-  await expect(record).toBeVisible();
+  const record = await revealTrashedCompany(page, name);
   await record
     .getByRole('button', { name: 'Show history', exact: true })
     .click();

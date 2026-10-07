@@ -14,13 +14,16 @@ type CompanyLifecycleProps = {
   revision: number;
   onComplete: () => void;
 };
-type CompanyTrashActionProps = CompanyLifecycleProps;
+type CompanyTrashActionProps = CompanyLifecycleProps & {
+  onChanged: () => void;
+};
 
 export const CompanyTrashAction = ({
   workspaceId,
   companyId,
   revision,
   onComplete,
+  onChanged,
 }: CompanyTrashActionProps) => {
   const { t } = useLingui();
   const trash = useAccountOperation(api.accountLifecycle.trash);
@@ -41,8 +44,12 @@ export const CompanyTrashAction = ({
       });
       onComplete();
     } catch (failure) {
+      const changed =
+        failure instanceof ConvexError && failure.data === 'COMPANY_CHANGED';
+      // The change that won may already have removed this action from the page.
+      if (changed) onChanged();
       setError(
-        failure instanceof ConvexError && failure.data === 'COMPANY_CHANGED'
+        changed
           ? t`This company changed. Cancel and try again with the latest version.`
           : t`Unable to move this company to trash. Try again.`,
       );
@@ -95,10 +102,12 @@ const TrashedCompany = ({
   companyId,
   revision,
   onComplete,
+  onRestoreChanged,
   name,
   ownerName,
   canReassign,
 }: CompanyLifecycleProps & {
+  onRestoreChanged: () => void;
   name: string;
   ownerName: string | null;
   canReassign: boolean;
@@ -134,6 +143,16 @@ const TrashedCompany = ({
         setOwnerId('');
       }
     } catch (failure) {
+      if (
+        action === 'restore' &&
+        failure instanceof ConvexError &&
+        failure.data === 'COMPANY_CHANGED'
+      ) {
+        // The trash page reports it, since the winning change may already
+        // have removed this company from the list.
+        onRestoreChanged();
+        return;
+      }
       setError(
         failure instanceof ConvexError &&
           failure.data === 'INVALID_ACCOUNT_OWNER'
@@ -147,9 +166,7 @@ const TrashedCompany = ({
   return (
     <section className="fenforce-editor" aria-label={name}>
       <h2>{name}</h2>
-      <p>
-        {t`Account Owner`}: {ownerName ?? '—'}
-      </p>
+      <p>{t`Account Owner: ${ownerName ?? '—'}`}</p>
       <button
         type="button"
         disabled={pending}
@@ -206,12 +223,18 @@ export const CompanyTrash = ({
     { initialNumItems: 25 },
   );
   const [restored, setRestored] = useState(false);
+  const [changedRestoreName, setChangedRestoreName] = useState<string | null>(
+    null,
+  );
   const heading = useRef<HTMLHeadingElement>(null);
   return (
     <div className="fenforce-page">
       <h1 ref={heading} tabIndex={-1}>{t`Trash`}</h1>
       {restored && (
         <p role="status">{t`Company restored. It is available in Companies.`}</p>
+      )}
+      {changedRestoreName !== null && (
+        <p role="alert">{t`${changedRestoreName} changed before your restore was saved. Your request was not applied.`}</p>
       )}
       {companies.status === 'LoadingFirstPage' && (
         <p role="status">{t`Loading trash…`}</p>
@@ -230,7 +253,12 @@ export const CompanyTrash = ({
           canReassign={company.permissions.canReassign}
           onComplete={() => {
             setRestored(true);
+            setChangedRestoreName(null);
             heading.current?.focus();
+          }}
+          onRestoreChanged={() => {
+            setRestored(false);
+            setChangedRestoreName(company.name);
           }}
         />
       ))}

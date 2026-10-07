@@ -632,6 +632,17 @@ const CompanyRecordDetail = () => {
     }),
   );
   const [editingRevision, setEditingRevision] = useState<number | null>(null);
+  const [trashRejectedRevision, setTrashRejectedRevision] = useState<
+    number | null
+  >(null);
+
+  if (
+    isDefined(company.data) &&
+    trashRejectedRevision !== null &&
+    company.data.revision > trashRejectedRevision
+  ) {
+    setTrashRejectedRevision(null);
+  }
 
   if (company.isPending) {
     return (
@@ -652,6 +663,9 @@ const CompanyRecordDetail = () => {
     return (
       <div className="fenforce-page">
         <h1>{t`Company not found`}</h1>
+        {trashRejectedRevision !== null && (
+          <p role="alert">{t`This company changed before your move to trash was saved. Your request was not applied.`}</p>
+        )}
         <Link
           to="/objects/companies"
           search={{ workspace: workspaceId }}
@@ -717,6 +731,7 @@ const CompanyRecordDetail = () => {
               search: { workspace: workspaceId },
             });
           }}
+          onChanged={() => setTrashRejectedRevision(record.revision)}
         />
       )}
       <CompanyHistory workspaceId={workspaceId} companyId={record._id} />

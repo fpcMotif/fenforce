@@ -53,6 +53,9 @@ export const updateCompany = makeFunctionReference<
   null
 >('workspaceCompanies:update');
 
+export const sortsFirstName = (label: string) =>
+  `0${10 ** 13 - Date.now()} ${label}`;
+
 export const openEmployeePage = async (
   browser: Browser,
   url: string,
@@ -63,6 +66,23 @@ export const openEmployeePage = async (
   await page.goto(url);
   await chooseEmployee(page, subject);
   return { context, page };
+};
+
+// Trash lists the oldest trashed companies first, so a record trashed by the
+// current test sits on the last page once earlier runs have filled the trash.
+export const revealTrashedCompany = async (page: Page, name: string) => {
+  const record = page.getByRole('region', { name, exact: true });
+  const loadMore = page.getByRole('button', {
+    name: 'Load more',
+    exact: true,
+    disabled: false,
+  });
+  for (let loadedPages = 1; loadedPages <= 100; loadedPages += 1) {
+    await expect(record.or(loadMore).first()).toBeVisible();
+    if ((await record.count()) > 0) return record;
+    await loadMore.click();
+  }
+  throw new Error(`${name} is not in the first 100 trash pages`);
 };
 
 export const tabUntilFocused = async (

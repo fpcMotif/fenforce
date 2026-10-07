@@ -31,20 +31,20 @@ vi.mock('convex/react', () => ({
     ),
   }),
 }));
+const trashedAcme = {
+  _id: 'company',
+  revision: 2,
+  name: 'Acme',
+  accountOwnerName: 'Former owner',
+  permissions: { canReassign: true },
+  memberId: 'active-owner',
+  displayName: 'Active owner',
+};
+let trashResults = [trashedAcme];
 vi.mock('@convex-dev/react-query', () => ({
   useConvexPaginatedQuery: () => ({
     status: 'Exhausted',
-    results: [
-      {
-        _id: 'company',
-        revision: 2,
-        name: 'Acme',
-        accountOwnerName: 'Former owner',
-        permissions: { canReassign: true },
-        memberId: 'active-owner',
-        displayName: 'Active owner',
-      },
-    ],
+    results: trashResults,
   }),
 }));
 
@@ -56,6 +56,7 @@ it('captures the confirmed revision and keeps a stale trash failure visible', as
   mutation.mockReset().mockRejectedValue(new ConvexError('COMPANY_CHANGED'));
   const user = userEvent.setup();
   const onComplete = vi.fn();
+  const onChanged = vi.fn();
   const view = (revision: number) => (
     <I18nProvider i18n={i18n}>
       <CompanyTrashAction
@@ -63,6 +64,7 @@ it('captures the confirmed revision and keeps a stale trash failure visible', as
         companyId={companyId}
         revision={revision}
         onComplete={onComplete}
+        onChanged={onChanged}
       />
     </I18nProvider>
   );
@@ -81,7 +83,38 @@ it('captures the confirmed revision and keeps a stale trash failure visible', as
     operationId: expect.any(String),
   });
   expect(screen.getByRole('alert')).toHaveTextContent('This company changed');
+  expect(onChanged).toHaveBeenCalledOnce();
   expect(onComplete).not.toHaveBeenCalled();
+});
+
+it('reports a stale trash rejection that arrives after the record left the page', async () => {
+  let reject: (reason: unknown) => void = () => {};
+  mutation.mockReset().mockImplementation(
+    () =>
+      new Promise((_, rejectMutation) => {
+        reject = rejectMutation;
+      }),
+  );
+  const user = userEvent.setup();
+  const onChanged = vi.fn();
+  const rendered = render(
+    <I18nProvider i18n={i18n}>
+      <CompanyTrashAction
+        workspaceId={workspaceId}
+        companyId={companyId}
+        revision={2}
+        onComplete={vi.fn()}
+        onChanged={onChanged}
+      />
+    </I18nProvider>,
+  );
+  await user.click(screen.getByRole('button', { name: 'Move to trash' }));
+  await user.click(
+    screen.getByRole('button', { name: 'Confirm move to trash' }),
+  );
+  rendered.unmount();
+  await act(async () => reject(new ConvexError('COMPANY_CHANGED')));
+  expect(onChanged).toHaveBeenCalledOnce();
 });
 
 it('keeps a trash submit pending through an outage and completes it once after reconnect', async () => {
@@ -101,6 +134,7 @@ it('keeps a trash submit pending through an outage and completes it once after r
         companyId={companyId}
         revision={2}
         onComplete={onComplete}
+        onChanged={vi.fn()}
       />
     </I18nProvider>,
   );
@@ -130,6 +164,7 @@ it('shows a plain failure when the server rejects a trash without retrying', asy
   mutation.mockReset().mockRejectedValue(new Error('Server Error'));
   const user = userEvent.setup();
   const onComplete = vi.fn();
+  const onChanged = vi.fn();
   render(
     <I18nProvider i18n={i18n}>
       <CompanyTrashAction
@@ -137,6 +172,7 @@ it('shows a plain failure when the server rejects a trash without retrying', asy
         companyId={companyId}
         revision={2}
         onComplete={onComplete}
+        onChanged={onChanged}
       />
     </I18nProvider>,
   );
@@ -150,6 +186,39 @@ it('shows a plain failure when the server rejects a trash without retrying', asy
   expect(screen.queryByRole('status')).toBeNull();
   expect(mutation).toHaveBeenCalledTimes(1);
   expect(onComplete).not.toHaveBeenCalled();
+  expect(onChanged).not.toHaveBeenCalled();
+});
+
+it('explains a stale restore after another restore removed the company from trash', async () => {
+  let reject: (reason: unknown) => void = () => {};
+  mutation.mockReset().mockImplementation(
+    () =>
+      new Promise((_, rejectMutation) => {
+        reject = rejectMutation;
+      }),
+  );
+  const user = userEvent.setup();
+  const view = () => (
+    <I18nProvider i18n={i18n}>
+      <CompanyTrash workspaceId={workspaceId} />
+    </I18nProvider>
+  );
+  const rendered = render(view());
+  try {
+    await user.click(screen.getByRole('button', { name: 'Restore' }));
+    trashResults = [];
+    rendered.rerender(view());
+    expect(screen.queryByRole('region', { name: 'Acme' })).toBeNull();
+    await act(async () => reject(new ConvexError('COMPANY_CHANGED')));
+    expect(screen.getByRole('alert')).toHaveTextContent(
+      'Acme changed before your restore was saved. Your request was not applied.',
+    );
+    expect(
+      screen.queryByText('Company restored. It is available in Companies.'),
+    ).toBeNull();
+  } finally {
+    trashResults = [trashedAcme];
+  }
 });
 
 it('explains an unavailable owner and allows manager recovery before restoring', async () => {
