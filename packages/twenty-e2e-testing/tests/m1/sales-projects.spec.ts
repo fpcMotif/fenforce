@@ -127,10 +127,6 @@ test('product sales preserves review gates, confirms a blanket order and reconci
     .getByRole('combobox', { name: 'Payment terms', exact: true })
     .selectOption('net30');
   await saveAction(quote, 'Prepare or revise quotation');
-  await saveAction(
-    await openAction(page, 'Request pricing review'),
-    'Request pricing review',
-  );
   const sent = await openAction(page, 'Record quote sent');
   await sent.getByLabel('Evidence reference').fill('DEMO-QUOTE-COMMUNICATION');
   await sent
@@ -147,6 +143,10 @@ test('product sales preserves review gates, confirms a blanket order and reconci
     .getByLabel('Expected close date', { exact: true })
     .fill('2099-12-15');
   await saveAction(closeDate, 'Set expected close date');
+  await saveAction(
+    await openAction(page, 'Request pricing review'),
+    'Request pricing review',
+  );
   await sent.locator('summary').click();
   await openAction(page, 'Record quote sent');
   await sent.getByLabel('Evidence reference').fill('DEMO-QUOTE-COMMUNICATION');
