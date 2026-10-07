@@ -2,6 +2,7 @@ import { ConvexError, v } from 'convex/values';
 import { internalMutation, type MutationCtx } from './_generated/server';
 import type { Id } from './_generated/dataModel';
 import { appendAccountAudit } from './accountAudit';
+import { findContactBySourceId, insertImportedContact } from './contactSource';
 
 const benchmarkEmployees = async (context: MutationCtx) => {
   const issuer = process.env.FENFORCE_OIDC_ISSUER;
@@ -125,14 +126,17 @@ const benchmarkMembers = async (
   return { managerMember, sellerMember };
 };
 
-const validateBatch = (start: number, count: number) => {
+const BENCHMARK_ACCOUNT_COUNT = 1000;
+const BENCHMARK_CONTACTS_PER_ACCOUNT = 3;
+
+const validateBatch = (start: number, count: number, total: number) => {
   if (
     !Number.isInteger(start) ||
     !Number.isInteger(count) ||
     start < 0 ||
     count < 1 ||
     count > 100 ||
-    start + count > 1000
+    start + count > total
   )
     throw new ConvexError('INVALID_BENCHMARK_BATCH');
 };
@@ -143,6 +147,21 @@ const benchmarkIndustry = (offset: number) => {
   if (offset % 3 === 0) return null;
   return offset % 3 === 1 ? ('services' as const) : ('manufacturing' as const);
 };
+
+const findBenchmarkAccount = (
+  context: MutationCtx,
+  workspaceId: Id<'workspaces'>,
+  name: string,
+) =>
+  context.db
+    .query('workspaceCompanies')
+    .withIndex('by_workspaceId_and_deletedAt_and_nameSortKey', (index) =>
+      index
+        .eq('workspaceId', workspaceId)
+        .eq('deletedAt', null)
+        .eq('nameSortKey', name.toLowerCase()),
+    )
+    .first();
 
 export const seedBatch = internalMutation({
   args: {
@@ -156,19 +175,15 @@ export const seedBatch = internalMutation({
       context,
       args.workspaceId,
     );
-    validateBatch(args.start, args.count);
+    validateBatch(args.start, args.count, BENCHMARK_ACCOUNT_COUNT);
     let inserted = 0;
     for (let offset = args.start; offset < args.start + args.count; offset++) {
       const name = benchmarkName(offset);
-      const existing = await context.db
-        .query('workspaceCompanies')
-        .withIndex('by_workspaceId_and_deletedAt_and_nameSortKey', (index) =>
-          index
-            .eq('workspaceId', args.workspaceId)
-            .eq('deletedAt', null)
-            .eq('nameSortKey', name.toLowerCase()),
-        )
-        .first();
+      const existing = await findBenchmarkAccount(
+        context,
+        args.workspaceId,
+        name,
+      );
       if (existing) continue;
       const owner = offset % 2 === 0 ? managerMember : sellerMember;
       const companyId = await context.db.insert('workspaceCompanies', {
@@ -190,6 +205,50 @@ export const seedBatch = internalMutation({
         deletedAt: null,
       });
       await appendAccountAudit(context, companyId, null);
+      inserted++;
+    }
+    return { inserted };
+  },
+});
+
+const benchmarkContactLastName = (offset: number) =>
+  `Contact ${String(offset).padStart(4, '0')}${offset === 2999 ? ' needle' : ''}`;
+const benchmarkContactEmail = (offset: number) =>
+  offset % 2 === 0 ? `contact-${offset}@example.test` : null;
+
+export const seedContactBatch = internalMutation({
+  args: {
+    workspaceId: v.id('workspaces'),
+    start: v.number(),
+    count: v.number(),
+  },
+  returns: v.object({ inserted: v.number() }),
+  handler: async (context, args) => {
+    const { managerMember } = await benchmarkMembers(context, args.workspaceId);
+    validateBatch(
+      args.start,
+      args.count,
+      BENCHMARK_ACCOUNT_COUNT * BENCHMARK_CONTACTS_PER_ACCOUNT,
+    );
+    let inserted = 0;
+    for (let offset = args.start; offset < args.start + args.count; offset++) {
+      const sourceId = `benchmark-contact-${offset}`;
+      if (await findContactBySourceId(context, args.workspaceId, sourceId))
+        continue;
+      const account = await findBenchmarkAccount(
+        context,
+        args.workspaceId,
+        benchmarkName(Math.floor(offset / BENCHMARK_CONTACTS_PER_ACCOUNT)),
+      );
+      if (account === null) throw new ConvexError('BENCHMARK_ACCOUNT_MISSING');
+      await insertImportedContact(context, {
+        workspaceId: args.workspaceId,
+        accountId: account._id,
+        actorId: managerMember._id,
+        sourceId,
+        lastName: benchmarkContactLastName(offset),
+        email: benchmarkContactEmail(offset),
+      });
       inserted++;
     }
     return { inserted };

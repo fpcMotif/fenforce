@@ -2,7 +2,7 @@ import { vi } from 'vite-plus/test';
 
 import { setupI18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getFunctionName, type FunctionReference } from 'convex/server';
 import { useSyncExternalStore } from 'react';
@@ -22,18 +22,37 @@ vi.mock('@convex-dev/auth/react', () => ({
 vi.mock('@convex-dev/react-query', () => ({
   convexQuery: (reference: FunctionReference<'query'>) =>
     getFunctionName(reference),
-  useConvexPaginatedQuery: () => ({
-    status: 'Exhausted',
-    results: [
-      {
-        workspaceId: 'workspace',
-        name: 'Workspace',
-        memberId: 'member',
-        displayName: 'Member',
-        role: 'seller',
-      },
-    ],
-  }),
+  useConvexPaginatedQuery: (
+    reference: FunctionReference<'query'>,
+    args: { accountId?: string } | 'skip',
+  ) =>
+    getFunctionName(reference) === 'workspaceContacts:list'
+      ? {
+          status: 'Exhausted',
+          results:
+            args !== 'skip' && args.accountId === 'company'
+              ? [
+                  {
+                    _id: 'contact',
+                    accountId: 'company',
+                    lastName: 'Synthetic',
+                    email: null,
+                  },
+                ]
+              : [],
+        }
+      : {
+          status: 'Exhausted',
+          results: [
+            {
+              workspaceId: 'workspace',
+              name: 'Workspace',
+              memberId: 'member',
+              displayName: 'Member',
+              role: 'seller',
+            },
+          ],
+        },
 }));
 vi.mock('@tanstack/react-query', () => ({
   useQueryClient: () => ({ clear: vi.fn() }),
@@ -103,9 +122,59 @@ vi.mock('twenty-ui/icon', () => ({
   IconBuildingSkyscraper: () => null,
   IconChevronLeft: () => null,
   IconPlus: () => null,
+  IconUser: () => null,
   IconUsers: () => null,
   IconTrash: () => null,
 }));
+
+it('lists the people linked to the company on its detail page', () => {
+  render(
+    <I18nProvider i18n={setupI18n({ locale: 'en', messages: { en: {} } })}>
+      <WorkspaceGate>
+        <CompanyDetailPage />
+      </WorkspaceGate>
+    </I18nProvider>,
+  );
+  const people = screen.getByRole('region', { name: 'People' });
+  expect(people).toHaveTextContent('Synthetic');
+  expect(screen.getByRole('button', { name: 'Add person' })).toBeVisible();
+});
+
+it('adds a person to the current company without offering another company', async () => {
+  mockUpdateCompany.mockReset();
+  mockUpdateCompany.mockResolvedValue('contact-new');
+  const user = userEvent.setup();
+  render(
+    <I18nProvider i18n={setupI18n({ locale: 'en', messages: { en: {} } })}>
+      <WorkspaceGate>
+        <CompanyDetailPage />
+      </WorkspaceGate>
+    </I18nProvider>,
+  );
+  await user.click(screen.getByRole('button', { name: 'Add person' }));
+  const form = screen.getByRole('region', { name: 'New person' });
+  expect(within(form).queryByRole('combobox')).toBeNull();
+  expect(within(form).getByRole('textbox', { name: 'Company' })).toHaveValue(
+    'Original',
+  );
+  expect(
+    within(form).getByRole('textbox', { name: 'Company' }),
+  ).toHaveAttribute('readonly');
+  await user.type(
+    within(form).getByRole('textbox', { name: 'Last name' }),
+    'Lee',
+  );
+  await user.click(within(form).getByRole('button', { name: 'Create person' }));
+  expect(mockUpdateCompany).toHaveBeenCalledTimes(1);
+  expect(mockUpdateCompany).toHaveBeenCalledWith({
+    workspaceId: 'workspace',
+    lastName: 'Lee',
+    email: '',
+    accountId: 'company',
+    operationId: expect.any(String),
+  });
+  expect(await screen.findByText('Lee was added.')).toBeVisible();
+});
 
 it('submits the revision at edit start even after a subscription updates', async () => {
   const user = userEvent.setup();

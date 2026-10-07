@@ -10,10 +10,8 @@ import {
   type AccountListArgs,
 } from './accountQueryContract';
 import schema from './schema';
-import {
-  accountQueryFingerprint,
-  paginateWithAccountCursor,
-} from './accountQueryCursor';
+import { accountQueryFingerprint } from './accountQueryCursor';
+import { paginateWithFingerprintCursor } from './fingerprintCursor';
 
 export const listAccountDocuments = async (
   context: QueryCtx,
@@ -27,13 +25,7 @@ export const listAccountDocuments = async (
     args.filters?.ownerId,
   );
   const fingerprint = accountQueryFingerprint(args, member, search, ownerId);
-  const firstAccount = await authorizedAccountStream(
-    context,
-    args.workspaceId,
-    ownerId,
-  ).first();
-  if (firstAccount !== null && firstAccount.nameSortKey === undefined)
-    throw new ConvexError('ACCOUNT_QUERY_INDEX_NOT_READY');
+  await assertAccountQueryIndexReady(context, args.workspaceId, ownerId);
   validateAccountPageSize(args.paginationOpts.numItems);
   const accessible = authorizedAccountStream(
     context,
@@ -41,7 +33,7 @@ export const listAccountDocuments = async (
     ownerId,
   );
   let scannedCount = 0;
-  const companiesPage = await paginateWithAccountCursor(
+  const companiesPage = await paginateWithFingerprintCursor(
     accessible
       .order(args.sortDirection ?? 'asc')
       .filterWith(async (company) => {
@@ -54,11 +46,12 @@ export const listAccountDocuments = async (
       }),
     args.paginationOpts,
     fingerprint,
+    'INVALID_ACCOUNT_CURSOR',
   );
   return { member, companiesPage: { ...companiesPage, scannedCount } };
 };
 
-const authorizedAccountStream = (
+export const authorizedAccountStream = (
   context: QueryCtx,
   workspaceId: Id<'workspaces'>,
   ownerId: Id<'workspaceMembers'> | undefined,
@@ -77,6 +70,20 @@ const authorizedAccountStream = (
             .eq('accountOwnerId', ownerId)
             .eq('deletedAt', null),
       );
+};
+
+export const assertAccountQueryIndexReady = async (
+  context: QueryCtx,
+  workspaceId: Id<'workspaces'>,
+  ownerId: Id<'workspaceMembers'> | undefined,
+) => {
+  const firstAccount = await authorizedAccountStream(
+    context,
+    workspaceId,
+    ownerId,
+  ).first();
+  if (firstAccount !== null && firstAccount.nameSortKey === undefined)
+    throw new ConvexError('ACCOUNT_QUERY_INDEX_NOT_READY');
 };
 
 export const resolveAccountOwnerFilter = async (

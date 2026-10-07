@@ -7,7 +7,7 @@ import type { Doc, Id } from './_generated/dataModel';
 import { requireSalesMember } from './accountPolicy';
 import { resolveAccountOwnerFilter } from './accountQueries';
 import { validateAccountPageSize } from './accountQueryContract';
-import { paginateWithAccountCursor } from './accountQueryCursor';
+import { paginateWithFingerprintCursor } from './fingerprintCursor';
 import {
   accountViewConfigurationValidator,
   accountViewScopeValidator,
@@ -30,7 +30,7 @@ export const list = query({
       member.role,
     ]);
     const views = stream(context.db, schema).query('accountViews');
-    const viewsPage = await paginateWithAccountCursor(
+    const viewsPage = await paginateWithFingerprintCursor(
       mergedStream(
         [
           views.withIndex('by_workspaceId_and_scope', (index) =>
@@ -49,6 +49,7 @@ export const list = query({
       ),
       args.paginationOpts,
       fingerprint,
+      'INVALID_ACCOUNT_CURSOR',
     );
     return {
       ...viewsPage,

@@ -11,6 +11,10 @@ import {
   accountViewScopeValidator,
 } from './accountViewContract';
 import { accountOperationValidator } from './accountOperationContract';
+import {
+  contactOperationValidator,
+  contactValuesValidator,
+} from './contactContract';
 
 export default defineSchema({
   ...authTables,
@@ -143,6 +147,49 @@ export default defineSchema({
     revision: v.number(),
     changed: v.boolean(),
     requiresManager: v.boolean(),
+    acceptedAt: v.number(),
+  }).index('by_workspaceId_and_actorId_and_operationId', [
+    'workspaceId',
+    'actorId',
+    'operationId',
+  ]),
+  workspaceContacts: defineTable({
+    workspaceId: v.id('workspaces'),
+    accountId: v.id('workspaceCompanies'),
+    revision: v.number(),
+    lastName: v.string(),
+    lastNameSortKey: v.string(),
+    email: v.union(v.string(), v.null()),
+    sourceId: v.union(v.string(), v.null()),
+    createdBy: v.id('workspaceMembers'),
+    updatedBy: v.id('workspaceMembers'),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+    deletedAt: v.union(v.number(), v.null()),
+  })
+    .index('by_accountId_and_deletedAt_and_lastNameSortKey', [
+      'accountId',
+      'deletedAt',
+      'lastNameSortKey',
+    ])
+    .index('by_workspaceId_and_sourceId', ['workspaceId', 'sourceId']),
+  contactAudit: defineTable({
+    workspaceId: v.id('workspaces'),
+    contactId: v.id('workspaceContacts'),
+    actorId: v.id('workspaceMembers'),
+    timestamp: v.number(),
+    before: v.union(contactValuesValidator, v.null()),
+    after: contactValuesValidator,
+  }).index('by_contactId', ['contactId']),
+  contactOperationReceipts: defineTable({
+    workspaceId: v.id('workspaces'),
+    actorId: v.id('workspaceMembers'),
+    operationId: v.string(),
+    operation: contactOperationValidator,
+    payload: v.string(),
+    contactId: v.id('workspaceContacts'),
+    revision: v.number(),
+    changed: v.boolean(),
     acceptedAt: v.number(),
   }).index('by_workspaceId_and_actorId_and_operationId', [
     'workspaceId',

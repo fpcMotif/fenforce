@@ -35,6 +35,7 @@ import {
 } from './accountQueryContract';
 import { listAccountDocuments } from './accountQueries';
 import { readAccountReceipt, saveAccountReceipt } from './accountOperations';
+import { memberDisplayName } from './memberDisplayName';
 
 export const companyValidator = v.object({
   _id: v.id('workspaceCompanies'),
@@ -104,20 +105,6 @@ const accountChanges = (
         ? company.accountOwnerId
         : args.accountOwnerId,
   };
-};
-
-const memberDisplayName = async (
-  context: QueryCtx,
-  workspaceId: Id<'workspaces'>,
-  memberId: Id<'workspaceMembers'>,
-) => {
-  const member = await context.db.get(memberId);
-
-  if (member === null || member.workspaceId !== workspaceId) {
-    return memberId;
-  }
-
-  return member.displayName;
 };
 
 export const projectCompany = async (
