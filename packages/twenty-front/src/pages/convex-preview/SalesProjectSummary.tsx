@@ -1,15 +1,26 @@
 import { useLingui } from '@lingui/react/macro';
 import { Fragment } from 'react';
 
-import type { SalesProject } from '../../../../../deployments/convex/convex/salesContract';
+import type {
+  SalesGate,
+  SalesProject,
+} from '../../../../../deployments/convex/convex/salesContract';
 import { useSalesLabels } from './SalesLabels';
 import { formatSalesMinor } from './SalesPipelineTotals';
+
+const ORDER_REVIEW_GATES: SalesGate[] = [
+  'support',
+  'management',
+  'osbo',
+  'finance',
+  'supply',
+];
 
 type SalesProjectSummaryProps = { project: SalesProject };
 
 export const SalesProjectSummary = ({ project }: SalesProjectSummaryProps) => {
   const { t, i18n } = useLingui();
-  const { label } = useSalesLabels();
+  const labels = useSalesLabels();
   const quote = project.quote;
   const money = (minor: number) =>
     formatSalesMinor(minor, project.currency, i18n.locale);
@@ -22,7 +33,7 @@ export const SalesProjectSummary = ({ project }: SalesProjectSummaryProps) => {
         <h2>{t`Sampling and quality`}</h2>
         {project.sample ? (
           <>
-            <p>{label(project.sample.status)}</p>
+            <p>{labels.sampleStatus(project.sample.status)}</p>
             <p>{project.sample.notes}</p>
             <dl className="fenforce-sales-facts">
               <dt>{t`Batch`}</dt>
@@ -63,7 +74,7 @@ export const SalesProjectSummary = ({ project }: SalesProjectSummaryProps) => {
                 {quote.incoterm} {quote.namedPlace}
               </dd>
               <dt>{t`Payment terms`}</dt>
-              <dd>{label(quote.paymentTerms)}</dd>
+              <dd>{labels.paymentTerms(quote.paymentTerms)}</dd>
               <dt>{t`Packaging`}</dt>
               <dd>{quote.packaging}</dd>
               <dt>{t`Valid until`}</dt>
@@ -79,7 +90,7 @@ export const SalesProjectSummary = ({ project }: SalesProjectSummaryProps) => {
                   <dt>{t`Customer PO`}</dt>
                   <dd>{project.purchaseOrder.reference}</dd>
                   <dt>{t`Order type`}</dt>
-                  <dd>{label(project.purchaseOrder.orderType)}</dd>
+                  <dd>{labels.orderType(project.purchaseOrder.orderType)}</dd>
                   <dt>{t`PO document`}</dt>
                   <dd>{project.purchaseOrder.documentReference}</dd>
                   <dt>{t`Quality requirements`}</dt>
@@ -95,11 +106,11 @@ export const SalesProjectSummary = ({ project }: SalesProjectSummaryProps) => {
       {project.pricingReview && (
         <section className="fenforce-sales-card" aria-label={t`Pricing review`}>
           <h2>{t`Pricing review`}</h2>
-          <p>{label(project.pricingReview.status)}</p>
+          <p>{labels.reviewStatus(project.pricingReview.status)}</p>
           {project.pricingReview.decisions.map((decision) => (
             <p key={decision.gate}>
-              {label(decision.gate)}: {label(decision.decision)} ·{' '}
-              {decision.evidenceReference}
+              {labels.gate(decision.gate)}: {labels.decision(decision.decision)}{' '}
+              · {decision.evidenceReference}
             </p>
           ))}
         </section>
@@ -112,28 +123,26 @@ export const SalesProjectSummary = ({ project }: SalesProjectSummaryProps) => {
           <h2>{t`Review responsibilities`}</h2>
           <p>{t`Demo responsibilities represented by manager accounts.`}</p>
           <dl className="fenforce-sales-facts">
-            {['support', 'management', 'osbo', 'finance', 'supply'].map(
-              (gate) => {
-                const decision = project.orderReview?.decisions.find(
-                  (item) => item.gate === gate,
-                );
-                return (
-                  <Fragment key={gate}>
-                    <dt>{label(gate)}</dt>
-                    <dd>
-                      {decision ? (
-                        <>
-                          {label(decision.decision)} ·{' '}
-                          {decision.evidenceReference}
-                        </>
-                      ) : (
-                        t`Pending`
-                      )}
-                    </dd>
-                  </Fragment>
-                );
-              },
-            )}
+            {ORDER_REVIEW_GATES.map((gate) => {
+              const decision = project.orderReview?.decisions.find(
+                (item) => item.gate === gate,
+              );
+              return (
+                <Fragment key={gate}>
+                  <dt>{labels.gate(gate)}</dt>
+                  <dd>
+                    {decision ? (
+                      <>
+                        {labels.decision(decision.decision)} ·{' '}
+                        {decision.evidenceReference}
+                      </>
+                    ) : (
+                      t`Pending`
+                    )}
+                  </dd>
+                </Fragment>
+              );
+            })}
           </dl>
         </section>
       )}

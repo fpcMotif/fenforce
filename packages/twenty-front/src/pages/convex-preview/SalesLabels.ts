@@ -1,53 +1,86 @@
 import { useLingui } from '@lingui/react/macro';
 
+import type {
+  SalesDecision,
+  SalesEvent,
+  SalesGate,
+  SalesProject,
+  SalesQuote,
+  SalesRelease,
+  SalesReviewState,
+} from '../../../../../deployments/convex/convex/salesContract';
+
+type SalesSampleStatus = NonNullable<SalesProject['sample']>['status'];
+type SalesOrderType = NonNullable<SalesProject['purchaseOrder']>['orderType'];
+
 export const useSalesLabels = () => {
   const { t } = useLingui();
-  const labels = new Map([
-    ['qualified', t`Qualified project`],
-    ['quoted', t`Quote sent`],
-    ['po-received', t`PO received`],
-    ['review', t`Order under review`],
-    ['confirmed', t`Won · confirmation simulated`],
-    ['lost', t`Closed Lost`],
-    ['pending', t`Pending`],
-    ['approved', t`Approved`],
-    ['rejected', t`Rejected`],
-    ['requested', t`Sample requested`],
-    ['shipped', t`Sample shipped`],
-    ['accepted', t`Customer accepted`],
-    ['not-required', t`Sampling not required`],
-    ['pricing', t`Pricing exception`],
-    ['support', t`Co-worker`],
-    ['management', t`Branch manager`],
-    ['osbo', t`OSBO`],
-    ['finance', t`Finance`],
-    ['supply', t`Supply`],
-    ['prepayment', t`Prepayment`],
-    ['net30', t`Net 30`],
-    ['net60', t`Net 60`],
-    ['standard', t`Standard order`],
-    ['blanket', t`Blanket order`],
-    ['ready', t`Ready for simulated handoff`],
-    ['failed', t`Demo: handoff failed`],
-    ['uncertain', t`Demo: reconciliation needed`],
-    ['create', t`Project created`],
-    ['setNextAction', t`Next action updated`],
-    ['recordSample', t`Sample progress recorded`],
-    ['reviseQuote', t`Quotation version created`],
-    ['submitPricingReview', t`Pricing review requested`],
-    ['markQuoteSent', t`Quote communication recorded`],
-    ['capturePurchaseOrder', t`Customer PO captured`],
-    ['submitOrderReview', t`Order review requested`],
-    ['simulateReviewDecision', t`Review decision simulated`],
-    ['simulateCustomerConfirmation', t`Customer confirmation simulated`],
-    ['createBlanketRelease', t`Blanket release created`],
-    ['simulateSapHandoff', t`SAP handoff simulated`],
-    ['logActivity', t`Customer activity recorded`],
-    ['closeLost', t`Project lost`],
-    ['setCloseDate', t`Expected close date updated`],
-    ['setPrimaryContact', t`Primary contact updated`],
-    ['applyApprovalOutcome', t`Approval decision applied`],
-  ]);
+  const stages: Record<SalesProject['stage'], string> = {
+    qualified: t`Qualified project`,
+    quoted: t`Quote sent`,
+    'po-received': t`PO received`,
+    review: t`Order under review`,
+    confirmed: t`Won · confirmation simulated`,
+    lost: t`Closed Lost`,
+  };
+  const reviewStatuses: Record<SalesReviewState['status'], string> = {
+    pending: t`Pending`,
+    approved: t`Approved`,
+    rejected: t`Rejected`,
+  };
+  const decisions: Record<SalesDecision['decision'], string> = {
+    approved: t`Approved`,
+    rejected: t`Rejected`,
+  };
+  const sampleStatuses: Record<SalesSampleStatus, string> = {
+    requested: t`Sample requested`,
+    shipped: t`Sample shipped`,
+    accepted: t`Customer accepted`,
+    rejected: t`Customer rejected`,
+    'not-required': t`Sampling not required`,
+  };
+  const gates: Record<SalesGate, string> = {
+    pricing: t`Pricing exception`,
+    support: t`Co-worker`,
+    management: t`Branch manager`,
+    osbo: t`OSBO`,
+    finance: t`Finance`,
+    supply: t`Supply`,
+  };
+  const paymentTerms: Record<SalesQuote['paymentTerms'], string> = {
+    prepayment: t`Prepayment`,
+    net30: t`Net 30`,
+    net60: t`Net 60`,
+  };
+  const orderTypes: Record<SalesOrderType, string> = {
+    standard: t`Standard order`,
+    blanket: t`Blanket order`,
+  };
+  const erpStates: Record<SalesRelease['erpState'], string> = {
+    ready: t`Ready for simulated handoff`,
+    accepted: t`Demo: accepted`,
+    failed: t`Demo: handoff failed`,
+    uncertain: t`Demo: reconciliation needed`,
+  };
+  const events: Record<SalesEvent['command']['type'], string> = {
+    create: t`Project created`,
+    setNextAction: t`Next action updated`,
+    setCloseDate: t`Expected close date updated`,
+    setPrimaryContact: t`Primary contact updated`,
+    recordSample: t`Sample progress recorded`,
+    reviseQuote: t`Quotation version created`,
+    submitPricingReview: t`Pricing review requested`,
+    markQuoteSent: t`Quote communication recorded`,
+    capturePurchaseOrder: t`Customer PO captured`,
+    submitOrderReview: t`Order review requested`,
+    simulateReviewDecision: t`Review decision simulated`,
+    simulateCustomerConfirmation: t`Customer confirmation simulated`,
+    createBlanketRelease: t`Blanket release created`,
+    simulateSapHandoff: t`SAP handoff simulated`,
+    logActivity: t`Customer activity recorded`,
+    closeLost: t`Project lost`,
+    applyApprovalOutcome: t`Approval decision applied`,
+  };
   const problems = new Map([
     ['SALES_QUOTE_REQUIRED', t`Prepare a quotation.`],
     [
@@ -166,6 +199,14 @@ export const useSalesLabels = () => {
     ],
     ['CONTACT_NOT_FOUND', t`Choose an active contact of this company.`],
     [
+      'SALES_SIMULATED_APPROVAL',
+      t`A simulated decision cannot approve this change. Apply a verified approval.`,
+    ],
+    [
+      'SALES_SIMULATION_DISABLED',
+      t`Simulated review decisions are turned off for this workspace.`,
+    ],
+    [
       'SALES_INVALID_QUANTITY',
       t`Enter a positive quantity with up to three decimal places.`,
     ],
@@ -188,7 +229,15 @@ export const useSalesLabels = () => {
     ],
   ]);
   return {
-    label: (value: string) => labels.get(value) ?? value,
+    stage: (value: SalesProject['stage']) => stages[value],
+    reviewStatus: (value: SalesReviewState['status']) => reviewStatuses[value],
+    decision: (value: SalesDecision['decision']) => decisions[value],
+    sampleStatus: (value: SalesSampleStatus) => sampleStatuses[value],
+    gate: (value: SalesGate) => gates[value],
+    paymentTerms: (value: SalesQuote['paymentTerms']) => paymentTerms[value],
+    orderType: (value: SalesOrderType) => orderTypes[value],
+    erpState: (value: SalesRelease['erpState']) => erpStates[value],
+    event: (value: SalesEvent['command']['type']) => events[value],
     problem: (code: string) =>
       problems.get(code) ??
       t`Unable to save. Check the current project, your access and the entered details.`,

@@ -288,3 +288,4 @@ export type SalesReviewState = Infer<typeof salesReviewStateValidator>;
 export type SalesGate = Infer<typeof salesGateValidator>;
 export type SalesDecision = Infer<typeof salesDecisionValidator>;
 export type SalesRelease = Infer<typeof salesReleaseValidator>;
+export type SalesEvent = Infer<typeof salesEventValidator>;

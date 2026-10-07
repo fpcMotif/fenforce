@@ -36,7 +36,7 @@ export const SalesPipelineTotals = ({
   complete,
 }: SalesPipelineTotalsProps) => {
   const { t, i18n } = useLingui();
-  const { label: stageLabel } = useSalesLabels();
+  const { stage: stageLabel } = useSalesLabels();
   return (
     <section
       className="fenforce-sales-card"

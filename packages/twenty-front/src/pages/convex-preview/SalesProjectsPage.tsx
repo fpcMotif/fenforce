@@ -104,7 +104,7 @@ const SalesProjectsWorkspace = () => {
 
 const SalesProjectList = ({ company }: { company: SelectedCompany }) => {
   const { t } = useLingui();
-  const { label } = useSalesLabels();
+  const { stage: stageLabel } = useSalesLabels();
   const { workspaceId } = useWorkspace();
   const projects = useConvexPaginatedQuery(
     api.salesProjects.list,
@@ -142,7 +142,7 @@ const SalesProjectList = ({ company }: { company: SelectedCompany }) => {
                 <td>
                   {project.nextAction} · {project.nextActionDate}
                 </td>
-                <td>{label(project.stage)}</td>
+                <td>{stageLabel(project.stage)}</td>
               </tr>
             ))}
           </tbody>

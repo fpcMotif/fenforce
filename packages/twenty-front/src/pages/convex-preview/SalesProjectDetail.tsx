@@ -44,7 +44,7 @@ export const SalesFacts = ({
 const SalesProjectDetail = () => {
   const { t } = useLingui();
   const { workspaceId, role } = useWorkspace();
-  const { label, problem } = useSalesLabels();
+  const labels = useSalesLabels();
   const { projectId } = useParams({ from: '/object/sales-project/$projectId' });
   const query = useQuery(
     convexQuery(api.salesProjects.get, {
@@ -87,7 +87,9 @@ const SalesProjectDetail = () => {
             {project.materialCode} · {project.productName}
           </p>
         </div>
-        <span className="fenforce-sales-status">{label(project.stage)}</span>
+        <span className="fenforce-sales-status">
+          {labels.stage(project.stage)}
+        </span>
       </header>
       <SalesDemoNotice />
       <div className="fenforce-sales-grid">
@@ -149,7 +151,7 @@ const SalesProjectDetail = () => {
             {blockers.length > 0 ? (
               <ul>
                 {blockers.map((blocker) => (
-                  <li key={blocker}>{problem(blocker)}</li>
+                  <li key={blocker}>{labels.problem(blocker)}</li>
                 ))}
               </ul>
             ) : (
@@ -171,11 +173,7 @@ const SalesProjectDetail = () => {
                   {release.quantityMilli / 1000} {project.unit} ·{' '}
                   {release.deliveryDate}
                 </p>
-                <p>
-                  {release.erpState === 'accepted'
-                    ? t`Demo: accepted`
-                    : label(release.erpState)}
-                </p>
+                <p>{labels.erpState(release.erpState)}</p>
               </div>
             ))}
           </section>
@@ -195,7 +193,7 @@ const SalesProjectDetail = () => {
               });
             } catch (failure) {
               if (failure instanceof ConvexError && isString(failure.data))
-                throw new Error(problem(failure.data));
+                throw new Error(labels.problem(failure.data));
               throw failure;
             }
           }}
@@ -242,7 +240,7 @@ const SalesProjectHistory = ({
 }) => {
   const { t } = useLingui();
   const { workspaceId } = useWorkspace();
-  const { label } = useSalesLabels();
+  const labels = useSalesLabels();
   const history = useConvexPaginatedQuery(
     api.salesProjects.history,
     { workspaceId, projectId },
@@ -254,18 +252,19 @@ const SalesProjectHistory = ({
       <ol className="fenforce-sales-history">
         {history.results.map((event) => (
           <li key={event._id}>
-            <strong>{label(event.command.type)}</strong>
+            <strong>{labels.event(event.command.type)}</strong>
             <p>{event.actorName}</p>
             {isDefined(event.fromStage) &&
               event.fromStage !== event.toStage && (
-                <p>{t`${label(event.fromStage)} to ${label(event.toStage)}`}</p>
+                <p>{t`${labels.stage(event.fromStage)} to ${labels.stage(event.toStage)}`}</p>
               )}
             {event.command.type === 'logActivity' && (
               <p>{event.command.text}</p>
             )}
             {event.command.type === 'recordSample' && (
               <p>
-                {label(event.command.status)} · {event.command.notes}
+                {labels.sampleStatus(event.command.status)} ·{' '}
+                {event.command.notes}
               </p>
             )}
             {'evidenceReference' in event.command && (

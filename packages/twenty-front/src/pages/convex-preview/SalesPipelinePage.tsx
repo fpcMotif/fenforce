@@ -25,7 +25,7 @@ const SalesPipeline = () => {
   const { t } = useLingui();
   const { workspaceId, workspaceName } = useWorkspace();
   const [stage, setStage] = useState<OpenStage>();
-  const { label: stageLabel } = useSalesLabels();
+  const { stage: stageLabel } = useSalesLabels();
   const totals = useQuery(
     convexQuery(api.salesPipeline.totals, { workspaceId }),
   );
@@ -82,7 +82,7 @@ const SalesPipeline = () => {
 const SalesPipelineList = ({ stage }: { stage: OpenStage | undefined }) => {
   const { t, i18n } = useLingui();
   const { workspaceId } = useWorkspace();
-  const { label: stageLabel } = useSalesLabels();
+  const { stage: stageLabel } = useSalesLabels();
   const projects = useConvexPaginatedQuery(
     api.salesPipeline.list,
     { workspaceId, stage },
