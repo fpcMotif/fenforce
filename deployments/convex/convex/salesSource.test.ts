@@ -71,3 +71,36 @@ it('imports an opportunity by stable source ID with exact quantity, currency and
     ),
   ).rejects.toThrow('SALES_INVALID_DATE');
 });
+
+it('rejects imports onto trashed accounts or by actors who are not active workspace members', async () => {
+  const fixture = await salesFixture();
+  const { test, workspaceId, accountA, seller, outsider } = fixture;
+  const imported = {
+    ...SALES_PRODUCT,
+    workspaceId,
+    accountId: accountA,
+    actorId: seller.memberId,
+    sourceId: 'OPP-MOCK-010',
+  };
+  await expect(
+    test.run((context) =>
+      insertImportedSalesProject(context, {
+        ...imported,
+        actorId: outsider.memberId,
+      }),
+    ),
+  ).rejects.toThrow('INVALID_IMPORT_ACTOR');
+  await test.run((context) =>
+    context.db.patch(seller.memberId, { active: false }),
+  );
+  await expect(
+    test.run((context) => insertImportedSalesProject(context, imported)),
+  ).rejects.toThrow('INVALID_IMPORT_ACTOR');
+  await test.run(async (context) => {
+    await context.db.patch(seller.memberId, { active: true });
+    await context.db.patch(accountA, { deletedAt: Date.now() });
+  });
+  await expect(
+    test.run((context) => insertImportedSalesProject(context, imported)),
+  ).rejects.toThrow('COMPANY_NOT_FOUND');
+});

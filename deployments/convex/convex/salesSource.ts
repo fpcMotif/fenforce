@@ -123,8 +123,19 @@ export const insertImportedSalesProject = async (
     imported.sourceId,
   );
   if (existing !== null) throw new ConvexError('DUPLICATE_SALES_SOURCE_ID');
+  const actor = await context.db.get(imported.actorId);
+  if (
+    actor === null ||
+    actor.workspaceId !== imported.workspaceId ||
+    actor.active === false
+  )
+    throw new ConvexError('INVALID_IMPORT_ACTOR');
   const account = await context.db.get(imported.accountId);
-  if (account === null || account.workspaceId !== imported.workspaceId)
+  if (
+    account === null ||
+    account.workspaceId !== imported.workspaceId ||
+    account.deletedAt !== null
+  )
     throw new ConvexError('COMPANY_NOT_FOUND');
   const { actorId, sourceId, ...input } = imported;
   return salesInsertProject(context, account, actorId, input, sourceId);
