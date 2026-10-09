@@ -16,8 +16,10 @@ type CompanyHistoryRecordsProps = CompanyHistoryProps;
 
 const HistoryValues = ({
   values,
+  ownerName,
 }: {
   values: Doc<'accountAudit'>['after'] | null;
+  ownerName: string | null;
 }) => {
   const { t } = useLingui();
   if (values === null) return <p>{t`Not created yet`}</p>;
@@ -33,8 +35,8 @@ const HistoryValues = ({
             ? t`Manufacturing`
             : '—'}
       </dd>
-      <dt>{t`Owner ID`}</dt>
-      <dd>{values.accountOwnerId ?? '—'}</dd>
+      <dt>{t`Account Owner`}</dt>
+      <dd>{ownerName ?? '—'}</dd>
       <dt>{t`Domain Name`}</dt>
       <dd>
         {values.domainName.primaryLinkLabel || '—'}{' '}
@@ -75,16 +77,16 @@ const CompanyHistoryRecords = ({
             {t`Revision`} {entry.after.revision}
           </h3>
           <p>
-            {new Date(entry.timestamp).toLocaleString()} · {t`Actor ID`}:{' '}
-            {entry.actorId}
+            {new Intl.DateTimeFormat('en-AU', { timeZone: 'Australia/Perth', dateStyle: 'medium', timeStyle: 'short' }).format(entry.timestamp)} (Australia/Perth) · {t`Changed by`}:{' '}
+            {entry.actorName}
           </p>
           <details>
             <summary>{t`Before`}</summary>
-            <HistoryValues values={entry.before} />
+            <HistoryValues values={entry.before} ownerName={entry.beforeOwnerName} />
           </details>
           <details>
             <summary>{t`After`}</summary>
-            <HistoryValues values={entry.after} />
+            <HistoryValues values={entry.after} ownerName={entry.afterOwnerName} />
           </details>
         </article>
       ))}

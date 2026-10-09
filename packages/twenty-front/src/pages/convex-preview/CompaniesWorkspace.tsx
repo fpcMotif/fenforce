@@ -274,6 +274,7 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
 
 const formatDate = (timestamp: number) =>
   new Intl.DateTimeFormat('en', {
+    timeZone: 'Australia/Perth',
     month: 'short',
     day: 'numeric',
     year: 'numeric',
