@@ -1,9 +1,27 @@
 import { authTables } from '@convex-dev/auth/server';
+import { vWorkflowId } from '@convex-dev/workflow';
 import { defineSchema, defineTable } from 'convex/server';
 import { v } from 'convex/values';
 
+import { decisionValidator, lifecycleValidator } from './approvalContract';
+
 export default defineSchema({
   ...authTables,
+  syntheticApprovalRuns: defineTable({
+    instanceId: v.string(),
+    workflowId: v.optional(vWorkflowId),
+    decision: decisionValidator,
+    decisionPayload: v.union(v.boolean(), v.string(), v.null()),
+    lifecycle: lifecycleValidator,
+    error: v.union(v.string(), v.null()),
+    expiresAt: v.union(v.number(), v.null()),
+    retentionExpiresAt: v.optional(v.number()),
+    preparationAttempts: v.number(),
+    deliveryAttempts: v.number(),
+    deliveryCount: v.number(),
+    operationId: v.union(v.string(), v.null()),
+    receiptId: v.union(v.string(), v.null()),
+  }).index('by_instanceId', ['instanceId']),
   companies: defineTable({
     name: v.string(),
     domain: v.string(),

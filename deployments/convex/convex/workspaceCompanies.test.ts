@@ -305,7 +305,7 @@ describe('workspace companies authorization', () => {
       revision: 2,
       name: 'Alice edit',
       domainName: {
-        primaryLinkUrl: 'http://example.com:8080',
+        primaryLinkUrl: 'https://example.com',
         primaryLinkLabel: 'example.com',
       },
     });

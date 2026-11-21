@@ -20,17 +20,17 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "^24.7.2",
-    "@types/react": "^19.0.0",
-    "@typescript/native-preview": "^7.0.0-dev.20260116.1",
-    "oxlint": "^0.16.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@typescript/native-preview": "^7.0.0-dev.20260707.2",
+    "oxlint": "^1.87.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "twenty-client-sdk": "TO-BE-GENERATED",
     "twenty-sdk": "TO-BE-GENERATED",
     "twenty-ui": "TO-BE-GENERATED",
-    "typescript": "^5.9.3",
-    "vite-tsconfig-paths": "^4.2.1",
-    "vitest": "^4.0.0"
+    "typescript": "next",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^5.0.3"
   }
 }

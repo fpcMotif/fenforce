@@ -29,23 +29,23 @@
     "test:unit": "vitest run --config vitest.unit.config.ts"
   },
   "dependencies": {
-    "@slack/web-api": "^7.18.0"
+    "@slack/web-api": "^8.2.0"
   },
   "devDependencies": {
     "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@types/node": "^24.7.2",
-    "@types/react": "^18.2.0",
-    "@typescript/native-preview": "^7.0.0-dev.20260116.1",
-    "msw": "^2.12.14",
-    "oxlint": "^0.16.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@emotion/styled": "^11.14.1",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@typescript/native-preview": "^7.0.0-dev.20260707.2",
+    "msw": "^3.0.2",
+    "oxlint": "^1.87.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "twenty-client-sdk": "^2.41.0",
     "twenty-sdk": "^2.41.0",
     "twenty-ui": "^1.0.0-alpha.1",
-    "typescript": "^5.9.3",
-    "vite-tsconfig-paths": "^4.2.1",
-    "vitest": "^4.0.0"
+    "typescript": "next",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^5.0.3"
   }
 }
