@@ -13,7 +13,7 @@ import {
 import { ErrorBoundary } from 'react-error-boundary';
 import { ThemeProvider } from 'twenty-ui/theme';
 
-import { ClearQueryCacheOnUnmountEffect } from './ClearQueryCacheOnUnmountEffect';
+import { SessionGate } from './SessionGate';
 import { PreviewRouter } from './PreviewRouter';
 import { PreviewSignIn } from './PreviewSignIn';
 import { PreviewError } from './PreviewError';
@@ -63,8 +63,9 @@ export const ConvexCompaniesPreview = () => (
             <ErrorBoundary
               fallbackRender={({ error }) => <PreviewError error={error} />}
             >
-              <ClearQueryCacheOnUnmountEffect />
-              <PreviewRouter />
+              <SessionGate>
+                <PreviewRouter />
+              </SessionGate>
             </ErrorBoundary>
           </Authenticated>
         </QueryClientProvider>

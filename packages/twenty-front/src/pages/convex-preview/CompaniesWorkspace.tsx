@@ -1,14 +1,21 @@
 import { useAuthActions } from '@convex-dev/auth/react';
 import { convexQuery, useConvexPaginatedQuery } from '@convex-dev/react-query';
 import { useLingui } from '@lingui/react/macro';
-import { useQuery } from '@tanstack/react-query';
-import { Link, useNavigate, useParams } from '@tanstack/react-router';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useParams,
+  useRouter,
+  useSearch,
+} from '@tanstack/react-router';
 import { useConvexConnectionState, useMutation } from 'convex/react';
 import {
   createContext,
   useContext,
+  useEffect,
   useState,
-  type FormEvent,
   type ReactNode,
 } from 'react';
 import { MainButton } from 'twenty-ui/components';
@@ -16,18 +23,42 @@ import {
   IconBuildingSkyscraper,
   IconChevronLeft,
   IconPlus,
+  IconTrash,
+  IconUsers,
 } from 'twenty-ui/icon';
 
 import { api } from '../../../../../deployments/convex/convex/_generated/api';
-import type { Id } from '../../../../../deployments/convex/convex/_generated/dataModel';
+import type {
+  Doc,
+  Id,
+} from '../../../../../deployments/convex/convex/_generated/dataModel';
 import { CompanyForm, type CompanyFormValues } from './CompanyForm';
+import { MemberAdministration } from './MemberAdministration';
+import { CompanyTrash, CompanyTrashAction } from './CompanyLifecycle';
+import { CompanyHistory } from './CompanyHistory';
+import { isSalesRole } from '../../../../../deployments/convex/convex/membershipRole';
 
 type WorkspaceContextValue = {
   workspaceId: Id<'workspaces'>;
   workspaceName: string;
+  role: Doc<'workspaceMembers'>['role'];
 };
 
 const WorkspaceContext = createContext<WorkspaceContextValue | null>(null);
+
+const WorkspaceRedirectEffect = ({
+  workspaceId,
+  to,
+}: {
+  workspaceId: Id<'workspaces'>;
+  to: '.' | '/settings/members';
+}) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    void navigate({ to, search: { workspace: workspaceId }, replace: true });
+  }, [navigate, to, workspaceId]);
+  return null;
+};
 
 const useWorkspace = () => {
   const workspace = useContext(WorkspaceContext);
@@ -39,79 +70,52 @@ const useWorkspace = () => {
   return workspace;
 };
 
-const WorkspaceCreation = ({
-  onCreated,
-}: {
-  onCreated: (workspaceId: Id<'workspaces'>, name: string) => void;
-}) => {
-  const { t } = useLingui();
-  const createWorkspace = useMutation(api.workspaces.create);
-  const [name, setName] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [hasError, setHasError] = useState(false);
-
-  const submit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
-    setHasError(false);
-
-    try {
-      const workspaceId = await createWorkspace({ name: name.trim() });
-      onCreated(workspaceId, name.trim());
-    } catch {
-      setHasError(true);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  return (
-    <div className="fenforce-gate">
-      <section className="fenforce-gate-card">
-        <div className="fenforce-gate-mark">
-          <IconBuildingSkyscraper size={22} />
-        </div>
-        <h1>{t`Create your workspace`}</h1>
-        <p className="fenforce-gate-copy">{t`Your companies belong to a workspace.`}</p>
-        <form className="fenforce-form" onSubmit={submit}>
-          <label>
-            <span>{t`Workspace name`}</span>
-            <input
-              name="workspaceName"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              maxLength={120}
-              required
-              autoFocus
-            />
-          </label>
-          {hasError && (
-            <p className="fenforce-form-error" role="alert">
-              {t`Unable to create a workspace. Try again.`}
-            </p>
-          )}
-          <MainButton type="submit" fullWidth loading={isSubmitting}>
-            {t`Create workspace`}
-          </MainButton>
-        </form>
-      </section>
-    </div>
-  );
-};
-
 export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
   const { t } = useLingui();
   const { signOut } = useAuthActions();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { workspace: requestedWorkspace } = useSearch({ strict: false });
   const connection = useConvexConnectionState();
   const workspaces = useConvexPaginatedQuery(
     api.workspaces.listMine,
     {},
     { initialNumItems: 50 },
   );
-  const [preferredWorkspace, setPreferredWorkspace] = useState<{
-    workspaceId: Id<'workspaces'>;
-    name: string;
-  } | null>(null);
+  const [logoutStatus, setLogoutStatus] = useState<
+    'idle' | 'pending' | 'failed'
+  >('idle');
+  const logout = async () => {
+    setLogoutStatus('pending');
+    queryClient.clear();
+    try {
+      await signOut();
+    } catch {
+      setLogoutStatus('failed');
+    }
+  };
+
+  if (logoutStatus !== 'idle') {
+    return (
+      <div className="fenforce-gate">
+        <section className="fenforce-gate-card" role="status">
+          <h1>
+            {logoutStatus === 'failed'
+              ? t`Unable to complete sign-out`
+              : t`Signing out…`}
+          </h1>
+          {logoutStatus === 'failed' && (
+            <button
+              className="fenforce-secondary-button"
+              type="button"
+              onClick={() => void logout()}
+            >{t`Try signing out again`}</button>
+          )}
+        </section>
+      </div>
+    );
+  }
 
   if (workspaces.status === 'LoadingFirstPage') {
     return (
@@ -121,32 +125,66 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
     );
   }
 
-  if (workspaces.results.length === 0 && preferredWorkspace === null) {
+  const selected = workspaces.results.find(
+    (workspace) => workspace.workspaceId === requestedWorkspace,
+  );
+  const firstWorkspace = workspaces.results[0];
+  if (requestedWorkspace === undefined && firstWorkspace !== undefined) {
     return (
-      <WorkspaceCreation
-        onCreated={(workspaceId, name) =>
-          setPreferredWorkspace({ workspaceId, name })
-        }
+      <WorkspaceRedirectEffect
+        to="."
+        workspaceId={firstWorkspace.workspaceId}
       />
     );
   }
-
-  const selected =
-    workspaces.results.find(
-      (workspace) => workspace.workspaceId === preferredWorkspace?.workspaceId,
-    ) ?? workspaces.results[0];
-  const workspaceId = preferredWorkspace?.workspaceId ?? selected?.workspaceId;
-  const workspaceName =
-    selected?.workspaceId === workspaceId
-      ? selected.name
-      : (preferredWorkspace?.name ?? '');
-
-  if (workspaceId === undefined) {
-    return null;
+  if (selected === undefined) {
+    return (
+      <div className="fenforce-gate">
+        <section className="fenforce-gate-card">
+          <h1>{t`Workspace unavailable`}</h1>
+          <p>{t`Choose an assigned workspace or contact your administrator.`}</p>
+          {workspaces.results.map((workspace) => (
+            <p key={workspace.workspaceId}>
+              <Link
+                to="/objects/companies"
+                search={{ workspace: workspace.workspaceId }}
+              >
+                {workspace.name}
+              </Link>
+            </p>
+          ))}
+          {workspaces.status === 'CanLoadMore' && (
+            <button
+              type="button"
+              onClick={() => workspaces.loadMore(50)}
+            >{t`Load more workspaces`}</button>
+          )}
+          <button
+            className="fenforce-secondary-button"
+            type="button"
+            onClick={() => void logout()}
+          >{t`Sign out`}</button>
+        </section>
+      </div>
+    );
   }
 
+  const workspaceId = selected.workspaceId;
+  const workspaceName = selected.name;
+  const isAdministrator = selected.role === 'admin';
+  if (isAdministrator && location.pathname !== '/settings/members') {
+    return (
+      <WorkspaceRedirectEffect
+        to="/settings/members"
+        workspaceId={workspaceId}
+      />
+    );
+  }
   return (
-    <WorkspaceContext.Provider value={{ workspaceId, workspaceName }}>
+    <WorkspaceContext.Provider
+      key={workspaceId}
+      value={{ workspaceId, workspaceName, role: selected.role }}
+    >
       <div className="fenforce-app">
         <aside className="fenforce-sidebar">
           <div className="fenforce-brand">Fenforce</div>
@@ -155,16 +193,10 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
             <select
               value={workspaceId}
               onChange={(event) => {
-                const nextWorkspace = workspaces.results.find(
-                  (workspace) => workspace.workspaceId === event.target.value,
-                );
-
-                if (nextWorkspace) {
-                  setPreferredWorkspace({
-                    workspaceId: nextWorkspace.workspaceId,
-                    name: nextWorkspace.name,
-                  });
-                }
+                void navigate({
+                  to: '/objects/companies',
+                  search: { workspace: event.target.value },
+                });
               }}
             >
               {workspaces.results.map((workspace) => (
@@ -175,9 +207,6 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
                   {workspace.name}
                 </option>
               ))}
-              {selected === undefined && (
-                <option value={workspaceId}>{workspaceName}</option>
-              )}
             </select>
           </label>
           {workspaces.status === 'CanLoadMore' && (
@@ -185,36 +214,50 @@ export const WorkspaceGate = ({ children }: { children: ReactNode }) => {
               className="fenforce-text-button fenforce-sidebar-more"
               type="button"
               onClick={() => workspaces.loadMore(50)}
-            >
-              {t`Load more workspaces`}
-            </button>
+            >{t`Load more workspaces`}</button>
           )}
-          <div className="fenforce-sidebar-section">{t`Objects`}</div>
+          <div className="fenforce-sidebar-section">
+            {isAdministrator ? t`Administration` : t`Objects`}
+          </div>
           <nav aria-label={t`Workspace navigation`}>
             <Link
-              to="/objects/companies"
+              to={isAdministrator ? '/settings/members' : '/objects/companies'}
+              search={{ workspace: workspaceId }}
               className="fenforce-sidebar-link"
               activeProps={{
                 className: 'fenforce-sidebar-link fenforce-sidebar-link-active',
               }}
             >
-              <IconBuildingSkyscraper size={16} />
-              <span>{t`Companies`}</span>
+              {isAdministrator ? (
+                <IconUsers size={16} />
+              ) : (
+                <IconBuildingSkyscraper size={16} />
+              )}
+              <span>{isAdministrator ? t`Members` : t`Companies`}</span>
             </Link>
+            {isSalesRole(selected.role) && (
+              <Link
+                to="/objects/companies/trash"
+                search={{ workspace: workspaceId }}
+                className="fenforce-sidebar-link"
+              >
+                <IconTrash size={16} />
+                <span>{t`Trash`}</span>
+              </Link>
+            )}
           </nav>
           <button
             className="fenforce-signout"
             type="button"
-            onClick={() => void signOut()}
-          >
-            {t`Sign out`}
-          </button>
+            onClick={() => void logout()}
+          >{t`Sign out`}</button>
         </aside>
         <div className="fenforce-content">
           {!connection.isWebSocketConnected && connection.hasEverConnected && (
-            <div className="fenforce-connection" role="status">
-              {t`Connection interrupted. Your changes will resume when you reconnect.`}
-            </div>
+            <div
+              className="fenforce-connection"
+              role="status"
+            >{t`Connection interrupted. Your changes will resume when you reconnect.`}</div>
           )}
           <main>{children}</main>
         </div>
@@ -230,10 +273,50 @@ const formatDate = (timestamp: number) =>
     year: 'numeric',
   }).format(new Date(timestamp));
 
+export const WorkspaceAdministrationPage = () => {
+  const { t } = useLingui();
+  const { workspaceId, role } = useWorkspace();
+  if (role !== 'admin')
+    return (
+      <div
+        className="fenforce-page"
+        role="alert"
+      >{t`Administrator access is required.`}</div>
+    );
+  return <MemberAdministration workspaceId={workspaceId} />;
+};
+
 export const CompaniesPage = () => {
   const { t } = useLingui();
-  const { workspaceId, workspaceName } = useWorkspace();
+  const { role } = useWorkspace();
+  if (!isSalesRole(role))
+    return (
+      <div
+        className="fenforce-page"
+        role="alert"
+      >{t`Sales access is required.`}</div>
+    );
+  return <CompanyRecords />;
+};
+
+export const CompanyTrashPage = () => {
+  const { t } = useLingui();
+  const { workspaceId, role } = useWorkspace();
+  if (!isSalesRole(role))
+    return (
+      <div
+        className="fenforce-page"
+        role="alert"
+      >{t`Sales access is required.`}</div>
+    );
+  return <CompanyTrash workspaceId={workspaceId} />;
+};
+
+const CompanyRecords = () => {
+  const { t } = useLingui();
+  const { workspaceId, workspaceName, role } = useWorkspace();
   const navigate = useNavigate();
+  const router = useRouter();
   const createCompany = useMutation(api.workspaceCompanies.create);
   const companies = useConvexPaginatedQuery(
     api.workspaceCompanies.list,
@@ -243,9 +326,15 @@ export const CompaniesPage = () => {
   const [isCreating, setIsCreating] = useState(false);
 
   const saveCompany = async (values: CompanyFormValues) => {
+    const location = router.state.location;
     const companyId = await createCompany({ workspaceId, ...values });
+    if (router.state.location !== location) return;
     setIsCreating(false);
-    await navigate({ to: '/object/company/$companyId', params: { companyId } });
+    await navigate({
+      to: '/object/company/$companyId',
+      params: { companyId },
+      search: { workspace: workspaceId },
+    });
   };
 
   return (
@@ -271,6 +360,7 @@ export const CompaniesPage = () => {
           <h2>{t`New company`}</h2>
           <CompanyForm
             workspaceId={workspaceId}
+            canReassignOwner={role === 'manager'}
             onSave={saveCompany}
             onCancel={() => setIsCreating(false)}
           />
@@ -290,6 +380,7 @@ export const CompaniesPage = () => {
             <thead>
               <tr>
                 <th scope="col">{t`Name`}</th>
+                <th scope="col">{t`Industry`}</th>
                 <th scope="col">{t`Domain Name`}</th>
                 <th scope="col">{t`Account Owner`}</th>
                 <th scope="col">{t`Created by`}</th>
@@ -303,6 +394,7 @@ export const CompaniesPage = () => {
                     <Link
                       to="/object/company/$companyId"
                       params={{ companyId: company._id }}
+                      search={{ workspace: workspaceId }}
                       className="fenforce-record-name"
                     >
                       <span className="fenforce-company-icon">
@@ -310,6 +402,13 @@ export const CompaniesPage = () => {
                       </span>
                       {company.name}
                     </Link>
+                  </td>
+                  <td>
+                    {company.industry === 'services'
+                      ? t`Services`
+                      : company.industry === 'manufacturing'
+                        ? t`Manufacturing`
+                        : '—'}
                   </td>
                   <td>
                     {company.domainName.primaryLinkUrl ? (
@@ -370,7 +469,23 @@ export const CompaniesPage = () => {
 
 export const CompanyDetailPage = () => {
   const { t } = useLingui();
+  const { role } = useWorkspace();
+  if (!isSalesRole(role))
+    return (
+      <div
+        className="fenforce-page"
+        role="alert"
+      >{t`Sales access is required.`}</div>
+    );
+  return <CompanyRecordDetail />;
+};
+
+const CompanyRecordDetail = () => {
+  const { t } = useLingui();
   const { workspaceId, workspaceName } = useWorkspace();
+  const navigate = useNavigate();
+  const router = useRouter();
+  const location = useLocation();
   const { companyId } = useParams({ from: '/object/company/$companyId' });
   const updateCompany = useMutation(api.workspaceCompanies.update);
   const company = useQuery(
@@ -400,7 +515,10 @@ export const CompanyDetailPage = () => {
     return (
       <div className="fenforce-page">
         <h1>{t`Company not found`}</h1>
-        <Link to="/objects/companies">{t`Back to companies`}</Link>
+        <Link
+          to="/objects/companies"
+          search={{ workspace: workspaceId }}
+        >{t`Back to companies`}</Link>
       </div>
     );
   }
@@ -423,17 +541,25 @@ export const CompanyDetailPage = () => {
   return (
     <div className="fenforce-page fenforce-detail-page">
       <div className="fenforce-breadcrumb">
-        {workspaceName} / <Link to="/objects/companies">{t`Companies`}</Link> /{' '}
-        {record.name}
+        {workspaceName} /{' '}
+        <Link
+          to="/objects/companies"
+          search={{ workspace: workspaceId }}
+        >{t`Companies`}</Link>{' '}
+        / {record.name}
       </div>
       <header className="fenforce-page-header">
         <div>
-          <Link to="/objects/companies" className="fenforce-back-link">
+          <Link
+            to="/objects/companies"
+            search={{ workspace: workspaceId }}
+            className="fenforce-back-link"
+          >
             <IconChevronLeft size={16} /> {t`Companies`}
           </Link>
           <h1>{record.name}</h1>
         </div>
-        {editingRevision === null && (
+        {editingRevision === null && record.permissions.canUpdate && (
           <MainButton
             type="button"
             onClick={() => setEditingRevision(record.revision)}
@@ -442,16 +568,34 @@ export const CompanyDetailPage = () => {
           </MainButton>
         )}
       </header>
-      {editingRevision !== null ? (
+      {editingRevision === null && record.permissions.canTrash && (
+        <CompanyTrashAction
+          workspaceId={workspaceId}
+          companyId={record._id}
+          revision={record.revision}
+          onComplete={() => {
+            if (router.state.location !== location) return;
+            void navigate({
+              to: '/objects/companies/trash',
+              search: { workspace: workspaceId },
+            });
+          }}
+        />
+      )}
+      <CompanyHistory workspaceId={workspaceId} companyId={record._id} />
+      {editingRevision !== null && record.permissions.canUpdate ? (
         <section className="fenforce-editor" aria-label={t`Edit company`}>
           <h2>{t`Edit company`}</h2>
           <CompanyForm
             key={record._id}
             workspaceId={workspaceId}
+            canReassignOwner={record.permissions.canReassign}
+            ownerName={record.accountOwnerName}
             initialValues={{
               name: record.name,
+              industry: record.industry,
               domainName: record.domainName.primaryLinkLabel,
-              accountOwnerId: record.accountOwnerId,
+              accountOwnerId: record.accountOwnerId ?? undefined,
             }}
             onSave={saveCompany}
             onCancel={() => setEditingRevision(null)}
@@ -464,6 +608,16 @@ export const CompanyDetailPage = () => {
             <div>
               <dt>{t`Name`}</dt>
               <dd>{record.name}</dd>
+            </div>
+            <div>
+              <dt>{t`Industry`}</dt>
+              <dd>
+                {record.industry === 'services'
+                  ? t`Services`
+                  : record.industry === 'manufacturing'
+                    ? t`Manufacturing`
+                    : '—'}
+              </dd>
             </div>
             <div>
               <dt>{t`Domain Name`}</dt>

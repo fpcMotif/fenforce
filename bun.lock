@@ -142,6 +142,7 @@
       "name": "twenty-e2e-testing",
       "devDependencies": {
         "@playwright/test": "^1.60.0",
+        "convex": "^1.46.0",
         "playwright": "^1.60.0",
       },
     },
