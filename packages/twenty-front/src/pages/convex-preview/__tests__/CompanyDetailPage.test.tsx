@@ -12,6 +12,7 @@ import {
 
 const mockUpdateCompany = vi.fn();
 let mockRevision = 1;
+let mockCanReassign = false;
 
 vi.mock('@convex-dev/auth/react', () => ({
   useAuthActions: () => ({ signOut: vi.fn() }),
@@ -26,18 +27,27 @@ vi.mock('@convex-dev/react-query', () => ({
         name: 'Workspace',
         memberId: 'member',
         displayName: 'Member',
+        role: 'seller',
       },
     ],
   }),
 }));
 vi.mock('@tanstack/react-query', () => ({
+  useQueryClient: () => ({ clear: vi.fn() }),
   useQuery: () => ({
     data: {
       _id: 'company',
       name: 'Original',
+      industry: 'services',
       revision: mockRevision,
       domainName: { primaryLinkLabel: '', primaryLinkUrl: '' },
-      accountOwnerId: null,
+      accountOwnerId: 'original-member',
+      accountOwnerName: 'Original owner',
+      permissions: {
+        canUpdate: true,
+        canReassign: mockCanReassign,
+        canTrash: true,
+      },
       createdAt: 0,
     },
   }),
@@ -48,6 +58,9 @@ vi.mock('@tanstack/react-router', () => ({
   ),
   useParams: () => ({ companyId: 'company' }),
   useNavigate: () => vi.fn(),
+  useRouter: () => ({ state: { location: {} } }),
+  useSearch: () => ({ workspace: 'workspace' }),
+  useLocation: () => ({ pathname: '/objects/companies' }),
 }));
 vi.mock('convex/react', () => ({
   useMutation: () => mockUpdateCompany,
@@ -69,6 +82,8 @@ vi.mock('twenty-ui/icon', () => ({
   IconBuildingSkyscraper: () => null,
   IconChevronLeft: () => null,
   IconPlus: () => null,
+  IconUsers: () => null,
+  IconTrash: () => null,
 }));
 
 it('submits the revision at edit start even after a subscription updates', async () => {
@@ -82,6 +97,7 @@ it('submits the revision at edit start even after a subscription updates', async
     </I18nProvider>
   );
   const { rerender } = render(view());
+  expect(screen.getByText('Services')).toBeVisible();
   await user.click(screen.getByRole('button', { name: 'Edit company' }));
   await user.clear(screen.getByRole('textbox', { name: 'Name' }));
   await user.type(screen.getByRole('textbox', { name: 'Name' }), 'My edit');
@@ -93,7 +109,32 @@ it('submits the revision at edit start even after a subscription updates', async
     companyId: 'company',
     expectedRevision: 1,
     name: 'My edit',
-    domainName: '',
-    accountOwnerId: null,
+    industry: 'services',
   });
+});
+
+it('uses server permission to let a manager reassign the owner', async () => {
+  mockCanReassign = true;
+  mockUpdateCompany.mockClear();
+  const user = userEvent.setup();
+  try {
+    render(
+      <I18nProvider i18n={setupI18n({ locale: 'en', messages: { en: {} } })}>
+        <WorkspaceGate>
+          <CompanyDetailPage />
+        </WorkspaceGate>
+      </I18nProvider>,
+    );
+    await user.click(screen.getByRole('button', { name: 'Edit company' }));
+    await user.selectOptions(
+      screen.getByRole('combobox', { name: 'Account Owner' }),
+      'member',
+    );
+    await user.click(screen.getByRole('button', { name: 'Save changes' }));
+    expect(mockUpdateCompany).toHaveBeenCalledWith(
+      expect.objectContaining({ accountOwnerId: 'member' }),
+    );
+  } finally {
+    mockCanReassign = false;
+  }
 });

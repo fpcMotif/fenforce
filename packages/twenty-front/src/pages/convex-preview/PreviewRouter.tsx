@@ -6,15 +6,29 @@ import {
   Outlet,
   RouterProvider,
 } from '@tanstack/react-router';
+import { useState } from 'react';
 
 import {
   CompanyDetailPage,
+  CompanyTrashPage,
   CompaniesPage,
   WorkspaceGate,
+  WorkspaceAdministrationPage,
 } from './CompaniesWorkspace';
 import { PreviewError } from './PreviewError';
+import type { CompanyViewSearch } from './companyViewConfiguration';
 
 const rootRoute = createRootRoute({
+  validateSearch: (search: Record<string, unknown>): CompanyViewSearch => ({
+    workspace:
+      typeof search.workspace === 'string' ? search.workspace : undefined,
+    q: typeof search.q === 'string' ? search.q : undefined,
+    industry: typeof search.industry === 'string' ? search.industry : undefined,
+    owner: typeof search.owner === 'string' ? search.owner : undefined,
+    sort: typeof search.sort === 'string' ? search.sort : undefined,
+    columns: typeof search.columns === 'string' ? search.columns : undefined,
+    view: typeof search.view === 'string' ? search.view : undefined,
+  }),
   component: () => (
     <WorkspaceGate>
       <Outlet />
@@ -24,7 +38,9 @@ const rootRoute = createRootRoute({
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
-  component: () => <Navigate to="/objects/companies" />,
+  component: () => (
+    <Navigate to="/objects/companies" search={(search) => search} />
+  ),
 });
 const companiesRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -36,19 +52,35 @@ const companyDetailRoute = createRoute({
   path: '/object/company/$companyId',
   component: CompanyDetailPage,
 });
-const router = createRouter({
-  defaultErrorComponent: PreviewError,
-  routeTree: rootRoute.addChildren([
-    indexRoute,
-    companiesRoute,
-    companyDetailRoute,
-  ]),
+const membersRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/settings/members',
+  component: WorkspaceAdministrationPage,
 });
+const trashRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/objects/companies/trash',
+  component: CompanyTrashPage,
+});
+const createPreviewRouter = () =>
+  createRouter({
+    defaultErrorComponent: PreviewError,
+    routeTree: rootRoute.addChildren([
+      indexRoute,
+      companiesRoute,
+      companyDetailRoute,
+      membersRoute,
+      trashRoute,
+    ]),
+  });
 
 declare module '@tanstack/react-router' {
   interface Register {
-    router: typeof router;
+    router: ReturnType<typeof createPreviewRouter>;
   }
 }
 
-export const PreviewRouter = () => <RouterProvider router={router} />;
+export const PreviewRouter = () => {
+  const [router] = useState(createPreviewRouter);
+  return <RouterProvider router={router} />;
+};

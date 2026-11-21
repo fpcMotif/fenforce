@@ -18,10 +18,10 @@
     "twenty-client-sdk": "latest"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
-    "@types/node": "^24.7.2",
-    "@types/react": "^19.0.2",
-    "react": "^19.0.2",
-    "oxlint": "^0.16.0"
+    "typescript": "next",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "react": "^19.3.0",
+    "oxlint": "^1.87.0"
   }
 }
