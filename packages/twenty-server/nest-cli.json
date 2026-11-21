@@ -12,7 +12,12 @@
     ]
   },
   "compilerOptions": {
-    "builder": "swc",
+    "builder": {
+      "type": "swc",
+      "options": {
+        "stripLeadingPaths": true
+      }
+    },
     "typeCheck": false,
     "watchAssets": true,
     "assets": [

@@ -1,0 +1,10 @@
+{
+  "project": "fenforce.codex-legacy-migration-baseline",
+  "surface": "web",
+  "choice": "agent-browser for exploration and visible-result smoke; existing regression and rendering suites remain authoritative",
+  "commands": {
+    "harness:check": {
+      "argv": ["bun", "--no-env-file", "tools/qa/self-check.mjs"]
+    }
+  }
+}

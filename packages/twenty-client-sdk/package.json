@@ -49,20 +49,20 @@
   ],
   "dependencies": {
     "@genql/runtime": "^2.10.0",
-    "esbuild": "^0.28.1",
-    "graphql": "^16.8.1",
-    "lodash": "^4.17.21",
-    "prettier": "^3.8.3"
+    "esbuild": "^0.28.2",
+    "graphql": "^17.0.2",
+    "lodash": "^4.18.1",
+    "prettier": "^3.9.9"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.24",
-    "@typescript/native-preview": "^7.0.0-dev.20260116.1",
-    "tsc-alias": "^1.8.16",
+    "@types/lodash": "^4.17.25",
+    "@typescript/native-preview": "^7.0.0-dev.20260707.2",
+    "tsc-alias": "^1.9.7",
     "twenty-shared": "workspace:*",
-    "typescript": "^5.9.3",
-    "vite": "^8.0.0",
-    "vite-plugin-dts": "^4.5.4",
-    "vitest": "^4.1.0"
+    "typescript": "next",
+    "vite": "^8.3.4",
+    "vite-plugin-dts": "^5.1.2",
+    "vitest": "^5.0.3"
   },
   "engines": {
     "node": "^24.5.0",
