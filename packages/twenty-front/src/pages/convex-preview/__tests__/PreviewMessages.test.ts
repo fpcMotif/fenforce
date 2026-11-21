@@ -7,9 +7,11 @@ it('renders compiled sign-in and recovery messages without development fallbacks
   const i18n = setupI18n({ locale: 'en', messages: { en: messages } });
   const cases = [
     [msg`Sign in`, 'Sign in'],
-    [msg`Email`, 'Email'],
-    [msg`Password`, 'Password'],
-    [msg`Create preview account`, 'Create preview account'],
+    [msg`Continue with employee identity`, 'Continue with employee identity'],
+    [
+      msg`Unable to sign in. Check your invitation or try again.`,
+      'Unable to sign in. Check your invitation or try again.',
+    ],
     [msg`Your session has ended`, 'Your session has ended'],
     [msg`Sign in again`, 'Sign in again'],
   ] as const;

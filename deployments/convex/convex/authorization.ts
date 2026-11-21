@@ -3,6 +3,7 @@ import { ConvexError } from 'convex/values';
 
 import type { Id } from './_generated/dataModel';
 import type { MutationCtx, QueryCtx } from './_generated/server';
+import { requireActiveEmployee } from './employeeEnrollment';
 
 type DatabaseContext = MutationCtx | QueryCtx;
 
@@ -31,7 +32,16 @@ export const requireSession = async (context: DatabaseContext) => {
     throw new ConvexError('UNAUTHENTICATED');
   }
 
-  return { identity, userId: session.userId };
+  const employee = await context.db
+    .query('employeeIdentities')
+    .withIndex('by_userId', (index) => index.eq('userId', session.userId))
+    .unique();
+  if (employee) await requireActiveEmployee(context, session.userId);
+  return {
+    identity,
+    userId: session.userId,
+    expiresAt: session.expirationTime,
+  };
 };
 
 export const requireWorkspaceMember = async (
@@ -46,7 +56,7 @@ export const requireWorkspaceMember = async (
     )
     .unique();
 
-  if (membership === null) {
+  if (membership === null || membership.active === false) {
     throw new ConvexError('FORBIDDEN');
   }
 

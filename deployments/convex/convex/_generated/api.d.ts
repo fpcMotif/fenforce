@@ -9,14 +9,20 @@
  */
 
 import type * as approvalContract from "../approvalContract.js";
+import type * as accountLifecycle from "../accountLifecycle.js";
 import type * as approvalEffects from "../approvalEffects.js";
 import type * as approvalLedger from "../approvalLedger.js";
 import type * as approvalWorkflow from "../approvalWorkflow.js";
 import type * as auth from "../auth.js";
+import type * as accountViews from "../accountViews.js";
+import type * as mockAccountBenchmark from "../mockAccountBenchmark.js";
+import type * as accountQueryMigration from "../accountQueryMigration.js";
 import type * as authorization from "../authorization.js";
 import type * as companies from "../companies.js";
 import type * as companyDomain from "../companyDomain.js";
 import type * as http from "../http.js";
+import type * as employeeIdentity from "../employeeIdentity.js";
+import type * as employeeEnrollment from "../employeeEnrollment.js";
 import type * as workflowRuntime from "../workflowRuntime.js";
 import type * as workspaceCompanies from "../workspaceCompanies.js";
 import type * as workspaces from "../workspaces.js";
@@ -28,15 +34,21 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  accountLifecycle: typeof accountLifecycle;
   approvalContract: typeof approvalContract;
   approvalEffects: typeof approvalEffects;
   approvalLedger: typeof approvalLedger;
   approvalWorkflow: typeof approvalWorkflow;
   auth: typeof auth;
+  accountViews: typeof accountViews;
+  mockAccountBenchmark: typeof mockAccountBenchmark;
+  accountQueryMigration: typeof accountQueryMigration;
   authorization: typeof authorization;
   companies: typeof companies;
   companyDomain: typeof companyDomain;
   http: typeof http;
+  employeeIdentity: typeof employeeIdentity;
+  employeeEnrollment: typeof employeeEnrollment;
   workflowRuntime: typeof workflowRuntime;
   workspaceCompanies: typeof workspaceCompanies;
   workspaces: typeof workspaces;
